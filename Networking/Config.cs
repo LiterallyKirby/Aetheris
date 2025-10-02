@@ -5,6 +5,6 @@ class Config
     public static int CHUNK_SIZE_Y = 96;
     public static int RENDER_DISTANCE = 128;
     public static int SIMULATION_DISTANCE= 128;
-    public static int STEP = 4;
-    public static int WORLD_SEED = 69420;
+    public static int STEP = 8;
+    public static int WORLD_SEED = 1272343;
 }

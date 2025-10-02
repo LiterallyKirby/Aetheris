@@ -23,37 +23,37 @@ namespace Aetheris
         private Task? updateTask;
         private readonly SemaphoreSlim networkSemaphore = new SemaphoreSlim(1, 1);
         private readonly SemaphoreSlim connectionSemaphore = new SemaphoreSlim(1, 1);
-       private int currentRenderDistance; 
+        private int currentRenderDistance;
         // Configurable loading parameters
         public int MaxConcurrentLoads { get; set; } = 16; // How many chunks to load at once
         public int ChunksPerUpdateBatch { get; set; } = 128; // How many to queue per update cycle
         public int UpdatesPerSecond { get; set; } = 20; // How often to check for new chunks
         public int MaxPendingUploads { get; set; } = 64; // Max chunks waiting in upload queue
-        
+
         private int UpdateInterval => 1000 / UpdatesPerSecond;
 
         public void Run()
         {
             cts = new CancellationTokenSource();
-            
+
             // Auto-tune settings based on render distance
             AutoTuneSettings();
-            
+
             // Connect to server asynchronously
             Task.Run(async () => await ConnectToServerAsync("127.0.0.1", Config.SERVER_PORT)).Wait();
-            
+
             // Create game with empty chunks initially
             game = new Game(new Dictionary<(int, int, int), Aetheris.Chunk>(loadedChunks), this);
-            
+
             // Start background tasks AFTER game is created
             loaderTask = Task.Run(() => ChunkLoaderLoopAsync(cts.Token));
             updateTask = Task.Run(() => ChunkUpdateLoopAsync(cts.Token));
-            
+
             // Don't trigger initial load here - let the game do it with the real player position
-            
+
             // Run the game (blocks until window closes)
             game.RunGame();
-            
+
             // Cleanup
             Cleanup();
         }
@@ -64,7 +64,7 @@ namespace Aetheris
         private void AutoTuneSettings()
         {
             int rd = Config.RENDER_DISTANCE;
-            
+
             if (rd <= 8)
             {
                 // Small render distance - conservative settings
@@ -97,7 +97,7 @@ namespace Aetheris
                 UpdatesPerSecond = 40;
                 MaxPendingUploads = 256;
             }
-            
+
             Console.WriteLine($"[Client] Auto-tuned for render distance {rd}: " +
                             $"{MaxConcurrentLoads} concurrent loads, " +
                             $"{ChunksPerUpdateBatch} per batch, " +
@@ -107,12 +107,12 @@ namespace Aetheris
         private async Task ConnectToServerAsync(string host, int port)
         {
             Console.WriteLine($"[Client] Connecting to {host}:{port}...");
-            
+
             tcp = new TcpClient();
             await tcp.ConnectAsync(host, port);
             stream = tcp.GetStream();
             tcp.NoDelay = true;
-            
+
             Console.WriteLine("[Client] Connected to server.");
         }
 
@@ -122,13 +122,13 @@ namespace Aetheris
             // Wait for game to fully initialize
             await Task.Delay(1000, token);
             Console.WriteLine("[Client] Chunk update loop starting...");
-            
+
             while (!token.IsCancellationRequested)
             {
                 try
                 {
                     await Task.Delay(UpdateInterval, token);
-                    
+
                     // Run update logic asynchronously to avoid blocking
                     _ = Task.Run(() => CheckAndUpdateChunks(), token);
                 }
@@ -161,43 +161,43 @@ namespace Aetheris
 
             // Collect chunks to request - prioritize by distance
             var toRequest = new List<(int cx, int cy, int cz, float priority)>();
-            
+
             // Check ALL chunks in range, then sort by priority
             for (int dx = -currentRenderDistance; dx <= currentRenderDistance; dx++)
-            for (int dy = -1; dy <= 1; dy++)
-            for (int dz = -currentRenderDistance; dz <= currentRenderDistance; dz++)
-            {
-                int cx = playerCx + dx;
-                int cy = playerCy + dy;
-                int cz = playerCz + dz;
+                for (int dy = -1; dy <= 1; dy++)
+                    for (int dz = -currentRenderDistance; dz <= currentRenderDistance; dz++)
+                    {
+                        int cx = playerCx + dx;
+                        int cy = playerCy + dy;
+                        int cz = playerCz + dz;
 
-                var key = (cx, cy, cz);
-                
-                if (!loadedChunks.ContainsKey(key) && !requestedChunks.ContainsKey(key))
-                {
-                    float distance = MathF.Sqrt(dx * dx + dy * dy * 2 + dz * dz);
-                    toRequest.Add((cx, cy, cz, distance));
-                }
-            }
+                        var key = (cx, cy, cz);
+
+                        if (!loadedChunks.ContainsKey(key) && !requestedChunks.ContainsKey(key))
+                        {
+                            float distance = MathF.Sqrt(dx * dx + dy * dy * 2 + dz * dz);
+                            toRequest.Add((cx, cy, cz, distance));
+                        }
+                    }
 
             // Sort by priority (closest first) and enqueue
             if (toRequest.Count > 0)
             {
                 toRequest.Sort((a, b) => a.priority.CompareTo(b.priority));
-                
+
                 // Queue chunks up to the batch size
                 int toEnqueue = Math.Min(toRequest.Count, ChunksPerUpdateBatch);
-                
+
                 // Throttle if upload queue is getting too long
                 int queueSize = requestQueue.Count;
                 if (queueSize > MaxPendingUploads)
                 {
-                    Console.WriteLine($"[Client] Upload queue saturated ({queueSize}), skipping batch");
+
                     return;
                 }
-                
-                Console.WriteLine($"[Client] Queueing {toEnqueue}/{toRequest.Count} chunks (player at {playerCx},{playerCy},{playerCz}, loaded: {loadedChunks.Count}, pending: {queueSize})");
-                
+
+
+
                 for (int i = 0; i < toEnqueue; i++)
                 {
                     var chunk = toRequest[i];
@@ -207,7 +207,7 @@ namespace Aetheris
             }
             else if (loadedChunks.Count > 0) // Only log if we've actually loaded something
             {
-                Console.WriteLine($"[Client] All chunks loaded for current position (loaded: {loadedChunks.Count})");
+
             }
 
             // Unload distant chunks (less frequently)
@@ -220,13 +220,13 @@ namespace Aetheris
         private void UnloadDistantChunksAsync(int playerCx, int playerCy, int playerCz, int renderDistance)
         {
             var toUnload = new List<(int, int, int)>();
-            
+
             foreach (var coord in loadedChunks.Keys)
             {
                 int dx = Math.Abs(coord.Item1 - playerCx);
                 int dy = Math.Abs(coord.Item2 - playerCy);
                 int dz = Math.Abs(coord.Item3 - playerCz);
-                
+
                 if (dx > renderDistance + 3 || dy > 4 || dz > renderDistance + 3)
                 {
                     toUnload.Add(coord);
@@ -301,11 +301,11 @@ namespace Aetheris
                     int playerCx = (int)lastPlayerChunk.X;
                     int playerCy = (int)lastPlayerChunk.Y;
                     int playerCz = (int)lastPlayerChunk.Z;
-                    
+
                     int dx = Math.Abs(chunk.cx - playerCx);
                     int dy = Math.Abs(chunk.cy - playerCy);
                     int dz = Math.Abs(chunk.cz - playerCz);
-                    
+
                     if (dx > currentRenderDistance + 2 || dy > 3 || dz > currentRenderDistance + 2)
                     {
                         requestedChunks.TryRemove((chunk.cx, chunk.cy, chunk.cz), out _);
@@ -314,7 +314,7 @@ namespace Aetheris
                 }
 
                 float[] meshData = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
-                
+
                 var placeholderChunk = new Aetheris.Chunk();
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = placeholderChunk;
 
@@ -365,28 +365,30 @@ namespace Aetheris
             Array.Copy(BitConverter.GetBytes(cx), 0, req, 0, 4);
             Array.Copy(BitConverter.GetBytes(cy), 0, req, 4, 4);
             Array.Copy(BitConverter.GetBytes(cz), 0, req, 8, 4);
-            
+
             await stream!.WriteAsync(req, 0, req.Length, token);
             await stream.FlushAsync(token);
         }
+
 
         private async Task<float[]> ReceiveMeshPayloadAsync(CancellationToken token)
         {
             var lenBuf = new byte[4];
             await ReadFullAsync(stream!, lenBuf, 0, 4, token);
             int payloadLen = BitConverter.ToInt32(lenBuf, 0);
-            
+
             var payload = new byte[payloadLen];
             await ReadFullAsync(stream!, payload, 0, payloadLen, token);
-            
+
             int vertexCount = BitConverter.ToInt32(payload, 0);
-            int floatsCount = vertexCount * 6;
-            
+            int floatsCount = vertexCount * 8; // ✅ Changed from 6 to 8 (pos + normal + UV)
+
             var floats = new float[floatsCount];
             Buffer.BlockCopy(payload, 4, floats, 0, floatsCount * sizeof(float));
-            
+
             return floats;
         }
+
 
         private static async Task ReadFullAsync(NetworkStream stream, byte[] buf, int off, int count, CancellationToken token)
         {
@@ -404,10 +406,10 @@ namespace Aetheris
         {
             Console.WriteLine("[Client] Shutting down...");
             cts?.Cancel();
-            
+
             loaderTask?.Wait(TimeSpan.FromSeconds(2));
             updateTask?.Wait(TimeSpan.FromSeconds(1));
-            
+
             stream?.Dispose();
             tcp?.Close();
             networkSemaphore?.Dispose();

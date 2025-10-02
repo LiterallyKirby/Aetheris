@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-
+using AetherisClient.Rendering;
 namespace Aetheris
 {
     public class Game : GameWindow
@@ -34,13 +34,15 @@ namespace Aetheris
 
         protected override void OnLoad()
         {
+
+AtlasManager.LoadAtlas("textures/atlas.png");
             base.OnLoad();
             GL.ClearColor(0.15f, 0.18f, 0.2f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
             CursorState = CursorState.Grabbed;
 
             // Load texture atlas (with automatic fallback to procedural)
-            Renderer.LoadTextureAtlas("textures/atlas.png");
+
 GL.Enable(EnableCap.DepthTest);
 GL.DepthFunc(DepthFunction.Less);
 GL.Enable(EnableCap.CullFace);
@@ -74,7 +76,7 @@ GL.FrontFace(FrontFaceDirection.Ccw);
             if (chunkUpdateTimer == 0f)
             {
                 Vector3 playerChunk = player.GetPlayersChunk();
-                Console.WriteLine($"[Game] Initial chunk request at {playerChunk}");
+
                 client?.UpdateLoadedChunks(playerChunk, renderDistance);
             }
 
@@ -105,7 +107,29 @@ GL.FrontFace(FrontFaceDirection.Ccw);
         {
             base.OnRenderFrame(e);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+if (KeyboardState.IsKeyPressed(Keys.R))
+{
+    Vector3 forward = player.GetForward(); // You'll need to add this method
+    for (float dist = 0; dist < 50; dist += 0.5f)
+    {
+        Vector3 pos = player.Position + forward * dist;
+        int x = (int)pos.X, y = (int)pos.Y, z = (int)pos.Z;
+        var blockType = WorldGen.GetBlockType(x, y, z);
+        if (blockType != BlockType.Air)
+        {
+            Console.WriteLine($"Looking at: {blockType} at ({x},{y},{z}), distance={dist:F1}");
+            break;
+        }
+    }
+}
 
+if (KeyboardState.IsKeyPressed(Keys.B))
+{
+    int px = (int)player.Position.X;
+    int pz = (int)player.Position.Z;
+    WorldGen.PrintBiomeAt(px, pz);
+    Console.WriteLine($"Player at: {player.Position}");
+}
             var projection = Matrix4.CreatePerspectiveFieldOfView(
                 MathHelper.DegreesToRadians(60f),
                 Size.X / (float)Size.Y,

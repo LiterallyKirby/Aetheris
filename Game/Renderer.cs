@@ -6,6 +6,9 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using StbImageSharp;
 
+// <-- IMPORTANT: add this so we can call the client-side AtlasManager
+using AetherisClient.Rendering;
+
 namespace Aetheris
 {
     public class Renderer : IDisposable
@@ -19,7 +22,10 @@ namespace Aetheris
 
         private int shaderProgram;
         private int locProjection, locView, locModel, locFogDecay, locAtlasTexture;
-        private int atlasTextureId = 0;
+
+        // renderer-local atlas id is only used for the procedural atlas fallback or when using StbImageSharp loader.
+        // If AtlasManager is loaded, we use AtlasManager.AtlasTextureId instead.
+        private int localAtlasTextureId = 0;
 
         private int frameCount = 0;
         private int lastVisibleCount = 0;
@@ -95,44 +101,64 @@ void main()
         public Renderer() { }
 
         /// <summary>
-        /// Load texture atlas from file. Falls back to procedural if file not found.
-        /// Call this once during initialization.
+        /// Load texture atlas from file. Prefers client-side AtlasManager (ImageSharp).
+        /// Falls back to StbImageSharp loader or procedural atlas if needed.
         /// </summary>
         public void LoadTextureAtlas(string path)
         {
+            // Try AtlasManager first (client-side image loader + metadata/tile detection)
+            try
+            {
+                AtlasManager.LoadAtlas(path, preferredTileSize: 64);
+                if (AtlasManager.IsLoaded && AtlasManager.AtlasTextureId != 0)
+                {
+                    Console.WriteLine($"[Renderer] AtlasManager loaded atlas: {path} (GL id {AtlasManager.AtlasTextureId})");
+                    // don't set localAtlasTextureId — AtlasManager owns that texture
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Renderer] AtlasManager failed to load atlas: {ex.Message}");
+            }
+
+            // If AtlasManager didn't load it, try the old StbImageSharp loader as a fallback.
             if (System.IO.File.Exists(path))
             {
                 try
                 {
-                    atlasTextureId = LoadTextureFromFile(path);
-                    Console.WriteLine($"[Renderer] Loaded texture atlas: {path}");
+                    // This returns a local GL texture id (renderer owns this one)
+                    localAtlasTextureId = LoadTextureFromFile(path);
+                    Console.WriteLine($"[Renderer] StbImageSharp loaded texture atlas: {path} (GL id {localAtlasTextureId})");
+                    return;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[Renderer] Failed to load texture '{path}': {ex.Message}");
-                    Console.WriteLine("[Renderer] Falling back to procedural atlas");
-                    CreateProceduralAtlas();
+                    Console.WriteLine($"[Renderer] Failed to load texture '{path}' via StbImageSharp: {ex.Message}");
                 }
             }
             else
             {
                 Console.WriteLine($"[Renderer] Texture file not found: {path}");
-                Console.WriteLine("[Renderer] Using procedural atlas as fallback");
-                CreateProceduralAtlas();
             }
+
+            // Final fallback: create procedural atlas (renderer-local)
+            Console.WriteLine("[Renderer] Using procedural atlas as fallback");
+            CreateProceduralAtlas();
         }
 
         /// <summary>
         /// Create a procedural texture atlas if no image file is available
+        /// (renderer-local; kept for dev fallback).
         /// </summary>
         public void CreateProceduralAtlas()
         {
             const int atlasSize = 256; // 4x4 grid, 64px per tile
             const int tileSize = 64;
-            
+
             byte[] pixels = new byte[atlasSize * atlasSize * 4];
-            
-            // Define colors for each block type
+
+            // Block colors for atlas tiles
             var blockColors = new Dictionary<int, (byte, byte, byte)>
             {
                 [0] = (128, 128, 128), // Stone - gray
@@ -140,23 +166,22 @@ void main()
                 [2] = (34, 139, 34),   // Grass - green
                 [3] = (194, 178, 128), // Sand - tan
                 [4] = (255, 250, 250), // Snow - white
-                [5] = (105, 105, 105), // Gravel - dark gray
+                [5] = (255, 255, 105), // Gravel - light yellow-ish (visible)
                 [6] = (101, 67, 33),   // Wood - dark brown
                 [7] = (46, 125, 50)    // Leaves - dark green
             };
-            
+
+            var rand = new Random(12345); // Consistent seed for noise
+
             for (int ty = 0; ty < 4; ty++)
             {
                 for (int tx = 0; tx < 4; tx++)
                 {
                     int tileIndex = ty * 4 + tx;
-                    var color = blockColors.ContainsKey(tileIndex) 
-                        ? blockColors[tileIndex] 
+                    var color = blockColors.ContainsKey(tileIndex)
+                        ? blockColors[tileIndex]
                         : ((byte)255, (byte)0, (byte)255); // Magenta fallback
-                    
-                    Console.WriteLine($"[Renderer] Creating tile {tileIndex} at ({tx},{ty}) with color RGB({color.Item1},{color.Item2},{color.Item3})");
-                    
-                    // Fill tile with color and some noise
+
                     for (int py = 0; py < tileSize; py++)
                     {
                         for (int px = 0; px < tileSize; px++)
@@ -164,56 +189,157 @@ void main()
                             int x = tx * tileSize + px;
                             int y = ty * tileSize + py;
                             int idx = (y * atlasSize + x) * 4;
-                            
-                            // Add deterministic noise variation using position
-                            int seed = (tileIndex * 10000) + (px * 100) + py;
-                            seed = (seed * 1103515245 + 12345) & 0x7fffffff; // LCG
-                            int noise = (seed % 41) - 20; // Range: -20 to 20
-                            
-                            pixels[idx + 0] = (byte)Math.Clamp(color.Item1 + noise, 0, 255);
-                            pixels[idx + 1] = (byte)Math.Clamp(color.Item2 + noise, 0, 255);
-                            pixels[idx + 2] = (byte)Math.Clamp(color.Item3 + noise, 0, 255);
+
+                            // Simple per-pixel noise for texture variation
+                            int noise = (int)((rand.NextDouble() - 0.5) * 30); // ±15 variation
+
+                            // Gradient shading to give texture depth
+                            float gradient = 0.8f + 0.2f * ((float)py / tileSize);
+
+                            pixels[idx + 0] = (byte)Math.Clamp((color.Item1 + noise) * gradient, 0, 255);
+                            pixels[idx + 1] = (byte)Math.Clamp((color.Item2 + noise) * gradient, 0, 255);
+                            pixels[idx + 2] = (byte)Math.Clamp((color.Item3 + noise) * gradient, 0, 255);
                             pixels[idx + 3] = 255;
                         }
                     }
                 }
             }
-            
-            atlasTextureId = GL.GenTexture();
-            GL.BindTexture(TextureTarget.Texture2D, atlasTextureId);
+
+            // If there was an existing renderer-local atlas, delete it
+            if (localAtlasTextureId != 0)
+            {
+                try { GL.DeleteTexture(localAtlasTextureId); } catch { }
+                localAtlasTextureId = 0;
+            }
+
+            localAtlasTextureId = GL.GenTexture();
+            GL.BindTexture(TextureTarget.Texture2D, localAtlasTextureId);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
                 atlasSize, atlasSize, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels);
-            
-            // CRITICAL: Use ClampToEdge to prevent atlas bleeding at tile boundaries
+
+            // Ensure crisp block textures
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
-            
-            Console.WriteLine("[Renderer] Created procedural texture atlas");
+
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+
+            Console.WriteLine("[Renderer] Created new procedural texture atlas (renderer-local).");
         }
 
+
+        // Client-side helper in Renderer.cs (or a utility file)
+        // Requires: using AetherisClient.Rendering; at top
+
+        private static float FractLocal(float x)
+        {
+            float f = x - MathF.Floor(x);
+            return Math.Clamp(f, 0f, 0.9999f);
+        }
+
+        private float[] ConvertMeshWithBlockTypeToUVs(float[] src)
+        {
+            // src: pos3, normal3, blockTypeFloat => 7 floats
+            const int srcStride = 7;
+            const int dstStride = 8;
+
+            if (src == null || src.Length == 0) return Array.Empty<float>();
+            int vertexCount = src.Length / srcStride;
+            var dst = new float[vertexCount * dstStride];
+
+            bool atlasLoaded = AetherisClient.Rendering.AtlasManager.IsLoaded;
+
+            for (int vi = 0; vi < vertexCount; vi++)
+            {
+                int si = vi * srcStride;
+                int di = vi * dstStride;
+
+                float px = src[si + 0];
+                float py = src[si + 1];
+                float pz = src[si + 2];
+                float nx = src[si + 3];
+                float ny = src[si + 4];
+                float nz = src[si + 5];
+
+                int blockTypeInt = (int)src[si + 6];
+
+                // safe cast: if value out of range, default to Stone(1) or first mapping your client expects
+                AetherisClient.Rendering.BlockType clientType;
+                if (Enum.IsDefined(typeof(AetherisClient.Rendering.BlockType), blockTypeInt))
+                    clientType = (AetherisClient.Rendering.BlockType)blockTypeInt;
+                else
+                    clientType = AetherisClient.Rendering.BlockType.Stone;
+
+                dst[di + 0] = px;
+                dst[di + 1] = py;
+                dst[di + 2] = pz;
+                dst[di + 3] = nx;
+                dst[di + 4] = ny;
+                dst[di + 5] = nz;
+
+                // triplanar raw coords
+                float absX = MathF.Abs(nx), absY = MathF.Abs(ny), absZ = MathF.Abs(nz);
+                float scale = 0.25f;
+                float uRaw, vRaw;
+                if (absY > absX && absY > absZ) { uRaw = px * scale; vRaw = pz * scale; }
+                else if (absX > absZ) { uRaw = pz * scale; vRaw = py * scale; }
+                else { uRaw = px * scale; vRaw = py * scale; }
+
+                uRaw = FractLocal(uRaw);
+                vRaw = FractLocal(vRaw);
+
+                float u = 0.5f, v = 0.5f; // fallback uv
+                if (atlasLoaded)
+                {
+                    var (uMin, vMin, uMax, vMax) = AetherisClient.Rendering.AtlasManager.GetAtlasUV(clientType);
+                    const float uvEpsilon = 0.001f;
+                    float uRange = (uMax - uMin) * (1f - uvEpsilon * 2);
+                    float vRange = (vMax - vMin) * (1f - uvEpsilon * 2);
+                    u = uMin + uvEpsilon + uRaw * uRange;
+                    v = vMin + uvEpsilon + vRaw * vRange;
+                    u = Math.Clamp(u, uMin + uvEpsilon, uMax - uvEpsilon);
+                    v = Math.Clamp(v, vMin + uvEpsilon, vMax - uvEpsilon);
+                }
+                else
+                {
+                    // If atlas not loaded yet, map numerically to a simple procedural checker so world is visible.
+                    // Very small variation so you can spot different block types even before atlas loads.
+                    float t = (blockTypeInt % 8) / 8f;
+                    u = FractLocal(uRaw * 0.5f + t);
+                    v = FractLocal(vRaw * 0.5f + t);
+                }
+
+                dst[di + 6] = u;
+                dst[di + 7] = v;
+            }
+
+            return dst;
+        }
+        // Reuse this Fract from MarchingCubes if needed:
+        private static float Fract(float x)
+        {
+            float f = x - MathF.Floor(x);
+            return Math.Clamp(f, 0f, 0.9999f);
+        }
         /// <summary>
         /// Load texture from image file using StbImageSharp
         /// Add NuGet package: StbImageSharp
         /// </summary>
         private int LoadTextureFromFile(string path)
         {
-            // Using StbImageSharp for cross-platform image loading
-            // Install via: dotnet add package StbImageSharp
-            
             StbImage.stbi_set_flip_vertically_on_load(1); // OpenGL expects bottom-left origin
-            
+
             using (var stream = System.IO.File.OpenRead(path))
             {
                 ImageResult image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
-                
+
                 if (image == null)
                     throw new Exception("Failed to load image");
-                
+
                 int textureId = GL.GenTexture();
                 GL.BindTexture(TextureTarget.Texture2D, textureId);
-                
+
                 GL.TexImage2D(
                     TextureTarget.Texture2D,
                     0,
@@ -225,26 +351,25 @@ void main()
                     PixelType.UnsignedByte,
                     image.Data
                 );
-                
+
                 // Generate mipmaps for better quality at distance
                 GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
-                
+
                 // CRITICAL: Set proper texture parameters to prevent atlas bleeding
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.NearestMipmapLinear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
-                
+
                 // Optional: Anisotropic filtering for better quality
-                if (GL.GetString(StringName.Extensions).Contains("GL_EXT_texture_filter_anisotropic"))
+                if (GL.GetString(StringName.Extensions)?.Contains("GL_EXT_texture_filter_anisotropic") == true)
                 {
-                    float maxAniso;
-                    GL.GetFloat((GetPName)0x84FF, out maxAniso); // MAX_TEXTURE_MAX_ANISOTROPY_EXT
+                    GL.GetFloat((GetPName)0x84FF, out float maxAniso); // MAX_TEXTURE_MAX_ANISOTROPY_EXT
                     GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)0x84FE, Math.Min(4.0f, maxAniso));
                 }
-                
+
                 GL.BindTexture(TextureTarget.Texture2D, 0);
-                
+
                 Console.WriteLine($"[Renderer] Loaded {image.Width}x{image.Height} texture with {image.Comp} components");
                 return textureId;
             }
@@ -284,9 +409,49 @@ void main()
             if (meshes.Count == 0) return;
 
             EnsureShader();
-            if (atlasTextureId == 0)
+
+            // Prefer AtlasManager texture if available
+            int textureToBind = 0;
+            if (AtlasManager.IsLoaded && AtlasManager.AtlasTextureId != 0)
+                textureToBind = AtlasManager.AtlasTextureId;
+            else if (localAtlasTextureId != 0)
+                textureToBind = localAtlasTextureId;
+            else
+                CreateProceduralAtlas(); // creates localAtlasTextureId and returns
+
+            // DIAGNOSTIC: First frame only
+            if (frameCount == 0)
             {
-                CreateProceduralAtlas();
+                Console.WriteLine($"[Renderer] === FIRST FRAME DIAGNOSTICS ===");
+                Console.WriteLine($"[Renderer] Shader program ID: {shaderProgram}");
+                Console.WriteLine($"[Renderer] Using texture ID: {textureToBind}");
+                Console.WriteLine($"[Renderer] Uniform location uAtlasTexture: {locAtlasTexture}");
+
+                // Verify texture exists and has correct dimensions
+                GL.BindTexture(TextureTarget.Texture2D, textureToBind);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out int width);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureHeight, out int height);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureInternalFormat, out int format);
+                Console.WriteLine($"[Renderer] Atlas texture dimensions: {width}x{height}, format: {format}");
+
+                // If AtlasManager is present, print its detected tileSize info
+                if (AtlasManager.IsLoaded)
+                {
+                    Console.WriteLine($"[Renderer] AtlasManager: atlas {AtlasManager.AtlasWidth}x{AtlasManager.AtlasHeight}, tileSize={AtlasManager.TileSize}, tilesPerRow={AtlasManager.TilesPerRow}, tilesPerCol={AtlasManager.TilesPerCol}");
+                }
+
+                // Check what texture is currently bound to unit 0
+                GL.ActiveTexture(TextureUnit.Texture0);
+                GL.GetInteger(GetPName.TextureBinding2D, out int boundTex);
+                Console.WriteLine($"[Renderer] Texture bound to unit 0: {boundTex}");
+
+                // Verify shader uniform
+                if (locAtlasTexture == -1)
+                {
+                    Console.WriteLine("[Renderer] ERROR: uAtlasTexture uniform not found in shader!");
+                }
+
+                Console.WriteLine($"[Renderer] === END DIAGNOSTICS ===");
             }
 
             Matrix4 viewProj = view * projection;
@@ -322,11 +487,18 @@ void main()
             GL.UniformMatrix4(locProjection, false, ref projection);
             GL.UniformMatrix4(locView, false, ref view);
             GL.Uniform1(locFogDecay, FogDecay);
-            
-            // Bind texture atlas
+
+            // Bind texture atlas (either AtlasManager's or local fallback)
             GL.ActiveTexture(TextureUnit.Texture0);
-            GL.BindTexture(TextureTarget.Texture2D, atlasTextureId);
+            GL.BindTexture(TextureTarget.Texture2D, (AtlasManager.IsLoaded && AtlasManager.AtlasTextureId != 0) ? AtlasManager.AtlasTextureId : localAtlasTextureId);
             GL.Uniform1(locAtlasTexture, 0);
+
+            // DIAGNOSTIC: Verify binding on first frame
+            if (frameCount == 0)
+            {
+                GL.GetInteger(GetPName.TextureBinding2D, out int boundAfter);
+                Console.WriteLine($"[Renderer] After explicit bind, texture unit 0 has: {boundAfter}");
+            }
 
             foreach (var md in visibleMeshes)
             {
@@ -340,8 +512,6 @@ void main()
             GL.UseProgram(0);
 
             frameCount++;
-            if (frameCount % 300 == 0)
-                Console.WriteLine($"[Renderer] Visible: {lastVisibleCount}/{meshes.Count}");
         }
 
         public void RemoveChunk(int cx, int cy, int cz)
@@ -380,11 +550,12 @@ void main()
                 try { GL.DeleteProgram(shaderProgram); } catch { }
                 shaderProgram = 0;
             }
-            
-            if (atlasTextureId != 0)
+
+            // Only delete renderer-local atlas texture. AtlasManager's texture is managed by AtlasManager.
+            if (localAtlasTextureId != 0)
             {
-                try { GL.DeleteTexture(atlasTextureId); } catch { }
-                atlasTextureId = 0;
+                try { GL.DeleteTexture(localAtlasTextureId); } catch { }
+                localAtlasTextureId = 0;
             }
         }
 
@@ -396,6 +567,8 @@ void main()
         public int GetVisibleChunkCount() => lastVisibleCount;
         public int GetTotalChunkCount() => meshes.Count;
 
+
+
         private void UploadMesh(int cx, int cy, int cz, float[] interleavedData)
         {
             if (interleavedData == null || interleavedData.Length == 0) return;
@@ -403,27 +576,47 @@ void main()
             EnsureShader();
             RemoveChunk(cx, cy, cz);
 
+            float[] uploadData = interleavedData;
+
+            // Heuristic: if divisible by 7 and not by 8, assume server format (pos3,norm3,blockType)
+            if (interleavedData.Length % 7 == 0 && interleavedData.Length % 8 != 0)
+            {
+                try
+                {
+                    // Ensure atlas exists or allow fallback inside converter
+                    uploadData = ConvertMeshWithBlockTypeToUVs(interleavedData);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[Renderer] Mesh conversion error: " + ex.Message);
+                    return;
+                }
+            }
+            else if (interleavedData.Length % 8 != 0)
+            {
+                Console.WriteLine("[Renderer] UploadMesh: unexpected vertex stride. Aborting upload.");
+                return;
+            }
+
             int vao = GL.GenVertexArray();
             int vbo = GL.GenBuffer();
 
             GL.BindVertexArray(vao);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
+
             GL.BufferData(BufferTarget.ArrayBuffer,
-                interleavedData.Length * sizeof(float),
-                interleavedData,
+                uploadData.Length * sizeof(float),
+                uploadData,
                 BufferUsageHint.StaticDraw);
 
-            int stride = 8 * sizeof(float); // 3 pos + 3 normal + 2 uv
-            
-            // Position attribute
+            int stride = 8 * sizeof(float); // pos3 + normal3 + uv2
+
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, stride, 0);
-            
-            // Normal attribute
+
             GL.EnableVertexAttribArray(1);
             GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, stride, 3 * sizeof(float));
-            
-            // UV attribute
+
             GL.EnableVertexAttribArray(2);
             GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, stride, 6 * sizeof(float));
 
@@ -442,7 +635,7 @@ void main()
                 Config.CHUNK_SIZE * Config.CHUNK_SIZE
             ) * 0.5f;
 
-            int vertexCount = interleavedData.Length / 8;
+            int vertexCount = uploadData.Length / 8;
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
         }
 
@@ -500,31 +693,31 @@ void main()
                 viewProj.M24 + viewProj.M21,
                 viewProj.M34 + viewProj.M31,
                 viewProj.M44 + viewProj.M41));
-            
+
             frustumPlanes[1] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M11,
                 viewProj.M24 - viewProj.M21,
                 viewProj.M34 - viewProj.M31,
                 viewProj.M44 - viewProj.M41));
-            
+
             frustumPlanes[2] = NormalizePlane(new Plane(
                 viewProj.M14 + viewProj.M12,
                 viewProj.M24 + viewProj.M22,
                 viewProj.M34 + viewProj.M32,
                 viewProj.M44 + viewProj.M42));
-            
+
             frustumPlanes[3] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M12,
                 viewProj.M24 - viewProj.M22,
                 viewProj.M34 - viewProj.M32,
                 viewProj.M44 - viewProj.M42));
-            
+
             frustumPlanes[4] = NormalizePlane(new Plane(
                 viewProj.M14 + viewProj.M13,
                 viewProj.M24 + viewProj.M23,
                 viewProj.M34 + viewProj.M33,
                 viewProj.M44 + viewProj.M43));
-            
+
             frustumPlanes[5] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M13,
                 viewProj.M24 - viewProj.M23,
@@ -549,7 +742,7 @@ void main()
                                  frustumPlanes[i].B * center.Y +
                                  frustumPlanes[i].C * center.Z +
                                  frustumPlanes[i].D;
-                
+
                 if (distance < -radius)
                     return false;
             }

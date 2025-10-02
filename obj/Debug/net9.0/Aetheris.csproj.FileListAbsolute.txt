@@ -31,3 +31,4 @@
 /home/kirby/Programming/Aetheris/obj/Debug/net9.0/Aetheris.sourcelink.json
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/textures/atlas.png
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/StbImageSharp.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/SixLabors.ImageSharp.dll

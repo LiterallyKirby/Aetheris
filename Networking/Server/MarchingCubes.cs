@@ -59,7 +59,6 @@ namespace Aetheris
                             int worldY = chunk.PositionY + (int)pos[i].Y;
                             int worldZ = chunk.PositionZ + (int)pos[i].Z;
                             val[i] = WorldGen.SampleDensity(worldX, worldY, worldZ);
-                            // Use density-aware GetBlockType to avoid double sampling
                             blockTypes[i] = WorldGen.GetBlockType(worldX, worldY, worldZ, val[i]);
                         }
 
@@ -104,6 +103,24 @@ namespace Aetheris
                             var v1 = vertList[b];
                             var v2 = vertList[c];
 
+                            // CRITICAL: More aggressive degenerate triangle detection
+                            var edge1 = v1 - v0;
+                            var edge2 = v2 - v0;
+
+                            // Skip if edges are too short
+                            if (edge1.LengthSquared < 0.001f || edge2.LengthSquared < 0.001f)
+                                continue;
+
+                            // Calculate normal with better degenerate check
+                            var normal = Vector3.Cross(edge1, edge2);
+                            float normalLenSq = normal.LengthSquared;
+
+                            // Skip degenerate triangles (area too small)
+                            if (normalLenSq < 0.0001f)
+                                continue;
+
+                            normal = normal.Normalized();
+
                             // Use the most common block type for this triangle
                             BlockType triBlockType = GetMostCommonBlockType(
                                 vertBlockTypes[a],
@@ -111,12 +128,11 @@ namespace Aetheris
                                 vertBlockTypes[c]
                             );
 
-                            // Calculate normal and guard against degenerates
-                            var normal = Vector3.Cross(v1 - v0, v2 - v0);
-                            if (normal.LengthSquared > 1e-8f)
-                                normal = normal.Normalized();
-                            else
-                                normal = new Vector3(0f, 1f, 0f);
+                            // Add small offset along normal to prevent z-fighting
+                            float offset = 0.001f;
+                            v0 += normal * offset;
+                            v1 += normal * offset;
+                            v2 += normal * offset;
 
                             // Generate triplanar UVs based on normal
                             AddVertexWithUV(verts, v0, normal, triBlockType);
@@ -129,38 +145,32 @@ namespace Aetheris
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-
         private static BlockType ChooseBlockType(BlockType b1, BlockType b2, float v1, float v2, float iso)
         {
             float diff1 = Math.Abs(v1 - iso);
             float diff2 = Math.Abs(v2 - iso);
-
             return diff1 < diff2 ? b1 : b2;
         }
-
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static BlockType GetMostCommonBlockType(BlockType a, BlockType b, BlockType c)
         {
-            // Simple majority vote
             if (a == b || a == c) return a;
             if (b == c) return b;
-            return a; // Fallback to first
+            return a;
         }
 
-        // Stable fract for floats (works with negative inputs)
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static float Fract(float x)
         {
-            // x - floor(x) gives 0..1 (floor handles negatives properly)
+            // Improved fract with better precision handling
             float f = x - MathF.Floor(x);
-            // Avoid returning 1.0 due to tiny precision errors
-            if (f >= 1f) f = 0f;
-            if (f < 0f) f = 0f;
-            return f;
+            // Clamp to avoid edge cases
+            return Math.Clamp(f, 0f, 0.9999f);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static void AddVertexWithUV(List<float> verts, Vector3 pos, Vector3 n, BlockType blockType)
         {
             // Position
@@ -173,48 +183,58 @@ namespace Aetheris
             verts.Add(n.Y);
             verts.Add(n.Z);
 
-            // Triplanar UV mapping based on dominant normal axis
-            float u, vCoord;
+            // Triplanar UV mapping
+            float uRaw, vRaw;
             float absX = MathF.Abs(n.X);
             float absY = MathF.Abs(n.Y);
             float absZ = MathF.Abs(n.Z);
 
-            var (uMin, vMin, uMax, vMax) = blockType.GetAtlasUV();
-            float scale = 0.25f; // Texture tiling scale
-
+            float scale = 0.25f;
             if (absY > absX && absY > absZ)
             {
-                // Top/bottom face - use XZ
-                float fx = pos.X * scale;
-                float fz = pos.Z * scale;
-                float sx = Fract(fx);
-                float sz = Fract(fz);
-                u = uMin + sx * (uMax - uMin);
-                vCoord = vMin + sz * (vMax - vMin);
+                uRaw = pos.X * scale;
+                vRaw = pos.Z * scale;
             }
             else if (absX > absZ)
             {
-                // Left/right face - use ZY
-                float fz = pos.Z * scale;
-                float fy = pos.Y * scale;
-                float sz = Fract(fz);
-                float sy = Fract(fy);
-                u = uMin + sz * (uMax - uMin);
-                vCoord = vMin + sy * (vMax - vMin);
+                uRaw = pos.Z * scale;
+                vRaw = pos.Y * scale;
             }
             else
             {
-                // Front/back face - use XY
-                float fx = pos.X * scale;
-                float fy = pos.Y * scale;
-                float sx = Fract(fx);
-                float sy = Fract(fy);
-                u = uMin + sx * (uMax - uMin);
-                vCoord = vMin + sy * (vMax - vMin);
+                uRaw = pos.X * scale;
+                vRaw = pos.Y * scale;
+            }
+
+            uRaw = Fract(uRaw);
+            vRaw = Fract(vRaw);
+
+            var (uMin, vMin, uMax, vMax) = GetAtlasUV(blockType);
+
+            // DEBUG: Log for Sand blocks
+            if (blockType == BlockType.Sand && verts.Count < 240) // Only log first few
+            {
+
+            }
+
+            float uvEpsilon = 0.001f;
+            float uRange = (uMax - uMin) * (1f - uvEpsilon * 2);
+            float vRange = (vMax - vMin) * (1f - uvEpsilon * 2);
+
+            float u = uMin + uvEpsilon + uRaw * uRange;
+            float v = vMin + uvEpsilon + vRaw * vRange;
+
+            u = Math.Clamp(u, uMin + uvEpsilon, uMax - uvEpsilon);
+            v = Math.Clamp(v, vMin + uvEpsilon, vMax - uvEpsilon);
+
+            // DEBUG: Log final UV
+            if (blockType == BlockType.Sand && verts.Count < 240)
+            {
+
             }
 
             verts.Add(u);
-            verts.Add(vCoord);
+            verts.Add(v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -226,7 +246,46 @@ namespace Aetheris
             if (Math.Abs(v1 - v2) < epsilon) return p1;
 
             float t = (iso - v1) / (v2 - v1);
+            t = Math.Clamp(t, 0f, 1f); // Ensure interpolation stays in bounds
             return p1 + t * (p2 - p1);
+        }
+
+        /// <summary>
+        /// Return normalized atlas bounds (uMin, vMin, uMax, vMax) for the given block type.
+        /// Matches the procedural atlas in Renderer.CreateProceduralAtlas:
+        /// 0=Stone,1=Dirt,2=Grass,3=Sand,4=Snow,5=Gravel,6=Wood,7=Leaves
+        /// Atlas assumed 256x256 with 4x4 tiles (64px each).
+        /// </summary>
+        private static (float uMin, float vMin, float uMax, float vMax) GetAtlasUV(BlockType type)
+        {
+            const int atlasSize = 256;
+            const int tileSize = 64;
+            const int tilesPerRow = atlasSize / tileSize; // =4
+            const float halfTexel = 0.5f / atlasSize;
+
+            // FIXED: Account for Air = 0 offset in enum
+            int tileIndex = type switch
+            {
+                BlockType.Stone => 0,
+                BlockType.Dirt => 1,
+                BlockType.Grass => 2,
+                BlockType.Sand => 3,
+                BlockType.Snow => 4,
+                BlockType.Gravel => 5,
+                BlockType.Wood => 6,
+                BlockType.Leaves => 7,
+                _ => 0  // Air and unknown fallback to Stone
+            };
+
+            int tx = tileIndex % tilesPerRow;
+            int ty = tileIndex / tilesPerRow;
+
+            float uMin = (tx * tileSize + halfTexel) / (float)atlasSize;
+            float vMin = (ty * tileSize + halfTexel) / (float)atlasSize;
+            float uMax = ((tx + 1) * tileSize - halfTexel) / (float)atlasSize;
+            float vMax = ((ty + 1) * tileSize - halfTexel) / (float)atlasSize;
+
+            return (uMin, vMin, uMax, vMax);
         }
     }
 }

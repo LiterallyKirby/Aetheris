@@ -14,11 +14,11 @@ namespace Aetheris
         private TcpListener? listener;
         private CancellationTokenSource? cts;
         private readonly ChunkManager chunkManager = new();
-        
+
         // Mesh cache with LRU eviction
         private readonly ConcurrentDictionary<ChunkCoord, CachedMesh> meshCache = new();
         private readonly ConcurrentDictionary<ChunkCoord, SemaphoreSlim> generationLocks = new();
-        
+
         private const int MaxCachedMeshes = 20000;
         private int cacheSize = 0;
 
@@ -31,7 +31,7 @@ namespace Aetheris
         {
             public float[] Data { get; }
             public long LastAccessed { get; set; }
-            
+
             public CachedMesh(float[] data)
             {
                 Data = data;
@@ -39,13 +39,16 @@ namespace Aetheris
             }
         }
 
+
         public async Task RunServerAsync()
         {
+            WorldGen.Initialize(); // <- Ensure noise generators are ready
+
             listener = new TcpListener(IPAddress.Any, Config.SERVER_PORT);
             listener.Start();
             listener.Server.NoDelay = true;
             cts = new CancellationTokenSource();
-            
+
             Console.WriteLine($"[[Server]] Listening on port {Config.SERVER_PORT} @ {TickRate} TPS");
 
             // Start background tasks
@@ -66,6 +69,7 @@ namespace Aetheris
                 Console.WriteLine("[[Server]] Shutting down...");
             }
         }
+
 
         private async Task ServerTickLoop(CancellationToken token)
         {
@@ -105,7 +109,7 @@ namespace Aetheris
             using (client)
             {
                 var stream = client.GetStream();
-                
+
                 try
                 {
                     while (!token.IsCancellationRequested && client.Connected)
@@ -153,7 +157,7 @@ namespace Aetheris
                 int cx = BitConverter.ToInt32(buf, 0);
                 int cy = BitConverter.ToInt32(buf, 4);
                 int cz = BitConverter.ToInt32(buf, 8);
-                
+
                 return new ChunkCoord(cx, cy, cz);
             }
             catch
@@ -166,6 +170,7 @@ namespace Aetheris
             }
         }
 
+
         private async Task<float[]> GetOrGenerateMeshAsync(ChunkCoord coord, CancellationToken token)
         {
             // Check cache first
@@ -177,7 +182,7 @@ namespace Aetheris
 
             // Ensure only one generation per chunk at a time
             var lockObj = generationLocks.GetOrAdd(coord, _ => new SemaphoreSlim(1, 1));
-            
+
             await lockObj.WaitAsync(token);
             try
             {
@@ -188,7 +193,10 @@ namespace Aetheris
                     return cached.Data;
                 }
 
-                // Generate mesh on thread pool
+                // **PRINT BIOME HERE**
+
+
+                // Generate mesh
                 var mesh = await Task.Run(() =>
                 {
                     var chunk = chunkManager.GetOrGenerateChunk(coord);
@@ -199,7 +207,7 @@ namespace Aetheris
                 var cachedMesh = new CachedMesh(mesh);
                 meshCache[coord] = cachedMesh;
                 Interlocked.Increment(ref cacheSize);
-                
+
                 return mesh;
             }
             finally
@@ -208,13 +216,15 @@ namespace Aetheris
             }
         }
 
+
         private readonly SemaphoreSlim sendSemaphore = new SemaphoreSlim(1, 1);
 
         private async Task SendMeshAsync(NetworkStream stream, float[] mesh, ChunkCoord coord, CancellationToken token)
         {
-            int vertexCount = mesh.Length / 6;
+            // CRITICAL: Changed from /6 to /8 (pos + normal + UV = 8 floats per vertex)
+            int vertexCount = mesh.Length / 8;
             int payloadSize = sizeof(int) + mesh.Length * sizeof(float);
-            
+
             var payload = ArrayPool<byte>.Shared.Rent(payloadSize);
             try
             {
@@ -222,7 +232,7 @@ namespace Aetheris
                 Buffer.BlockCopy(mesh, 0, payload, sizeof(int), mesh.Length * sizeof(float));
 
                 var lenBytes = BitConverter.GetBytes(payloadSize);
-                
+
                 // Serialize sends to prevent interleaving
                 await sendSemaphore.WaitAsync(token);
                 try
@@ -253,17 +263,17 @@ namespace Aetheris
                     if (cacheSize > MaxCachedMeshes)
                     {
                         var entries = new System.Collections.Generic.List<(ChunkCoord coord, long lastAccessed)>();
-                        
+
                         foreach (var kvp in meshCache)
                         {
                             entries.Add((kvp.Key, kvp.Value.LastAccessed));
                         }
 
                         entries.Sort((a, b) => a.lastAccessed.CompareTo(b.lastAccessed));
-                        
+
                         int toRemove = Math.Min(entries.Count / 4, entries.Count - MaxCachedMeshes + 200);
                         int removed = 0;
-                        
+
                         for (int i = 0; i < toRemove; i++)
                         {
                             if (meshCache.TryRemove(entries[i].coord, out _))
@@ -300,7 +310,7 @@ namespace Aetheris
             cts?.Cancel();
             listener?.Stop();
             sendSemaphore?.Dispose();
-            
+
             foreach (var lockObj in generationLocks.Values)
             {
                 lockObj.Dispose();

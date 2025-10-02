@@ -14,12 +14,12 @@ namespace Aetheris
         private static FastNoiseLite caveNoise1;
         private static FastNoiseLite caveNoise2;
         private static FastNoiseLite caveNoise3;
-        
+
         private const float ISO = 0.5f;
         private static bool initialized = false;
 
         // Biome definitions
-        private enum Biome
+        public enum Biome
         {
             Plains,
             Mountains,
@@ -30,180 +30,152 @@ namespace Aetheris
         public static void Initialize()
         {
             if (initialized) return;
-            
+
             int seed = Config.WORLD_SEED;
-            
+
             // Biome selection noise
             biomeNoise = new FastNoiseLite(seed);
             biomeNoise.SetNoiseType(NoiseType.Cellular);
             biomeNoise.SetFrequency(0.001f);
             biomeNoise.SetCellularReturnType(CellularReturnType.CellValue);
-            
+
             // Terrain height noise
             terrainNoise = new FastNoiseLite(seed + 1);
             terrainNoise.SetNoiseType(NoiseType.OpenSimplex2);
             terrainNoise.SetFrequency(0.008f);
             terrainNoise.SetFractalOctaves(4);
-            
+
             // Cave systems
             caveNoise1 = new FastNoiseLite(seed + 2);
             caveNoise1.SetNoiseType(NoiseType.OpenSimplex2);
-            caveNoise1.SetFrequency(0.015f);
-            
+            caveNoise1.SetFrequency(0.02f);
+
             caveNoise2 = new FastNoiseLite(seed + 3);
             caveNoise2.SetNoiseType(NoiseType.OpenSimplex2);
-            caveNoise2.SetFrequency(0.03f);
-            
+            caveNoise2.SetFrequency(0.04f);
+
             caveNoise3 = new FastNoiseLite(seed + 4);
             caveNoise3.SetNoiseType(NoiseType.Perlin);
-            caveNoise3.SetFrequency(0.05f);
-            
+            caveNoise3.SetFrequency(0.08f);
+
             initialized = true;
         }
 
         private static Biome GetBiome(int x, int z)
         {
             float biomeValue = biomeNoise.GetNoise(x, z);
-            
+
             if (biomeValue < -0.5f) return Biome.Plains;
             if (biomeValue < 0.0f) return Biome.Forest;
             if (biomeValue < 0.5f) return Biome.Desert;
             return Biome.Mountains;
         }
 
-        /// <summary>
-        /// Get biome blend weights for smooth transitions
-        /// Returns the primary biome and a blend factor (0-1)
-        /// </summary>
-        private static (Biome primary, Biome secondary, float blend) GetBiomeBlend(int x, int z)
-        {
-            float biomeValue = biomeNoise.GetNoise(x, z);
-            const float blendWidth = 0.15f; // Transition zone width
-            
-            Biome primary, secondary;
-            float blend;
-            
-            // Check each biome boundary
-            if (biomeValue < -0.5f + blendWidth && biomeValue >= -0.5f - blendWidth)
-            {
-                // Transition between Plains and previous
-                primary = Biome.Plains;
-                secondary = Biome.Mountains; // Wraps around
-                blend = (biomeValue - (-0.5f - blendWidth)) / (blendWidth * 2);
-            }
-            else if (biomeValue < 0.0f + blendWidth && biomeValue >= 0.0f - blendWidth)
-            {
-                // Transition between Forest and Plains
-                primary = Biome.Forest;
-                secondary = Biome.Plains;
-                blend = (biomeValue - (0.0f - blendWidth)) / (blendWidth * 2);
-            }
-            else if (biomeValue < 0.5f + blendWidth && biomeValue >= 0.5f - blendWidth)
-            {
-                // Transition between Desert and Forest
-                primary = Biome.Desert;
-                secondary = Biome.Forest;
-                blend = (biomeValue - (0.5f - blendWidth)) / (blendWidth * 2);
-            }
-            else if (biomeValue >= 0.5f + blendWidth || biomeValue < -0.5f - blendWidth)
-            {
-                // Transition between Mountains and Desert
-                primary = Biome.Mountains;
-                secondary = Biome.Desert;
-                if (biomeValue >= 0.5f + blendWidth)
-                    blend = (biomeValue - (0.5f + blendWidth)) / (blendWidth * 2);
-                else
-                    blend = 1.0f - ((biomeValue - (-0.5f - blendWidth * 2)) / (blendWidth * 2));
-            }
-            else
-            {
-                // Pure biome (no blending)
-                primary = GetBiome(x, z);
-                secondary = primary;
-                blend = 0.0f;
-            }
-            
-            blend = Math.Clamp(blend, 0.0f, 1.0f);
-            return (primary, secondary, blend);
-        }
-
         private static (float baseHeight, float amplitude) GetBiomeParams(Biome biome)
         {
             return biome switch
             {
-                Biome.Plains => (25f, 5f),
-                Biome.Forest => (30f, 12f),
-                Biome.Desert => (20f, 8f),
-                Biome.Mountains => (40f, 35f),
+                Biome.Plains => (30f, 6f),
+                Biome.Forest => (35f, 10f),
+                Biome.Desert => (28f, 5f), // slightly raised and smoothed deserts
+                Biome.Mountains => (50f, 35f),
                 _ => (30f, 10f)
             };
         }
 
+        // thickness of surface/subsurface per biome
+        private static int GetDirtDepth(Biome biome)
+        {
+            return biome switch
+            {
+                Biome.Plains => 6,
+                Biome.Forest => 7,
+                Biome.Desert => 4,
+                Biome.Mountains => 2,
+                _ => 5
+            };
+        }
+
+        /// <summary>
+        /// Check if a position is exposed to air (has air above it)
+        /// slightly relaxed: check a couple blocks above so slopes count as exposed
+        /// </summary>
+        private static bool IsExposedToAir(int x, int y, int z)
+        {
+            // if any of the next two blocks above are air-ish, consider this exposed
+            return SampleDensity(x, y + 1, z) <= ISO || SampleDensity(x, y + 2, z) <= ISO;
+        }
+
+        /// <summary>
+        /// Get the (rounded) surface Y coordinate for a column (x,z)
+        /// </summary>
+        private static int GetSurfaceY(int x, int z)
+        {
+            var biome = GetBiome(x, z);
+            var (baseHeight, amplitude) = GetBiomeParams(biome);
+            float surfaceNoise = terrainNoise.GetNoise(x, z);
+            float surfaceYf = baseHeight + surfaceNoise * amplitude;
+            return (int)MathF.Round(surfaceYf);
+        }
+
         /// <summary>
         /// Get block type at world position (with known density)
-        /// Uses biome blending for smooth transitions
         /// </summary>
         public static BlockType GetBlockType(int x, int y, int z, float density)
         {
             if (!initialized) Initialize();
-            
-            // Air check - use provided density
+            if (y == 40 && x >= -50 && x <= -48 && z >= -55 && z <= -53)
+            {
+                Console.WriteLine($"Block at ({x},{y},{z}): density={density:F3}, biome={GetBiome(x, z)}");
+            }
+            // Air driven by density / caves
             if (density <= ISO)
                 return BlockType.Air;
-            
-            // Bedrock layer
+
+            // Bedrock
             if (y <= 2)
                 return BlockType.Stone;
-            
-            // Get blended biome info
-            var (primaryBiome, secondaryBiome, blendFactor) = GetBiomeBlend(x, z);
-            
-            // Get terrain params for both biomes
-            var (baseHeight1, amplitude1) = GetBiomeParams(primaryBiome);
-            var (baseHeight2, amplitude2) = GetBiomeParams(secondaryBiome);
-            
-            // Blend terrain height
-            float surfaceNoise = terrainNoise.GetNoise(x, z);
-            float surfaceY1 = baseHeight1 + surfaceNoise * amplitude1;
-            float surfaceY2 = baseHeight2 + surfaceNoise * amplitude2;
-            float surfaceY = surfaceY1 * (1.0f - blendFactor) + surfaceY2 * blendFactor;
-            
-            int depthBelowSurface = (int)(surfaceY - y);
-            
-            // Determine which biome's block to use based on blend
-            // Use a noise-based selection for natural mixing
-            float selectionNoise = terrainNoise.GetNoise(x * 0.5f, z * 0.5f);
-            bool usePrimary = (selectionNoise + 1.0f) * 0.5f > blendFactor;
-            Biome selectedBiome = usePrimary ? primaryBiome : secondaryBiome;
-            
-            // Surface layer (top block)
-            if (depthBelowSurface <= 1)
+
+            Biome biome = GetBiome(x, z);
+            int surfaceY = GetSurfaceY(x, z);
+
+            int depthBelowSurface = surfaceY - y; // positive if below surface
+            bool isAtSurface = (y == surfaceY);
+            bool isExposed = IsExposedToAir(x, y, z);
+
+            // Decide surface block: explicit surface or exposed block (cliffs/overhangs)
+            if (isAtSurface || isExposed)
             {
-                return selectedBiome switch
+                return biome switch
                 {
                     Biome.Plains => BlockType.Grass,
                     Biome.Forest => BlockType.Grass,
                     Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => y > 45 ? BlockType.Snow : BlockType.Stone,
+                    Biome.Mountains => (y >= surfaceY && surfaceY > 45) ? BlockType.Snow : BlockType.Stone,
                     _ => BlockType.Grass
                 };
             }
-            
-            // Subsurface layers
-            if (depthBelowSurface <= 4)
+
+            // Subsurface layers (thickness varies by biome)
+            int dirtDepth = GetDirtDepth(biome);
+
+            if (depthBelowSurface > 0 && depthBelowSurface <= dirtDepth)
             {
-                return selectedBiome switch
+                return biome switch
                 {
+                    Biome.Plains => BlockType.Dirt,
+                    Biome.Forest => BlockType.Dirt,
                     Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => BlockType.Stone,
+                    Biome.Mountains => BlockType.Stone, // mountains quickly go to stone
                     _ => BlockType.Dirt
                 };
             }
-            
-            // Deep underground - mix of stone and gravel
-            if (y < 15 && (x + y + z) % 7 == 0)
+
+            // Small chance for gravel near the top of deep caves / near surface
+            if (y < 15 && ((x + y + z) % 7) == 0)
                 return BlockType.Gravel;
-            
+
+            // Default deep rock
             return BlockType.Stone;
         }
 
@@ -212,73 +184,21 @@ namespace Aetheris
         /// </summary>
         public static BlockType GetBlockType(int x, int y, int z)
         {
-            if (!initialized) Initialize();
-            
-            // Air check first - using density
             float density = SampleDensity(x, y, z);
-            if (density <= ISO)
-                return BlockType.Air;
-            
-            // Bedrock layer
-            if (y <= 2)
-                return BlockType.Stone;
-            
-            // Determine biome
-            Biome biome = GetBiome(x, z);
-            var (baseHeight, amplitude) = GetBiomeParams(biome);
-            
-            float surfaceNoise = terrainNoise.GetNoise(x, z);
-            float surfaceY = baseHeight + surfaceNoise * amplitude;
-            
-            int depthBelowSurface = (int)(surfaceY - y);
-            
-            // Surface layer (top block)
-            if (depthBelowSurface <= 1)
-            {
-                return biome switch
-                {
-                    Biome.Plains => BlockType.Grass,
-                    Biome.Forest => BlockType.Grass,
-                    Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => y > 45 ? BlockType.Snow : BlockType.Stone,
-                    _ => BlockType.Grass
-                };
-            }
-            
-            // Subsurface layers
-            if (depthBelowSurface <= 4)
-            {
-                return biome switch
-                {
-                    Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => BlockType.Stone,
-                    _ => BlockType.Dirt
-                };
-            }
-            
-            // Deep underground - mix of stone and gravel
-            if (y < 15 && (x + y + z) % 7 == 0)
-                return BlockType.Gravel;
-            
-            return BlockType.Stone;
+            return GetBlockType(x, y, z, density);
         }
 
         public static float SampleDensity(int x, int y, int z)
         {
             if (!initialized) Initialize();
-            
-            // Get blended biome parameters
-            var (primaryBiome, secondaryBiome, blendFactor) = GetBiomeBlend(x, z);
-            var (baseHeight1, amplitude1) = GetBiomeParams(primaryBiome);
-            var (baseHeight2, amplitude2) = GetBiomeParams(secondaryBiome);
-            
-            // Blend the terrain parameters
-            float baseHeight = baseHeight1 * (1.0f - blendFactor) + baseHeight2 * blendFactor;
-            float amplitude = amplitude1 * (1.0f - blendFactor) + amplitude2 * blendFactor;
-            
+
+            // Determine biome and params for column
+            Biome biome = GetBiome(x, z);
+            var (baseHeight, amplitude) = GetBiomeParams(biome);
+
             float surfaceNoise = terrainNoise.GetNoise(x, z);
             float surfaceY = baseHeight + surfaceNoise * amplitude;
-            
+
             float density;
             if (y > surfaceY)
             {
@@ -289,46 +209,87 @@ namespace Aetheris
                 float depthBelowSurface = surfaceY - y;
                 density = ISO + 2.0f + (depthBelowSurface * 0.02f);
             }
-            
-            // Blend cave intensity
-            float caveIntensity1 = GetCaveIntensity(primaryBiome);
-            float caveIntensity2 = GetCaveIntensity(secondaryBiome);
-            float caveIntensity = caveIntensity1 * (1.0f - blendFactor) + caveIntensity2 * blendFactor;
-            
-            // Carve caves
-            if (y < surfaceY - 5 && y > 5 && caveIntensity > 0)
+
+            // Get cave intensity for this biome
+            float caveIntensity = GetCaveIntensity(biome);
+
+            // Multi-layer cave system with depth-based parameters
+            if (y > 3 && y < surfaceY - 3 && caveIntensity > 0)
             {
                 float c1 = caveNoise1.GetNoise(x, y, z);
                 float c2 = caveNoise2.GetNoise(x, y, z);
                 float c3 = caveNoise3.GetNoise(x, y, z);
-                
-                float worm = (c1 + c2) * 0.5f;
-                if (worm > 0.3f)
+
+                // Calculate depth factor (0 = near surface, 1 = deep underground)
+                float depthFactor = Math.Clamp(1.0f - (y / surfaceY), 0f, 1f);
+
+                // Shallow caves (near surface) - tight tunnels
+                if (y > surfaceY - 15)
                 {
-                    density -= (worm - 0.3f) * 50.0f * caveIntensity;
-                }
-                
-                if (c3 > 0.5f && y < surfaceY * 0.7f)
-                {
-                    density -= (c3 - 0.5f) * 6.0f * caveIntensity;
-                }
-                
-                if (y < 20)
-                {
-                    float cavern = c1 * c2;
-                    if (cavern > 0.4f)
+                    float worm = (c1 + c2) * 0.5f;
+                    if (worm > 0.2f)
                     {
-                        density -= (cavern - 0.4f) * 10000.0f * caveIntensity;
+                        density -= (worm - 0.2f) * 60.0f * caveIntensity;
+                    }
+                }
+                // Mid-depth caves - larger tunnels and chambers
+                else if (y > 20)
+                {
+                    float worm = (c1 + c2) * 0.5f;
+                    if (worm > 0.15f)
+                    {
+                        float strength = 80.0f + (depthFactor * 70.0f);
+                        density -= (worm - 0.15f) * strength * caveIntensity;
+                    }
+
+                    // Medium caverns
+                    if (c3 > 0.3f)
+                    {
+                        float strength = 15.0f + (depthFactor * 15.0f);
+                        density -= (c3 - 0.3f) * strength * caveIntensity;
+                    }
+                }
+                // Deep caves (y <= 20) - massive caverns and networks
+                else
+                {
+                    // Worm tunnels - more aggressive
+                    float worm = (c1 + c2) * 0.5f;
+                    if (worm > 0.1f)
+                    {
+                        density -= (worm - 0.1f) * 200.0f * caveIntensity;
+                    }
+
+                    // Large caverns
+                    if (c3 > 0.25f)
+                    {
+                        density -= (c3 - 0.25f) * 40.0f * caveIntensity;
+                    }
+
+                    // Massive deep caverns using noise multiplication
+                    float cavern = c1 * c2;
+                    if (cavern > 0.2f)
+                    {
+                        density -= (cavern - 0.2f) * 25000.0f * caveIntensity;
+                    }
+
+                    // Extra deep pockets (y < 10) - enormous underground chambers
+                    if (y < 10)
+                    {
+                        float deepCavern = (c1 + c3) * 0.5f;
+                        if (deepCavern > 0.15f)
+                        {
+                            density -= (deepCavern - 0.15f) * 300.0f * caveIntensity;
+                        }
                     }
                 }
             }
-            
-            // Bedrock layer
+
+            // Bedrock layer (unbreakable bottom)
             if (y <= 2)
             {
                 density += (3 - y) * 100f;
             }
-            
+
             return density;
         }
 
@@ -342,6 +303,12 @@ namespace Aetheris
                 Biome.Mountains => 1.5f,
                 _ => 1.0f
             };
+        }
+
+        public static void PrintBiomeAt(int x, int z)
+        {
+            Biome biome = GetBiome(x, z);
+            Console.WriteLine($"Biome at ({x}, {z}) is {biome}");
         }
 
         public static bool IsSolid(int x, int y, int z)
