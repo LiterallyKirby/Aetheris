@@ -13,10 +13,21 @@ namespace Aetheris
 
         public byte[,,] Blocks;
 
-        public Chunk()
+        // World position of chunk (in blocks)
+        public int PositionX { get; }
+        public int PositionY { get; }
+        public int PositionZ { get; }
+
+        public Chunk(int posX, int posY, int posZ)
         {
+            PositionX = posX;
+            PositionY = posY;
+            PositionZ = posZ;
             Blocks = new byte[SizeX, SizeY, SizeZ];
         }
+
+        // Default constructor places chunk at (0,0,0)
+        public Chunk() : this(0, 0, 0) { }
 
         public byte[] ToBytes()
         {
@@ -29,10 +40,11 @@ namespace Aetheris
             return flat;
         }
 
-        public static Chunk FromBytes(byte[] data)
+        public static Chunk FromBytes(byte[] data, int posX, int posY, int posZ)
         {
-            if (data.Length != TotalSize) throw new ArgumentException($"Chunk.FromBytes: bad length {data.Length}, expected {TotalSize}");
-            var c = new Chunk();
+            if (data.Length != TotalSize)
+                throw new ArgumentException($"Chunk.FromBytes: bad length {data.Length}, expected {TotalSize}");
+            var c = new Chunk(posX, posY, posZ);
             int i = 0;
             for (int x = 0; x < SizeX; x++)
                 for (int y = 0; y < SizeY; y++)
