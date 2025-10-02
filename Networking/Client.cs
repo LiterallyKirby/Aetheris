@@ -318,6 +318,7 @@ namespace Aetheris
                 var placeholderChunk = new Aetheris.Chunk();
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = placeholderChunk;
 
+                //Console.WriteLine($"[Client] Loaded chunk ({chunk.cx},{chunk.cy},{chunk.cz}): {meshData.Length / 7} vertices");
                 // Enqueue mesh for upload on render thread
                 game?.Renderer.EnqueueMeshForChunk(chunk.cx, chunk.cy, chunk.cz, meshData);
             }
@@ -371,6 +372,7 @@ namespace Aetheris
         }
 
 
+
         private async Task<float[]> ReceiveMeshPayloadAsync(CancellationToken token)
         {
             var lenBuf = new byte[4];
@@ -381,13 +383,16 @@ namespace Aetheris
             await ReadFullAsync(stream!, payload, 0, payloadLen, token);
 
             int vertexCount = BitConverter.ToInt32(payload, 0);
-            int floatsCount = vertexCount * 8; // ✅ Changed from 6 to 8 (pos + normal + UV)
+
+            const int floatsPerVertex = 7; // pos(3) + normal(3) + blockType(1)
+            int floatsCount = vertexCount * floatsPerVertex;
 
             var floats = new float[floatsCount];
             Buffer.BlockCopy(payload, 4, floats, 0, floatsCount * sizeof(float));
 
             return floats;
         }
+
 
 
         private static async Task ReadFullAsync(NetworkStream stream, byte[] buf, int off, int count, CancellationToken token)

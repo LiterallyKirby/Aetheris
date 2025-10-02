@@ -222,7 +222,10 @@ namespace Aetheris
         private async Task SendMeshAsync(NetworkStream stream, float[] mesh, ChunkCoord coord, CancellationToken token)
         {
             // CRITICAL: Changed from /6 to /8 (pos + normal + UV = 8 floats per vertex)
-            int vertexCount = mesh.Length / 8;
+
+            const int floatsPerVertex = 7; // pos(3) + normal(3) + blockType(1)
+            int vertexCount = mesh.Length / floatsPerVertex;
+
             int payloadSize = sizeof(int) + mesh.Length * sizeof(float);
 
             var payload = ArrayPool<byte>.Shared.Rent(payloadSize);

@@ -34,29 +34,70 @@ namespace Aetheris
 
         protected override void OnLoad()
         {
-
-AtlasManager.LoadAtlas("textures/atlas.png");
             base.OnLoad();
             GL.ClearColor(0.15f, 0.18f, 0.2f, 1.0f);
             GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Less);
+            GL.Enable(EnableCap.CullFace);
+            GL.CullFace(CullFaceMode.Back);
+            GL.FrontFace(FrontFaceDirection.Ccw);
             CursorState = CursorState.Grabbed;
 
-            // Load texture atlas (with automatic fallback to procedural)
+            // CRITICAL: Load atlas BEFORE loading any chunks
+            // Try multiple paths in case file location varies
+            string[] atlasPaths = new[]
+            {
+        "textures/atlas.png",
+        "../textures/atlas.png",
+        "../../textures/atlas.png",
+        "atlas.png"
+    };
 
-GL.Enable(EnableCap.DepthTest);
-GL.DepthFunc(DepthFunction.Less);
-GL.Enable(EnableCap.CullFace);
-GL.CullFace(CullFaceMode.Back);
-GL.FrontFace(FrontFaceDirection.Ccw);
-            // Load all pre-fetched chunks into renderer
+            bool atlasLoaded = false;
+            foreach (var path in atlasPaths)
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    Console.WriteLine($"[Game] Found atlas at: {path}");
+                    Renderer.LoadTextureAtlas(path);
+                    atlasLoaded = true;
+                    break;
+                }
+            }
+
+            if (!atlasLoaded)
+            {
+                Console.WriteLine("[Game] No atlas.png found - using procedural fallback");
+                Renderer.CreateProceduralAtlas();
+            }
+
+            // Verify atlas is ready
+            // After atlas loading, add this diagnostic
+            // Verify atlas is ready
+            if (AtlasManager.IsLoaded)
+            {
+                Console.WriteLine($"[Game] AtlasManager loaded: {AtlasManager.AtlasWidth}x{AtlasManager.AtlasHeight}, " +
+                                 $"tileSize={AtlasManager.TileSize}, texture ID={AtlasManager.AtlasTextureId}");
+
+                // Verify the texture exists and has correct properties
+                GL.BindTexture(TextureTarget.Texture2D, AtlasManager.AtlasTextureId);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out int w);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureHeight, out int h);
+                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureInternalFormat, out int fmt);
+                Console.WriteLine($"[Game] Texture verified: {w}x{h}, format={fmt}");
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+            }
+
+            // NOW load all pre-fetched chunks into renderer
             foreach (var kv in loadedChunks)
             {
                 var coord = kv.Key;
                 var chunk = kv.Value;
                 var meshFloats = MarchingCubes.GenerateMesh(chunk, 0.5f);
-                Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 8} vertices");
+                Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 7} vertices");
                 Renderer.LoadMeshForChunk(coord.Item1, coord.Item2, coord.Item3, meshFloats);
             }
+
             Console.WriteLine($"[Game] Loaded {loadedChunks.Count} chunks");
         }
 
@@ -107,29 +148,29 @@ GL.FrontFace(FrontFaceDirection.Ccw);
         {
             base.OnRenderFrame(e);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-if (KeyboardState.IsKeyPressed(Keys.R))
-{
-    Vector3 forward = player.GetForward(); // You'll need to add this method
-    for (float dist = 0; dist < 50; dist += 0.5f)
-    {
-        Vector3 pos = player.Position + forward * dist;
-        int x = (int)pos.X, y = (int)pos.Y, z = (int)pos.Z;
-        var blockType = WorldGen.GetBlockType(x, y, z);
-        if (blockType != BlockType.Air)
-        {
-            Console.WriteLine($"Looking at: {blockType} at ({x},{y},{z}), distance={dist:F1}");
-            break;
-        }
-    }
-}
+            if (KeyboardState.IsKeyPressed(Keys.R))
+            {
+                Vector3 forward = player.GetForward(); // You'll need to add this method
+                for (float dist = 0; dist < 50; dist += 0.5f)
+                {
+                    Vector3 pos = player.Position + forward * dist;
+                    int x = (int)pos.X, y = (int)pos.Y, z = (int)pos.Z;
+                    var blockType = WorldGen.GetBlockType(x, y, z);
+                    if (blockType != BlockType.Air)
+                    {
+                        Console.WriteLine($"Looking at: {blockType} at ({x},{y},{z}), distance={dist:F1}");
+                        break;
+                    }
+                }
+            }
 
-if (KeyboardState.IsKeyPressed(Keys.B))
-{
-    int px = (int)player.Position.X;
-    int pz = (int)player.Position.Z;
-    WorldGen.PrintBiomeAt(px, pz);
-    Console.WriteLine($"Player at: {player.Position}");
-}
+            if (KeyboardState.IsKeyPressed(Keys.B))
+            {
+                int px = (int)player.Position.X;
+                int pz = (int)player.Position.Z;
+                WorldGen.PrintBiomeAt(px, pz);
+                Console.WriteLine($"Player at: {player.Position}");
+            }
             var projection = Matrix4.CreatePerspectiveFieldOfView(
                 MathHelper.DegreesToRadians(60f),
                 Size.X / (float)Size.Y,
