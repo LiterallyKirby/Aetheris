@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using StbImageSharp;
 
 namespace Aetheris
 {
@@ -11,30 +12,19 @@ namespace Aetheris
     {
         private record MeshData(int Vao, int Vbo, int VertexCount, Matrix4 Model, Vector3 Center, float Radius);
 
-        // All loaded chunk meshes (key: chunk coords)
         private readonly Dictionary<(int cx, int cy, int cz), MeshData> meshes = new();
-
-        // Queue for thread-safe mesh uploads
         private readonly ConcurrentQueue<Action> uploadQueue = new();
-
-        // Visible meshes collected per-frame
         private readonly List<MeshData> visibleMeshes = new(1024);
-
-        // Frustum planes for sphere-frustum tests
         private readonly Plane[] frustumPlanes = new Plane[6];
 
-        // Shader program + uniform locations
         private int shaderProgram;
-        private int locProjection, locView, locModel, locFogDecay;
+        private int locProjection, locView, locModel, locFogDecay, locAtlasTexture;
+        private int atlasTextureId = 0;
 
-        // Stats
         private int frameCount = 0;
         private int lastVisibleCount = 0;
 
-        // How many chunks to render around player (in chunks). Default read from Config.
         public int RenderDistanceChunks { get; set; } = Config.RENDER_DISTANCE;
-
-        // You can tweak this to reduce fog aggression; smaller = less fog.
         public float FogDecay = 0.003f;
 
         #region Shaders
@@ -42,9 +32,11 @@ namespace Aetheris
 #version 330 core
 layout(location = 0) in vec3 aPos;
 layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aUV;
 
 out vec3 vNormal;
 out vec3 vFragPos;
+out vec2 vUV;
 
 uniform mat4 uProjection;
 uniform mat4 uView;
@@ -55,6 +47,7 @@ void main()
     vec4 worldPos = uModel * vec4(aPos, 1.0);
     vFragPos = worldPos.xyz;
     vNormal = mat3(uModel) * aNormal;
+    vUV = aUV;
     gl_Position = uProjection * uView * worldPos;
 }
 ";
@@ -63,14 +56,19 @@ void main()
 #version 330 core
 in vec3 vNormal;
 in vec3 vFragPos;
+in vec2 vUV;
 
 out vec4 FragColor;
 
 uniform float uFogDecay;
+uniform sampler2D uAtlasTexture;
 
 void main()
 {
     vec3 n = normalize(vNormal);
+    
+    // Sample texture
+    vec4 texColor = texture(uAtlasTexture, vUV);
     
     // Lighting
     vec3 light1Dir = normalize(vec3(0.5, 1.0, 0.3));
@@ -80,12 +78,12 @@ void main()
     float ambient = 0.3;
     float light = ambient + diffuse1 + diffuse2;
 
-    // Fog (exponential)
+    // Fog
     float fogDistance = length(vFragPos);
     float fogFactor = exp(-fogDistance * uFogDecay);
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 
-    vec3 color = vec3(0.7, 0.72, 0.75) * light;
+    vec3 color = texColor.rgb * light;
     vec3 fogColor = vec3(0.5, 0.6, 0.7);
     vec3 finalColor = mix(fogColor, color, fogFactor);
     
@@ -96,28 +94,178 @@ void main()
 
         public Renderer() { }
 
-        // ---------------- Public API ----------------
-
         /// <summary>
-        /// Enqueue mesh data for an async upload (thread-safe).
+        /// Load texture atlas from file. Falls back to procedural if file not found.
+        /// Call this once during initialization.
         /// </summary>
-        public void EnqueueMeshForChunk(int cx, int cy, int cz, float[] interleavedPosNormal)
+        public void LoadTextureAtlas(string path)
         {
-            uploadQueue.Enqueue(() => UploadMesh(cx, cy, cz, interleavedPosNormal));
+            if (System.IO.File.Exists(path))
+            {
+                try
+                {
+                    atlasTextureId = LoadTextureFromFile(path);
+                    Console.WriteLine($"[Renderer] Loaded texture atlas: {path}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Renderer] Failed to load texture '{path}': {ex.Message}");
+                    Console.WriteLine("[Renderer] Falling back to procedural atlas");
+                    CreateProceduralAtlas();
+                }
+            }
+            else
+            {
+                Console.WriteLine($"[Renderer] Texture file not found: {path}");
+                Console.WriteLine("[Renderer] Using procedural atlas as fallback");
+                CreateProceduralAtlas();
+            }
         }
 
         /// <summary>
-        /// Immediately upload mesh (useful when on main thread or pre-loading).
+        /// Create a procedural texture atlas if no image file is available
         /// </summary>
-        public void LoadMeshForChunk(int cx, int cy, int cz, float[] interleavedPosNormal)
+        public void CreateProceduralAtlas()
         {
-            UploadMesh(cx, cy, cz, interleavedPosNormal);
+            const int atlasSize = 256; // 4x4 grid, 64px per tile
+            const int tileSize = 64;
+            
+            byte[] pixels = new byte[atlasSize * atlasSize * 4];
+            
+            // Define colors for each block type
+            var blockColors = new Dictionary<int, (byte, byte, byte)>
+            {
+                [0] = (128, 128, 128), // Stone - gray
+                [1] = (139, 69, 19),   // Dirt - brown
+                [2] = (34, 139, 34),   // Grass - green
+                [3] = (194, 178, 128), // Sand - tan
+                [4] = (255, 250, 250), // Snow - white
+                [5] = (105, 105, 105), // Gravel - dark gray
+                [6] = (101, 67, 33),   // Wood - dark brown
+                [7] = (46, 125, 50)    // Leaves - dark green
+            };
+            
+            for (int ty = 0; ty < 4; ty++)
+            {
+                for (int tx = 0; tx < 4; tx++)
+                {
+                    int tileIndex = ty * 4 + tx;
+                    var color = blockColors.ContainsKey(tileIndex) 
+                        ? blockColors[tileIndex] 
+                        : ((byte)255, (byte)0, (byte)255); // Magenta fallback
+                    
+                    Console.WriteLine($"[Renderer] Creating tile {tileIndex} at ({tx},{ty}) with color RGB({color.Item1},{color.Item2},{color.Item3})");
+                    
+                    // Fill tile with color and some noise
+                    for (int py = 0; py < tileSize; py++)
+                    {
+                        for (int px = 0; px < tileSize; px++)
+                        {
+                            int x = tx * tileSize + px;
+                            int y = ty * tileSize + py;
+                            int idx = (y * atlasSize + x) * 4;
+                            
+                            // Add deterministic noise variation using position
+                            int seed = (tileIndex * 10000) + (px * 100) + py;
+                            seed = (seed * 1103515245 + 12345) & 0x7fffffff; // LCG
+                            int noise = (seed % 41) - 20; // Range: -20 to 20
+                            
+                            pixels[idx + 0] = (byte)Math.Clamp(color.Item1 + noise, 0, 255);
+                            pixels[idx + 1] = (byte)Math.Clamp(color.Item2 + noise, 0, 255);
+                            pixels[idx + 2] = (byte)Math.Clamp(color.Item3 + noise, 0, 255);
+                            pixels[idx + 3] = 255;
+                        }
+                    }
+                }
+            }
+            
+            atlasTextureId = GL.GenTexture();
+            GL.BindTexture(TextureTarget.Texture2D, atlasTextureId);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
+                atlasSize, atlasSize, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels);
+            
+            // CRITICAL: Use ClampToEdge to prevent atlas bleeding at tile boundaries
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+            
+            Console.WriteLine("[Renderer] Created procedural texture atlas");
         }
 
         /// <summary>
-        /// Process a limited number of pending uploads per-frame to avoid stutters.
-        /// Call from main thread each frame.
+        /// Load texture from image file using StbImageSharp
+        /// Add NuGet package: StbImageSharp
         /// </summary>
+        private int LoadTextureFromFile(string path)
+        {
+            // Using StbImageSharp for cross-platform image loading
+            // Install via: dotnet add package StbImageSharp
+            
+            StbImage.stbi_set_flip_vertically_on_load(1); // OpenGL expects bottom-left origin
+            
+            using (var stream = System.IO.File.OpenRead(path))
+            {
+                ImageResult image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
+                
+                if (image == null)
+                    throw new Exception("Failed to load image");
+                
+                int textureId = GL.GenTexture();
+                GL.BindTexture(TextureTarget.Texture2D, textureId);
+                
+                GL.TexImage2D(
+                    TextureTarget.Texture2D,
+                    0,
+                    PixelInternalFormat.Rgba,
+                    image.Width,
+                    image.Height,
+                    0,
+                    PixelFormat.Rgba,
+                    PixelType.UnsignedByte,
+                    image.Data
+                );
+                
+                // Generate mipmaps for better quality at distance
+                GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+                
+                // CRITICAL: Set proper texture parameters to prevent atlas bleeding
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.NearestMipmapLinear);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+                
+                // Optional: Anisotropic filtering for better quality
+                if (GL.GetString(StringName.Extensions).Contains("GL_EXT_texture_filter_anisotropic"))
+                {
+                    float maxAniso;
+                    GL.GetFloat((GetPName)0x84FF, out maxAniso); // MAX_TEXTURE_MAX_ANISOTROPY_EXT
+                    GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)0x84FE, Math.Min(4.0f, maxAniso));
+                }
+                
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+                
+                Console.WriteLine($"[Renderer] Loaded {image.Width}x{image.Height} texture with {image.Comp} components");
+                return textureId;
+            }
+        }
+
+        private int LoadTexture(string path)
+        {
+            // Deprecated - use LoadTextureAtlas() instead
+            return LoadTextureFromFile(path);
+        }
+
+        public void EnqueueMeshForChunk(int cx, int cy, int cz, float[] interleavedData)
+        {
+            uploadQueue.Enqueue(() => UploadMesh(cx, cy, cz, interleavedData));
+        }
+
+        public void LoadMeshForChunk(int cx, int cy, int cz, float[] interleavedData)
+        {
+            UploadMesh(cx, cy, cz, interleavedData);
+        }
+
         public void ProcessPendingUploads()
         {
             const int maxPerFrame = 8;
@@ -131,33 +279,30 @@ void main()
             }
         }
 
-        /// <summary>
-        /// Main render call. projection and view should match the camera; cameraPos is world-space.
-        /// </summary>
         public void Render(Matrix4 projection, Matrix4 view, Vector3 cameraPos)
         {
             if (meshes.Count == 0) return;
 
             EnsureShader();
+            if (atlasTextureId == 0)
+            {
+                CreateProceduralAtlas();
+            }
 
-            // Build frustum planes from projection*view every frame
             Matrix4 viewProj = view * projection;
             ExtractFrustumPlanes(viewProj);
 
             visibleMeshes.Clear();
 
-            // Distance-based culling distance (in world units)
             float maxRenderDistance = RenderDistanceChunks * Config.CHUNK_SIZE * 1.5f;
             float maxDistSq = maxRenderDistance * maxRenderDistance;
 
             foreach (var md in meshes.Values)
             {
-                // First check: distance culling
                 float distSq = (md.Center - cameraPos).LengthSquared;
                 if (distSq > maxDistSq)
                     continue;
 
-                // Second check: frustum culling
                 if (IsInFrustum(md.Center, md.Radius))
                 {
                     visibleMeshes.Add(md);
@@ -166,7 +311,6 @@ void main()
 
             lastVisibleCount = visibleMeshes.Count;
 
-            // Sort front-to-back for performance
             visibleMeshes.Sort((a, b) =>
             {
                 float da = (a.Center - cameraPos).LengthSquared;
@@ -178,6 +322,11 @@ void main()
             GL.UniformMatrix4(locProjection, false, ref projection);
             GL.UniformMatrix4(locView, false, ref view);
             GL.Uniform1(locFogDecay, FogDecay);
+            
+            // Bind texture atlas
+            GL.ActiveTexture(TextureUnit.Texture0);
+            GL.BindTexture(TextureTarget.Texture2D, atlasTextureId);
+            GL.Uniform1(locAtlasTexture, 0);
 
             foreach (var md in visibleMeshes)
             {
@@ -222,7 +371,7 @@ void main()
                     if (md.Vbo != 0) GL.DeleteBuffer(md.Vbo);
                     if (md.Vao != 0) GL.DeleteVertexArray(md.Vao);
                 }
-                catch { /* ignore cleanup errors */ }
+                catch { }
             }
             meshes.Clear();
 
@@ -230,6 +379,12 @@ void main()
             {
                 try { GL.DeleteProgram(shaderProgram); } catch { }
                 shaderProgram = 0;
+            }
+            
+            if (atlasTextureId != 0)
+            {
+                try { GL.DeleteTexture(atlasTextureId); } catch { }
+                atlasTextureId = 0;
             }
         }
 
@@ -241,11 +396,9 @@ void main()
         public int GetVisibleChunkCount() => lastVisibleCount;
         public int GetTotalChunkCount() => meshes.Count;
 
-        // ---------------- Internal Helpers ----------------
-
-        private void UploadMesh(int cx, int cy, int cz, float[] interleavedPosNormal)
+        private void UploadMesh(int cx, int cy, int cz, float[] interleavedData)
         {
-            if (interleavedPosNormal == null || interleavedPosNormal.Length == 0) return;
+            if (interleavedData == null || interleavedData.Length == 0) return;
 
             EnsureShader();
             RemoveChunk(cx, cy, cz);
@@ -256,22 +409,28 @@ void main()
             GL.BindVertexArray(vao);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
             GL.BufferData(BufferTarget.ArrayBuffer,
-                interleavedPosNormal.Length * sizeof(float),
-                interleavedPosNormal,
+                interleavedData.Length * sizeof(float),
+                interleavedData,
                 BufferUsageHint.StaticDraw);
 
-            int stride = 6 * sizeof(float); // 3 pos + 3 normal
+            int stride = 8 * sizeof(float); // 3 pos + 3 normal + 2 uv
+            
+            // Position attribute
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, stride, 0);
+            
+            // Normal attribute
             GL.EnableVertexAttribArray(1);
             GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, stride, 3 * sizeof(float));
+            
+            // UV attribute
+            GL.EnableVertexAttribArray(2);
+            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, stride, 6 * sizeof(float));
 
             GL.BindVertexArray(0);
 
-            // Model matrix: translate chunk to world position
             var model = Matrix4.CreateTranslation(cx * Config.CHUNK_SIZE, cy * Config.CHUNK_SIZE_Y, cz * Config.CHUNK_SIZE);
 
-            // Bounding sphere center and radius in world-space
             Vector3 chunkCenter = new Vector3(
                 cx * Config.CHUNK_SIZE + Config.CHUNK_SIZE * 0.5f,
                 cy * Config.CHUNK_SIZE_Y + Config.CHUNK_SIZE_Y * 0.5f,
@@ -283,7 +442,7 @@ void main()
                 Config.CHUNK_SIZE * Config.CHUNK_SIZE
             ) * 0.5f;
 
-            int vertexCount = interleavedPosNormal.Length / 6;
+            int vertexCount = interleavedData.Length / 8;
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
         }
 
@@ -316,6 +475,7 @@ void main()
             locView = GL.GetUniformLocation(shaderProgram, "uView");
             locModel = GL.GetUniformLocation(shaderProgram, "uModel");
             locFogDecay = GL.GetUniformLocation(shaderProgram, "uFogDecay");
+            locAtlasTexture = GL.GetUniformLocation(shaderProgram, "uAtlasTexture");
         }
 
         private int CompileShader(ShaderType type, string src)
@@ -333,47 +493,38 @@ void main()
             return s;
         }
 
-        // ---------------- Frustum Culling ----------------
-
         private void ExtractFrustumPlanes(Matrix4 viewProj)
         {
-            // Extract frustum planes from view-projection matrix
-            // Left plane
             frustumPlanes[0] = NormalizePlane(new Plane(
                 viewProj.M14 + viewProj.M11,
                 viewProj.M24 + viewProj.M21,
                 viewProj.M34 + viewProj.M31,
                 viewProj.M44 + viewProj.M41));
             
-            // Right plane
             frustumPlanes[1] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M11,
                 viewProj.M24 - viewProj.M21,
                 viewProj.M34 - viewProj.M31,
                 viewProj.M44 - viewProj.M41));
             
-            // Bottom plane
             frustumPlanes[2] = NormalizePlane(new Plane(
                 viewProj.M14 + viewProj.M12,
                 viewProj.M24 + viewProj.M22,
                 viewProj.M34 + viewProj.M32,
                 viewProj.M44 + viewProj.M42));
             
-            // Top plane
             frustumPlanes[3] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M12,
                 viewProj.M24 - viewProj.M22,
                 viewProj.M34 - viewProj.M32,
                 viewProj.M44 - viewProj.M42));
             
-            // Near plane
             frustumPlanes[4] = NormalizePlane(new Plane(
                 viewProj.M14 + viewProj.M13,
                 viewProj.M24 + viewProj.M23,
                 viewProj.M34 + viewProj.M33,
                 viewProj.M44 + viewProj.M43));
             
-            // Far plane
             frustumPlanes[5] = NormalizePlane(new Plane(
                 viewProj.M14 - viewProj.M13,
                 viewProj.M24 - viewProj.M23,
@@ -392,7 +543,6 @@ void main()
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsInFrustum(Vector3 center, float radius)
         {
-            // Check if sphere intersects all 6 frustum planes
             for (int i = 0; i < 6; i++)
             {
                 float distance = frustumPlanes[i].A * center.X +
@@ -400,7 +550,6 @@ void main()
                                  frustumPlanes[i].C * center.Z +
                                  frustumPlanes[i].D;
                 
-                // If sphere is completely outside this plane, it's not visible
                 if (distance < -radius)
                     return false;
             }

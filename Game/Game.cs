@@ -39,61 +39,67 @@ namespace Aetheris
             GL.Enable(EnableCap.DepthTest);
             CursorState = CursorState.Grabbed;
 
+            // Load texture atlas (with automatic fallback to procedural)
+            Renderer.LoadTextureAtlas("textures/atlas.png");
+GL.Enable(EnableCap.DepthTest);
+GL.DepthFunc(DepthFunction.Less);
+GL.Enable(EnableCap.CullFace);
+GL.CullFace(CullFaceMode.Back);
+GL.FrontFace(FrontFaceDirection.Ccw);
             // Load all pre-fetched chunks into renderer
             foreach (var kv in loadedChunks)
             {
                 var coord = kv.Key;
                 var chunk = kv.Value;
                 var meshFloats = MarchingCubes.GenerateMesh(chunk, 0.5f);
-                Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 6} vertices");
+                Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 8} vertices");
                 Renderer.LoadMeshForChunk(coord.Item1, coord.Item2, coord.Item3, meshFloats);
             }
-
             Console.WriteLine($"[Game] Loaded {loadedChunks.Count} chunks");
         }
 
-       protected override void OnUpdateFrame(FrameEventArgs e)
-{
-    base.OnUpdateFrame(e);
-    
-    // CRITICAL: Process any pending mesh uploads from the client thread
-    Renderer.ProcessPendingUploads();
-    
-    if (IsKeyDown(Keys.Escape))
-        Close();
-    
-    player.Update(e, KeyboardState, MouseState);
-    
-    // Trigger immediate load on FIRST frame only
-    if (chunkUpdateTimer == 0f)
-    {
-        Vector3 playerChunk = player.GetPlayersChunk();
-        Console.WriteLine($"[Game] Initial chunk request at {playerChunk}");
-        client?.UpdateLoadedChunks(playerChunk, renderDistance);
-    }
-    
-    // Periodically update chunk loading based on player position
-    chunkUpdateTimer += (float)e.Time;
-    if (chunkUpdateTimer >= CHUNK_UPDATE_INTERVAL)
-    {
-        chunkUpdateTimer = 0f;
-        // Use player's existing GetPlayersChunk method
-        Vector3 playerChunk = player.GetPlayersChunk();
-        client?.UpdateLoadedChunks(playerChunk, renderDistance);
-    }
-    
-    // Allow changing render distance with +/- keys
-    if (KeyboardState.IsKeyPressed(Keys.Equal) || KeyboardState.IsKeyPressed(Keys.KeyPadAdd))
-    {
-        renderDistance = Math.Min(renderDistance + 1, 999);
-        Console.WriteLine($"[Game] Render distance: {renderDistance}");
-    }
-    if (KeyboardState.IsKeyPressed(Keys.Minus) || KeyboardState.IsKeyPressed(Keys.KeyPadSubtract))
-    {
-        renderDistance = Math.Max(renderDistance - 1, 1);
-        Console.WriteLine($"[Game] Render distance: {renderDistance}");
-    }
-}
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+            base.OnUpdateFrame(e);
+
+            // CRITICAL: Process any pending mesh uploads from the client thread
+            Renderer.ProcessPendingUploads();
+
+            if (IsKeyDown(Keys.Escape))
+                Close();
+
+            player.Update(e, KeyboardState, MouseState);
+
+            // Trigger immediate load on FIRST frame only
+            if (chunkUpdateTimer == 0f)
+            {
+                Vector3 playerChunk = player.GetPlayersChunk();
+                Console.WriteLine($"[Game] Initial chunk request at {playerChunk}");
+                client?.UpdateLoadedChunks(playerChunk, renderDistance);
+            }
+
+            // Periodically update chunk loading based on player position
+            chunkUpdateTimer += (float)e.Time;
+            if (chunkUpdateTimer >= CHUNK_UPDATE_INTERVAL)
+            {
+                chunkUpdateTimer = 0f;
+                // Use player's existing GetPlayersChunk method
+                Vector3 playerChunk = player.GetPlayersChunk();
+                client?.UpdateLoadedChunks(playerChunk, renderDistance);
+            }
+
+            // Allow changing render distance with +/- keys
+            if (KeyboardState.IsKeyPressed(Keys.Equal) || KeyboardState.IsKeyPressed(Keys.KeyPadAdd))
+            {
+                renderDistance = Math.Min(renderDistance + 1, 999);
+                Console.WriteLine($"[Game] Render distance: {renderDistance}");
+            }
+            if (KeyboardState.IsKeyPressed(Keys.Minus) || KeyboardState.IsKeyPressed(Keys.KeyPadSubtract))
+            {
+                renderDistance = Math.Max(renderDistance - 1, 1);
+                Console.WriteLine($"[Game] Render distance: {renderDistance}");
+            }
+        }
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
