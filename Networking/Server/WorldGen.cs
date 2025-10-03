@@ -180,8 +180,8 @@ namespace Aetheris
             // DEBUG: Log anomalies
             if (result == BlockType.Sand && y < 20)
             {
-                Console.WriteLine($"[WorldGen] WARNING: Sand at y={y}, surfaceY={surfaceY}, " +
-                                 $"biome={biome}, isExposed={isExposed}, depthBelow={depthBelowSurface}");
+
+
             }
             if (result == BlockType.Snow && y < 35)
             {

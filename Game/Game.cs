@@ -21,7 +21,7 @@ namespace Aetheris
         public Game(Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks, Client? client = null)
             : base(GameWindowSettings.Default, new NativeWindowSettings()
             {
-                Size = new Vector2i(800, 600),
+                Size = new Vector2i(1920, 1080),
                 Title = "Aetheris Client"
             })
         {

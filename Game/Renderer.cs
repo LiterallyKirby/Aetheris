@@ -230,7 +230,6 @@ void main()
 
 
 
-
         private float[] ConvertMeshWithBlockTypeToUVs(float[] src)
         {
             const int srcStride = 7; // pos3 + normal3 + blockType1
@@ -261,17 +260,38 @@ void main()
                     if (i == 0) blockTypeInt = (int)Math.Round(src[si + 6]);
                 }
 
-                // Get block type and atlas UVs
+                // Get block type
                 AetherisClient.Rendering.BlockType clientType;
                 if (Enum.IsDefined(typeof(AetherisClient.Rendering.BlockType), blockTypeInt))
                     clientType = (AetherisClient.Rendering.BlockType)blockTypeInt;
                 else
                     clientType = AetherisClient.Rendering.BlockType.Stone;
 
+                // Calculate triangle's average normal
+                Vector3 triNormal = (normal[0] + normal[1] + normal[2]) / 3.0f;
+                Vector3 absNormal = new Vector3(
+                    MathF.Abs(triNormal.X),
+                    MathF.Abs(triNormal.Y),
+                    MathF.Abs(triNormal.Z)
+                );
+
+                // Determine which face this triangle belongs to
+                AetherisClient.Rendering.BlockFace face;
+                if (absNormal.Y > absNormal.X && absNormal.Y > absNormal.Z)
+                {
+                    face = triNormal.Y > 0 ? AetherisClient.Rendering.BlockFace.Top
+                                            : AetherisClient.Rendering.BlockFace.Bottom;
+                }
+                else
+                {
+                    face = AetherisClient.Rendering.BlockFace.Side;
+                }
+
+                // Get face-specific UVs
                 float uMin, vMin, uMax, vMax;
                 if (atlasLoaded)
                 {
-                    (uMin, vMin, uMax, vMax) = AtlasManager.GetAtlasUV(clientType);
+                    (uMin, vMin, uMax, vMax) = AtlasManager.GetAtlasUV(clientType, face);
                 }
                 else
                 {
@@ -284,16 +304,8 @@ void main()
                     vMax = (ty + 1) * 0.25f - pad;
                 }
 
-                // Calculate triangle's average normal
-                Vector3 triNormal = (normal[0] + normal[1] + normal[2]) / 3.0f;
-                Vector3 absNormal = new Vector3(
-                    MathF.Abs(triNormal.X),
-                    MathF.Abs(triNormal.Y),
-                    MathF.Abs(triNormal.Z)
-                );
-
-                // Determine projection axis (which face of the "virtual cube" this triangle belongs to)
-                int axis; // 0=YZ plane (X-facing), 1=XZ plane (Y-facing), 2=XY plane (Z-facing)
+                // Determine projection axis for texture mapping
+                int axis;
                 if (absNormal.Y > absNormal.X && absNormal.Y > absNormal.Z)
                     axis = 1; // Top/Bottom
                 else if (absNormal.X > absNormal.Z)
@@ -301,8 +313,16 @@ void main()
                 else
                     axis = 2; // Front/Back
 
-                // Calculate texture scale (how many world units = 1 texture repeat)
-                const float texScale = 1.0f; // 1 world unit = 1 texture repeat
+                // Calculate per-triangle rotation based on average position
+                Vector3 avgPos = (pos[0] + pos[1] + pos[2]) / 3.0f;
+                int blockX = (int)MathF.Floor(avgPos.X);
+                int blockY = (int)MathF.Floor(avgPos.Y);
+                int blockZ = (int)MathF.Floor(avgPos.Z);
+                int seed = blockX * 73856093 ^ blockY * 19349663 ^ blockZ * 83492791;
+                float random = (float)((seed & 0x7FFFFFFF) / (float)0x7FFFFFFF);
+                int rotation = (int)(random * 4);
+
+                const float texScale = 1.0f / 8.0f;
 
                 // Map each vertex
                 for (int i = 0; i < 3; i++)
@@ -341,9 +361,18 @@ void main()
                     u2d = u2d - MathF.Floor(u2d);
                     v2d = v2d - MathF.Floor(v2d);
 
+                    // Apply rotation
+                    float u2dRot = u2d, v2dRot = v2d;
+                    switch (rotation)
+                    {
+                        case 1: u2dRot = 1 - v2d; v2dRot = u2d; break;      // 90°
+                        case 2: u2dRot = 1 - u2d; v2dRot = 1 - v2d; break;  // 180°
+                        case 3: u2dRot = v2d; v2dRot = 1 - u2d; break;      // 270°
+                    }
+
                     // Map to atlas tile (linear interpolation)
-                    float u = uMin + u2d * (uMax - uMin);
-                    float v = vMin + v2d * (vMax - vMin);
+                    float u = uMin + u2dRot * (uMax - uMin);
+                    float v = vMin + v2dRot * (vMax - vMin);
 
                     // Store UVs
                     dst[di + 6] = Math.Clamp(u, uMin, uMax);
@@ -562,7 +591,24 @@ void main()
 
             GL.BindVertexArray(0);
             GL.UseProgram(0);
+            if (frameCount == 0 && AtlasManager.IsLoaded)
+            {
+                Console.WriteLine("=== ATLAS UV DIAGNOSTICS ===");
+                Console.WriteLine($"Atlas: {AtlasManager.AtlasWidth}x{AtlasManager.AtlasHeight}");
+                Console.WriteLine($"Tile: {AtlasManager.TileSize}px, Grid: {AtlasManager.TilesPerRow}x{AtlasManager.TilesPerCol}");
 
+                // Test each block type and face
+                foreach (var bt in Enum.GetValues(typeof(AetherisClient.Rendering.BlockType)).Cast<AetherisClient.Rendering.BlockType>())
+                {
+                    if (bt == AetherisClient.Rendering.BlockType.Air) continue;
+
+                    var (u0, v0, u1, v1) = AtlasManager.GetAtlasUV(bt, AetherisClient.Rendering.BlockFace.Top);
+                    int tileX = (int)(u0 * AtlasManager.TilesPerRow);
+                    int tileY = (int)(v0 * AtlasManager.TilesPerCol);
+                    Console.WriteLine($"{bt} Top -> Tile({tileX},{tileY}) UV=({u0:F4},{v0:F4})");
+                }
+                Console.WriteLine("=== END ATLAS DIAGNOSTICS ===");
+            }
             // Log draw count on first frame
             if (frameCount == 0)
             {
