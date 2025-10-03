@@ -229,8 +229,7 @@ void main()
         }
 
 
-        // Client-side helper in Renderer.cs (or a utility file)
-        // Requires: using AetherisClient.Rendering; at top
+
 
         private float[] ConvertMeshWithBlockTypeToUVs(float[] src)
         {
@@ -244,129 +243,124 @@ void main()
 
             bool atlasLoaded = AtlasManager.IsLoaded;
 
-            if (!atlasLoaded)
+            // Process each triangle
+            for (int triIdx = 0; triIdx < vertexCount; triIdx += 3)
             {
-                Console.WriteLine("[Renderer] WARNING: ConvertMeshWithBlockTypeToUVs called but atlas not loaded!");
-            }
+                if (triIdx + 2 >= vertexCount) break;
 
-            for (int vi = 0; vi < vertexCount; vi++)
-            {
-                int si = vi * srcStride;
-                int di = vi * dstStride;
+                // Read triangle data
+                Vector3[] pos = new Vector3[3];
+                Vector3[] normal = new Vector3[3];
+                int blockTypeInt = 0;
 
-                // Copy position
-                float px = src[si + 0];
-                float py = src[si + 1];
-                float pz = src[si + 2];
+                for (int i = 0; i < 3; i++)
+                {
+                    int si = (triIdx + i) * srcStride;
+                    pos[i] = new Vector3(src[si + 0], src[si + 1], src[si + 2]);
+                    normal[i] = new Vector3(src[si + 3], src[si + 4], src[si + 5]);
+                    if (i == 0) blockTypeInt = (int)Math.Round(src[si + 6]);
+                }
 
-                dst[di + 0] = px;
-                dst[di + 1] = py;
-                dst[di + 2] = pz;
-
-                // Copy normal
-                float nx = src[si + 3];
-                float ny = src[si + 4];
-                float nz = src[si + 5];
-
-                dst[di + 3] = nx;
-                dst[di + 4] = ny;
-                dst[di + 5] = nz;
-
-                // Get block type
-                int blockTypeInt = (int)Math.Round(src[si + 6]);
-
-                // Map server BlockType enum to client BlockType enum
+                // Get block type and atlas UVs
                 AetherisClient.Rendering.BlockType clientType;
                 if (Enum.IsDefined(typeof(AetherisClient.Rendering.BlockType), blockTypeInt))
-                {
                     clientType = (AetherisClient.Rendering.BlockType)blockTypeInt;
-                }
                 else
-                {
                     clientType = AetherisClient.Rendering.BlockType.Stone;
-                }
 
-                // Generate triplanar UV coordinates
-                float absX = MathF.Abs(nx);
-                float absY = MathF.Abs(ny);
-                float absZ = MathF.Abs(nz);
-
-                // Scale for texture tiling
-                float scale = 1.0f;
-                float uRaw, vRaw;
-
-                // Choose projection plane based on dominant normal axis
-                if (absY > absX && absY > absZ)
-                {
-                    // Top/bottom face - use XZ
-                    uRaw = px * scale;
-                    vRaw = pz * scale;
-                }
-                else if (absX > absZ)
-                {
-                    // Left/right face - use ZY
-                    uRaw = pz * scale;
-                    vRaw = py * scale;
-                }
-                else
-                {
-                    // Front/back face - use XY
-                    uRaw = px * scale;
-                    vRaw = py * scale;
-                }
-
-                // Get fractional part (0-1 range within tile)
-                uRaw = FractLocal(uRaw);
-                vRaw = FractLocal(vRaw);
-
-                // Map to atlas tile
-                float u, v;
+                float uMin, vMin, uMax, vMax;
                 if (atlasLoaded)
                 {
-                    var (uMin, vMin, uMax, vMax) = AtlasManager.GetAtlasUV(clientType);
-
-                    // CRITICAL: Map the 0-1 fractional coords into the tile bounds
-                    u = uMin + uRaw * (uMax - uMin);
-                    v = vMin + vRaw * (vMax - vMin);
-
-                    // Clamp to ensure we stay within tile bounds
-                    u = Math.Clamp(u, uMin, uMax);
-                    v = Math.Clamp(v, vMin, vMax);
+                    (uMin, vMin, uMax, vMax) = AtlasManager.GetAtlasUV(clientType);
                 }
                 else
                 {
-                    // Fallback: use raw coords (will look wrong but at least visible)
-                    u = uRaw;
-                    v = vRaw;
+                    int tx = blockTypeInt % 4;
+                    int ty = blockTypeInt / 4;
+                    const float pad = 0.002f;
+                    uMin = tx * 0.25f + pad;
+                    vMin = ty * 0.25f + pad;
+                    uMax = (tx + 1) * 0.25f - pad;
+                    vMax = (ty + 1) * 0.25f - pad;
                 }
 
-                dst[di + 6] = u;
-                dst[di + 7] = v;
+                // Calculate triangle's average normal
+                Vector3 triNormal = (normal[0] + normal[1] + normal[2]) / 3.0f;
+                Vector3 absNormal = new Vector3(
+                    MathF.Abs(triNormal.X),
+                    MathF.Abs(triNormal.Y),
+                    MathF.Abs(triNormal.Z)
+                );
 
-                // Debug first vertex only
-                if (vi == 0 && frameCount < 3)
+                // Determine projection axis (which face of the "virtual cube" this triangle belongs to)
+                int axis; // 0=YZ plane (X-facing), 1=XZ plane (Y-facing), 2=XY plane (Z-facing)
+                if (absNormal.Y > absNormal.X && absNormal.Y > absNormal.Z)
+                    axis = 1; // Top/Bottom
+                else if (absNormal.X > absNormal.Z)
+                    axis = 0; // Left/Right
+                else
+                    axis = 2; // Front/Back
+
+                // Calculate texture scale (how many world units = 1 texture repeat)
+                const float texScale = 1.0f; // 1 world unit = 1 texture repeat
+
+                // Map each vertex
+                for (int i = 0; i < 3; i++)
                 {
-                    Console.WriteLine($"[Renderer] First vertex UV: blockType={clientType}({blockTypeInt}), uv=({u:F4},{v:F4}), normal=({nx:F2},{ny:F2},{nz:F2})");
+                    int vi = triIdx + i;
+                    int si = vi * srcStride;
+                    int di = vi * dstStride;
+
+                    // Copy position and normal
+                    dst[di + 0] = src[si + 0];
+                    dst[di + 1] = src[si + 1];
+                    dst[di + 2] = src[si + 2];
+                    dst[di + 3] = src[si + 3];
+                    dst[di + 4] = src[si + 4];
+                    dst[di + 5] = src[si + 5];
+
+                    // Project position to 2D based on dominant axis
+                    float u2d, v2d;
+                    switch (axis)
+                    {
+                        case 0: // X-facing (use YZ)
+                            u2d = pos[i].Z * texScale;
+                            v2d = pos[i].Y * texScale;
+                            break;
+                        case 1: // Y-facing (use XZ)
+                            u2d = pos[i].X * texScale;
+                            v2d = pos[i].Z * texScale;
+                            break;
+                        default: // Z-facing (use XY)
+                            u2d = pos[i].X * texScale;
+                            v2d = pos[i].Y * texScale;
+                            break;
+                    }
+
+                    // Get fractional part (0-1 range for texture tiling)
+                    u2d = u2d - MathF.Floor(u2d);
+                    v2d = v2d - MathF.Floor(v2d);
+
+                    // Map to atlas tile (linear interpolation)
+                    float u = uMin + u2d * (uMax - uMin);
+                    float v = vMin + v2d * (vMax - vMin);
+
+                    // Store UVs
+                    dst[di + 6] = Math.Clamp(u, uMin, uMax);
+                    dst[di + 7] = Math.Clamp(v, vMin, vMax);
                 }
             }
 
             return dst;
         }
-
-        private static float FractLocal(float x)
-        {
-            float f = x - MathF.Floor(x);
-            return Math.Clamp(f, 0f, 0.9999f);
-        }        // Reuse this Fract from MarchingCubes if needed:
         private static float Fract(float x)
         {
             float f = x - MathF.Floor(x);
-            return Math.Clamp(f, 0f, 0.9999f);
-        }
-        /// <summary>
-        /// Load texture from image file using StbImageSharp
-        /// Add NuGet package: StbImageSharp
-        /// </summary>
+            return Math.Clamp(f, 0f, 1f);
+        }        /// <summary>
+                 /// Load texture from image file using StbImageSharp
+                 /// Add NuGet package: StbImageSharp
+                 /// </summary>
         private int LoadTextureFromFile(string path)
         {
             StbImage.stbi_set_flip_vertically_on_load(1); // OpenGL expects bottom-left origin
@@ -574,7 +568,30 @@ void main()
             {
                 Console.WriteLine($"[Renderer] Drew {drawn} chunks in first frame");
             }
+            // In Renderer.Render(), add after texture diagnostics:
+            if (frameCount == 0 && AtlasManager.IsLoaded)
+            {
+                Console.WriteLine("=== ATLAS UV DIAGNOSTICS ===");
+                Console.WriteLine($"Atlas: {AtlasManager.AtlasWidth}x{AtlasManager.AtlasHeight}");
+                Console.WriteLine($"Tile: {AtlasManager.TileSize}px, Grid: {AtlasManager.TilesPerRow}x{AtlasManager.TilesPerCol}");
+                Console.WriteLine($"Padding: 0.002 (0.2%)");
+                Console.WriteLine();
 
+                for (int i = 0; i <= 8; i++)
+                {
+                    if (!Enum.IsDefined(typeof(AetherisClient.Rendering.BlockType), i)) continue;
+
+                    var bt = (AetherisClient.Rendering.BlockType)i;
+                    var (u0, v0, u1, v1) = AtlasManager.GetAtlasUV(bt);
+
+                    // Calculate which tile this maps to
+                    int tileX = (int)(u0 / 0.25f);
+                    int tileY = (int)(v0 / 0.25f);
+
+                    Console.WriteLine($"{bt,-8} (ID:{i}) -> Tile({tileX},{tileY}) UV=({u0:F4},{v0:F4}) to ({u1:F4},{v1:F4})");
+                }
+                Console.WriteLine("=== END ATLAS DIAGNOSTICS ===");
+            }
             frameCount++;
         }
 
@@ -633,23 +650,72 @@ void main()
 
 
 
+        // Replace your UploadMesh method with this version:
+
         private void UploadMesh(int cx, int cy, int cz, float[] interleavedData)
         {
-            if (interleavedData == null || interleavedData.Length == 0) return;
+            if (interleavedData == null || interleavedData.Length == 0)
+            {
+                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Empty mesh data");
+                return;
+            }
 
             EnsureShader();
             RemoveChunk(cx, cy, cz);
 
             float[] uploadData = interleavedData;
-            bool needsConversion = false;
+            int detectedStride = 0;
 
-            // Heuristic: if divisible by 7 and not by 8, assume server format
-            if (interleavedData.Length % 7 == 0 && interleavedData.Length % 8 != 0)
+            // More robust stride detection
+            // Check if data has blockType (stride 7) by examining the 7th value
+            if (interleavedData.Length >= 7)
             {
-                needsConversion = true;
+                // Sample a few vertices to check if 7th value looks like a blockType (0-8)
+                bool looksLikeBlockType = true;
+                int samplesToCheck = Math.Min(5, interleavedData.Length / 7);
 
-                // DEBUG: Check first few vertices BEFORE conversion
-                if (meshes.Count < 3) // Only for first few chunks
+                for (int i = 0; i < samplesToCheck; i++)
+                {
+                    int idx = i * 7 + 6;
+                    if (idx >= interleavedData.Length) break;
+
+                    float val = interleavedData[idx];
+                    // BlockType should be integer in range [0, 8]
+                    if (val < -0.5f || val > 8.5f || Math.Abs(val - Math.Round(val)) > 0.1f)
+                    {
+                        looksLikeBlockType = false;
+                        break;
+                    }
+                }
+
+                if (looksLikeBlockType && interleavedData.Length % 7 == 0)
+                {
+                    detectedStride = 7;
+                }
+                else if (interleavedData.Length % 8 == 0)
+                {
+                    detectedStride = 8;
+                }
+                else
+                {
+                    Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Cannot determine stride from {interleavedData.Length} floats");
+                    return;
+                }
+            }
+            else if (interleavedData.Length % 8 == 0)
+            {
+                detectedStride = 8;
+            }
+            else
+            {
+                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Data too short or invalid stride");
+                return;
+            }
+
+            // Convert if needed
+            if (detectedStride == 7)
+            {
+                if (meshes.Count < 3)
                 {
                     Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) BEFORE conversion:");
                     Console.WriteLine($"  Length: {interleavedData.Length}, vertices: {interleavedData.Length / 7}");
@@ -662,7 +728,12 @@ void main()
                 {
                     uploadData = ConvertMeshWithBlockTypeToUVs(interleavedData);
 
-                    // DEBUG: Check AFTER conversion
+                    if (uploadData == null || uploadData.Length == 0)
+                    {
+                        Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Conversion produced empty mesh");
+                        return;
+                    }
+
                     if (meshes.Count < 3)
                     {
                         Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) AFTER conversion:");
@@ -674,16 +745,27 @@ void main()
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[Renderer] Mesh conversion error: {ex.Message}");
+                    Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) conversion error: {ex.Message}");
+                    Console.WriteLine($"[Renderer] Stack trace: {ex.StackTrace}");
                     return;
                 }
             }
-            else if (interleavedData.Length % 8 != 0)
+
+            // Final validation
+            if (uploadData.Length % 8 != 0)
             {
-                Console.WriteLine($"[Renderer] UploadMesh: unexpected vertex stride ({interleavedData.Length} floats). Aborting.");
+                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Final data has invalid stride ({uploadData.Length} floats)");
                 return;
             }
 
+            int vertexCount = uploadData.Length / 8;
+            if (vertexCount == 0)
+            {
+                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Zero vertices after conversion");
+                return;
+            }
+
+            // Create OpenGL objects
             int vao = GL.GenVertexArray();
             int vbo = GL.GenBuffer();
 
@@ -725,7 +807,6 @@ void main()
                 Config.CHUNK_SIZE * Config.CHUNK_SIZE
             ) * 0.5f;
 
-            int vertexCount = uploadData.Length / 8;
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
 
             if (meshes.Count < 3)

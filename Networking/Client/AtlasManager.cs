@@ -19,7 +19,7 @@ namespace AetherisClient.Rendering
         Snow = 5,
         Gravel = 6,
         Wood = 7,
-        Leaves = 8,
+        Leaves = 8
     }
 
     public static class AtlasManager
@@ -32,8 +32,9 @@ namespace AetherisClient.Rendering
         public static int TilesPerCol { get; private set; } = 0;
         public static bool IsLoaded => AtlasTextureId != 0 && AtlasWidth > 0;
 
-        // FIXED: Set to false - OpenGL expects bottom-left origin, ImageSharp loads top-left
-        // The texture upload handles the flip, so we DON'T flip V in GetAtlasUV
+        // CRITICAL FIX: Add the missing Padding constant
+        private const float Padding = 0.002f; // 0.2% padding to prevent bleeding
+
         public static bool FlipV { get; set; } = false;
 
         private static readonly Dictionary<BlockType, int> DefaultBlockToTile = new()
@@ -66,36 +67,31 @@ namespace AetherisClient.Rendering
                     AtlasHeight = image.Height;
                     Console.WriteLine($"[AtlasManager] Loaded image: {atlasPath} ({AtlasWidth}x{AtlasHeight})");
 
-                    // Detect tile size
                     TileSize = DetectTileSize(AtlasWidth, AtlasHeight, DefaultBlockToTile.Count, preferredTileSize);
                     TilesPerRow = Math.Max(1, AtlasWidth / TileSize);
                     TilesPerCol = Math.Max(1, AtlasHeight / TileSize);
 
                     Console.WriteLine($"[AtlasManager] Detected: tileSize={TileSize}, tilesPerRow={TilesPerRow}, tilesPerCol={TilesPerCol}");
 
-                    // Extract pixel data - FLIP vertically for OpenGL (bottom-left origin)
                     var pixels = new byte[AtlasWidth * AtlasHeight * 4];
 
                     image.ProcessPixelRows(accessor =>
-   {
-       for (int y = 0; y < AtlasHeight; y++)
-       {
-           // DON'T flip Y here - keep it as-is
-           Span<Rgba32> row = accessor.GetRowSpan(y);
+                    {
+                        for (int y = 0; y < AtlasHeight; y++)
+                        {
+                            Span<Rgba32> row = accessor.GetRowSpan(y);
+                            for (int x = 0; x < AtlasWidth; x++)
+                            {
+                                Rgba32 px = row[x];
+                                int idx = (y * AtlasWidth + x) * 4;
+                                pixels[idx + 0] = px.R;
+                                pixels[idx + 1] = px.G;
+                                pixels[idx + 2] = px.B;
+                                pixels[idx + 3] = px.A;
+                            }
+                        }
+                    });
 
-           for (int x = 0; x < AtlasWidth; x++)
-           {
-               Rgba32 px = row[x];
-               int idx = (y * AtlasWidth + x) * 4;  // Use y directly, not flippedY
-               pixels[idx + 0] = px.R;
-               pixels[idx + 1] = px.G;
-               pixels[idx + 2] = px.B;
-               pixels[idx + 3] = px.A;
-           }
-       }
-   });
-
-                    // Upload to OpenGL
                     if (AtlasTextureId != 0)
                     {
                         GL.DeleteTexture(AtlasTextureId);
@@ -117,7 +113,6 @@ namespace AetherisClient.Rendering
                         pixels
                     );
 
-                    // Texture parameters for pixel-perfect rendering
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
@@ -128,7 +123,6 @@ namespace AetherisClient.Rendering
 
                     Console.WriteLine($"[AtlasManager] Successfully uploaded to GL texture {AtlasTextureId}");
 
-                    // Verify upload
                     GL.BindTexture(TextureTarget.Texture2D, AtlasTextureId);
                     GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out int w);
                     GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureHeight, out int h);
@@ -136,7 +130,6 @@ namespace AetherisClient.Rendering
                     GL.BindTexture(TextureTarget.Texture2D, 0);
                 }
 
-                // Try to load optional JSON mapping
                 TryLoadOptionalMapping(atlasPath + ".json");
             }
             catch (Exception ex)
@@ -161,38 +154,27 @@ namespace AetherisClient.Rendering
             blockToTile = new Dictionary<BlockType, int>(DefaultBlockToTile);
         }
 
-        public static (float uMin, float vMin, float uMax, float vMax) GetAtlasUV(BlockType type)
+        public static (float uMin, float vMin, float uMax, float vMax) GetAtlasUV(BlockType blockType)
         {
-            if (!IsLoaded)
+            if (!IsLoaded) return (0f, 0f, 0.25f, 0.25f);
+
+            // Get tile index from block type mapping
+            if (!blockToTile.TryGetValue(blockType, out int tileIndex))
             {
-                Console.WriteLine("[AtlasManager] WARNING: GetAtlasUV called but atlas not loaded!");
-                return (0f, 0f, 0.25f, 0.25f); // fallback to first tile
+                // Fallback for unmapped types
+                tileIndex = blockType == BlockType.Air ? 0 : (int)blockType - 1;
             }
 
-            int tileIndex = blockToTile.TryGetValue(type, out var t) ? t : 0;
-
-            // Calculate tile position in grid
             int tx = tileIndex % TilesPerRow;
             int ty = tileIndex / TilesPerRow;
 
-            // IMPORTANT: Add small epsilon to prevent texture bleeding
-            float epsilon = 0.5f / Math.Max(AtlasWidth, AtlasHeight);
+            float tileU = (float)TileSize / AtlasWidth;
+            float tileV = (float)TileSize / AtlasHeight;
 
-            float uMin = ((float)(tx * TileSize) / AtlasWidth) + epsilon;
-            float vMin = ((float)(ty * TileSize) / AtlasHeight) + epsilon;
-            float uMax = ((float)((tx + 1) * TileSize) / AtlasWidth) - epsilon;
-            float vMax = ((float)((ty + 1) * TileSize) / AtlasHeight) - epsilon;
-
-            // Clamp to valid range
-            uMin = Math.Clamp(uMin, 0f, 1f);
-            vMin = Math.Clamp(vMin, 0f, 1f);
-            uMax = Math.Clamp(uMax, 0f, 1f);
-            vMax = Math.Clamp(vMax, 0f, 1f);
-
-            if (FlipV)
-            {
-                return (uMin, 1f - vMax, uMax, 1f - vMin);
-            }
+            float uMin = tx * tileU + Padding;
+            float vMin = ty * tileV + Padding;
+            float uMax = (tx + 1) * tileU - Padding;
+            float vMax = (ty + 1) * tileV - Padding;
 
             return (uMin, vMin, uMax, vMax);
         }
@@ -236,7 +218,6 @@ namespace AetherisClient.Rendering
 
         private static int DetectTileSize(int width, int height, int knownTileCount, int preferredTileSize)
         {
-            // Try preferred size first
             if (preferredTileSize > 0 &&
                 width % preferredTileSize == 0 &&
                 height % preferredTileSize == 0)
@@ -249,7 +230,6 @@ namespace AetherisClient.Rendering
                 }
             }
 
-            // Try common POW2 sizes
             int[] candidates = { 256, 128, 64, 32, 16 };
             foreach (var size in candidates)
             {
@@ -264,7 +244,6 @@ namespace AetherisClient.Rendering
                 }
             }
 
-            // Fall back to GCD
             int gcd = Gcd(width, height);
             Console.WriteLine($"[AtlasManager] Using GCD tile size: {gcd}");
             return Math.Max(gcd, 16);

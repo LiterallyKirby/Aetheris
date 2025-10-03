@@ -102,8 +102,13 @@ namespace Aetheris
         /// </summary>
         private static bool IsExposedToAir(int x, int y, int z)
         {
-            // if any of the next two blocks above are air-ish, consider this exposed
-            return SampleDensity(x, y + 1, z) <= ISO || SampleDensity(x, y + 2, z) <= ISO;
+            // Check multiple blocks above for better detection
+            for (int dy = 1; dy <= 3; dy++)
+            {
+                if (SampleDensity(x, y + dy, z) <= ISO)
+                    return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -124,29 +129,26 @@ namespace Aetheris
         public static BlockType GetBlockType(int x, int y, int z, float density)
         {
             if (!initialized) Initialize();
-            if (y == 40 && x >= -50 && x <= -48 && z >= -55 && z <= -53)
-            {
-                Console.WriteLine($"Block at ({x},{y},{z}): density={density:F3}, biome={GetBiome(x, z)}");
-            }
-            // Air driven by density / caves
+
             if (density <= ISO)
                 return BlockType.Air;
 
-            // Bedrock
             if (y <= 2)
                 return BlockType.Stone;
 
             Biome biome = GetBiome(x, z);
             int surfaceY = GetSurfaceY(x, z);
 
-            int depthBelowSurface = surfaceY - y; // positive if below surface
+            // CRITICAL DEBUG: Log suspicious assignments
+            BlockType result;
+
+            int depthBelowSurface = surfaceY - y;
             bool isAtSurface = (y == surfaceY);
             bool isExposed = IsExposedToAir(x, y, z);
 
-            // Decide surface block: explicit surface or exposed block (cliffs/overhangs)
             if (isAtSurface || isExposed)
             {
-                return biome switch
+                result = biome switch
                 {
                     Biome.Plains => BlockType.Grass,
                     Biome.Forest => BlockType.Grass,
@@ -155,30 +157,40 @@ namespace Aetheris
                     _ => BlockType.Grass
                 };
             }
-
-            // Subsurface layers (thickness varies by biome)
-            int dirtDepth = GetDirtDepth(biome);
-
-            if (depthBelowSurface > 0 && depthBelowSurface <= dirtDepth)
+            else if (depthBelowSurface > 0 && depthBelowSurface <= GetDirtDepth(biome))
             {
-                return biome switch
+                result = biome switch
                 {
                     Biome.Plains => BlockType.Dirt,
                     Biome.Forest => BlockType.Dirt,
                     Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => BlockType.Stone, // mountains quickly go to stone
+                    Biome.Mountains => BlockType.Stone,
                     _ => BlockType.Dirt
                 };
             }
+            else if (y < 15 && ((x + y + z) % 7) == 0)
+            {
+                result = BlockType.Gravel;
+            }
+            else
+            {
+                result = BlockType.Stone;
+            }
 
-            // Small chance for gravel near the top of deep caves / near surface
-            if (y < 15 && ((x + y + z) % 7) == 0)
-                return BlockType.Gravel;
+            // DEBUG: Log anomalies
+            if (result == BlockType.Sand && y < 20)
+            {
+                Console.WriteLine($"[WorldGen] WARNING: Sand at y={y}, surfaceY={surfaceY}, " +
+                                 $"biome={biome}, isExposed={isExposed}, depthBelow={depthBelowSurface}");
+            }
+            if (result == BlockType.Snow && y < 35)
+            {
+                Console.WriteLine($"[WorldGen] WARNING: Snow at y={y}, surfaceY={surfaceY}, " +
+                                 $"biome={biome}, isExposed={isExposed}");
+            }
 
-            // Default deep rock
-            return BlockType.Stone;
+            return result;
         }
-
         /// <summary>
         /// Get block type at world position (convenience overload)
         /// </summary>
