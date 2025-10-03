@@ -6,5 +6,5 @@ class Config
     public static int RENDER_DISTANCE = 128;
     public static int SIMULATION_DISTANCE= 32;
     public static int STEP = 2;
-    public static int WORLD_SEED = 69420;
+    public static int WORLD_SEED = 690;
 }

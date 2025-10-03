@@ -1,7 +1,25 @@
 # Aetheris World Generation Documentation
 
 ## Overview
-The Aetheris world generator creates infinite voxel terrain using **noise-based generation** and the **marching cubes algorithm**. The system uses a density field where `density > 0.5 = solid` and `density < 0.5 = air`, with support for **textured block types** and **smooth biome blending**.
+The Aetheris world generator creates infinite voxel terrain using **noise-based generation** and the **marching cubes algorithm**. The system uses a density field where `density > 0.5 = solid` and `density < 0.5 = air`, with support for **textured block types**, **negative Y coordinates**, and **extremely deep cave systems**.
+
+---
+
+## World Coordinate System
+
+### Y-Axis Range
+The world now supports **negative Y coordinates** for ultra-deep underground exploration:
+
+| Y Range | Description |
+|---------|-------------|
+| **Y > 80** | Sky / High mountains |
+| **Y = 20-80** | Surface terrain (varies by biome) |
+| **Y = 0-20** | Shallow underground |
+| **Y = -32 to 0** | Deep underground |
+| **Y = -64 to -32** | Ultra-deep caverns (the "Deep Dark") |
+| **Y ≤ -64** | Bedrock (unbreakable) |
+
+**Total vertical range**: ~144 blocks from bedrock to mountain peaks (compared to Minecraft's ~384 blocks in 1.18+)
 
 ---
 
@@ -32,612 +50,260 @@ public enum BlockType : byte
     Gravel = 6,
     Wood = 7,
     Leaves = 8
+    // Add more: DeepSlate = 9, AncientStone = 10, etc.
 }
-```
-
-Block types are determined by:
-- **Biome** (Desert=Sand, Plains=Grass)
-- **Depth below surface** (Surface=Grass, Subsurface=Dirt, Deep=Stone)
-- **Altitude** (Mountains above Y=45 get Snow)
-
-### 3. Pillar Generation (Minecraft-style)
-Underground terrain is generated as **solid vertical pillars** that extend down from the surface:
-
-```csharp
-if (y > surfaceY)
-{
-    density = ISO - (y - surfaceY) * 0.2f;  // Air above
-}
-else
-{
-    float depth = surfaceY - y;
-    density = ISO + 2.0f + (depth * 0.02f);  // Solid below
-}
-```
-
-The key is starting at `ISO + 2.0f` (not just `ISO`) to ensure underground is **very solid** by default.
-
----
-
-## Biome System
-
-### How Biomes Work
-
-1. **Biome Selection** uses cellular noise to create large regions:
-```csharp
-float biomeValue = biomeNoise.GetNoise(x, z);  // 2D noise
-Biome biome = MapValueToBiome(biomeValue);
-```
-
-2. **Biome Blending** creates smooth transitions:
-```csharp
-var (primary, secondary, blendFactor) = GetBiomeBlend(x, z);
-```
-- Transition zones are 0.15 units wide
-- Terrain height, cave intensity, and block types blend smoothly
-- Eliminates z-fighting at biome boundaries
-
-3. **Each biome has parameters**:
-   - `baseHeight` - Average terrain height
-   - `amplitude` - How much terrain varies
-   - `caveIntensity` - How many caves spawn
-   - `blockTypes` - Surface and subsurface materials
-
-4. **Biomes are determined by XZ position** (not Y) so they span from bedrock to sky.
-
-### Current Biomes
-
-| Biome | Base Height | Amplitude | Cave Intensity | Surface Block | Subsurface |
-|-------|------------|-----------|----------------|---------------|------------|
-| **Plains** | 25 | 5 | 1.0x | Grass | Dirt |
-| **Forest** | 30 | 12 | 0.8x | Grass | Dirt |
-| **Desert** | 20 | 8 | 0.6x | Sand | Sand |
-| **Mountains** | 40 | 35 | 1.5x | Stone/Snow (>Y45) | Stone |
-
-### Biome Transition Zones
-
-At biome boundaries, the system creates natural-looking transitions:
-
-```csharp
-// In transition zone between Plains and Desert:
-- Terrain height gradually changes from 25 to 20
-- Cave intensity blends from 1.0x to 0.6x
-- Blocks mix naturally (patches of grass and sand)
-- Uses noise to create organic mixing pattern
-```
-
-**Benefits:**
-- No z-fighting or visual artifacts
-- Natural "edge of biome" feeling
-- Smooth gameplay experience when crossing biomes
-
-### Adding a New Biome
-
-**Step 1:** Add to the `Biome` enum:
-```csharp
-private enum Biome
-{
-    Plains,
-    Mountains,
-    Desert,
-    Forest,
-    Swamp      // <- New biome
-}
-```
-
-**Step 2:** Add to `GetBiome()` mapping:
-```csharp
-private static Biome GetBiome(int x, int z)
-{
-    float biomeValue = biomeNoise.GetNoise(x, z);
-    
-    if (biomeValue < -0.6f) return Biome.Plains;
-    if (biomeValue < -0.2f) return Biome.Forest;
-    if (biomeValue < 0.2f) return Biome.Desert;
-    if (biomeValue < 0.6f) return Biome.Swamp;    // <- Add here
-    return Biome.Mountains;
-}
-```
-
-**Step 3:** Add to `GetBiomeBlend()` transition logic:
-```csharp
-// Add transition handling in GetBiomeBlend()
-else if (biomeValue < 0.2f + blendWidth && biomeValue >= 0.2f - blendWidth)
-{
-    primary = Biome.Swamp;
-    secondary = Biome.Desert;
-    blend = (biomeValue - (0.2f - blendWidth)) / (blendWidth * 2);
-}
-```
-
-**Step 4:** Add parameters in `GetBiomeParams()`:
-```csharp
-private static (float baseHeight, float amplitude) GetBiomeParams(Biome biome)
-{
-    return biome switch
-    {
-        Biome.Plains => (25f, 5f),
-        Biome.Forest => (30f, 12f),
-        Biome.Desert => (20f, 8f),
-        Biome.Mountains => (40f, 35f),
-        Biome.Swamp => (18f, 3f),      // <- Low, flat terrain
-        _ => (30f, 10f)
-    };
-}
-```
-
-**Step 5:** Add cave intensity in `GetCaveIntensity()`:
-```csharp
-private static float GetCaveIntensity(Biome biome)
-{
-    return biome switch
-    {
-        Biome.Plains => 1.0f,
-        Biome.Forest => 0.8f,
-        Biome.Desert => 0.6f,
-        Biome.Mountains => 1.5f,
-        Biome.Swamp => 0.3f,          // <- Very few caves
-        _ => 1.0f
-    };
-}
-```
-
-**Step 6:** Define block types in `GetBlockType()`:
-```csharp
-// Surface layer
-return selectedBiome switch
-{
-    Biome.Plains => BlockType.Grass,
-    Biome.Forest => BlockType.Grass,
-    Biome.Desert => BlockType.Sand,
-    Biome.Mountains => y > 45 ? BlockType.Snow : BlockType.Stone,
-    Biome.Swamp => BlockType.Dirt,    // <- Muddy surface
-    _ => BlockType.Grass
-};
-
-// Subsurface
-return selectedBiome switch
-{
-    Biome.Desert => BlockType.Sand,
-    Biome.Mountains => BlockType.Stone,
-    Biome.Swamp => BlockType.Dirt,    // <- Thick mud layer
-    _ => BlockType.Dirt
-};
 ```
 
 ---
 
-## Block Type System
+## Cave System (ULTRA-DEEP)
 
-### How Block Types Are Assigned
+### Cave Depth Layers
 
-Block types are determined in `GetBlockType()` based on:
+The new cave system extends **158 blocks deep** (from surface at Y=80 down to Y=-64):
 
-1. **Density** - Must be solid (`density > ISO`)
-2. **Y-level** - Bedrock (Y≤2), Surface, Subsurface, Deep
-3. **Biome** - Different biomes use different materials
-4. **Altitude** - Mountains get snow above Y=45
-
+#### 1. **Shallow Caves** (Surface to Surface-20)
 ```csharp
-public static BlockType GetBlockType(int x, int y, int z, float density)
+if (y > surfaceY - 20)
 {
-    if (density <= ISO) return BlockType.Air;
-    if (y <= 2) return BlockType.Stone;  // Bedrock
-    
-    var (primary, secondary, blend) = GetBiomeBlend(x, z);
-    // ... determine surface height ...
-    
-    int depthBelowSurface = (int)(surfaceY - y);
-    
-    if (depthBelowSurface <= 1)  // Surface layer
-        return GetSurfaceBlock(selectedBiome, y);
-    else if (depthBelowSurface <= 4)  // Subsurface
-        return GetSubsurfaceBlock(selectedBiome);
-    else  // Deep underground
-        return BlockType.Stone;
+    float worm = (c1 + c2) * 0.5f;
+    if (worm > 0.12f)
+        density -= (worm - 0.12f) * 100.0f * caveIntensity;
 }
 ```
+- **Characteristics**: Tight winding tunnels
+- **Frequency**: Medium
+- **Purpose**: Early exploration, connects to surface
 
-### Adding New Block Types
-
-**Step 1:** Add to `BlockType` enum:
+#### 2. **Mid-Depth Caves** (Y=30 to shallow)
 ```csharp
-public enum BlockType : byte
+else if (y > 30)
 {
-    Air = 0,
-    Stone = 1,
-    // ... existing types ...
-    Clay = 9,      // New block type
-    Obsidian = 10
+    // Worm tunnels, medium caverns, large chambers
+    // Thresholds: 0.08, 0.2, 0.35
+    // Strength: 150x, 40x, 80x
 }
 ```
+- **Characteristics**: Large interconnected tunnel networks
+- **Frequency**: High
+- **Purpose**: Main exploration layer, resource-rich
 
-**Step 2:** Add texture mapping in `BlockTypeExtensions.GetAtlasUV()`:
+#### 3. **Deep Caves** (Y=0 to 30)
 ```csharp
-int atlasIndex = block switch
+else if (y > 0)
 {
-    BlockType.Stone => 0,
-    // ... existing mappings ...
-    BlockType.Clay => 8,      // Position (0,2) in 4x4 atlas
-    BlockType.Obsidian => 9,  // Position (1,2)
-    _ => 0
-};
-```
-
-**Step 3:** Update texture atlas:
-- Create or expand your atlas image to include new textures
-- For 4x4 grid: rows 2-3 are available (indices 8-15)
-- For more types: increase to 8x8 grid (512×512 atlas)
-
-**Step 4:** Use in world generation:
-```csharp
-// Example: Clay near water level in swamps
-if (selectedBiome == Biome.Swamp && y < 20 && y > 15)
-{
-    return BlockType.Clay;
+    // Dense tunnels, mega caverns
+    // Threshold: 0.05 (very permissive)
+    // Strength: Up to 50,000x density reduction
 }
 ```
+- **Characteristics**: MASSIVE chambers, underground lakes
+- **Frequency**: Very high
+- **Features**: Huge open spaces suitable for underground bases
 
-### Texture Atlas Configuration
-
-The system uses a **texture atlas** to map block types to textures:
-
-**Default Setup:**
-- Atlas size: 256×256 pixels (4×4 grid)
-- Tile size: 64×64 pixels per block type
-- Format: PNG with RGBA
-
-**Atlas Layout:**
-```
-Row 0: [Stone] [Dirt ] [Grass] [Sand ]  (indices 0-3)
-Row 1: [Snow ] [Gravel] [Wood ] [Leaves] (indices 4-7)
-Row 2: [Empty] [Empty ] [Empty] [Empty ] (indices 8-11)
-Row 3: [Empty] [Empty ] [Empty] [Empty ] (indices 12-15)
-```
-
-**Expanding the Atlas:**
-
-For more than 16 block types, increase `ATLAS_SIZE` in `BlockTypeExtensions.cs`:
-
+#### 4. **Ultra-Deep Caves** (Y=-64 to 0) ⭐ NEW
 ```csharp
-private const int ATLAS_SIZE = 8;  // 8×8 = 64 textures
+else  // y <= 0 && y > -64
+{
+    // Ancient caverns with colossal chambers
+    // Thresholds: 0.02 (extremely permissive)
+    // Strength: Up to 100,000x reduction
+}
 ```
+- **Characteristics**: Void-like spaces, ancient chambers
+- **Frequency**: Extremely high
+- **Features**: 
+  - Deepest layer at Y < -32: The "Abyss" with 1200x strength carving
+  - Perfect for endgame content, rare ores, boss arenas
+  - Dangerous to navigate due to scale
 
-Then create a 512×512 atlas with 64×64 tiles, or 1024×1024 with 128×128 tiles.
+### Cave Generation Parameters
+
+| Layer | Y Range | Threshold | Max Strength | Coverage |
+|-------|---------|-----------|--------------|----------|
+| Shallow | Surface-20 | 0.12 | 100x | ~40% |
+| Mid-Depth | 30 to shallow | 0.08 | 150x | ~60% |
+| Deep | 0 to 30 | 0.05 | 50,000x | ~75% |
+| **Ultra-Deep** | **-64 to 0** | **0.02** | **100,000x** | **~85%** |
+| **Abyss** | **< -32** | **0.08** | **1,200x** | **~90%** |
+
+**Result**: The deeper you go, the more open and cavernous it becomes, creating a true sense of descending into an alien underworld.
 
 ---
 
-## Cave System
+## Adding Features to Deep Underground
 
-### Cave Types
+### Example: Depth-Based Ore Distribution
 
-The system generates **three types of caves** that layer on top of each other:
-
-#### 1. Worm Caves (Tunnels)
 ```csharp
-float worm = (c1 + c2) * 0.5f;
-if (worm > 0.3f)
+// In GetBlockType() after determining base stone type:
+
+// Coal - common, shallow (like real coal seams)
+if (y >= 10 && y <= 70)
 {
-    density -= (worm - 0.3f) * 50.0f * caveIntensity;
+    float coalNoise = oreNoise.GetNoise(x, y, z);
+    if (coalNoise > 0.6f)
+        return BlockType.Coal;
+}
+
+// Iron - common to mid-depth
+if (y >= -10 && y <= 50)
+{
+    float ironNoise = oreNoise.GetNoise(x * 1.1f, y * 1.1f, z * 1.1f);
+    if (ironNoise > 0.65f)
+        return BlockType.Iron;
+}
+
+// Gold - rare, deep
+if (y >= -30 && y <= 20)
+{
+    float goldNoise = oreNoise.GetNoise(x * 1.3f, y * 1.3f, z * 1.3f);
+    if (goldNoise > 0.75f)
+        return BlockType.Gold;
+}
+
+// Diamond - very rare, very deep
+if (y >= -50 && y <= -5)
+{
+    float diamondNoise = oreNoise.GetNoise(x * 0.7f, y * 0.7f, z * 0.7f);
+    if (diamondNoise > 0.82f)
+        return BlockType.Diamond;
+}
+
+// Ancient/Mythril - ultra-rare, ultra-deep (endgame ore)
+if (y >= -64 && y <= -35)
+{
+    float ancientNoise = oreNoise.GetNoise(x * 0.5f, y * 0.5f, z * 0.5f);
+    if (ancientNoise > 0.88f)
+        return BlockType.AncientOre;
 }
 ```
-- **What it does**: Creates winding tunnel networks
-- **Frequency**: 0.015-0.03 (medium to large)
-- **Active depth**: Y=5 to surface-5
 
-#### 2. Cheese Caves (Pockets)
+### Example: Deep Stone Variants
+
+Add visual variety to deep underground:
+
 ```csharp
-if (c3 > 0.5f && y < surfaceY * 0.7f)
+// In GetBlockType(), before returning default BlockType.Stone:
+
+// Transition to darker stone in deep underground
+if (y < 0 && y > -32)
 {
-    density -= (c3 - 0.5f) * 6.0f * caveIntensity;
+    return BlockType.DeepSlate;  // Darker, tougher-looking stone
+}
+
+// Ancient stone in the deepest depths
+if (y <= -32 && y > -64)
+{
+    return BlockType.AncientStone;  // Mysterious, ancient-looking blocks
+}
+
+// Could add glowing fungi/crystals for ambiance
+if (y < -20 && ((x + y + z) % 23) == 0)
+{
+    return BlockType.GlowingCrystal;
 }
 ```
-- **What it does**: Random air pockets like Swiss cheese
-- **Frequency**: 0.05 (small)
-- **Active depth**: Only in middle layers (not near surface)
 
-#### 3. Large Caverns
+### Example: Lava Lakes at Depth
+
 ```csharp
-if (y < 20)
+// In SampleDensity(), after cave carving:
+
+// Create lava pools at deep levels
+if (y < -40)
 {
-    float cavern = c1 * c2;
-    if (cavern > 0.4f)
+    float lavaPool = caveNoise3.GetNoise(x * 0.05f, y * 0.05f, z * 0.05f);
+    if (lavaPool > 0.5f && lavaPool < 0.55f)  // Thin layer = pool bottom
     {
-        density -= (cavern - 0.4f) * 10000.0f * caveIntensity;
+        density = ISO + 1.0f;  // Solid for lava to sit on
     }
 }
-```
-- **What it does**: Huge open spaces
-- **Active depth**: Only deep underground (Y < 20)
-- **Method**: Multiplies two noise fields (rare intersections)
 
-### Cave Intensity Blending
-
-Cave density smoothly transitions between biomes:
-
-```csharp
-float caveIntensity1 = GetCaveIntensity(primaryBiome);
-float caveIntensity2 = GetCaveIntensity(secondaryBiome);
-float caveIntensity = caveIntensity1 * (1.0f - blendFactor) + caveIntensity2 * blendFactor;
-```
-
-This prevents sudden changes in cave frequency at biome boundaries.
-
-### Cave Parameters
-
-| Parameter | Effect | Recommended Range |
-|-----------|--------|-------------------|
-| **Threshold** | Higher = fewer caves | 0.2 - 0.5 |
-| **Strength** | Higher = bigger caves | 5.0 - 50.0 |
-| **Frequency** | Higher = smaller caves | 0.01 - 0.1 |
-| **Min Depth** | How close to surface | 3 - 10 blocks |
-
-### Adding a New Cave Type
-
-**Example: Crystal Caves (rare, only in mountains)**
-
-```csharp
-// In SampleDensity(), after existing caves:
-
-// Crystal caves - only in mountains, very rare
-if (primaryBiome == Biome.Mountains && y < 30 && y > 15)
+// Then in GetBlockType():
+if (y < -40 && y > GetLavaPoolFloor(x, z) && y < GetLavaPoolFloor(x, z) + 3)
 {
-    float crystal = caveNoise3.GetNoise(x * 0.1f, y * 0.1f, z * 0.1f);
-    if (crystal > 0.7f)  // Very high threshold = rare
-    {
-        density -= (crystal - 0.7f) * 20.0f;  // Strong carving
-    }
+    return BlockType.Lava;  // 3-block deep lava pool
 }
 ```
 
 ---
 
-## Rendering & Textures
+## Biome System (Unchanged)
 
-### Texture Loading
+The biome system works identically but now applies to the full -64 to 80+ Y range:
 
-The system supports both **image-based** and **procedural** texture atlases:
+- Biomes are determined by XZ position only (2D)
+- Cave intensity varies by biome
+- Deep underground retains biome influence for ore distribution
 
-```csharp
-// In OnLoad():
-Renderer.LoadTextureAtlas("textures/atlas.png");  // Loads image or falls back to procedural
-```
+---
 
-**Procedural Fallback:**
-If no atlas image exists, the system generates colored textures automatically:
-- Stone: Gray
-- Dirt: Brown
-- Grass: Green
-- Sand: Tan
-- (etc.)
+## Performance Considerations
 
-### Triplanar UV Mapping
+### Negative Y Impact
 
-The marching cubes mesh uses **triplanar mapping** to avoid stretching:
+**Chunk Height**: With Y=-64 to Y=96, your chunks are now **160 blocks tall** (compared to 96 before).
 
-```csharp
-// Choose UV coordinates based on surface normal
-if (absY > absX && absY > absZ)
-    // Top/bottom face - use XZ coordinates
-else if (absX > absZ)
-    // Side face - use ZY coordinates
-else
-    // Front/back face - use XY coordinates
-```
+**Options:**
+1. **Keep CHUNK_SIZE_Y = 96**, chunks stack vertically (Y=-64 to -32, Y=-32 to 64, Y=64 to 96)
+2. **Increase to CHUNK_SIZE_Y = 160** for single-piece chunks (more memory, simpler)
+3. **Use variable chunk height**: Surface chunks = 96 tall, underground chunks = 32 tall
 
-This ensures textures look correct on all surface angles.
+**Recommended**: Keep 96 and let chunks stack. Underground chunks (Y=-64 to 32) will be VERY full of geometry due to dense cave systems.
 
-### Vertex Format
+### Memory Usage
 
-Each vertex contains 8 floats:
-- Position (3): X, Y, Z
-- Normal (3): NX, NY, NZ
-- UV (2): U, V
-
-```csharp
-var meshFloats = MarchingCubes.GenerateMesh(chunk, 0.5f);
-int vertexCount = meshFloats.Length / 8;
-```
+Deep caves = more triangles. Monitor:
+- Vertex buffer sizes (underground chunks may be 2-3x larger)
+- Mesh generation time (may need to increase `maxPerFrame` budget)
+- GPU memory (more visible chunks when underground)
 
 ---
 
 ## Configuration
 
-### World Seed
-Change `Config.WORLD_SEED` to generate different worlds:
-```csharp
-public static int WORLD_SEED = 12345;  // Each seed = unique world
-```
+### Adjusting Cave Depth
 
-### Chunk Settings
-```csharp
-CHUNK_SIZE = 32;      // XZ size (must divide evenly by STEP)
-CHUNK_SIZE_Y = 96;    // Y height
-STEP = 8;             // Marching cubes resolution (lower = more detail)
-```
-
-**STEP Guidelines:**
-- `STEP = 2`: Very detailed, slow
-- `STEP = 4`: High detail, good performance
-- `STEP = 8`: Medium detail, fast (recommended)
-- `STEP = 16`: Low detail, very fast
-
----
-
-## Noise Functions
-
-### FastNoiseLite Types
-
-| Noise Type | Characteristics | Best For |
-|------------|-----------------|----------|
-| **OpenSimplex2** | Smooth, organic | Terrain, caves |
-| **Perlin** | Classic, layered | Detail noise |
-| **Cellular** | Cell-like patterns | Biomes, crystal formations |
-
-### Key Parameters
+To change bedrock level:
 
 ```csharp
-noise.SetFrequency(0.008f);      // Lower = larger features
-noise.SetFractalOctaves(4);      // More = more detail layers
-noise.SetFractalLacunarity(2.0f);// How octaves scale
-noise.SetFractalGain(0.5f);      // Octave strength
-```
-
-### Biome Noise Configuration
-
-```csharp
-biomeNoise.SetNoiseType(NoiseType.Cellular);
-biomeNoise.SetFrequency(0.001f);  // Very large biomes
-biomeNoise.SetCellularReturnType(CellularReturnType.CellValue);
-```
-
-The low frequency (0.001f) creates biomes that span thousands of blocks.
-
----
-
-## Advanced Techniques
-
-### Custom Biome-Specific Features
-
-Add unique structures or materials to specific biomes:
-
-```csharp
-// In GetBlockType():
-if (selectedBiome == Biome.Desert && y < 25 && y > 20)
+// In SampleDensity():
+if (y <= -128)  // Move bedrock deeper
 {
-    // Sandstone layer in deserts
-    return BlockType.Sand;  // Or BlockType.Sandstone if you add it
+    density += (-127 - y) * 100f;
 }
 
-if (selectedBiome == Biome.Mountains && y > 60)
-{
-    // Ice caps on mountain peaks
-    return BlockType.Snow;
-}
+// In cave generation:
+if (y > -128 && y < surfaceY - 2 && caveIntensity > 0)  // Extend caves
 ```
 
-### Height-Based Features
-Add features that only appear at certain elevations:
+### Adjusting Cave Density
+
+Make caves more/less common:
 
 ```csharp
-// Floating islands (high altitude)
-if (y > 80)
-{
-    float island = islandNoise.GetNoise(x, y, z);
-    if (island > 0.6f)
-    {
-        density += 5.0f;  // Create floating mass
-    }
-}
-```
+// More caves: Lower thresholds
+if (worm > 0.05f)  // Was 0.12f
 
-### Ore Veins
-Add resource deposits using 3D noise:
+// Fewer caves: Raise thresholds
+if (worm > 0.25f)  // Was 0.12f
 
-```csharp
-// In GetBlockType(), after determining base block type:
-if (y < 40 && density > ISO)
-{
-    float ore = oreNoise.GetNoise(x, y, z);
-    if (ore > 0.85f)  // Rare
-    {
-        return BlockType.Iron;  // Or gold, coal, etc.
-    }
-}
-```
+// Bigger caves: Increase strength multipliers
+density -= (worm - 0.12f) * 200.0f;  // Was 100.0f
 
-### Blending Optimization
-
-The current blend calculation samples density twice (once for primary, once for secondary biome). For optimization:
-
-```csharp
-// Cache blended terrain height instead of calculating per-block
-float surfaceY = CalculateBlendedSurfaceHeight(x, z, primaryBiome, secondaryBiome, blendFactor);
+// Smaller caves: Decrease strength
+density -= (worm - 0.12f) * 50.0f;  // Was 100.0f
 ```
 
 ---
 
-## Performance Tips
+## Gameplay Implications
 
-1. **Cache noise values** - `GetBlockType()` now uses pre-calculated density
-2. **Use ThreadStatic** - Already implemented in MarchingCubes
-3. **Adjust STEP size** - Larger STEP = fewer triangles
-4. **Limit cave density** - Too many caves = too many vertices
-5. **Pre-generate chunks** - Server caches meshes
-6. **Biome blend width** - Smaller transitions = less blending overhead
+### Progression Design
 
----
+The depth system naturally creates a progression curve:
 
-## Troubleshooting
-
-### "Chunks have gaps between them"
-- Ensure marching cubes samples beyond chunk boundaries
-- Check that STEP divides evenly into CHUNK_SIZE
-
-### "Z-fighting at biome boundaries"
-- This is fixed by biome blending system
-- Verify `GetBiomeBlend()` is being called
-- Check that both `SampleDensity()` and `GetBlockType()` use blending
-
-### "Caves are too shallow"
-- Increase cave depth range: `y < surfaceY - 5` → `y < surfaceY - 2`
-- Lower the min Y: `y > 5` → `y > 2`
-
-### "World is all air/all solid"
-- Check ISO_SURFACE threshold (should be 0.5)
-- Verify density calculation returns positive for underground
-
-### "Terrain looks blocky"
-- Reduce STEP size (8 → 4 or 2)
-- Add more noise octaves for detail
-
-### "Wrong textures on blocks"
-- Verify atlas indices match `BlockTypeExtensions.GetAtlasUV()`
-- Check that atlas image has textures in correct grid positions
-- Ensure atlas is being loaded in `OnLoad()`
-
-### "Textures are blurry/pixelated"
-- Adjust texture filtering in `Renderer.LoadTextureFromFile()`
-- For pixel art: Use `TextureMagFilter.Nearest`
-- For smooth: Use `TextureMagFilter.Linear`
-
----
-
-## Example: Creating an Ocean Biome
-
-```csharp
-// Step 1: Add to enum
-private enum Biome { Plains, Mountains, Desert, Forest, Ocean }
-
-// Step 2: Map in GetBiome
-if (biomeValue < -0.7f) return Biome.Ocean;
-
-// Step 3: Add to GetBiomeBlend transitions
-else if (biomeValue < -0.7f + blendWidth && biomeValue >= -0.7f - blendWidth)
-{
-    primary = Biome.Ocean;
-    secondary = Biome.Plains;
-    blend = (biomeValue - (-0.7f - blendWidth)) / (blendWidth * 2);
-}
-
-// Step 4: Parameters
-Biome.Ocean => (5f, 2f),  // Sea floor with small variation
-
-// Step 5: Special ocean logic in SampleDensity
-if (primaryBiome == Biome.Ocean || secondaryBiome == Biome.Ocean)
-{
-    // Water level at Y=12
-    if (y < 12 && y > surfaceY)
-    {
-        density = ISO + 0.5f;  // Water is "solid" for rendering
-    }
-}
-
-// Step 6: Ocean floor blocks
-Biome.Ocean => BlockType.Sand  // Sandy ocean floor
-
-// Step 7: No caves in ocean
-Biome.Ocean => 0.0f  // No caves underwater
-```
-
-This creates underwater terrain with a water surface at Y=12 and smooth transitions to beaches.
+1. **Surface (Y=20-80)**: Building, farming, initial resources
+2. **Shallow Caves (Y=0-20)**: Coal, iron, basic exploration
+3. **Deep Caves (Y=-32-0)**:
