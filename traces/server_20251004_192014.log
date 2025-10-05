@@ -1,0 +1,10 @@
+
+Provider Name                           Keywords            Level               Enabled By
+Microsoft-Windows-DotNETRuntime         0x0000000000008003  Verbose(5)          --profile 
+
+Launching: dotnet run -- --server 
+Process        : /usr/share/dotnet/dotnet
+Output File    : /home/kirby/Programming/Aetheris/traces/dotnet_20251004_192014.nettrace
+
+
+

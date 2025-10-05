@@ -1,0 +1,17 @@
+[INFO] Launching client...
+[Client] Auto-tuned for 16 chunk render distance: 16 concurrent, 128 batch size
+[Client] Connecting to 127.0.0.1:42069...
+Unhandled exception. System.AggregateException: One or more errors occurred. (Connection refused)
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at Aetheris.Client.ConnectToServerAsync(String host, Int32 port) in /home/kirby/Programming/Aetheris/Networking/Client.cs:line 93
+   at Aetheris.Client.<Run>b__31_0() in /home/kirby/Programming/Aetheris/Networking/Client.cs:line 41
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Task.Wait()
+   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Networking/Client.cs:line 41
+   at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 42
