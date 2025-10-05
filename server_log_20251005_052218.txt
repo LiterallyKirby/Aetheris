@@ -1,0 +1,18 @@
+[05:22:18.887] [[Server]] Log file created: server_log_20251005_052218.txt
+[05:22:18.889] [[Server]] Initializing world generation...
+[05:22:18.899] [[Server]] UDP listening on port 42070
+[05:22:18.908] [[Server]] Listening on port 42069 @ 60 TPS
+[05:22:18.908] [[Server]] Performance timing enabled - waiting for connections...
+[05:22:18.927] [[Server]] Tick 0 | Cache: 0/20000
+[05:22:23.928] [[Server]] Tick 300 | Cache: 0/20000
+[05:22:28.927] [[Server]] Tick 600 | Cache: 0/20000
+[05:22:33.942] [[Server]] Tick 900 | Cache: 0/20000
+[05:22:38.937] [[Server]] Tick 1200 | Cache: 0/20000
+[05:22:43.940] [[Server]] Tick 1500 | Cache: 0/20000
+[05:22:48.941] [[Server]] Tick 1800 | Cache: 0/20000
+[05:22:53.937] [[Server]] Tick 2100 | Cache: 0/20000
+[05:22:58.928] [[Server]] Tick 2400 | Cache: 0/20000
+[05:23:03.938] [[Server]] Tick 2700 | Cache: 0/20000
+[05:23:08.932] [[Server]] Tick 3000 | Cache: 0/20000
+[05:23:13.939] [[Server]] Tick 3300 | Cache: 0/20000
+[05:23:18.930] [[Server]] Tick 3600 | Cache: 0/20000

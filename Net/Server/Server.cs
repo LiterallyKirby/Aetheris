@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Numerics;
 namespace Aetheris
 {
     public class Server
@@ -28,6 +28,25 @@ namespace Aetheris
         private const double TickDuration = 1000.0 / TickRate; // ms per tick
         private long tickCount = 0;
 
+        private readonly ConcurrentDictionary<string, PlayerState> playerStates = new();
+
+        private class PlayerState
+        {
+            public Vector3 Position { get; set; }
+            public Vector3 Velocity { get; set; }
+            public Vector2 Rotation { get; set; } // Yaw, Pitch
+            public long LastUpdate { get; set; }
+            public IPEndPoint? EndPoint { get; set; }
+        }
+
+        // Add this enum for packet types
+        private enum UdpPacketType : byte
+        {
+            PlayerPosition = 1,
+            PlayerInput = 2,
+            EntityUpdate = 3,
+            KeepAlive = 4
+        }
         // Performance tracking
         private long totalRequests = 0;
         private double totalChunkGenTime = 0;
@@ -35,6 +54,8 @@ namespace Aetheris
         private double totalSendTime = 0;
         private readonly object perfLock = new();
 
+        private UdpClient? udpServer;
+        private readonly int UDP_PORT = ServerConfig.SERVER_PORT + 1;
         // File logging
         private StreamWriter? logWriter;
         private readonly object logLock = new();
@@ -60,7 +81,7 @@ namespace Aetheris
             lock (logLock)
             {
                 // Write to console
-                Console.WriteLine(logMessage);  // ✅ not Log(logMessage)
+
 
                 // Write to file
                 try
@@ -94,12 +115,15 @@ namespace Aetheris
             Log("[[Server]] Initializing world generation...");
             WorldGen.Initialize(); // <- Ensure noise generators are ready
 
-            listener = new TcpListener(IPAddress.Any, Config.SERVER_PORT);
+            listener = new TcpListener(IPAddress.Any, ServerConfig.SERVER_PORT);
             listener.Start();
             listener.Server.NoDelay = true;
             cts = new CancellationTokenSource();
 
-            Log($"[[Server]] Listening on port {Config.SERVER_PORT} @ {TickRate} TPS");
+            udpServer = new UdpClient(UDP_PORT);
+            _ = Task.Run(() => HandleUdpLoop(cts.Token));
+            Log($"[[Server]] UDP listening on port {UDP_PORT}");
+            Log($"[[Server]] Listening on port {ServerConfig.SERVER_PORT} @ {TickRate} TPS");
             Log("[[Server]] Performance timing enabled - waiting for connections...");
 
             // Start background tasks
@@ -176,6 +200,162 @@ namespace Aetheris
             }
         }
 
+
+
+        private async Task HandleUdpLoop(CancellationToken token)
+        {
+            if (udpServer == null) return;
+
+            IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
+
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    UdpReceiveResult result = await udpServer.ReceiveAsync(token);
+                    byte[] data = result.Buffer;
+
+                    // Handle packet (input, position update, etc.)
+                    HandleUdpPacket(data, result.RemoteEndPoint);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                Log("[[UDP]] Loop cancelled");
+            }
+            catch (Exception ex)
+            {
+                Log($"[[UDP]] Error: {ex.Message}");
+            }
+        }
+
+
+        private void HandleUdpPacket(byte[] data, IPEndPoint remoteEndPoint)
+        {
+            if (data.Length < 1) return;
+
+            UdpPacketType packetType = (UdpPacketType)data[0];
+
+            try
+            {
+                switch (packetType)
+                {
+                    case UdpPacketType.PlayerPosition:
+                        HandlePlayerPositionPacket(data, remoteEndPoint);
+                        break;
+
+                    case UdpPacketType.PlayerInput:
+                        HandlePlayerInputPacket(data, remoteEndPoint);
+                        break;
+
+                    case UdpPacketType.KeepAlive:
+                        HandleKeepAlivePacket(data, remoteEndPoint);
+                        break;
+
+                    default:
+                        Log($"[[UDP]] Unknown packet type: {packetType}");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"[[UDP]] Error handling packet: {ex.Message}");
+            }
+        }
+
+        private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
+        {
+            // Packet format: [type:1][x:4][y:4][z:4][velX:4][velY:4][velZ:4][yaw:4][pitch:4]
+            if (data.Length < 33) return;
+
+            string playerKey = remoteEndPoint.ToString();
+
+            float x = BitConverter.ToSingle(data, 1);
+            float y = BitConverter.ToSingle(data, 5);
+            float z = BitConverter.ToSingle(data, 9);
+            float velX = BitConverter.ToSingle(data, 13);
+            float velY = BitConverter.ToSingle(data, 17);
+            float velZ = BitConverter.ToSingle(data, 21);
+            float yaw = BitConverter.ToSingle(data, 25);
+            float pitch = BitConverter.ToSingle(data, 29);
+
+            var state = playerStates.GetOrAdd(playerKey, _ => new PlayerState { EndPoint = remoteEndPoint });
+            state.Position = new Vector3(x, y, z);
+            state.Velocity = new Vector3(velX, velY, velZ);
+            state.Rotation = new Vector2(yaw, pitch);
+            state.LastUpdate = DateTime.UtcNow.Ticks;
+            state.EndPoint = remoteEndPoint;
+
+            // Optional: Broadcast to other players
+            BroadcastPlayerState(playerKey, state);
+        }
+
+        private void HandlePlayerInputPacket(byte[] data, IPEndPoint remoteEndPoint)
+        {
+            // Packet format: [type:1][inputs:1] (bitfield for WASD, jump, etc.)
+            if (data.Length < 2) return;
+
+            string playerKey = remoteEndPoint.ToString();
+            byte inputs = data[1];
+
+            // Process input flags
+            bool forward = (inputs & 0x01) != 0;
+            bool backward = (inputs & 0x02) != 0;
+            bool left = (inputs & 0x04) != 0;
+            bool right = (inputs & 0x08) != 0;
+            bool jump = (inputs & 0x10) != 0;
+            bool crouch = (inputs & 0x20) != 0;
+
+            // Server-side input processing (if needed)
+            // This is useful for authoritative server movement
+        }
+
+        private void HandleKeepAlivePacket(byte[] data, IPEndPoint remoteEndPoint)
+        {
+            // Echo back to confirm connection
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await udpServer!.SendAsync(data, data.Length, remoteEndPoint);
+                }
+                catch (Exception ex)
+                {
+                    Log($"[[UDP]] Error sending keep-alive: {ex.Message}");
+                }
+            });
+        }
+
+        // Optional: Broadcast player states to all connected clients
+        private async Task BroadcastPlayerState(string excludePlayer, PlayerState state)
+        {
+            // Build packet
+            byte[] packet = new byte[33];
+            packet[0] = (byte)UdpPacketType.EntityUpdate;
+            BitConverter.TryWriteBytes(packet.AsSpan(1, 4), state.Position.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), state.Position.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), state.Position.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(13, 4), state.Velocity.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(17, 4), state.Velocity.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(21, 4), state.Velocity.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(25, 4), state.Rotation.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(29, 4), state.Rotation.Y);
+
+            foreach (var player in playerStates)
+            {
+                if (player.Key != excludePlayer && player.Value.EndPoint != null)
+                {
+                    try
+                    {
+                        await udpServer!.SendAsync(packet, packet.Length, player.Value.EndPoint);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"[[UDP]] Error broadcasting to {player.Key}: {ex.Message}");
+                    }
+                }
+            }
+        }
         private async Task HandleClientAsync(TcpClient client, CancellationToken token)
         {
             using (client)
@@ -300,7 +480,7 @@ namespace Aetheris
 
                 // Print biome info
                 var columns = chunkManager.GetColumnDataForChunk(coord);
-                var centerBiome = columns[Config.CHUNK_SIZE / 2, Config.CHUNK_SIZE / 2].Biome;
+                var centerBiome = columns[ServerConfig.CHUNK_SIZE / 2, ServerConfig.CHUNK_SIZE / 2].Biome;
                 Log($"[[Biome]] Chunk {coord} center biome: {centerBiome}");
 
                 // Generate mesh

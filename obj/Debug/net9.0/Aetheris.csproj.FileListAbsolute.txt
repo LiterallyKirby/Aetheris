@@ -32,3 +32,5 @@
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/textures/atlas.png
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/StbImageSharp.dll
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/SixLabors.ImageSharp.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuPhysics.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuUtilities.dll

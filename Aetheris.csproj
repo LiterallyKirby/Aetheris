@@ -5,9 +5,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
+
+    <PackageReference Include="BepuPhysics" Version="2.5.0-beta.27" />
+
+    <PackageReference Include="BepuUtilities" Version="2.5.0-beta.27" />
+
+
+
     <PackageReference Include="OpenTK" Version="4.9.4" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
     <PackageReference Include="StbImageSharp" Version="2.30.15" />

@@ -2,6 +2,35 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "BepuPhysics/2.5.0-beta.27": {
+        "type": "package",
+        "dependencies": {
+          "BepuUtilities": "2.5.0-beta.27"
+        },
+        "compile": {
+          "lib/net8.0/BepuPhysics.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/BepuPhysics.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "BepuUtilities/2.5.0-beta.27": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/BepuUtilities.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/BepuUtilities.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "OpenTK/4.9.4": {
         "type": "package",
         "dependencies": {
@@ -233,6 +262,34 @@
     }
   },
   "libraries": {
+    "BepuPhysics/2.5.0-beta.27": {
+      "sha512": "5JxyuUsgafhoazUJB5PKO88gD8wv6gfIVk6SrdT0cT7JlvD4iOAJZzXu2DrGr1yQde4tgoosebggGeKH2avYPA==",
+      "type": "package",
+      "path": "bepuphysics/2.5.0-beta.27",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bepuphysics.2.5.0-beta.27.nupkg.sha512",
+        "bepuphysics.nuspec",
+        "bepuphysicslogo256.png",
+        "lib/net8.0/BepuPhysics.dll",
+        "lib/net8.0/BepuPhysics.xml"
+      ]
+    },
+    "BepuUtilities/2.5.0-beta.27": {
+      "sha512": "alZRZVmQMnmDP0F41JqLpU6+BnIvwvqEAmXAQ2d7PLEDbo6qg1pWaVCfh9l4dMlvAOtKoFaSqP5MWWb5I5Ez/A==",
+      "type": "package",
+      "path": "bepuutilities/2.5.0-beta.27",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bepuphysicslogo256.png",
+        "bepuutilities.2.5.0-beta.27.nupkg.sha512",
+        "bepuutilities.nuspec",
+        "lib/net8.0/BepuUtilities.dll",
+        "lib/net8.0/BepuUtilities.xml"
+      ]
+    },
     "OpenTK/4.9.4": {
       "sha512": "fp9ZI6akO4ZuIGzuUE0QRU5zRJhXbSXa5racehFoTdvodhRDecXCOcH68mRsZaMwnxLO9ECnf2LGM9BmiJKvhw==",
       "type": "package",
@@ -473,6 +530,8 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "BepuPhysics >= 2.5.0-beta.27",
+      "BepuUtilities >= 2.5.0-beta.27",
       "OpenTK >= 4.9.4",
       "SixLabors.ImageSharp >= 3.1.11",
       "StbImageSharp >= 2.30.15"
@@ -521,6 +580,14 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "BepuPhysics": {
+            "target": "Package",
+            "version": "[2.5.0-beta.27, )"
+          },
+          "BepuUtilities": {
+            "target": "Package",
+            "version": "[2.5.0-beta.27, )"
+          },
           "OpenTK": {
             "target": "Package",
             "version": "[4.9.4, )"
@@ -548,7 +615,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.8, 9.0.8]"
+            "version": "[9.0.9, 9.0.9]"
           }
         ],
         "frameworkReferences": {
@@ -556,7 +623,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,8 @@
+[05:22:05.976] [[Server]] Log file created: server_log_20251005_052205.txt
+[05:22:05.977] [[Server]] Initializing world generation...
+[05:22:05.988] [[Server]] UDP listening on port 42070
+[05:22:05.998] [[Server]] Listening on port 42069 @ 60 TPS
+[05:22:05.998] [[Server]] Performance timing enabled - waiting for connections...
+[05:22:06.017] [[Server]] Tick 0 | Cache: 0/20000
+[05:22:11.022] [[Server]] Tick 300 | Cache: 0/20000
+[05:22:16.031] [[Server]] Tick 600 | Cache: 0/20000

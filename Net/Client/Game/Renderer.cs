@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Linq;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using StbImageSharp;
@@ -22,7 +23,8 @@ namespace Aetheris
 
         private int shaderProgram;
         private int locProjection, locView, locModel, locFogDecay, locAtlasTexture;
-
+        public delegate void ChunkMeshLoadedCallback(int cx, int cy, int cz, float[] meshData);
+        public ChunkMeshLoadedCallback? OnChunkMeshLoaded;
         // renderer-local atlas id is only used for the procedural atlas fallback or when using StbImageSharp loader.
         // If AtlasManager is loaded, we use AtlasManager.AtlasTextureId instead.
         private int localAtlasTextureId = 0;
@@ -30,8 +32,17 @@ namespace Aetheris
         private int frameCount = 0;
         private int lastVisibleCount = 0;
 
-        public int RenderDistanceChunks { get; set; } = Config.RENDER_DISTANCE;
+        public int RenderDistanceChunks { get; set; } = ClientConfig.RENDER_DISTANCE;
         public float FogDecay = 0.003f;
+
+        // --- PHYSICS INTEGRATION ---
+        // Set this from Game.OnLoad after creating your PhysicsManager:
+        // physics = new PhysicsManager();
+        // renderer.Physics = physics;
+        public PhysicsManager? Physics { get; set; }
+
+        // Track chunk colliders registered by this renderer instance
+        private readonly HashSet<int> physicsRegisteredChunks = new();
 
         #region Shaders
         private const string VertexShaderSrc = @"
@@ -227,8 +238,13 @@ void main()
 
             Console.WriteLine("[Renderer] Created new procedural texture atlas (renderer-local).");
         }
-
-
+        private readonly Dictionary<(int, int, int), float[]> meshCache = new();
+        public float[]? GetMeshData(int cx, int cy, int cz)
+        {
+            // This is called frequently, so we need stored mesh data
+            // We'll add a cache when meshes are uploaded
+            return meshCache.TryGetValue((cx, cy, cz), out var data) ? data : null;
+        }
 
         private float[] ConvertMeshWithBlockTypeToUVs(float[] src)
         {
@@ -452,6 +468,7 @@ void main()
 
         public void LoadMeshForChunk(int cx, int cy, int cz, float[] interleavedData)
         {
+            OnChunkMeshLoaded?.Invoke(cx, cy, cz, interleavedData);
             UploadMesh(cx, cy, cz, interleavedData);
         }
 
@@ -526,7 +543,7 @@ void main()
             ExtractFrustumPlanes(viewProj);
             visibleMeshes.Clear();
 
-            float maxRenderDistance = RenderDistanceChunks * Config.CHUNK_SIZE * 1.5f;
+            float maxRenderDistance = RenderDistanceChunks * ClientConfig.CHUNK_SIZE * 1.5f;
             float maxDistSq = maxRenderDistance * maxRenderDistance;
 
             foreach (var md in meshes.Values)
@@ -650,6 +667,7 @@ void main()
                 {
                     if (md.Vbo != 0) GL.DeleteBuffer(md.Vbo);
                     if (md.Vao != 0) GL.DeleteVertexArray(md.Vao);
+
                 }
                 catch (Exception ex)
                 {
@@ -657,10 +675,42 @@ void main()
                 }
                 meshes.Remove(key);
             }
+
+            // Remove physics collider if we registered it
+            int chunkId = ChunkKey(cx, cy, cz);
+            if (physicsRegisteredChunks.Contains(chunkId))
+            {
+                try
+                {
+                    Physics?.RemoveChunkCollider(chunkId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[Renderer] Error removing chunk collider from physics: " + ex);
+                }
+                physicsRegisteredChunks.Remove(chunkId);
+            }
         }
 
         public void Clear()
         {
+            // Remove physics colliders we registered
+            if (Physics != null)
+            {
+                foreach (var id in physicsRegisteredChunks.ToArray())
+                {
+                    try
+                    {
+                        Physics.RemoveChunkCollider(id);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("[Renderer] Error removing chunk collider during Clear(): " + ex);
+                    }
+                }
+            }
+            physicsRegisteredChunks.Clear();
+
             foreach (var md in meshes.Values)
             {
                 try
@@ -702,7 +752,7 @@ void main()
         {
             if (interleavedData == null || interleavedData.Length == 0)
             {
-                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Empty mesh data");
+
                 return;
             }
 
@@ -796,7 +846,10 @@ void main()
                     return;
                 }
             }
-
+            if (uploadData.Length % 8 == 0 && uploadData.Length > 0)
+            {
+                meshCache[(cx, cy, cz)] = uploadData;
+            }
             // Final validation
             if (uploadData.Length % 8 != 0)
             {
@@ -839,26 +892,53 @@ void main()
 
             GL.BindVertexArray(0);
 
-            var model = Matrix4.CreateTranslation(cx * Config.CHUNK_SIZE, cy * Config.CHUNK_SIZE_Y, cz * Config.CHUNK_SIZE);
+            var model = Matrix4.CreateTranslation(cx * ClientConfig.CHUNK_SIZE, cy * ClientConfig.CHUNK_SIZE_Y, cz * ClientConfig.CHUNK_SIZE);
 
             Vector3 chunkCenter = new Vector3(
-                cx * Config.CHUNK_SIZE + Config.CHUNK_SIZE * 0.5f,
-                cy * Config.CHUNK_SIZE_Y + Config.CHUNK_SIZE_Y * 0.5f,
-                cz * Config.CHUNK_SIZE + Config.CHUNK_SIZE * 0.5f
+                cx * ClientConfig.CHUNK_SIZE + ClientConfig.CHUNK_SIZE * 0.5f,
+                cy * ClientConfig.CHUNK_SIZE_Y + ClientConfig.CHUNK_SIZE_Y * 0.5f,
+                cz * ClientConfig.CHUNK_SIZE + ClientConfig.CHUNK_SIZE * 0.5f
             );
 
             float radius = MathF.Sqrt(
-                Config.CHUNK_SIZE * Config.CHUNK_SIZE +
-                Config.CHUNK_SIZE_Y * Config.CHUNK_SIZE_Y +
-                Config.CHUNK_SIZE * Config.CHUNK_SIZE
+                ClientConfig.CHUNK_SIZE * ClientConfig.CHUNK_SIZE +
+                ClientConfig.CHUNK_SIZE_Y * ClientConfig.CHUNK_SIZE_Y +
+                ClientConfig.CHUNK_SIZE * ClientConfig.CHUNK_SIZE
             ) * 0.5f;
 
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
+
+            // Register physics collider (if Physics manager assigned)
+            try
+            {
+                var physMesh = GetPhysicsMesh(cx, cy, cz);
+                if (physMesh != null && physMesh.Value.Vertices != null && physMesh.Value.Vertices.Length >= 3)
+                {
+                    int id = ChunkKey(cx, cy, cz);
+                    if (Physics != null && !physicsRegisteredChunks.Contains(id))
+                    {
+                        Physics.AddChunkCollider(id, physMesh.Value.Vertices);
+                        physicsRegisteredChunks.Add(id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[Renderer] Error registering chunk collider with physics: " + ex);
+            }
 
             if (meshes.Count < 3)
             {
                 Console.WriteLine($"[Renderer] Uploaded chunk ({cx},{cy},{cz}): VAO={vao}, VBO={vbo}, {vertexCount} vertices");
             }
+            if (uploadData.Length % 8 == 0 && uploadData.Length > 0)
+            {
+                meshCache[(cx, cy, cz)] = uploadData;
+
+                // TRIGGER THE CALLBACK HERE
+                OnChunkMeshLoaded?.Invoke(cx, cy, cz, uploadData);
+            }
+
         }
         private void EnsureShader()
         {
@@ -890,6 +970,58 @@ void main()
             locModel = GL.GetUniformLocation(shaderProgram, "uModel");
             locFogDecay = GL.GetUniformLocation(shaderProgram, "uFogDecay");
             locAtlasTexture = GL.GetUniformLocation(shaderProgram, "uAtlasTexture");
+        }
+
+        public struct PhysicsMeshData
+        {
+            public Vector3[] Vertices;
+            public int[] Indices;
+        }
+
+        public PhysicsMeshData? GetPhysicsMesh(int cx, int cy, int cz)
+        {
+            var meshData = GetMeshData(cx, cy, cz);
+            if (meshData == null || meshData.Length == 0) return null;
+
+            // Extract just positions from stride-8 data
+            int vertexCount = meshData.Length / 8;
+            if (vertexCount < 3) return null;
+
+            var vertices = new Vector3[vertexCount];
+
+            Vector3 chunkOffset = new Vector3(
+                cx * ClientConfig.CHUNK_SIZE,
+                cy * ClientConfig.CHUNK_SIZE_Y,
+                cz * ClientConfig.CHUNK_SIZE
+            );
+
+            // Extract vertices in world space
+            for (int i = 0; i < vertexCount; i++)
+            {
+                int idx = i * 8;
+                vertices[i] = new Vector3(
+                    meshData[idx + 0],
+                    meshData[idx + 1],
+                    meshData[idx + 2]
+                ) + chunkOffset;
+            }
+
+            // Validate mesh has reasonable bounds
+            float minY = float.MaxValue;
+            float maxY = float.MinValue;
+            foreach (var v in vertices)
+            {
+                if (v.Y < minY) minY = v.Y;
+                if (v.Y > maxY) maxY = v.Y;
+            }
+
+
+
+            var indices = new int[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
+                indices[i] = i;
+
+            return new PhysicsMeshData { Vertices = vertices, Indices = indices };
         }
 
         private int CompileShader(ShaderType type, string src)
@@ -974,6 +1106,15 @@ void main()
         {
             public float A, B, C, D;
             public Plane(float a, float b, float c, float d) { A = a; B = b; C = c; D = d; }
+        }
+
+        // Helper: consistent chunk-to-int key (same as Game.ChunkKey)
+        private static int ChunkKey(int cx, int cy, int cz)
+        {
+            unchecked
+            {
+                return (cx * 73856093) ^ (cy * 19349663) ^ (cz * 83492791);
+            }
         }
     }
 }

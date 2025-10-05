@@ -1,0 +1,2107 @@
+[05:33:57.134] [[Server]] Log file created: server_log_20251005_053357.txt
+[05:33:57.136] [[Server]] Initializing world generation...
+[05:33:57.145] [[Server]] UDP listening on port 42070
+[05:33:57.156] [[Server]] Listening on port 42069 @ 60 TPS
+[05:33:57.156] [[Server]] Performance timing enabled - waiting for connections...
+[05:33:57.175] [[Server]] Tick 0 | Cache: 0/20000
+[05:33:58.639] [[Biome]] Chunk (0,0,0) center biome: Forest
+[05:33:58.751] [[Generation]] (0,0,0): Chunk=13.76ms Mesh=111.55ms Vertices=5937
+[05:33:58.754] [[Timing]] Chunk (0,0,0): Chunk=13.76ms Mesh=111.55ms Send=1.40ms Total=144.75ms
+[05:33:58.759] [[Biome]] Chunk (0,0,1) center biome: Forest
+[05:33:58.844] [[Generation]] (0,0,1): Chunk=1.35ms Mesh=85.57ms Vertices=4938
+[05:33:58.845] [[Timing]] Chunk (0,0,1): Chunk=1.35ms Mesh=85.57ms Send=0.18ms Total=87.33ms
+[05:33:58.847] [[Biome]] Chunk (0,0,-1) center biome: Forest
+[05:33:58.924] [[Generation]] (0,0,-1): Chunk=1.20ms Mesh=76.78ms Vertices=3705
+[05:33:58.924] [[Timing]] Chunk (0,0,-1): Chunk=1.20ms Mesh=76.78ms Send=0.26ms Total=79.29ms
+[05:33:58.927] [[Biome]] Chunk (-1,0,0) center biome: Forest
+[05:33:59.016] [[Generation]] (-1,0,0): Chunk=1.70ms Mesh=88.98ms Vertices=3375
+[05:33:59.017] [[Timing]] Chunk (-1,0,0): Chunk=1.70ms Mesh=88.98ms Send=0.26ms Total=91.26ms
+[05:33:59.019] [[Biome]] Chunk (1,0,0) center biome: Forest
+[05:33:59.100] [[Generation]] (1,0,0): Chunk=1.61ms Mesh=81.64ms Vertices=3963
+[05:33:59.101] [[Timing]] Chunk (1,0,0): Chunk=1.61ms Mesh=81.64ms Send=0.26ms Total=83.74ms
+[05:33:59.104] [[Biome]] Chunk (-1,0,1) center biome: Forest
+[05:33:59.188] [[Generation]] (-1,0,1): Chunk=2.95ms Mesh=84.00ms Vertices=3435
+[05:33:59.189] [[Timing]] Chunk (-1,0,1): Chunk=2.95ms Mesh=84.00ms Send=0.30ms Total=87.47ms
+[05:33:59.191] [[Biome]] Chunk (1,0,-1) center biome: Forest
+[05:33:59.273] [[Generation]] (1,0,-1): Chunk=1.60ms Mesh=81.97ms Vertices=3942
+[05:33:59.273] [[Timing]] Chunk (1,0,-1): Chunk=1.60ms Mesh=81.97ms Send=0.20ms Total=83.99ms
+[05:33:59.275] [[Biome]] Chunk (1,0,1) center biome: Forest
+[05:33:59.351] [[Generation]] (1,0,1): Chunk=1.55ms Mesh=75.47ms Vertices=3849
+[05:33:59.351] [[Timing]] Chunk (1,0,1): Chunk=1.55ms Mesh=75.47ms Send=0.13ms Total=77.34ms
+[05:33:59.353] [[Biome]] Chunk (-1,0,-1) center biome: Forest
+[05:33:59.415] [[Generation]] (-1,0,-1): Chunk=1.51ms Mesh=61.46ms Vertices=4560
+[05:33:59.415] [[Timing]] Chunk (-1,0,-1): Chunk=1.51ms Mesh=61.46ms Send=0.13ms Total=63.28ms
+[05:33:59.416] [[Biome]] Chunk (0,0,2) center biome: Forest
+[05:33:59.487] [[Generation]] (0,0,2): Chunk=1.27ms Mesh=70.26ms Vertices=4251
+[05:33:59.487] [[Timing]] Chunk (0,0,2): Chunk=1.27ms Mesh=70.26ms Send=0.15ms Total=71.83ms
+[05:33:59.489] [[Biome]] Chunk (2,0,0) center biome: Forest
+[05:33:59.559] [[Generation]] (2,0,0): Chunk=1.18ms Mesh=70.02ms Vertices=4098
+[05:33:59.559] [[Timing]] Chunk (2,0,0): Chunk=1.18ms Mesh=70.02ms Send=0.20ms Total=71.55ms
+[05:33:59.564] [[Biome]] Chunk (-2,0,0) center biome: Forest
+[05:33:59.634] [[Generation]] (-2,0,0): Chunk=4.17ms Mesh=69.90ms Vertices=3411
+[05:33:59.634] [[Timing]] Chunk (-2,0,0): Chunk=4.17ms Mesh=69.90ms Send=0.13ms Total=74.44ms
+[05:33:59.636] [[Biome]] Chunk (0,1,0) center biome: Forest
+[05:33:59.639] [[Generation]] (0,1,0): Chunk=1.39ms Mesh=2.98ms Vertices=0
+[05:33:59.639] [[Timing]] Chunk (0,1,0): Chunk=1.39ms Mesh=2.98ms Send=0.04ms Total=4.52ms
+[05:33:59.641] [[Biome]] Chunk (0,-1,0) center biome: Forest
+[05:33:59.706] [[Generation]] (0,-1,0): Chunk=1.84ms Mesh=65.32ms Vertices=0
+[05:33:59.706] [[Timing]] Chunk (0,-1,0): Chunk=1.84ms Mesh=65.32ms Send=0.06ms Total=67.37ms
+[05:33:59.708] [[Biome]] Chunk (0,0,-2) center biome: Forest
+[05:33:59.778] [[Generation]] (0,0,-2): Chunk=1.29ms Mesh=70.45ms Vertices=3519
+[05:33:59.778] [[Timing]] Chunk (0,0,-2): Chunk=1.29ms Mesh=70.45ms Send=0.12ms Total=72.04ms
+[05:33:59.781] [[Biome]] Chunk (-1,0,-2) center biome: Forest
+[05:33:59.848] [[Generation]] (-1,0,-2): Chunk=2.46ms Mesh=66.85ms Vertices=3360
+[05:33:59.848] [[Timing]] Chunk (-1,0,-2): Chunk=2.46ms Mesh=66.85ms Send=0.11ms Total=69.64ms
+[05:33:59.850] [[Biome]] Chunk (-1,1,0) center biome: Forest
+[05:33:59.853] [[Generation]] (-1,1,0): Chunk=1.16ms Mesh=2.66ms Vertices=0
+[05:33:59.853] [[Timing]] Chunk (-1,1,0): Chunk=1.16ms Mesh=2.66ms Send=0.06ms Total=4.03ms
+[05:33:59.855] [[Biome]] Chunk (-2,0,1) center biome: Forest
+[05:33:59.934] [[Generation]] (-2,0,1): Chunk=1.48ms Mesh=79.08ms Vertices=3261
+[05:33:59.934] [[Timing]] Chunk (-2,0,1): Chunk=1.48ms Mesh=79.08ms Send=0.16ms Total=80.90ms
+[05:33:59.936] [[Biome]] Chunk (-1,0,2) center biome: Forest
+[05:34:00.014] [[Generation]] (-1,0,2): Chunk=1.65ms Mesh=78.09ms Vertices=3459
+[05:34:00.015] [[Timing]] Chunk (-1,0,2): Chunk=1.65ms Mesh=78.09ms Send=0.35ms Total=80.33ms
+[05:34:00.016] [[Biome]] Chunk (-1,-1,0) center biome: Forest
+[05:34:00.086] [[Generation]] (-1,-1,0): Chunk=1.55ms Mesh=69.77ms Vertices=0
+[05:34:00.087] [[Timing]] Chunk (-1,-1,0): Chunk=1.55ms Mesh=69.77ms Send=0.13ms Total=71.68ms
+[05:34:00.088] [[Biome]] Chunk (0,-1,1) center biome: Forest
+[05:34:00.157] [[Generation]] (0,-1,1): Chunk=1.24ms Mesh=69.09ms Vertices=0
+[05:34:00.158] [[Timing]] Chunk (0,-1,1): Chunk=1.24ms Mesh=69.09ms Send=0.13ms Total=70.79ms
+[05:34:00.160] [[Biome]] Chunk (0,1,1) center biome: Forest
+[05:34:00.164] [[Generation]] (0,1,1): Chunk=2.16ms Mesh=4.02ms Vertices=0
+[05:34:00.165] [[Timing]] Chunk (0,1,1): Chunk=2.16ms Mesh=4.02ms Send=0.35ms Total=6.83ms
+[05:34:00.167] [[Biome]] Chunk (1,0,-2) center biome: Forest
+[05:34:00.238] [[Generation]] (1,0,-2): Chunk=2.04ms Mesh=71.08ms Vertices=5403
+[05:34:00.239] [[Timing]] Chunk (1,0,-2): Chunk=2.04ms Mesh=71.08ms Send=0.49ms Total=73.83ms
+[05:34:00.242] [[Biome]] Chunk (1,-1,0) center biome: Forest
+[05:34:00.322] [[Generation]] (1,-1,0): Chunk=2.50ms Mesh=79.39ms Vertices=0
+[05:34:00.322] [[Timing]] Chunk (1,-1,0): Chunk=2.50ms Mesh=79.39ms Send=0.20ms Total=82.43ms
+[05:34:00.330] [[Biome]] Chunk (1,1,0) center biome: Forest
+[05:34:00.334] [[Generation]] (1,1,0): Chunk=5.38ms Mesh=3.30ms Vertices=0
+[05:34:00.334] [[Timing]] Chunk (1,1,0): Chunk=5.38ms Mesh=3.30ms Send=0.08ms Total=11.65ms
+[05:34:00.336] [[Biome]] Chunk (1,0,2) center biome: Forest
+[05:34:00.406] [[Generation]] (1,0,2): Chunk=1.64ms Mesh=70.54ms Vertices=3951
+[05:34:00.408] [[Timing]] Chunk (1,0,2): Chunk=1.64ms Mesh=70.54ms Send=1.50ms Total=73.88ms
+[05:34:00.410] [[Biome]] Chunk (2,0,-1) center biome: Forest
+[05:34:00.487] [[Generation]] (2,0,-1): Chunk=1.59ms Mesh=76.82ms Vertices=3492
+[05:34:00.487] [[Timing]] Chunk (2,0,-1): Chunk=1.59ms Mesh=76.82ms Send=0.21ms Total=78.85ms
+[05:34:00.490] [[Biome]] Chunk (2,0,1) center biome: Forest
+[05:34:00.561] [[Generation]] (2,0,1): Chunk=1.81ms Mesh=71.15ms Vertices=4911
+[05:34:00.562] [[Timing]] Chunk (2,0,1): Chunk=1.81ms Mesh=71.15ms Send=0.28ms Total=73.60ms
+[05:34:00.565] [[Biome]] Chunk (0,1,-1) center biome: Forest
+[05:34:00.570] [[Generation]] (0,1,-1): Chunk=3.15ms Mesh=4.70ms Vertices=0
+[05:34:00.571] [[Timing]] Chunk (0,1,-1): Chunk=3.15ms Mesh=4.70ms Send=0.16ms Total=8.32ms
+[05:34:00.573] [[Biome]] Chunk (-2,0,-1) center biome: Forest
+[05:34:00.651] [[Generation]] (-2,0,-1): Chunk=2.59ms Mesh=76.97ms Vertices=3936
+[05:34:00.651] [[Timing]] Chunk (-2,0,-1): Chunk=2.59ms Mesh=76.97ms Send=0.22ms Total=79.97ms
+[05:34:00.653] [[Biome]] Chunk (0,-1,-1) center biome: Forest
+[05:34:00.723] [[Generation]] (0,-1,-1): Chunk=1.57ms Mesh=69.49ms Vertices=0
+[05:34:00.723] [[Timing]] Chunk (0,-1,-1): Chunk=1.57ms Mesh=69.49ms Send=0.13ms Total=71.40ms
+[05:34:00.725] [[Biome]] Chunk (1,-1,-1) center biome: Forest
+[05:34:00.801] [[Generation]] (1,-1,-1): Chunk=2.29ms Mesh=75.04ms Vertices=222
+[05:34:00.801] [[Timing]] Chunk (1,-1,-1): Chunk=2.29ms Mesh=75.04ms Send=0.18ms Total=78.02ms
+[05:34:00.804] [[Biome]] Chunk (-1,-1,-1) center biome: Forest
+[05:34:00.872] [[Generation]] (-1,-1,-1): Chunk=1.89ms Mesh=68.67ms Vertices=114
+[05:34:00.873] [[Timing]] Chunk (-1,-1,-1): Chunk=1.89ms Mesh=68.67ms Send=0.11ms Total=70.93ms
+[05:34:00.875] [[Biome]] Chunk (-1,1,-1) center biome: Forest
+[05:34:00.879] [[Generation]] (-1,1,-1): Chunk=2.28ms Mesh=3.40ms Vertices=0
+[05:34:00.879] [[Timing]] Chunk (-1,1,-1): Chunk=2.28ms Mesh=3.40ms Send=0.07ms Total=6.03ms
+[05:34:00.881] [[Biome]] Chunk (-1,-1,1) center biome: Forest
+[05:34:00.949] [[Generation]] (-1,-1,1): Chunk=1.62ms Mesh=68.16ms Vertices=0
+[05:34:00.949] [[Timing]] Chunk (-1,-1,1): Chunk=1.62ms Mesh=68.16ms Send=0.10ms Total=70.12ms
+[05:34:00.951] [[Biome]] Chunk (1,1,1) center biome: Forest
+[05:34:00.954] [[Generation]] (1,1,1): Chunk=1.77ms Mesh=3.09ms Vertices=0
+[05:34:00.955] [[Timing]] Chunk (1,1,1): Chunk=1.77ms Mesh=3.09ms Send=0.11ms Total=5.17ms
+[05:34:00.957] [[Biome]] Chunk (1,-1,1) center biome: Forest
+[05:34:01.022] [[Generation]] (1,-1,1): Chunk=1.83ms Mesh=65.09ms Vertices=0
+[05:34:01.022] [[Timing]] Chunk (1,-1,1): Chunk=1.83ms Mesh=65.09ms Send=0.11ms Total=67.27ms
+[05:34:01.025] [[Biome]] Chunk (1,1,-1) center biome: Forest
+[05:34:01.029] [[Generation]] (1,1,-1): Chunk=2.32ms Mesh=3.90ms Vertices=0
+[05:34:01.029] [[Timing]] Chunk (1,1,-1): Chunk=2.32ms Mesh=3.90ms Send=0.13ms Total=6.57ms
+[05:34:01.032] [[Biome]] Chunk (-1,1,1) center biome: Forest
+[05:34:01.036] [[Generation]] (-1,1,1): Chunk=2.83ms Mesh=4.05ms Vertices=0
+[05:34:01.037] [[Timing]] Chunk (-1,1,1): Chunk=2.83ms Mesh=4.05ms Send=0.17ms Total=7.28ms
+[05:34:01.040] [[Biome]] Chunk (-2,0,2) center biome: Forest
+[05:34:01.114] [[Generation]] (-2,0,2): Chunk=2.63ms Mesh=73.87ms Vertices=4545
+[05:34:01.114] [[Timing]] Chunk (-2,0,2): Chunk=2.63ms Mesh=73.87ms Send=0.34ms Total=77.07ms
+[05:34:01.117] [[Biome]] Chunk (0,1,-2) center biome: Forest
+[05:34:01.122] [[Generation]] (0,1,-2): Chunk=1.91ms Mesh=4.90ms Vertices=0
+[05:34:01.122] [[Timing]] Chunk (0,1,-2): Chunk=1.91ms Mesh=4.90ms Send=0.07ms Total=7.16ms
+[05:34:01.123] [[Biome]] Chunk (0,-1,2) center biome: Forest
+[05:34:01.199] [[Generation]] (0,-1,2): Chunk=1.29ms Mesh=76.06ms Vertices=0
+[05:34:01.200] [[Timing]] Chunk (0,-1,2): Chunk=1.29ms Mesh=76.06ms Send=0.09ms Total=77.63ms
+[05:34:01.202] [[Biome]] Chunk (-2,1,0) center biome: Forest
+[05:34:01.206] [[Generation]] (-2,1,0): Chunk=1.78ms Mesh=4.37ms Vertices=0
+[05:34:01.207] [[Timing]] Chunk (-2,1,0): Chunk=1.78ms Mesh=4.37ms Send=0.17ms Total=6.64ms
+[05:34:01.210] [[Biome]] Chunk (2,0,-2) center biome: Forest
+[05:34:01.284] [[Generation]] (2,0,-2): Chunk=3.37ms Mesh=74.03ms Vertices=3291
+[05:34:01.285] [[Timing]] Chunk (2,0,-2): Chunk=3.37ms Mesh=74.03ms Send=0.35ms Total=77.98ms
+[05:34:01.287] [[Biome]] Chunk (2,-1,0) center biome: Forest
+[05:34:01.361] [[Generation]] (2,-1,0): Chunk=1.66ms Mesh=74.04ms Vertices=0
+[05:34:01.361] [[Timing]] Chunk (2,-1,0): Chunk=1.66ms Mesh=74.04ms Send=0.09ms Total=76.00ms
+[05:34:01.364] [[Biome]] Chunk (2,1,0) center biome: Forest
+[05:34:01.368] [[Generation]] (2,1,0): Chunk=1.91ms Mesh=4.55ms Vertices=0
+[05:34:01.368] [[Timing]] Chunk (2,1,0): Chunk=1.91ms Mesh=4.55ms Send=0.12ms Total=6.81ms
+[05:34:01.370] [[Biome]] Chunk (2,0,2) center biome: Forest
+[05:34:01.440] [[Generation]] (2,0,2): Chunk=1.47ms Mesh=69.76ms Vertices=3639
+[05:34:01.440] [[Timing]] Chunk (2,0,2): Chunk=1.47ms Mesh=69.76ms Send=0.23ms Total=71.67ms
+[05:34:01.443] [[Biome]] Chunk (0,1,2) center biome: Forest
+[05:34:01.447] [[Generation]] (0,1,2): Chunk=1.90ms Mesh=3.90ms Vertices=0
+[05:34:01.447] [[Timing]] Chunk (0,1,2): Chunk=1.90ms Mesh=3.90ms Send=0.08ms Total=6.03ms
+[05:34:01.449] [[Biome]] Chunk (-2,-1,0) center biome: Forest
+[05:34:01.533] [[Generation]] (-2,-1,0): Chunk=1.59ms Mesh=83.61ms Vertices=19197
+[05:34:01.533] [[Timing]] Chunk (-2,-1,0): Chunk=1.59ms Mesh=83.61ms Send=0.63ms Total=86.17ms
+[05:34:01.536] [[Biome]] Chunk (0,-1,-2) center biome: Forest
+[05:34:01.606] [[Generation]] (0,-1,-2): Chunk=1.42ms Mesh=70.20ms Vertices=6552
+[05:34:01.607] [[Timing]] Chunk (0,-1,-2): Chunk=1.42ms Mesh=70.20ms Send=0.18ms Total=71.97ms
+[05:34:01.608] [[Biome]] Chunk (-2,0,-2) center biome: Forest
+[05:34:01.672] [[Generation]] (-2,0,-2): Chunk=1.30ms Mesh=63.30ms Vertices=4248
+[05:34:01.672] [[Timing]] Chunk (-2,0,-2): Chunk=1.30ms Mesh=63.30ms Send=0.10ms Total=64.80ms
+[05:34:01.674] [[Biome]] Chunk (-2,-1,-1) center biome: Forest
+[05:34:01.749] [[Generation]] (-2,-1,-1): Chunk=1.30ms Mesh=75.05ms Vertices=13494
+[05:34:01.749] [[Timing]] Chunk (-2,-1,-1): Chunk=1.30ms Mesh=75.05ms Send=0.43ms Total=76.94ms
+[05:34:01.751] [[Biome]] Chunk (3,0,0) center biome: Forest
+[05:34:01.817] [[Generation]] (3,0,0): Chunk=1.50ms Mesh=65.07ms Vertices=4551
+[05:34:01.817] [[Timing]] Chunk (3,0,0): Chunk=1.50ms Mesh=65.07ms Send=0.12ms Total=66.87ms
+[05:34:01.818] [[Biome]] Chunk (2,1,1) center biome: Forest
+[05:34:01.822] [[Generation]] (2,1,1): Chunk=1.23ms Mesh=3.52ms Vertices=0
+[05:34:01.822] [[Timing]] Chunk (2,1,1): Chunk=1.23ms Mesh=3.52ms Send=0.09ms Total=5.04ms
+[05:34:01.823] [[Biome]] Chunk (2,-1,1) center biome: Forest
+[05:34:01.894] [[Generation]] (2,-1,1): Chunk=1.22ms Mesh=70.51ms Vertices=261
+[05:34:01.894] [[Timing]] Chunk (2,-1,1): Chunk=1.22ms Mesh=70.51ms Send=0.15ms Total=72.01ms
+[05:34:01.897] [[Biome]] Chunk (2,1,-1) center biome: Forest
+[05:34:01.901] [[Generation]] (2,1,-1): Chunk=2.02ms Mesh=4.22ms Vertices=0
+[05:34:01.901] [[Timing]] Chunk (2,1,-1): Chunk=2.02ms Mesh=4.22ms Send=0.09ms Total=6.50ms
+[05:34:01.903] [[Biome]] Chunk (2,-1,-1) center biome: Forest
+[05:34:01.974] [[Generation]] (2,-1,-1): Chunk=1.35ms Mesh=71.58ms Vertices=12
+[05:34:01.974] [[Timing]] Chunk (2,-1,-1): Chunk=1.35ms Mesh=71.58ms Send=0.07ms Total=73.14ms
+[05:34:01.977] [[Biome]] Chunk (1,1,2) center biome: Forest
+[05:34:01.980] [[Generation]] (1,1,2): Chunk=2.04ms Mesh=3.26ms Vertices=0
+[05:34:01.980] [[Timing]] Chunk (1,1,2): Chunk=2.04ms Mesh=3.26ms Send=0.05ms Total=5.48ms
+[05:34:01.982] [[Biome]] Chunk (1,-1,2) center biome: Forest
+[05:34:02.048] [[Generation]] (1,-1,2): Chunk=1.84ms Mesh=65.75ms Vertices=0
+[05:34:02.048] [[Timing]] Chunk (1,-1,2): Chunk=1.84ms Mesh=65.75ms Send=0.12ms Total=67.90ms
+[05:34:02.050] [[Biome]] Chunk (-3,0,0) center biome: Forest
+[05:34:02.113] [[Generation]] (-3,0,0): Chunk=1.61ms Mesh=62.82ms Vertices=3324
+[05:34:02.113] [[Timing]] Chunk (-3,0,0): Chunk=1.61ms Mesh=62.82ms Send=0.34ms Total=64.92ms
+[05:34:02.117] [[Biome]] Chunk (1,1,-2) center biome: Forest
+[05:34:02.121] [[Generation]] (1,1,-2): Chunk=3.32ms Mesh=3.90ms Vertices=0
+[05:34:02.122] [[Timing]] Chunk (1,1,-2): Chunk=3.32ms Mesh=3.90ms Send=0.06ms Total=7.45ms
+[05:34:02.123] [[Biome]] Chunk (-2,1,-1) center biome: Forest
+[05:34:02.127] [[Generation]] (-2,1,-1): Chunk=1.23ms Mesh=3.64ms Vertices=0
+[05:34:02.127] [[Timing]] Chunk (-2,1,-1): Chunk=1.23ms Mesh=3.64ms Send=0.11ms Total=5.16ms
+[05:34:02.129] [[Biome]] Chunk (0,0,3) center biome: Forest
+[05:34:02.193] [[Generation]] (0,0,3): Chunk=2.45ms Mesh=63.90ms Vertices=4230
+[05:34:02.194] [[Timing]] Chunk (0,0,3): Chunk=2.45ms Mesh=63.90ms Send=0.27ms Total=66.82ms
+[05:34:02.196] [[Biome]] Chunk (0,0,-3) center biome: Forest
+[05:34:02.269] [[Generation]] (0,0,-3): Chunk=1.88ms Mesh=71.93ms Vertices=4305
+[05:34:02.269] [[Timing]] Chunk (0,0,-3): Chunk=1.88ms Mesh=71.93ms Send=0.19ms Total=74.16ms
+[05:34:02.271] [[Biome]] Chunk (-1,1,2) center biome: Forest
+[05:34:02.274] [[Generation]] (-1,1,2): Chunk=1.66ms Mesh=2.71ms Vertices=0
+[05:34:02.274] [[Timing]] Chunk (-1,1,2): Chunk=1.66ms Mesh=2.71ms Send=0.11ms Total=4.66ms
+[05:34:02.277] [[Biome]] Chunk (-1,-1,2) center biome: Forest
+[05:34:02.340] [[Generation]] (-1,-1,2): Chunk=2.50ms Mesh=63.77ms Vertices=0
+[05:34:02.341] [[Timing]] Chunk (-1,-1,2): Chunk=2.50ms Mesh=63.77ms Send=0.08ms Total=66.51ms
+[05:34:02.343] [[Biome]] Chunk (1,-1,-2) center biome: Forest
+[05:34:02.411] [[Generation]] (1,-1,-2): Chunk=1.79ms Mesh=68.01ms Vertices=14787
+[05:34:02.411] [[Timing]] Chunk (1,-1,-2): Chunk=1.79ms Mesh=68.01ms Send=0.57ms Total=70.56ms
+[05:34:02.414] [[Biome]] Chunk (-1,-1,-2) center biome: Forest
+[05:34:02.490] [[Generation]] (-1,-1,-2): Chunk=1.33ms Mesh=76.56ms Vertices=0
+[05:34:02.491] [[Timing]] Chunk (-1,-1,-2): Chunk=1.33ms Mesh=76.56ms Send=0.09ms Total=78.13ms
+[05:34:02.494] [[Biome]] Chunk (-2,1,1) center biome: Forest
+[05:34:02.498] [[Generation]] (-2,1,1): Chunk=2.54ms Mesh=4.59ms Vertices=0
+[05:34:02.498] [[Timing]] Chunk (-2,1,1): Chunk=2.54ms Mesh=4.59ms Send=0.11ms Total=7.47ms
+[05:34:02.500] [[Biome]] Chunk (-1,1,-2) center biome: Forest
+[05:34:02.504] [[Generation]] (-1,1,-2): Chunk=1.63ms Mesh=3.40ms Vertices=0
+[05:34:02.504] [[Timing]] Chunk (-1,1,-2): Chunk=1.63ms Mesh=3.40ms Send=0.08ms Total=5.29ms
+[05:34:02.507] [[Biome]] Chunk (-2,-1,1) center biome: Forest
+[05:34:02.583] [[Generation]] (-2,-1,1): Chunk=2.16ms Mesh=76.60ms Vertices=912
+[05:34:02.584] [[Timing]] Chunk (-2,-1,1): Chunk=2.16ms Mesh=76.60ms Send=0.19ms Total=79.23ms
+[05:34:02.587] [[Biome]] Chunk (1,0,3) center biome: Forest
+[05:34:02.657] [[Generation]] (1,0,3): Chunk=2.68ms Mesh=69.47ms Vertices=4455
+[05:34:02.657] [[Timing]] Chunk (1,0,3): Chunk=2.68ms Mesh=69.47ms Send=0.18ms Total=72.59ms
+[05:34:02.659] [[Biome]] Chunk (3,0,1) center biome: Forest
+[05:34:02.742] [[Generation]] (3,0,1): Chunk=1.95ms Mesh=83.11ms Vertices=3987
+[05:34:02.743] [[Timing]] Chunk (3,0,1): Chunk=1.95ms Mesh=83.11ms Send=0.11ms Total=85.34ms
+[05:34:02.746] [[Biome]] Chunk (-3,0,-1) center biome: Forest
+[05:34:02.809] [[Generation]] (-3,0,-1): Chunk=2.77ms Mesh=63.28ms Vertices=3348
+[05:34:02.810] [[Timing]] Chunk (-3,0,-1): Chunk=2.77ms Mesh=63.28ms Send=0.26ms Total=66.55ms
+[05:34:02.812] [[Biome]] Chunk (-1,0,3) center biome: Forest
+[05:34:02.879] [[Generation]] (-1,0,3): Chunk=1.74ms Mesh=66.92ms Vertices=3456
+[05:34:02.879] [[Timing]] Chunk (-1,0,3): Chunk=1.74ms Mesh=66.92ms Send=0.33ms Total=69.19ms
+[05:34:02.883] [[Biome]] Chunk (-1,0,-3) center biome: Forest
+[05:34:02.961] [[Generation]] (-1,0,-3): Chunk=2.69ms Mesh=77.82ms Vertices=3282
+[05:34:02.961] [[Timing]] Chunk (-1,0,-3): Chunk=2.69ms Mesh=77.82ms Send=0.26ms Total=80.98ms
+[05:34:02.963] [[Biome]] Chunk (3,0,-1) center biome: Forest
+[05:34:03.031] [[Generation]] (3,0,-1): Chunk=1.80ms Mesh=67.08ms Vertices=3891
+[05:34:03.031] [[Timing]] Chunk (3,0,-1): Chunk=1.80ms Mesh=67.08ms Send=0.10ms Total=69.10ms
+[05:34:03.033] [[Biome]] Chunk (-3,0,1) center biome: Forest
+[05:34:03.101] [[Generation]] (-3,0,1): Chunk=1.60ms Mesh=67.86ms Vertices=4197
+[05:34:03.101] [[Timing]] Chunk (-3,0,1): Chunk=1.60ms Mesh=67.86ms Send=0.14ms Total=69.90ms
+[05:34:03.103] [[Biome]] Chunk (1,0,-3) center biome: Forest
+[05:34:03.176] [[Generation]] (1,0,-3): Chunk=1.91ms Mesh=72.77ms Vertices=3912
+[05:34:03.177] [[Timing]] Chunk (1,0,-3): Chunk=1.91ms Mesh=72.77ms Send=0.17ms Total=75.04ms
+[05:34:03.179] [[Biome]] Chunk (2,1,-2) center biome: Forest
+[05:34:03.183] [[Generation]] (2,1,-2): Chunk=1.84ms Mesh=4.15ms Vertices=0
+[05:34:03.184] [[Timing]] Chunk (2,1,-2): Chunk=1.84ms Mesh=4.15ms Send=0.09ms Total=6.24ms
+[05:34:03.186] [[Biome]] Chunk (-2,1,2) center biome: Forest
+[05:34:03.190] [[Generation]] (-2,1,2): Chunk=1.85ms Mesh=4.18ms Vertices=0
+[05:34:03.190] [[Timing]] Chunk (-2,1,2): Chunk=1.85ms Mesh=4.18ms Send=0.05ms Total=6.25ms
+[05:34:03.192] [[Biome]] Chunk (-2,-1,2) center biome: Forest
+[05:34:03.268] [[Generation]] (-2,-1,2): Chunk=1.37ms Mesh=76.16ms Vertices=0
+[05:34:03.268] [[Timing]] Chunk (-2,-1,2): Chunk=1.37ms Mesh=76.16ms Send=0.13ms Total=77.81ms
+[05:34:03.270] [[Biome]] Chunk (2,-1,2) center biome: Forest
+[05:34:03.345] [[Generation]] (2,-1,2): Chunk=1.74ms Mesh=74.77ms Vertices=138
+[05:34:03.345] [[Timing]] Chunk (2,-1,2): Chunk=1.74ms Mesh=74.77ms Send=0.09ms Total=76.76ms
+[05:34:03.348] [[Biome]] Chunk (2,1,2) center biome: Forest
+[05:34:03.352] [[Generation]] (2,1,2): Chunk=2.31ms Mesh=4.06ms Vertices=0
+[05:34:03.352] [[Timing]] Chunk (2,1,2): Chunk=2.31ms Mesh=4.06ms Send=0.05ms Total=6.58ms
+[05:34:03.355] [[Biome]] Chunk (-2,-1,-2) center biome: Forest
+[05:34:03.431] [[Generation]] (-2,-1,-2): Chunk=2.80ms Mesh=75.45ms Vertices=0
+[05:34:03.431] [[Timing]] Chunk (-2,-1,-2): Chunk=2.80ms Mesh=75.45ms Send=0.11ms Total=78.56ms
+[05:34:03.433] [[Biome]] Chunk (-2,1,-2) center biome: Forest
+[05:34:03.436] [[Generation]] (-2,1,-2): Chunk=1.46ms Mesh=3.49ms Vertices=0
+[05:34:03.436] [[Timing]] Chunk (-2,1,-2): Chunk=1.46ms Mesh=3.49ms Send=0.06ms Total=5.18ms
+[05:34:03.438] [[Biome]] Chunk (2,-1,-2) center biome: Forest
+[05:34:03.517] [[Generation]] (2,-1,-2): Chunk=1.42ms Mesh=79.64ms Vertices=15633
+[05:34:03.518] [[Timing]] Chunk (2,-1,-2): Chunk=1.42ms Mesh=79.64ms Send=0.61ms Total=81.83ms
+[05:34:03.522] [[Biome]] Chunk (-3,0,-2) center biome: Forest
+[05:34:03.600] [[Generation]] (-3,0,-2): Chunk=2.42ms Mesh=78.76ms Vertices=3792
+[05:34:03.601] [[Timing]] Chunk (-3,0,-2): Chunk=2.42ms Mesh=78.76ms Send=0.28ms Total=81.63ms
+[05:34:03.603] [[Biome]] Chunk (2,0,3) center biome: Forest
+[05:34:03.670] [[Generation]] (2,0,3): Chunk=1.63ms Mesh=67.35ms Vertices=3483
+[05:34:03.671] [[Timing]] Chunk (2,0,3): Chunk=1.63ms Mesh=67.35ms Send=0.33ms Total=69.50ms
+[05:34:03.674] [[Biome]] Chunk (3,0,-2) center biome: Forest
+[05:34:03.752] [[Generation]] (3,0,-2): Chunk=2.31ms Mesh=78.85ms Vertices=2724
+[05:34:03.753] [[Timing]] Chunk (3,0,-2): Chunk=2.31ms Mesh=78.85ms Send=0.23ms Total=81.55ms
+[05:34:03.755] [[Biome]] Chunk (3,-1,0) center biome: Forest
+[05:34:03.828] [[Generation]] (3,-1,0): Chunk=1.55ms Mesh=72.76ms Vertices=0
+[05:34:03.828] [[Timing]] Chunk (3,-1,0): Chunk=1.55ms Mesh=72.76ms Send=0.16ms Total=74.67ms
+[05:34:03.831] [[Biome]] Chunk (3,1,0) center biome: Forest
+[05:34:03.836] [[Generation]] (3,1,0): Chunk=2.38ms Mesh=4.89ms Vertices=0
+[05:34:03.836] [[Timing]] Chunk (3,1,0): Chunk=2.38ms Mesh=4.89ms Send=0.22ms Total=7.67ms
+[05:34:03.838] [[Biome]] Chunk (2,0,-3) center biome: Forest
+[05:34:03.910] [[Generation]] (2,0,-3): Chunk=1.82ms Mesh=71.61ms Vertices=1884
+[05:34:03.910] [[Timing]] Chunk (2,0,-3): Chunk=1.82ms Mesh=71.61ms Send=0.20ms Total=73.83ms
+[05:34:03.912] [[Biome]] Chunk (-3,0,2) center biome: Forest
+[05:34:03.985] [[Generation]] (-3,0,2): Chunk=1.86ms Mesh=73.03ms Vertices=4032
+[05:34:03.986] [[Timing]] Chunk (-3,0,2): Chunk=1.86ms Mesh=73.03ms Send=0.26ms Total=75.28ms
+[05:34:03.989] [[Biome]] Chunk (0,-1,3) center biome: Forest
+[05:34:04.064] [[Generation]] (0,-1,3): Chunk=2.56ms Mesh=75.00ms Vertices=0
+[05:34:04.064] [[Timing]] Chunk (0,-1,3): Chunk=2.56ms Mesh=75.00ms Send=0.10ms Total=77.80ms
+[05:34:04.066] [[Biome]] Chunk (0,-1,-3) center biome: Forest
+[05:34:04.140] [[Generation]] (0,-1,-3): Chunk=1.83ms Mesh=73.78ms Vertices=10431
+[05:34:04.142] [[Timing]] Chunk (0,-1,-3): Chunk=1.83ms Mesh=73.78ms Send=2.23ms Total=78.00ms
+[05:34:04.144] [[Biome]] Chunk (0,1,-3) center biome: Forest
+[05:34:04.146] [[Generation]] (0,1,-3): Chunk=1.34ms Mesh=2.16ms Vertices=0
+[05:34:04.146] [[Timing]] Chunk (0,1,-3): Chunk=1.34ms Mesh=2.16ms Send=0.04ms Total=3.66ms
+[05:34:04.147] [[Biome]] Chunk (3,0,2) center biome: Forest
+[05:34:04.214] [[Generation]] (3,0,2): Chunk=1.11ms Mesh=66.26ms Vertices=3810
+[05:34:04.214] [[Timing]] Chunk (3,0,2): Chunk=1.11ms Mesh=66.26ms Send=0.17ms Total=67.63ms
+[05:34:04.216] [[Biome]] Chunk (0,1,3) center biome: Forest
+[05:34:04.218] [[Generation]] (0,1,3): Chunk=1.38ms Mesh=2.72ms Vertices=0
+[05:34:04.218] [[Timing]] Chunk (0,1,3): Chunk=1.38ms Mesh=2.72ms Send=0.04ms Total=4.24ms
+[05:34:04.220] [[Biome]] Chunk (-3,1,0) center biome: Forest
+[05:34:04.223] [[Generation]] (-3,1,0): Chunk=1.40ms Mesh=2.71ms Vertices=0
+[05:34:04.223] [[Timing]] Chunk (-3,1,0): Chunk=1.40ms Mesh=2.71ms Send=0.19ms Total=4.43ms
+[05:34:04.225] [[Biome]] Chunk (-2,0,-3) center biome: Forest
+[05:34:04.289] [[Generation]] (-2,0,-3): Chunk=1.28ms Mesh=64.04ms Vertices=5118
+[05:34:04.289] [[Timing]] Chunk (-2,0,-3): Chunk=1.28ms Mesh=64.04ms Send=0.15ms Total=65.56ms
+[05:34:04.292] [[Biome]] Chunk (-2,0,3) center biome: Forest
+[05:34:04.349] [[Generation]] (-2,0,3): Chunk=2.34ms Mesh=57.93ms Vertices=3318
+[05:34:04.350] [[Timing]] Chunk (-2,0,3): Chunk=2.34ms Mesh=57.93ms Send=0.10ms Total=60.49ms
+[05:34:04.351] [[Biome]] Chunk (-3,-1,0) center biome: Forest
+[05:34:04.422] [[Generation]] (-3,-1,0): Chunk=1.20ms Mesh=71.37ms Vertices=19755
+[05:34:04.423] [[Timing]] Chunk (-3,-1,0): Chunk=1.20ms Mesh=71.37ms Send=0.38ms Total=73.06ms
+[05:34:04.425] [[Biome]] Chunk (-1,1,-3) center biome: Forest
+[05:34:04.429] [[Generation]] (-1,1,-3): Chunk=1.42ms Mesh=3.94ms Vertices=0
+[05:34:04.429] [[Timing]] Chunk (-1,1,-3): Chunk=1.42ms Mesh=3.94ms Send=0.07ms Total=5.54ms
+[05:34:04.431] [[Biome]] Chunk (-1,-1,3) center biome: Forest
+[05:34:04.500] [[Generation]] (-1,-1,3): Chunk=1.51ms Mesh=69.55ms Vertices=0
+[05:34:04.500] [[Timing]] Chunk (-1,-1,3): Chunk=1.51ms Mesh=69.55ms Send=0.08ms Total=71.30ms
+[05:34:04.502] [[Biome]] Chunk (-1,1,3) center biome: Forest
+[05:34:04.507] [[Generation]] (-1,1,3): Chunk=1.52ms Mesh=4.62ms Vertices=0
+[05:34:04.507] [[Timing]] Chunk (-1,1,3): Chunk=1.52ms Mesh=4.62ms Send=0.08ms Total=6.35ms
+[05:34:04.510] [[Biome]] Chunk (3,1,1) center biome: Forest
+[05:34:04.514] [[Generation]] (3,1,1): Chunk=3.29ms Mesh=3.44ms Vertices=0
+[05:34:04.514] [[Timing]] Chunk (3,1,1): Chunk=3.29ms Mesh=3.44ms Send=0.10ms Total=7.02ms
+[05:34:04.516] [[Biome]] Chunk (3,1,-1) center biome: Forest
+[05:34:04.521] [[Generation]] (3,1,-1): Chunk=1.73ms Mesh=4.78ms Vertices=0
+[05:34:04.521] [[Timing]] Chunk (3,1,-1): Chunk=1.73ms Mesh=4.78ms Send=0.12ms Total=6.80ms
+[05:34:04.524] [[Biome]] Chunk (1,1,3) center biome: Forest
+[05:34:04.529] [[Generation]] (1,1,3): Chunk=2.16ms Mesh=5.42ms Vertices=0
+[05:34:04.529] [[Timing]] Chunk (1,1,3): Chunk=2.16ms Mesh=5.42ms Send=0.09ms Total=7.83ms
+[05:34:04.531] [[Biome]] Chunk (3,-1,-1) center biome: Forest
+[05:34:04.607] [[Generation]] (3,-1,-1): Chunk=1.92ms Mesh=75.12ms Vertices=0
+[05:34:04.607] [[Timing]] Chunk (3,-1,-1): Chunk=1.92ms Mesh=75.12ms Send=0.09ms Total=77.27ms
+[05:34:04.609] [[Biome]] Chunk (-1,-1,-3) center biome: Forest
+[05:34:04.672] [[Generation]] (-1,-1,-3): Chunk=1.87ms Mesh=63.39ms Vertices=12
+[05:34:04.672] [[Timing]] Chunk (-1,-1,-3): Chunk=1.87ms Mesh=63.39ms Send=0.07ms Total=65.50ms
+[05:34:04.675] [[Biome]] Chunk (1,-1,3) center biome: Forest
+[05:34:04.748] [[Generation]] (1,-1,3): Chunk=1.93ms Mesh=73.35ms Vertices=3099
+[05:34:04.748] [[Timing]] Chunk (1,-1,3): Chunk=1.93ms Mesh=73.35ms Send=0.12ms Total=75.52ms
+[05:34:04.750] [[Biome]] Chunk (3,-1,1) center biome: Forest
+[05:34:04.820] [[Generation]] (3,-1,1): Chunk=1.49ms Mesh=69.54ms Vertices=633
+[05:34:04.820] [[Timing]] Chunk (3,-1,1): Chunk=1.49ms Mesh=69.54ms Send=0.07ms Total=71.24ms
+[05:34:04.823] [[Biome]] Chunk (-3,1,-1) center biome: Forest
+[05:34:04.826] [[Generation]] (-3,1,-1): Chunk=2.74ms Mesh=2.81ms Vertices=0
+[05:34:04.826] [[Timing]] Chunk (-3,1,-1): Chunk=2.74ms Mesh=2.81ms Send=0.06ms Total=5.79ms
+[05:34:04.828] [[Biome]] Chunk (1,-1,-3) center biome: Forest
+[05:34:04.894] [[Generation]] (1,-1,-3): Chunk=1.77ms Mesh=66.79ms Vertices=10914
+[05:34:04.895] [[Timing]] Chunk (1,-1,-3): Chunk=1.77ms Mesh=66.79ms Send=0.21ms Total=68.90ms
+[05:34:04.897] [[Biome]] Chunk (1,1,-3) center biome: Forest
+[05:34:04.900] [[Generation]] (1,1,-3): Chunk=1.55ms Mesh=3.28ms Vertices=0
+[05:34:04.900] [[Timing]] Chunk (1,1,-3): Chunk=1.55ms Mesh=3.28ms Send=0.14ms Total=5.15ms
+[05:34:04.902] [[Biome]] Chunk (-3,-1,-1) center biome: Forest
+[05:34:04.967] [[Generation]] (-3,-1,-1): Chunk=1.77ms Mesh=64.49ms Vertices=2760
+[05:34:04.967] [[Timing]] Chunk (-3,-1,-1): Chunk=1.77ms Mesh=64.49ms Send=0.12ms Total=66.50ms
+[05:34:04.969] [[Biome]] Chunk (-3,-1,1) center biome: Forest
+[05:34:05.031] [[Generation]] (-3,-1,1): Chunk=1.45ms Mesh=62.40ms Vertices=4692
+[05:34:05.031] [[Timing]] Chunk (-3,-1,1): Chunk=1.45ms Mesh=62.40ms Send=0.10ms Total=64.08ms
+[05:34:05.033] [[Biome]] Chunk (-3,1,1) center biome: Forest
+[05:34:05.036] [[Generation]] (-3,1,1): Chunk=1.39ms Mesh=2.76ms Vertices=0
+[05:34:05.036] [[Timing]] Chunk (-3,1,1): Chunk=1.39ms Mesh=2.76ms Send=0.11ms Total=4.43ms
+[05:34:05.037] [[Biome]] Chunk (-4,0,0) center biome: Forest
+[05:34:05.095] [[Generation]] (-4,0,0): Chunk=1.28ms Mesh=57.88ms Vertices=4269
+[05:34:05.096] [[Timing]] Chunk (-4,0,0): Chunk=1.28ms Mesh=57.88ms Send=0.19ms Total=59.44ms
+[05:34:05.097] [[Biome]] Chunk (0,0,-4) center biome: Forest
+[05:34:05.158] [[Generation]] (0,0,-4): Chunk=1.62ms Mesh=60.41ms Vertices=3690
+[05:34:05.158] [[Timing]] Chunk (0,0,-4): Chunk=1.62ms Mesh=60.41ms Send=0.11ms Total=62.28ms
+[05:34:05.160] [[Biome]] Chunk (4,0,0) center biome: Forest
+[05:34:05.223] [[Generation]] (4,0,0): Chunk=1.52ms Mesh=63.07ms Vertices=4554
+[05:34:05.223] [[Timing]] Chunk (4,0,0): Chunk=1.52ms Mesh=63.07ms Send=0.07ms Total=64.78ms
+[05:34:05.225] [[Biome]] Chunk (0,0,4) center biome: Forest
+[05:34:05.284] [[Generation]] (0,0,4): Chunk=1.45ms Mesh=58.70ms Vertices=5703
+[05:34:05.284] [[Timing]] Chunk (0,0,4): Chunk=1.45ms Mesh=58.70ms Send=0.10ms Total=60.40ms
+[05:34:05.285] [[Biome]] Chunk (-2,1,3) center biome: Forest
+[05:34:05.288] [[Generation]] (-2,1,3): Chunk=1.29ms Mesh=2.85ms Vertices=0
+[05:34:05.288] [[Timing]] Chunk (-2,1,3): Chunk=1.29ms Mesh=2.85ms Send=0.05ms Total=4.26ms
+[05:34:05.290] [[Biome]] Chunk (-3,-1,-2) center biome: Forest
+[05:34:05.360] [[Generation]] (-3,-1,-2): Chunk=2.01ms Mesh=69.86ms Vertices=0
+[05:34:05.361] [[Timing]] Chunk (-3,-1,-2): Chunk=2.01ms Mesh=69.86ms Send=0.13ms Total=72.15ms
+[05:34:05.363] [[Biome]] Chunk (-3,1,-2) center biome: Forest
+[05:34:05.366] [[Generation]] (-3,1,-2): Chunk=1.83ms Mesh=3.40ms Vertices=0
+[05:34:05.366] [[Timing]] Chunk (-3,1,-2): Chunk=1.83ms Mesh=3.40ms Send=0.08ms Total=5.51ms
+[05:34:05.368] [[Biome]] Chunk (4,0,1) center biome: Forest
+[05:34:05.440] [[Generation]] (4,0,1): Chunk=1.70ms Mesh=71.91ms Vertices=5214
+[05:34:05.440] [[Timing]] Chunk (4,0,1): Chunk=1.70ms Mesh=71.91ms Send=0.18ms Total=73.91ms
+[05:34:05.442] [[Biome]] Chunk (-1,0,4) center biome: Forest
+[05:34:05.518] [[Generation]] (-1,0,4): Chunk=1.73ms Mesh=75.32ms Vertices=4605
+[05:34:05.518] [[Timing]] Chunk (-1,0,4): Chunk=1.73ms Mesh=75.32ms Send=0.14ms Total=77.35ms
+[05:34:05.520] [[Biome]] Chunk (-3,-1,2) center biome: Forest
+[05:34:05.595] [[Generation]] (-3,-1,2): Chunk=1.53ms Mesh=74.72ms Vertices=0
+[05:34:05.595] [[Timing]] Chunk (-3,-1,2): Chunk=1.53ms Mesh=74.72ms Send=0.12ms Total=76.50ms
+[05:34:05.597] [[Biome]] Chunk (-3,1,2) center biome: Forest
+[05:34:05.601] [[Generation]] (-3,1,2): Chunk=2.44ms Mesh=3.41ms Vertices=0
+[05:34:05.601] [[Timing]] Chunk (-3,1,2): Chunk=2.44ms Mesh=3.41ms Send=0.08ms Total=6.07ms
+[05:34:05.603] [[Biome]] Chunk (4,0,-1) center biome: Forest
+[05:34:05.681] [[Generation]] (4,0,-1): Chunk=1.85ms Mesh=77.41ms Vertices=4374
+[05:34:05.681] [[Timing]] Chunk (4,0,-1): Chunk=1.85ms Mesh=77.41ms Send=0.13ms Total=79.56ms
+[05:34:05.683] [[Biome]] Chunk (2,-1,-3) center biome: Forest
+[05:34:05.752] [[Generation]] (2,-1,-3): Chunk=1.57ms Mesh=69.28ms Vertices=15858
+[05:34:05.753] [[Timing]] Chunk (2,-1,-3): Chunk=1.57ms Mesh=69.28ms Send=0.79ms Total=71.78ms
+[05:34:05.756] [[Biome]] Chunk (2,1,-3) center biome: Forest
+[05:34:05.759] [[Generation]] (2,1,-3): Chunk=1.55ms Mesh=2.89ms Vertices=0
+[05:34:05.759] [[Timing]] Chunk (2,1,-3): Chunk=1.55ms Mesh=2.89ms Send=0.06ms Total=4.66ms
+[05:34:05.761] [[Biome]] Chunk (2,-1,3) center biome: Forest
+[05:34:05.826] [[Generation]] (2,-1,3): Chunk=1.49ms Mesh=64.99ms Vertices=3912
+[05:34:05.826] [[Timing]] Chunk (2,-1,3): Chunk=1.49ms Mesh=64.99ms Send=0.34ms Total=66.94ms
+[05:34:05.828] [[Biome]] Chunk (2,1,3) center biome: Forest
+[05:34:05.832] [[Generation]] (2,1,3): Chunk=1.68ms Mesh=3.95ms Vertices=0
+[05:34:05.833] [[Timing]] Chunk (2,1,3): Chunk=1.68ms Mesh=3.95ms Send=0.07ms Total=5.89ms
+[05:34:05.834] [[Biome]] Chunk (-4,0,-1) center biome: Forest
+[05:34:05.894] [[Generation]] (-4,0,-1): Chunk=1.55ms Mesh=59.70ms Vertices=3828
+[05:34:05.894] [[Timing]] Chunk (-4,0,-1): Chunk=1.55ms Mesh=59.70ms Send=0.22ms Total=61.59ms
+[05:34:05.896] [[Biome]] Chunk (3,1,2) center biome: Forest
+[05:34:05.900] [[Generation]] (3,1,2): Chunk=1.56ms Mesh=3.59ms Vertices=0
+[05:34:05.900] [[Timing]] Chunk (3,1,2): Chunk=1.56ms Mesh=3.59ms Send=0.06ms Total=5.39ms
+[05:34:05.902] [[Biome]] Chunk (3,-1,2) center biome: Forest
+[05:34:05.966] [[Generation]] (3,-1,2): Chunk=1.52ms Mesh=63.77ms Vertices=216
+[05:34:05.966] [[Timing]] Chunk (3,-1,2): Chunk=1.52ms Mesh=63.77ms Send=0.16ms Total=65.62ms
+[05:34:05.969] [[Biome]] Chunk (-1,0,-4) center biome: Forest
+[05:34:06.031] [[Generation]] (-1,0,-4): Chunk=2.61ms Mesh=62.30ms Vertices=3540
+[05:34:06.032] [[Timing]] Chunk (-1,0,-4): Chunk=2.61ms Mesh=62.30ms Send=0.14ms Total=65.23ms
+[05:34:06.034] [[Biome]] Chunk (1,0,-4) center biome: Forest
+[05:34:06.092] [[Generation]] (1,0,-4): Chunk=1.78ms Mesh=58.32ms Vertices=2772
+[05:34:06.092] [[Timing]] Chunk (1,0,-4): Chunk=1.78ms Mesh=58.32ms Send=0.08ms Total=60.33ms
+[05:34:06.094] [[Biome]] Chunk (-2,-1,3) center biome: Forest
+[05:34:06.158] [[Generation]] (-2,-1,3): Chunk=1.30ms Mesh=63.68ms Vertices=0
+[05:34:06.158] [[Timing]] Chunk (-2,-1,3): Chunk=1.30ms Mesh=63.68ms Send=0.07ms Total=65.22ms
+[05:34:06.160] [[Biome]] Chunk (-2,1,-3) center biome: Forest
+[05:34:06.163] [[Generation]] (-2,1,-3): Chunk=1.60ms Mesh=3.30ms Vertices=0
+[05:34:06.163] [[Timing]] Chunk (-2,1,-3): Chunk=1.60ms Mesh=3.30ms Send=0.09ms Total=5.25ms
+[05:34:06.165] [[Biome]] Chunk (1,0,4) center biome: Forest
+[05:34:06.221] [[Generation]] (1,0,4): Chunk=1.70ms Mesh=55.78ms Vertices=4950
+[05:34:06.221] [[Timing]] Chunk (1,0,4): Chunk=1.70ms Mesh=55.78ms Send=0.29ms Total=57.98ms
+[05:34:06.224] [[Biome]] Chunk (3,-1,-2) center biome: Forest
+[05:34:06.292] [[Generation]] (3,-1,-2): Chunk=1.78ms Mesh=68.59ms Vertices=6000
+[05:34:06.293] [[Timing]] Chunk (3,-1,-2): Chunk=1.78ms Mesh=68.59ms Send=0.19ms Total=70.67ms
+[05:34:06.295] [[Biome]] Chunk (-2,-1,-3) center biome: Forest
+[05:34:06.361] [[Generation]] (-2,-1,-3): Chunk=1.46ms Mesh=66.20ms Vertices=0
+[05:34:06.361] [[Timing]] Chunk (-2,-1,-3): Chunk=1.46ms Mesh=66.20ms Send=0.12ms Total=67.97ms
+[05:34:06.364] [[Biome]] Chunk (-4,0,1) center biome: Forest
+[05:34:06.422] [[Generation]] (-4,0,1): Chunk=2.28ms Mesh=58.36ms Vertices=4908
+[05:34:06.422] [[Timing]] Chunk (-4,0,1): Chunk=2.28ms Mesh=58.36ms Send=0.13ms Total=60.89ms
+[05:34:06.425] [[Biome]] Chunk (3,1,-2) center biome: Forest
+[05:34:06.428] [[Generation]] (3,1,-2): Chunk=2.21ms Mesh=3.45ms Vertices=0
+[05:34:06.428] [[Timing]] Chunk (3,1,-2): Chunk=2.21ms Mesh=3.45ms Send=0.06ms Total=5.80ms
+[05:34:06.432] [[Biome]] Chunk (3,0,-3) center biome: Forest
+[05:34:06.493] [[Generation]] (3,0,-3): Chunk=3.23ms Mesh=61.03ms Vertices=3558
+[05:34:06.493] [[Timing]] Chunk (3,0,-3): Chunk=3.23ms Mesh=61.03ms Send=0.09ms Total=64.49ms
+[05:34:06.495] [[Biome]] Chunk (-3,0,3) center biome: Forest
+[05:34:06.548] [[Generation]] (-3,0,3): Chunk=1.66ms Mesh=53.07ms Vertices=5592
+[05:34:06.548] [[Timing]] Chunk (-3,0,3): Chunk=1.66ms Mesh=53.07ms Send=0.16ms Total=55.00ms
+[05:34:06.550] [[Biome]] Chunk (3,0,3) center biome: Forest
+[05:34:06.621] [[Generation]] (3,0,3): Chunk=1.38ms Mesh=71.24ms Vertices=3444
+[05:34:06.622] [[Timing]] Chunk (3,0,3): Chunk=1.38ms Mesh=71.24ms Send=0.21ms Total=72.99ms
+[05:34:06.624] [[Biome]] Chunk (-3,0,-3) center biome: Forest
+[05:34:06.696] [[Generation]] (-3,0,-3): Chunk=1.52ms Mesh=72.64ms Vertices=4392
+[05:34:06.697] [[Timing]] Chunk (-3,0,-3): Chunk=1.52ms Mesh=72.64ms Send=0.24ms Total=74.52ms
+[05:34:06.699] [[Biome]] Chunk (4,1,0) center biome: Forest
+[05:34:06.701] [[Generation]] (4,1,0): Chunk=1.52ms Mesh=2.77ms Vertices=0
+[05:34:06.702] [[Timing]] Chunk (4,1,0): Chunk=1.52ms Mesh=2.77ms Send=0.10ms Total=4.54ms
+[05:34:06.704] [[Biome]] Chunk (4,-1,0) center biome: Forest
+[05:34:06.766] [[Generation]] (4,-1,0): Chunk=1.81ms Mesh=62.49ms Vertices=0
+[05:34:06.766] [[Timing]] Chunk (4,-1,0): Chunk=1.81ms Mesh=62.49ms Send=0.09ms Total=64.55ms
+[05:34:06.768] [[Biome]] Chunk (-2,0,-4) center biome: Forest
+[05:34:06.837] [[Generation]] (-2,0,-4): Chunk=1.40ms Mesh=68.90ms Vertices=4554
+[05:34:06.837] [[Timing]] Chunk (-2,0,-4): Chunk=1.40ms Mesh=68.90ms Send=0.18ms Total=70.61ms
+[05:34:06.839] [[Biome]] Chunk (-2,0,4) center biome: Forest
+[05:34:06.898] [[Generation]] (-2,0,4): Chunk=1.62ms Mesh=58.58ms Vertices=5454
+[05:34:06.898] [[Timing]] Chunk (-2,0,4): Chunk=1.62ms Mesh=58.58ms Send=0.25ms Total=60.59ms
+[05:34:06.901] [[Biome]] Chunk (4,0,2) center biome: Forest
+[05:34:06.968] [[Generation]] (4,0,2): Chunk=2.20ms Mesh=66.16ms Vertices=5529
+[05:34:06.968] [[Timing]] Chunk (4,0,2): Chunk=2.20ms Mesh=66.16ms Send=0.28ms Total=68.82ms
+[05:34:06.970] [[Biome]] Chunk (0,1,-4) center biome: Forest
+[05:34:06.973] [[Generation]] (0,1,-4): Chunk=1.49ms Mesh=3.13ms Vertices=0
+[05:34:06.973] [[Timing]] Chunk (0,1,-4): Chunk=1.49ms Mesh=3.13ms Send=0.06ms Total=4.78ms
+[05:34:06.975] [[Biome]] Chunk (2,0,-4) center biome: Forest
+[05:34:07.039] [[Generation]] (2,0,-4): Chunk=2.02ms Mesh=63.45ms Vertices=4764
+[05:34:07.039] [[Timing]] Chunk (2,0,-4): Chunk=2.02ms Mesh=63.45ms Send=0.27ms Total=65.88ms
+[05:34:07.041] [[Biome]] Chunk (0,-1,-4) center biome: Forest
+[05:34:07.106] [[Generation]] (0,-1,-4): Chunk=1.76ms Mesh=64.58ms Vertices=7032
+[05:34:07.106] [[Timing]] Chunk (0,-1,-4): Chunk=1.76ms Mesh=64.58ms Send=0.28ms Total=66.78ms
+[05:34:07.108] [[Biome]] Chunk (0,1,4) center biome: Forest
+[05:34:07.112] [[Generation]] (0,1,4): Chunk=1.55ms Mesh=3.74ms Vertices=0
+[05:34:07.112] [[Timing]] Chunk (0,1,4): Chunk=1.55ms Mesh=3.74ms Send=0.18ms Total=5.63ms
+[05:34:07.114] [[Biome]] Chunk (0,-1,4) center biome: Forest
+[05:34:07.176] [[Server]] Tick 600 | Cache: 160/20000
+[05:34:07.176]   Requests: 160 | Avg Times: Chunk=1.93ms Mesh=50.33ms Send=0.20ms Total=52.45ms
+[05:34:07.183] [[Generation]] (0,-1,4): Chunk=1.56ms Mesh=68.85ms Vertices=42
+[05:34:07.183] [[Timing]] Chunk (0,-1,4): Chunk=1.56ms Mesh=68.85ms Send=0.07ms Total=70.69ms
+[05:34:07.184] [[Biome]] Chunk (-4,0,2) center biome: Forest
+[05:34:07.252] [[Generation]] (-4,0,2): Chunk=1.49ms Mesh=67.21ms Vertices=3612
+[05:34:07.252] [[Timing]] Chunk (-4,0,2): Chunk=1.49ms Mesh=67.21ms Send=0.18ms Total=69.03ms
+[05:34:07.254] [[Biome]] Chunk (2,0,4) center biome: Forest
+[05:34:07.316] [[Generation]] (2,0,4): Chunk=1.52ms Mesh=62.02ms Vertices=2559
+[05:34:07.316] [[Timing]] Chunk (2,0,4): Chunk=1.52ms Mesh=62.02ms Send=0.09ms Total=63.79ms
+[05:34:07.318] [[Biome]] Chunk (-4,-1,0) center biome: Forest
+[05:34:07.387] [[Generation]] (-4,-1,0): Chunk=1.27ms Mesh=69.91ms Vertices=7452
+[05:34:07.388] [[Timing]] Chunk (-4,-1,0): Chunk=1.27ms Mesh=69.91ms Send=0.11ms Total=71.37ms
+[05:34:07.390] [[Biome]] Chunk (-4,1,0) center biome: Forest
+[05:34:07.393] [[Generation]] (-4,1,0): Chunk=2.05ms Mesh=3.24ms Vertices=0
+[05:34:07.393] [[Timing]] Chunk (-4,1,0): Chunk=2.05ms Mesh=3.24ms Send=0.06ms Total=5.44ms
+[05:34:07.395] [[Biome]] Chunk (4,0,-2) center biome: Forest
+[05:34:07.472] [[Generation]] (4,0,-2): Chunk=1.34ms Mesh=77.17ms Vertices=4416
+[05:34:07.472] [[Timing]] Chunk (4,0,-2): Chunk=1.34ms Mesh=77.17ms Send=0.20ms Total=78.87ms
+[05:34:07.474] [[Biome]] Chunk (-4,0,-2) center biome: Forest
+[05:34:07.546] [[Generation]] (-4,0,-2): Chunk=1.90ms Mesh=71.16ms Vertices=3330
+[05:34:07.546] [[Timing]] Chunk (-4,0,-2): Chunk=1.90ms Mesh=71.16ms Send=0.13ms Total=73.33ms
+[05:34:07.548] [[Biome]] Chunk (4,-1,-1) center biome: Forest
+[05:34:07.612] [[Generation]] (4,-1,-1): Chunk=1.74ms Mesh=63.51ms Vertices=0
+[05:34:07.612] [[Timing]] Chunk (4,-1,-1): Chunk=1.74ms Mesh=63.51ms Send=0.09ms Total=65.49ms
+[05:34:07.613] [[Biome]] Chunk (-4,1,1) center biome: Forest
+[05:34:07.617] [[Generation]] (-4,1,1): Chunk=1.36ms Mesh=3.16ms Vertices=0
+[05:34:07.617] [[Timing]] Chunk (-4,1,1): Chunk=1.36ms Mesh=3.16ms Send=0.06ms Total=4.74ms
+[05:34:07.619] [[Biome]] Chunk (4,-1,1) center biome: Forest
+[05:34:07.682] [[Generation]] (4,-1,1): Chunk=1.96ms Mesh=62.70ms Vertices=0
+[05:34:07.682] [[Timing]] Chunk (4,-1,1): Chunk=1.96ms Mesh=62.70ms Send=0.09ms Total=64.91ms
+[05:34:07.683] [[Biome]] Chunk (-4,-1,-1) center biome: Forest
+[05:34:07.747] [[Generation]] (-4,-1,-1): Chunk=1.30ms Mesh=63.02ms Vertices=0
+[05:34:07.747] [[Timing]] Chunk (-4,-1,-1): Chunk=1.30ms Mesh=63.02ms Send=0.15ms Total=64.71ms
+[05:34:07.749] [[Biome]] Chunk (-4,1,-1) center biome: Forest
+[05:34:07.753] [[Generation]] (-4,1,-1): Chunk=2.06ms Mesh=3.56ms Vertices=0
+[05:34:07.753] [[Timing]] Chunk (-4,1,-1): Chunk=2.06ms Mesh=3.56ms Send=0.13ms Total=5.93ms
+[05:34:07.755] [[Biome]] Chunk (4,1,1) center biome: Forest
+[05:34:07.759] [[Generation]] (4,1,1): Chunk=1.87ms Mesh=3.94ms Vertices=0
+[05:34:07.760] [[Timing]] Chunk (4,1,1): Chunk=1.87ms Mesh=3.94ms Send=0.18ms Total=6.15ms
+[05:34:07.763] [[Biome]] Chunk (-4,-1,1) center biome: Forest
+[05:34:07.830] [[Generation]] (-4,-1,1): Chunk=3.32ms Mesh=66.77ms Vertices=5994
+[05:34:07.830] [[Timing]] Chunk (-4,-1,1): Chunk=3.32ms Mesh=66.77ms Send=0.15ms Total=70.39ms
+[05:34:07.832] [[Biome]] Chunk (4,1,-1) center biome: Forest
+[05:34:07.835] [[Generation]] (4,1,-1): Chunk=1.67ms Mesh=3.38ms Vertices=0
+[05:34:07.836] [[Timing]] Chunk (4,1,-1): Chunk=1.67ms Mesh=3.38ms Send=0.07ms Total=5.24ms
+[05:34:07.838] [[Biome]] Chunk (1,1,4) center biome: Forest
+[05:34:07.841] [[Generation]] (1,1,4): Chunk=2.03ms Mesh=3.33ms Vertices=0
+[05:34:07.841] [[Timing]] Chunk (1,1,4): Chunk=2.03ms Mesh=3.33ms Send=0.09ms Total=5.59ms
+[05:34:07.843] [[Biome]] Chunk (-1,-1,-4) center biome: Forest
+[05:34:07.908] [[Generation]] (-1,-1,-4): Chunk=1.86ms Mesh=64.10ms Vertices=0
+[05:34:07.908] [[Timing]] Chunk (-1,-1,-4): Chunk=1.86ms Mesh=64.10ms Send=0.08ms Total=66.18ms
+[05:34:07.910] [[Biome]] Chunk (1,1,-4) center biome: Forest
+[05:34:07.913] [[Generation]] (1,1,-4): Chunk=1.75ms Mesh=3.20ms Vertices=0
+[05:34:07.913] [[Timing]] Chunk (1,1,-4): Chunk=1.75ms Mesh=3.20ms Send=0.09ms Total=5.21ms
+[05:34:07.915] [[Biome]] Chunk (1,-1,4) center biome: Forest
+[05:34:07.991] [[Generation]] (1,-1,4): Chunk=1.48ms Mesh=75.55ms Vertices=11604
+[05:34:07.991] [[Timing]] Chunk (1,-1,4): Chunk=1.48ms Mesh=75.55ms Send=0.42ms Total=77.61ms
+[05:34:07.994] [[Biome]] Chunk (-1,1,4) center biome: Forest
+[05:34:07.997] [[Generation]] (-1,1,4): Chunk=2.55ms Mesh=3.51ms Vertices=0
+[05:34:07.998] [[Timing]] Chunk (-1,1,4): Chunk=2.55ms Mesh=3.51ms Send=0.09ms Total=6.28ms
+[05:34:08.001] [[Biome]] Chunk (1,-1,-4) center biome: Forest
+[05:34:08.077] [[Generation]] (1,-1,-4): Chunk=1.52ms Mesh=75.48ms Vertices=12897
+[05:34:08.077] [[Timing]] Chunk (1,-1,-4): Chunk=1.52ms Mesh=75.48ms Send=0.30ms Total=79.18ms
+[05:34:08.079] [[Biome]] Chunk (-1,-1,4) center biome: Forest
+[05:34:08.150] [[Generation]] (-1,-1,4): Chunk=2.11ms Mesh=70.74ms Vertices=0
+[05:34:08.150] [[Timing]] Chunk (-1,-1,4): Chunk=2.11ms Mesh=70.74ms Send=0.08ms Total=73.08ms
+[05:34:08.152] [[Biome]] Chunk (-1,1,-4) center biome: Forest
+[05:34:08.155] [[Generation]] (-1,1,-4): Chunk=1.14ms Mesh=2.99ms Vertices=0
+[05:34:08.155] [[Timing]] Chunk (-1,1,-4): Chunk=1.14ms Mesh=2.99ms Send=0.05ms Total=4.29ms
+[05:34:08.157] [[Biome]] Chunk (3,1,3) center biome: Forest
+[05:34:08.159] [[Generation]] (3,1,3): Chunk=1.51ms Mesh=2.69ms Vertices=0
+[05:34:08.159] [[Timing]] Chunk (3,1,3): Chunk=1.51ms Mesh=2.69ms Send=0.05ms Total=4.39ms
+[05:34:08.161] [[Biome]] Chunk (-3,1,3) center biome: Forest
+[05:34:08.164] [[Generation]] (-3,1,3): Chunk=1.67ms Mesh=3.07ms Vertices=0
+[05:34:08.164] [[Timing]] Chunk (-3,1,3): Chunk=1.67ms Mesh=3.07ms Send=0.07ms Total=4.95ms
+[05:34:08.166] [[Biome]] Chunk (3,-1,3) center biome: Forest
+[05:34:08.230] [[Generation]] (3,-1,3): Chunk=1.48ms Mesh=63.38ms Vertices=0
+[05:34:08.230] [[Timing]] Chunk (3,-1,3): Chunk=1.48ms Mesh=63.38ms Send=0.10ms Total=65.13ms
+[05:34:08.232] [[Biome]] Chunk (-3,-1,3) center biome: Forest
+[05:34:08.293] [[Generation]] (-3,-1,3): Chunk=1.69ms Mesh=61.32ms Vertices=0
+[05:34:08.293] [[Timing]] Chunk (-3,-1,3): Chunk=1.69ms Mesh=61.32ms Send=0.06ms Total=63.24ms
+[05:34:08.295] [[Biome]] Chunk (-3,-1,-3) center biome: Forest
+[05:34:08.356] [[Generation]] (-3,-1,-3): Chunk=1.39ms Mesh=61.50ms Vertices=0
+[05:34:08.357] [[Timing]] Chunk (-3,-1,-3): Chunk=1.39ms Mesh=61.50ms Send=0.08ms Total=63.13ms
+[05:34:08.358] [[Biome]] Chunk (3,-1,-3) center biome: Forest
+[05:34:08.424] [[Generation]] (3,-1,-3): Chunk=1.53ms Mesh=65.95ms Vertices=9288
+[05:34:08.425] [[Timing]] Chunk (3,-1,-3): Chunk=1.53ms Mesh=65.95ms Send=0.55ms Total=68.16ms
+[05:34:08.429] [[Biome]] Chunk (3,1,-3) center biome: Forest
+[05:34:08.432] [[Generation]] (3,1,-3): Chunk=2.88ms Mesh=3.32ms Vertices=0
+[05:34:08.432] [[Timing]] Chunk (3,1,-3): Chunk=2.88ms Mesh=3.32ms Send=0.09ms Total=6.52ms
+[05:34:08.434] [[Biome]] Chunk (-3,1,-3) center biome: Forest
+[05:34:08.439] [[Generation]] (-3,1,-3): Chunk=1.63ms Mesh=4.44ms Vertices=0
+[05:34:08.439] [[Timing]] Chunk (-3,1,-3): Chunk=1.63ms Mesh=4.44ms Send=0.07ms Total=6.25ms
+[05:34:08.441] [[Biome]] Chunk (4,-1,2) center biome: Forest
+[05:34:08.504] [[Generation]] (4,-1,2): Chunk=2.06ms Mesh=62.41ms Vertices=0
+[05:34:08.504] [[Timing]] Chunk (4,-1,2): Chunk=2.06ms Mesh=62.41ms Send=0.10ms Total=64.73ms
+[05:34:08.506] [[Biome]] Chunk (2,-1,4) center biome: Forest
+[05:34:08.570] [[Generation]] (2,-1,4): Chunk=1.95ms Mesh=64.28ms Vertices=19812
+[05:34:08.571] [[Timing]] Chunk (2,-1,4): Chunk=1.95ms Mesh=64.28ms Send=0.59ms Total=66.98ms
+[05:34:08.573] [[Biome]] Chunk (2,1,4) center biome: Forest
+[05:34:08.577] [[Generation]] (2,1,4): Chunk=1.49ms Mesh=3.15ms Vertices=0
+[05:34:08.577] [[Timing]] Chunk (2,1,4): Chunk=1.49ms Mesh=3.15ms Send=0.05ms Total=4.87ms
+[05:34:08.578] [[Biome]] Chunk (2,1,-4) center biome: Forest
+[05:34:08.582] [[Generation]] (2,1,-4): Chunk=1.37ms Mesh=3.74ms Vertices=0
+[05:34:08.582] [[Timing]] Chunk (2,1,-4): Chunk=1.37ms Mesh=3.74ms Send=0.11ms Total=5.35ms
+[05:34:08.585] [[Biome]] Chunk (-2,-1,-4) center biome: Forest
+[05:34:08.650] [[Generation]] (-2,-1,-4): Chunk=2.45ms Mesh=65.48ms Vertices=0
+[05:34:08.651] [[Timing]] Chunk (-2,-1,-4): Chunk=2.45ms Mesh=65.48ms Send=0.16ms Total=68.27ms
+[05:34:08.653] [[Biome]] Chunk (-4,-1,-2) center biome: Forest
+[05:34:08.715] [[Generation]] (-4,-1,-2): Chunk=2.56ms Mesh=61.94ms Vertices=0
+[05:34:08.715] [[Timing]] Chunk (-4,-1,-2): Chunk=2.56ms Mesh=61.94ms Send=0.09ms Total=64.75ms
+[05:34:08.717] [[Biome]] Chunk (-4,1,-2) center biome: Forest
+[05:34:08.721] [[Generation]] (-4,1,-2): Chunk=1.48ms Mesh=3.37ms Vertices=0
+[05:34:08.721] [[Timing]] Chunk (-4,1,-2): Chunk=1.48ms Mesh=3.37ms Send=0.11ms Total=5.19ms
+[05:34:08.723] [[Biome]] Chunk (-2,-1,4) center biome: Forest
+[05:34:08.784] [[Generation]] (-2,-1,4): Chunk=1.80ms Mesh=60.91ms Vertices=0
+[05:34:08.784] [[Timing]] Chunk (-2,-1,4): Chunk=1.80ms Mesh=60.91ms Send=0.06ms Total=63.01ms
+[05:34:08.786] [[Biome]] Chunk (2,-1,-4) center biome: Forest
+[05:34:08.851] [[Generation]] (2,-1,-4): Chunk=1.66ms Mesh=65.43ms Vertices=16641
+[05:34:08.852] [[Timing]] Chunk (2,-1,-4): Chunk=1.66ms Mesh=65.43ms Send=0.75ms Total=68.01ms
+[05:34:08.855] [[Biome]] Chunk (4,-1,-2) center biome: Forest
+[05:34:08.937] [[Generation]] (4,-1,-2): Chunk=1.54ms Mesh=82.29ms Vertices=2106
+[05:34:08.937] [[Timing]] Chunk (4,-1,-2): Chunk=1.54ms Mesh=82.29ms Send=0.09ms Total=84.03ms
+[05:34:08.939] [[Biome]] Chunk (4,1,-2) center biome: Forest
+[05:34:08.942] [[Generation]] (4,1,-2): Chunk=1.57ms Mesh=2.85ms Vertices=0
+[05:34:08.942] [[Timing]] Chunk (4,1,-2): Chunk=1.57ms Mesh=2.85ms Send=0.05ms Total=4.61ms
+[05:34:08.945] [[Biome]] Chunk (-2,1,4) center biome: Forest
+[05:34:08.948] [[Generation]] (-2,1,4): Chunk=2.39ms Mesh=2.77ms Vertices=0
+[05:34:08.948] [[Timing]] Chunk (-2,1,4): Chunk=2.39ms Mesh=2.77ms Send=0.06ms Total=5.36ms
+[05:34:08.950] [[Biome]] Chunk (-4,1,2) center biome: Forest
+[05:34:08.953] [[Generation]] (-4,1,2): Chunk=1.65ms Mesh=3.48ms Vertices=0
+[05:34:08.953] [[Timing]] Chunk (-4,1,2): Chunk=1.65ms Mesh=3.48ms Send=0.09ms Total=5.37ms
+[05:34:08.957] [[Biome]] Chunk (4,1,2) center biome: Forest
+[05:34:08.961] [[Generation]] (4,1,2): Chunk=3.45ms Mesh=3.27ms Vertices=0
+[05:34:08.961] [[Timing]] Chunk (4,1,2): Chunk=3.45ms Mesh=3.27ms Send=0.16ms Total=7.15ms
+[05:34:08.963] [[Biome]] Chunk (-4,-1,2) center biome: Forest
+[05:34:09.037] [[Generation]] (-4,-1,2): Chunk=1.75ms Mesh=74.25ms Vertices=33
+[05:34:09.037] [[Timing]] Chunk (-4,-1,2): Chunk=1.75ms Mesh=74.25ms Send=0.07ms Total=76.20ms
+[05:34:09.039] [[Biome]] Chunk (-2,1,-4) center biome: Forest
+[05:34:09.043] [[Generation]] (-2,1,-4): Chunk=1.57ms Mesh=3.73ms Vertices=0
+[05:34:09.043] [[Timing]] Chunk (-2,1,-4): Chunk=1.57ms Mesh=3.73ms Send=0.08ms Total=5.52ms
+[05:34:09.046] [[Biome]] Chunk (3,0,4) center biome: Forest
+[05:34:09.111] [[Generation]] (3,0,4): Chunk=2.47ms Mesh=65.52ms Vertices=3339
+[05:34:09.111] [[Timing]] Chunk (3,0,4): Chunk=2.47ms Mesh=65.52ms Send=0.11ms Total=68.27ms
+[05:34:09.114] [[Biome]] Chunk (-4,0,3) center biome: Forest
+[05:34:09.173] [[Generation]] (-4,0,3): Chunk=1.77ms Mesh=59.37ms Vertices=4623
+[05:34:09.173] [[Timing]] Chunk (-4,0,3): Chunk=1.77ms Mesh=59.37ms Send=0.12ms Total=61.45ms
+[05:34:09.175] [[Biome]] Chunk (5,0,0) center biome: Forest
+[05:34:09.249] [[Generation]] (5,0,0): Chunk=1.65ms Mesh=73.87ms Vertices=5274
+[05:34:09.249] [[Timing]] Chunk (5,0,0): Chunk=1.65ms Mesh=73.87ms Send=0.13ms Total=75.76ms
+[05:34:09.251] [[Biome]] Chunk (-4,0,-3) center biome: Forest
+[05:34:09.332] [[Generation]] (-4,0,-3): Chunk=1.50ms Mesh=80.72ms Vertices=5343
+[05:34:09.332] [[Timing]] Chunk (-4,0,-3): Chunk=1.50ms Mesh=80.72ms Send=0.15ms Total=82.58ms
+[05:34:09.335] [[Biome]] Chunk (0,0,-5) center biome: Forest
+[05:34:09.394] [[Generation]] (0,0,-5): Chunk=1.62ms Mesh=59.38ms Vertices=5217
+[05:34:09.394] [[Timing]] Chunk (0,0,-5): Chunk=1.62ms Mesh=59.38ms Send=0.08ms Total=61.17ms
+[05:34:09.396] [[Biome]] Chunk (0,0,5) center biome: Plains
+[05:34:09.462] [[Generation]] (0,0,5): Chunk=1.22ms Mesh=66.31ms Vertices=3270
+[05:34:09.462] [[Timing]] Chunk (0,0,5): Chunk=1.22ms Mesh=66.31ms Send=0.07ms Total=67.72ms
+[05:34:09.464] [[Biome]] Chunk (4,0,3) center biome: Forest
+[05:34:09.535] [[Generation]] (4,0,3): Chunk=1.34ms Mesh=70.67ms Vertices=3531
+[05:34:09.535] [[Timing]] Chunk (4,0,3): Chunk=1.34ms Mesh=70.67ms Send=0.12ms Total=72.25ms
+[05:34:09.537] [[Biome]] Chunk (3,0,-4) center biome: Forest
+[05:34:09.600] [[Generation]] (3,0,-4): Chunk=1.56ms Mesh=63.06ms Vertices=3300
+[05:34:09.600] [[Timing]] Chunk (3,0,-4): Chunk=1.56ms Mesh=63.06ms Send=0.08ms Total=64.87ms
+[05:34:09.602] [[Biome]] Chunk (-5,0,0) center biome: Forest
+[05:34:09.661] [[Generation]] (-5,0,0): Chunk=1.82ms Mesh=58.26ms Vertices=4854
+[05:34:09.661] [[Timing]] Chunk (-5,0,0): Chunk=1.82ms Mesh=58.26ms Send=0.09ms Total=60.25ms
+[05:34:09.663] [[Biome]] Chunk (-3,0,-4) center biome: Forest
+[05:34:09.730] [[Generation]] (-3,0,-4): Chunk=1.29ms Mesh=67.54ms Vertices=5703
+[05:34:09.730] [[Timing]] Chunk (-3,0,-4): Chunk=1.29ms Mesh=67.54ms Send=0.28ms Total=69.30ms
+[05:34:09.733] [[Biome]] Chunk (4,0,-3) center biome: Forest
+[05:34:09.791] [[Generation]] (4,0,-3): Chunk=1.69ms Mesh=58.45ms Vertices=5235
+[05:34:09.792] [[Timing]] Chunk (4,0,-3): Chunk=1.69ms Mesh=58.45ms Send=0.08ms Total=60.31ms
+[05:34:09.793] [[Biome]] Chunk (-3,0,4) center biome: Forest
+[05:34:09.857] [[Generation]] (-3,0,4): Chunk=1.29ms Mesh=63.80ms Vertices=4065
+[05:34:09.857] [[Timing]] Chunk (-3,0,4): Chunk=1.29ms Mesh=63.80ms Send=0.17ms Total=65.40ms
+[05:34:09.859] [[Biome]] Chunk (-5,0,1) center biome: Forest
+[05:34:09.932] [[Generation]] (-5,0,1): Chunk=1.60ms Mesh=72.46ms Vertices=5307
+[05:34:09.932] [[Timing]] Chunk (-5,0,1): Chunk=1.60ms Mesh=72.46ms Send=0.17ms Total=74.34ms
+[05:34:09.935] [[Biome]] Chunk (-5,0,-1) center biome: Forest
+[05:34:09.995] [[Generation]] (-5,0,-1): Chunk=2.29ms Mesh=59.68ms Vertices=4779
+[05:34:09.995] [[Timing]] Chunk (-5,0,-1): Chunk=2.29ms Mesh=59.68ms Send=0.14ms Total=62.24ms
+[05:34:09.997] [[Biome]] Chunk (-1,0,5) center biome: Plains
+[05:34:10.062] [[Generation]] (-1,0,5): Chunk=1.46ms Mesh=64.77ms Vertices=3687
+[05:34:10.062] [[Timing]] Chunk (-1,0,5): Chunk=1.46ms Mesh=64.77ms Send=0.08ms Total=66.41ms
+[05:34:10.063] [[Biome]] Chunk (1,0,5) center biome: Forest
+[05:34:10.124] [[Generation]] (1,0,5): Chunk=1.16ms Mesh=60.72ms Vertices=4038
+[05:34:10.124] [[Timing]] Chunk (1,0,5): Chunk=1.16ms Mesh=60.72ms Send=0.15ms Total=62.16ms
+[05:34:10.126] [[Biome]] Chunk (5,0,-1) center biome: Forest
+[05:34:10.198] [[Generation]] (5,0,-1): Chunk=1.46ms Mesh=71.49ms Vertices=5469
+[05:34:10.198] [[Timing]] Chunk (5,0,-1): Chunk=1.46ms Mesh=71.49ms Send=0.19ms Total=73.25ms
+[05:34:10.200] [[Biome]] Chunk (5,0,1) center biome: Forest
+[05:34:10.273] [[Generation]] (5,0,1): Chunk=1.37ms Mesh=72.94ms Vertices=3822
+[05:34:10.273] [[Timing]] Chunk (5,0,1): Chunk=1.37ms Mesh=72.94ms Send=0.19ms Total=74.62ms
+[05:34:10.275] [[Biome]] Chunk (1,0,-5) center biome: Forest
+[05:34:10.349] [[Generation]] (1,0,-5): Chunk=1.69ms Mesh=73.41ms Vertices=2631
+[05:34:10.349] [[Timing]] Chunk (1,0,-5): Chunk=1.69ms Mesh=73.41ms Send=0.14ms Total=75.38ms
+[05:34:10.351] [[Biome]] Chunk (-1,0,-5) center biome: Forest
+[05:34:10.420] [[Generation]] (-1,0,-5): Chunk=1.56ms Mesh=68.91ms Vertices=3996
+[05:34:10.420] [[Timing]] Chunk (-1,0,-5): Chunk=1.56ms Mesh=68.91ms Send=0.22ms Total=70.83ms
+[05:34:10.422] [[Biome]] Chunk (2,0,5) center biome: Forest
+[05:34:10.482] [[Generation]] (2,0,5): Chunk=1.35ms Mesh=60.47ms Vertices=3204
+[05:34:10.482] [[Timing]] Chunk (2,0,5): Chunk=1.35ms Mesh=60.47ms Send=0.13ms Total=62.11ms
+[05:34:10.484] [[Biome]] Chunk (-4,-1,-3) center biome: Forest
+[05:34:10.555] [[Generation]] (-4,-1,-3): Chunk=1.60ms Mesh=70.67ms Vertices=0
+[05:34:10.555] [[Timing]] Chunk (-4,-1,-3): Chunk=1.60ms Mesh=70.67ms Send=0.08ms Total=72.46ms
+[05:34:10.558] [[Biome]] Chunk (5,0,-2) center biome: Forest
+[05:34:10.641] [[Generation]] (5,0,-2): Chunk=2.18ms Mesh=83.13ms Vertices=3651
+[05:34:10.641] [[Timing]] Chunk (5,0,-2): Chunk=2.18ms Mesh=83.13ms Send=0.12ms Total=85.57ms
+[05:34:10.644] [[Biome]] Chunk (2,0,-5) center biome: Forest
+[05:34:10.717] [[Generation]] (2,0,-5): Chunk=2.55ms Mesh=73.18ms Vertices=4200
+[05:34:10.717] [[Timing]] Chunk (2,0,-5): Chunk=2.55ms Mesh=73.18ms Send=0.12ms Total=75.96ms
+[05:34:10.719] [[Biome]] Chunk (-5,0,-2) center biome: Forest
+[05:34:10.782] [[Generation]] (-5,0,-2): Chunk=1.22ms Mesh=63.23ms Vertices=3876
+[05:34:10.782] [[Timing]] Chunk (-5,0,-2): Chunk=1.22ms Mesh=63.23ms Send=0.08ms Total=64.63ms
+[05:34:10.784] [[Biome]] Chunk (0,-1,-5) center biome: Forest
+[05:34:10.848] [[Generation]] (0,-1,-5): Chunk=1.26ms Mesh=63.60ms Vertices=8592
+[05:34:10.848] [[Timing]] Chunk (0,-1,-5): Chunk=1.26ms Mesh=63.60ms Send=0.25ms Total=65.21ms
+[05:34:10.850] [[Biome]] Chunk (0,1,-5) center biome: Forest
+[05:34:10.853] [[Generation]] (0,1,-5): Chunk=1.30ms Mesh=2.76ms Vertices=0
+[05:34:10.853] [[Timing]] Chunk (0,1,-5): Chunk=1.30ms Mesh=2.76ms Send=0.05ms Total=4.26ms
+[05:34:10.854] [[Biome]] Chunk (-3,1,4) center biome: Forest
+[05:34:10.857] [[Generation]] (-3,1,4): Chunk=1.17ms Mesh=2.75ms Vertices=0
+[05:34:10.857] [[Timing]] Chunk (-3,1,4): Chunk=1.17ms Mesh=2.75ms Send=0.04ms Total=4.00ms
+[05:34:10.858] [[Biome]] Chunk (4,-1,3) center biome: Forest
+[05:34:10.923] [[Generation]] (4,-1,3): Chunk=1.14ms Mesh=65.12ms Vertices=0
+[05:34:10.924] [[Timing]] Chunk (4,-1,3): Chunk=1.14ms Mesh=65.12ms Send=0.09ms Total=66.44ms
+[05:34:10.926] [[Biome]] Chunk (-5,-1,0) center biome: Forest
+[05:34:10.993] [[Generation]] (-5,-1,0): Chunk=2.24ms Mesh=67.43ms Vertices=15270
+[05:34:10.994] [[Timing]] Chunk (-5,-1,0): Chunk=2.24ms Mesh=67.43ms Send=0.66ms Total=70.47ms
+[05:34:10.996] [[Biome]] Chunk (-4,1,3) center biome: Forest
+[05:34:10.999] [[Generation]] (-4,1,3): Chunk=1.46ms Mesh=2.87ms Vertices=0
+[05:34:10.999] [[Timing]] Chunk (-4,1,3): Chunk=1.46ms Mesh=2.87ms Send=0.11ms Total=4.56ms
+[05:34:11.001] [[Biome]] Chunk (-2,0,5) center biome: Forest
+[05:34:11.079] [[Generation]] (-2,0,5): Chunk=1.78ms Mesh=77.26ms Vertices=4725
+[05:34:11.079] [[Timing]] Chunk (-2,0,5): Chunk=1.78ms Mesh=77.26ms Send=0.21ms Total=79.41ms
+[05:34:11.081] [[Biome]] Chunk (-5,1,0) center biome: Forest
+[05:34:11.084] [[Generation]] (-5,1,0): Chunk=1.60ms Mesh=3.37ms Vertices=0
+[05:34:11.084] [[Timing]] Chunk (-5,1,0): Chunk=1.60ms Mesh=3.37ms Send=0.07ms Total=5.15ms
+[05:34:11.086] [[Biome]] Chunk (0,-1,5) center biome: Plains
+[05:34:11.160] [[Generation]] (0,-1,5): Chunk=1.33ms Mesh=74.13ms Vertices=16236
+[05:34:11.161] [[Timing]] Chunk (0,-1,5): Chunk=1.33ms Mesh=74.13ms Send=0.63ms Total=76.19ms
+[05:34:11.163] [[Biome]] Chunk (3,1,-4) center biome: Forest
+[05:34:11.167] [[Generation]] (3,1,-4): Chunk=1.66ms Mesh=3.18ms Vertices=0
+[05:34:11.167] [[Timing]] Chunk (3,1,-4): Chunk=1.66ms Mesh=3.18ms Send=0.07ms Total=5.04ms
+[05:34:11.171] [[Biome]] Chunk (-4,-1,3) center biome: Forest
+[05:34:11.235] [[Generation]] (-4,-1,3): Chunk=4.60ms Mesh=63.82ms Vertices=0
+[05:34:11.235] [[Timing]] Chunk (-4,-1,3): Chunk=4.60ms Mesh=63.82ms Send=0.06ms Total=68.61ms
+[05:34:11.237] [[Biome]] Chunk (-5,0,2) center biome: Forest
+[05:34:11.305] [[Generation]] (-5,0,2): Chunk=1.41ms Mesh=67.85ms Vertices=3759
+[05:34:11.305] [[Timing]] Chunk (-5,0,2): Chunk=1.41ms Mesh=67.85ms Send=0.19ms Total=69.59ms
+[05:34:11.307] [[Biome]] Chunk (-3,-1,-4) center biome: Forest
+[05:34:11.374] [[Generation]] (-3,-1,-4): Chunk=1.36ms Mesh=66.85ms Vertices=0
+[05:34:11.374] [[Timing]] Chunk (-3,-1,-4): Chunk=1.36ms Mesh=66.85ms Send=0.10ms Total=68.56ms
+[05:34:11.377] [[Biome]] Chunk (3,1,4) center biome: Forest
+[05:34:11.380] [[Generation]] (3,1,4): Chunk=2.07ms Mesh=3.77ms Vertices=0
+[05:34:11.381] [[Timing]] Chunk (3,1,4): Chunk=2.07ms Mesh=3.77ms Send=0.08ms Total=6.07ms
+[05:34:11.382] [[Biome]] Chunk (5,-1,0) center biome: Forest
+[05:34:11.447] [[Generation]] (5,-1,0): Chunk=1.49ms Mesh=64.26ms Vertices=0
+[05:34:11.447] [[Timing]] Chunk (5,-1,0): Chunk=1.49ms Mesh=64.26ms Send=0.07ms Total=66.01ms
+[05:34:11.449] [[Biome]] Chunk (3,-1,-4) center biome: Forest
+[05:34:11.521] [[Generation]] (3,-1,-4): Chunk=2.10ms Mesh=72.12ms Vertices=1887
+[05:34:11.521] [[Timing]] Chunk (3,-1,-4): Chunk=2.10ms Mesh=72.12ms Send=0.13ms Total=74.49ms
+[05:34:11.524] [[Biome]] Chunk (0,1,5) center biome: Plains
+[05:34:11.527] [[Generation]] (0,1,5): Chunk=2.16ms Mesh=3.39ms Vertices=0
+[05:34:11.527] [[Timing]] Chunk (0,1,5): Chunk=2.16ms Mesh=3.39ms Send=0.07ms Total=5.74ms
+[05:34:11.529] [[Biome]] Chunk (5,1,0) center biome: Forest
+[05:34:11.532] [[Generation]] (5,1,0): Chunk=1.64ms Mesh=2.62ms Vertices=0
+[05:34:11.532] [[Timing]] Chunk (5,1,0): Chunk=1.64ms Mesh=2.62ms Send=0.06ms Total=4.43ms
+[05:34:11.535] [[Biome]] Chunk (-3,-1,4) center biome: Forest
+[05:34:11.602] [[Generation]] (-3,-1,4): Chunk=2.34ms Mesh=67.13ms Vertices=0
+[05:34:11.602] [[Timing]] Chunk (-3,-1,4): Chunk=2.34ms Mesh=67.13ms Send=0.08ms Total=69.74ms
+[05:34:11.605] [[Biome]] Chunk (3,-1,4) center biome: Forest
+[05:34:11.669] [[Generation]] (3,-1,4): Chunk=2.90ms Mesh=63.83ms Vertices=711
+[05:34:11.669] [[Timing]] Chunk (3,-1,4): Chunk=2.90ms Mesh=63.83ms Send=0.12ms Total=67.04ms
+[05:34:11.671] [[Biome]] Chunk (4,-1,-3) center biome: Forest
+[05:34:11.735] [[Generation]] (4,-1,-3): Chunk=1.59ms Mesh=63.57ms Vertices=0
+[05:34:11.735] [[Timing]] Chunk (4,-1,-3): Chunk=1.59ms Mesh=63.57ms Send=0.06ms Total=65.33ms
+[05:34:11.736] [[Biome]] Chunk (4,1,-3) center biome: Forest
+[05:34:11.739] [[Generation]] (4,1,-3): Chunk=1.18ms Mesh=2.65ms Vertices=0
+[05:34:11.739] [[Timing]] Chunk (4,1,-3): Chunk=1.18ms Mesh=2.65ms Send=0.05ms Total=3.97ms
+[05:34:11.740] [[Biome]] Chunk (4,1,3) center biome: Forest
+[05:34:11.744] [[Generation]] (4,1,3): Chunk=1.23ms Mesh=3.73ms Vertices=0
+[05:34:11.744] [[Timing]] Chunk (4,1,3): Chunk=1.23ms Mesh=3.73ms Send=0.10ms Total=5.15ms
+[05:34:11.746] [[Biome]] Chunk (-4,1,-3) center biome: Forest
+[05:34:11.749] [[Generation]] (-4,1,-3): Chunk=1.61ms Mesh=2.80ms Vertices=0
+[05:34:11.749] [[Timing]] Chunk (-4,1,-3): Chunk=1.61ms Mesh=2.80ms Send=0.07ms Total=4.60ms
+[05:34:11.751] [[Biome]] Chunk (5,0,2) center biome: Forest
+[05:34:11.829] [[Generation]] (5,0,2): Chunk=1.85ms Mesh=78.04ms Vertices=4740
+[05:34:11.830] [[Timing]] Chunk (5,0,2): Chunk=1.85ms Mesh=78.04ms Send=0.25ms Total=80.28ms
+[05:34:11.832] [[Biome]] Chunk (-2,0,-5) center biome: Forest
+[05:34:11.903] [[Generation]] (-2,0,-5): Chunk=1.58ms Mesh=70.75ms Vertices=3429
+[05:34:11.903] [[Timing]] Chunk (-2,0,-5): Chunk=1.58ms Mesh=70.75ms Send=0.13ms Total=72.57ms
+[05:34:11.905] [[Biome]] Chunk (-3,1,-4) center biome: Forest
+[05:34:11.908] [[Generation]] (-3,1,-4): Chunk=1.46ms Mesh=3.01ms Vertices=0
+[05:34:11.908] [[Timing]] Chunk (-3,1,-4): Chunk=1.46ms Mesh=3.01ms Send=0.05ms Total=4.63ms
+[05:34:11.911] [[Biome]] Chunk (-5,-1,-1) center biome: Forest
+[05:34:11.975] [[Generation]] (-5,-1,-1): Chunk=3.04ms Mesh=64.34ms Vertices=96
+[05:34:11.975] [[Timing]] Chunk (-5,-1,-1): Chunk=3.04ms Mesh=64.34ms Send=0.09ms Total=67.61ms
+[05:34:11.977] [[Biome]] Chunk (5,1,-1) center biome: Forest
+[05:34:11.980] [[Generation]] (5,1,-1): Chunk=1.71ms Mesh=2.96ms Vertices=0
+[05:34:11.980] [[Timing]] Chunk (5,1,-1): Chunk=1.71ms Mesh=2.96ms Send=0.08ms Total=4.88ms
+[05:34:11.982] [[Biome]] Chunk (5,-1,-1) center biome: Forest
+[05:34:12.047] [[Generation]] (5,-1,-1): Chunk=1.81ms Mesh=64.40ms Vertices=30
+[05:34:12.047] [[Timing]] Chunk (5,-1,-1): Chunk=1.81ms Mesh=64.40ms Send=0.10ms Total=66.51ms
+[05:34:12.049] [[Biome]] Chunk (-5,1,1) center biome: Forest
+[05:34:12.052] [[Generation]] (-5,1,1): Chunk=1.57ms Mesh=3.17ms Vertices=0
+[05:34:12.052] [[Timing]] Chunk (-5,1,1): Chunk=1.57ms Mesh=3.17ms Send=0.08ms Total=4.95ms
+[05:34:12.054] [[Biome]] Chunk (5,-1,1) center biome: Forest
+[05:34:12.116] [[Generation]] (5,-1,1): Chunk=1.66ms Mesh=61.53ms Vertices=0
+[05:34:12.116] [[Timing]] Chunk (5,-1,1): Chunk=1.66ms Mesh=61.53ms Send=0.10ms Total=63.45ms
+[05:34:12.118] [[Biome]] Chunk (-5,1,-1) center biome: Forest
+[05:34:12.121] [[Generation]] (-5,1,-1): Chunk=1.53ms Mesh=2.81ms Vertices=0
+[05:34:12.121] [[Timing]] Chunk (-5,1,-1): Chunk=1.53ms Mesh=2.81ms Send=0.06ms Total=4.63ms
+[05:34:12.123] [[Biome]] Chunk (5,1,1) center biome: Forest
+[05:34:12.125] [[Generation]] (5,1,1): Chunk=1.58ms Mesh=2.67ms Vertices=0
+[05:34:12.125] [[Timing]] Chunk (5,1,1): Chunk=1.58ms Mesh=2.67ms Send=0.05ms Total=4.44ms
+[05:34:12.127] [[Biome]] Chunk (-1,1,-5) center biome: Forest
+[05:34:12.130] [[Generation]] (-1,1,-5): Chunk=1.67ms Mesh=3.15ms Vertices=0
+[05:34:12.131] [[Timing]] Chunk (-1,1,-5): Chunk=1.67ms Mesh=3.15ms Send=0.09ms Total=5.07ms
+[05:34:12.132] [[Biome]] Chunk (-1,-1,5) center biome: Plains
+[05:34:12.209] [[Generation]] (-1,-1,5): Chunk=1.48ms Mesh=76.12ms Vertices=11274
+[05:34:12.209] [[Timing]] Chunk (-1,-1,5): Chunk=1.48ms Mesh=76.12ms Send=0.62ms Total=78.38ms
+[05:34:12.214] [[Biome]] Chunk (1,1,5) center biome: Forest
+[05:34:12.218] [[Generation]] (1,1,5): Chunk=3.90ms Mesh=4.28ms Vertices=0
+[05:34:12.219] [[Timing]] Chunk (1,1,5): Chunk=3.90ms Mesh=4.28ms Send=0.05ms Total=8.36ms
+[05:34:12.220] [[Biome]] Chunk (1,-1,5) center biome: Forest
+[05:34:12.302] [[Generation]] (1,-1,5): Chunk=1.27ms Mesh=81.86ms Vertices=18306
+[05:34:12.302] [[Timing]] Chunk (1,-1,5): Chunk=1.27ms Mesh=81.86ms Send=0.41ms Total=83.63ms
+[05:34:12.305] [[Biome]] Chunk (1,1,-5) center biome: Forest
+[05:34:12.308] [[Generation]] (1,1,-5): Chunk=1.55ms Mesh=2.77ms Vertices=0
+[05:34:12.308] [[Timing]] Chunk (1,1,-5): Chunk=1.55ms Mesh=2.77ms Send=0.06ms Total=4.45ms
+[05:34:12.309] [[Biome]] Chunk (1,-1,-5) center biome: Forest
+[05:34:12.383] [[Generation]] (1,-1,-5): Chunk=1.51ms Mesh=73.00ms Vertices=15000
+[05:34:12.383] [[Timing]] Chunk (1,-1,-5): Chunk=1.51ms Mesh=73.00ms Send=0.18ms Total=74.81ms
+[05:34:12.385] [[Biome]] Chunk (-1,1,5) center biome: Plains
+[05:34:12.388] [[Generation]] (-1,1,5): Chunk=1.36ms Mesh=3.30ms Vertices=0
+[05:34:12.388] [[Timing]] Chunk (-1,1,5): Chunk=1.36ms Mesh=3.30ms Send=0.04ms Total=4.78ms
+[05:34:12.391] [[Biome]] Chunk (-1,-1,-5) center biome: Forest
+[05:34:12.455] [[Generation]] (-1,-1,-5): Chunk=2.01ms Mesh=64.70ms Vertices=0
+[05:34:12.455] [[Timing]] Chunk (-1,-1,-5): Chunk=2.01ms Mesh=64.70ms Send=0.07ms Total=66.91ms
+[05:34:12.458] [[Biome]] Chunk (-5,-1,1) center biome: Forest
+[05:34:12.531] [[Generation]] (-5,-1,1): Chunk=2.42ms Mesh=73.27ms Vertices=32358
+[05:34:12.532] [[Timing]] Chunk (-5,-1,1): Chunk=2.42ms Mesh=73.27ms Send=0.88ms Total=76.77ms
+[05:34:12.536] [[Biome]] Chunk (-4,0,-4) center biome: Forest
+[05:34:12.610] [[Generation]] (-4,0,-4): Chunk=1.51ms Mesh=74.15ms Vertices=3321
+[05:34:12.610] [[Timing]] Chunk (-4,0,-4): Chunk=1.51ms Mesh=74.15ms Send=0.23ms Total=76.01ms
+[05:34:12.612] [[Biome]] Chunk (4,0,4) center biome: Forest
+[05:34:12.680] [[Generation]] (4,0,4): Chunk=1.65ms Mesh=67.82ms Vertices=3876
+[05:34:12.680] [[Timing]] Chunk (4,0,4): Chunk=1.65ms Mesh=67.82ms Send=0.09ms Total=69.73ms
+[05:34:12.682] [[Biome]] Chunk (-4,0,4) center biome: Forest
+[05:34:12.751] [[Generation]] (-4,0,4): Chunk=1.48ms Mesh=68.64ms Vertices=5190
+[05:34:12.751] [[Timing]] Chunk (-4,0,4): Chunk=1.48ms Mesh=68.64ms Send=0.34ms Total=70.62ms
+[05:34:12.755] [[Biome]] Chunk (4,0,-4) center biome: Forest
+[05:34:12.827] [[Generation]] (4,0,-4): Chunk=3.00ms Mesh=72.12ms Vertices=6195
+[05:34:12.828] [[Timing]] Chunk (4,0,-4): Chunk=3.00ms Mesh=72.12ms Send=0.35ms Total=75.72ms
+[05:34:12.830] [[Biome]] Chunk (5,1,2) center biome: Forest
+[05:34:12.833] [[Generation]] (5,1,2): Chunk=1.71ms Mesh=3.24ms Vertices=0
+[05:34:12.833] [[Timing]] Chunk (5,1,2): Chunk=1.71ms Mesh=3.24ms Send=0.10ms Total=5.22ms
+[05:34:12.836] [[Biome]] Chunk (5,1,-2) center biome: Forest
+[05:34:12.840] [[Generation]] (5,1,-2): Chunk=1.93ms Mesh=4.16ms Vertices=0
+[05:34:12.840] [[Timing]] Chunk (5,1,-2): Chunk=1.93ms Mesh=4.16ms Send=0.08ms Total=6.29ms
+[05:34:12.842] [[Biome]] Chunk (5,-1,-2) center biome: Forest
+[05:34:12.906] [[Generation]] (5,-1,-2): Chunk=1.65ms Mesh=64.31ms Vertices=174
+[05:34:12.906] [[Timing]] Chunk (5,-1,-2): Chunk=1.65ms Mesh=64.31ms Send=0.08ms Total=66.16ms
+[05:34:12.908] [[Biome]] Chunk (5,-1,2) center biome: Forest
+[05:34:12.970] [[Generation]] (5,-1,2): Chunk=1.38ms Mesh=61.80ms Vertices=0
+[05:34:12.970] [[Timing]] Chunk (5,-1,2): Chunk=1.38ms Mesh=61.80ms Send=0.08ms Total=63.38ms
+[05:34:12.971] [[Biome]] Chunk (-2,-1,-5) center biome: Forest
+[05:34:13.032] [[Generation]] (-2,-1,-5): Chunk=1.40ms Mesh=61.20ms Vertices=0
+[05:34:13.033] [[Timing]] Chunk (-2,-1,-5): Chunk=1.40ms Mesh=61.20ms Send=0.07ms Total=62.77ms
+[05:34:13.034] [[Biome]] Chunk (-2,-1,5) center biome: Forest
+[05:34:13.100] [[Generation]] (-2,-1,5): Chunk=1.32ms Mesh=65.73ms Vertices=10218
+[05:34:13.100] [[Timing]] Chunk (-2,-1,5): Chunk=1.32ms Mesh=65.73ms Send=0.42ms Total=67.58ms
+[05:34:13.103] [[Biome]] Chunk (-2,1,-5) center biome: Forest
+[05:34:13.105] [[Generation]] (-2,1,-5): Chunk=1.53ms Mesh=2.84ms Vertices=0
+[05:34:13.106] [[Timing]] Chunk (-2,1,-5): Chunk=1.53ms Mesh=2.84ms Send=0.04ms Total=4.49ms
+[05:34:13.107] [[Biome]] Chunk (2,-1,-5) center biome: Forest
+[05:34:13.185] [[Generation]] (2,-1,-5): Chunk=1.74ms Mesh=77.61ms Vertices=13326
+[05:34:13.186] [[Timing]] Chunk (2,-1,-5): Chunk=1.74ms Mesh=77.61ms Send=0.68ms Total=80.13ms
+[05:34:13.188] [[Biome]] Chunk (2,1,-5) center biome: Forest
+[05:34:13.191] [[Generation]] (2,1,-5): Chunk=1.54ms Mesh=3.07ms Vertices=0
+[05:34:13.191] [[Timing]] Chunk (2,1,-5): Chunk=1.54ms Mesh=3.07ms Send=0.06ms Total=4.79ms
+[05:34:13.193] [[Biome]] Chunk (-5,-1,-2) center biome: Forest
+[05:34:13.270] [[Generation]] (-5,-1,-2): Chunk=1.30ms Mesh=76.84ms Vertices=0
+[05:34:13.270] [[Timing]] Chunk (-5,-1,-2): Chunk=1.30ms Mesh=76.84ms Send=0.10ms Total=78.38ms
+[05:34:13.272] [[Biome]] Chunk (-5,1,-2) center biome: Forest
+[05:34:13.277] [[Generation]] (-5,1,-2): Chunk=2.22ms Mesh=4.25ms Vertices=0
+[05:34:13.277] [[Timing]] Chunk (-5,1,-2): Chunk=2.22ms Mesh=4.25ms Send=0.08ms Total=6.72ms
+[05:34:13.279] [[Biome]] Chunk (2,-1,5) center biome: Forest
+[05:34:13.346] [[Generation]] (2,-1,5): Chunk=1.53ms Mesh=67.75ms Vertices=15012
+[05:34:13.347] [[Timing]] Chunk (2,-1,5): Chunk=1.53ms Mesh=67.75ms Send=0.58ms Total=69.98ms
+[05:34:13.350] [[Biome]] Chunk (-5,-1,2) center biome: Forest
+[05:34:13.418] [[Generation]] (-5,-1,2): Chunk=1.73ms Mesh=68.20ms Vertices=4692
+[05:34:13.418] [[Timing]] Chunk (-5,-1,2): Chunk=1.73ms Mesh=68.20ms Send=0.15ms Total=70.20ms
+[05:34:13.421] [[Biome]] Chunk (-5,1,2) center biome: Forest
+[05:34:13.425] [[Generation]] (-5,1,2): Chunk=2.52ms Mesh=3.45ms Vertices=0
+[05:34:13.425] [[Timing]] Chunk (-5,1,2): Chunk=2.52ms Mesh=3.45ms Send=0.10ms Total=6.19ms
+[05:34:13.427] [[Biome]] Chunk (-2,1,5) center biome: Forest
+[05:34:13.430] [[Generation]] (-2,1,5): Chunk=1.72ms Mesh=3.05ms Vertices=0
+[05:34:13.430] [[Timing]] Chunk (-2,1,5): Chunk=1.72ms Mesh=3.05ms Send=0.07ms Total=4.96ms
+[05:34:13.432] [[Biome]] Chunk (2,1,5) center biome: Forest
+[05:34:13.435] [[Generation]] (2,1,5): Chunk=1.37ms Mesh=2.90ms Vertices=0
+[05:34:13.435] [[Timing]] Chunk (2,1,5): Chunk=1.37ms Mesh=2.90ms Send=0.05ms Total=4.43ms
+[05:34:13.437] [[Biome]] Chunk (5,0,3) center biome: Forest
+[05:34:13.513] [[Generation]] (5,0,3): Chunk=1.62ms Mesh=75.83ms Vertices=4203
+[05:34:13.513] [[Timing]] Chunk (5,0,3): Chunk=1.62ms Mesh=75.83ms Send=0.22ms Total=77.81ms
+[05:34:13.515] [[Biome]] Chunk (3,0,-5) center biome: Forest
+[05:34:13.583] [[Generation]] (3,0,-5): Chunk=1.46ms Mesh=67.85ms Vertices=5037
+[05:34:13.583] [[Timing]] Chunk (3,0,-5): Chunk=1.46ms Mesh=67.85ms Send=0.35ms Total=69.79ms
+[05:34:13.585] [[Biome]] Chunk (5,0,-3) center biome: Forest
+[05:34:13.647] [[Generation]] (5,0,-3): Chunk=1.32ms Mesh=61.77ms Vertices=3678
+[05:34:13.647] [[Timing]] Chunk (5,0,-3): Chunk=1.32ms Mesh=61.77ms Send=0.18ms Total=63.40ms
+[05:34:13.649] [[Biome]] Chunk (3,0,5) center biome: Forest
+[05:34:13.712] [[Generation]] (3,0,5): Chunk=1.52ms Mesh=62.55ms Vertices=5154
+[05:34:13.712] [[Timing]] Chunk (3,0,5): Chunk=1.52ms Mesh=62.55ms Send=0.35ms Total=64.55ms
+[05:34:13.714] [[Biome]] Chunk (-3,0,5) center biome: Forest
+[05:34:13.781] [[Generation]] (-3,0,5): Chunk=1.36ms Mesh=67.22ms Vertices=3456
+[05:34:13.781] [[Timing]] Chunk (-3,0,5): Chunk=1.36ms Mesh=67.22ms Send=0.18ms Total=68.90ms
+[05:34:13.783] [[Biome]] Chunk (-5,0,-3) center biome: Forest
+[05:34:13.850] [[Generation]] (-5,0,-3): Chunk=1.51ms Mesh=66.69ms Vertices=5787
+[05:34:13.850] [[Timing]] Chunk (-5,0,-3): Chunk=1.51ms Mesh=66.69ms Send=0.17ms Total=68.49ms
+[05:34:13.853] [[Biome]] Chunk (-3,0,-5) center biome: Forest
+[05:34:13.930] [[Generation]] (-3,0,-5): Chunk=1.92ms Mesh=77.14ms Vertices=4356
+[05:34:13.930] [[Timing]] Chunk (-3,0,-5): Chunk=1.92ms Mesh=77.14ms Send=0.15ms Total=79.32ms
+[05:34:13.933] [[Biome]] Chunk (-5,0,3) center biome: Forest
+[05:34:14.004] [[Generation]] (-5,0,3): Chunk=2.40ms Mesh=70.84ms Vertices=4470
+[05:34:14.005] [[Timing]] Chunk (-5,0,3): Chunk=2.40ms Mesh=70.84ms Send=0.26ms Total=73.68ms
+[05:34:14.010] [[Biome]] Chunk (0,0,6) center biome: Forest
+[05:34:14.078] [[Generation]] (0,0,6): Chunk=4.48ms Mesh=68.43ms Vertices=5862
+[05:34:14.079] [[Timing]] Chunk (0,0,6): Chunk=4.48ms Mesh=68.43ms Send=0.14ms Total=73.23ms
+[05:34:14.081] [[Biome]] Chunk (4,-1,-4) center biome: Forest
+[05:34:14.153] [[Generation]] (4,-1,-4): Chunk=1.60ms Mesh=72.49ms Vertices=0
+[05:34:14.154] [[Timing]] Chunk (4,-1,-4): Chunk=1.60ms Mesh=72.49ms Send=0.12ms Total=74.41ms
+[05:34:14.156] [[Biome]] Chunk (4,1,-4) center biome: Forest
+[05:34:14.160] [[Generation]] (4,1,-4): Chunk=1.84ms Mesh=3.81ms Vertices=0
+[05:34:14.160] [[Timing]] Chunk (4,1,-4): Chunk=1.84ms Mesh=3.81ms Send=0.13ms Total=5.93ms
+[05:34:14.161] [[Biome]] Chunk (-4,1,4) center biome: Forest
+[05:34:14.164] [[Generation]] (-4,1,4): Chunk=1.55ms Mesh=2.72ms Vertices=0
+[05:34:14.164] [[Timing]] Chunk (-4,1,4): Chunk=1.55ms Mesh=2.72ms Send=0.08ms Total=4.49ms
+[05:34:14.166] [[Biome]] Chunk (4,1,4) center biome: Forest
+[05:34:14.170] [[Generation]] (4,1,4): Chunk=1.54ms Mesh=3.78ms Vertices=0
+[05:34:14.170] [[Timing]] Chunk (4,1,4): Chunk=1.54ms Mesh=3.78ms Send=0.10ms Total=5.58ms
+[05:34:14.172] [[Biome]] Chunk (6,0,0) center biome: Forest
+[05:34:14.249] [[Generation]] (6,0,0): Chunk=1.79ms Mesh=76.64ms Vertices=3750
+[05:34:14.249] [[Timing]] Chunk (6,0,0): Chunk=1.79ms Mesh=76.64ms Send=0.16ms Total=78.81ms
+[05:34:14.252] [[Biome]] Chunk (4,-1,4) center biome: Forest
+[05:34:14.326] [[Generation]] (4,-1,4): Chunk=1.84ms Mesh=74.12ms Vertices=0
+[05:34:14.326] [[Timing]] Chunk (4,-1,4): Chunk=1.84ms Mesh=74.12ms Send=0.09ms Total=76.19ms
+[05:34:14.328] [[Biome]] Chunk (-6,0,0) center biome: Forest
+[05:34:14.396] [[Generation]] (-6,0,0): Chunk=1.98ms Mesh=68.16ms Vertices=5457
+[05:34:14.397] [[Timing]] Chunk (-6,0,0): Chunk=1.98ms Mesh=68.16ms Send=0.12ms Total=70.36ms
+[05:34:14.398] [[Biome]] Chunk (-4,1,-4) center biome: Forest
+[05:34:14.401] [[Generation]] (-4,1,-4): Chunk=1.38ms Mesh=2.73ms Vertices=0
+[05:34:14.401] [[Timing]] Chunk (-4,1,-4): Chunk=1.38ms Mesh=2.73ms Send=0.05ms Total=4.30ms
+[05:34:14.403] [[Biome]] Chunk (-4,-1,-4) center biome: Forest
+[05:34:14.467] [[Generation]] (-4,-1,-4): Chunk=1.22ms Mesh=63.82ms Vertices=0
+[05:34:14.467] [[Timing]] Chunk (-4,-1,-4): Chunk=1.22ms Mesh=63.82ms Send=0.12ms Total=65.31ms
+[05:34:14.468] [[Biome]] Chunk (-4,-1,4) center biome: Forest
+[05:34:14.541] [[Generation]] (-4,-1,4): Chunk=1.40ms Mesh=72.58ms Vertices=0
+[05:34:14.541] [[Timing]] Chunk (-4,-1,4): Chunk=1.40ms Mesh=72.58ms Send=0.07ms Total=74.17ms
+[05:34:14.543] [[Biome]] Chunk (0,0,-6) center biome: Forest
+[05:34:14.617] [[Generation]] (0,0,-6): Chunk=2.20ms Mesh=73.55ms Vertices=4650
+[05:34:14.617] [[Timing]] Chunk (0,0,-6): Chunk=2.20ms Mesh=73.55ms Send=0.13ms Total=76.01ms
+[05:34:14.619] [[Biome]] Chunk (1,0,-6) center biome: Forest
+[05:34:14.702] [[Generation]] (1,0,-6): Chunk=1.45ms Mesh=82.99ms Vertices=5307
+[05:34:14.703] [[Timing]] Chunk (1,0,-6): Chunk=1.45ms Mesh=82.99ms Send=0.14ms Total=84.74ms
+[05:34:14.705] [[Biome]] Chunk (1,0,6) center biome: Forest
+[05:34:14.771] [[Generation]] (1,0,6): Chunk=1.64ms Mesh=66.56ms Vertices=4101
+[05:34:14.772] [[Timing]] Chunk (1,0,6): Chunk=1.64ms Mesh=66.56ms Send=0.12ms Total=68.49ms
+[05:34:14.774] [[Biome]] Chunk (-1,0,-6) center biome: Forest
+[05:34:14.851] [[Generation]] (-1,0,-6): Chunk=1.50ms Mesh=76.80ms Vertices=3573
+[05:34:14.851] [[Timing]] Chunk (-1,0,-6): Chunk=1.50ms Mesh=76.80ms Send=0.22ms Total=78.64ms
+[05:34:14.854] [[Biome]] Chunk (6,0,1) center biome: Forest
+[05:34:14.920] [[Generation]] (6,0,1): Chunk=2.55ms Mesh=66.09ms Vertices=3954
+[05:34:14.921] [[Timing]] Chunk (6,0,1): Chunk=2.55ms Mesh=66.09ms Send=0.10ms Total=68.85ms
+[05:34:14.923] [[Biome]] Chunk (-1,0,6) center biome: Forest
+[05:34:15.008] [[Generation]] (-1,0,6): Chunk=1.66ms Mesh=85.35ms Vertices=3600
+[05:34:15.009] [[Timing]] Chunk (-1,0,6): Chunk=1.66ms Mesh=85.35ms Send=0.33ms Total=87.78ms
+[05:34:15.011] [[Biome]] Chunk (6,0,-1) center biome: Forest
+[05:34:15.098] [[Generation]] (6,0,-1): Chunk=1.52ms Mesh=87.13ms Vertices=5253
+[05:34:15.098] [[Timing]] Chunk (6,0,-1): Chunk=1.52ms Mesh=87.13ms Send=0.24ms Total=89.07ms
+[05:34:15.101] [[Biome]] Chunk (-6,0,-1) center biome: Forest
+[05:34:15.179] [[Generation]] (-6,0,-1): Chunk=2.11ms Mesh=77.67ms Vertices=4455
+[05:34:15.179] [[Timing]] Chunk (-6,0,-1): Chunk=2.11ms Mesh=77.67ms Send=0.18ms Total=80.13ms
+[05:34:15.181] [[Biome]] Chunk (-6,0,1) center biome: Forest
+[05:34:15.247] [[Generation]] (-6,0,1): Chunk=1.31ms Mesh=66.60ms Vertices=5460
+[05:34:15.248] [[Timing]] Chunk (-6,0,1): Chunk=1.31ms Mesh=66.60ms Send=0.12ms Total=68.13ms
+[05:34:15.250] [[Biome]] Chunk (-5,-1,-3) center biome: Forest
+[05:34:15.311] [[Generation]] (-5,-1,-3): Chunk=1.45ms Mesh=61.43ms Vertices=3129
+[05:34:15.311] [[Timing]] Chunk (-5,-1,-3): Chunk=1.45ms Mesh=61.43ms Send=0.16ms Total=63.16ms
+[05:34:15.313] [[Biome]] Chunk (-5,1,-3) center biome: Forest
+[05:34:15.316] [[Generation]] (-5,1,-3): Chunk=1.23ms Mesh=2.72ms Vertices=0
+[05:34:15.316] [[Timing]] Chunk (-5,1,-3): Chunk=1.23ms Mesh=2.72ms Send=0.07ms Total=4.14ms
+[05:34:15.317] [[Biome]] Chunk (-5,-1,3) center biome: Forest
+[05:34:15.392] [[Generation]] (-5,-1,3): Chunk=1.32ms Mesh=74.40ms Vertices=0
+[05:34:15.392] [[Timing]] Chunk (-5,-1,3): Chunk=1.32ms Mesh=74.40ms Send=0.11ms Total=76.02ms
+[05:34:15.394] [[Biome]] Chunk (5,1,3) center biome: Forest
+[05:34:15.398] [[Generation]] (5,1,3): Chunk=2.07ms Mesh=3.44ms Vertices=0
+[05:34:15.398] [[Timing]] Chunk (5,1,3): Chunk=2.07ms Mesh=3.44ms Send=0.08ms Total=5.76ms
+[05:34:15.400] [[Biome]] Chunk (-3,-1,-5) center biome: Forest
+[05:34:15.476] [[Generation]] (-3,-1,-5): Chunk=1.69ms Mesh=75.87ms Vertices=0
+[05:34:15.476] [[Timing]] Chunk (-3,-1,-5): Chunk=1.69ms Mesh=75.87ms Send=0.10ms Total=77.83ms
+[05:34:15.478] [[Biome]] Chunk (-3,1,-5) center biome: Forest
+[05:34:15.481] [[Generation]] (-3,1,-5): Chunk=2.08ms Mesh=3.09ms Vertices=0
+[05:34:15.482] [[Timing]] Chunk (-3,1,-5): Chunk=2.08ms Mesh=3.09ms Send=0.09ms Total=5.40ms
+[05:34:15.484] [[Biome]] Chunk (-3,-1,5) center biome: Forest
+[05:34:15.551] [[Generation]] (-3,-1,5): Chunk=2.23ms Mesh=66.30ms Vertices=3987
+[05:34:15.551] [[Timing]] Chunk (-3,-1,5): Chunk=2.23ms Mesh=66.30ms Send=0.12ms Total=68.89ms
+[05:34:15.553] [[Biome]] Chunk (-3,1,5) center biome: Forest
+[05:34:15.557] [[Generation]] (-3,1,5): Chunk=1.37ms Mesh=3.97ms Vertices=0
+[05:34:15.557] [[Timing]] Chunk (-3,1,5): Chunk=1.37ms Mesh=3.97ms Send=0.08ms Total=5.61ms
+[05:34:15.560] [[Biome]] Chunk (-5,1,3) center biome: Forest
+[05:34:15.562] [[Generation]] (-5,1,3): Chunk=2.47ms Mesh=2.71ms Vertices=0
+[05:34:15.563] [[Timing]] Chunk (-5,1,3): Chunk=2.47ms Mesh=2.71ms Send=0.13ms Total=5.50ms
+[05:34:15.565] [[Biome]] Chunk (5,-1,-3) center biome: Forest
+[05:34:15.627] [[Generation]] (5,-1,-3): Chunk=1.59ms Mesh=62.57ms Vertices=0
+[05:34:15.627] [[Timing]] Chunk (5,-1,-3): Chunk=1.59ms Mesh=62.57ms Send=0.09ms Total=64.41ms
+[05:34:15.629] [[Biome]] Chunk (3,1,5) center biome: Forest
+[05:34:15.632] [[Generation]] (3,1,5): Chunk=1.42ms Mesh=3.02ms Vertices=0
+[05:34:15.632] [[Timing]] Chunk (3,1,5): Chunk=1.42ms Mesh=3.02ms Send=0.05ms Total=4.60ms
+[05:34:15.634] [[Biome]] Chunk (3,1,-5) center biome: Forest
+[05:34:15.638] [[Generation]] (3,1,-5): Chunk=1.90ms Mesh=3.90ms Vertices=0
+[05:34:15.638] [[Timing]] Chunk (3,1,-5): Chunk=1.90ms Mesh=3.90ms Send=0.07ms Total=6.08ms
+[05:34:15.641] [[Biome]] Chunk (5,1,-3) center biome: Forest
+[05:34:15.645] [[Generation]] (5,1,-3): Chunk=2.20ms Mesh=4.61ms Vertices=0
+[05:34:15.646] [[Timing]] Chunk (5,1,-3): Chunk=2.20ms Mesh=4.61ms Send=0.13ms Total=7.11ms
+[05:34:15.647] [[Biome]] Chunk (3,-1,-5) center biome: Forest
+[05:34:15.715] [[Generation]] (3,-1,-5): Chunk=1.73ms Mesh=67.39ms Vertices=1062
+[05:34:15.715] [[Timing]] Chunk (3,-1,-5): Chunk=1.73ms Mesh=67.39ms Send=0.09ms Total=69.40ms
+[05:34:15.717] [[Biome]] Chunk (5,-1,3) center biome: Forest
+[05:34:15.780] [[Generation]] (5,-1,3): Chunk=1.96ms Mesh=62.61ms Vertices=0
+[05:34:15.780] [[Timing]] Chunk (5,-1,3): Chunk=1.96ms Mesh=62.61ms Send=0.09ms Total=64.86ms
+[05:34:15.782] [[Biome]] Chunk (3,-1,5) center biome: Forest
+[05:34:15.848] [[Generation]] (3,-1,5): Chunk=1.46ms Mesh=66.26ms Vertices=16152
+[05:34:15.849] [[Timing]] Chunk (3,-1,5): Chunk=1.46ms Mesh=66.26ms Send=0.76ms Total=68.62ms
+[05:34:15.852] [[Biome]] Chunk (-6,0,2) center biome: Forest
+[05:34:15.935] [[Generation]] (-6,0,2): Chunk=1.55ms Mesh=83.31ms Vertices=4950
+[05:34:15.935] [[Timing]] Chunk (-6,0,2): Chunk=1.55ms Mesh=83.31ms Send=0.15ms Total=85.14ms
+[05:34:15.939] [[Biome]] Chunk (-2,0,6) center biome: Forest
+[05:34:16.015] [[Generation]] (-2,0,6): Chunk=2.77ms Mesh=76.01ms Vertices=3315
+[05:34:16.015] [[Timing]] Chunk (-2,0,6): Chunk=2.77ms Mesh=76.01ms Send=0.15ms Total=79.11ms
+[05:34:16.017] [[Biome]] Chunk (-6,1,0) center biome: Forest
+[05:34:16.021] [[Generation]] (-6,1,0): Chunk=1.51ms Mesh=3.62ms Vertices=0
+[05:34:16.021] [[Timing]] Chunk (-6,1,0): Chunk=1.51ms Mesh=3.62ms Send=0.12ms Total=5.37ms
+[05:34:16.023] [[Biome]] Chunk (-6,-1,0) center biome: Forest
+[05:34:16.089] [[Generation]] (-6,-1,0): Chunk=2.09ms Mesh=66.07ms Vertices=2277
+[05:34:16.090] [[Timing]] Chunk (-6,-1,0): Chunk=2.09ms Mesh=66.07ms Send=0.08ms Total=68.38ms
+[05:34:16.091] [[Biome]] Chunk (-6,0,-2) center biome: Forest
+[05:34:16.150] [[Generation]] (-6,0,-2): Chunk=1.14ms Mesh=59.08ms Vertices=5154
+[05:34:16.150] [[Timing]] Chunk (-6,0,-2): Chunk=1.14ms Mesh=59.08ms Send=0.24ms Total=60.55ms
+[05:34:16.152] [[Biome]] Chunk (-2,0,-6) center biome: Forest
+[05:34:16.215] [[Generation]] (-2,0,-6): Chunk=1.23ms Mesh=63.23ms Vertices=4119
+[05:34:16.215] [[Timing]] Chunk (-2,0,-6): Chunk=1.23ms Mesh=63.23ms Send=0.09ms Total=64.65ms
+[05:34:16.218] [[Biome]] Chunk (0,-1,-6) center biome: Forest
+[05:34:16.285] [[Generation]] (0,-1,-6): Chunk=1.57ms Mesh=66.94ms Vertices=9186
+[05:34:16.285] [[Timing]] Chunk (0,-1,-6): Chunk=1.57ms Mesh=66.94ms Send=0.58ms Total=69.25ms
+[05:34:16.289] [[Biome]] Chunk (0,-1,6) center biome: Forest
+[05:34:16.360] [[Generation]] (0,-1,6): Chunk=2.97ms Mesh=71.26ms Vertices=12102
+[05:34:16.361] [[Timing]] Chunk (0,-1,6): Chunk=2.97ms Mesh=71.26ms Send=0.36ms Total=74.72ms
+[05:34:16.363] [[Biome]] Chunk (0,1,-6) center biome: Forest
+[05:34:16.366] [[Generation]] (0,1,-6): Chunk=1.42ms Mesh=2.68ms Vertices=0
+[05:34:16.366] [[Timing]] Chunk (0,1,-6): Chunk=1.42ms Mesh=2.68ms Send=0.09ms Total=4.30ms
+[05:34:16.368] [[Biome]] Chunk (0,1,6) center biome: Forest
+[05:34:16.371] [[Generation]] (0,1,6): Chunk=1.59ms Mesh=2.95ms Vertices=0
+[05:34:16.371] [[Timing]] Chunk (0,1,6): Chunk=1.59ms Mesh=2.95ms Send=0.05ms Total=4.68ms
+[05:34:16.372] [[Biome]] Chunk (6,0,2) center biome: Forest
+[05:34:16.446] [[Generation]] (6,0,2): Chunk=1.20ms Mesh=74.26ms Vertices=4467
+[05:34:16.446] [[Timing]] Chunk (6,0,2): Chunk=1.20ms Mesh=74.26ms Send=0.15ms Total=75.70ms
+[05:34:16.449] [[Biome]] Chunk (2,0,6) center biome: Forest
+[05:34:16.528] [[Generation]] (2,0,6): Chunk=1.86ms Mesh=78.94ms Vertices=3231
+[05:34:16.528] [[Timing]] Chunk (2,0,6): Chunk=1.86ms Mesh=78.94ms Send=0.13ms Total=81.07ms
+[05:34:16.530] [[Biome]] Chunk (6,1,0) center biome: Forest
+[05:34:16.533] [[Generation]] (6,1,0): Chunk=1.41ms Mesh=3.09ms Vertices=0
+[05:34:16.533] [[Timing]] Chunk (6,1,0): Chunk=1.41ms Mesh=3.09ms Send=0.04ms Total=4.64ms
+[05:34:16.535] [[Biome]] Chunk (6,-1,0) center biome: Forest
+[05:34:16.606] [[Generation]] (6,-1,0): Chunk=1.32ms Mesh=71.73ms Vertices=0
+[05:34:16.607] [[Timing]] Chunk (6,-1,0): Chunk=1.32ms Mesh=71.73ms Send=0.13ms Total=73.36ms
+[05:34:16.610] [[Biome]] Chunk (2,0,-6) center biome: Forest
+[05:34:16.681] [[Generation]] (2,0,-6): Chunk=2.62ms Mesh=71.01ms Vertices=4638
+[05:34:16.681] [[Timing]] Chunk (2,0,-6): Chunk=2.62ms Mesh=71.01ms Send=0.20ms Total=74.11ms
+[05:34:16.684] [[Biome]] Chunk (6,0,-2) center biome: Forest
+[05:34:16.757] [[Generation]] (6,0,-2): Chunk=1.94ms Mesh=73.80ms Vertices=3789
+[05:34:16.758] [[Timing]] Chunk (6,0,-2): Chunk=1.94ms Mesh=73.80ms Send=0.09ms Total=75.96ms
+[05:34:16.760] [[Biome]] Chunk (6,-1,-1) center biome: Forest
+[05:34:16.829] [[Generation]] (6,-1,-1): Chunk=1.64ms Mesh=69.64ms Vertices=0
+[05:34:16.829] [[Timing]] Chunk (6,-1,-1): Chunk=1.64ms Mesh=69.64ms Send=0.06ms Total=71.47ms
+[05:34:16.831] [[Biome]] Chunk (5,0,-4) center biome: Forest
+[05:34:16.908] [[Generation]] (5,0,-4): Chunk=1.35ms Mesh=76.58ms Vertices=5574
+[05:34:16.908] [[Timing]] Chunk (5,0,-4): Chunk=1.35ms Mesh=76.58ms Send=0.23ms Total=78.30ms
+[05:34:16.910] [[Biome]] Chunk (-4,0,-5) center biome: Forest
+[05:34:16.989] [[Generation]] (-4,0,-5): Chunk=1.81ms Mesh=77.98ms Vertices=3330
+[05:34:16.989] [[Timing]] Chunk (-4,0,-5): Chunk=1.81ms Mesh=77.98ms Send=0.20ms Total=80.17ms
+[05:34:16.991] [[Biome]] Chunk (6,-1,1) center biome: Forest
+[05:34:17.060] [[Generation]] (6,-1,1): Chunk=2.03ms Mesh=68.98ms Vertices=0
+[05:34:17.060] [[Timing]] Chunk (6,-1,1): Chunk=2.03ms Mesh=68.98ms Send=0.09ms Total=71.27ms
+[05:34:17.062] [[Biome]] Chunk (5,0,4) center biome: Forest
+[05:34:17.129] [[Generation]] (5,0,4): Chunk=1.58ms Mesh=66.34ms Vertices=3276
+[05:34:17.129] [[Timing]] Chunk (5,0,4): Chunk=1.58ms Mesh=66.34ms Send=0.13ms Total=68.18ms
+[05:34:17.131] [[Biome]] Chunk (4,0,5) center biome: Forest
+[05:34:17.197] [[Generation]] (4,0,5): Chunk=1.41ms Mesh=65.76ms Vertices=4215
+[05:34:17.197] [[Timing]] Chunk (4,0,5): Chunk=1.41ms Mesh=65.76ms Send=0.12ms Total=67.54ms
+[05:34:17.199] [[Biome]] Chunk (6,1,1) center biome: Forest
+[05:34:17.202] [[Generation]] (6,1,1): Chunk=1.54ms Mesh=2.65ms Vertices=0
+[05:34:17.202] [[Timing]] Chunk (6,1,1): Chunk=1.54ms Mesh=2.65ms Send=0.06ms Total=4.35ms
+[05:34:17.203] [[Biome]] Chunk (-4,0,5) center biome: Forest
+[05:34:17.267] [[Generation]] (-4,0,5): Chunk=1.37ms Mesh=63.74ms Vertices=6486
+[05:34:17.267] [[Timing]] Chunk (-4,0,5): Chunk=1.37ms Mesh=63.74ms Send=0.17ms Total=65.42ms
+[05:34:17.270] [[Biome]] Chunk (-5,0,-4) center biome: Forest
+[05:34:17.332] [[Generation]] (-5,0,-4): Chunk=1.76ms Mesh=61.57ms Vertices=3321
+[05:34:17.332] [[Timing]] Chunk (-5,0,-4): Chunk=1.76ms Mesh=61.57ms Send=0.14ms Total=63.63ms
+[05:34:17.334] [[Biome]] Chunk (4,0,-5) center biome: Forest
+[05:34:17.408] [[Generation]] (4,0,-5): Chunk=1.60ms Mesh=73.47ms Vertices=3540
+[05:34:17.408] [[Timing]] Chunk (4,0,-5): Chunk=1.60ms Mesh=73.47ms Send=0.18ms Total=75.39ms
+[05:34:17.411] [[Biome]] Chunk (-6,1,1) center biome: Forest
+[05:34:17.414] [[Generation]] (-6,1,1): Chunk=1.98ms Mesh=3.52ms Vertices=0
+[05:34:17.414] [[Timing]] Chunk (-6,1,1): Chunk=1.98ms Mesh=3.52ms Send=0.08ms Total=5.75ms
+[05:34:17.416] [[Biome]] Chunk (-5,0,4) center biome: Forest
+[05:34:17.490] [[Generation]] (-5,0,4): Chunk=1.63ms Mesh=73.53ms Vertices=3642
+[05:34:17.490] [[Timing]] Chunk (-5,0,4): Chunk=1.63ms Mesh=73.53ms Send=0.18ms Total=75.48ms
+[05:34:17.493] [[Biome]] Chunk (6,1,-1) center biome: Forest
+[05:34:17.497] [[Generation]] (6,1,-1): Chunk=2.30ms Mesh=4.32ms Vertices=0
+[05:34:17.497] [[Timing]] Chunk (6,1,-1): Chunk=2.30ms Mesh=4.32ms Send=0.09ms Total=6.88ms
+[05:34:17.499] [[Biome]] Chunk (-6,1,-1) center biome: Forest
+[05:34:17.503] [[Generation]] (-6,1,-1): Chunk=1.68ms Mesh=3.47ms Vertices=0
+[05:34:17.503] [[Timing]] Chunk (-6,1,-1): Chunk=1.68ms Mesh=3.47ms Send=0.10ms Total=5.40ms
+[05:34:17.507] [[Biome]] Chunk (-6,-1,1) center biome: Forest
+[05:34:17.575] [[Generation]] (-6,-1,1): Chunk=3.25ms Mesh=68.63ms Vertices=7182
+[05:34:17.575] [[Timing]] Chunk (-6,-1,1): Chunk=3.25ms Mesh=68.63ms Send=0.15ms Total=72.16ms
+[05:34:17.577] [[Biome]] Chunk (-1,1,6) center biome: Forest
+[05:34:17.580] [[Generation]] (-1,1,6): Chunk=1.33ms Mesh=2.76ms Vertices=0
+[05:34:17.580] [[Timing]] Chunk (-1,1,6): Chunk=1.33ms Mesh=2.76ms Send=0.05ms Total=4.24ms
+[05:34:17.582] [[Biome]] Chunk (1,-1,-6) center biome: Forest
+[05:34:17.652] [[Generation]] (1,-1,-6): Chunk=1.41ms Mesh=70.20ms Vertices=15150
+[05:34:17.653] [[Timing]] Chunk (1,-1,-6): Chunk=1.41ms Mesh=70.20ms Send=0.43ms Total=72.18ms
+[05:34:17.655] [[Biome]] Chunk (-1,-1,6) center biome: Forest
+[05:34:17.735] [[Generation]] (-1,-1,6): Chunk=1.96ms Mesh=79.95ms Vertices=16092
+[05:34:17.736] [[Timing]] Chunk (-1,-1,6): Chunk=1.96ms Mesh=79.95ms Send=0.42ms Total=82.59ms
+[05:34:17.738] [[Biome]] Chunk (1,1,-6) center biome: Forest
+[05:34:17.742] [[Generation]] (1,1,-6): Chunk=1.69ms Mesh=4.20ms Vertices=0
+[05:34:17.743] [[Timing]] Chunk (1,1,-6): Chunk=1.69ms Mesh=4.20ms Send=0.12ms Total=6.15ms
+[05:34:17.744] [[Biome]] Chunk (1,-1,6) center biome: Forest
+[05:34:17.815] [[Generation]] (1,-1,6): Chunk=1.54ms Mesh=71.06ms Vertices=11244
+[05:34:17.816] [[Timing]] Chunk (1,-1,6): Chunk=1.54ms Mesh=71.06ms Send=0.28ms Total=73.05ms
+[05:34:17.818] [[Biome]] Chunk (1,1,6) center biome: Forest
+[05:34:17.821] [[Generation]] (1,1,6): Chunk=1.62ms Mesh=3.16ms Vertices=0
+[05:34:17.821] [[Timing]] Chunk (1,1,6): Chunk=1.62ms Mesh=3.16ms Send=0.06ms Total=5.10ms
+[05:34:17.823] [[Biome]] Chunk (-1,1,-6) center biome: Forest
+[05:34:17.827] [[Generation]] (-1,1,-6): Chunk=1.35ms Mesh=3.72ms Vertices=0
+[05:34:17.827] [[Timing]] Chunk (-1,1,-6): Chunk=1.35ms Mesh=3.72ms Send=0.10ms Total=5.27ms
+[05:34:17.829] [[Biome]] Chunk (-1,-1,-6) center biome: Forest
+[05:34:17.894] [[Generation]] (-1,-1,-6): Chunk=1.64ms Mesh=64.92ms Vertices=2121
+[05:34:17.894] [[Timing]] Chunk (-1,-1,-6): Chunk=1.64ms Mesh=64.92ms Send=0.11ms Total=66.85ms
+[05:34:17.896] [[Biome]] Chunk (-6,-1,-1) center biome: Forest
+[05:34:17.966] [[Generation]] (-6,-1,-1): Chunk=1.64ms Mesh=70.51ms Vertices=6228
+[05:34:17.967] [[Timing]] Chunk (-6,-1,-1): Chunk=1.64ms Mesh=70.51ms Send=0.22ms Total=72.53ms
+[05:34:17.969] [[Biome]] Chunk (-2,-1,-6) center biome: Forest
+[05:34:18.041] [[Generation]] (-2,-1,-6): Chunk=1.57ms Mesh=72.69ms Vertices=0
+[05:34:18.042] [[Timing]] Chunk (-2,-1,-6): Chunk=1.57ms Mesh=72.69ms Send=0.08ms Total=74.46ms
+[05:34:18.043] [[Biome]] Chunk (6,-1,-2) center biome: Forest
+[05:34:18.115] [[Generation]] (6,-1,-2): Chunk=1.71ms Mesh=71.23ms Vertices=0
+[05:34:18.115] [[Timing]] Chunk (6,-1,-2): Chunk=1.71ms Mesh=71.23ms Send=0.11ms Total=73.22ms
+[05:34:18.119] [[Biome]] Chunk (6,1,-2) center biome: Forest
+[05:34:18.124] [[Generation]] (6,1,-2): Chunk=3.33ms Mesh=5.12ms Vertices=0
+[05:34:18.124] [[Timing]] Chunk (6,1,-2): Chunk=3.33ms Mesh=5.12ms Send=0.11ms Total=8.81ms
+[05:34:18.126] [[Biome]] Chunk (2,-1,-6) center biome: Forest
+[05:34:18.202] [[Generation]] (2,-1,-6): Chunk=1.65ms Mesh=76.46ms Vertices=24645
+[05:34:18.203] [[Timing]] Chunk (2,-1,-6): Chunk=1.65ms Mesh=76.46ms Send=0.72ms Total=78.99ms
+[05:34:18.206] [[Biome]] Chunk (-2,1,6) center biome: Forest
+[05:34:18.211] [[Generation]] (-2,1,6): Chunk=1.99ms Mesh=4.44ms Vertices=0
+[05:34:18.211] [[Timing]] Chunk (-2,1,6): Chunk=1.99ms Mesh=4.44ms Send=0.11ms Total=6.68ms
+[05:34:18.213] [[Biome]] Chunk (2,1,-6) center biome: Forest
+[05:34:18.216] [[Generation]] (2,1,-6): Chunk=1.59ms Mesh=3.23ms Vertices=0
+[05:34:18.216] [[Timing]] Chunk (2,1,-6): Chunk=1.59ms Mesh=3.23ms Send=0.04ms Total=4.95ms
+[05:34:18.218] [[Biome]] Chunk (-2,-1,6) center biome: Forest
+[05:34:18.293] [[Generation]] (-2,-1,6): Chunk=1.35ms Mesh=75.09ms Vertices=11139
+[05:34:18.293] [[Timing]] Chunk (-2,-1,6): Chunk=1.35ms Mesh=75.09ms Send=0.23ms Total=76.78ms
+[05:34:18.295] [[Biome]] Chunk (-6,1,2) center biome: Forest
+[05:34:18.298] [[Generation]] (-6,1,2): Chunk=1.50ms Mesh=2.83ms Vertices=0
+[05:34:18.298] [[Timing]] Chunk (-6,1,2): Chunk=1.50ms Mesh=2.83ms Send=0.10ms Total=4.61ms
+[05:34:18.300] [[Biome]] Chunk (6,-1,2) center biome: Forest
+[05:34:18.367] [[Generation]] (6,-1,2): Chunk=1.86ms Mesh=67.27ms Vertices=0
+[05:34:18.368] [[Timing]] Chunk (6,-1,2): Chunk=1.86ms Mesh=67.27ms Send=0.10ms Total=69.40ms
+[05:34:18.372] [[Biome]] Chunk (2,-1,6) center biome: Forest
+[05:34:18.453] [[Generation]] (2,-1,6): Chunk=3.85ms Mesh=80.69ms Vertices=17946
+[05:34:18.454] [[Timing]] Chunk (2,-1,6): Chunk=3.85ms Mesh=80.69ms Send=1.27ms Total=86.00ms
+[05:34:18.456] [[Biome]] Chunk (-6,-1,2) center biome: Forest
+[05:34:18.524] [[Generation]] (-6,-1,2): Chunk=1.77ms Mesh=67.79ms Vertices=7005
+[05:34:18.525] [[Timing]] Chunk (-6,-1,2): Chunk=1.77ms Mesh=67.79ms Send=0.46ms Total=70.22ms
+[05:34:18.527] [[Biome]] Chunk (2,1,6) center biome: Forest
+[05:34:18.530] [[Generation]] (2,1,6): Chunk=1.65ms Mesh=3.52ms Vertices=0
+[05:34:18.530] [[Timing]] Chunk (2,1,6): Chunk=1.65ms Mesh=3.52ms Send=0.05ms Total=5.33ms
+[05:34:18.532] [[Biome]] Chunk (-6,-1,-2) center biome: Forest
+[05:34:18.612] [[Generation]] (-6,-1,-2): Chunk=1.61ms Mesh=79.70ms Vertices=16035
+[05:34:18.613] [[Timing]] Chunk (-6,-1,-2): Chunk=1.61ms Mesh=79.70ms Send=0.60ms Total=82.02ms
+[05:34:18.615] [[Biome]] Chunk (-6,1,-2) center biome: Forest
+[05:34:18.619] [[Generation]] (-6,1,-2): Chunk=1.65ms Mesh=4.07ms Vertices=0
+[05:34:18.619] [[Timing]] Chunk (-6,1,-2): Chunk=1.65ms Mesh=4.07ms Send=0.06ms Total=5.88ms
+[05:34:18.621] [[Biome]] Chunk (6,1,2) center biome: Forest
+[05:34:18.626] [[Generation]] (6,1,2): Chunk=2.19ms Mesh=4.15ms Vertices=0
+[05:34:18.626] [[Timing]] Chunk (6,1,2): Chunk=2.19ms Mesh=4.15ms Send=0.10ms Total=6.57ms
+[05:34:18.628] [[Biome]] Chunk (-2,1,-6) center biome: Forest
+[05:34:18.631] [[Generation]] (-2,1,-6): Chunk=1.81ms Mesh=2.63ms Vertices=0
+[05:34:18.631] [[Timing]] Chunk (-2,1,-6): Chunk=1.81ms Mesh=2.63ms Send=0.10ms Total=4.66ms
+[05:34:18.633] [[Biome]] Chunk (-5,-1,-4) center biome: Forest
+[05:34:18.696] [[Generation]] (-5,-1,-4): Chunk=1.45ms Mesh=63.25ms Vertices=210
+[05:34:18.696] [[Timing]] Chunk (-5,-1,-4): Chunk=1.45ms Mesh=63.25ms Send=0.08ms Total=64.92ms
+[05:34:18.698] [[Biome]] Chunk (-6,0,3) center biome: Forest
+[05:34:18.764] [[Generation]] (-6,0,3): Chunk=1.64ms Mesh=66.13ms Vertices=5574
+[05:34:18.764] [[Timing]] Chunk (-6,0,3): Chunk=1.64ms Mesh=66.13ms Send=0.21ms Total=68.12ms
+[05:34:18.766] [[Biome]] Chunk (6,0,3) center biome: Forest
+[05:34:18.836] [[Generation]] (6,0,3): Chunk=1.76ms Mesh=69.76ms Vertices=4569
+[05:34:18.836] [[Timing]] Chunk (6,0,3): Chunk=1.76ms Mesh=69.76ms Send=0.14ms Total=71.81ms
+[05:34:18.839] [[Biome]] Chunk (-6,0,-3) center biome: Forest
+[05:34:18.907] [[Generation]] (-6,0,-3): Chunk=1.95ms Mesh=68.61ms Vertices=5589
+[05:34:18.908] [[Timing]] Chunk (-6,0,-3): Chunk=1.95ms Mesh=68.61ms Send=0.11ms Total=70.79ms
+[05:34:18.909] [[Biome]] Chunk (-5,1,-4) center biome: Forest
+[05:34:18.912] [[Generation]] (-5,1,-4): Chunk=1.58ms Mesh=2.97ms Vertices=0
+[05:34:18.912] [[Timing]] Chunk (-5,1,-4): Chunk=1.58ms Mesh=2.97ms Send=0.08ms Total=4.75ms
+[05:34:18.915] [[Biome]] Chunk (6,0,-3) center biome: Forest
+[05:34:18.991] [[Generation]] (6,0,-3): Chunk=2.76ms Mesh=75.51ms Vertices=4539
+[05:34:18.991] [[Timing]] Chunk (6,0,-3): Chunk=2.76ms Mesh=75.51ms Send=0.22ms Total=78.61ms
+[05:34:18.993] [[Biome]] Chunk (5,-1,4) center biome: Forest
+[05:34:19.055] [[Generation]] (5,-1,4): Chunk=1.79ms Mesh=61.80ms Vertices=0
+[05:34:19.055] [[Timing]] Chunk (5,-1,4): Chunk=1.79ms Mesh=61.80ms Send=0.08ms Total=63.87ms
+[05:34:19.057] [[Biome]] Chunk (5,1,4) center biome: Forest
+[05:34:19.060] [[Generation]] (5,1,4): Chunk=1.87ms Mesh=2.64ms Vertices=0
+[05:34:19.060] [[Timing]] Chunk (5,1,4): Chunk=1.87ms Mesh=2.64ms Send=0.06ms Total=4.68ms
+[05:34:19.062] [[Biome]] Chunk (3,0,-6) center biome: Forest
+[05:34:19.130] [[Generation]] (3,0,-6): Chunk=1.47ms Mesh=67.47ms Vertices=4161
+[05:34:19.130] [[Timing]] Chunk (3,0,-6): Chunk=1.47ms Mesh=67.47ms Send=0.18ms Total=69.28ms
+[05:34:19.132] [[Biome]] Chunk (-3,0,6) center biome: Forest
+[05:34:19.198] [[Generation]] (-3,0,6): Chunk=1.74ms Mesh=65.67ms Vertices=3327
+[05:34:19.198] [[Timing]] Chunk (-3,0,6): Chunk=1.74ms Mesh=65.67ms Send=0.22ms Total=67.78ms
+[05:34:19.200] [[Biome]] Chunk (3,0,6) center biome: Forest
+[05:34:19.282] [[Generation]] (3,0,6): Chunk=1.41ms Mesh=82.41ms Vertices=3447
+[05:34:19.282] [[Timing]] Chunk (3,0,6): Chunk=1.41ms Mesh=82.41ms Send=0.22ms Total=84.21ms
+[05:34:19.285] [[Biome]] Chunk (4,-1,-5) center biome: Forest
+[05:34:19.362] [[Generation]] (4,-1,-5): Chunk=1.97ms Mesh=77.57ms Vertices=0
+[05:34:19.362] [[Timing]] Chunk (4,-1,-5): Chunk=1.97ms Mesh=77.57ms Send=0.05ms Total=79.73ms
+[05:34:19.365] [[Biome]] Chunk (4,1,-5) center biome: Forest
+[05:34:19.368] [[Generation]] (4,1,-5): Chunk=1.67ms Mesh=3.82ms Vertices=0
+[05:34:19.369] [[Timing]] Chunk (4,1,-5): Chunk=1.67ms Mesh=3.82ms Send=0.10ms Total=5.77ms
+[05:34:19.371] [[Biome]] Chunk (-3,0,-6) center biome: Forest
+[05:34:19.451] [[Generation]] (-3,0,-6): Chunk=2.64ms Mesh=79.08ms Vertices=5247
+[05:34:19.451] [[Timing]] Chunk (-3,0,-6): Chunk=2.64ms Mesh=79.08ms Send=0.18ms Total=82.18ms
+[05:34:19.454] [[Biome]] Chunk (-4,1,5) center biome: Forest
+[05:34:19.457] [[Generation]] (-4,1,5): Chunk=2.94ms Mesh=3.05ms Vertices=0
+[05:34:19.458] [[Timing]] Chunk (-4,1,5): Chunk=2.94ms Mesh=3.05ms Send=0.10ms Total=6.27ms
+[05:34:19.459] [[Biome]] Chunk (-4,-1,5) center biome: Forest
+[05:34:19.534] [[Generation]] (-4,-1,5): Chunk=1.55ms Mesh=74.99ms Vertices=8484
+[05:34:19.535] [[Timing]] Chunk (-4,-1,5): Chunk=1.55ms Mesh=74.99ms Send=0.39ms Total=77.07ms
+[05:34:19.537] [[Biome]] Chunk (4,-1,5) center biome: Forest
+[05:34:19.605] [[Generation]] (4,-1,5): Chunk=1.91ms Mesh=67.52ms Vertices=7251
+[05:34:19.605] [[Timing]] Chunk (4,-1,5): Chunk=1.91ms Mesh=67.52ms Send=0.24ms Total=69.89ms
+[05:34:19.608] [[Biome]] Chunk (5,-1,-4) center biome: Forest
+[05:34:19.678] [[Generation]] (5,-1,-4): Chunk=2.75ms Mesh=70.04ms Vertices=0
+[05:34:19.678] [[Timing]] Chunk (5,-1,-4): Chunk=2.75ms Mesh=70.04ms Send=0.10ms Total=73.05ms
+[05:34:19.680] [[Biome]] Chunk (5,1,-4) center biome: Forest
+[05:34:19.683] [[Generation]] (5,1,-4): Chunk=1.52ms Mesh=3.12ms Vertices=0
+[05:34:19.683] [[Timing]] Chunk (5,1,-4): Chunk=1.52ms Mesh=3.12ms Send=0.07ms Total=4.89ms
+[05:34:19.685] [[Biome]] Chunk (-4,1,-5) center biome: Forest
+[05:34:19.689] [[Generation]] (-4,1,-5): Chunk=1.73ms Mesh=3.19ms Vertices=0
+[05:34:19.689] [[Timing]] Chunk (-4,1,-5): Chunk=1.73ms Mesh=3.19ms Send=0.08ms Total=5.22ms
+[05:34:19.691] [[Biome]] Chunk (-4,-1,-5) center biome: Forest
+[05:34:19.763] [[Generation]] (-4,-1,-5): Chunk=1.96ms Mesh=71.84ms Vertices=0
+[05:34:19.763] [[Timing]] Chunk (-4,-1,-5): Chunk=1.96ms Mesh=71.84ms Send=0.11ms Total=74.05ms
+[05:34:19.765] [[Biome]] Chunk (-5,1,4) center biome: Forest
+[05:34:19.770] [[Generation]] (-5,1,4): Chunk=1.99ms Mesh=4.73ms Vertices=0
+[05:34:19.770] [[Timing]] Chunk (-5,1,4): Chunk=1.99ms Mesh=4.73ms Send=0.10ms Total=7.02ms
+[05:34:19.773] [[Biome]] Chunk (4,1,5) center biome: Forest
+[05:34:19.777] [[Generation]] (4,1,5): Chunk=1.95ms Mesh=4.20ms Vertices=0
+[05:34:19.777] [[Timing]] Chunk (4,1,5): Chunk=1.95ms Mesh=4.20ms Send=0.08ms Total=6.43ms
+[05:34:19.779] [[Biome]] Chunk (-5,-1,4) center biome: Forest
+[05:34:19.850] [[Generation]] (-5,-1,4): Chunk=1.68ms Mesh=71.58ms Vertices=618
+[05:34:19.851] [[Timing]] Chunk (-5,-1,4): Chunk=1.68ms Mesh=71.58ms Send=0.09ms Total=73.48ms
+[05:34:19.853] [[Biome]] Chunk (0,0,7) center biome: Forest
+[05:34:19.930] [[Generation]] (0,0,7): Chunk=2.24ms Mesh=76.01ms Vertices=4113
+[05:34:19.930] [[Timing]] Chunk (0,0,7): Chunk=2.24ms Mesh=76.01ms Send=0.17ms Total=78.77ms
+[05:34:19.932] [[Biome]] Chunk (-6,1,-3) center biome: Forest
+[05:34:19.935] [[Generation]] (-6,1,-3): Chunk=1.85ms Mesh=3.02ms Vertices=0
+[05:34:19.935] [[Timing]] Chunk (-6,1,-3): Chunk=1.85ms Mesh=3.02ms Send=0.10ms Total=5.11ms
+[05:34:19.938] [[Biome]] Chunk (3,-1,-6) center biome: Forest
+[05:34:20.018] [[Generation]] (3,-1,-6): Chunk=2.77ms Mesh=79.42ms Vertices=2742
+[05:34:20.018] [[Timing]] Chunk (3,-1,-6): Chunk=2.77ms Mesh=79.42ms Send=0.20ms Total=82.61ms
+[05:34:20.020] [[Biome]] Chunk (7,0,0) center biome: Forest
+[05:34:20.082] [[Generation]] (7,0,0): Chunk=1.97ms Mesh=61.93ms Vertices=3519
+[05:34:20.083] [[Timing]] Chunk (7,0,0): Chunk=1.97ms Mesh=61.93ms Send=0.23ms Total=64.29ms
+[05:34:20.085] [[Biome]] Chunk (6,1,-3) center biome: Forest
+[05:34:20.088] [[Generation]] (6,1,-3): Chunk=1.88ms Mesh=3.29ms Vertices=0
+[05:34:20.088] [[Timing]] Chunk (6,1,-3): Chunk=1.88ms Mesh=3.29ms Send=0.07ms Total=5.37ms
+[05:34:20.091] [[Biome]] Chunk (3,1,-6) center biome: Forest
+[05:34:20.094] [[Generation]] (3,1,-6): Chunk=1.98ms Mesh=3.38ms Vertices=0
+[05:34:20.094] [[Timing]] Chunk (3,1,-6): Chunk=1.98ms Mesh=3.38ms Send=0.06ms Total=5.57ms
+[05:34:20.096] [[Biome]] Chunk (6,1,3) center biome: Forest
+[05:34:20.100] [[Generation]] (6,1,3): Chunk=1.66ms Mesh=3.92ms Vertices=0
+[05:34:20.100] [[Timing]] Chunk (6,1,3): Chunk=1.66ms Mesh=3.92ms Send=0.13ms Total=5.91ms
+[05:34:20.102] [[Biome]] Chunk (-3,1,6) center biome: Forest
+[05:34:20.106] [[Generation]] (-3,1,6): Chunk=1.64ms Mesh=3.58ms Vertices=0
+[05:34:20.106] [[Timing]] Chunk (-3,1,6): Chunk=1.64ms Mesh=3.58ms Send=0.08ms Total=5.52ms
+[05:34:20.108] [[Biome]] Chunk (3,-1,6) center biome: Forest
+[05:34:20.177] [[Generation]] (3,-1,6): Chunk=1.85ms Mesh=68.72ms Vertices=12195
+[05:34:20.177] [[Timing]] Chunk (3,-1,6): Chunk=1.85ms Mesh=68.72ms Send=0.24ms Total=70.98ms
+[05:34:20.180] [[Biome]] Chunk (-3,-1,6) center biome: Forest
+[05:34:20.252] [[Generation]] (-3,-1,6): Chunk=1.72ms Mesh=72.05ms Vertices=16287
+[05:34:20.252] [[Timing]] Chunk (-3,-1,6): Chunk=1.72ms Mesh=72.05ms Send=0.49ms Total=74.45ms
+[05:34:20.256] [[Biome]] Chunk (3,1,6) center biome: Forest
+[05:34:20.259] [[Generation]] (3,1,6): Chunk=3.20ms Mesh=3.12ms Vertices=0
+[05:34:20.260] [[Timing]] Chunk (3,1,6): Chunk=3.20ms Mesh=3.12ms Send=0.08ms Total=6.56ms
+[05:34:20.262] [[Biome]] Chunk (6,-1,-3) center biome: Forest
+[05:34:20.336] [[Generation]] (6,-1,-3): Chunk=1.73ms Mesh=74.01ms Vertices=0
+[05:34:20.336] [[Timing]] Chunk (6,-1,-3): Chunk=1.73ms Mesh=74.01ms Send=0.08ms Total=75.99ms
+[05:34:20.338] [[Biome]] Chunk (-6,-1,3) center biome: Forest
+[05:34:20.414] [[Generation]] (-6,-1,3): Chunk=2.19ms Mesh=75.35ms Vertices=0
+[05:34:20.414] [[Timing]] Chunk (-6,-1,3): Chunk=2.19ms Mesh=75.35ms Send=0.08ms Total=77.81ms
+[05:34:20.416] [[Biome]] Chunk (-3,1,-6) center biome: Forest
+[05:34:20.421] [[Generation]] (-3,1,-6): Chunk=2.05ms Mesh=4.48ms Vertices=0
+[05:34:20.421] [[Timing]] Chunk (-3,1,-6): Chunk=2.05ms Mesh=4.48ms Send=0.09ms Total=6.82ms
+[05:34:20.424] [[Biome]] Chunk (-6,1,3) center biome: Forest
+[05:34:20.427] [[Generation]] (-6,1,3): Chunk=2.89ms Mesh=3.32ms Vertices=0
+[05:34:20.428] [[Timing]] Chunk (-6,1,3): Chunk=2.89ms Mesh=3.32ms Send=0.07ms Total=6.43ms
+[05:34:20.429] [[Biome]] Chunk (-6,-1,-3) center biome: Forest
+[05:34:20.497] [[Generation]] (-6,-1,-3): Chunk=1.73ms Mesh=67.65ms Vertices=22977
+[05:34:20.498] [[Timing]] Chunk (-6,-1,-3): Chunk=1.73ms Mesh=67.65ms Send=0.68ms Total=70.28ms
+[05:34:20.501] [[Biome]] Chunk (-3,-1,-6) center biome: Forest
+[05:34:20.573] [[Generation]] (-3,-1,-6): Chunk=1.69ms Mesh=72.23ms Vertices=0
+[05:34:20.573] [[Timing]] Chunk (-3,-1,-6): Chunk=1.69ms Mesh=72.23ms Send=0.08ms Total=74.22ms
+[05:34:20.575] [[Biome]] Chunk (6,-1,3) center biome: Forest
+[05:34:20.642] [[Generation]] (6,-1,3): Chunk=1.79ms Mesh=67.06ms Vertices=0
+[05:34:20.642] [[Timing]] Chunk (6,-1,3): Chunk=1.79ms Mesh=67.06ms Send=0.10ms Total=69.20ms
+[05:34:20.644] [[Biome]] Chunk (-7,0,0) center biome: Forest
+[05:34:20.728] [[Generation]] (-7,0,0): Chunk=1.42ms Mesh=84.32ms Vertices=3756
+[05:34:20.729] [[Timing]] Chunk (-7,0,0): Chunk=1.42ms Mesh=84.32ms Send=0.15ms Total=86.04ms
+[05:34:20.730] [[Biome]] Chunk (0,0,-7) center biome: Forest
+[05:34:20.808] [[Generation]] (0,0,-7): Chunk=1.52ms Mesh=77.00ms Vertices=5157
+[05:34:20.808] [[Timing]] Chunk (0,0,-7): Chunk=1.52ms Mesh=77.00ms Send=0.20ms Total=78.86ms
+[05:34:20.810] [[Biome]] Chunk (5,0,-5) center biome: Forest
+[05:34:20.879] [[Generation]] (5,0,-5): Chunk=1.74ms Mesh=68.79ms Vertices=3927
+[05:34:20.879] [[Timing]] Chunk (5,0,-5): Chunk=1.74ms Mesh=68.79ms Send=0.13ms Total=70.85ms
+[05:34:20.881] [[Biome]] Chunk (7,0,-1) center biome: Forest
+[05:34:20.950] [[Generation]] (7,0,-1): Chunk=1.75ms Mesh=69.25ms Vertices=4878
+[05:34:20.951] [[Timing]] Chunk (7,0,-1): Chunk=1.75ms Mesh=69.25ms Send=0.23ms Total=71.41ms
+[05:34:20.953] [[Biome]] Chunk (1,0,7) center biome: Forest
+[05:34:21.027] [[Generation]] (1,0,7): Chunk=2.22ms Mesh=73.30ms Vertices=4857
+[05:34:21.027] [[Timing]] Chunk (1,0,7): Chunk=2.22ms Mesh=73.30ms Send=0.19ms Total=75.91ms
+[05:34:21.029] [[Biome]] Chunk (7,0,1) center biome: Forest
+[05:34:21.104] [[Generation]] (7,0,1): Chunk=1.45ms Mesh=74.96ms Vertices=4329
+[05:34:21.104] [[Timing]] Chunk (7,0,1): Chunk=1.45ms Mesh=74.96ms Send=0.22ms Total=76.80ms
+[05:34:21.106] [[Biome]] Chunk (5,0,5) center biome: Forest
+[05:34:21.187] [[Generation]] (5,0,5): Chunk=1.76ms Mesh=80.53ms Vertices=3741
+[05:34:21.187] [[Timing]] Chunk (5,0,5): Chunk=1.76ms Mesh=80.53ms Send=0.17ms Total=82.64ms
+[05:34:21.190] [[Biome]] Chunk (-1,0,7) center biome: Forest
+[05:34:21.263] [[Generation]] (-1,0,7): Chunk=2.73ms Mesh=73.24ms Vertices=4005
+[05:34:21.264] [[Timing]] Chunk (-1,0,7): Chunk=2.73ms Mesh=73.24ms Send=0.21ms Total=76.38ms
+[05:34:21.266] [[Biome]] Chunk (-1,0,-7) center biome: Forest
+[05:34:21.346] [[Generation]] (-1,0,-7): Chunk=1.91ms Mesh=79.64ms Vertices=3816
+[05:34:21.346] [[Timing]] Chunk (-1,0,-7): Chunk=1.91ms Mesh=79.64ms Send=0.11ms Total=81.81ms
+[05:34:21.348] [[Biome]] Chunk (-5,0,-5) center biome: Forest
+[05:34:21.413] [[Generation]] (-5,0,-5): Chunk=1.38ms Mesh=64.98ms Vertices=3216
+[05:34:21.413] [[Timing]] Chunk (-5,0,-5): Chunk=1.38ms Mesh=64.98ms Send=0.19ms Total=66.81ms
+[05:34:21.416] [[Biome]] Chunk (-5,0,5) center biome: Forest
+[05:34:21.491] [[Generation]] (-5,0,5): Chunk=2.18ms Mesh=75.70ms Vertices=5523
+[05:34:21.492] [[Timing]] Chunk (-5,0,5): Chunk=2.18ms Mesh=75.70ms Send=0.11ms Total=78.12ms
+[05:34:21.493] [[Biome]] Chunk (-7,0,1) center biome: Forest
+[05:34:21.566] [[Generation]] (-7,0,1): Chunk=1.53ms Mesh=72.55ms Vertices=3975
+[05:34:21.566] [[Timing]] Chunk (-7,0,1): Chunk=1.53ms Mesh=72.55ms Send=0.26ms Total=74.49ms
+[05:34:21.568] [[Biome]] Chunk (1,0,-7) center biome: Forest
+[05:34:21.657] [[Generation]] (1,0,-7): Chunk=1.66ms Mesh=88.64ms Vertices=5412
+[05:34:21.657] [[Timing]] Chunk (1,0,-7): Chunk=1.66ms Mesh=88.64ms Send=0.21ms Total=90.65ms
+[05:34:21.659] [[Biome]] Chunk (-7,0,-1) center biome: Forest
+[05:34:21.727] [[Generation]] (-7,0,-1): Chunk=1.51ms Mesh=67.87ms Vertices=5109
+[05:34:21.727] [[Timing]] Chunk (-7,0,-1): Chunk=1.51ms Mesh=67.87ms Send=0.15ms Total=69.67ms
+[05:34:21.730] [[Biome]] Chunk (-6,0,-4) center biome: Forest
+[05:34:21.792] [[Generation]] (-6,0,-4): Chunk=2.00ms Mesh=61.90ms Vertices=2688
+[05:34:21.792] [[Timing]] Chunk (-6,0,-4): Chunk=2.00ms Mesh=61.90ms Send=0.28ms Total=64.33ms
+[05:34:21.794] [[Biome]] Chunk (-6,0,4) center biome: Forest
+[05:34:21.859] [[Generation]] (-6,0,4): Chunk=1.91ms Mesh=64.49ms Vertices=4806
+[05:34:21.859] [[Timing]] Chunk (-6,0,4): Chunk=1.91ms Mesh=64.49ms Send=0.19ms Total=66.74ms
+[05:34:21.862] [[Biome]] Chunk (4,0,-6) center biome: Forest
+[05:34:21.928] [[Generation]] (4,0,-6): Chunk=2.60ms Mesh=65.79ms Vertices=3669
+[05:34:21.928] [[Timing]] Chunk (4,0,-6): Chunk=2.60ms Mesh=65.79ms Send=0.09ms Total=68.65ms
+[05:34:21.930] [[Biome]] Chunk (-4,0,-6) center biome: Forest
+[05:34:22.006] [[Generation]] (-4,0,-6): Chunk=1.62ms Mesh=75.86ms Vertices=4155
+[05:34:22.006] [[Timing]] Chunk (-4,0,-6): Chunk=1.62ms Mesh=75.86ms Send=0.24ms Total=77.91ms
+[05:34:22.009] [[Biome]] Chunk (4,0,6) center biome: Forest
+[05:34:22.080] [[Generation]] (4,0,6): Chunk=1.94ms Mesh=71.43ms Vertices=4971
+[05:34:22.081] [[Timing]] Chunk (4,0,6): Chunk=1.94ms Mesh=71.43ms Send=0.17ms Total=73.75ms
+[05:34:22.083] [[Biome]] Chunk (6,0,-4) center biome: Forest
+[05:34:22.155] [[Generation]] (6,0,-4): Chunk=2.13ms Mesh=72.19ms Vertices=5448
+[05:34:22.156] [[Timing]] Chunk (6,0,-4): Chunk=2.13ms Mesh=72.19ms Send=0.23ms Total=74.75ms
+[05:34:22.158] [[Biome]] Chunk (-4,0,6) center biome: Forest
+[05:34:22.244] [[Generation]] (-4,0,6): Chunk=1.93ms Mesh=86.20ms Vertices=6081
+[05:34:22.244] [[Timing]] Chunk (-4,0,6): Chunk=1.93ms Mesh=86.20ms Send=0.15ms Total=88.41ms
+[05:34:22.247] [[Biome]] Chunk (6,0,4) center biome: Forest
+[05:34:22.342] [[Generation]] (6,0,4): Chunk=2.55ms Mesh=94.86ms Vertices=3867
+[05:34:22.343] [[Timing]] Chunk (6,0,4): Chunk=2.55ms Mesh=94.86ms Send=0.25ms Total=97.84ms
+[05:34:22.345] [[Biome]] Chunk (2,0,-7) center biome: Forest
+[05:34:22.456] [[Generation]] (2,0,-7): Chunk=1.85ms Mesh=110.58ms Vertices=3423
+[05:34:22.456] [[Timing]] Chunk (2,0,-7): Chunk=1.85ms Mesh=110.58ms Send=0.15ms Total=112.77ms
+[05:34:22.458] [[Biome]] Chunk (7,1,0) center biome: Forest
+[05:34:22.463] [[Generation]] (7,1,0): Chunk=1.95ms Mesh=4.41ms Vertices=0
+[05:34:22.463] [[Timing]] Chunk (7,1,0): Chunk=1.95ms Mesh=4.41ms Send=0.08ms Total=6.63ms
+[05:34:22.465] [[Biome]] Chunk (7,0,-2) center biome: Forest
+[05:34:22.560] [[Generation]] (7,0,-2): Chunk=1.57ms Mesh=94.71ms Vertices=3729
+[05:34:22.560] [[Timing]] Chunk (7,0,-2): Chunk=1.57ms Mesh=94.71ms Send=0.35ms Total=96.86ms
+[05:34:22.564] [[Biome]] Chunk (7,0,2) center biome: Forest
+[05:34:22.643] [[Generation]] (7,0,2): Chunk=3.52ms Mesh=78.95ms Vertices=3663
+[05:34:22.643] [[Timing]] Chunk (7,0,2): Chunk=3.52ms Mesh=78.95ms Send=0.08ms Total=82.71ms
+[05:34:22.645] [[Biome]] Chunk (-2,0,-7) center biome: Forest
+[05:34:22.733] [[Generation]] (-2,0,-7): Chunk=1.43ms Mesh=88.29ms Vertices=4578
+[05:34:22.734] [[Timing]] Chunk (-2,0,-7): Chunk=1.43ms Mesh=88.29ms Send=0.20ms Total=90.09ms
+[05:34:22.742] [[Biome]] Chunk (7,-1,0) center biome: Forest
+[05:34:22.817] [[Generation]] (7,-1,0): Chunk=7.81ms Mesh=74.92ms Vertices=0
+[05:34:22.817] [[Timing]] Chunk (7,-1,0): Chunk=7.81ms Mesh=74.92ms Send=0.10ms Total=83.08ms
+[05:34:22.820] [[Biome]] Chunk (0,1,7) center biome: Forest
+[05:34:22.824] [[Generation]] (0,1,7): Chunk=2.10ms Mesh=4.14ms Vertices=0
+[05:34:22.824] [[Timing]] Chunk (0,1,7): Chunk=2.10ms Mesh=4.14ms Send=0.12ms Total=6.54ms
+[05:34:22.826] [[Biome]] Chunk (-2,0,7) center biome: Forest
+[05:34:22.907] [[Generation]] (-2,0,7): Chunk=1.81ms Mesh=81.22ms Vertices=2568
+[05:34:22.908] [[Timing]] Chunk (-2,0,7): Chunk=1.81ms Mesh=81.22ms Send=0.15ms Total=83.34ms
+[05:34:22.910] [[Biome]] Chunk (-7,0,2) center biome: Forest
+[05:34:22.994] [[Generation]] (-7,0,2): Chunk=1.89ms Mesh=84.28ms Vertices=4710
+[05:34:22.994] [[Timing]] Chunk (-7,0,2): Chunk=1.89ms Mesh=84.28ms Send=0.19ms Total=86.62ms
+[05:34:22.996] [[Biome]] Chunk (0,-1,-7) center biome: Forest
+[05:34:23.076] [[Generation]] (0,-1,-7): Chunk=1.70ms Mesh=79.26ms Vertices=0
+[05:34:23.076] [[Timing]] Chunk (0,-1,-7): Chunk=1.70ms Mesh=79.26ms Send=0.19ms Total=81.34ms
+[05:34:23.078] [[Biome]] Chunk (0,-1,7) center biome: Forest
+[05:34:23.161] [[Generation]] (0,-1,7): Chunk=1.61ms Mesh=83.10ms Vertices=11256
+[05:34:23.162] [[Timing]] Chunk (0,-1,7): Chunk=1.61ms Mesh=83.10ms Send=0.64ms Total=85.54ms
+[05:34:23.166] [[Biome]] Chunk (-7,-1,0) center biome: Forest
+[05:34:23.247] [[Generation]] (-7,-1,0): Chunk=3.57ms Mesh=80.71ms Vertices=0
+[05:34:23.247] [[Timing]] Chunk (-7,-1,0): Chunk=3.57ms Mesh=80.71ms Send=0.21ms Total=84.73ms
+[05:34:23.250] [[Biome]] Chunk (-7,1,0) center biome: Forest
+[05:34:23.256] [[Generation]] (-7,1,0): Chunk=2.07ms Mesh=6.21ms Vertices=0
+[05:34:23.256] [[Timing]] Chunk (-7,1,0): Chunk=2.07ms Mesh=6.21ms Send=0.17ms Total=8.82ms
+[05:34:23.259] [[Biome]] Chunk (0,1,-7) center biome: Forest
+[05:34:23.262] [[Generation]] (0,1,-7): Chunk=1.75ms Mesh=3.73ms Vertices=0
+[05:34:23.263] [[Timing]] Chunk (0,1,-7): Chunk=1.75ms Mesh=3.73ms Send=0.22ms Total=5.99ms
+[05:34:23.265] [[Biome]] Chunk (2,0,7) center biome: Forest
+[05:34:23.353] [[Generation]] (2,0,7): Chunk=2.04ms Mesh=87.60ms Vertices=5553
+[05:34:23.353] [[Timing]] Chunk (2,0,7): Chunk=2.04ms Mesh=87.60ms Send=0.41ms Total=90.31ms
+[05:34:23.356] [[Biome]] Chunk (-7,0,-2) center biome: Forest
+[05:34:23.433] [[Generation]] (-7,0,-2): Chunk=2.07ms Mesh=76.17ms Vertices=4905
+[05:34:23.433] [[Timing]] Chunk (-7,0,-2): Chunk=2.07ms Mesh=76.17ms Send=0.21ms Total=78.72ms
+[05:34:23.436] [[Biome]] Chunk (7,-1,1) center biome: Forest
+[05:34:23.514] [[Generation]] (7,-1,1): Chunk=2.19ms Mesh=78.17ms Vertices=0
+[05:34:23.515] [[Timing]] Chunk (7,-1,1): Chunk=2.19ms Mesh=78.17ms Send=0.16ms Total=80.71ms
+[05:34:23.517] [[Biome]] Chunk (7,1,1) center biome: Forest
+[05:34:23.521] [[Generation]] (7,1,1): Chunk=2.52ms Mesh=3.98ms Vertices=0
+[05:34:23.522] [[Timing]] Chunk (7,1,1): Chunk=2.52ms Mesh=3.98ms Send=0.11ms Total=6.81ms
+[05:34:23.524] [[Biome]] Chunk (-1,1,7) center biome: Forest
+[05:34:23.529] [[Generation]] (-1,1,7): Chunk=2.12ms Mesh=4.78ms Vertices=0
+[05:34:23.529] [[Timing]] Chunk (-1,1,7): Chunk=2.12ms Mesh=4.78ms Send=0.12ms Total=7.20ms
+[05:34:23.532] [[Biome]] Chunk (-1,-1,7) center biome: Forest
+[05:34:23.617] [[Generation]] (-1,-1,7): Chunk=2.08ms Mesh=85.00ms Vertices=10380
+[05:34:23.617] [[Timing]] Chunk (-1,-1,7): Chunk=2.08ms Mesh=85.00ms Send=0.60ms Total=87.93ms
+[05:34:23.623] [[Biome]] Chunk (5,-1,-5) center biome: Forest
+[05:34:23.706] [[Generation]] (5,-1,-5): Chunk=3.85ms Mesh=83.16ms Vertices=0
+[05:34:23.706] [[Timing]] Chunk (5,-1,-5): Chunk=3.85ms Mesh=83.16ms Send=0.10ms Total=87.34ms
+[05:34:23.708] [[Biome]] Chunk (-5,-1,-5) center biome: Forest
+[05:34:23.784] [[Generation]] (-5,-1,-5): Chunk=1.97ms Mesh=75.89ms Vertices=213
+[05:34:23.785] [[Timing]] Chunk (-5,-1,-5): Chunk=1.97ms Mesh=75.89ms Send=0.09ms Total=78.12ms
+[05:34:23.787] [[Biome]] Chunk (7,-1,-1) center biome: Forest
+[05:34:23.877] [[Generation]] (7,-1,-1): Chunk=2.50ms Mesh=89.17ms Vertices=0
+[05:34:23.877] [[Timing]] Chunk (7,-1,-1): Chunk=2.50ms Mesh=89.17ms Send=0.11ms Total=92.02ms
+[05:34:23.879] [[Biome]] Chunk (-5,1,5) center biome: Forest
+[05:34:23.884] [[Generation]] (-5,1,5): Chunk=1.75ms Mesh=5.04ms Vertices=0
+[05:34:23.884] [[Timing]] Chunk (-5,1,5): Chunk=1.75ms Mesh=5.04ms Send=0.19ms Total=7.19ms
+[05:34:23.888] [[Biome]] Chunk (-5,1,-5) center biome: Forest
+[05:34:23.894] [[Generation]] (-5,1,-5): Chunk=3.61ms Mesh=5.43ms Vertices=0
+[05:34:23.894] [[Timing]] Chunk (-5,1,-5): Chunk=3.61ms Mesh=5.43ms Send=0.13ms Total=9.44ms
+[05:34:23.898] [[Biome]] Chunk (-5,-1,5) center biome: Forest
+[05:34:23.990] [[Generation]] (-5,-1,5): Chunk=3.48ms Mesh=92.24ms Vertices=18783
+[05:34:23.991] [[Timing]] Chunk (-5,-1,5): Chunk=3.48ms Mesh=92.24ms Send=1.03ms Total=96.96ms
+[05:34:23.994] [[Biome]] Chunk (-1,1,-7) center biome: Forest
+[05:34:23.999] [[Generation]] (-1,1,-7): Chunk=1.41ms Mesh=4.56ms Vertices=0
+[05:34:23.999] [[Timing]] Chunk (-1,1,-7): Chunk=1.41ms Mesh=4.56ms Send=0.09ms Total=6.23ms
+[05:34:24.001] [[Biome]] Chunk (-1,-1,-7) center biome: Forest
+[05:34:24.085] [[Generation]] (-1,-1,-7): Chunk=1.28ms Mesh=84.83ms Vertices=24
+[05:34:24.086] [[Timing]] Chunk (-1,-1,-7): Chunk=1.28ms Mesh=84.83ms Send=0.12ms Total=86.36ms
+[05:34:24.090] [[Biome]] Chunk (7,1,-1) center biome: Forest
+[05:34:24.095] [[Generation]] (7,1,-1): Chunk=3.93ms Mesh=4.87ms Vertices=0
+[05:34:24.095] [[Timing]] Chunk (7,1,-1): Chunk=3.93ms Mesh=4.87ms Send=0.15ms Total=9.14ms
+[05:34:24.099] [[Biome]] Chunk (1,-1,-7) center biome: Forest
+[05:34:24.178] [[Generation]] (1,-1,-7): Chunk=3.44ms Mesh=78.99ms Vertices=0
+[05:34:24.178] [[Timing]] Chunk (1,-1,-7): Chunk=3.44ms Mesh=78.99ms Send=0.17ms Total=82.82ms
+[05:34:24.181] [[Biome]] Chunk (-7,1,1) center biome: Forest
+[05:34:24.186] [[Generation]] (-7,1,1): Chunk=2.26ms Mesh=5.11ms Vertices=0
+[05:34:24.186] [[Timing]] Chunk (-7,1,1): Chunk=2.26ms Mesh=5.11ms Send=0.19ms Total=7.85ms
+[05:34:24.188] [[Biome]] Chunk (1,1,-7) center biome: Forest
+[05:34:24.194] [[Generation]] (1,1,-7): Chunk=1.88ms Mesh=4.99ms Vertices=0
+[05:34:24.194] [[Timing]] Chunk (1,1,-7): Chunk=1.88ms Mesh=4.99ms Send=0.13ms Total=7.20ms
+[05:34:24.196] [[Biome]] Chunk (1,-1,7) center biome: Forest
+[05:34:24.276] [[Generation]] (1,-1,7): Chunk=1.78ms Mesh=80.36ms Vertices=8325
+[05:34:24.277] [[Timing]] Chunk (1,-1,7): Chunk=1.78ms Mesh=80.36ms Send=0.13ms Total=82.47ms
+[05:34:24.279] [[Biome]] Chunk (5,1,-5) center biome: Forest
+[05:34:24.284] [[Generation]] (5,1,-5): Chunk=2.08ms Mesh=4.13ms Vertices=0
+[05:34:24.284] [[Timing]] Chunk (5,1,-5): Chunk=2.08ms Mesh=4.13ms Send=0.05ms Total=6.39ms
+[05:34:24.286] [[Biome]] Chunk (-7,-1,1) center biome: Forest
+[05:34:24.374] [[Generation]] (-7,-1,1): Chunk=2.35ms Mesh=87.47ms Vertices=0
+[05:34:24.374] [[Timing]] Chunk (-7,-1,1): Chunk=2.35ms Mesh=87.47ms Send=0.11ms Total=90.08ms
+[05:34:24.376] [[Biome]] Chunk (-7,1,-1) center biome: Forest
+[05:34:24.381] [[Generation]] (-7,1,-1): Chunk=1.91ms Mesh=5.04ms Vertices=0
+[05:34:24.381] [[Timing]] Chunk (-7,1,-1): Chunk=1.91ms Mesh=5.04ms Send=0.10ms Total=7.23ms
+[05:34:24.384] [[Biome]] Chunk (1,1,7) center biome: Forest
+[05:34:24.388] [[Generation]] (1,1,7): Chunk=2.38ms Mesh=3.75ms Vertices=0
+[05:34:24.388] [[Timing]] Chunk (1,1,7): Chunk=2.38ms Mesh=3.75ms Send=0.21ms Total=6.67ms
+[05:34:24.391] [[Biome]] Chunk (5,1,5) center biome: Forest
+[05:34:24.395] [[Generation]] (5,1,5): Chunk=2.10ms Mesh=4.52ms Vertices=0
+[05:34:24.396] [[Timing]] Chunk (5,1,5): Chunk=2.10ms Mesh=4.52ms Send=0.22ms Total=7.07ms
+[05:34:24.399] [[Biome]] Chunk (-7,-1,-1) center biome: Forest
+[05:34:24.493] [[Generation]] (-7,-1,-1): Chunk=3.34ms Mesh=93.25ms Vertices=729
+[05:34:24.493] [[Timing]] Chunk (-7,-1,-1): Chunk=3.34ms Mesh=93.25ms Send=0.13ms Total=96.92ms
+[05:34:24.495] [[Biome]] Chunk (5,-1,5) center biome: Forest
+[05:34:24.574] [[Generation]] (5,-1,5): Chunk=1.93ms Mesh=78.50ms Vertices=228
+[05:34:24.574] [[Timing]] Chunk (5,-1,5): Chunk=1.93ms Mesh=78.50ms Send=0.08ms Total=80.71ms
+[05:34:24.576] [[Biome]] Chunk (-4,1,-6) center biome: Forest
+[05:34:24.580] [[Generation]] (-4,1,-6): Chunk=1.73ms Mesh=4.10ms Vertices=0
+[05:34:24.580] [[Timing]] Chunk (-4,1,-6): Chunk=1.73ms Mesh=4.10ms Send=0.10ms Total=6.12ms
+[05:34:24.584] [[Biome]] Chunk (-6,1,4) center biome: Forest
+[05:34:24.588] [[Generation]] (-6,1,4): Chunk=3.10ms Mesh=3.76ms Vertices=0
+[05:34:24.588] [[Timing]] Chunk (-6,1,4): Chunk=3.10ms Mesh=3.76ms Send=0.09ms Total=7.18ms
+[05:34:24.590] [[Biome]] Chunk (4,-1,-6) center biome: Forest
+[05:34:24.659] [[Generation]] (4,-1,-6): Chunk=1.82ms Mesh=69.19ms Vertices=0
+[05:34:24.659] [[Timing]] Chunk (4,-1,-6): Chunk=1.82ms Mesh=69.19ms Send=0.05ms Total=71.23ms
+[05:34:24.661] [[Biome]] Chunk (6,1,-4) center biome: Forest
+[05:34:24.664] [[Generation]] (6,1,-4): Chunk=1.60ms Mesh=2.92ms Vertices=0
+[05:34:24.664] [[Timing]] Chunk (6,1,-4): Chunk=1.60ms Mesh=2.92ms Send=0.12ms Total=4.84ms
+[05:34:24.666] [[Biome]] Chunk (4,1,-6) center biome: Forest
+[05:34:24.670] [[Generation]] (4,1,-6): Chunk=2.04ms Mesh=3.69ms Vertices=0
+[05:34:24.670] [[Timing]] Chunk (4,1,-6): Chunk=2.04ms Mesh=3.69ms Send=0.15ms Total=6.06ms
+[05:34:24.673] [[Biome]] Chunk (4,-1,6) center biome: Forest
+[05:34:24.743] [[Generation]] (4,-1,6): Chunk=2.01ms Mesh=70.22ms Vertices=6957
+[05:34:24.743] [[Timing]] Chunk (4,-1,6): Chunk=2.01ms Mesh=70.22ms Send=0.12ms Total=72.47ms
+[05:34:24.746] [[Biome]] Chunk (6,-1,4) center biome: Forest
+[05:34:24.815] [[Generation]] (6,-1,4): Chunk=2.03ms Mesh=69.56ms Vertices=264
+[05:34:24.815] [[Timing]] Chunk (6,-1,4): Chunk=2.03ms Mesh=69.56ms Send=0.13ms Total=71.91ms
+[05:34:24.819] [[Biome]] Chunk (4,1,6) center biome: Forest
+[05:34:24.823] [[Generation]] (4,1,6): Chunk=3.02ms Mesh=4.04ms Vertices=0
+[05:34:24.823] [[Timing]] Chunk (4,1,6): Chunk=3.02ms Mesh=4.04ms Send=0.10ms Total=7.38ms
+[05:34:24.825] [[Biome]] Chunk (6,1,4) center biome: Forest
+[05:34:24.828] [[Generation]] (6,1,4): Chunk=1.58ms Mesh=2.76ms Vertices=0
+[05:34:24.828] [[Timing]] Chunk (6,1,4): Chunk=1.58ms Mesh=2.76ms Send=0.12ms Total=4.58ms
+[05:34:24.830] [[Biome]] Chunk (6,-1,-4) center biome: Forest
+[05:34:24.901] [[Generation]] (6,-1,-4): Chunk=1.98ms Mesh=70.72ms Vertices=0
+[05:34:24.901] [[Timing]] Chunk (6,-1,-4): Chunk=1.98ms Mesh=70.72ms Send=0.18ms Total=73.11ms
+[05:34:24.903] [[Biome]] Chunk (-4,-1,6) center biome: Forest
+[05:34:24.978] [[Generation]] (-4,-1,6): Chunk=2.15ms Mesh=74.11ms Vertices=15114
+[05:34:24.978] [[Timing]] Chunk (-4,-1,6): Chunk=2.15ms Mesh=74.11ms Send=0.32ms Total=76.73ms
+[05:34:24.981] [[Biome]] Chunk (-4,-1,-6) center biome: Forest
+[05:34:25.056] [[Generation]] (-4,-1,-6): Chunk=1.64ms Mesh=74.63ms Vertices=0
+[05:34:25.056] [[Timing]] Chunk (-4,-1,-6): Chunk=1.64ms Mesh=74.63ms Send=0.15ms Total=76.61ms
+[05:34:25.058] [[Biome]] Chunk (-4,1,6) center biome: Forest
+[05:34:25.061] [[Generation]] (-4,1,6): Chunk=1.75ms Mesh=2.93ms Vertices=0
+[05:34:25.061] [[Timing]] Chunk (-4,1,6): Chunk=1.75ms Mesh=2.93ms Send=0.09ms Total=4.94ms
+[05:34:25.064] [[Biome]] Chunk (-6,-1,4) center biome: Forest
+[05:34:25.127] [[Generation]] (-6,-1,4): Chunk=2.61ms Mesh=63.27ms Vertices=0
+[05:34:25.128] [[Timing]] Chunk (-6,-1,4): Chunk=2.61ms Mesh=63.27ms Send=0.13ms Total=66.25ms
+[05:34:25.130] [[Biome]] Chunk (-6,1,-4) center biome: Forest
+[05:34:25.133] [[Generation]] (-6,1,-4): Chunk=1.72ms Mesh=3.27ms Vertices=0
+[05:34:25.133] [[Timing]] Chunk (-6,1,-4): Chunk=1.72ms Mesh=3.27ms Send=0.09ms Total=5.30ms
+[05:34:25.135] [[Biome]] Chunk (-6,-1,-4) center biome: Forest
+[05:34:25.209] [[Generation]] (-6,-1,-4): Chunk=2.11ms Mesh=73.82ms Vertices=30645
+[05:34:25.211] [[Timing]] Chunk (-6,-1,-4): Chunk=2.11ms Mesh=73.82ms Send=1.42ms Total=77.49ms
+[05:34:25.215] [[Biome]] Chunk (7,-1,-2) center biome: Forest
+[05:34:25.279] [[Generation]] (7,-1,-2): Chunk=2.34ms Mesh=64.18ms Vertices=0
+[05:34:25.279] [[Timing]] Chunk (7,-1,-2): Chunk=2.34ms Mesh=64.18ms Send=0.06ms Total=66.71ms
+[05:34:25.281] [[Biome]] Chunk (7,1,2) center biome: Forest
+[05:34:25.285] [[Generation]] (7,1,2): Chunk=1.73ms Mesh=3.45ms Vertices=0
+[05:34:25.285] [[Timing]] Chunk (7,1,2): Chunk=1.73ms Mesh=3.45ms Send=0.06ms Total=5.54ms
+[05:34:25.287] [[Biome]] Chunk (7,-1,2) center biome: Forest
+[05:34:25.361] [[Generation]] (7,-1,2): Chunk=1.75ms Mesh=73.97ms Vertices=549
+[05:34:25.361] [[Timing]] Chunk (7,-1,2): Chunk=1.75ms Mesh=73.97ms Send=0.10ms Total=75.96ms
+[05:34:25.363] [[Biome]] Chunk (7,1,-2) center biome: Forest
+[05:34:25.367] [[Generation]] (7,1,-2): Chunk=1.71ms Mesh=3.39ms Vertices=0
+[05:34:25.367] [[Timing]] Chunk (7,1,-2): Chunk=1.71ms Mesh=3.39ms Send=0.15ms Total=5.37ms
+[05:34:25.369] [[Biome]] Chunk (-2,-1,-7) center biome: Forest
+[05:34:25.442] [[Generation]] (-2,-1,-7): Chunk=1.73ms Mesh=73.16ms Vertices=516
+[05:34:25.442] [[Timing]] Chunk (-2,-1,-7): Chunk=1.73ms Mesh=73.16ms Send=0.08ms Total=75.13ms
+[05:34:25.446] [[Biome]] Chunk (-2,-1,7) center biome: Forest
+[05:34:25.522] [[Generation]] (-2,-1,7): Chunk=1.46ms Mesh=76.38ms Vertices=9627
+[05:34:25.522] [[Timing]] Chunk (-2,-1,7): Chunk=1.46ms Mesh=76.38ms Send=0.34ms Total=78.43ms
+[05:34:25.525] [[Biome]] Chunk (-2,1,7) center biome: Forest
+[05:34:25.528] [[Generation]] (-2,1,7): Chunk=1.63ms Mesh=3.14ms Vertices=0
+[05:34:25.528] [[Timing]] Chunk (-2,1,7): Chunk=1.63ms Mesh=3.14ms Send=0.07ms Total=4.99ms
+[05:34:25.530] [[Biome]] Chunk (-7,1,2) center biome: Forest
+[05:34:25.533] [[Generation]] (-7,1,2): Chunk=1.73ms Mesh=2.97ms Vertices=0
+[05:34:25.533] [[Timing]] Chunk (-7,1,2): Chunk=1.73ms Mesh=2.97ms Send=0.05ms Total=4.85ms
+[05:34:25.534] [[Biome]] Chunk (-7,-1,2) center biome: Forest
+[05:34:25.610] [[Generation]] (-7,-1,2): Chunk=1.23ms Mesh=75.40ms Vertices=0
+[05:34:25.610] [[Timing]] Chunk (-7,-1,2): Chunk=1.23ms Mesh=75.40ms Send=0.16ms Total=76.93ms
+[05:34:25.612] [[Biome]] Chunk (-7,1,-2) center biome: Forest
+[05:34:25.615] [[Generation]] (-7,1,-2): Chunk=1.59ms Mesh=3.30ms Vertices=0
+[05:34:25.616] [[Timing]] Chunk (-7,1,-2): Chunk=1.59ms Mesh=3.30ms Send=0.23ms Total=5.35ms
+[05:34:25.619] [[Biome]] Chunk (-2,1,-7) center biome: Forest
+[05:34:25.623] [[Generation]] (-2,1,-7): Chunk=2.50ms Mesh=4.05ms Vertices=0
+[05:34:25.623] [[Timing]] Chunk (-2,1,-7): Chunk=2.50ms Mesh=4.05ms Send=0.06ms Total=6.77ms
+[05:34:25.625] [[Biome]] Chunk (2,-1,-7) center biome: Forest
+[05:34:25.700] [[Generation]] (2,-1,-7): Chunk=1.77ms Mesh=75.28ms Vertices=504
+[05:34:25.700] [[Timing]] Chunk (2,-1,-7): Chunk=1.77ms Mesh=75.28ms Send=0.10ms Total=77.34ms
+[05:34:25.703] [[Biome]] Chunk (2,1,-7) center biome: Forest
+[05:34:25.707] [[Generation]] (2,1,-7): Chunk=2.00ms Mesh=4.65ms Vertices=0
+[05:34:25.708] [[Timing]] Chunk (2,1,-7): Chunk=2.00ms Mesh=4.65ms Send=0.11ms Total=6.99ms
+[05:34:25.709] [[Biome]] Chunk (2,-1,7) center biome: Forest
+[05:34:25.779] [[Generation]] (2,-1,7): Chunk=1.59ms Mesh=69.95ms Vertices=0
+[05:34:25.780] [[Timing]] Chunk (2,-1,7): Chunk=1.59ms Mesh=69.95ms Send=0.11ms Total=71.81ms
+[05:34:25.782] [[Biome]] Chunk (2,1,7) center biome: Forest
+[05:34:25.785] [[Generation]] (2,1,7): Chunk=1.97ms Mesh=3.61ms Vertices=0
+[05:34:25.786] [[Timing]] Chunk (2,1,7): Chunk=1.97ms Mesh=3.61ms Send=0.18ms Total=5.98ms
+[05:34:25.788] [[Biome]] Chunk (-7,-1,-2) center biome: Forest
+[05:34:25.860] [[Generation]] (-7,-1,-2): Chunk=1.96ms Mesh=72.42ms Vertices=10731
+[05:34:25.861] [[Timing]] Chunk (-7,-1,-2): Chunk=1.96ms Mesh=72.42ms Send=0.30ms Total=74.82ms
+[05:34:25.863] [[Biome]] Chunk (7,0,3) center biome: Forest
+[05:34:25.943] [[Generation]] (7,0,3): Chunk=1.60ms Mesh=79.90ms Vertices=3609
+[05:34:25.943] [[Timing]] Chunk (7,0,3): Chunk=1.60ms Mesh=79.90ms Send=0.14ms Total=81.79ms
+[05:34:25.945] [[Biome]] Chunk (-7,0,-3) center biome: Forest
+[05:34:26.008] [[Generation]] (-7,0,-3): Chunk=1.48ms Mesh=62.97ms Vertices=3561
+[05:34:26.008] [[Timing]] Chunk (-7,0,-3): Chunk=1.48ms Mesh=62.97ms Send=0.31ms Total=64.91ms
+[05:34:26.011] [[Biome]] Chunk (3,0,-7) center biome: Forest
+[05:34:26.079] [[Generation]] (3,0,-7): Chunk=1.85ms Mesh=68.70ms Vertices=3897
+[05:34:26.080] [[Timing]] Chunk (3,0,-7): Chunk=1.85ms Mesh=68.70ms Send=0.14ms Total=70.84ms
+[05:34:26.082] [[Biome]] Chunk (-7,0,3) center biome: Forest
+[05:34:26.156] [[Generation]] (-7,0,3): Chunk=1.81ms Mesh=74.21ms Vertices=5445
+[05:34:26.156] [[Timing]] Chunk (-7,0,3): Chunk=1.81ms Mesh=74.21ms Send=0.15ms Total=76.34ms
+[05:34:26.158] [[Biome]] Chunk (3,0,7) center biome: Forest
+[05:34:26.225] [[Generation]] (3,0,7): Chunk=1.54ms Mesh=67.08ms Vertices=6327
+[05:34:26.226] [[Timing]] Chunk (3,0,7): Chunk=1.54ms Mesh=67.08ms Send=0.28ms Total=69.11ms
+[05:34:26.228] [[Biome]] Chunk (7,0,-3) center biome: Forest
+[05:34:26.289] [[Generation]] (7,0,-3): Chunk=1.61ms Mesh=61.38ms Vertices=4440
+[05:34:26.290] [[Timing]] Chunk (7,0,-3): Chunk=1.61ms Mesh=61.38ms Send=0.13ms Total=63.31ms
+[05:34:26.293] [[Biome]] Chunk (-3,0,-7) center biome: Forest
+[05:34:26.372] [[Generation]] (-3,0,-7): Chunk=2.98ms Mesh=78.99ms Vertices=3543
+[05:34:26.372] [[Timing]] Chunk (-3,0,-7): Chunk=2.98ms Mesh=78.99ms Send=0.17ms Total=82.28ms
+[05:34:26.374] [[Biome]] Chunk (-3,0,7) center biome: Forest
+[05:34:26.459] [[Generation]] (-3,0,7): Chunk=1.91ms Mesh=84.67ms Vertices=3258
+[05:34:26.459] [[Timing]] Chunk (-3,0,7): Chunk=1.91ms Mesh=84.67ms Send=0.10ms Total=86.83ms
+[05:34:26.461] [[Biome]] Chunk (-5,0,6) center biome: Forest
+[05:34:26.539] [[Generation]] (-5,0,6): Chunk=1.68ms Mesh=78.33ms Vertices=4866
+[05:34:26.540] [[Timing]] Chunk (-5,0,6): Chunk=1.68ms Mesh=78.33ms Send=0.16ms Total=80.32ms
+[05:34:26.541] [[Biome]] Chunk (-5,0,-6) center biome: Forest
+[05:34:26.611] [[Generation]] (-5,0,-6): Chunk=1.48ms Mesh=69.79ms Vertices=3279
+[05:34:26.612] [[Timing]] Chunk (-5,0,-6): Chunk=1.48ms Mesh=69.79ms Send=0.20ms Total=71.63ms
+[05:34:26.614] [[Biome]] Chunk (-6,0,5) center biome: Forest
+[05:34:26.697] [[Generation]] (-6,0,5): Chunk=2.01ms Mesh=82.92ms Vertices=3612
+[05:34:26.697] [[Timing]] Chunk (-6,0,5): Chunk=2.01ms Mesh=82.92ms Send=0.12ms Total=85.24ms
+[05:34:26.700] [[Biome]] Chunk (5,0,6) center biome: Forest
+[05:34:26.780] [[Generation]] (5,0,6): Chunk=2.01ms Mesh=80.71ms Vertices=3783
+[05:34:26.781] [[Timing]] Chunk (5,0,6): Chunk=2.01ms Mesh=80.71ms Send=0.22ms Total=83.10ms
+[05:34:26.784] [[Biome]] Chunk (-6,0,-5) center biome: Forest
+[05:34:26.856] [[Generation]] (-6,0,-5): Chunk=3.09ms Mesh=71.88ms Vertices=3243
+[05:34:26.856] [[Timing]] Chunk (-6,0,-5): Chunk=3.09ms Mesh=71.88ms Send=0.08ms Total=75.18ms
+[05:34:26.858] [[Biome]] Chunk (5,0,-6) center biome: Forest
+[05:34:26.925] [[Generation]] (5,0,-6): Chunk=1.55ms Mesh=66.78ms Vertices=3393
+[05:34:26.925] [[Timing]] Chunk (5,0,-6): Chunk=1.55ms Mesh=66.78ms Send=0.12ms Total=68.60ms
+[05:34:26.927] [[Biome]] Chunk (6,0,5) center biome: Forest
+[05:34:27.009] [[Generation]] (6,0,5): Chunk=1.73ms Mesh=81.68ms Vertices=3882
+[05:34:27.009] [[Timing]] Chunk (6,0,5): Chunk=1.73ms Mesh=81.68ms Send=0.10ms Total=83.65ms
+[05:34:27.011] [[Biome]] Chunk (6,0,-5) center biome: Forest
+[05:34:27.081] [[Generation]] (6,0,-5): Chunk=1.66ms Mesh=70.18ms Vertices=3441
+[05:34:27.081] [[Timing]] Chunk (6,0,-5): Chunk=1.66ms Mesh=70.18ms Send=0.16ms Total=72.23ms
+[05:34:27.085] [[Biome]] Chunk (-3,1,-7) center biome: Forest
+[05:34:27.088] [[Generation]] (-3,1,-7): Chunk=3.01ms Mesh=3.22ms Vertices=0
+[05:34:27.088] [[Timing]] Chunk (-3,1,-7): Chunk=3.01ms Mesh=3.22ms Send=0.08ms Total=6.42ms
+[05:34:27.090] [[Biome]] Chunk (-3,1,7) center biome: Forest
+[05:34:27.093] [[Generation]] (-3,1,7): Chunk=1.51ms Mesh=2.68ms Vertices=0
+[05:34:27.093] [[Timing]] Chunk (-3,1,7): Chunk=1.51ms Mesh=2.68ms Send=0.07ms Total=4.37ms
+[05:34:27.095] [[Biome]] Chunk (7,-1,-3) center biome: Forest
+[05:34:27.164] [[Generation]] (7,-1,-3): Chunk=1.74ms Mesh=69.20ms Vertices=0
+[05:34:27.164] [[Timing]] Chunk (7,-1,-3): Chunk=1.74ms Mesh=69.20ms Send=0.12ms Total=71.30ms
+[05:34:27.167] [[Biome]] Chunk (7,-1,3) center biome: Forest
+[05:34:27.240] [[Generation]] (7,-1,3): Chunk=2.05ms Mesh=73.32ms Vertices=0
+[05:34:27.240] [[Timing]] Chunk (7,-1,3): Chunk=2.05ms Mesh=73.32ms Send=0.07ms Total=75.63ms
+[05:34:27.242] [[Biome]] Chunk (7,1,-3) center biome: Forest
+[05:34:27.245] [[Generation]] (7,1,-3): Chunk=1.57ms Mesh=3.00ms Vertices=0
+[05:34:27.245] [[Timing]] Chunk (7,1,-3): Chunk=1.57ms Mesh=3.00ms Send=0.09ms Total=4.86ms
+[05:34:27.247] [[Biome]] Chunk (3,1,-7) center biome: Forest
+[05:34:27.251] [[Generation]] (3,1,-7): Chunk=1.94ms Mesh=3.99ms Vertices=0
+[05:34:27.252] [[Timing]] Chunk (3,1,-7): Chunk=1.94ms Mesh=3.99ms Send=0.11ms Total=6.21ms
+[05:34:27.255] [[Biome]] Chunk (3,-1,7) center biome: Forest
+[05:34:27.323] [[Generation]] (3,-1,7): Chunk=2.67ms Mesh=67.86ms Vertices=0
+[05:34:27.323] [[Timing]] Chunk (3,-1,7): Chunk=2.67ms Mesh=67.86ms Send=0.26ms Total=71.03ms
+[05:34:27.326] [[Biome]] Chunk (-3,-1,7) center biome: Forest
+[05:34:27.395] [[Generation]] (-3,-1,7): Chunk=2.67ms Mesh=69.50ms Vertices=15564
+[05:34:27.397] [[Timing]] Chunk (-3,-1,7): Chunk=2.67ms Mesh=69.50ms Send=0.38ms Total=74.12ms
+[05:34:27.399] [[Biome]] Chunk (3,-1,-7) center biome: Forest
+[05:34:27.471] [[Generation]] (3,-1,-7): Chunk=1.74ms Mesh=71.47ms Vertices=0
+[05:34:27.471] [[Timing]] Chunk (3,-1,-7): Chunk=1.74ms Mesh=71.47ms Send=0.06ms Total=73.40ms
+[05:34:27.473] [[Biome]] Chunk (3,1,7) center biome: Forest
+[05:34:27.476] [[Generation]] (3,1,7): Chunk=1.88ms Mesh=3.15ms Vertices=0
+[05:34:27.476] [[Timing]] Chunk (3,1,7): Chunk=1.88ms Mesh=3.15ms Send=0.09ms Total=5.26ms
+[05:34:27.478] [[Biome]] Chunk (-3,-1,-7) center biome: Forest
+[05:34:27.550] [[Generation]] (-3,-1,-7): Chunk=1.84ms Mesh=71.97ms Vertices=0
+[05:34:27.551] [[Timing]] Chunk (-3,-1,-7): Chunk=1.84ms Mesh=71.97ms Send=0.22ms Total=74.17ms
+[05:34:27.553] [[Biome]] Chunk (-7,-1,-3) center biome: Forest
+[05:34:27.630] [[Generation]] (-7,-1,-3): Chunk=2.13ms Mesh=76.82ms Vertices=5289
+[05:34:27.630] [[Timing]] Chunk (-7,-1,-3): Chunk=2.13ms Mesh=76.82ms Send=0.26ms Total=79.38ms
+[05:34:27.633] [[Biome]] Chunk (-7,1,-3) center biome: Forest
+[05:34:27.636] [[Generation]] (-7,1,-3): Chunk=2.02ms Mesh=3.81ms Vertices=0
+[05:34:27.637] [[Timing]] Chunk (-7,1,-3): Chunk=2.02ms Mesh=3.81ms Send=0.12ms Total=6.16ms
+[05:34:27.639] [[Biome]] Chunk (7,1,3) center biome: Forest
+[05:34:27.642] [[Generation]] (7,1,3): Chunk=1.95ms Mesh=2.85ms Vertices=0
+[05:34:27.642] [[Timing]] Chunk (7,1,3): Chunk=1.95ms Mesh=2.85ms Send=0.08ms Total=5.01ms
+[05:34:27.644] [[Biome]] Chunk (-7,-1,3) center biome: Forest
+[05:34:27.712] [[Generation]] (-7,-1,3): Chunk=1.39ms Mesh=68.44ms Vertices=0
+[05:34:27.712] [[Timing]] Chunk (-7,-1,3): Chunk=1.39ms Mesh=68.44ms Send=0.10ms Total=70.07ms
+[05:34:27.715] [[Biome]] Chunk (-7,1,3) center biome: Forest
+[05:34:27.719] [[Generation]] (-7,1,3): Chunk=2.98ms Mesh=3.76ms Vertices=0
+[05:34:27.719] [[Timing]] Chunk (-7,1,3): Chunk=2.98ms Mesh=3.76ms Send=0.08ms Total=7.00ms
+[05:34:27.722] [[Biome]] Chunk (-8,0,0) center biome: Forest
+[05:34:27.796] [[Generation]] (-8,0,0): Chunk=2.21ms Mesh=73.80ms Vertices=4611
+[05:34:27.796] [[Timing]] Chunk (-8,0,0): Chunk=2.21ms Mesh=73.80ms Send=0.16ms Total=76.36ms
+[05:34:27.799] [[Biome]] Chunk (0,0,8) center biome: Forest
+[05:34:27.872] [[Generation]] (0,0,8): Chunk=2.35ms Mesh=73.24ms Vertices=4209
+[05:34:27.872] [[Timing]] Chunk (0,0,8): Chunk=2.35ms Mesh=73.24ms Send=0.10ms Total=75.84ms
+[05:34:27.874] [[Biome]] Chunk (8,0,0) center biome: Forest
+[05:34:27.939] [[Generation]] (8,0,0): Chunk=1.63ms Mesh=64.73ms Vertices=6555
+[05:34:27.939] [[Timing]] Chunk (8,0,0): Chunk=1.63ms Mesh=64.73ms Send=0.16ms Total=66.65ms
+[05:34:27.941] [[Biome]] Chunk (0,0,-8) center biome: Forest
+[05:34:28.012] [[Generation]] (0,0,-8): Chunk=1.63ms Mesh=70.45ms Vertices=3510
+[05:34:28.012] [[Timing]] Chunk (0,0,-8): Chunk=1.63ms Mesh=70.45ms Send=0.17ms Total=72.43ms
+[05:34:28.014] [[Biome]] Chunk (-6,-1,5) center biome: Forest
+[05:34:28.087] [[Generation]] (-6,-1,5): Chunk=1.96ms Mesh=73.15ms Vertices=1698
+[05:34:28.088] [[Timing]] Chunk (-6,-1,5): Chunk=1.96ms Mesh=73.15ms Send=0.13ms Total=75.38ms
+[05:34:28.090] [[Biome]] Chunk (-8,0,-1) center biome: Forest
+[05:34:28.175] [[Generation]] (-8,0,-1): Chunk=1.76ms Mesh=85.21ms Vertices=3261
+[05:34:28.175] [[Timing]] Chunk (-8,0,-1): Chunk=1.76ms Mesh=85.21ms Send=0.07ms Total=87.24ms
+[05:34:28.177] [[Biome]] Chunk (4,0,-7) center biome: Forest
+[05:34:28.236] [[Generation]] (4,0,-7): Chunk=1.56ms Mesh=58.91ms Vertices=4533
+[05:34:28.236] [[Timing]] Chunk (4,0,-7): Chunk=1.56ms Mesh=58.91ms Send=0.22ms Total=60.94ms
+[05:34:28.239] [[Biome]] Chunk (7,0,4) center biome: Forest
+[05:34:28.318] [[Generation]] (7,0,4): Chunk=1.67ms Mesh=79.17ms Vertices=3420
+[05:34:28.318] [[Timing]] Chunk (7,0,4): Chunk=1.67ms Mesh=79.17ms Send=0.19ms Total=81.24ms
+[05:34:28.321] [[Biome]] Chunk (4,0,7) center biome: Forest
+[05:34:28.390] [[Generation]] (4,0,7): Chunk=2.50ms Mesh=69.14ms Vertices=5757
+[05:34:28.391] [[Timing]] Chunk (4,0,7): Chunk=2.50ms Mesh=69.14ms Send=0.30ms Total=72.19ms
+[05:34:28.393] [[Biome]] Chunk (-8,0,1) center biome: Forest
+[05:34:28.470] [[Generation]] (-8,0,1): Chunk=1.85ms Mesh=77.17ms Vertices=4221
+[05:34:28.470] [[Timing]] Chunk (-8,0,1): Chunk=1.85ms Mesh=77.17ms Send=0.18ms Total=79.36ms
+[05:34:28.474] [[Biome]] Chunk (-7,0,-4) center biome: Forest
+[05:34:28.541] [[Generation]] (-7,0,-4): Chunk=3.25ms Mesh=66.82ms Vertices=3609
+[05:34:28.541] [[Timing]] Chunk (-7,0,-4): Chunk=3.25ms Mesh=66.82ms Send=0.09ms Total=70.28ms
+[05:34:28.543] [[Biome]] Chunk (1,0,8) center biome: Forest
+[05:34:28.624] [[Generation]] (1,0,8): Chunk=1.69ms Mesh=81.32ms Vertices=4158
+[05:34:28.624] [[Timing]] Chunk (1,0,8): Chunk=1.69ms Mesh=81.32ms Send=0.11ms Total=83.24ms
+[05:34:28.626] [[Biome]] Chunk (1,0,-8) center biome: Forest
+[05:34:28.697] [[Generation]] (1,0,-8): Chunk=1.57ms Mesh=70.47ms Vertices=4470
+[05:34:28.697] [[Timing]] Chunk (1,0,-8): Chunk=1.57ms Mesh=70.47ms Send=0.19ms Total=72.39ms
+[05:34:28.699] [[Biome]] Chunk (5,-1,-6) center biome: Forest
+[05:34:28.776] [[Generation]] (5,-1,-6): Chunk=1.86ms Mesh=77.08ms Vertices=6
+[05:34:28.777] [[Timing]] Chunk (5,-1,-6): Chunk=1.86ms Mesh=77.08ms Send=0.07ms Total=79.13ms
+[05:34:28.779] [[Biome]] Chunk (-4,0,7) center biome: Forest
+[05:34:28.863] [[Generation]] (-4,0,7): Chunk=2.16ms Mesh=83.51ms Vertices=3498
+[05:34:28.863] [[Timing]] Chunk (-4,0,7): Chunk=2.16ms Mesh=83.51ms Send=0.17ms Total=86.09ms
+[05:34:28.867] [[Biome]] Chunk (5,1,-6) center biome: Forest
+[05:34:28.871] [[Generation]] (5,1,-6): Chunk=3.44ms Mesh=4.14ms Vertices=0
+[05:34:28.871] [[Timing]] Chunk (5,1,-6): Chunk=3.44ms Mesh=4.14ms Send=0.09ms Total=7.82ms
+[05:34:28.873] [[Biome]] Chunk (5,-1,6) center biome: Forest
+[05:34:28.954] [[Generation]] (5,-1,6): Chunk=1.81ms Mesh=80.43ms Vertices=150
+[05:34:28.954] [[Timing]] Chunk (5,-1,6): Chunk=1.81ms Mesh=80.43ms Send=0.11ms Total=82.51ms
+[05:34:28.956] [[Biome]] Chunk (-4,0,-7) center biome: Forest
+[05:34:29.020] [[Generation]] (-4,0,-7): Chunk=1.87ms Mesh=63.96ms Vertices=3876
+[05:34:29.020] [[Timing]] Chunk (-4,0,-7): Chunk=1.87ms Mesh=63.96ms Send=0.15ms Total=66.12ms
+[05:34:29.022] [[Biome]] Chunk (-6,1,5) center biome: Forest
+[05:34:29.024] [[Generation]] (-6,1,5): Chunk=1.18ms Mesh=2.42ms Vertices=0
+[05:34:29.024] [[Timing]] Chunk (-6,1,5): Chunk=1.18ms Mesh=2.42ms Send=0.10ms Total=3.83ms
+[05:34:29.026] [[Biome]] Chunk (-5,1,6) center biome: Forest
+[05:34:29.029] [[Generation]] (-5,1,6): Chunk=1.45ms Mesh=2.76ms Vertices=0
+[05:34:29.029] [[Timing]] Chunk (-5,1,6): Chunk=1.45ms Mesh=2.76ms Send=0.05ms Total=4.46ms
+[05:34:29.031] [[Biome]] Chunk (5,1,6) center biome: Forest
+[05:34:29.034] [[Generation]] (5,1,6): Chunk=1.47ms Mesh=3.39ms Vertices=0
+[05:34:29.034] [[Timing]] Chunk (5,1,6): Chunk=1.47ms Mesh=3.39ms Send=0.08ms Total=5.06ms
+[05:34:29.037] [[Biome]] Chunk (-1,0,8) center biome: Forest
+[05:34:29.107] [[Generation]] (-1,0,8): Chunk=2.43ms Mesh=69.53ms Vertices=4938
+[05:34:29.107] [[Timing]] Chunk (-1,0,8): Chunk=2.43ms Mesh=69.53ms Send=0.10ms Total=72.19ms
+[05:34:29.109] [[Biome]] Chunk (7,0,-4) center biome: Forest
+[05:34:29.176] [[Generation]] (7,0,-4): Chunk=1.37ms Mesh=67.41ms Vertices=5103
+[05:34:29.177] [[Timing]] Chunk (7,0,-4): Chunk=1.37ms Mesh=67.41ms Send=0.30ms Total=69.28ms
+[05:34:29.179] [[Biome]] Chunk (8,0,-1) center biome: Forest
+[05:34:29.259] [[Generation]] (8,0,-1): Chunk=1.77ms Mesh=80.60ms Vertices=4092
+[05:34:29.260] [[Timing]] Chunk (8,0,-1): Chunk=1.77ms Mesh=80.60ms Send=0.16ms Total=82.66ms
+[05:34:29.262] [[Biome]] Chunk (-7,0,4) center biome: Forest
+[05:34:29.327] [[Generation]] (-7,0,4): Chunk=2.10ms Mesh=64.53ms Vertices=6102
+[05:34:29.327] [[Timing]] Chunk (-7,0,4): Chunk=2.10ms Mesh=64.53ms Send=0.17ms Total=66.99ms
+[05:34:29.330] [[Biome]] Chunk (-5,-1,6) center biome: Forest
+[05:34:29.408] [[Generation]] (-5,-1,6): Chunk=2.18ms Mesh=78.12ms Vertices=16725
+[05:34:29.408] [[Timing]] Chunk (-5,-1,6): Chunk=2.18ms Mesh=78.12ms Send=0.35ms Total=80.77ms
+[05:34:29.410] [[Biome]] Chunk (-5,-1,-6) center biome: Forest
+[05:34:29.477] [[Generation]] (-5,-1,-6): Chunk=1.22ms Mesh=67.01ms Vertices=153
+[05:34:29.477] [[Timing]] Chunk (-5,-1,-6): Chunk=1.22ms Mesh=67.01ms Send=0.09ms Total=68.49ms
+[05:34:29.479] [[Biome]] Chunk (6,1,5) center biome: Forest
+[05:34:29.483] [[Generation]] (6,1,5): Chunk=1.41ms Mesh=4.31ms Vertices=0
+[05:34:29.484] [[Timing]] Chunk (6,1,5): Chunk=1.41ms Mesh=4.31ms Send=0.07ms Total=5.92ms
+[05:34:29.486] [[Biome]] Chunk (8,0,1) center biome: Forest
+[05:34:29.565] [[Generation]] (8,0,1): Chunk=2.21ms Mesh=78.67ms Vertices=4254
+[05:34:29.565] [[Timing]] Chunk (8,0,1): Chunk=2.21ms Mesh=78.67ms Send=0.16ms Total=81.27ms
+[05:34:29.567] [[Biome]] Chunk (6,-1,5) center biome: Forest
+[05:34:29.639] [[Generation]] (6,-1,5): Chunk=1.82ms Mesh=71.89ms Vertices=0
+[05:34:29.639] [[Timing]] Chunk (6,-1,5): Chunk=1.82ms Mesh=71.89ms Send=0.06ms Total=73.93ms
+[05:34:29.641] [[Biome]] Chunk (6,1,-5) center biome: Forest
+[05:34:29.643] [[Generation]] (6,1,-5): Chunk=1.32ms Mesh=2.60ms Vertices=0
+[05:34:29.644] [[Timing]] Chunk (6,1,-5): Chunk=1.32ms Mesh=2.60ms Send=0.08ms Total=4.19ms
+[05:34:29.646] [[Biome]] Chunk (-5,1,-6) center biome: Forest
+[05:34:29.649] [[Generation]] (-5,1,-6): Chunk=2.20ms Mesh=3.25ms Vertices=0
+[05:34:29.650] [[Timing]] Chunk (-5,1,-6): Chunk=2.20ms Mesh=3.25ms Send=0.10ms Total=5.74ms
+[05:34:29.653] [[Biome]] Chunk (6,-1,-5) center biome: Forest
+[05:34:29.727] [[Generation]] (6,-1,-5): Chunk=3.01ms Mesh=73.25ms Vertices=0
+[05:34:29.727] [[Timing]] Chunk (6,-1,-5): Chunk=3.01ms Mesh=73.25ms Send=0.07ms Total=76.47ms
+[05:34:29.728] [[Biome]] Chunk (-6,1,-5) center biome: Forest
+[05:34:29.733] [[Generation]] (-6,1,-5): Chunk=1.52ms Mesh=4.48ms Vertices=0
+[05:34:29.733] [[Timing]] Chunk (-6,1,-5): Chunk=1.52ms Mesh=4.48ms Send=0.06ms Total=6.22ms
+[05:34:29.736] [[Biome]] Chunk (-1,0,-8) center biome: Forest
+[05:34:29.820] [[Generation]] (-1,0,-8): Chunk=2.49ms Mesh=84.40ms Vertices=3627
+[05:34:29.820] [[Timing]] Chunk (-1,0,-8): Chunk=2.49ms Mesh=84.40ms Send=0.12ms Total=87.16ms
+[05:34:29.822] [[Biome]] Chunk (-6,-1,-5) center biome: Forest
+[05:34:29.898] [[Generation]] (-6,-1,-5): Chunk=1.84ms Mesh=75.00ms Vertices=15357
+[05:34:29.898] [[Timing]] Chunk (-6,-1,-5): Chunk=1.84ms Mesh=75.00ms Send=0.25ms Total=77.32ms
+[05:34:29.900] [[Biome]] Chunk (-8,-1,0) center biome: Forest
+[05:34:29.972] [[Generation]] (-8,-1,0): Chunk=1.90ms Mesh=71.95ms Vertices=0
+[05:34:29.972] [[Timing]] Chunk (-8,-1,0): Chunk=1.90ms Mesh=71.95ms Send=0.11ms Total=74.17ms
+[05:34:29.974] [[Biome]] Chunk (-8,0,-2) center biome: Forest
+[05:34:30.055] [[Generation]] (-8,0,-2): Chunk=1.56ms Mesh=81.16ms Vertices=3789
+[05:34:30.056] [[Timing]] Chunk (-8,0,-2): Chunk=1.56ms Mesh=81.16ms Send=0.11ms Total=82.97ms
+[05:34:30.058] [[Biome]] Chunk (-2,0,-8) center biome: Forest
+[05:34:30.137] [[Generation]] (-2,0,-8): Chunk=1.49ms Mesh=78.95ms Vertices=4827
+[05:34:30.137] [[Timing]] Chunk (-2,0,-8): Chunk=1.49ms Mesh=78.95ms Send=0.18ms Total=80.83ms
+[05:34:30.139] [[Biome]] Chunk (2,0,-8) center biome: Forest
+[05:34:30.220] [[Generation]] (2,0,-8): Chunk=2.18ms Mesh=80.41ms Vertices=4284
+[05:34:30.220] [[Timing]] Chunk (2,0,-8): Chunk=2.18ms Mesh=80.41ms Send=0.17ms Total=83.02ms
+[05:34:30.223] [[Biome]] Chunk (-8,1,0) center biome: Forest
+[05:34:30.229] [[Generation]] (-8,1,0): Chunk=3.01ms Mesh=5.05ms Vertices=0
+[05:34:30.229] [[Timing]] Chunk (-8,1,0): Chunk=3.01ms Mesh=5.05ms Send=0.07ms Total=8.25ms
+[05:34:30.231] [[Biome]] Chunk (-8,0,2) center biome: Forest
+[05:34:30.297] [[Generation]] (-8,0,2): Chunk=1.77ms Mesh=66.11ms Vertices=4347
+[05:34:30.297] [[Timing]] Chunk (-8,0,2): Chunk=1.77ms Mesh=66.11ms Send=0.17ms Total=68.28ms
+[05:34:30.300] [[Biome]] Chunk (-2,0,8) center biome: Forest
+[05:34:30.379] [[Generation]] (-2,0,8): Chunk=1.54ms Mesh=79.76ms Vertices=4461
+[05:34:30.380] [[Timing]] Chunk (-2,0,8): Chunk=1.54ms Mesh=79.76ms Send=0.14ms Total=81.56ms
+[05:34:30.382] [[Biome]] Chunk (0,1,8) center biome: Forest
+[05:34:30.386] [[Generation]] (0,1,8): Chunk=2.00ms Mesh=3.94ms Vertices=0
+[05:34:30.387] [[Timing]] Chunk (0,1,8): Chunk=2.00ms Mesh=3.94ms Send=0.12ms Total=6.23ms
+[05:34:30.388] [[Biome]] Chunk (0,1,-8) center biome: Forest
+[05:34:30.392] [[Generation]] (0,1,-8): Chunk=1.52ms Mesh=3.70ms Vertices=0
+[05:34:30.392] [[Timing]] Chunk (0,1,-8): Chunk=1.52ms Mesh=3.70ms Send=0.10ms Total=5.46ms
+[05:34:30.394] [[Biome]] Chunk (2,0,8) center biome: Forest
+[05:34:30.469] [[Generation]] (2,0,8): Chunk=1.46ms Mesh=75.61ms Vertices=4404
+[05:34:30.470] [[Timing]] Chunk (2,0,8): Chunk=1.46ms Mesh=75.61ms Send=0.24ms Total=77.43ms
+[05:34:30.472] [[Biome]] Chunk (0,-1,-8) center biome: Forest
+[05:34:30.546] [[Generation]] (0,-1,-8): Chunk=1.80ms Mesh=73.97ms Vertices=0
+[05:34:30.546] [[Timing]] Chunk (0,-1,-8): Chunk=1.80ms Mesh=73.97ms Send=0.08ms Total=76.02ms
+[05:34:30.549] [[Biome]] Chunk (0,-1,8) center biome: Forest
+[05:34:30.620] [[Generation]] (0,-1,8): Chunk=2.63ms Mesh=70.62ms Vertices=10422
+[05:34:30.620] [[Timing]] Chunk (0,-1,8): Chunk=2.63ms Mesh=70.62ms Send=0.30ms Total=73.74ms
+[05:34:30.623] [[Biome]] Chunk (8,-1,0) center biome: Forest
+[05:34:30.689] [[Generation]] (8,-1,0): Chunk=1.59ms Mesh=66.11ms Vertices=0
+[05:34:30.689] [[Timing]] Chunk (8,-1,0): Chunk=1.59ms Mesh=66.11ms Send=0.06ms Total=67.93ms
+[05:34:30.691] [[Biome]] Chunk (8,1,0) center biome: Forest
+[05:34:30.694] [[Generation]] (8,1,0): Chunk=1.65ms Mesh=3.45ms Vertices=0
+[05:34:30.694] [[Timing]] Chunk (8,1,0): Chunk=1.65ms Mesh=3.45ms Send=0.08ms Total=5.32ms
+[05:34:30.696] [[Biome]] Chunk (8,0,2) center biome: Forest
+[05:34:30.763] [[Generation]] (8,0,2): Chunk=1.69ms Mesh=66.68ms Vertices=5469
+[05:34:30.764] [[Timing]] Chunk (8,0,2): Chunk=1.69ms Mesh=66.68ms Send=0.30ms Total=68.90ms
+[05:34:30.767] [[Biome]] Chunk (8,0,-2) center biome: Forest
+[05:34:30.830] [[Generation]] (8,0,-2): Chunk=2.77ms Mesh=63.40ms Vertices=3837
+[05:34:30.831] [[Timing]] Chunk (8,0,-2): Chunk=2.77ms Mesh=63.40ms Send=0.12ms Total=66.42ms
+[05:34:30.834] [[Biome]] Chunk (-4,1,-7) center biome: Forest
+[05:34:30.838] [[Generation]] (-4,1,-7): Chunk=2.94ms Mesh=3.99ms Vertices=0
+[05:34:30.838] [[Timing]] Chunk (-4,1,-7): Chunk=2.94ms Mesh=3.99ms Send=0.07ms Total=7.15ms
+[05:34:30.840] [[Biome]] Chunk (1,-1,-8) center biome: Forest
+[05:34:30.908] [[Generation]] (1,-1,-8): Chunk=1.53ms Mesh=68.19ms Vertices=0
+[05:34:30.909] [[Timing]] Chunk (1,-1,-8): Chunk=1.53ms Mesh=68.19ms Send=0.13ms Total=70.00ms
+[05:34:30.911] [[Biome]] Chunk (-4,-1,7) center biome: Forest
+[05:34:30.992] [[Generation]] (-4,-1,7): Chunk=2.09ms Mesh=81.49ms Vertices=11070
+[05:34:30.993] [[Timing]] Chunk (-4,-1,7): Chunk=2.09ms Mesh=81.49ms Send=0.21ms Total=83.94ms
+[05:34:30.996] [[Biome]] Chunk (-7,-1,-4) center biome: Forest
+[05:34:31.071] [[Generation]] (-7,-1,-4): Chunk=2.05ms Mesh=75.07ms Vertices=4626
+[05:34:31.071] [[Timing]] Chunk (-7,-1,-4): Chunk=2.05ms Mesh=75.07ms Send=0.10ms Total=77.43ms
+[05:34:31.073] [[Biome]] Chunk (8,1,-1) center biome: Forest
+[05:34:31.077] [[Generation]] (8,1,-1): Chunk=1.49ms Mesh=3.67ms Vertices=0
+[05:34:31.077] [[Timing]] Chunk (8,1,-1): Chunk=1.49ms Mesh=3.67ms Send=0.06ms Total=5.34ms
+[05:34:31.079] [[Biome]] Chunk (7,1,4) center biome: Forest
+[05:34:31.082] [[Generation]] (7,1,4): Chunk=1.36ms Mesh=2.95ms Vertices=0
+[05:34:31.082] [[Timing]] Chunk (7,1,4): Chunk=1.36ms Mesh=2.95ms Send=0.11ms Total=4.57ms
+[05:34:31.084] [[Biome]] Chunk (-4,1,7) center biome: Forest
+[05:34:31.089] [[Generation]] (-4,1,7): Chunk=2.27ms Mesh=4.45ms Vertices=0
+[05:34:31.089] [[Timing]] Chunk (-4,1,7): Chunk=2.27ms Mesh=4.45ms Send=0.15ms Total=7.04ms
+[05:34:31.091] [[Biome]] Chunk (8,1,1) center biome: Forest
+[05:34:31.095] [[Generation]] (8,1,1): Chunk=1.62ms Mesh=4.41ms Vertices=0
+[05:34:31.096] [[Timing]] Chunk (8,1,1): Chunk=1.62ms Mesh=4.41ms Send=0.14ms Total=6.37ms
+[05:34:31.098] [[Biome]] Chunk (-1,1,8) center biome: Forest
+[05:34:31.104] [[Generation]] (-1,1,8): Chunk=2.25ms Mesh=5.63ms Vertices=0
+[05:34:31.104] [[Timing]] Chunk (-1,1,8): Chunk=2.25ms Mesh=5.63ms Send=0.09ms Total=8.14ms
+[05:34:31.106] [[Biome]] Chunk (1,1,-8) center biome: Forest
+[05:34:31.109] [[Generation]] (1,1,-8): Chunk=1.66ms Mesh=2.99ms Vertices=0
+[05:34:31.109] [[Timing]] Chunk (1,1,-8): Chunk=1.66ms Mesh=2.99ms Send=0.07ms Total=4.85ms
+[05:34:31.112] [[Biome]] Chunk (-1,1,-8) center biome: Forest
+[05:34:31.116] [[Generation]] (-1,1,-8): Chunk=2.40ms Mesh=4.28ms Vertices=0
+[05:34:31.116] [[Timing]] Chunk (-1,1,-8): Chunk=2.40ms Mesh=4.28ms Send=0.12ms Total=6.96ms
+[05:34:31.119] [[Biome]] Chunk (-1,-1,-8) center biome: Forest
+[05:34:31.189] [[Generation]] (-1,-1,-8): Chunk=2.15ms Mesh=70.66ms Vertices=0
+[05:34:31.190] [[Timing]] Chunk (-1,-1,-8): Chunk=2.15ms Mesh=70.66ms Send=0.12ms Total=73.12ms
+[05:34:31.191] [[Biome]] Chunk (-7,-1,4) center biome: Forest
+[05:34:31.259] [[Generation]] (-7,-1,4): Chunk=1.55ms Mesh=67.16ms Vertices=0
+[05:34:31.259] [[Timing]] Chunk (-7,-1,4): Chunk=1.55ms Mesh=67.16ms Send=0.10ms Total=68.97ms
+[05:34:31.262] [[Biome]] Chunk (8,-1,-1) center biome: Forest
+[05:34:31.337] [[Generation]] (8,-1,-1): Chunk=2.31ms Mesh=75.62ms Vertices=0
+[05:34:31.337] [[Timing]] Chunk (8,-1,-1): Chunk=2.31ms Mesh=75.62ms Send=0.06ms Total=78.19ms
+[05:34:31.344] [[Biome]] Chunk (7,-1,4) center biome: Forest
+[05:34:31.417] [[Generation]] (7,-1,4): Chunk=2.56ms Mesh=72.62ms Vertices=0
+[05:34:31.417] [[Timing]] Chunk (7,-1,4): Chunk=2.56ms Mesh=72.62ms Send=0.11ms Total=79.28ms
+[05:34:31.420] [[Biome]] Chunk (-7,1,4) center biome: Forest
+[05:34:31.423] [[Generation]] (-7,1,4): Chunk=2.44ms Mesh=3.37ms Vertices=0
+[05:34:31.423] [[Timing]] Chunk (-7,1,4): Chunk=2.44ms Mesh=3.37ms Send=0.06ms Total=6.04ms
+[05:34:31.425] [[Biome]] Chunk (7,1,-4) center biome: Forest
+[05:34:31.429] [[Generation]] (7,1,-4): Chunk=1.85ms Mesh=3.33ms Vertices=0
+[05:34:31.429] [[Timing]] Chunk (7,1,-4): Chunk=1.85ms Mesh=3.33ms Send=0.06ms Total=5.41ms
+[05:34:31.431] [[Biome]] Chunk (7,-1,-4) center biome: Forest
+[05:34:31.498] [[Generation]] (7,-1,-4): Chunk=1.95ms Mesh=67.22ms Vertices=0
+[05:34:31.499] [[Timing]] Chunk (7,-1,-4): Chunk=1.95ms Mesh=67.22ms Send=0.09ms Total=69.46ms
+[05:34:31.501] [[Biome]] Chunk (8,-1,1) center biome: Forest
+[05:34:31.580] [[Generation]] (8,-1,1): Chunk=2.26ms Mesh=78.38ms Vertices=822
+[05:34:31.580] [[Timing]] Chunk (8,-1,1): Chunk=2.26ms Mesh=78.38ms Send=0.22ms Total=81.10ms
+[05:34:31.582] [[Biome]] Chunk (1,-1,8) center biome: Forest
+[05:34:31.656] [[Generation]] (1,-1,8): Chunk=2.13ms Mesh=73.59ms Vertices=5469
+[05:34:31.656] [[Timing]] Chunk (1,-1,8): Chunk=2.13ms Mesh=73.59ms Send=0.15ms Total=76.04ms
+[05:34:31.658] [[Biome]] Chunk (-7,1,-4) center biome: Forest
+[05:34:31.663] [[Generation]] (-7,1,-4): Chunk=1.76ms Mesh=4.36ms Vertices=0
+[05:34:31.663] [[Timing]] Chunk (-7,1,-4): Chunk=1.76ms Mesh=4.36ms Send=0.06ms Total=6.32ms
+[05:34:31.665] [[Biome]] Chunk (1,1,8) center biome: Forest
+[05:34:31.669] [[Generation]] (1,1,8): Chunk=2.07ms Mesh=3.45ms Vertices=0
+[05:34:31.669] [[Timing]] Chunk (1,1,8): Chunk=2.07ms Mesh=3.45ms Send=0.06ms Total=5.68ms
+[05:34:31.671] [[Biome]] Chunk (4,-1,-7) center biome: Forest
+[05:34:31.739] [[Generation]] (4,-1,-7): Chunk=1.65ms Mesh=68.48ms Vertices=0
+[05:34:31.740] [[Timing]] Chunk (4,-1,-7): Chunk=1.65ms Mesh=68.48ms Send=0.07ms Total=70.32ms
+[05:34:31.741] [[Biome]] Chunk (4,1,-7) center biome: Forest
+[05:34:31.745] [[Generation]] (4,1,-7): Chunk=1.49ms Mesh=4.02ms Vertices=0
+[05:34:31.746] [[Timing]] Chunk (4,1,-7): Chunk=1.49ms Mesh=4.02ms Send=0.09ms Total=5.73ms
+[05:34:31.748] [[Biome]] Chunk (-8,1,-1) center biome: Forest
+[05:34:31.751] [[Generation]] (-8,1,-1): Chunk=1.85ms Mesh=3.28ms Vertices=0
+[05:34:31.751] [[Timing]] Chunk (-8,1,-1): Chunk=1.85ms Mesh=3.28ms Send=0.12ms Total=5.49ms
+[05:34:31.753] [[Biome]] Chunk (4,-1,7) center biome: Forest
+[05:34:31.823] [[Generation]] (4,-1,7): Chunk=1.81ms Mesh=69.89ms Vertices=0
+[05:34:31.823] [[Timing]] Chunk (4,-1,7): Chunk=1.81ms Mesh=69.89ms Send=0.09ms Total=71.92ms
+[05:34:31.826] [[Biome]] Chunk (4,1,7) center biome: Forest
+[05:34:31.829] [[Generation]] (4,1,7): Chunk=2.04ms Mesh=2.96ms Vertices=0
+[05:34:31.829] [[Timing]] Chunk (4,1,7): Chunk=2.04ms Mesh=2.96ms Send=0.10ms Total=5.30ms
+[05:34:31.831] [[Biome]] Chunk (-8,-1,1) center biome: Forest
+[05:34:31.896] [[Generation]] (-8,-1,1): Chunk=2.00ms Mesh=65.36ms Vertices=0
+[05:34:31.897] [[Timing]] Chunk (-8,-1,1): Chunk=2.00ms Mesh=65.36ms Send=0.12ms Total=67.67ms
+[05:34:31.900] [[Biome]] Chunk (-8,-1,-1) center biome: Forest
+[05:34:31.969] [[Generation]] (-8,-1,-1): Chunk=2.92ms Mesh=69.11ms Vertices=0
+[05:34:31.969] [[Timing]] Chunk (-8,-1,-1): Chunk=2.92ms Mesh=69.11ms Send=0.14ms Total=72.34ms
+[05:34:31.971] [[Biome]] Chunk (-4,-1,-7) center biome: Forest
+[05:34:32.045] [[Generation]] (-4,-1,-7): Chunk=1.84ms Mesh=73.81ms Vertices=0
+[05:34:32.045] [[Timing]] Chunk (-4,-1,-7): Chunk=1.84ms Mesh=73.81ms Send=0.13ms Total=75.94ms
+[05:34:32.047] [[Biome]] Chunk (-8,1,1) center biome: Forest
+[05:34:32.051] [[Generation]] (-8,1,1): Chunk=1.72ms Mesh=3.33ms Vertices=0
+[05:34:32.051] [[Timing]] Chunk (-8,1,1): Chunk=1.72ms Mesh=3.33ms Send=0.08ms Total=5.32ms
+[05:34:32.054] [[Biome]] Chunk (-1,-1,8) center biome: Forest
+[05:34:32.123] [[Generation]] (-1,-1,8): Chunk=2.78ms Mesh=69.44ms Vertices=11616
+[05:34:32.124] [[Timing]] Chunk (-1,-1,8): Chunk=2.78ms Mesh=69.44ms Send=0.25ms Total=72.66ms
+[05:34:32.126] [[Biome]] Chunk (8,1,2) center biome: Forest
+[05:34:32.129] [[Generation]] (8,1,2): Chunk=1.63ms Mesh=3.31ms Vertices=0
+[05:34:32.130] [[Timing]] Chunk (8,1,2): Chunk=1.63ms Mesh=3.31ms Send=0.05ms Total=5.16ms
+[05:34:32.132] [[Biome]] Chunk (-6,0,-6) center biome: Forest
+[05:34:32.201] [[Generation]] (-6,0,-6): Chunk=2.65ms Mesh=68.40ms Vertices=5349
+[05:34:32.201] [[Timing]] Chunk (-6,0,-6): Chunk=2.65ms Mesh=68.40ms Send=0.25ms Total=71.40ms
+[05:34:32.204] [[Biome]] Chunk (-2,-1,-8) center biome: Forest
+[05:34:32.271] [[Generation]] (-2,-1,-8): Chunk=2.09ms Mesh=67.36ms Vertices=2457
+[05:34:32.272] [[Timing]] Chunk (-2,-1,-8): Chunk=2.09ms Mesh=67.36ms Send=0.20ms Total=69.77ms
+[05:34:32.274] [[Biome]] Chunk (-2,1,-8) center biome: Forest
+[05:34:32.277] [[Generation]] (-2,1,-8): Chunk=1.88ms Mesh=3.58ms Vertices=0
+[05:34:32.278] [[Timing]] Chunk (-2,1,-8): Chunk=1.88ms Mesh=3.58ms Send=0.14ms Total=5.74ms
+[05:34:32.280] [[Biome]] Chunk (-6,0,6) center biome: Forest
+[05:34:32.350] [[Generation]] (-6,0,6): Chunk=1.77ms Mesh=70.50ms Vertices=3441
+[05:34:32.350] [[Timing]] Chunk (-6,0,6): Chunk=1.77ms Mesh=70.50ms Send=0.13ms Total=72.51ms
+[05:34:32.352] [[Biome]] Chunk (-8,-1,-2) center biome: Forest
+[05:34:32.419] [[Generation]] (-8,-1,-2): Chunk=1.47ms Mesh=66.34ms Vertices=0
+[05:34:32.419] [[Timing]] Chunk (-8,-1,-2): Chunk=1.47ms Mesh=66.34ms Send=0.08ms Total=68.08ms
+[05:34:32.422] [[Biome]] Chunk (6,0,6) center biome: Forest
+[05:34:32.489] [[Generation]] (6,0,6): Chunk=3.19ms Mesh=66.63ms Vertices=4881
+[05:34:32.489] [[Timing]] Chunk (6,0,6): Chunk=3.19ms Mesh=66.63ms Send=0.13ms Total=70.13ms
+[05:34:32.492] [[Biome]] Chunk (-2,-1,8) center biome: Forest
+[05:34:32.569] [[Generation]] (-2,-1,8): Chunk=2.04ms Mesh=77.23ms Vertices=13674
+[05:34:32.570] [[Timing]] Chunk (-2,-1,8): Chunk=2.04ms Mesh=77.23ms Send=0.59ms Total=80.14ms
+[05:34:32.572] [[Biome]] Chunk (8,-1,-2) center biome: Forest
+[05:34:32.633] [[Generation]] (8,-1,-2): Chunk=1.52ms Mesh=60.64ms Vertices=0
+[05:34:32.633] [[Timing]] Chunk (8,-1,-2): Chunk=1.52ms Mesh=60.64ms Send=0.11ms Total=62.39ms
+[05:34:32.636] [[Biome]] Chunk (-8,-1,2) center biome: Forest
+[05:34:32.704] [[Generation]] (-8,-1,2): Chunk=2.14ms Mesh=67.76ms Vertices=0
+[05:34:32.704] [[Timing]] Chunk (-8,-1,2): Chunk=2.14ms Mesh=67.76ms Send=0.12ms Total=70.37ms
+[05:34:32.706] [[Biome]] Chunk (-8,1,-2) center biome: Forest
+[05:34:32.709] [[Generation]] (-8,1,-2): Chunk=1.56ms Mesh=3.10ms Vertices=0
+[05:34:32.709] [[Timing]] Chunk (-8,1,-2): Chunk=1.56ms Mesh=3.10ms Send=0.08ms Total=4.85ms
+[05:34:32.712] [[Biome]] Chunk (-2,1,8) center biome: Forest
+[05:34:32.716] [[Generation]] (-2,1,8): Chunk=2.73ms Mesh=3.84ms Vertices=0
+[05:34:32.716] [[Timing]] Chunk (-2,1,8): Chunk=2.73ms Mesh=3.84ms Send=0.10ms Total=6.87ms
+[05:34:32.719] [[Biome]] Chunk (6,0,-6) center biome: Forest
+[05:34:32.803] [[Generation]] (6,0,-6): Chunk=2.13ms Mesh=84.37ms Vertices=4617
+[05:34:32.803] [[Timing]] Chunk (6,0,-6): Chunk=2.13ms Mesh=84.37ms Send=0.13ms Total=86.81ms
+[05:34:32.805] [[Biome]] Chunk (8,1,-2) center biome: Forest
+[05:34:32.810] [[Generation]] (8,1,-2): Chunk=1.67ms Mesh=4.62ms Vertices=0
+[05:34:32.810] [[Timing]] Chunk (8,1,-2): Chunk=1.67ms Mesh=4.62ms Send=0.04ms Total=6.45ms
+[05:34:32.812] [[Biome]] Chunk (2,-1,-8) center biome: Forest
+[05:34:32.884] [[Generation]] (2,-1,-8): Chunk=1.22ms Mesh=72.42ms Vertices=0
+[05:34:32.884] [[Timing]] Chunk (2,-1,-8): Chunk=1.22ms Mesh=72.42ms Send=0.12ms Total=73.88ms
+[05:34:32.887] [[Biome]] Chunk (2,1,8) center biome: Forest
+[05:34:32.890] [[Generation]] (2,1,8): Chunk=2.54ms Mesh=3.22ms Vertices=0
+[05:34:32.890] [[Timing]] Chunk (2,1,8): Chunk=2.54ms Mesh=3.22ms Send=0.12ms Total=6.03ms
+[05:34:32.893] [[Biome]] Chunk (-8,1,2) center biome: Forest
+[05:34:32.898] [[Generation]] (-8,1,2): Chunk=2.35ms Mesh=4.53ms Vertices=0
+[05:34:32.898] [[Timing]] Chunk (-8,1,2): Chunk=2.35ms Mesh=4.53ms Send=0.09ms Total=7.09ms
+[05:34:32.900] [[Biome]] Chunk (2,-1,8) center biome: Forest
+[05:34:32.965] [[Generation]] (2,-1,8): Chunk=1.92ms Mesh=65.08ms Vertices=0
+[05:34:32.965] [[Timing]] Chunk (2,-1,8): Chunk=1.92ms Mesh=65.08ms Send=0.05ms Total=67.31ms
+[05:34:32.966] [[Biome]] Chunk (8,-1,2) center biome: Forest
+[05:34:33.030] [[Generation]] (8,-1,2): Chunk=1.23ms Mesh=63.41ms Vertices=222
+[05:34:33.030] [[Timing]] Chunk (8,-1,2): Chunk=1.23ms Mesh=63.41ms Send=0.07ms Total=64.82ms
+[05:34:33.032] [[Biome]] Chunk (2,1,-8) center biome: Forest
+[05:34:33.035] [[Generation]] (2,1,-8): Chunk=1.37ms Mesh=3.29ms Vertices=0
+[05:34:33.035] [[Timing]] Chunk (2,1,-8): Chunk=1.37ms Mesh=3.29ms Send=0.07ms Total=4.86ms
+[05:34:33.038] [[Biome]] Chunk (8,0,-3) center biome: Forest
+[05:34:33.101] [[Generation]] (8,0,-3): Chunk=3.23ms Mesh=62.51ms Vertices=4554
+[05:34:33.101] [[Timing]] Chunk (8,0,-3): Chunk=3.23ms Mesh=62.51ms Send=0.14ms Total=66.09ms
+[05:34:33.104] [[Biome]] Chunk (-3,0,-8) center biome: Forest
+[05:34:33.176] [[Generation]] (-3,0,-8): Chunk=1.73ms Mesh=71.90ms Vertices=4191
+[05:34:33.176] [[Timing]] Chunk (-3,0,-8): Chunk=1.73ms Mesh=71.90ms Send=0.10ms Total=73.87ms
+[05:34:33.179] [[Biome]] Chunk (-8,0,3) center biome: Forest
+[05:34:33.253] [[Generation]] (-8,0,3): Chunk=1.99ms Mesh=73.71ms Vertices=3483
+[05:34:33.253] [[Timing]] Chunk (-8,0,3): Chunk=1.99ms Mesh=73.71ms Send=0.13ms Total=76.02ms
+[05:34:33.255] [[Biome]] Chunk (-8,0,-3) center biome: Forest
+[05:34:33.328] [[Generation]] (-8,0,-3): Chunk=1.83ms Mesh=72.91ms Vertices=3369
+[05:34:33.328] [[Timing]] Chunk (-8,0,-3): Chunk=1.83ms Mesh=72.91ms Send=0.13ms Total=75.06ms
+[05:34:33.331] [[Biome]] Chunk (3,0,8) center biome: Forest
+[05:34:33.406] [[Generation]] (3,0,8): Chunk=1.74ms Mesh=75.50ms Vertices=3612
+[05:34:33.406] [[Timing]] Chunk (3,0,8): Chunk=1.74ms Mesh=75.50ms Send=0.08ms Total=77.44ms
+[05:34:33.408] [[Biome]] Chunk (-3,0,8) center biome: Forest
+[05:34:33.485] [[Generation]] (-3,0,8): Chunk=1.64ms Mesh=76.82ms Vertices=5181
+[05:34:33.486] [[Timing]] Chunk (-3,0,8): Chunk=1.64ms Mesh=76.82ms Send=0.14ms Total=78.73ms
+[05:34:33.488] [[Biome]] Chunk (3,0,-8) center biome: Forest
+[05:34:33.552] [[Generation]] (3,0,-8): Chunk=1.71ms Mesh=63.97ms Vertices=4272
+[05:34:33.552] [[Timing]] Chunk (3,0,-8): Chunk=1.71ms Mesh=63.97ms Send=0.15ms Total=65.99ms
+[05:34:33.555] [[Biome]] Chunk (8,0,3) center biome: Forest
+[05:34:33.640] [[Generation]] (8,0,3): Chunk=2.14ms Mesh=84.93ms Vertices=4716
+[05:34:33.640] [[Timing]] Chunk (8,0,3): Chunk=2.14ms Mesh=84.93ms Send=0.20ms Total=87.38ms
+[05:34:33.643] [[Biome]] Chunk (-5,0,7) center biome: Forest
+[05:34:33.728] [[Generation]] (-5,0,7): Chunk=1.90ms Mesh=85.28ms Vertices=3585
+[05:34:33.728] [[Timing]] Chunk (-5,0,7): Chunk=1.90ms Mesh=85.28ms Send=0.11ms Total=87.48ms
+[05:34:33.730] [[Biome]] Chunk (7,0,5) center biome: Forest
+[05:34:33.811] [[Generation]] (7,0,5): Chunk=1.89ms Mesh=80.76ms Vertices=4323
+[05:34:33.812] [[Timing]] Chunk (7,0,5): Chunk=1.89ms Mesh=80.76ms Send=0.20ms Total=83.05ms
+[05:34:33.814] [[Biome]] Chunk (-7,0,5) center biome: Forest
+[05:34:33.884] [[Generation]] (-7,0,5): Chunk=1.88ms Mesh=69.78ms Vertices=4233
+[05:34:33.884] [[Timing]] Chunk (-7,0,5): Chunk=1.88ms Mesh=69.78ms Send=0.24ms Total=72.12ms
+[05:34:33.887] [[Biome]] Chunk (5,0,-7) center biome: Forest
+[05:34:33.946] [[Generation]] (5,0,-7): Chunk=1.72ms Mesh=59.40ms Vertices=4455
+[05:34:33.947] [[Timing]] Chunk (5,0,-7): Chunk=1.72ms Mesh=59.40ms Send=0.11ms Total=61.36ms
+[05:34:33.948] [[Biome]] Chunk (-7,0,-5) center biome: Forest
+[05:34:34.013] [[Generation]] (-7,0,-5): Chunk=1.53ms Mesh=64.61ms Vertices=4452
+[05:34:34.013] [[Timing]] Chunk (-7,0,-5): Chunk=1.53ms Mesh=64.61ms Send=0.15ms Total=66.47ms
+[05:34:34.017] [[Biome]] Chunk (-5,0,-7) center biome: Forest
+[05:34:34.091] [[Generation]] (-5,0,-7): Chunk=2.24ms Mesh=74.76ms Vertices=3735
+[05:34:34.092] [[Timing]] Chunk (-5,0,-7): Chunk=2.24ms Mesh=74.76ms Send=0.27ms Total=77.44ms
+[05:34:34.094] [[Biome]] Chunk (7,0,-5) center biome: Forest
+[05:34:34.172] [[Generation]] (7,0,-5): Chunk=1.53ms Mesh=77.91ms Vertices=3912
+[05:34:34.172] [[Timing]] Chunk (7,0,-5): Chunk=1.53ms Mesh=77.91ms Send=0.09ms Total=79.69ms
+[05:34:34.174] [[Biome]] Chunk (5,0,7) center biome: Forest
+[05:34:34.247] [[Generation]] (5,0,7): Chunk=1.57ms Mesh=72.80ms Vertices=3660
+[05:34:34.247] [[Timing]] Chunk (5,0,7): Chunk=1.57ms Mesh=72.80ms Send=0.24ms Total=74.86ms
+[05:34:34.250] [[Biome]] Chunk (-6,1,6) center biome: Forest
+[05:34:34.255] [[Generation]] (-6,1,6): Chunk=2.57ms Mesh=4.10ms Vertices=0
+[05:34:34.255] [[Timing]] Chunk (-6,1,6): Chunk=2.57ms Mesh=4.10ms Send=0.19ms Total=7.05ms
+[05:34:34.257] [[Biome]] Chunk (-6,-1,6) center biome: Forest
+[05:34:34.330] [[Generation]] (-6,-1,6): Chunk=1.73ms Mesh=73.49ms Vertices=1083
+[05:34:34.331] [[Timing]] Chunk (-6,-1,6): Chunk=1.73ms Mesh=73.49ms Send=0.12ms Total=75.56ms
+[05:34:34.333] [[Biome]] Chunk (-6,1,-6) center biome: Forest
+[05:34:34.337] [[Generation]] (-6,1,-6): Chunk=2.00ms Mesh=3.69ms Vertices=0
+[05:34:34.337] [[Timing]] Chunk (-6,1,-6): Chunk=2.00ms Mesh=3.69ms Send=0.13ms Total=5.96ms
+[05:34:34.339] [[Biome]] Chunk (6,-1,-6) center biome: Forest
+[05:34:34.410] [[Generation]] (6,-1,-6): Chunk=1.86ms Mesh=71.09ms Vertices=1743
+[05:34:34.410] [[Timing]] Chunk (6,-1,-6): Chunk=1.86ms Mesh=71.09ms Send=0.11ms Total=73.30ms
+[05:34:34.414] [[Biome]] Chunk (6,1,-6) center biome: Forest
+[05:34:34.416] [[Generation]] (6,1,-6): Chunk=2.66ms Mesh=2.86ms Vertices=0
+[05:34:34.417] [[Timing]] Chunk (6,1,-6): Chunk=2.66ms Mesh=2.86ms Send=0.10ms Total=5.75ms
+[05:34:34.419] [[Biome]] Chunk (6,-1,6) center biome: Forest
+[05:34:34.487] [[Generation]] (6,-1,6): Chunk=2.19ms Mesh=68.22ms Vertices=0
+[05:34:34.487] [[Timing]] Chunk (6,-1,6): Chunk=2.19ms Mesh=68.22ms Send=0.08ms Total=70.65ms
+[05:34:34.489] [[Biome]] Chunk (6,1,6) center biome: Forest
+[05:34:34.493] [[Generation]] (6,1,6): Chunk=1.69ms Mesh=3.62ms Vertices=0
+[05:34:34.493] [[Timing]] Chunk (6,1,6): Chunk=1.69ms Mesh=3.62ms Send=0.09ms Total=5.53ms
+[05:34:34.496] [[Biome]] Chunk (-6,-1,-6) center biome: Forest
+[05:34:34.569] [[Generation]] (-6,-1,-6): Chunk=2.11ms Mesh=73.80ms Vertices=147
+[05:34:34.570] [[Timing]] Chunk (-6,-1,-6): Chunk=2.11ms Mesh=73.80ms Send=0.08ms Total=76.16ms
+[05:34:34.571] [[Biome]] Chunk (8,-1,3) center biome: Forest
+[05:34:34.645] [[Generation]] (8,-1,3): Chunk=1.45ms Mesh=73.22ms Vertices=0
+[05:34:34.645] [[Timing]] Chunk (8,-1,3): Chunk=1.45ms Mesh=73.22ms Send=0.13ms Total=74.94ms
+[05:34:34.648] [[Biome]] Chunk (-8,1,3) center biome: Forest
+[05:34:34.652] [[Generation]] (-8,1,3): Chunk=2.91ms Mesh=3.76ms Vertices=0
+[05:34:34.652] [[Timing]] Chunk (-8,1,3): Chunk=2.91ms Mesh=3.76ms Send=0.10ms Total=6.99ms
+[05:34:34.654] [[Biome]] Chunk (-8,-1,3) center biome: Forest
+[05:34:34.723] [[Generation]] (-8,-1,3): Chunk=1.62ms Mesh=68.96ms Vertices=0
+[05:34:34.723] [[Timing]] Chunk (-8,-1,3): Chunk=1.62ms Mesh=68.96ms Send=0.07ms Total=70.76ms
+[05:34:34.726] [[Biome]] Chunk (8,-1,-3) center biome: Forest
+[05:34:34.798] [[Generation]] (8,-1,-3): Chunk=2.58ms Mesh=71.96ms Vertices=1761
+[05:34:34.798] [[Timing]] Chunk (8,-1,-3): Chunk=2.58ms Mesh=71.96ms Send=0.19ms Total=74.95ms
+[05:34:34.802] [[Biome]] Chunk (-8,1,-3) center biome: Forest
+[05:34:34.806] [[Generation]] (-8,1,-3): Chunk=3.12ms Mesh=4.12ms Vertices=0
+[05:34:34.806] [[Timing]] Chunk (-8,1,-3): Chunk=3.12ms Mesh=4.12ms Send=0.12ms Total=7.60ms
+[05:34:34.808] [[Biome]] Chunk (-8,-1,-3) center biome: Forest
+[05:34:34.876] [[Generation]] (-8,-1,-3): Chunk=1.96ms Mesh=68.01ms Vertices=0
+[05:34:34.877] [[Timing]] Chunk (-8,-1,-3): Chunk=1.96ms Mesh=68.01ms Send=0.06ms Total=70.20ms
+[05:34:34.879] [[Biome]] Chunk (8,1,-3) center biome: Forest
+[05:34:34.881] [[Generation]] (8,1,-3): Chunk=2.12ms Mesh=2.52ms Vertices=0
+[05:34:34.882] [[Timing]] Chunk (8,1,-3): Chunk=2.12ms Mesh=2.52ms Send=0.08ms Total=4.82ms
+[05:34:34.883] [[Biome]] Chunk (8,1,3) center biome: Forest
+[05:34:34.887] [[Generation]] (8,1,3): Chunk=1.51ms Mesh=3.54ms Vertices=0
+[05:34:34.887] [[Server]] Error handling chunk (8,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[05:34:34.892] [[UDP]] Loop cancelled

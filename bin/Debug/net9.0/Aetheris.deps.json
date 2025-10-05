@@ -8,12 +8,33 @@
     ".NETCoreApp,Version=v9.0": {
       "Aetheris/1.0.0": {
         "dependencies": {
+          "BepuPhysics": "2.5.0-beta.27",
+          "BepuUtilities": "2.5.0-beta.27",
           "OpenTK": "4.9.4",
           "SixLabors.ImageSharp": "3.1.11",
           "StbImageSharp": "2.30.15"
         },
         "runtime": {
           "Aetheris.dll": {}
+        }
+      },
+      "BepuPhysics/2.5.0-beta.27": {
+        "dependencies": {
+          "BepuUtilities": "2.5.0-beta.27"
+        },
+        "runtime": {
+          "lib/net8.0/BepuPhysics.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.0.0"
+          }
+        }
+      },
+      "BepuUtilities/2.5.0-beta.27": {
+        "runtime": {
+          "lib/net8.0/BepuUtilities.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.0.0"
+          }
         }
       },
       "OpenTK/4.9.4": {
@@ -179,6 +200,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BepuPhysics/2.5.0-beta.27": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5JxyuUsgafhoazUJB5PKO88gD8wv6gfIVk6SrdT0cT7JlvD4iOAJZzXu2DrGr1yQde4tgoosebggGeKH2avYPA==",
+      "path": "bepuphysics/2.5.0-beta.27",
+      "hashPath": "bepuphysics.2.5.0-beta.27.nupkg.sha512"
+    },
+    "BepuUtilities/2.5.0-beta.27": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-alZRZVmQMnmDP0F41JqLpU6+BnIvwvqEAmXAQ2d7PLEDbo6qg1pWaVCfh9l4dMlvAOtKoFaSqP5MWWb5I5Ez/A==",
+      "path": "bepuutilities/2.5.0-beta.27",
+      "hashPath": "bepuutilities.2.5.0-beta.27.nupkg.sha512"
     },
     "OpenTK/4.9.4": {
       "type": "package",

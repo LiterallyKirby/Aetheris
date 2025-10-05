@@ -38,7 +38,7 @@ namespace Aetheris
             cts = new CancellationTokenSource();
             AutoTuneSettings();
 
-            Task.Run(async () => await ConnectToServerAsync("127.0.0.1", Config.SERVER_PORT)).Wait();
+            Task.Run(async () => await ConnectToServerAsync("127.0.0.1", ClientConfig.SERVER_PORT)).Wait();
 
             game = new Game(new Dictionary<(int, int, int), Aetheris.Chunk>(loadedChunks), this);
 
@@ -51,7 +51,7 @@ namespace Aetheris
 
         private void AutoTuneSettings()
         {
-            int rd = Config.RENDER_DISTANCE;
+            int rd = ClientConfig.RENDER_DISTANCE;
 
             if (rd <= 4)
             {
@@ -154,7 +154,7 @@ namespace Aetheris
                         int cz = playerCz + dz;
 
                         // CRITICAL OPTIMIZATION: Skip chunks far from player's actual Y position
-                        int chunkCenterY = cy * Config.CHUNK_SIZE_Y + Config.CHUNK_SIZE_Y / 2;
+                        int chunkCenterY = cy * ClientConfig.CHUNK_SIZE_Y + ClientConfig.CHUNK_SIZE_Y / 2;
                         int yDistance = Math.Abs(chunkCenterY - playerBlockY);
 
                         // Don't load chunks more than 150 blocks above/below player
@@ -233,7 +233,7 @@ namespace Aetheris
 
             if (unloadLimit > 0)
             {
-                Console.WriteLine($"[Client] Unloaded {unloadLimit} distant chunks");
+		    
             }
         }
 
@@ -318,7 +318,7 @@ namespace Aetheris
                 {
                     if (stream == null || tcp == null || !tcp.Connected)
                     {
-                        await ConnectToServerAsync("127.0.0.1", Config.SERVER_PORT);
+                        await ConnectToServerAsync("127.0.0.1", ClientConfig.SERVER_PORT);
                     }
                 }
                 finally
