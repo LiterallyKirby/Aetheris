@@ -1,0 +1,553 @@
+[13:53:06.281] [[Server]] Log file created: server_log_20251006_135306.txt
+[13:53:06.284] [[Server]] Initializing world generation...
+[13:53:06.295] [[Server]] UDP listening on port 42070
+[13:53:06.305] [[Server]] Listening on port 42069 @ 60 TPS
+[13:53:06.305] [[Server]] Performance timing enabled - waiting for connections...
+[13:53:06.324] [[Server]] Tick 0 | Cache: 0/20000
+[13:53:11.339] [[Server]] Tick 300 | Cache: 0/20000
+[13:53:13.395] [[Biome]] Chunk (0,0,0) center biome: Desert
+[13:53:13.514] [[Generation]] (0,0,0): Chunk=12.02ms Mesh=118.14ms Vertices=4182
+[13:53:13.517] [[Timing]] Chunk (0,0,0): Chunk=12.02ms Mesh=118.14ms Send=2.76ms Total=143.76ms
+[13:53:13.522] [[Biome]] Chunk (0,0,1) center biome: Desert
+[13:53:13.636] [[Generation]] (0,0,1): Chunk=2.77ms Mesh=114.29ms Vertices=3633
+[13:53:13.636] [[Timing]] Chunk (0,0,1): Chunk=2.77ms Mesh=114.29ms Send=0.21ms Total=117.50ms
+[13:53:13.643] [[Biome]] Chunk (0,0,-1) center biome: Desert
+[13:53:13.722] [[Generation]] (0,0,-1): Chunk=1.40ms Mesh=79.23ms Vertices=3345
+[13:53:13.722] [[Timing]] Chunk (0,0,-1): Chunk=1.40ms Mesh=79.23ms Send=0.20ms Total=81.80ms
+[13:53:13.725] [[Biome]] Chunk (-1,0,0) center biome: Desert
+[13:53:13.827] [[Generation]] (-1,0,0): Chunk=2.49ms Mesh=101.28ms Vertices=4428
+[13:53:13.827] [[Timing]] Chunk (-1,0,0): Chunk=2.49ms Mesh=101.28ms Send=0.20ms Total=104.17ms
+[13:53:13.829] [[Biome]] Chunk (1,0,0) center biome: Desert
+[13:53:13.928] [[Generation]] (1,0,0): Chunk=1.48ms Mesh=99.41ms Vertices=3417
+[13:53:13.929] [[Timing]] Chunk (1,0,0): Chunk=1.48ms Mesh=99.41ms Send=0.24ms Total=101.30ms
+[13:53:13.933] [[Biome]] Chunk (-1,0,1) center biome: Desert
+[13:53:14.065] [[Generation]] (-1,0,1): Chunk=2.05ms Mesh=132.35ms Vertices=4431
+[13:53:14.066] [[Timing]] Chunk (-1,0,1): Chunk=2.05ms Mesh=132.35ms Send=0.48ms Total=135.11ms
+[13:53:14.069] [[Biome]] Chunk (1,0,-1) center biome: Desert
+[13:53:14.161] [[Generation]] (1,0,-1): Chunk=2.02ms Mesh=92.33ms Vertices=3369
+[13:53:14.161] [[Timing]] Chunk (1,0,-1): Chunk=2.02ms Mesh=92.33ms Send=0.18ms Total=94.80ms
+[13:53:14.164] [[Biome]] Chunk (1,0,1) center biome: Mountains
+[13:53:14.273] [[Generation]] (1,0,1): Chunk=1.84ms Mesh=108.92ms Vertices=3711
+[13:53:14.273] [[Timing]] Chunk (1,0,1): Chunk=1.84ms Mesh=108.92ms Send=0.31ms Total=111.26ms
+[13:53:14.276] [[Biome]] Chunk (-1,0,-1) center biome: Desert
+[13:53:14.369] [[Generation]] (-1,0,-1): Chunk=1.72ms Mesh=93.51ms Vertices=3354
+[13:53:14.370] [[Timing]] Chunk (-1,0,-1): Chunk=1.72ms Mesh=93.51ms Send=0.19ms Total=95.82ms
+[13:53:14.377] [[Biome]] Chunk (0,0,2) center biome: Mountains
+[13:53:14.511] [[Generation]] (0,0,2): Chunk=3.00ms Mesh=133.40ms Vertices=4101
+[13:53:14.511] [[Timing]] Chunk (0,0,2): Chunk=3.00ms Mesh=133.40ms Send=0.13ms Total=136.73ms
+[13:53:14.513] [[Biome]] Chunk (2,0,0) center biome: Desert
+[13:53:14.605] [[Generation]] (2,0,0): Chunk=1.38ms Mesh=92.22ms Vertices=4104
+[13:53:14.605] [[Timing]] Chunk (2,0,0): Chunk=1.38ms Mesh=92.22ms Send=0.10ms Total=93.86ms
+[13:53:14.607] [[Biome]] Chunk (-2,0,0) center biome: Desert
+[13:53:14.690] [[Generation]] (-2,0,0): Chunk=1.23ms Mesh=83.06ms Vertices=4935
+[13:53:14.691] [[Timing]] Chunk (-2,0,0): Chunk=1.23ms Mesh=83.06ms Send=0.35ms Total=84.83ms
+[13:53:14.694] [[Biome]] Chunk (0,1,0) center biome: Desert
+[13:53:14.700] [[Generation]] (0,1,0): Chunk=3.09ms Mesh=5.72ms Vertices=0
+[13:53:14.701] [[Timing]] Chunk (0,1,0): Chunk=3.09ms Mesh=5.72ms Send=0.24ms Total=9.45ms
+[13:53:14.704] [[Biome]] Chunk (0,-1,0) center biome: Desert
+[13:53:14.788] [[Generation]] (0,-1,0): Chunk=2.84ms Mesh=84.38ms Vertices=10914
+[13:53:14.789] [[Timing]] Chunk (0,-1,0): Chunk=2.84ms Mesh=84.38ms Send=0.37ms Total=88.02ms
+[13:53:14.791] [[Biome]] Chunk (0,0,-2) center biome: Desert
+[13:53:14.854] [[Generation]] (0,0,-2): Chunk=1.45ms Mesh=63.09ms Vertices=4098
+[13:53:14.855] [[Timing]] Chunk (0,0,-2): Chunk=1.45ms Mesh=63.09ms Send=0.32ms Total=65.16ms
+[13:53:14.857] [[Biome]] Chunk (-1,0,-2) center biome: Desert
+[13:53:14.934] [[Generation]] (-1,0,-2): Chunk=2.31ms Mesh=76.03ms Vertices=3207
+[13:53:14.934] [[Timing]] Chunk (-1,0,-2): Chunk=2.31ms Mesh=76.03ms Send=0.24ms Total=78.80ms
+[13:53:14.937] [[Biome]] Chunk (-1,1,0) center biome: Desert
+[13:53:14.943] [[Generation]] (-1,1,0): Chunk=2.68ms Mesh=5.80ms Vertices=0
+[13:53:14.943] [[Timing]] Chunk (-1,1,0): Chunk=2.68ms Mesh=5.80ms Send=0.08ms Total=8.80ms
+[13:53:14.946] [[Biome]] Chunk (-2,0,1) center biome: Desert
+[13:53:15.070] [[Generation]] (-2,0,1): Chunk=2.80ms Mesh=124.06ms Vertices=3819
+[13:53:15.071] [[Timing]] Chunk (-2,0,1): Chunk=2.80ms Mesh=124.06ms Send=0.12ms Total=127.17ms
+[13:53:15.073] [[Biome]] Chunk (-1,0,2) center biome: Mountains
+[13:53:15.223] [[Generation]] (-1,0,2): Chunk=1.45ms Mesh=149.57ms Vertices=4647
+[13:53:15.223] [[Timing]] Chunk (-1,0,2): Chunk=1.45ms Mesh=149.57ms Send=0.18ms Total=151.40ms
+[13:53:15.227] [[Biome]] Chunk (-1,-1,0) center biome: Desert
+[13:53:15.331] [[Generation]] (-1,-1,0): Chunk=2.74ms Mesh=104.36ms Vertices=10140
+[13:53:15.331] [[Timing]] Chunk (-1,-1,0): Chunk=2.74ms Mesh=104.36ms Send=0.34ms Total=107.60ms
+[13:53:15.338] [[Biome]] Chunk (0,-1,1) center biome: Desert
+[13:53:15.436] [[Generation]] (0,-1,1): Chunk=4.04ms Mesh=97.37ms Vertices=4341
+[13:53:15.436] [[Timing]] Chunk (0,-1,1): Chunk=4.04ms Mesh=97.37ms Send=0.34ms Total=103.97ms
+[13:53:15.439] [[Biome]] Chunk (0,1,1) center biome: Desert
+[13:53:15.443] [[Generation]] (0,1,1): Chunk=1.64ms Mesh=4.03ms Vertices=0
+[13:53:15.443] [[Timing]] Chunk (0,1,1): Chunk=1.64ms Mesh=4.03ms Send=0.10ms Total=5.98ms
+[13:53:15.446] [[Biome]] Chunk (1,0,-2) center biome: Desert
+[13:53:15.525] [[Generation]] (1,0,-2): Chunk=2.39ms Mesh=78.79ms Vertices=3306
+[13:53:15.525] [[Timing]] Chunk (1,0,-2): Chunk=2.39ms Mesh=78.79ms Send=0.35ms Total=81.90ms
+[13:53:15.529] [[Biome]] Chunk (1,-1,0) center biome: Desert
+[13:53:15.630] [[Generation]] (1,-1,0): Chunk=2.97ms Mesh=101.41ms Vertices=11910
+[13:53:15.631] [[Timing]] Chunk (1,-1,0): Chunk=2.97ms Mesh=101.41ms Send=0.52ms Total=105.11ms
+[13:53:15.634] [[Biome]] Chunk (1,1,0) center biome: Desert
+[13:53:15.638] [[Generation]] (1,1,0): Chunk=2.06ms Mesh=4.20ms Vertices=0
+[13:53:15.638] [[Timing]] Chunk (1,1,0): Chunk=2.06ms Mesh=4.20ms Send=0.07ms Total=6.47ms
+[13:53:15.641] [[Biome]] Chunk (1,0,2) center biome: Mountains
+[13:53:15.773] [[Generation]] (1,0,2): Chunk=2.09ms Mesh=131.71ms Vertices=3639
+[13:53:15.773] [[Timing]] Chunk (1,0,2): Chunk=2.09ms Mesh=131.71ms Send=0.31ms Total=134.44ms
+[13:53:15.776] [[Biome]] Chunk (2,0,-1) center biome: Desert
+[13:53:15.881] [[Generation]] (2,0,-1): Chunk=2.03ms Mesh=104.66ms Vertices=3357
+[13:53:15.881] [[Timing]] Chunk (2,0,-1): Chunk=2.03ms Mesh=104.66ms Send=0.24ms Total=107.11ms
+[13:53:15.883] [[Biome]] Chunk (2,0,1) center biome: Mountains
+[13:53:16.014] [[Generation]] (2,0,1): Chunk=1.50ms Mesh=130.65ms Vertices=4629
+[13:53:16.014] [[Timing]] Chunk (2,0,1): Chunk=1.50ms Mesh=130.65ms Send=0.16ms Total=132.43ms
+[13:53:16.016] [[Biome]] Chunk (0,1,-1) center biome: Desert
+[13:53:16.021] [[Generation]] (0,1,-1): Chunk=1.44ms Mesh=4.90ms Vertices=0
+[13:53:16.021] [[Timing]] Chunk (0,1,-1): Chunk=1.44ms Mesh=4.90ms Send=0.33ms Total=6.96ms
+[13:53:16.025] [[Biome]] Chunk (-2,0,-1) center biome: Desert
+[13:53:16.110] [[Generation]] (-2,0,-1): Chunk=3.12ms Mesh=84.65ms Vertices=4494
+[13:53:16.110] [[Timing]] Chunk (-2,0,-1): Chunk=3.12ms Mesh=84.65ms Send=0.09ms Total=88.00ms
+[13:53:16.112] [[Biome]] Chunk (0,-1,-1) center biome: Desert
+[13:53:16.199] [[Generation]] (0,-1,-1): Chunk=1.39ms Mesh=86.98ms Vertices=5286
+[13:53:16.199] [[Timing]] Chunk (0,-1,-1): Chunk=1.39ms Mesh=86.98ms Send=0.28ms Total=88.80ms
+[13:53:16.203] [[Biome]] Chunk (1,-1,-1) center biome: Desert
+[13:53:16.309] [[Generation]] (1,-1,-1): Chunk=3.22ms Mesh=105.32ms Vertices=2076
+[13:53:16.309] [[Timing]] Chunk (1,-1,-1): Chunk=3.22ms Mesh=105.32ms Send=0.19ms Total=108.94ms
+[13:53:16.312] [[Biome]] Chunk (-1,-1,-1) center biome: Desert
+[13:53:16.329] [[Server]] Tick 600 | Cache: 32/20000
+[13:53:16.329]   Requests: 32 | Avg Times: Chunk=2.52ms Mesh=87.37ms Send=0.32ms Total=90.21ms
+[13:53:16.410] [[Generation]] (-1,-1,-1): Chunk=2.53ms Mesh=97.80ms Vertices=8946
+[13:53:16.410] [[Timing]] Chunk (-1,-1,-1): Chunk=2.53ms Mesh=97.80ms Send=0.47ms Total=101.08ms
+[13:53:16.414] [[Biome]] Chunk (-1,1,-1) center biome: Desert
+[13:53:16.420] [[Generation]] (-1,1,-1): Chunk=2.73ms Mesh=5.39ms Vertices=0
+[13:53:16.420] [[Timing]] Chunk (-1,1,-1): Chunk=2.73ms Mesh=5.39ms Send=0.16ms Total=8.50ms
+[13:53:16.424] [[Biome]] Chunk (-1,-1,1) center biome: Desert
+[13:53:16.521] [[Generation]] (-1,-1,1): Chunk=3.17ms Mesh=97.28ms Vertices=5814
+[13:53:16.521] [[Timing]] Chunk (-1,-1,1): Chunk=3.17ms Mesh=97.28ms Send=0.21ms Total=100.80ms
+[13:53:16.524] [[Biome]] Chunk (1,1,1) center biome: Mountains
+[13:53:16.529] [[Generation]] (1,1,1): Chunk=1.34ms Mesh=5.23ms Vertices=0
+[13:53:16.529] [[Timing]] Chunk (1,1,1): Chunk=1.34ms Mesh=5.23ms Send=0.07ms Total=6.75ms
+[13:53:16.531] [[Biome]] Chunk (1,-1,1) center biome: Mountains
+[13:53:16.630] [[Generation]] (1,-1,1): Chunk=1.52ms Mesh=98.92ms Vertices=11784
+[13:53:16.630] [[Timing]] Chunk (1,-1,1): Chunk=1.52ms Mesh=98.92ms Send=0.34ms Total=100.88ms
+[13:53:20.544] [[Cache]] Hit for (0,0,0)
+[13:53:20.545] [[Timing]] Chunk (0,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.35ms Total=1.07ms
+[13:53:20.552] [[Cache]] Hit for (0,0,1)
+[13:53:20.553] [[Timing]] Chunk (0,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.13ms
+[13:53:20.556] [[Cache]] Hit for (0,0,-1)
+[13:53:20.556] [[Timing]] Chunk (0,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.12ms
+[13:53:20.557] [[Cache]] Hit for (-1,0,0)
+[13:53:20.557] [[Timing]] Chunk (-1,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.10ms Total=0.14ms
+[13:53:20.557] [[Cache]] Hit for (1,0,0)
+[13:53:20.558] [[Timing]] Chunk (1,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.12ms
+[13:53:20.558] [[Cache]] Hit for (-1,0,1)
+[13:53:20.558] [[Timing]] Chunk (-1,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.10ms
+[13:53:20.558] [[Cache]] Hit for (1,0,-1)
+[13:53:20.558] [[Timing]] Chunk (1,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.12ms
+[13:53:20.559] [[Cache]] Hit for (1,0,1)
+[13:53:20.559] [[Timing]] Chunk (1,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.10ms
+[13:53:20.561] [[Cache]] Hit for (-1,0,-1)
+[13:53:20.561] [[Timing]] Chunk (-1,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.11ms
+[13:53:20.561] [[Cache]] Hit for (0,0,2)
+[13:53:20.561] [[Timing]] Chunk (0,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.13ms
+[13:53:20.562] [[Cache]] Hit for (2,0,0)
+[13:53:20.562] [[Timing]] Chunk (2,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.10ms
+[13:53:20.562] [[Cache]] Hit for (-2,0,0)
+[13:53:20.562] [[Timing]] Chunk (-2,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.17ms Total=0.19ms
+[13:53:20.562] [[Cache]] Hit for (0,1,0)
+[13:53:20.562] [[Timing]] Chunk (0,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.03ms Total=0.06ms
+[13:53:20.562] [[Cache]] Hit for (0,-1,0)
+[13:53:20.563] [[Timing]] Chunk (0,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.15ms Total=0.17ms
+[13:53:20.563] [[Cache]] Hit for (0,0,-2)
+[13:53:20.563] [[Timing]] Chunk (0,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.26ms Total=0.29ms
+[13:53:20.564] [[Cache]] Hit for (-1,0,-2)
+[13:53:20.564] [[Timing]] Chunk (-1,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.08ms
+[13:53:20.564] [[Cache]] Hit for (-1,1,0)
+[13:53:20.564] [[Timing]] Chunk (-1,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.05ms
+[13:53:20.564] [[Cache]] Hit for (-2,0,1)
+[13:53:20.564] [[Timing]] Chunk (-2,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.07ms
+[13:53:20.565] [[Cache]] Hit for (-1,0,2)
+[13:53:20.565] [[Timing]] Chunk (-1,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.12ms
+[13:53:20.565] [[Cache]] Hit for (-1,-1,0)
+[13:53:20.566] [[Timing]] Chunk (-1,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.26ms Total=0.28ms
+[13:53:20.566] [[Cache]] Hit for (0,-1,1)
+[13:53:20.566] [[Timing]] Chunk (0,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.11ms
+[13:53:20.567] [[Cache]] Hit for (0,1,1)
+[13:53:20.567] [[Timing]] Chunk (0,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.07ms
+[13:53:20.567] [[Cache]] Hit for (1,0,-2)
+[13:53:20.567] [[Timing]] Chunk (1,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.12ms
+[13:53:20.567] [[Cache]] Hit for (1,-1,0)
+[13:53:20.568] [[Timing]] Chunk (1,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.31ms Total=0.35ms
+[13:53:20.569] [[Cache]] Hit for (1,1,0)
+[13:53:20.569] [[Timing]] Chunk (1,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.08ms
+[13:53:20.569] [[Cache]] Hit for (1,0,2)
+[13:53:20.569] [[Timing]] Chunk (1,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.12ms
+[13:53:20.569] [[Cache]] Hit for (2,0,-1)
+[13:53:20.569] [[Timing]] Chunk (2,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.11ms
+[13:53:20.570] [[Cache]] Hit for (2,0,1)
+[13:53:20.570] [[Timing]] Chunk (2,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.18ms
+[13:53:20.570] [[Cache]] Hit for (0,1,-1)
+[13:53:20.571] [[Timing]] Chunk (0,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.05ms Total=0.10ms
+[13:53:20.571] [[Cache]] Hit for (-2,0,-1)
+[13:53:20.571] [[Timing]] Chunk (-2,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.12ms
+[13:53:20.571] [[Cache]] Hit for (0,-1,-1)
+[13:53:20.571] [[Timing]] Chunk (0,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.13ms Total=0.15ms
+[13:53:20.572] [[Cache]] Hit for (1,-1,-1)
+[13:53:20.572] [[Timing]] Chunk (1,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.14ms
+[13:53:20.572] [[Cache]] Hit for (-1,-1,-1)
+[13:53:20.572] [[Timing]] Chunk (-1,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.19ms Total=0.20ms
+[13:53:20.573] [[Cache]] Hit for (-1,1,-1)
+[13:53:20.573] [[Timing]] Chunk (-1,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.03ms Total=0.06ms
+[13:53:20.573] [[Cache]] Hit for (-1,-1,1)
+[13:53:20.573] [[Timing]] Chunk (-1,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.10ms
+[13:53:20.573] [[Cache]] Hit for (1,1,1)
+[13:53:20.574] [[Timing]] Chunk (1,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.13ms
+[13:53:20.574] [[Cache]] Hit for (1,-1,1)
+[13:53:20.574] [[Timing]] Chunk (1,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.19ms Total=0.22ms
+[13:53:20.577] [[Biome]] Chunk (1,1,-1) center biome: Desert
+[13:53:20.582] [[Generation]] (1,1,-1): Chunk=2.34ms Mesh=4.32ms Vertices=0
+[13:53:20.582] [[Timing]] Chunk (1,1,-1): Chunk=2.34ms Mesh=4.32ms Send=0.07ms Total=6.86ms
+[13:53:20.583] [[Biome]] Chunk (-1,1,1) center biome: Desert
+[13:53:20.588] [[Generation]] (-1,1,1): Chunk=1.39ms Mesh=3.93ms Vertices=0
+[13:53:20.588] [[Timing]] Chunk (-1,1,1): Chunk=1.39ms Mesh=3.93ms Send=0.10ms Total=5.57ms
+[13:53:20.589] [[Biome]] Chunk (-2,0,2) center biome: Desert
+[13:53:20.699] [[Generation]] (-2,0,2): Chunk=1.44ms Mesh=109.70ms Vertices=2340
+[13:53:20.699] [[Timing]] Chunk (-2,0,2): Chunk=1.44ms Mesh=109.70ms Send=0.12ms Total=111.34ms
+[13:53:20.703] [[Biome]] Chunk (0,1,-2) center biome: Desert
+[13:53:20.709] [[Generation]] (0,1,-2): Chunk=3.30ms Mesh=5.71ms Vertices=0
+[13:53:20.709] [[Timing]] Chunk (0,1,-2): Chunk=3.30ms Mesh=5.71ms Send=0.08ms Total=9.24ms
+[13:53:20.712] [[Biome]] Chunk (0,-1,2) center biome: Mountains
+[13:53:20.810] [[Generation]] (0,-1,2): Chunk=2.92ms Mesh=98.31ms Vertices=0
+[13:53:20.811] [[Timing]] Chunk (0,-1,2): Chunk=2.92ms Mesh=98.31ms Send=0.08ms Total=101.42ms
+[13:53:20.813] [[Biome]] Chunk (-2,1,0) center biome: Desert
+[13:53:20.817] [[Generation]] (-2,1,0): Chunk=1.56ms Mesh=3.93ms Vertices=0
+[13:53:20.817] [[Timing]] Chunk (-2,1,0): Chunk=1.56ms Mesh=3.93ms Send=0.08ms Total=5.82ms
+[13:53:20.819] [[Biome]] Chunk (2,0,-2) center biome: Desert
+[13:53:20.901] [[Generation]] (2,0,-2): Chunk=1.68ms Mesh=82.16ms Vertices=3390
+[13:53:20.901] [[Timing]] Chunk (2,0,-2): Chunk=1.68ms Mesh=82.16ms Send=0.21ms Total=84.15ms
+[13:53:20.904] [[Biome]] Chunk (2,-1,0) center biome: Desert
+[13:53:20.986] [[Generation]] (2,-1,0): Chunk=1.79ms Mesh=82.73ms Vertices=2238
+[13:53:20.987] [[Timing]] Chunk (2,-1,0): Chunk=1.79ms Mesh=82.73ms Send=0.17ms Total=84.80ms
+[13:53:20.989] [[Biome]] Chunk (2,1,0) center biome: Desert
+[13:53:20.993] [[Generation]] (2,1,0): Chunk=1.55ms Mesh=4.17ms Vertices=0
+[13:53:20.993] [[Timing]] Chunk (2,1,0): Chunk=1.55ms Mesh=4.17ms Send=0.05ms Total=5.87ms
+[13:53:20.995] [[Biome]] Chunk (2,0,2) center biome: Mountains
+[13:53:21.105] [[Generation]] (2,0,2): Chunk=1.56ms Mesh=110.16ms Vertices=4467
+[13:53:21.105] [[Timing]] Chunk (2,0,2): Chunk=1.56ms Mesh=110.16ms Send=0.09ms Total=111.94ms
+[13:53:21.108] [[Biome]] Chunk (0,1,2) center biome: Mountains
+[13:53:21.112] [[Generation]] (0,1,2): Chunk=1.63ms Mesh=4.37ms Vertices=0
+[13:53:21.113] [[Timing]] Chunk (0,1,2): Chunk=1.63ms Mesh=4.37ms Send=0.04ms Total=6.13ms
+[13:53:21.115] [[Biome]] Chunk (-2,-1,0) center biome: Desert
+[13:53:21.209] [[Generation]] (-2,-1,0): Chunk=1.70ms Mesh=94.87ms Vertices=7668
+[13:53:21.210] [[Timing]] Chunk (-2,-1,0): Chunk=1.70ms Mesh=94.87ms Send=0.65ms Total=97.38ms
+[13:53:21.213] [[Biome]] Chunk (0,-1,-2) center biome: Desert
+[13:53:21.305] [[Generation]] (0,-1,-2): Chunk=2.64ms Mesh=91.83ms Vertices=4440
+[13:53:21.305] [[Timing]] Chunk (0,-1,-2): Chunk=2.64ms Mesh=91.83ms Send=0.11ms Total=94.72ms
+[13:53:21.308] [[Biome]] Chunk (-2,0,-2) center biome: Desert
+[13:53:21.364] [[Server]] Tick 900 | Cache: 50/20000
+[13:53:21.364]   Requests: 87 | Avg Times: Chunk=1.35ms Mesh=43.64ms Send=0.20ms Total=45.19ms
+[13:53:21.390] [[Generation]] (-2,0,-2): Chunk=2.37ms Mesh=81.79ms Vertices=3333
+[13:53:21.390] [[Timing]] Chunk (-2,0,-2): Chunk=2.37ms Mesh=81.79ms Send=0.11ms Total=84.35ms
+[13:53:21.393] [[Biome]] Chunk (-2,-1,-1) center biome: Desert
+[13:53:21.491] [[Generation]] (-2,-1,-1): Chunk=2.35ms Mesh=98.41ms Vertices=522
+[13:53:21.491] [[Timing]] Chunk (-2,-1,-1): Chunk=2.35ms Mesh=98.41ms Send=0.07ms Total=100.93ms
+[13:53:21.493] [[Biome]] Chunk (3,0,0) center biome: Desert
+[13:53:21.596] [[Generation]] (3,0,0): Chunk=1.61ms Mesh=103.20ms Vertices=3837
+[13:53:21.597] [[Timing]] Chunk (3,0,0): Chunk=1.61ms Mesh=103.20ms Send=0.10ms Total=105.01ms
+[13:53:21.599] [[Biome]] Chunk (2,1,1) center biome: Mountains
+[13:53:21.604] [[Generation]] (2,1,1): Chunk=1.48ms Mesh=4.87ms Vertices=0
+[13:53:21.604] [[Timing]] Chunk (2,1,1): Chunk=1.48ms Mesh=4.87ms Send=0.15ms Total=6.71ms
+[13:53:21.608] [[Biome]] Chunk (2,-1,1) center biome: Mountains
+[13:53:21.698] [[Generation]] (2,-1,1): Chunk=3.07ms Mesh=89.53ms Vertices=13968
+[13:53:21.698] [[Timing]] Chunk (2,-1,1): Chunk=3.07ms Mesh=89.53ms Send=0.22ms Total=93.03ms
+[13:53:21.701] [[Biome]] Chunk (2,1,-1) center biome: Desert
+[13:53:21.707] [[Generation]] (2,1,-1): Chunk=2.93ms Mesh=5.80ms Vertices=0
+[13:53:21.707] [[Timing]] Chunk (2,1,-1): Chunk=2.93ms Mesh=5.80ms Send=0.06ms Total=8.92ms
+[13:53:21.709] [[Biome]] Chunk (2,-1,-1) center biome: Desert
+[13:53:21.787] [[Generation]] (2,-1,-1): Chunk=1.35ms Mesh=78.12ms Vertices=0
+[13:53:21.787] [[Timing]] Chunk (2,-1,-1): Chunk=1.35ms Mesh=78.12ms Send=0.09ms Total=79.66ms
+[13:53:21.789] [[Biome]] Chunk (1,1,2) center biome: Mountains
+[13:53:21.793] [[Generation]] (1,1,2): Chunk=1.55ms Mesh=3.71ms Vertices=0
+[13:53:21.793] [[Timing]] Chunk (1,1,2): Chunk=1.55ms Mesh=3.71ms Send=0.05ms Total=5.38ms
+[13:53:21.795] [[Biome]] Chunk (1,-1,2) center biome: Mountains
+[13:53:21.885] [[Generation]] (1,-1,2): Chunk=2.19ms Mesh=90.20ms Vertices=2727
+[13:53:21.886] [[Timing]] Chunk (1,-1,2): Chunk=2.19ms Mesh=90.20ms Send=0.18ms Total=92.66ms
+[13:53:21.888] [[Biome]] Chunk (-3,0,0) center biome: Desert
+[13:53:21.982] [[Generation]] (-3,0,0): Chunk=1.78ms Mesh=93.56ms Vertices=4071
+[13:53:21.982] [[Timing]] Chunk (-3,0,0): Chunk=1.78ms Mesh=93.56ms Send=0.16ms Total=95.70ms
+[13:53:21.984] [[Biome]] Chunk (1,1,-2) center biome: Desert
+[13:53:21.990] [[Generation]] (1,1,-2): Chunk=2.09ms Mesh=5.82ms Vertices=0
+[13:53:21.990] [[Timing]] Chunk (1,1,-2): Chunk=2.09ms Mesh=5.82ms Send=0.08ms Total=8.20ms
+[13:53:21.993] [[Biome]] Chunk (-2,1,-1) center biome: Desert
+[13:53:21.999] [[Generation]] (-2,1,-1): Chunk=2.03ms Mesh=6.39ms Vertices=0
+[13:53:21.999] [[Timing]] Chunk (-2,1,-1): Chunk=2.03ms Mesh=6.39ms Send=0.18ms Total=8.81ms
+[13:53:22.002] [[Biome]] Chunk (0,0,3) center biome: Mountains
+[13:53:22.142] [[Generation]] (0,0,3): Chunk=2.05ms Mesh=139.60ms Vertices=4623
+[13:53:22.142] [[Timing]] Chunk (0,0,3): Chunk=2.05ms Mesh=139.60ms Send=0.15ms Total=141.98ms
+[13:53:22.144] [[Biome]] Chunk (0,0,-3) center biome: Desert
+[13:53:22.217] [[Generation]] (0,0,-3): Chunk=1.62ms Mesh=72.75ms Vertices=4359
+[13:53:22.217] [[Timing]] Chunk (0,0,-3): Chunk=1.62ms Mesh=72.75ms Send=0.14ms Total=74.64ms
+[13:53:22.219] [[Biome]] Chunk (-1,1,2) center biome: Mountains
+[13:53:22.224] [[Generation]] (-1,1,2): Chunk=1.73ms Mesh=4.69ms Vertices=0
+[13:53:22.224] [[Timing]] Chunk (-1,1,2): Chunk=1.73ms Mesh=4.69ms Send=0.07ms Total=6.62ms
+[13:53:22.227] [[Biome]] Chunk (-1,-1,2) center biome: Mountains
+[13:53:22.317] [[Generation]] (-1,-1,2): Chunk=2.63ms Mesh=89.60ms Vertices=270
+[13:53:22.317] [[Timing]] Chunk (-1,-1,2): Chunk=2.63ms Mesh=89.60ms Send=0.07ms Total=92.38ms
+[13:53:22.319] [[Biome]] Chunk (1,-1,-2) center biome: Desert
+[13:53:22.411] [[Generation]] (1,-1,-2): Chunk=1.78ms Mesh=92.33ms Vertices=450
+[13:53:22.412] [[Timing]] Chunk (1,-1,-2): Chunk=1.78ms Mesh=92.33ms Send=0.16ms Total=94.55ms
+[13:53:22.415] [[Biome]] Chunk (-1,-1,-2) center biome: Desert
+[13:53:22.508] [[Generation]] (-1,-1,-2): Chunk=2.54ms Mesh=93.84ms Vertices=7950
+[13:53:22.509] [[Timing]] Chunk (-1,-1,-2): Chunk=2.54ms Mesh=93.84ms Send=0.15ms Total=96.66ms
+[13:53:22.511] [[Biome]] Chunk (-2,1,1) center biome: Desert
+[13:53:22.514] [[Generation]] (-2,1,1): Chunk=1.46ms Mesh=3.56ms Vertices=0
+[13:53:22.514] [[Timing]] Chunk (-2,1,1): Chunk=1.46ms Mesh=3.56ms Send=0.05ms Total=5.16ms
+[13:53:22.516] [[Biome]] Chunk (-1,1,-2) center biome: Desert
+[13:53:22.521] [[Generation]] (-1,1,-2): Chunk=1.42ms Mesh=5.44ms Vertices=0
+[13:53:22.522] [[Timing]] Chunk (-1,1,-2): Chunk=1.42ms Mesh=5.44ms Send=0.13ms Total=7.16ms
+[13:53:26.337] [[Server]] Tick 1200 | Cache: 70/20000
+[13:53:26.337]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:31.333] [[Server]] Tick 1500 | Cache: 70/20000
+[13:53:31.333]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:36.324] [[Server]] Tick 1800 | Cache: 70/20000
+[13:53:36.324]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:41.323] [[Server]] Tick 2100 | Cache: 70/20000
+[13:53:41.323]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:41.340] [[Server]] Tick 2100 | Cache: 70/20000
+[13:53:41.340]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:46.338] [[Server]] Tick 2400 | Cache: 70/20000
+[13:53:46.338]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:51.324] [[Server]] Tick 2700 | Cache: 70/20000
+[13:53:51.324]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:56.330] [[Server]] Tick 3000 | Cache: 70/20000
+[13:53:56.330]   Requests: 107 | Avg Times: Chunk=1.47ms Mesh=46.35ms Send=0.18ms Total=48.01ms
+[13:53:57.200] [[Cache]] Hit for (0,0,0)
+[13:53:57.200] [[Timing]] Chunk (0,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.18ms Total=0.23ms
+[13:53:57.256] [[Cache]] Hit for (0,0,1)
+[13:53:57.256] [[Timing]] Chunk (0,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.14ms Total=0.22ms
+[13:53:57.261] [[Cache]] Hit for (0,0,-1)
+[13:53:57.261] [[Timing]] Chunk (0,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.10ms Total=0.14ms
+[13:53:57.262] [[Cache]] Hit for (-1,0,0)
+[13:53:57.262] [[Timing]] Chunk (-1,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.10ms Total=0.16ms
+[13:53:57.264] [[Cache]] Hit for (1,0,0)
+[13:53:57.264] [[Timing]] Chunk (1,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.10ms Total=0.17ms
+[13:53:57.266] [[Cache]] Hit for (-1,0,1)
+[13:53:57.266] [[Timing]] Chunk (-1,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.24ms Total=0.28ms
+[13:53:57.267] [[Cache]] Hit for (1,0,-1)
+[13:53:57.267] [[Timing]] Chunk (1,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.30ms Total=0.34ms
+[13:53:57.279] [[Cache]] Hit for (1,0,1)
+[13:53:57.279] [[Timing]] Chunk (1,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.10ms Total=0.14ms
+[13:53:57.281] [[Cache]] Hit for (-1,0,-1)
+[13:53:57.281] [[Timing]] Chunk (-1,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.12ms
+[13:53:57.290] [[Cache]] Hit for (0,0,2)
+[13:53:57.290] [[Timing]] Chunk (0,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.14ms Total=0.19ms
+[13:53:57.292] [[Cache]] Hit for (2,0,0)
+[13:53:57.292] [[Timing]] Chunk (2,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.14ms Total=0.20ms
+[13:53:57.295] [[Cache]] Hit for (-2,0,0)
+[13:53:57.295] [[Timing]] Chunk (-2,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.26ms Total=0.32ms
+[13:53:57.300] [[Cache]] Hit for (0,1,0)
+[13:53:57.300] [[Timing]] Chunk (0,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.11ms
+[13:53:57.302] [[Cache]] Hit for (0,-1,0)
+[13:53:57.303] [[Timing]] Chunk (0,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.47ms Total=0.53ms
+[13:53:57.306] [[Cache]] Hit for (0,0,-2)
+[13:53:57.306] [[Timing]] Chunk (0,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.17ms Total=0.23ms
+[13:53:57.307] [[Cache]] Hit for (-1,0,-2)
+[13:53:57.308] [[Timing]] Chunk (-1,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.19ms Total=0.27ms
+[13:53:57.313] [[Cache]] Hit for (-1,1,0)
+[13:53:57.313] [[Timing]] Chunk (-1,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.12ms
+[13:53:57.316] [[Cache]] Hit for (-2,0,1)
+[13:53:57.316] [[Timing]] Chunk (-2,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.13ms Total=0.18ms
+[13:53:57.322] [[Cache]] Hit for (-1,0,2)
+[13:53:57.322] [[Timing]] Chunk (-1,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.29ms Total=0.35ms
+[13:53:57.326] [[Cache]] Hit for (-1,-1,0)
+[13:53:57.326] [[Timing]] Chunk (-1,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.26ms Total=0.30ms
+[13:53:57.331] [[Cache]] Hit for (0,-1,1)
+[13:53:57.332] [[Timing]] Chunk (0,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.17ms Total=0.23ms
+[13:53:57.336] [[Cache]] Hit for (0,1,1)
+[13:53:57.336] [[Timing]] Chunk (0,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.73ms Total=0.77ms
+[13:53:57.338] [[Cache]] Hit for (1,0,-2)
+[13:53:57.338] [[Timing]] Chunk (1,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.13ms Total=0.17ms
+[13:53:57.338] [[Cache]] Hit for (1,-1,0)
+[13:53:57.339] [[Timing]] Chunk (1,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.52ms Total=0.59ms
+[13:53:57.344] [[Cache]] Hit for (1,1,0)
+[13:53:57.344] [[Timing]] Chunk (1,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.17ms
+[13:53:57.345] [[Cache]] Hit for (1,0,2)
+[13:53:57.345] [[Timing]] Chunk (1,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.11ms
+[13:53:57.345] [[Cache]] Hit for (2,0,-1)
+[13:53:57.345] [[Timing]] Chunk (2,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.12ms
+[13:53:57.352] [[Cache]] Hit for (2,0,1)
+[13:53:57.352] [[Timing]] Chunk (2,0,1): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.15ms
+[13:53:57.354] [[Cache]] Hit for (0,1,-1)
+[13:53:57.354] [[Timing]] Chunk (0,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.09ms Total=0.15ms
+[13:53:57.355] [[Cache]] Hit for (-2,0,-1)
+[13:53:57.355] [[Timing]] Chunk (-2,0,-1): Chunk=0.00ms Mesh=0.00ms Send=0.18ms Total=0.22ms
+[13:53:57.357] [[Cache]] Hit for (0,-1,-1)
+[13:53:57.358] [[Timing]] Chunk (0,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.56ms Total=0.60ms
+[13:53:57.359] [[Cache]] Hit for (1,-1,-1)
+[13:53:57.359] [[Timing]] Chunk (1,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.84ms Total=0.89ms
+[13:53:57.365] [[Cache]] Hit for (-1,-1,-1)
+[13:53:57.367] [[Timing]] Chunk (-1,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=1.96ms Total=2.00ms
+[13:53:57.367] [[Cache]] Hit for (-1,1,-1)
+[13:53:57.367] [[Timing]] Chunk (-1,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.10ms
+[13:53:57.368] [[Cache]] Hit for (-1,-1,1)
+[13:53:57.368] [[Timing]] Chunk (-1,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.29ms Total=0.34ms
+[13:53:57.370] [[Cache]] Hit for (1,1,1)
+[13:53:57.370] [[Timing]] Chunk (1,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.16ms
+[13:53:57.371] [[Cache]] Hit for (1,-1,1)
+[13:53:57.371] [[Timing]] Chunk (1,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.27ms Total=0.30ms
+[13:53:57.372] [[Cache]] Hit for (1,1,-1)
+[13:53:57.373] [[Timing]] Chunk (1,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.11ms
+[13:53:57.375] [[Cache]] Hit for (-1,1,1)
+[13:53:57.375] [[Timing]] Chunk (-1,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.12ms
+[13:53:57.376] [[Cache]] Hit for (-2,0,2)
+[13:53:57.376] [[Timing]] Chunk (-2,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.16ms
+[13:53:57.378] [[Cache]] Hit for (0,1,-2)
+[13:53:57.379] [[Timing]] Chunk (0,1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.03ms Total=0.09ms
+[13:53:57.382] [[Cache]] Hit for (0,-1,2)
+[13:53:57.383] [[Timing]] Chunk (0,-1,2): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.11ms
+[13:53:57.383] [[Cache]] Hit for (-2,1,0)
+[13:53:57.383] [[Timing]] Chunk (-2,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.06ms
+[13:53:57.383] [[Cache]] Hit for (2,0,-2)
+[13:53:57.384] [[Timing]] Chunk (2,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.96ms Total=0.98ms
+[13:53:57.385] [[Cache]] Hit for (2,-1,0)
+[13:53:57.385] [[Timing]] Chunk (2,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.14ms
+[13:53:57.390] [[Cache]] Hit for (2,1,0)
+[13:53:57.390] [[Timing]] Chunk (2,1,0): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.16ms
+[13:53:57.397] [[Cache]] Hit for (2,0,2)
+[13:53:57.397] [[Timing]] Chunk (2,0,2): Chunk=0.00ms Mesh=0.00ms Send=0.16ms Total=0.20ms
+[13:53:57.400] [[Cache]] Hit for (0,1,2)
+[13:53:57.400] [[Timing]] Chunk (0,1,2): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.10ms
+[13:53:57.400] [[Cache]] Hit for (-2,-1,0)
+[13:53:57.400] [[Timing]] Chunk (-2,-1,0): Chunk=0.00ms Mesh=0.00ms Send=0.16ms Total=0.19ms
+[13:53:57.401] [[Cache]] Hit for (0,-1,-2)
+[13:53:57.401] [[Timing]] Chunk (0,-1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.12ms Total=0.16ms
+[13:53:57.401] [[Cache]] Hit for (-2,0,-2)
+[13:53:57.402] [[Timing]] Chunk (-2,0,-2): Chunk=0.00ms Mesh=0.00ms Send=0.12ms Total=0.14ms
+[13:53:57.406] [[Cache]] Hit for (-2,-1,-1)
+[13:53:57.407] [[Timing]] Chunk (-2,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.69ms Total=0.74ms
+[13:53:57.407] [[Cache]] Hit for (3,0,0)
+[13:53:57.407] [[Timing]] Chunk (3,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.17ms Total=0.19ms
+[13:53:57.412] [[Cache]] Hit for (2,1,1)
+[13:53:57.412] [[Timing]] Chunk (2,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.11ms
+[13:53:57.412] [[Cache]] Hit for (2,-1,1)
+[13:53:57.412] [[Timing]] Chunk (2,-1,1): Chunk=0.00ms Mesh=0.00ms Send=0.29ms Total=0.32ms
+[13:53:57.414] [[Cache]] Hit for (2,1,-1)
+[13:53:57.414] [[Timing]] Chunk (2,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.09ms
+[13:53:57.414] [[Cache]] Hit for (2,-1,-1)
+[13:53:57.414] [[Timing]] Chunk (2,-1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.07ms Total=0.10ms
+[13:53:57.415] [[Cache]] Hit for (1,1,2)
+[13:53:57.415] [[Timing]] Chunk (1,1,2): Chunk=0.00ms Mesh=0.00ms Send=0.06ms Total=0.10ms
+[13:53:57.415] [[Cache]] Hit for (1,-1,2)
+[13:53:57.415] [[Timing]] Chunk (1,-1,2): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.12ms
+[13:53:57.416] [[Cache]] Hit for (-3,0,0)
+[13:53:57.416] [[Timing]] Chunk (-3,0,0): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.10ms
+[13:53:57.416] [[Cache]] Hit for (1,1,-2)
+[13:53:57.416] [[Timing]] Chunk (1,1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.08ms
+[13:53:57.418] [[Cache]] Hit for (-2,1,-1)
+[13:53:57.418] [[Timing]] Chunk (-2,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.05ms Total=0.12ms
+[13:53:57.420] [[Cache]] Hit for (0,0,3)
+[13:53:57.420] [[Timing]] Chunk (0,0,3): Chunk=0.00ms Mesh=0.00ms Send=0.13ms Total=0.18ms
+[13:53:57.421] [[Cache]] Hit for (0,0,-3)
+[13:53:57.421] [[Timing]] Chunk (0,0,-3): Chunk=0.00ms Mesh=0.00ms Send=0.11ms Total=0.15ms
+[13:53:57.422] [[Cache]] Hit for (-1,1,2)
+[13:53:57.422] [[Timing]] Chunk (-1,1,2): Chunk=0.00ms Mesh=0.00ms Send=0.16ms Total=0.19ms
+[13:53:57.429] [[Cache]] Hit for (-1,-1,2)
+[13:53:57.429] [[Timing]] Chunk (-1,-1,2): Chunk=0.00ms Mesh=0.00ms Send=0.08ms Total=0.13ms
+[13:53:57.429] [[Cache]] Hit for (1,-1,-2)
+[13:53:57.429] [[Timing]] Chunk (1,-1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.08ms
+[13:53:57.432] [[Cache]] Hit for (-1,-1,-2)
+[13:53:57.432] [[Timing]] Chunk (-1,-1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.20ms Total=0.23ms
+[13:53:57.435] [[Cache]] Hit for (-2,1,1)
+[13:53:57.435] [[Timing]] Chunk (-2,1,1): Chunk=0.00ms Mesh=0.00ms Send=0.04ms Total=0.08ms
+[13:53:57.435] [[Cache]] Hit for (-1,1,-2)
+[13:53:57.435] [[Timing]] Chunk (-1,1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.03ms Total=0.06ms
+[13:53:57.439] [[Biome]] Chunk (-2,-1,1) center biome: Desert
+[13:53:57.548] [[Generation]] (-2,-1,1): Chunk=3.03ms Mesh=109.93ms Vertices=8475
+[13:53:57.549] [[Timing]] Chunk (-2,-1,1): Chunk=3.03ms Mesh=109.93ms Send=0.14ms Total=113.30ms
+[13:53:57.552] [[Biome]] Chunk (1,0,3) center biome: Mountains
+[13:53:57.696] [[Generation]] (1,0,3): Chunk=3.30ms Mesh=143.24ms Vertices=4056
+[13:53:57.696] [[Timing]] Chunk (1,0,3): Chunk=3.30ms Mesh=143.24ms Send=0.14ms Total=146.89ms
+[13:53:57.700] [[Biome]] Chunk (3,0,1) center biome: Mountains
+[13:53:57.821] [[Generation]] (3,0,1): Chunk=3.45ms Mesh=120.80ms Vertices=3675
+[13:53:57.821] [[Timing]] Chunk (3,0,1): Chunk=3.45ms Mesh=120.80ms Send=0.25ms Total=124.68ms
+[13:53:57.825] [[Biome]] Chunk (-3,0,-1) center biome: Desert
+[13:53:57.931] [[Generation]] (-3,0,-1): Chunk=3.27ms Mesh=105.40ms Vertices=4347
+[13:53:57.931] [[Timing]] Chunk (-3,0,-1): Chunk=3.27ms Mesh=105.40ms Send=0.19ms Total=109.00ms
+[13:53:57.935] [[Biome]] Chunk (-1,0,3) center biome: Mountains
+[13:53:58.099] [[Generation]] (-1,0,3): Chunk=2.65ms Mesh=164.18ms Vertices=4911
+[13:53:58.099] [[Timing]] Chunk (-1,0,3): Chunk=2.65ms Mesh=164.18ms Send=0.39ms Total=167.38ms
+[13:53:58.104] [[Biome]] Chunk (-1,0,-3) center biome: Desert
+[13:53:58.198] [[Generation]] (-1,0,-3): Chunk=3.57ms Mesh=93.79ms Vertices=3210
+[13:53:58.198] [[Timing]] Chunk (-1,0,-3): Chunk=3.57ms Mesh=93.79ms Send=0.13ms Total=97.67ms
+[13:53:58.203] [[Biome]] Chunk (3,0,-1) center biome: Desert
+[13:53:58.310] [[Generation]] (3,0,-1): Chunk=3.67ms Mesh=106.88ms Vertices=3624
+[13:53:58.310] [[Timing]] Chunk (3,0,-1): Chunk=3.67ms Mesh=106.88ms Send=0.11ms Total=110.80ms
+[13:53:58.315] [[Biome]] Chunk (-3,0,1) center biome: Desert
+[13:53:58.430] [[Generation]] (-3,0,1): Chunk=4.02ms Mesh=115.29ms Vertices=3255
+[13:53:58.430] [[Timing]] Chunk (-3,0,1): Chunk=4.02ms Mesh=115.29ms Send=0.08ms Total=119.50ms
+[13:53:58.433] [[Biome]] Chunk (1,0,-3) center biome: Desert
+[13:53:58.511] [[Generation]] (1,0,-3): Chunk=1.95ms Mesh=78.84ms Vertices=3453
+[13:53:58.512] [[Timing]] Chunk (1,0,-3): Chunk=1.95ms Mesh=78.84ms Send=0.08ms Total=80.95ms
+[13:53:58.513] [[Biome]] Chunk (2,1,-2) center biome: Desert
+[13:53:58.519] [[Generation]] (2,1,-2): Chunk=1.54ms Mesh=5.20ms Vertices=0
+[13:53:58.519] [[Timing]] Chunk (2,1,-2): Chunk=1.54ms Mesh=5.20ms Send=0.12ms Total=7.02ms
+[13:53:58.521] [[Biome]] Chunk (-2,1,2) center biome: Desert
+[13:53:58.527] [[Generation]] (-2,1,2): Chunk=2.07ms Mesh=5.64ms Vertices=0
+[13:53:58.527] [[Timing]] Chunk (-2,1,2): Chunk=2.07ms Mesh=5.64ms Send=0.12ms Total=7.97ms
+[13:53:58.530] [[Biome]] Chunk (-2,-1,2) center biome: Desert
+[13:53:58.621] [[Generation]] (-2,-1,2): Chunk=1.88ms Mesh=91.17ms Vertices=4881
+[13:53:58.621] [[Timing]] Chunk (-2,-1,2): Chunk=1.88ms Mesh=91.17ms Send=0.42ms Total=93.61ms
+[13:53:58.624] [[Biome]] Chunk (2,-1,2) center biome: Mountains
+[13:53:58.726] [[Generation]] (2,-1,2): Chunk=1.67ms Mesh=101.89ms Vertices=11100
+[13:53:58.726] [[Timing]] Chunk (2,-1,2): Chunk=1.67ms Mesh=101.89ms Send=0.56ms Total=104.27ms
+[13:53:58.730] [[Biome]] Chunk (2,1,2) center biome: Mountains
+[13:53:58.737] [[Generation]] (2,1,2): Chunk=2.52ms Mesh=7.32ms Vertices=0
+[13:53:58.737] [[Timing]] Chunk (2,1,2): Chunk=2.52ms Mesh=7.32ms Send=0.08ms Total=10.05ms
+[13:53:58.741] [[Biome]] Chunk (-2,-1,-2) center biome: Desert
+[13:53:58.846] [[Generation]] (-2,-1,-2): Chunk=3.61ms Mesh=104.94ms Vertices=0
+[13:53:58.847] [[Timing]] Chunk (-2,-1,-2): Chunk=3.61ms Mesh=104.94ms Send=0.09ms Total=108.82ms
+[13:53:58.849] [[Biome]] Chunk (-2,1,-2) center biome: Desert
+[13:53:58.855] [[Generation]] (-2,1,-2): Chunk=1.80ms Mesh=6.02ms Vertices=0
+[13:53:58.855] [[Timing]] Chunk (-2,1,-2): Chunk=1.80ms Mesh=6.02ms Send=0.08ms Total=8.07ms
+[13:53:58.857] [[Biome]] Chunk (2,-1,-2) center biome: Desert
+[13:53:58.966] [[Generation]] (2,-1,-2): Chunk=1.55ms Mesh=109.25ms Vertices=0
+[13:53:58.966] [[Timing]] Chunk (2,-1,-2): Chunk=1.55ms Mesh=109.25ms Send=0.08ms Total=111.06ms
+[13:53:58.970] [[Biome]] Chunk (-3,0,-2) center biome: Desert
+[13:53:59.069] [[Generation]] (-3,0,-2): Chunk=3.11ms Mesh=98.15ms Vertices=3228
+[13:53:59.069] [[Timing]] Chunk (-3,0,-2): Chunk=3.11ms Mesh=98.15ms Send=0.24ms Total=101.68ms
+[13:53:59.072] [[Biome]] Chunk (2,0,3) center biome: Mountains
+[13:53:59.220] [[Generation]] (2,0,3): Chunk=2.98ms Mesh=147.44ms Vertices=4779
+[13:53:59.220] [[Timing]] Chunk (2,0,3): Chunk=2.98ms Mesh=147.44ms Send=0.45ms Total=151.05ms
+[13:53:59.226] [[Biome]] Chunk (3,0,-2) center biome: Desert
+[13:53:59.342] [[Generation]] (3,0,-2): Chunk=3.74ms Mesh=115.78ms Vertices=4044
+[13:53:59.342] [[Timing]] Chunk (3,0,-2): Chunk=3.74ms Mesh=115.78ms Send=0.19ms Total=119.87ms
+[13:53:59.346] [[Biome]] Chunk (3,-1,0) center biome: Desert
+[13:53:59.458] [[Generation]] (3,-1,0): Chunk=2.73ms Mesh=112.31ms Vertices=1371
+[13:53:59.459] [[Timing]] Chunk (3,-1,0): Chunk=2.73ms Mesh=112.31ms Send=0.16ms Total=115.35ms
+[13:53:59.463] [[Biome]] Chunk (3,1,0) center biome: Desert
+[13:53:59.471] [[Generation]] (3,1,0): Chunk=4.47ms Mesh=7.22ms Vertices=0
+[13:53:59.471] [[Timing]] Chunk (3,1,0): Chunk=4.47ms Mesh=7.22ms Send=0.11ms Total=11.96ms
+[13:53:59.474] [[Biome]] Chunk (2,0,-3) center biome: Desert
+[13:53:59.551] [[Generation]] (2,0,-3): Chunk=2.17ms Mesh=77.34ms Vertices=4269
+[13:53:59.551] [[Timing]] Chunk (2,0,-3): Chunk=2.17ms Mesh=77.34ms Send=0.33ms Total=79.97ms
+[13:53:59.554] [[Biome]] Chunk (-3,0,2) center biome: Desert
+[13:53:59.675] [[Generation]] (-3,0,2): Chunk=2.22ms Mesh=120.88ms Vertices=2889
+[13:53:59.675] [[Timing]] Chunk (-3,0,2): Chunk=2.22ms Mesh=120.88ms Send=0.19ms Total=123.47ms
+[13:53:59.678] [[Biome]] Chunk (0,-1,3) center biome: Mountains
+[13:53:59.773] [[Generation]] (0,-1,3): Chunk=2.36ms Mesh=94.04ms Vertices=0
+[13:53:59.773] [[Timing]] Chunk (0,-1,3): Chunk=2.36ms Mesh=94.04ms Send=0.08ms Total=96.88ms
+[13:53:59.776] [[Biome]] Chunk (0,-1,-3) center biome: Desert
+[13:53:59.856] [[Generation]] (0,-1,-3): Chunk=2.82ms Mesh=80.30ms Vertices=0
+[13:53:59.856] [[Timing]] Chunk (0,-1,-3): Chunk=2.82ms Mesh=80.30ms Send=0.08ms Total=83.40ms
+[13:53:59.860] [[Biome]] Chunk (0,1,-3) center biome: Desert
+[13:53:59.863] [[Generation]] (0,1,-3): Chunk=2.76ms Mesh=3.70ms Vertices=0
+[13:53:59.864] [[Timing]] Chunk (0,1,-3): Chunk=2.76ms Mesh=3.70ms Send=0.21ms Total=6.81ms
+[13:53:59.865] [[Biome]] Chunk (3,0,2) center biome: Mountains
+[13:53:59.955] [[Generation]] (3,0,2): Chunk=1.26ms Mesh=89.51ms Vertices=2982
+[13:53:59.955] [[Timing]] Chunk (3,0,2): Chunk=1.26ms Mesh=89.51ms Send=0.12ms Total=91.02ms
+[13:53:59.957] [[Biome]] Chunk (0,1,3) center biome: Mountains
+[13:53:59.962] [[Generation]] (0,1,3): Chunk=1.66ms Mesh=4.80ms Vertices=0
+[13:53:59.962] [[Timing]] Chunk (0,1,3): Chunk=1.66ms Mesh=4.80ms Send=0.11ms Total=6.76ms
+[13:53:59.966] [[Biome]] Chunk (-3,1,0) center biome: Desert
+[13:53:59.971] [[Generation]] (-3,1,0): Chunk=3.03ms Mesh=5.48ms Vertices=0
+[13:53:59.971] [[Timing]] Chunk (-3,1,0): Chunk=3.03ms Mesh=5.48ms Send=0.13ms Total=8.81ms
+[13:53:59.975] [[Biome]] Chunk (-2,0,-3) center biome: Desert
+[13:54:00.059] [[Generation]] (-2,0,-3): Chunk=3.07ms Mesh=83.96ms Vertices=3525
+[13:54:00.059] [[Timing]] Chunk (-2,0,-3): Chunk=3.07ms Mesh=83.96ms Send=0.29ms Total=87.47ms
+[13:54:00.063] [[Biome]] Chunk (-2,0,3) center biome: Mountains
+[13:54:00.214] [[Generation]] (-2,0,3): Chunk=3.05ms Mesh=150.87ms Vertices=4476
+[13:54:00.217] [[Server]] Error handling chunk (-2,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[13:54:01.338] [[Server]] Tick 3300 | Cache: 102/20000
+[13:54:01.338]   Requests: 208 | Avg Times: Chunk=1.16ms Mesh=35.92ms Send=0.19ms Total=37.27ms
+[13:54:06.331] [[Server]] Tick 3600 | Cache: 102/20000
+[13:54:06.331]   Requests: 208 | Avg Times: Chunk=1.16ms Mesh=35.92ms Send=0.19ms Total=37.27ms
+[13:54:07.569] [[UDP]] Loop cancelled

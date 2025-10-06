@@ -51,7 +51,7 @@ namespace Aetheris
 
             // Proper mass and inertia for a human
             var mass = 70f; // 70kg
-            
+
             // Create body inertia with locked rotation
             var inertia = new BodyInertia
             {
@@ -103,6 +103,14 @@ namespace Aetheris
         private void UpdatePhysicsMovement(float delta, KeyboardState keys)
         {
             if (physics == null) return;
+
+            // Validate body still exists
+            if (!physics.Simulation.Bodies.BodyExists(bodyHandle))
+            {
+                Console.WriteLine("[Player] Physics body no longer exists, reinitializing...");
+                InitializePhysicsBody(Position);
+                return;
+            }
 
             var bodyRef = physics.Simulation.Bodies.GetBodyReference(bodyHandle);
 
@@ -156,7 +164,19 @@ namespace Aetheris
                     0,
                     impulse.Z
                 ));
-                bodyRef.Awake = true;
+
+                // SAFE AWAKE: Only wake if body is in active set
+                if (bodyRef.Awake == false)
+                {
+                    try
+                    {
+                        bodyRef.Awake = true;
+                    }
+                    catch
+                    {
+                        // Body not ready yet, impulse will be applied next frame
+                    }
+                }
             }
             else if (isGrounded)
             {
@@ -177,17 +197,28 @@ namespace Aetheris
                     jumpForce,
                     vel.Z
                 );
-                bodyRef.Awake = true;
+
+                // SAFE AWAKE: Only wake if body is in active set
+                if (bodyRef.Awake == false)
+                {
+                    try
+                    {
+                        bodyRef.Awake = true;
+                    }
+                    catch
+                    {
+                        // Body not ready yet, jump will apply next frame
+                    }
+                }
             }
 
             // Debug output (less frequent)
             debugCounter++;
             if (debugCounter % 60 == 0)
             {
-                Console.WriteLine($"[Player] Y={Position.Y:F1}, VelY={vel.Y:F2}, Grounded={isGrounded}, Input={inputDirection.Length:F2}");
+
             }
         }
-
         private void UpdateSimpleMovement(float delta, KeyboardState keys)
         {
             float velocity = moveSpeed * delta;

@@ -47,7 +47,7 @@ namespace Aetheris
             int sizeZ = Chunk.SizeZ + 1;
 
             bool potentiallyEmpty = chunk.PositionY > 100 || chunk.PositionY < -32;
-            
+
             if (workItem == null)
             {
                 workItem = new DensityWorkItem
@@ -82,7 +82,7 @@ namespace Aetheris
                     for (int y = 0; y < sizeY; y++)
                     {
                         int worldY = chunk.PositionY + y;
-                        
+
                         // CRITICAL: Ensure consistent density sampling using world coordinates
                         float density = WorldGen.SampleDensityFast(worldX, worldY, worldZ, columnData);
                         densityCache[x, y, z] = density;
@@ -90,9 +90,9 @@ namespace Aetheris
 
                         if (potentiallyEmpty)
                         {
-                            if (density > isoLevel) 
+                            if (density > isoLevel)
                                 System.Threading.Interlocked.Increment(ref solidCount);
-                            else 
+                            else
                                 System.Threading.Interlocked.Increment(ref airCount);
                         }
                     }
@@ -140,7 +140,7 @@ namespace Aetheris
                         // Calculate cube index with epsilon tolerance
                         int cubeIndex = 0;
                         int solidMask = 0;
-                        
+
                         // Use epsilon for boundary cases to ensure consistency
                         if (val[0] > isoLevel + EPSILON) { cubeIndex |= 1; solidMask |= 1; }
                         if (val[1] > isoLevel + EPSILON) { cubeIndex |= 2; solidMask |= 2; }
@@ -166,14 +166,38 @@ namespace Aetheris
                         blockTypes[7] = blockTypeCache[x, nextY, nextZ];
 
                         // Position cache
-                        pos[0].X = x; pos[0].Y = y; pos[0].Z = z;
-                        pos[1].X = nextX; pos[1].Y = y; pos[1].Z = z;
-                        pos[2].X = nextX; pos[2].Y = y; pos[2].Z = nextZ;
-                        pos[3].X = x; pos[3].Y = y; pos[3].Z = nextZ;
-                        pos[4].X = x; pos[4].Y = nextY; pos[4].Z = z;
-                        pos[5].X = nextX; pos[5].Y = nextY; pos[5].Z = z;
-                        pos[6].X = nextX; pos[6].Y = nextY; pos[6].Z = nextZ;
-                        pos[7].X = x; pos[7].Y = nextY; pos[7].Z = nextZ;
+                        // Position cache - MUST use world coordinates
+                        pos[0].X = chunk.PositionX + x;
+                        pos[0].Y = chunk.PositionY + y;
+                        pos[0].Z = chunk.PositionZ + z;
+
+                        pos[1].X = chunk.PositionX + nextX;
+                        pos[1].Y = chunk.PositionY + y;
+                        pos[1].Z = chunk.PositionZ + z;
+
+                        pos[2].X = chunk.PositionX + nextX;
+                        pos[2].Y = chunk.PositionY + y;
+                        pos[2].Z = chunk.PositionZ + nextZ;
+
+                        pos[3].X = chunk.PositionX + x;
+                        pos[3].Y = chunk.PositionY + y;
+                        pos[3].Z = chunk.PositionZ + nextZ;
+
+                        pos[4].X = chunk.PositionX + x;
+                        pos[4].Y = chunk.PositionY + nextY;
+                        pos[4].Z = chunk.PositionZ + z;
+
+                        pos[5].X = chunk.PositionX + nextX;
+                        pos[5].Y = chunk.PositionY + nextY;
+                        pos[5].Z = chunk.PositionZ + z;
+
+                        pos[6].X = chunk.PositionX + nextX;
+                        pos[6].Y = chunk.PositionY + nextY;
+                        pos[6].Z = chunk.PositionZ + nextZ;
+
+                        pos[7].X = chunk.PositionX + x;
+                        pos[7].Y = chunk.PositionY + nextY;
+                        pos[7].Z = chunk.PositionZ + nextZ;
 
                         // Interpolate edge vertices with improved precision
                         if ((edges & 1) != 0) { vertList[0] = LerpImproved(isoLevel, pos[0], pos[1], val[0], val[1]); vertBlockTypes[0] = ChooseBlockType(blockTypes[0], blockTypes[1], val[0], val[1], isoLevel); }
@@ -228,7 +252,7 @@ namespace Aetheris
                             float nz = dx01 * dy02 - dy01 * dx02;
 
                             float normalLenSq = nx * nx + ny * ny + nz * nz;
-                            
+
                             // Skip triangles with zero or near-zero area
                             if (normalLenSq < MIN_TRIANGLE_AREA)
                                 continue;
@@ -271,7 +295,13 @@ namespace Aetheris
                     }
                 }
             }
-
+for (int i = 0; i < Math.Min(21, verts.Count); i += 7) // 7 floats per vertex (pos + normal + blocktype)
+{
+    float x = verts[i + 0];
+    float y = verts[i + 1];
+    float z = verts[i + 2];
+    Console.WriteLine($"[MarchingCubes] Sample vertex {i / 7}: ({x:F2}, {y:F2}, {z:F2})");
+}
             return verts.ToArray();
         }
 
@@ -305,13 +335,13 @@ namespace Aetheris
             }
 
             float t = (iso - v1) / diff;
-            
+
             // Clamp to prevent extrapolation
             t = Math.Clamp(t, 0f, 1f);
-            
+
             // Use more precise interpolation
             float oneMinusT = 1f - t;
-            
+
             return new Vector3(
                 p1.X * oneMinusT + p2.X * t,
                 p1.Y * oneMinusT + p2.Y * t,
@@ -333,7 +363,7 @@ namespace Aetheris
             // Both on same side, choose based on distance to isosurface
             float dist1 = MathF.Abs(v1 - iso);
             float dist2 = MathF.Abs(v2 - iso);
-            
+
             BlockType chosen = (dist1 < dist2) ? b1 : b2;
 
             // Fallback to non-air block

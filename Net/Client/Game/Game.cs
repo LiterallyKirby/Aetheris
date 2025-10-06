@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -15,10 +17,18 @@ namespace Aetheris
         private readonly Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks;
         private readonly Player player;
         private readonly Client? client;
-        private readonly PhysicsManager physics;
+        public readonly PhysicsManager physics;
         private int renderDistance = ClientConfig.RENDER_DISTANCE;
         private float chunkUpdateTimer = 0f;
         private const float CHUNK_UPDATE_INTERVAL = 0.5f;
+
+        private bool forcePhysicsStep = false;
+        // --- Logging fields ---
+        private const string LogFileName = "physics_debug.log";
+        private StreamWriter? logWriter;
+        private TextWriter? originalConsoleOut;
+        private TextWriter? originalConsoleError;
+        private TeeTextWriter? teeWriter;
 
         public Game(Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks, Client? client = null)
             : base(GameWindowSettings.Default, new NativeWindowSettings()
@@ -29,17 +39,59 @@ namespace Aetheris
         {
             this.loadedChunks = loadedChunks ?? new Dictionary<(int, int, int), Aetheris.Chunk>();
             this.client = client;
-            
+
+            // Initialize logging very early so all Console writes are captured.
+            SetupLogging();
+
             // Initialize physics FIRST
             physics = new PhysicsManager();
             Console.WriteLine("[Game] PhysicsManager initialized");
-            
+
             Renderer = new Renderer();
             Renderer.Physics = physics; // Connect renderer to physics
-            
+
             // Create player with physics manager
             player = new Player(new Vector3(16, 50, 16), physics);
             Console.WriteLine("[Game] Player initialized with physics");
+        }
+
+        private void SetupLogging()
+        {
+            try
+            {
+                // Delete existing file so we always start fresh
+                if (File.Exists(LogFileName))
+                {
+                    File.Delete(LogFileName);
+                }
+
+                // Open file for writing with read sharing (so you can tail/read while program runs)
+                var fs = new FileStream(LogFileName, FileMode.Create, FileAccess.Write, FileShare.Read);
+                logWriter = new StreamWriter(fs, Encoding.UTF8) { AutoFlush = true };
+
+                // Keep original console writers so we can still output to console
+                originalConsoleOut = Console.Out;
+                originalConsoleError = Console.Error;
+
+                // Create a tee writer that writes to both original console and file, with timestamps
+                teeWriter = new TeeTextWriter(originalConsoleOut, logWriter);
+
+                // Redirect console output & error to the tee writer
+                Console.SetOut(teeWriter);
+                Console.SetError(teeWriter);
+
+                Console.WriteLine($"[Logging] Started logging to '{LogFileName}' (overwritten).");
+            }
+            catch (Exception ex)
+            {
+                // If logging setup fails, fall back to console and avoid throwing here.
+                try
+                {
+                    Console.SetOut(Console.Out);
+                    Console.WriteLine("[Logging] Failed to initialize file logging: " + ex.Message);
+                }
+                catch { }
+            }
         }
 
         protected override void OnLoad()
@@ -203,13 +255,81 @@ namespace Aetheris
             SwapBuffers();
         }
 
+        public void RegisterChunkPhysicsImmediate(int cx, int cy, int cz, float[] meshData)
+        {
+            if (physics == null || meshData == null || meshData.Length == 0) return;
+
+            try
+            {
+                int stride = (meshData.Length % 7 == 0) ? 7 : 8;
+                int vertexCount = meshData.Length / stride;
+
+                if (vertexCount < 3) return;
+
+                Vector3 chunkOffset = new Vector3(
+                    cx * ClientConfig.CHUNK_SIZE,
+                    cy * ClientConfig.CHUNK_SIZE_Y,
+                    cz * ClientConfig.CHUNK_SIZE
+                );
+
+                var vertices = new Vector3[vertexCount];
+                for (int i = 0; i < vertexCount; i++)
+                {
+                    int idx = i * stride;
+                    vertices[i] = new Vector3(
+                        meshData[idx + 0],
+                        meshData[idx + 1],
+                        meshData[idx + 2]
+                    ) + chunkOffset;
+                }
+
+                int chunkId = ChunkKey(cx, cy, cz);
+                physics.AddChunkCollider(chunkId, chunkOffset, vertices);
+
+                Console.WriteLine($"[Game] Registered physics with {vertexCount} vertices for chunk ({cx},{cy},{cz})");
+
+                // ⚡ Mark for a physics step instead of calling Update() immediately
+                forcePhysicsStep = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Game] Failed to register physics: {ex.Message}");
+            }
+        }
+
+        private static int ChunkKey(int cx, int cy, int cz)
+        {
+            unchecked
+            {
+                return (cx * 73856093) ^ (cy * 19349663) ^ (cz * 83492791);
+            }
+        }
         protected override void OnUnload()
         {
             base.OnUnload();
             player.Cleanup();
             physics.Dispose();
             Renderer.Dispose();
-            Console.WriteLine("[Game] Cleanup complete");
+
+            // Restore console and close log file cleanly
+            try
+            {
+                if (originalConsoleOut != null)
+                {
+                    Console.SetOut(originalConsoleOut);
+                }
+                if (originalConsoleError != null)
+                {
+                    Console.SetError(originalConsoleError);
+                }
+                logWriter?.Flush();
+                logWriter?.Dispose();
+                Console.WriteLine("[Game] Cleanup complete (logging stopped)");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[Game] Error closing log: " + ex.Message);
+            }
         }
 
         public Vector3 GetPlayerPosition()
@@ -218,5 +338,69 @@ namespace Aetheris
         }
 
         public void RunGame() => Run();
+
+        // --- Helper tee writer --- (writes to both original console writer and the log file with timestamps)
+        private class TeeTextWriter : TextWriter
+        {
+            private readonly TextWriter consoleWriter;
+            private readonly StreamWriter fileWriter;
+            private readonly object writeLock = new object();
+
+            public TeeTextWriter(TextWriter consoleWriter, StreamWriter fileWriter)
+            {
+                this.consoleWriter = consoleWriter ?? throw new ArgumentNullException(nameof(consoleWriter));
+                this.fileWriter = fileWriter ?? throw new ArgumentNullException(nameof(fileWriter));
+            }
+
+            public override Encoding Encoding => Encoding.UTF8;
+
+            // Prefer overriding WriteLine(string) and Write(string) & Write(char)
+            public override void WriteLine(string? value)
+            {
+                lock (writeLock)
+                {
+                    string line = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {value}";
+                    try { consoleWriter.WriteLine(line); } catch { }
+                    try { fileWriter.WriteLine(line); } catch { }
+                }
+            }
+
+            public override void Write(string? value)
+            {
+                lock (writeLock)
+                {
+                    // For intermediate Writes (no newline), write without timestamp.
+                    try { consoleWriter.Write(value); } catch { }
+                    try { fileWriter.Write(value); } catch { }
+                }
+            }
+
+            public override void Write(char value)
+            {
+                lock (writeLock)
+                {
+                    try { consoleWriter.Write(value); } catch { }
+                    try { fileWriter.Write(value); } catch { }
+                }
+            }
+
+            public override void Flush()
+            {
+                lock (writeLock)
+                {
+                    try { consoleWriter.Flush(); } catch { }
+                    try { fileWriter.Flush(); } catch { }
+                }
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    try { fileWriter.Flush(); } catch { }
+                }
+                base.Dispose(disposing);
+            }
+        }
     }
 }

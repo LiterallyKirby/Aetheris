@@ -46,7 +46,10 @@ namespace Aetheris
             }
         }
 
-        public void AddChunkCollider(int chunkId, OpenTK.Mathematics.Vector3[] vertices)
+
+
+        // In PhysicsManager
+        public void AddChunkCollider(int chunkId, OpenTK.Mathematics.Vector3 chunkOffset, OpenTK.Mathematics.Vector3[] vertices)
         {
             if (vertices == null || vertices.Length < 3)
             {
@@ -54,65 +57,72 @@ namespace Aetheris
                 return;
             }
 
-            // Remove existing collider if present
             RemoveChunkCollider(chunkId);
 
             try
             {
-                // Convert OpenTK vertices to System.Numerics and create triangle list
-                var triangleCount = vertices.Length / 3;
-                
-                // CRITICAL: Create DOUBLE-SIDED triangles (both front and back faces)
-                // This prevents falling through from any direction
+                // Convert chunkOffset to System.Numerics for Bepu
+                var chunkOffsetNum = new System.Numerics.Vector3(chunkOffset.X, chunkOffset.Y, chunkOffset.Z);
+
+                // Build triangles in SHAPE-LOCAL space by subtracting the chunk offset from each vertex.
+                // This lets us set StaticDescription.Position = chunkOffsetNum and Bepu will place the shape correctly.
+                int triangleCount = vertices.Length / 3;
                 var triangles = new Triangle[triangleCount * 2];
 
-                // Calculate bounds for diagnostics
                 float minY = float.MaxValue, maxY = float.MinValue;
-
                 for (int i = 0; i < triangleCount; i++)
                 {
                     var v0 = vertices[i * 3 + 0];
                     var v1 = vertices[i * 3 + 1];
                     var v2 = vertices[i * 3 + 2];
 
-                    // Track Y bounds
+                    // track bounds for diagnostics (use world-space values)
                     minY = Math.Min(minY, Math.Min(v0.Y, Math.Min(v1.Y, v2.Y)));
                     maxY = Math.Max(maxY, Math.Max(v0.Y, Math.Max(v1.Y, v2.Y)));
 
-                    var p0 = new Vector3(v0.X, v0.Y, v0.Z);
-                    var p1 = new Vector3(v1.X, v1.Y, v1.Z);
-                    var p2 = new Vector3(v2.X, v2.Y, v2.Z);
+                    // Convert to System.Numerics and transform into local-shape coords:
+                    var p0 = new System.Numerics.Vector3(v0.X - chunkOffset.X, v0.Y - chunkOffset.Y, v0.Z - chunkOffset.Z);
+                    var p1 = new System.Numerics.Vector3(v1.X - chunkOffset.X, v1.Y - chunkOffset.Y, v1.Z - chunkOffset.Z);
+                    var p2 = new System.Numerics.Vector3(v2.X - chunkOffset.X, v2.Y - chunkOffset.Y, v2.Z - chunkOffset.Z);
 
-                    // Front face (normal winding)
+                    // front face
+
+                    var normal = Vector3.Normalize(Vector3.Cross(p1 - p0, p2 - p0));
+                    Console.WriteLine($"Tri {i}: Normal {normal}");
                     triangles[i * 2] = new Triangle(p0, p1, p2);
-                    
-                    // Back face (reversed winding)
+                    // back face (reversed winding) - keeps mesh double-sided
                     triangles[i * 2 + 1] = new Triangle(p0, p2, p1);
+
+Console.WriteLine($"Chunk {chunkId} bounds: minY={minY:F2}, maxY={maxY:F2}");
                 }
 
-                // Create mesh shape with double the triangles
+                // Diagnostics
+                Console.WriteLine($"[Physics] Adding collider for chunk {chunkId} at chunkOffset(world)={chunkOffset} triangles={triangleCount * 2} minY={minY:F2} maxY={maxY:F2}");
+
+                // Upload to Bepu
                 int totalTriangles = triangleCount * 2;
                 bufferPool.Take<Triangle>(totalTriangles, out var triangleBuffer);
-                triangles.CopyTo(triangleBuffer);
+                triangles.CopyTo(triangleBuffer); // copy into Bepu buffer
 
-                var mesh = new Mesh(triangleBuffer, new Vector3(1, 1, 1), bufferPool);
+                var mesh = new Mesh(triangleBuffer, new System.Numerics.Vector3(1, 1, 1), bufferPool);
                 var shapeIndex = Simulation.Shapes.Add(mesh);
 
-                // Add as static body (doesn't move)
-                var staticDescription = new StaticDescription(
-                    new Vector3(0, 0, 0), // Position (mesh vertices are already in world space)
-                    shapeIndex
-                );
-
+                // Place the mesh in world at chunkOffsetNum (mesh triangles are local to the chunk)
+                var staticDescription = new StaticDescription(chunkOffsetNum, shapeIndex);
                 var handle = Simulation.Statics.Add(staticDescription);
                 chunkColliders[chunkId] = handle;
 
-                Console.WriteLine($"[PhysicsManager] ✓ Added chunk {chunkId}: {triangleCount} tris (x2 = {totalTriangles}), Y range [{minY:F1}, {maxY:F1}] (statics: {Simulation.Statics.Count})");
+                // Log first few local vertices for debugging if you want:
+                if (triangleCount > 0)
+                {
+                    var t0 = triangles[0];
+                    Console.WriteLine($"[Physics] First triangle local p0={t0.A}, p1={t0.B}, p2={t0.C} - static pos={chunkOffsetNum}");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[PhysicsManager] ERROR adding chunk {chunkId}: {ex.Message}");
-                Console.WriteLine($"[PhysicsManager] Stack: {ex.StackTrace}");
+                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -125,13 +135,13 @@ namespace Aetheris
                     // Get the shape index before removing
                     var staticReference = Simulation.Statics[handle];
                     var shapeIndex = staticReference.Shape;
-                    
+
                     // Remove the static body
                     Simulation.Statics.Remove(handle);
-                    
+
                     // Remove the shape from the shapes collection
                     Simulation.Shapes.Remove(shapeIndex);
-                    
+
                     chunkColliders.Remove(chunkId);
                     Console.WriteLine($"[PhysicsManager] Removed chunk {chunkId} collider");
                 }
@@ -150,7 +160,7 @@ namespace Aetheris
             {
                 RemoveChunkCollider(chunkId);
             }
-            
+
             threadDispatcher?.Dispose();
             Simulation.Dispose();
             bufferPool.Clear();
@@ -175,7 +185,7 @@ namespace Aetheris
             public bool ConfigureContactManifold<TManifold>(int workerIndex, CollidablePair pair, ref TManifold manifold, out PairMaterialProperties pairMaterial) where TManifold : unmanaged, IContactManifold<TManifold>
             {
                 // Higher friction to prevent sliding through surfaces
-                pairMaterial.FrictionCoefficient = 0.6f; 
+                pairMaterial.FrictionCoefficient = 0.6f;
                 pairMaterial.MaximumRecoveryVelocity = 10f;
                 // Stiffer springs for more solid collisions
                 pairMaterial.SpringSettings = new BepuPhysics.Constraints.SpringSettings(240, 10);
@@ -236,22 +246,22 @@ namespace Aetheris
             {
                 this.threadCount = Math.Max(1, threadCount);
                 signals = new AutoResetEvent[this.threadCount];
-                
+
                 for (int i = 0; i < this.threadCount; i++)
                 {
                     signals[i] = new AutoResetEvent(false);
                 }
-                
+
                 // Initialize worker buffer pools - CRITICAL for BepuPhysics
                 workerPools = new WorkerBufferPools(this.threadCount);
-                
+
                 Console.WriteLine($"[SimpleThreadDispatcher] Created {this.threadCount} worker threads with buffer pools");
             }
 
             public unsafe void DispatchWorkers(Action<int> workerBody, int maximumWorkerCount, void* dispatcherUnmanagedContext, object dispatcherManagedContext)
             {
                 int workerCount = Math.Min(maximumWorkerCount, threadCount);
-                
+
                 for (int i = 0; i < workerCount; i++)
                 {
                     int workerIndex = i;
@@ -282,7 +292,7 @@ namespace Aetheris
             public unsafe void DispatchWorkers(delegate*<int, IThreadDispatcher, void> workerBody, int maximumWorkerCount, void* dispatcherUnmanagedContext, object dispatcherManagedContext)
             {
                 int workerCount = Math.Min(maximumWorkerCount, threadCount);
-                
+
                 for (int i = 0; i < workerCount; i++)
                 {
                     int workerIndex = i;

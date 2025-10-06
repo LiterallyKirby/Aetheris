@@ -1,0 +1,28 @@
+[14:17:19.043] [[Server]] Log file created: server_log_20251006_141719.txt
+[14:17:19.045] [[Server]] Initializing world generation...
+[14:17:19.055] [[Server]] UDP listening on port 42070
+[14:17:19.065] [[Server]] Listening on port 42069 @ 60 TPS
+[14:17:19.065] [[Server]] Performance timing enabled - waiting for connections...
+[14:17:19.084] [[Server]] Tick 0 | Cache: 0/20000
+[14:17:20.578] [[Biome]] Chunk (0,0,0) center biome: Desert
+[14:17:20.684] [[Generation]] (0,0,0): Chunk=12.53ms Mesh=104.68ms Vertices=4182
+[14:17:20.689] [[Timing]] Chunk (0,0,0): Chunk=12.53ms Mesh=104.68ms Send=3.55ms Total=140.93ms
+[14:17:20.695] [[Biome]] Chunk (-1,0,0) center biome: Desert
+[14:17:20.775] [[Generation]] (-1,0,0): Chunk=2.28ms Mesh=80.77ms Vertices=4428
+[14:17:20.778] [[Timing]] Chunk (-1,0,0): Chunk=2.28ms Mesh=80.77ms Send=0.27ms Total=87.11ms
+[14:17:20.780] [[Biome]] Chunk (0,0,-1) center biome: Desert
+[14:17:20.858] [[Generation]] (0,0,-1): Chunk=1.60ms Mesh=77.36ms Vertices=3345
+[14:17:20.858] [[Timing]] Chunk (0,0,-1): Chunk=1.60ms Mesh=77.36ms Send=0.15ms Total=79.28ms
+[14:17:20.860] [[Biome]] Chunk (1,0,0) center biome: Desert
+[14:17:20.943] [[Generation]] (1,0,0): Chunk=1.40ms Mesh=83.66ms Vertices=3417
+[14:17:20.944] [[Timing]] Chunk (1,0,0): Chunk=1.40ms Mesh=83.66ms Send=0.28ms Total=85.50ms
+[14:17:20.947] [[Biome]] Chunk (0,0,1) center biome: Desert
+[14:17:21.071] [[Generation]] (0,0,1): Chunk=3.01ms Mesh=123.61ms Vertices=3633
+[14:17:21.072] [[Timing]] Chunk (0,0,1): Chunk=3.01ms Mesh=123.61ms Send=0.81ms Total=127.69ms
+[14:17:21.075] [[Biome]] Chunk (-1,0,-1) center biome: Desert
+[14:17:21.174] [[Generation]] (-1,0,-1): Chunk=2.78ms Mesh=98.29ms Vertices=3354
+[14:17:21.174] [[Timing]] Chunk (-1,0,-1): Chunk=2.78ms Mesh=98.29ms Send=0.43ms Total=101.84ms
+[14:17:21.177] [[Biome]] Chunk (-1,0,1) center biome: Desert
+[14:17:21.333] [[Generation]] (-1,0,1): Chunk=2.14ms Mesh=155.78ms Vertices=4431
+[14:17:21.333] [[Timing]] Chunk (-1,0,1): Chunk=2.14ms Mesh=155.78ms Send=0.20ms Total=158.27ms
+[14:17:21.336] [[Biome]] Chunk (1,0,1) center biome: Mountains
