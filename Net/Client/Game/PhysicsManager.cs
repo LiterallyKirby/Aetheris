@@ -49,81 +49,44 @@ namespace Aetheris
 
 
         // In PhysicsManager
-        public void AddChunkCollider(int chunkId, OpenTK.Mathematics.Vector3 chunkOffset, OpenTK.Mathematics.Vector3[] vertices)
+
+
+
+ 
+public void AddChunkCollider(int chunkId, Vector3 chunkOffset, float[] colliderMesh)
+
         {
-            if (vertices == null || vertices.Length < 3)
+            if (colliderMesh == null || colliderMesh.Length < 9)
             {
-                Console.WriteLine($"[PhysicsManager] Invalid mesh for chunk {chunkId}");
+                Console.WriteLine($"[PhysicsManager] Invalid collider data for chunk {chunkId}");
                 return;
             }
 
             RemoveChunkCollider(chunkId);
 
-            try
+            var chunkOffsetNum = new System.Numerics.Vector3(chunkOffset.X, chunkOffset.Y, chunkOffset.Z);
+
+            int triangleCount = colliderMesh.Length / 9;
+            var triangles = new Triangle[triangleCount];
+
+            for (int i = 0; i < triangleCount; i++)
             {
-                // Convert chunkOffset to System.Numerics for Bepu
-                var chunkOffsetNum = new System.Numerics.Vector3(chunkOffset.X, chunkOffset.Y, chunkOffset.Z);
+                var p0 = new System.Numerics.Vector3(colliderMesh[i * 9 + 0] - chunkOffset.X, colliderMesh[i * 9 + 1] - chunkOffset.Y, colliderMesh[i * 9 + 2] - chunkOffset.Z);
+                var p1 = new System.Numerics.Vector3(colliderMesh[i * 9 + 3] - chunkOffset.X, colliderMesh[i * 9 + 4] - chunkOffset.Y, colliderMesh[i * 9 + 5] - chunkOffset.Z);
+                var p2 = new System.Numerics.Vector3(colliderMesh[i * 9 + 6] - chunkOffset.X, colliderMesh[i * 9 + 7] - chunkOffset.Y, colliderMesh[i * 9 + 8] - chunkOffset.Z);
 
-                // Build triangles in SHAPE-LOCAL space by subtracting the chunk offset from each vertex.
-                // This lets us set StaticDescription.Position = chunkOffsetNum and Bepu will place the shape correctly.
-                int triangleCount = vertices.Length / 3;
-                var triangles = new Triangle[triangleCount * 2];
-
-                float minY = float.MaxValue, maxY = float.MinValue;
-                for (int i = 0; i < triangleCount; i++)
-                {
-                    var v0 = vertices[i * 3 + 0];
-                    var v1 = vertices[i * 3 + 1];
-                    var v2 = vertices[i * 3 + 2];
-
-                    // track bounds for diagnostics (use world-space values)
-                    minY = Math.Min(minY, Math.Min(v0.Y, Math.Min(v1.Y, v2.Y)));
-                    maxY = Math.Max(maxY, Math.Max(v0.Y, Math.Max(v1.Y, v2.Y)));
-
-                    // Convert to System.Numerics and transform into local-shape coords:
-                    var p0 = new System.Numerics.Vector3(v0.X - chunkOffset.X, v0.Y - chunkOffset.Y, v0.Z - chunkOffset.Z);
-                    var p1 = new System.Numerics.Vector3(v1.X - chunkOffset.X, v1.Y - chunkOffset.Y, v1.Z - chunkOffset.Z);
-                    var p2 = new System.Numerics.Vector3(v2.X - chunkOffset.X, v2.Y - chunkOffset.Y, v2.Z - chunkOffset.Z);
-
-                    // front face
-
-                    var normal = Vector3.Normalize(Vector3.Cross(p1 - p0, p2 - p0));
-                    Console.WriteLine($"Tri {i}: Normal {normal}");
-                    triangles[i * 2] = new Triangle(p0, p1, p2);
-                    // back face (reversed winding) - keeps mesh double-sided
-                    triangles[i * 2 + 1] = new Triangle(p0, p2, p1);
-
-Console.WriteLine($"Chunk {chunkId} bounds: minY={minY:F2}, maxY={maxY:F2}");
-                }
-
-                // Diagnostics
-                Console.WriteLine($"[Physics] Adding collider for chunk {chunkId} at chunkOffset(world)={chunkOffset} triangles={triangleCount * 2} minY={minY:F2} maxY={maxY:F2}");
-
-                // Upload to Bepu
-                int totalTriangles = triangleCount * 2;
-                bufferPool.Take<Triangle>(totalTriangles, out var triangleBuffer);
-                triangles.CopyTo(triangleBuffer); // copy into Bepu buffer
-
-                var mesh = new Mesh(triangleBuffer, new System.Numerics.Vector3(1, 1, 1), bufferPool);
-                var shapeIndex = Simulation.Shapes.Add(mesh);
-
-                // Place the mesh in world at chunkOffsetNum (mesh triangles are local to the chunk)
-                var staticDescription = new StaticDescription(chunkOffsetNum, shapeIndex);
-                var handle = Simulation.Statics.Add(staticDescription);
-                chunkColliders[chunkId] = handle;
-
-                // Log first few local vertices for debugging if you want:
-                if (triangleCount > 0)
-                {
-                    var t0 = triangles[0];
-                    Console.WriteLine($"[Physics] First triangle local p0={t0.A}, p1={t0.B}, p2={t0.C} - static pos={chunkOffsetNum}");
-                }
+                triangles[i] = new Triangle(p0, p1, p2);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[PhysicsManager] ERROR adding chunk {chunkId}: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
-            }
+
+            bufferPool.Take<Triangle>(triangleCount, out var triangleBuffer);
+            triangles.CopyTo(triangleBuffer);
+
+            var mesh = new Mesh(triangleBuffer, new System.Numerics.Vector3(1, 1, 1), bufferPool);
+            var shapeIndex = Simulation.Shapes.Add(mesh);
+
+            var staticDescription = new StaticDescription(chunkOffsetNum, shapeIndex);
+            var handle = Simulation.Statics.Add(staticDescription);
+            chunkColliders[chunkId] = handle;
         }
 
         public void RemoveChunkCollider(int chunkId)

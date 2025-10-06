@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Collections.Generic;
+
 namespace Aetheris
 {
     public class Server
@@ -17,7 +19,7 @@ namespace Aetheris
         private readonly ChunkManager chunkManager = new();
 
         // Mesh cache with LRU eviction
-        private readonly ConcurrentDictionary<ChunkCoord, CachedMesh> meshCache = new();
+        private readonly ConcurrentDictionary<ChunkCoord, CachedMeshPair> meshCache = new();
         private readonly ConcurrentDictionary<ChunkCoord, SemaphoreSlim> generationLocks = new();
 
         private const int MaxCachedMeshes = 20000;
@@ -25,7 +27,7 @@ namespace Aetheris
 
         // 60 TPS timing
         private const double TickRate = 60.0;
-        private const double TickDuration = 1000.0 / TickRate; // ms per tick
+        private const double TickDuration = 1000.0 / TickRate;
         private long tickCount = 0;
 
         private readonly ConcurrentDictionary<string, PlayerState> playerStates = new();
@@ -34,12 +36,11 @@ namespace Aetheris
         {
             public Vector3 Position { get; set; }
             public Vector3 Velocity { get; set; }
-            public Vector2 Rotation { get; set; } // Yaw, Pitch
+            public Vector2 Rotation { get; set; }
             public long LastUpdate { get; set; }
             public IPEndPoint? EndPoint { get; set; }
         }
 
-        // Add this enum for packet types
         private enum UdpPacketType : byte
         {
             PlayerPosition = 1,
@@ -47,31 +48,35 @@ namespace Aetheris
             EntityUpdate = 3,
             KeepAlive = 4
         }
+
         // Performance tracking
         private long totalRequests = 0;
         private double totalChunkGenTime = 0;
         private double totalMeshGenTime = 0;
+        private double totalColliderGenTime = 0;
         private double totalSendTime = 0;
         private readonly object perfLock = new();
 
         private UdpClient? udpServer;
         private readonly int UDP_PORT = ServerConfig.SERVER_PORT + 1;
+
         // File logging
         private StreamWriter? logWriter;
         private readonly object logLock = new();
 
-        private class CachedMesh
+        private class CachedMeshPair
         {
-            public float[] Data { get; }
+            public float[] RenderMesh { get; }
+            public float[] ColliderMesh { get; }
             public long LastAccessed { get; set; }
 
-            public CachedMesh(float[] data)
+            public CachedMeshPair(float[] renderMesh, float[] colliderMesh)
             {
-                Data = data;
+                RenderMesh = renderMesh;
+                ColliderMesh = colliderMesh;
                 LastAccessed = DateTime.UtcNow.Ticks;
             }
         }
-
 
         private void Log(string message)
         {
@@ -80,10 +85,6 @@ namespace Aetheris
 
             lock (logLock)
             {
-                // Write to console
-
-
-                // Write to file
                 try
                 {
                     logWriter?.WriteLine(logMessage);
@@ -96,11 +97,8 @@ namespace Aetheris
             }
         }
 
-
-
         public async Task RunServerAsync()
         {
-            // Initialize log file
             string logPath = $"server_log_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
             try
             {
@@ -113,7 +111,7 @@ namespace Aetheris
             }
 
             Log("[[Server]] Initializing world generation...");
-            WorldGen.Initialize(); // <- Ensure noise generators are ready
+            WorldGen.Initialize();
 
             listener = new TcpListener(IPAddress.Any, ServerConfig.SERVER_PORT);
             listener.Start();
@@ -126,7 +124,6 @@ namespace Aetheris
             Log($"[[Server]] Listening on port {ServerConfig.SERVER_PORT} @ {TickRate} TPS");
             Log("[[Server]] Performance timing enabled - waiting for connections...");
 
-            // Start background tasks
             _ = Task.Run(() => ServerTickLoop(cts.Token));
             _ = Task.Run(() => CacheCleanupLoop(cts.Token));
 
@@ -150,7 +147,6 @@ namespace Aetheris
             }
         }
 
-
         private async Task ServerTickLoop(CancellationToken token)
         {
             var sw = Stopwatch.StartNew();
@@ -164,19 +160,16 @@ namespace Aetheris
 
                 while (accumulator >= TickDuration)
                 {
-                    // Server tick logic (if needed)
                     tickCount++;
                     accumulator -= TickDuration;
                 }
 
-                // Sleep to maintain tick rate
                 double sleepTime = TickDuration - sw.Elapsed.TotalMilliseconds;
                 if (sleepTime > 1)
                 {
                     await Task.Delay((int)sleepTime, token);
                 }
 
-                // Log stats every 5 seconds
                 if (tickCount % (int)(TickRate * 5) == 0)
                 {
                     lock (perfLock)
@@ -185,11 +178,12 @@ namespace Aetheris
                         {
                             double avgChunk = totalChunkGenTime / totalRequests;
                             double avgMesh = totalMeshGenTime / totalRequests;
+                            double avgCollider = totalColliderGenTime / totalRequests;
                             double avgSend = totalSendTime / totalRequests;
-                            double avgTotal = avgChunk + avgMesh + avgSend;
+                            double avgTotal = avgChunk + avgMesh + avgCollider + avgSend;
 
                             Log($"[[Server]] Tick {tickCount} | Cache: {cacheSize}/{MaxCachedMeshes}");
-                            Log($"  Requests: {totalRequests} | Avg Times: Chunk={avgChunk:F2}ms Mesh={avgMesh:F2}ms Send={avgSend:F2}ms Total={avgTotal:F2}ms");
+                            Log($"  Requests: {totalRequests} | Avg Times: Chunk={avgChunk:F2}ms Mesh={avgMesh:F2}ms Collider={avgCollider:F2}ms Send={avgSend:F2}ms Total={avgTotal:F2}ms");
                         }
                         else
                         {
@@ -200,23 +194,16 @@ namespace Aetheris
             }
         }
 
-
-
         private async Task HandleUdpLoop(CancellationToken token)
         {
             if (udpServer == null) return;
-
-            IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
 
             try
             {
                 while (!token.IsCancellationRequested)
                 {
                     UdpReceiveResult result = await udpServer.ReceiveAsync(token);
-                    byte[] data = result.Buffer;
-
-                    // Handle packet (input, position update, etc.)
-                    HandleUdpPacket(data, result.RemoteEndPoint);
+                    HandleUdpPacket(result.Buffer, result.RemoteEndPoint);
                 }
             }
             catch (OperationCanceledException)
@@ -228,7 +215,6 @@ namespace Aetheris
                 Log($"[[UDP]] Error: {ex.Message}");
             }
         }
-
 
         private void HandleUdpPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
@@ -243,15 +229,12 @@ namespace Aetheris
                     case UdpPacketType.PlayerPosition:
                         HandlePlayerPositionPacket(data, remoteEndPoint);
                         break;
-
                     case UdpPacketType.PlayerInput:
                         HandlePlayerInputPacket(data, remoteEndPoint);
                         break;
-
                     case UdpPacketType.KeepAlive:
                         HandleKeepAlivePacket(data, remoteEndPoint);
                         break;
-
                     default:
                         Log($"[[UDP]] Unknown packet type: {packetType}");
                         break;
@@ -265,7 +248,6 @@ namespace Aetheris
 
         private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
-            // Packet format: [type:1][x:4][y:4][z:4][velX:4][velY:4][velZ:4][yaw:4][pitch:4]
             if (data.Length < 33) return;
 
             string playerKey = remoteEndPoint.ToString();
@@ -286,33 +268,17 @@ namespace Aetheris
             state.LastUpdate = DateTime.UtcNow.Ticks;
             state.EndPoint = remoteEndPoint;
 
-            // Optional: Broadcast to other players
-            BroadcastPlayerState(playerKey, state);
+            _ = BroadcastPlayerState(playerKey, state);
         }
 
         private void HandlePlayerInputPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
-            // Packet format: [type:1][inputs:1] (bitfield for WASD, jump, etc.)
             if (data.Length < 2) return;
-
-            string playerKey = remoteEndPoint.ToString();
-            byte inputs = data[1];
-
-            // Process input flags
-            bool forward = (inputs & 0x01) != 0;
-            bool backward = (inputs & 0x02) != 0;
-            bool left = (inputs & 0x04) != 0;
-            bool right = (inputs & 0x08) != 0;
-            bool jump = (inputs & 0x10) != 0;
-            bool crouch = (inputs & 0x20) != 0;
-
-            // Server-side input processing (if needed)
-            // This is useful for authoritative server movement
+            // Process input if needed
         }
 
         private void HandleKeepAlivePacket(byte[] data, IPEndPoint remoteEndPoint)
         {
-            // Echo back to confirm connection
             _ = Task.Run(async () =>
             {
                 try
@@ -326,10 +292,8 @@ namespace Aetheris
             });
         }
 
-        // Optional: Broadcast player states to all connected clients
         private async Task BroadcastPlayerState(string excludePlayer, PlayerState state)
         {
-            // Build packet
             byte[] packet = new byte[33];
             packet[0] = (byte)UdpPacketType.EntityUpdate;
             BitConverter.TryWriteBytes(packet.AsSpan(1, 4), state.Position.X);
@@ -356,6 +320,7 @@ namespace Aetheris
                 }
             }
         }
+
         private async Task HandleClientAsync(TcpClient client, CancellationToken token)
         {
             using (client)
@@ -370,34 +335,33 @@ namespace Aetheris
                         if (!coord.HasValue)
                             break;
 
-                        // Process request asynchronously without blocking
                         _ = Task.Run(async () =>
                         {
                             var requestSw = Stopwatch.StartNew();
-                            double chunkTime = 0, meshTime = 0, sendTime = 0;
+                            double chunkTime = 0, meshTime = 0, colliderTime = 0, sendTime = 0;
 
                             try
                             {
-                                var result = await GetOrGenerateMeshAsync(coord.Value, token);
-                                var mesh = result.mesh;
+                                var result = await GetOrGenerateMeshPairAsync(coord.Value, token);
                                 chunkTime = result.chunkGenTime;
                                 meshTime = result.meshGenTime;
+                                colliderTime = result.colliderGenTime;
 
                                 var sendSw = Stopwatch.StartNew();
-                                await SendMeshAsync(stream, mesh, coord.Value, token);
+                                await SendMeshPairAsync(stream, result.renderMesh, result.colliderMesh, coord.Value, token);
                                 sendTime = sendSw.Elapsed.TotalMilliseconds;
 
-                                // Update performance stats
                                 lock (perfLock)
                                 {
                                     totalRequests++;
                                     totalChunkGenTime += chunkTime;
                                     totalMeshGenTime += meshTime;
+                                    totalColliderGenTime += colliderTime;
                                     totalSendTime += sendTime;
                                 }
 
                                 double totalTime = requestSw.Elapsed.TotalMilliseconds;
-                                Log($"[[Timing]] Chunk {coord.Value}: Chunk={chunkTime:F2}ms Mesh={meshTime:F2}ms Send={sendTime:F2}ms Total={totalTime:F2}ms");
+                                Log($"[[Timing]] Chunk {coord.Value}: Chunk={chunkTime:F2}ms Mesh={meshTime:F2}ms Collider={colliderTime:F2}ms Send={sendTime:F2}ms Total={totalTime:F2}ms");
                             }
                             catch (Exception ex)
                             {
@@ -443,62 +407,53 @@ namespace Aetheris
             }
         }
 
+        // Replace GetOrGenerateMeshPairAsync with this version:
 
-        private async Task<(float[] mesh, double chunkGenTime, double meshGenTime)> GetOrGenerateMeshAsync(ChunkCoord coord, CancellationToken token)
+        private async Task<(float[] renderMesh, float[] colliderMesh, double chunkGenTime, double meshGenTime, double colliderGenTime)> GetOrGenerateMeshPairAsync(ChunkCoord coord, CancellationToken token)
         {
-            double chunkGenTime = 0;
-            double meshGenTime = 0;
-
             // Check cache first
             if (meshCache.TryGetValue(coord, out var cached))
             {
                 cached.LastAccessed = DateTime.UtcNow.Ticks;
                 Log($"[[Cache]] Hit for {coord}");
-                return (cached.Data, 0, 0);
+                return (cached.RenderMesh, cached.ColliderMesh, 0, 0, 0);
             }
 
-            // Ensure only one generation per chunk at a time
             var lockObj = generationLocks.GetOrAdd(coord, _ => new SemaphoreSlim(1, 1));
 
             await lockObj.WaitAsync(token);
             try
             {
-                // Double-check after acquiring lock
                 if (meshCache.TryGetValue(coord, out cached))
                 {
                     cached.LastAccessed = DateTime.UtcNow.Ticks;
                     Log($"[[Cache]] Hit after lock for {coord}");
-                    return (cached.Data, 0, 0);
+                    return (cached.RenderMesh, cached.ColliderMesh, 0, 0, 0);
                 }
-
-                var totalSw = Stopwatch.StartNew();
 
                 // Generate chunk
                 var chunkSw = Stopwatch.StartNew();
                 var chunk = await Task.Run(() => chunkManager.GetOrGenerateChunk(coord), token);
-                chunkGenTime = chunkSw.Elapsed.TotalMilliseconds;
+                double chunkGenTime = chunkSw.Elapsed.TotalMilliseconds;
 
-                // Print biome info
-                var columns = chunkManager.GetColumnDataForChunk(coord);
-                var centerBiome = columns[ServerConfig.CHUNK_SIZE / 2, ServerConfig.CHUNK_SIZE / 2].Biome;
-                Log($"[[Biome]] Chunk {coord} center biome: {centerBiome}");
-
-                // Generate mesh
+                // Generate render mesh (high detail, step=2)
                 var meshSw = Stopwatch.StartNew();
-                var mesh = await Task.Run(() =>
-                {
-                    return MarchingCubes.GenerateMesh(chunk, isoLevel: 0.5f);
-                }, token);
-                meshGenTime = meshSw.Elapsed.TotalMilliseconds;
+                var renderMesh = await Task.Run(() => MarchingCubes.GenerateMesh(chunk, coord, chunkManager, isoLevel: 0.5f), token);
+                double meshGenTime = meshSw.Elapsed.TotalMilliseconds;
 
-                // Cache the result
-                var cachedMesh = new CachedMesh(mesh);
-                meshCache[coord] = cachedMesh;
+                // Convert render mesh to collision mesh (just extract xyz positions)
+                var colliderSw = Stopwatch.StartNew();
+                var colliderMesh = ExtractCollisionMeshFromRenderMesh(renderMesh);
+                double colliderGenTime = colliderSw.Elapsed.TotalMilliseconds;
+
+                // Cache both meshes
+                var cachedPair = new CachedMeshPair(renderMesh, colliderMesh);
+                meshCache[coord] = cachedPair;
                 Interlocked.Increment(ref cacheSize);
 
-                Log($"[[Generation]] {coord}: Chunk={chunkGenTime:F2}ms Mesh={meshGenTime:F2}ms Vertices={mesh.Length / 7}");
+                Log($"[[Generation]] {coord}: Render vertices={renderMesh.Length / 7}, Collider triangles={colliderMesh.Length / 9}");
 
-                return (mesh, chunkGenTime, meshGenTime);
+                return (renderMesh, colliderMesh, chunkGenTime, meshGenTime, colliderGenTime);
             }
             finally
             {
@@ -506,40 +461,247 @@ namespace Aetheris
             }
         }
 
+        // Extract just the vertex positions from render mesh for collision
+
+        private float[] ExtractCollisionMeshFromRenderMesh(float[] renderMesh)
+        {
+            // Render mesh format: [x,y,z, nx,ny,nz, blockType] * N vertices
+            // Collision mesh format: [x,y,z] * N vertices
+            // Each triangle is 3 vertices, so we process in groups of 3
+
+            int vertexCount = renderMesh.Length / 7;
+            var collisionMesh = new float[vertexCount * 3];
+
+            // Process triangles (3 vertices at a time) and reverse winding
+            for (int tri = 0; tri < vertexCount / 3; tri++)
+            {
+                int baseIdx = tri * 3;
+
+                // Original order: v0, v1, v2
+                // Reversed order: v0, v2, v1 (swap v1 and v2)
+
+                // v0 (stays same)
+                int v0_render = (baseIdx + 0) * 7;
+                int v0_collision = (baseIdx + 0) * 3;
+                collisionMesh[v0_collision + 0] = renderMesh[v0_render + 0];
+                collisionMesh[v0_collision + 1] = renderMesh[v0_render + 1];
+                collisionMesh[v0_collision + 2] = renderMesh[v0_render + 2];
+
+                // v2 (goes to position 1)
+                int v2_render = (baseIdx + 2) * 7;
+                int v1_collision = (baseIdx + 1) * 3;
+                collisionMesh[v1_collision + 0] = renderMesh[v2_render + 0];
+                collisionMesh[v1_collision + 1] = renderMesh[v2_render + 1];
+                collisionMesh[v1_collision + 2] = renderMesh[v2_render + 2];
+
+                // v1 (goes to position 2)
+                int v1_render = (baseIdx + 1) * 7;
+                int v2_collision = (baseIdx + 2) * 3;
+                collisionMesh[v2_collision + 0] = renderMesh[v1_render + 0];
+                collisionMesh[v2_collision + 1] = renderMesh[v1_render + 1];
+                collisionMesh[v2_collision + 2] = renderMesh[v1_render + 2];
+            }
+
+            return collisionMesh;
+        }
+
+
+        // NEW: Generate collision mesh using simplified marching cubes
+        private float[] GenerateColliderMeshFromMarchingCubes(Chunk chunk, ChunkCoord coord)
+        {
+            int step = ServerConfig.STEP; // Use larger step for collision (less detail)
+            var vertices = new List<float>();
+
+            int sizeX = Chunk.SizeX;
+            int sizeY = Chunk.SizeY;
+            int sizeZ = Chunk.SizeZ;
+
+            const float iso = 0.5f;
+
+            for (int x = 0; x < sizeX; x += step)
+            {
+                for (int y = 0; y < sizeY; y += step)
+                {
+                    for (int z = 0; z < sizeZ; z += step)
+                    {
+                        int nextX = Math.Min(x + step, sizeX);
+                        int nextY = Math.Min(y + step, sizeY);
+                        int nextZ = Math.Min(z + step, sizeZ);
+
+                        // Get world positions
+                        float wx0 = chunk.PositionX + x;
+                        float wy0 = chunk.PositionY + y;
+                        float wz0 = chunk.PositionZ + z;
+                        float wx1 = chunk.PositionX + nextX;
+                        float wy1 = chunk.PositionY + nextY;
+                        float wz1 = chunk.PositionZ + nextZ;
+
+                        // Sample 8 corners
+                        var col0 = WorldGen.GetColumnData((int)wx0, (int)wz0);
+                        var col1 = WorldGen.GetColumnData((int)wx1, (int)wz0);
+                        var col2 = WorldGen.GetColumnData((int)wx1, (int)wz1);
+                        var col3 = WorldGen.GetColumnData((int)wx0, (int)wz1);
+
+                        float v0 = WorldGen.SampleDensityFast((int)wx0, (int)wy0, (int)wz0, col0);
+                        float v1 = WorldGen.SampleDensityFast((int)wx1, (int)wy0, (int)wz0, col1);
+                        float v2 = WorldGen.SampleDensityFast((int)wx1, (int)wy0, (int)wz1, col2);
+                        float v3 = WorldGen.SampleDensityFast((int)wx0, (int)wy0, (int)wz1, col3);
+                        float v4 = WorldGen.SampleDensityFast((int)wx0, (int)wy1, (int)wz0, col0);
+                        float v5 = WorldGen.SampleDensityFast((int)wx1, (int)wy1, (int)wz0, col1);
+                        float v6 = WorldGen.SampleDensityFast((int)wx1, (int)wy1, (int)wz1, col2);
+                        float v7 = WorldGen.SampleDensityFast((int)wx0, (int)wy1, (int)wz1, col3);
+
+                        // Calculate cube index
+                        int cubeIndex = 0;
+                        if (v0 > iso) cubeIndex |= 1;
+                        if (v1 > iso) cubeIndex |= 2;
+                        if (v2 > iso) cubeIndex |= 4;
+                        if (v3 > iso) cubeIndex |= 8;
+                        if (v4 > iso) cubeIndex |= 16;
+                        if (v5 > iso) cubeIndex |= 32;
+                        if (v6 > iso) cubeIndex |= 64;
+                        if (v7 > iso) cubeIndex |= 128;
+
+                        // Skip if completely inside or outside
+                        if (cubeIndex == 0 || cubeIndex == 255) continue;
+
+                        // For collision, just add a simple box at surface voxels
+                        // This is much simpler than full marching cubes triangulation
+                        vertices.AddRange(new[] { 
+                    // Top face (most important)
+                    wx0, wy1, wz0, wx1, wy1, wz1, wx1, wy1, wz0,
+                    wx0, wy1, wz0, wx0, wy1, wz1, wx1, wy1, wz1,
+                    
+                    // Sides (for wall collision)
+                    wx0, wy0, wz0, wx0, wy1, wz0, wx1, wy1, wz0,
+                    wx0, wy0, wz0, wx1, wy1, wz0, wx1, wy0, wz0,
+
+                    wx0, wy0, wz1, wx1, wy0, wz1, wx1, wy1, wz1,
+                    wx0, wy0, wz1, wx1, wy1, wz1, wx0, wy1, wz1
+                });
+                    }
+                }
+            }
+
+            return vertices.ToArray();
+        }
+        private float[] GenerateColliderMesh(Chunk chunk, ChunkCoord coord)
+        {
+            // Generate simplified collision mesh (lower resolution than render mesh)
+            int step = ServerConfig.STEP; // Use larger step for simpler collision
+            var vertices = new List<float>();
+
+            int sizeX = Chunk.SizeX;
+            int sizeY = Chunk.SizeY;
+            int sizeZ = Chunk.SizeZ;
+
+            for (int x = 0; x < sizeX; x += step)
+            {
+                for (int z = 0; z < sizeZ; z += step)
+                {
+                    for (int y = 0; y < sizeY; y += step)
+                    {
+                        int worldX = chunk.PositionX + x;
+                        int worldY = chunk.PositionY + y;
+                        int worldZ = chunk.PositionZ + z;
+
+                        var columnData = WorldGen.GetColumnData(worldX, worldZ);
+                        float density = WorldGen.SampleDensityFast(worldX, worldY, worldZ, columnData);
+
+                        if (density > 0.5f) // Solid voxel
+                        {
+                            // Add a cube worth of triangles (simplified)
+                            AddColliderCube(vertices, worldX, worldY, worldZ, step);
+                        }
+                    }
+                }
+            }
+
+            return vertices.ToArray();
+        }
+
+        private void AddColliderCube(List<float> vertices, float x, float y, float z, int size)
+        {
+            float s = size;
+
+            // Simplified: just add triangles for the cube
+            // Each face = 2 triangles = 6 vertices = 18 floats (xyz per vertex)
+
+            // Bottom face
+            vertices.AddRange(new[] { x, y, z, x + s, y, z, x + s, y, z + s });
+            vertices.AddRange(new[] { x, y, z, x + s, y, z + s, x, y, z + s });
+
+            // Top face  
+            vertices.AddRange(new[] { x, y + s, z, x + s, y + s, z + s, x + s, y + s, z });
+            vertices.AddRange(new[] { x, y + s, z, x, y + s, z + s, x + s, y + s, z + s });
+
+            // Front face
+            vertices.AddRange(new[] { x, y, z, x, y + s, z, x + s, y + s, z });
+            vertices.AddRange(new[] { x, y, z, x + s, y + s, z, x + s, y, z });
+
+            // Back face
+            vertices.AddRange(new[] { x, y, z + s, x + s, y, z + s, x + s, y + s, z + s });
+            vertices.AddRange(new[] { x, y, z + s, x + s, y + s, z + s, x, y + s, z + s });
+
+            // Left face
+            vertices.AddRange(new[] { x, y, z, x, y, z + s, x, y + s, z + s });
+            vertices.AddRange(new[] { x, y, z, x, y + s, z + s, x, y + s, z });
+
+            // Right face
+            vertices.AddRange(new[] { x + s, y, z, x + s, y + s, z, x + s, y + s, z + s });
+            vertices.AddRange(new[] { x + s, y, z, x + s, y + s, z + s, x + s, y, z + s });
+        }
 
         private readonly SemaphoreSlim sendSemaphore = new SemaphoreSlim(1, 1);
 
-        private async Task SendMeshAsync(NetworkStream stream, float[] mesh, ChunkCoord coord, CancellationToken token)
+        private async Task SendMeshPairAsync(NetworkStream stream, float[] renderMesh, float[] colliderMesh, ChunkCoord coord, CancellationToken token)
         {
-            const int floatsPerVertex = 7; // pos(3) + normal(3) + blockType(1)
-            int vertexCount = mesh.Length / floatsPerVertex;
+            // Send render mesh
+            int renderVertexCount = renderMesh.Length / 7;
+            int renderPayloadSize = sizeof(int) + renderMesh.Length * sizeof(float);
+            var renderPayload = ArrayPool<byte>.Shared.Rent(renderPayloadSize);
 
-            int payloadSize = sizeof(int) + mesh.Length * sizeof(float);
-
-            var payload = ArrayPool<byte>.Shared.Rent(payloadSize);
             try
             {
-                Array.Copy(BitConverter.GetBytes(vertexCount), 0, payload, 0, sizeof(int));
-                Buffer.BlockCopy(mesh, 0, payload, sizeof(int), mesh.Length * sizeof(float));
+                Array.Copy(BitConverter.GetBytes(renderVertexCount), 0, renderPayload, 0, sizeof(int));
+                Buffer.BlockCopy(renderMesh, 0, renderPayload, sizeof(int), renderMesh.Length * sizeof(float));
 
-                var lenBytes = BitConverter.GetBytes(payloadSize);
+                // Send collider mesh
+                int colliderPayloadSize = colliderMesh.Length * sizeof(float);
+                var colliderPayload = ArrayPool<byte>.Shared.Rent(colliderPayloadSize);
 
-                // Serialize sends to prevent interleaving
-                await sendSemaphore.WaitAsync(token);
                 try
                 {
-                    await stream.WriteAsync(lenBytes, 0, lenBytes.Length, token);
-                    await stream.WriteAsync(payload, 0, payloadSize, token);
-                    await stream.FlushAsync(token);
+                    Buffer.BlockCopy(colliderMesh, 0, colliderPayload, 0, colliderPayloadSize);
+
+                    await sendSemaphore.WaitAsync(token);
+                    try
+                    {
+                        // Send render mesh length + data
+                        var renderLenBytes = BitConverter.GetBytes(renderPayloadSize);
+                        await stream.WriteAsync(renderLenBytes, 0, renderLenBytes.Length, token);
+                        await stream.WriteAsync(renderPayload, 0, renderPayloadSize, token);
+
+                        // Send collider mesh length + data
+                        var colliderLenBytes = BitConverter.GetBytes(colliderPayloadSize);
+                        await stream.WriteAsync(colliderLenBytes, 0, colliderLenBytes.Length, token);
+                        await stream.WriteAsync(colliderPayload, 0, colliderPayloadSize, token);
+
+                        await stream.FlushAsync(token);
+                    }
+                    finally
+                    {
+                        sendSemaphore.Release();
+                    }
                 }
                 finally
                 {
-                    sendSemaphore.Release();
+                    ArrayPool<byte>.Shared.Return(colliderPayload);
                 }
             }
             finally
             {
-                ArrayPool<byte>.Shared.Return(payload);
+                ArrayPool<byte>.Shared.Return(renderPayload);
             }
         }
 
@@ -549,13 +711,12 @@ namespace Aetheris
             {
                 try
                 {
-                    await Task.Delay(60000, token); // Clean up every 60 seconds
+                    await Task.Delay(60000, token);
 
                     if (cacheSize > MaxCachedMeshes)
                     {
                         var cleanupSw = Stopwatch.StartNew();
-
-                        var entries = new System.Collections.Generic.List<(ChunkCoord coord, long lastAccessed)>();
+                        var entries = new List<(ChunkCoord coord, long lastAccessed)>();
 
                         foreach (var kvp in meshCache)
                         {

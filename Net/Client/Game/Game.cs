@@ -234,6 +234,15 @@ namespace Aetheris
                 }
             }
 
+if (KeyboardState.IsKeyPressed(Keys.D1))
+{
+    player.TeleportTo(new Vector3(
+        player.Position.X,
+        player.Position.Y + 10,
+        player.Position.Z
+    ));
+}
+
             // Debug: Show biome info
             if (KeyboardState.IsKeyPressed(Keys.B))
             {
@@ -257,43 +266,51 @@ namespace Aetheris
 
         public void RegisterChunkPhysicsImmediate(int cx, int cy, int cz, float[] meshData)
         {
-            if (physics == null || meshData == null || meshData.Length == 0) return;
+            if (physics == null || meshData == null || meshData.Length == 0)
+            {
+                Console.WriteLine($"[Game] Skipping physics registration for chunk ({cx},{cy},{cz}) - empty mesh");
+                return;
+            }
 
             try
             {
-                int stride = (meshData.Length % 7 == 0) ? 7 : 8;
-                int vertexCount = meshData.Length / stride;
+                // Collision mesh is in world coordinates already (xyz per vertex, 3 vertices per triangle)
+                // Format: [x0,y0,z0, x1,y1,z1, x2,y2,z2, ...] (9 floats per triangle)
 
-                if (vertexCount < 3) return;
+                if (meshData.Length % 9 != 0)
+                {
+                    Console.WriteLine($"[Game] Invalid collision mesh size: {meshData.Length} (not divisible by 9)");
+                    return;
+                }
 
-                Vector3 chunkOffset = new Vector3(
+                int triangleCount = meshData.Length / 9;
+                if (triangleCount == 0)
+                {
+                    Console.WriteLine($"[Game] No triangles in collision mesh for chunk ({cx},{cy},{cz})");
+                    return;
+                }
+
+                int chunkId = ChunkKey(cx, cy, cz);
+
+                // The mesh data is already in world coordinates from the server
+                // We just need to pass it to the physics manager
+                var chunkOffsetNum = new System.Numerics.Vector3(
                     cx * ClientConfig.CHUNK_SIZE,
                     cy * ClientConfig.CHUNK_SIZE_Y,
                     cz * ClientConfig.CHUNK_SIZE
                 );
 
-                var vertices = new Vector3[vertexCount];
-                for (int i = 0; i < vertexCount; i++)
-                {
-                    int idx = i * stride;
-                    vertices[i] = new Vector3(
-                        meshData[idx + 0],
-                        meshData[idx + 1],
-                        meshData[idx + 2]
-                    ) + chunkOffset;
-                }
+                physics.AddChunkCollider(chunkId, chunkOffsetNum, meshData);
 
-                int chunkId = ChunkKey(cx, cy, cz);
-                physics.AddChunkCollider(chunkId, chunkOffset, vertices);
+                Console.WriteLine($"[Game] Registered physics collider: chunk ({cx},{cy},{cz}), {triangleCount} triangles, {meshData.Length} floats");
 
-                Console.WriteLine($"[Game] Registered physics with {vertexCount} vertices for chunk ({cx},{cy},{cz})");
-
-                // ⚡ Mark for a physics step instead of calling Update() immediately
+                // Optionally force a physics step
                 forcePhysicsStep = true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[Game] Failed to register physics: {ex.Message}");
+                Console.WriteLine($"[Game] Failed to register physics for chunk ({cx},{cy},{cz}): {ex.Message}");
+                Console.WriteLine($"[Game] Stack trace: {ex.StackTrace}");
             }
         }
 

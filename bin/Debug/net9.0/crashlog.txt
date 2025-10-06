@@ -1,5 +1,5 @@
 ===== Aetheris Crash Report =====
-Time: 10/6/2025 2:18:34 PM
+Time: 10/6/2025 3:17:54 PM
 Message: One or more errors occurred. (A task was canceled.)
 Source: System.Private.CoreLib
 Stack Trace:
@@ -7,8 +7,8 @@ Stack Trace:
    at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout)
-   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 412
-   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 55
+   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 473
+   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 56
    at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 45
 
 Inner Exception:
@@ -18,7 +18,7 @@ System.Threading.Tasks.TaskCanceledException: A task was canceled.
    at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout)
-   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 412
-   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 55
+   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 473
+   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 56
    at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 45
 --- End of stack trace from previous location ---

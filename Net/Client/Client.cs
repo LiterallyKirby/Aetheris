@@ -25,6 +25,7 @@ namespace Aetheris
         private readonly SemaphoreSlim connectionSemaphore = new SemaphoreSlim(1, 1);
         private int currentRenderDistance;
 
+        private readonly ConcurrentQueue<(int cx, int cy, int cz, float[] colliderMesh)> colliderQueue = new();
         private readonly ConcurrentQueue<(int cx, int cy, int cz, float[] mesh)> physicsQueue = new();
         // Auto-tuned parameters
         public int MaxConcurrentLoads { get; set; } = 16;
@@ -124,6 +125,33 @@ namespace Aetheris
                     Console.WriteLine($"[Client] Update loop error: {ex.Message}");
                 }
             }
+        }
+
+
+        private async Task<(float[] renderMesh, float[] colliderMesh)> ReceiveChunkPayloadAsync(CancellationToken token)
+        {
+            var lenBuf = new byte[4];
+            await ReadFullAsync(stream!, lenBuf, 0, 4, token);
+            int renderPayloadLen = BitConverter.ToInt32(lenBuf, 0);
+
+            var renderPayload = new byte[renderPayloadLen];
+            await ReadFullAsync(stream!, renderPayload, 0, renderPayloadLen, token);
+
+            int colliderPayloadLen = BitConverter.ToInt32(renderPayload, renderPayloadLen); // next payload length
+            var colliderPayload = new byte[colliderPayloadLen];
+            await ReadFullAsync(stream!, colliderPayload, 0, colliderPayloadLen, token);
+
+            int vertexCount = BitConverter.ToInt32(renderPayload, 0);
+            const int floatsPerVertex = 7;
+            int floatsCount = vertexCount * floatsPerVertex;
+            var renderFloats = new float[floatsCount];
+            Buffer.BlockCopy(renderPayload, 4, renderFloats, 0, floatsCount * sizeof(float));
+
+            int colliderVertexCount = colliderPayloadLen / (sizeof(float) * 3);
+            var colliderFloats = new float[colliderVertexCount * 3];
+            Buffer.BlockCopy(colliderPayload, 0, colliderFloats, 0, colliderVertexCount * 3 * sizeof(float));
+
+            return (renderFloats, colliderFloats);
         }
 
         public void UpdateLoadedChunks(Vector3 playerChunk, int renderDistance)
@@ -303,20 +331,18 @@ namespace Aetheris
 
 
 
+
         private async Task LoadChunkAsync((int cx, int cy, int cz, float priority) chunk, CancellationToken token)
         {
             try
             {
-                // Distance check omitted for brevity
-                float[] meshData = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
+                var (renderMesh, colliderMesh) = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
 
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = new Aetheris.Chunk();
 
+                physicsQueue.Enqueue((chunk.cx, chunk.cy, chunk.cz, colliderMesh));
 
-                physicsQueue.Enqueue((chunk.cx, chunk.cy, chunk.cz, meshData));
-
-
-                game?.Renderer.EnqueueMeshForChunk(chunk.cx, chunk.cy, chunk.cz, meshData);
+                game?.Renderer.EnqueueMeshForChunk(chunk.cx, chunk.cy, chunk.cz, renderMesh);
             }
             catch (Exception ex)
             {
@@ -327,37 +353,43 @@ namespace Aetheris
 
 
 
-        private async Task<float[]> RequestChunkMeshAsync(int cx, int cy, int cz, CancellationToken token)
+ private async Task<(float[] renderMesh, float[] colliderMesh)> RequestChunkMeshAsync(int cx, int cy, int cz, CancellationToken token)
+{
+    // Ensure connection
+    if (stream == null || tcp == null || !tcp.Connected)
+    {
+        await connectionSemaphore.WaitAsync(token);
+        try
         {
-            // Ensure connection
             if (stream == null || tcp == null || !tcp.Connected)
             {
-                await connectionSemaphore.WaitAsync(token);
-                try
-                {
-                    if (stream == null || tcp == null || !tcp.Connected)
-                    {
-                        await ConnectToServerAsync("127.0.0.1", ClientConfig.SERVER_PORT);
-                    }
-                }
-                finally
-                {
-                    connectionSemaphore.Release();
-                }
-            }
-
-            await networkSemaphore.WaitAsync(token);
-            try
-            {
-                await SendChunkRequestAsync(cx, cy, cz, token);
-                return await ReceiveMeshPayloadAsync(token);
-            }
-            finally
-            {
-                networkSemaphore.Release();
+                await ConnectToServerAsync("127.0.0.1", ClientConfig.SERVER_PORT);
             }
         }
+        finally
+        {
+            connectionSemaphore.Release();
+        }
+    }
 
+    await networkSemaphore.WaitAsync(token);
+    try
+    {
+        await SendChunkRequestAsync(cx, cy, cz, token);
+
+        // First: render mesh (has vertex count header)
+        float[] renderMesh = await ReceiveMeshPayloadAsync(token);
+
+        // Second: collider mesh (raw floats, no header)
+        float[] colliderMesh = await ReceiveColliderMeshAsync(token);
+
+        return (renderMesh, colliderMesh);
+    }
+    finally
+    {
+        networkSemaphore.Release();
+    }
+}
         private async Task SendChunkRequestAsync(int cx, int cy, int cz, CancellationToken token)
         {
             var req = new byte[12];
@@ -382,6 +414,7 @@ namespace Aetheris
             var payload = new byte[payloadLen];
             await ReadFullAsync(stream!, payload, 0, payloadLen, token);
 
+            // Render mesh has vertex count header
             int vertexCount = BitConverter.ToInt32(payload, 0);
             const int floatsPerVertex = 7;
             int floatsCount = vertexCount * floatsPerVertex;
@@ -391,6 +424,34 @@ namespace Aetheris
 
             return floats;
         }
+
+private async Task<float[]> ReceiveColliderMeshAsync(CancellationToken token)
+{
+    var lenBuf = new byte[4];
+    await ReadFullAsync(stream!, lenBuf, 0, 4, token);
+    int payloadLen = BitConverter.ToInt32(lenBuf, 0);
+
+    // Sanity check
+    if (payloadLen < 0 || payloadLen > 100_000_000)
+        throw new Exception($"Invalid collider payload length: {payloadLen}");
+
+    if (payloadLen == 0)
+    {
+        Console.WriteLine("[Client] Empty collider mesh received");
+        return Array.Empty<float>();
+    }
+
+    var payload = new byte[payloadLen];
+    await ReadFullAsync(stream!, payload, 0, payloadLen, token);
+
+    // Collider mesh is just raw floats (xyz per vertex, 9 floats per triangle)
+    int floatCount = payloadLen / sizeof(float);
+    var floats = new float[floatCount];
+    Buffer.BlockCopy(payload, 0, floats, 0, payloadLen);
+
+    Console.WriteLine($"[Client] Received collider mesh: {floatCount} floats ({floatCount / 9} triangles)");
+    return floats;
+}
 
         private static async Task ReadFullAsync(NetworkStream stream, byte[] buf, int off, int count, CancellationToken token)
         {
@@ -409,7 +470,7 @@ namespace Aetheris
             Console.WriteLine("[Client] Shutting down...");
             cts?.Cancel();
 
-physicsTask?.Wait(TimeSpan.FromSeconds(2));
+            physicsTask?.Wait(TimeSpan.FromSeconds(2));
             loaderTask?.Wait(TimeSpan.FromSeconds(2));
             updateTask?.Wait(TimeSpan.FromSeconds(1));
 

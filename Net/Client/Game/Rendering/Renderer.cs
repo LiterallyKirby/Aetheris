@@ -161,7 +161,7 @@ void main()
 
         public Renderer()
         {
-            psxEffects = PSXVisualEffects.CreatePlayablePSX();
+            psxEffects = PSXVisualEffects.CreateMinimal();
 	    
         }
 

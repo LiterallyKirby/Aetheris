@@ -11,13 +11,19 @@ namespace Aetheris
 {
     public class Player
     {
-        public Vector3 Position { get; private set; }
+        public Vector3 Position { get; set; }
         public float Pitch { get; private set; } = 0f;
         public float Yaw { get; private set; } = -90f;
 
-        private float moveSpeed = 6f;
-        private float sprintMultiplier = 1.6f;
-        private float jumpForce = 6f;
+        // Quake 3 movement constants (scaled for our physics system)
+        private const float GroundAccelerate = 10f;     // Ground acceleration
+        private const float AirAccelerate = 1f;         // Air acceleration (for air control)
+        private const float MaxGroundSpeed = 12f;       // Max ground speed
+        private const float MaxAirSpeed = 1f;           // Max speed with air control
+        private const float Friction = 6f;              // Ground friction coefficient
+        private const float StopSpeed = 1f;             // Speed below which friction applies more
+        private const float JumpSpeed = 9f;             // Jump velocity
+        
         private float mouseSensitivity = 0.2f;
         private Vector2 lastMousePos;
         private bool firstMouse = true;
@@ -27,7 +33,7 @@ namespace Aetheris
         private BodyHandle bodyHandle;
         private bool isGrounded = false;
         private readonly float capsuleRadius = 0.4f;
-        private readonly float capsuleHeight = 1.8f;
+        private readonly float capsuleHeight = 2.5f;
         private int debugCounter = 0;
 
         public Player(Vector3 startPosition, PhysicsManager? physicsManager = null)
@@ -45,18 +51,14 @@ namespace Aetheris
         {
             if (physics == null) return;
 
-            // Create capsule shape for player
             var capsule = new Capsule(capsuleRadius, capsuleHeight);
             var shapeIndex = physics.Simulation.Shapes.Add(capsule);
 
-            // Proper mass and inertia for a human
-            var mass = 70f; // 70kg
-
-            // Create body inertia with locked rotation
+            var mass = 70f;
             var inertia = new BodyInertia
             {
                 InverseMass = 1f / mass,
-                InverseInertiaTensor = default // Zero rotational inertia = no rotation (prevents tipping)
+                InverseInertiaTensor = default // Locked rotation
             };
 
             var bodyDescription = BodyDescription.CreateDynamic(
@@ -67,27 +69,42 @@ namespace Aetheris
             );
 
             bodyHandle = physics.Simulation.Bodies.Add(bodyDescription);
-
-            Console.WriteLine($"[Player] Physics body created at {startPosition}, handle={bodyHandle.Value}, mass={mass}kg");
+            Console.WriteLine($"[Player] Q3-style physics body created at {startPosition}");
         }
 
         public Matrix4 GetViewMatrix()
         {
             Vector3 front = GetFront();
-            Vector3 eyePosition = Position + new Vector3(0, capsuleHeight * 0.4f, 0);
+            Vector3 eyePosition = Position + new Vector3(0, capsuleHeight * 0.8f, 0);
             return Matrix4.LookAt(eyePosition, eyePosition + front, Vector3.UnitY);
         }
 
-        public Vector3 GetForward()
+        public Vector3 GetForward() => GetFront();
+
+        public void TeleportTo(Vector3 newPosition)
         {
-            return GetFront();
+            if (physics != null && physics.Simulation.Bodies.BodyExists(bodyHandle))
+            {
+                var bodyRef = physics.Simulation.Bodies.GetBodyReference(bodyHandle);
+                bodyRef.Pose.Position = new System.Numerics.Vector3(
+                    newPosition.X,
+                    newPosition.Y + capsuleHeight * 0.5f,
+                    newPosition.Z
+                );
+                bodyRef.Velocity.Linear = System.Numerics.Vector3.Zero;
+                bodyRef.Awake = true;
+                Position = newPosition;
+                Console.WriteLine($"[Player] Teleported to {newPosition}");
+            }
+            else
+            {
+                Position = newPosition;
+            }
         }
 
         public void Update(FrameEventArgs e, KeyboardState keys, MouseState mouse)
         {
             float delta = (float)e.Time;
-
-            // Update camera rotation
             UpdateMouseLook(mouse);
 
             if (physics != null)
@@ -104,7 +121,6 @@ namespace Aetheris
         {
             if (physics == null) return;
 
-            // Validate body still exists
             if (!physics.Simulation.Bodies.BodyExists(bodyHandle))
             {
                 Console.WriteLine("[Player] Physics body no longer exists, reinitializing...");
@@ -113,19 +129,15 @@ namespace Aetheris
             }
 
             var bodyRef = physics.Simulation.Bodies.GetBodyReference(bodyHandle);
-
-            // Get current position from physics (capsule center is at Y position)
             var physPos = bodyRef.Pose.Position;
             Position = new Vector3(physPos.X, physPos.Y - capsuleHeight * 0.5f, physPos.Z);
 
-            // Get current velocity
             var vel = bodyRef.Velocity.Linear;
-            Vector3 currentVelocity = new Vector3(vel.X, vel.Y, vel.Z);
+            
+            // Ground detection - check if vertical velocity is small
+            isGrounded = Math.Abs(vel.Y) < 0.5f;
 
-            // Better ground check: look for near-zero or small downward velocity
-            isGrounded = vel.Y > -2f && vel.Y < 0.5f;
-
-            // Calculate movement direction (only horizontal)
+            // Get wish direction from input
             Vector3 front = GetFront();
             Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
             front.Y = 0;
@@ -133,60 +145,54 @@ namespace Aetheris
             right.Y = 0;
             right = right.LengthSquared > 0.01f ? Vector3.Normalize(right) : Vector3.Zero;
 
-            Vector3 inputDirection = Vector3.Zero;
-            if (keys.IsKeyDown(Keys.W)) inputDirection += front;
-            if (keys.IsKeyDown(Keys.S)) inputDirection -= front;
-            if (keys.IsKeyDown(Keys.A)) inputDirection -= right;
-            if (keys.IsKeyDown(Keys.D)) inputDirection += right;
+            Vector3 wishDir = Vector3.Zero;
+            if (keys.IsKeyDown(Keys.W)) wishDir += front;
+            if (keys.IsKeyDown(Keys.S)) wishDir -= front;
+            if (keys.IsKeyDown(Keys.A)) wishDir -= right;
+            if (keys.IsKeyDown(Keys.D)) wishDir += right;
 
-            if (inputDirection.LengthSquared > 0.01f)
-                inputDirection = Vector3.Normalize(inputDirection);
+            if (wishDir.LengthSquared > 0.01f)
+                wishDir = Vector3.Normalize(wishDir);
 
-            // Apply sprint
-            float currentSpeed = moveSpeed;
-            if (keys.IsKeyDown(Keys.LeftShift) && isGrounded)
-                currentSpeed *= sprintMultiplier;
+            // Current horizontal velocity
+            Vector3 horizVel = new Vector3(vel.X, 0, vel.Z);
+            float speed = horizVel.Length;
 
-            // FORCE-BASED MOVEMENT (feels responsive and grounded)
-            if (inputDirection.LengthSquared > 0.01f)
+            if (isGrounded)
             {
-                Vector3 targetVelocity = inputDirection * currentSpeed;
-                Vector3 currentHorizontal = new Vector3(vel.X, 0, vel.Z);
-                Vector3 velocityDiff = targetVelocity - currentHorizontal;
-
-                // Strong acceleration when grounded, weaker in air
-                float acceleration = isGrounded ? 500f : 100f;
-                Vector3 impulse = velocityDiff * acceleration * delta;
-
-                // Apply impulse (converted to System.Numerics)
-                bodyRef.ApplyLinearImpulse(new System.Numerics.Vector3(
-                    impulse.X,
-                    0,
-                    impulse.Z
-                ));
-
-                // SAFE AWAKE: Only wake if body is in active set
-                if (bodyRef.Awake == false)
+                // Apply Quake 3 ground friction
+                ApplyFriction(ref bodyRef, speed, delta);
+                
+                // Ground acceleration
+                float wishSpeed = MaxGroundSpeed;
+                if (keys.IsKeyDown(Keys.LeftShift))
+                    wishSpeed *= 1.5f;
+                
+                Accelerate(ref bodyRef, wishDir, wishSpeed, GroundAccelerate, delta);
+                
+                // Slope assist - applies upward force when moving on slopes
+                if (wishDir.LengthSquared > 0.01f)
                 {
-                    try
-                    {
-                        bodyRef.Awake = true;
-                    }
-                    catch
-                    {
-                        // Body not ready yet, impulse will be applied next frame
-                    }
+                    // Add a small upward component to help climb slopes
+                    float slopeAssist = 0.3f;
+                    var movement = new System.Numerics.Vector3(
+                        wishDir.X * wishSpeed * delta,
+                        slopeAssist,
+                        wishDir.Z * wishSpeed * delta
+                    );
+                    
+                    bodyRef.Velocity.Linear = new System.Numerics.Vector3(
+                        bodyRef.Velocity.Linear.X,
+                        Math.Max(bodyRef.Velocity.Linear.Y, movement.Y),
+                        bodyRef.Velocity.Linear.Z
+                    );
                 }
             }
-            else if (isGrounded)
+            else
             {
-                // FRICTION: Aggressively dampen horizontal velocity when no input
-                float friction = 0.15f; // Keep 15% of velocity each frame = strong friction
-                bodyRef.Velocity.Linear = new System.Numerics.Vector3(
-                    vel.X * friction,
-                    vel.Y,
-                    vel.Z * friction
-                );
+                // Air control (Quake 3 style)
+                float wishSpeed = MaxAirSpeed;
+                AirAccelerate_Q3(ref bodyRef, wishDir, wishSpeed, AirAccelerate, delta);
             }
 
             // Jump
@@ -194,50 +200,110 @@ namespace Aetheris
             {
                 bodyRef.Velocity.Linear = new System.Numerics.Vector3(
                     vel.X,
-                    jumpForce,
+                    JumpSpeed,
                     vel.Z
                 );
-
-                // SAFE AWAKE: Only wake if body is in active set
-                if (bodyRef.Awake == false)
+                
+                if (!bodyRef.Awake)
                 {
-                    try
-                    {
-                        bodyRef.Awake = true;
-                    }
-                    catch
-                    {
-                        // Body not ready yet, jump will apply next frame
-                    }
+                    try { bodyRef.Awake = true; } catch { }
                 }
             }
 
-            // Debug output (less frequent)
+            // Wake body if needed
+            if (!bodyRef.Awake && wishDir.LengthSquared > 0.01f)
+            {
+                try { bodyRef.Awake = true; } catch { }
+            }
+
             debugCounter++;
             if (debugCounter % 60 == 0)
             {
-
+                // Uncomment for speed display:
+                // Console.WriteLine($"[Player] Speed: {speed:F1}, Grounded: {isGrounded}");
             }
         }
+
+        // Quake 3 friction implementation
+        private void ApplyFriction(ref BodyReference bodyRef, float speed, float delta)
+        {
+            if (speed < 0.1f) return;
+
+            var vel = bodyRef.Velocity.Linear;
+            float control = speed < StopSpeed ? StopSpeed : speed;
+            float drop = control * Friction * delta;
+
+            float newSpeed = Math.Max(speed - drop, 0f);
+            if (speed > 0.01f)
+            {
+                float scale = newSpeed / speed;
+                bodyRef.Velocity.Linear = new System.Numerics.Vector3(
+                    vel.X * scale,
+                    vel.Y,
+                    vel.Z * scale
+                );
+            }
+        }
+
+        // Quake 3 ground acceleration
+        private void Accelerate(ref BodyReference bodyRef, Vector3 wishDir, float wishSpeed, float accel, float delta)
+        {
+            if (wishDir.LengthSquared < 0.01f) return;
+
+            var vel = bodyRef.Velocity.Linear;
+            Vector3 currentVel = new Vector3(vel.X, 0, vel.Z);
+            
+            float currentSpeed = Vector3.Dot(currentVel, wishDir);
+            float addSpeed = wishSpeed - currentSpeed;
+            
+            if (addSpeed <= 0) return;
+
+            float accelSpeed = Math.Min(accel * delta * wishSpeed, addSpeed);
+            
+            // Set velocity directly instead of applying impulse
+            bodyRef.Velocity.Linear = new System.Numerics.Vector3(
+                vel.X + wishDir.X * accelSpeed,
+                vel.Y,
+                vel.Z + wishDir.Z * accelSpeed
+            );
+        }
+
+        // Quake 3 air acceleration (for strafe jumping)
+        private void AirAccelerate_Q3(ref BodyReference bodyRef, Vector3 wishDir, float wishSpeed, float accel, float delta)
+        {
+            if (wishDir.LengthSquared < 0.01f) return;
+
+            var vel = bodyRef.Velocity.Linear;
+            Vector3 currentVel = new Vector3(vel.X, 0, vel.Z);
+            
+            float currentSpeed = Vector3.Dot(currentVel, wishDir);
+            float addSpeed = wishSpeed - currentSpeed;
+            
+            if (addSpeed <= 0) return;
+
+            float accelSpeed = Math.Min(accel * delta * wishSpeed, addSpeed);
+            
+            // Set velocity directly instead of applying impulse
+            bodyRef.Velocity.Linear = new System.Numerics.Vector3(
+                vel.X + wishDir.X * accelSpeed,
+                vel.Y,
+                vel.Z + wishDir.Z * accelSpeed
+            );
+        }
+
         private void UpdateSimpleMovement(float delta, KeyboardState keys)
         {
-            float velocity = moveSpeed * delta;
+            float velocity = 6f * delta;
             Vector3 front = GetFront();
             Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
             Vector3 up = Vector3.UnitY;
 
-            if (keys.IsKeyDown(Keys.W))
-                Position += front * velocity;
-            if (keys.IsKeyDown(Keys.S))
-                Position -= front * velocity;
-            if (keys.IsKeyDown(Keys.A))
-                Position -= right * velocity;
-            if (keys.IsKeyDown(Keys.D))
-                Position += right * velocity;
-            if (keys.IsKeyDown(Keys.Space))
-                Position += up * velocity;
-            if (keys.IsKeyDown(Keys.LeftShift))
-                Position -= up * velocity;
+            if (keys.IsKeyDown(Keys.W)) Position += front * velocity;
+            if (keys.IsKeyDown(Keys.S)) Position -= front * velocity;
+            if (keys.IsKeyDown(Keys.A)) Position -= right * velocity;
+            if (keys.IsKeyDown(Keys.D)) Position += right * velocity;
+            if (keys.IsKeyDown(Keys.Space)) Position += up * velocity;
+            if (keys.IsKeyDown(Keys.LeftShift)) Position -= up * velocity;
         }
 
         private void UpdateMouseLook(MouseState mouse)
@@ -258,7 +324,6 @@ namespace Aetheris
 
             Yaw += dx;
             Pitch += dy;
-
             Pitch = Math.Clamp(Pitch, -89f, 89f);
         }
 
