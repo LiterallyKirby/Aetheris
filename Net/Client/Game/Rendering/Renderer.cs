@@ -46,7 +46,7 @@ namespace Aetheris
 
         public int RenderDistanceChunks { get; set; } = ClientConfig.RENDER_DISTANCE;
         public float FogDecay = 0.003f;
-        public PhysicsManager? Physics { get; set; }
+
 
         // Track screen resolution for PSX effects
         public int ScreenWidth { get; set; } = 1280;
@@ -162,7 +162,7 @@ void main()
         public Renderer()
         {
             psxEffects = PSXVisualEffects.CreateMinimal();
-	    
+
         }
 
         public void LoadTextureAtlas(string path)
@@ -646,57 +646,12 @@ void main()
 
             frameCount++;
         }
-        public void RemoveChunk(int cx, int cy, int cz)
-        {
-            var key = (cx, cy, cz);
-            if (meshes.TryGetValue(key, out var md))
-            {
-                try
-                {
-                    if (md.Vbo != 0) GL.DeleteBuffer(md.Vbo);
-                    if (md.Vao != 0) GL.DeleteVertexArray(md.Vao);
 
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("[Renderer] GL delete error: " + ex);
-                }
-                meshes.Remove(key);
-            }
-
-            // Remove physics collider if we registered it
-            int chunkId = ChunkKey(cx, cy, cz);
-            if (physicsRegisteredChunks.Contains(chunkId))
-            {
-                try
-                {
-                    Physics?.RemoveChunkCollider(chunkId);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("[Renderer] Error removing chunk collider from physics: " + ex);
-                }
-                physicsRegisteredChunks.Remove(chunkId);
-            }
-        }
 
         public void Clear()
         {
             // Remove physics colliders we registered
-            if (Physics != null)
-            {
-                foreach (var id in physicsRegisteredChunks.ToArray())
-                {
-                    try
-                    {
-                        Physics.RemoveChunkCollider(id);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("[Renderer] Error removing chunk collider during Clear(): " + ex);
-                    }
-                }
-            }
+
             physicsRegisteredChunks.Clear();
 
             foreach (var md in meshes.Values)
@@ -745,11 +700,27 @@ void main()
             }
 
             EnsureShader();
-            RemoveChunk(cx, cy, cz);
+
 
             float[] uploadData = interleavedData;
             int detectedStride = 0;
+            if (uploadData.Length >= 8 && meshes.Count < 3)
+            {
+                float expectedX = cx * ClientConfig.CHUNK_SIZE;
+                float expectedY = cy * ClientConfig.CHUNK_SIZE_Y;
+                float expectedZ = cz * ClientConfig.CHUNK_SIZE;
 
+                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz})");
+                Console.WriteLine($"[Renderer]   Expected world range: ({expectedX}-{expectedX + ClientConfig.CHUNK_SIZE}, {expectedY}-{expectedY + ClientConfig.CHUNK_SIZE_Y}, {expectedZ}-{expectedZ + ClientConfig.CHUNK_SIZE})");
+                Console.WriteLine($"[Renderer]   First vertex at: ({uploadData[0]:F1}, {uploadData[1]:F1}, {uploadData[2]:F1})");
+
+                bool inExpectedRange =
+                    uploadData[0] >= expectedX && uploadData[0] <= expectedX + ClientConfig.CHUNK_SIZE &&
+                    uploadData[1] >= expectedY && uploadData[1] <= expectedY + ClientConfig.CHUNK_SIZE_Y &&
+                    uploadData[2] >= expectedZ && uploadData[2] <= expectedZ + ClientConfig.CHUNK_SIZE;
+
+                Console.WriteLine($"[Renderer]   Vertex in expected range: {inExpectedRange}");
+            }
             // More robust stride detection
             // Check if data has blockType (stride 7) by examining the 7th value
             if (interleavedData.Length >= 7)
@@ -880,7 +851,7 @@ void main()
 
             GL.BindVertexArray(0);
 
-          var model = Matrix4.Identity;
+            var model = Matrix4.Identity;
 
             Vector3 chunkCenter = new Vector3(
                 cx * ClientConfig.CHUNK_SIZE + ClientConfig.CHUNK_SIZE * 0.5f,
@@ -897,7 +868,7 @@ void main()
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
 
             // Register physics collider (if Physics manager assigned)
-        
+
 
             if (meshes.Count < 3)
             {
@@ -911,7 +882,7 @@ void main()
 
             }
 
-                OnChunkMeshLoaded?.Invoke(cx, cy, cz, uploadData);
+            OnChunkMeshLoaded?.Invoke(cx, cy, cz, uploadData);
 
         }
         private void EnsureShader()

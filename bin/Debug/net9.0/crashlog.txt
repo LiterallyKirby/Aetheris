@@ -1,24 +1,16 @@
 ===== Aetheris Crash Report =====
-Time: 10/6/2025 3:17:54 PM
-Message: One or more errors occurred. (A task was canceled.)
+Time: 10/6/2025 6:35:54 PM
+Message: One or more errors occurred. (Operation canceled)
 Source: System.Private.CoreLib
 Stack Trace:
-   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout)
-   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 473
-   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 56
-   at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 45
+   at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 75
 
 Inner Exception:
-System.Threading.Tasks.TaskCanceledException: A task was canceled.
-   at System.Threading.Tasks.Task.GetExceptions(Boolean includeTaskCanceledExceptions)
-   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
-   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
-   at System.Threading.Tasks.Task.Wait(TimeSpan timeout, CancellationToken cancellationToken)
-   at System.Threading.Tasks.Task.Wait(TimeSpan timeout)
-   at Aetheris.Client.Cleanup() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 473
-   at Aetheris.Client.Run() in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 56
-   at Aetheris.Program.Main(String[] args) in /home/kirby/Programming/Aetheris/Program.cs:line 45
---- End of stack trace from previous location ---
+System.Net.Sockets.SocketException (125): Operation canceled
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Net.Sockets.Socket>.GetResult(Int16 token)
+   at System.Net.Sockets.TcpListener.<AcceptTcpClientAsync>g__WaitAndWrap|32_0(ValueTask`1 task)
+   at Aetheris.Server.RunServerAsync() in /home/kirby/Programming/Aetheris/Net/Server/Server.cs:line 119

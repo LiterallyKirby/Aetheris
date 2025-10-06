@@ -300,7 +300,7 @@ for (int i = 0; i < Math.Min(21, verts.Count); i += 7) // 7 floats per vertex (p
     float x = verts[i + 0];
     float y = verts[i + 1];
     float z = verts[i + 2];
-    Console.WriteLine($"[MarchingCubes] Sample vertex {i / 7}: ({x:F2}, {y:F2}, {z:F2})");
+
 }
             return verts.ToArray();
         }

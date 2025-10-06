@@ -17,11 +17,13 @@ namespace Aetheris
         private readonly Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks;
         private readonly Player player;
         private readonly Client? client;
-        public readonly PhysicsManager physics;
+
         private int renderDistance = ClientConfig.RENDER_DISTANCE;
         private float chunkUpdateTimer = 0f;
         private const float CHUNK_UPDATE_INTERVAL = 0.5f;
-
+        private bool physicsReady = false;
+        private HashSet<(int, int, int)> registeredChunks = new HashSet<(int, int, int)>();
+        private object physicsLock = new object();
         private bool forcePhysicsStep = false;
         // --- Logging fields ---
         private const string LogFileName = "physics_debug.log";
@@ -44,14 +46,14 @@ namespace Aetheris
             SetupLogging();
 
             // Initialize physics FIRST
-            physics = new PhysicsManager();
+
             Console.WriteLine("[Game] PhysicsManager initialized");
 
             Renderer = new Renderer();
-            Renderer.Physics = physics; // Connect renderer to physics
+
 
             // Create player with physics manager
-            player = new Player(new Vector3(16, 50, 16), physics);
+            player = new Player(new Vector3(16, 50, 16), this);
             Console.WriteLine("[Game] Player initialized with physics");
         }
 
@@ -164,16 +166,41 @@ namespace Aetheris
         {
             base.OnUpdateFrame(e);
 
-            // Update physics simulation
-            physics.Update((float)e.Time);
+            // CRITICAL: Wait for minimum physics chunks before allowing full updates
 
-            // Process pending mesh uploads
+
+            // Still process pending mesh uploads while waiting
+            Renderer.ProcessPendingUploads();
+
+            // Check if player is falling too fast (no ground loaded yet)
+
+
+            // Trigger chunk loading even while waiting
+            if (chunkUpdateTimer == 0f)
+            {
+                Vector3 playerChunk = player.GetPlayersChunk();
+                client?.UpdateLoadedChunks(playerChunk, renderDistance);
+            }
+
+            chunkUpdateTimer += (float)e.Time;
+            if (chunkUpdateTimer >= CHUNK_UPDATE_INTERVAL)
+            {
+                chunkUpdateTimer = 0f;
+                Vector3 playerChunk = player.GetPlayersChunk();
+                client?.UpdateLoadedChunks(playerChunk, renderDistance);
+            }
+
+
+
+
+            // Normal update logic once physics is ready
+
             Renderer.ProcessPendingUploads();
 
             if (IsKeyDown(Keys.Escape))
                 Close();
 
-            // Update player (now includes physics)
+            // Update player
             player.Update(e, KeyboardState, MouseState);
 
             // Trigger immediate load on first frame
@@ -204,12 +231,6 @@ namespace Aetheris
                 Console.WriteLine($"[Game] Render distance: {renderDistance}");
             }
 
-            // Debug: Show physics stats
-            if (KeyboardState.IsKeyPressed(Keys.P))
-            {
-                Console.WriteLine($"[Physics] Bodies: {physics.Simulation.Bodies.ActiveSet.Count}, " +
-                                $"Statics: {physics.Simulation.Statics.Count}");
-            }
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -234,14 +255,14 @@ namespace Aetheris
                 }
             }
 
-if (KeyboardState.IsKeyPressed(Keys.D1))
-{
-    player.TeleportTo(new Vector3(
-        player.Position.X,
-        player.Position.Y + 10,
-        player.Position.Z
-    ));
-}
+            if (KeyboardState.IsKeyPressed(Keys.D1))
+            {
+                player.TeleportTo(new Vector3(
+                    player.Position.X,
+                    player.Position.Y + 10,
+                    player.Position.Z
+                ));
+            }
 
             // Debug: Show biome info
             if (KeyboardState.IsKeyPressed(Keys.B))
@@ -264,56 +285,15 @@ if (KeyboardState.IsKeyPressed(Keys.D1))
             SwapBuffers();
         }
 
-        public void RegisterChunkPhysicsImmediate(int cx, int cy, int cz, float[] meshData)
+
+
+        public bool IsPhysicsReady()
         {
-            if (physics == null || meshData == null || meshData.Length == 0)
+            lock (physicsLock)
             {
-                Console.WriteLine($"[Game] Skipping physics registration for chunk ({cx},{cy},{cz}) - empty mesh");
-                return;
-            }
-
-            try
-            {
-                // Collision mesh is in world coordinates already (xyz per vertex, 3 vertices per triangle)
-                // Format: [x0,y0,z0, x1,y1,z1, x2,y2,z2, ...] (9 floats per triangle)
-
-                if (meshData.Length % 9 != 0)
-                {
-                    Console.WriteLine($"[Game] Invalid collision mesh size: {meshData.Length} (not divisible by 9)");
-                    return;
-                }
-
-                int triangleCount = meshData.Length / 9;
-                if (triangleCount == 0)
-                {
-                    Console.WriteLine($"[Game] No triangles in collision mesh for chunk ({cx},{cy},{cz})");
-                    return;
-                }
-
-                int chunkId = ChunkKey(cx, cy, cz);
-
-                // The mesh data is already in world coordinates from the server
-                // We just need to pass it to the physics manager
-                var chunkOffsetNum = new System.Numerics.Vector3(
-                    cx * ClientConfig.CHUNK_SIZE,
-                    cy * ClientConfig.CHUNK_SIZE_Y,
-                    cz * ClientConfig.CHUNK_SIZE
-                );
-
-                physics.AddChunkCollider(chunkId, chunkOffsetNum, meshData);
-
-                Console.WriteLine($"[Game] Registered physics collider: chunk ({cx},{cy},{cz}), {triangleCount} triangles, {meshData.Length} floats");
-
-                // Optionally force a physics step
-                forcePhysicsStep = true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[Game] Failed to register physics for chunk ({cx},{cy},{cz}): {ex.Message}");
-                Console.WriteLine($"[Game] Stack trace: {ex.StackTrace}");
+                return physicsReady;
             }
         }
-
         private static int ChunkKey(int cx, int cy, int cz)
         {
             unchecked
@@ -325,7 +305,7 @@ if (KeyboardState.IsKeyPressed(Keys.D1))
         {
             base.OnUnload();
             player.Cleanup();
-            physics.Dispose();
+
             Renderer.Dispose();
 
             // Restore console and close log file cleanly

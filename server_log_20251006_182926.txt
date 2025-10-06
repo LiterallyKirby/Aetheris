@@ -1,0 +1,330 @@
+[18:29:26.700] [[Server]] Log file created: server_log_20251006_182926.txt
+[18:29:26.703] [[Server]] Initializing world generation...
+[18:29:26.756] [[Server]] UDP listening on port 42070
+[18:29:26.774] [[Server]] Listening on port 42069 @ 60 TPS
+[18:29:26.774] [[Server]] Performance timing enabled - waiting for connections...
+[18:29:26.794] [[Server]] Tick 0 | Cache: 0/20000
+[18:29:30.359] [[Generation]] (0,0,0): Render vertices=4182
+[18:29:30.366] [[Timing]] Chunk (0,0,0): Chunk=11.62ms Mesh=95.98ms Send=1.72ms Total=116.67ms
+[18:29:30.433] [[Generation]] (1,0,0): Render vertices=3417
+[18:29:30.433] [[Timing]] Chunk (1,0,0): Chunk=1.38ms Mesh=68.21ms Send=0.24ms Total=69.99ms
+[18:29:30.522] [[Generation]] (0,0,1): Render vertices=3633
+[18:29:30.522] [[Timing]] Chunk (0,0,1): Chunk=1.58ms Mesh=86.57ms Send=0.16ms Total=88.43ms
+[18:29:30.597] [[Generation]] (0,0,-1): Render vertices=3345
+[18:29:30.598] [[Timing]] Chunk (0,0,-1): Chunk=1.50ms Mesh=71.66ms Send=0.33ms Total=74.26ms
+[18:29:30.678] [[Generation]] (-1,0,0): Render vertices=4428
+[18:29:30.678] [[Timing]] Chunk (-1,0,0): Chunk=1.64ms Mesh=78.36ms Send=0.12ms Total=80.23ms
+[18:29:30.757] [[Generation]] (1,0,1): Render vertices=3711
+[18:29:30.757] [[Timing]] Chunk (1,0,1): Chunk=1.49ms Mesh=76.33ms Send=0.10ms Total=78.00ms
+[18:29:30.828] [[Generation]] (1,0,-1): Render vertices=3369
+[18:29:30.828] [[Timing]] Chunk (1,0,-1): Chunk=1.23ms Mesh=69.02ms Send=0.12ms Total=70.68ms
+[18:29:30.926] [[Generation]] (-1,0,1): Render vertices=4431
+[18:29:30.926] [[Timing]] Chunk (-1,0,1): Chunk=3.20ms Mesh=92.10ms Send=0.14ms Total=95.57ms
+[18:29:30.993] [[Generation]] (-1,0,-1): Render vertices=3354
+[18:29:30.993] [[Timing]] Chunk (-1,0,-1): Chunk=1.36ms Mesh=64.82ms Send=0.10ms Total=66.36ms
+[18:29:31.069] [[Generation]] (0,-1,0): Render vertices=10914
+[18:29:31.070] [[Timing]] Chunk (0,-1,0): Chunk=1.39ms Mesh=74.35ms Send=0.33ms Total=76.15ms
+[18:29:31.148] [[Generation]] (1,-1,0): Render vertices=11910
+[18:29:31.148] [[Timing]] Chunk (1,-1,0): Chunk=3.94ms Mesh=71.88ms Send=0.32ms Total=77.84ms
+[18:29:31.232] [[Generation]] (0,-1,1): Render vertices=4341
+[18:29:31.232] [[Timing]] Chunk (0,-1,1): Chunk=1.70ms Mesh=80.54ms Send=0.11ms Total=82.46ms
+[18:29:31.307] [[Generation]] (-1,-1,0): Render vertices=10140
+[18:29:31.307] [[Timing]] Chunk (-1,-1,0): Chunk=1.87ms Mesh=71.15ms Send=0.25ms Total=73.38ms
+[18:29:31.377] [[Generation]] (0,-1,-1): Render vertices=5286
+[18:29:31.377] [[Timing]] Chunk (0,-1,-1): Chunk=1.38ms Mesh=67.59ms Send=0.20ms Total=69.26ms
+[18:29:31.451] [[Generation]] (-1,-1,1): Render vertices=5814
+[18:29:31.451] [[Timing]] Chunk (-1,-1,1): Chunk=1.25ms Mesh=72.35ms Send=0.29ms Total=73.98ms
+[18:29:31.544] [[Generation]] (-1,-1,-1): Render vertices=8946
+[18:29:31.545] [[Timing]] Chunk (-1,-1,-1): Chunk=1.87ms Mesh=90.26ms Send=0.21ms Total=92.43ms
+[18:29:31.630] [[Generation]] (1,-1,-1): Render vertices=2076
+[18:29:31.631] [[Timing]] Chunk (1,-1,-1): Chunk=1.68ms Mesh=83.40ms Send=0.15ms Total=85.32ms
+[18:29:31.718] [[Generation]] (1,-1,1): Render vertices=11784
+[18:29:31.719] [[Timing]] Chunk (1,-1,1): Chunk=1.71ms Mesh=85.27ms Send=0.36ms Total=87.46ms
+[18:29:31.792] [[Generation]] (-2,0,0): Render vertices=4935
+[18:29:31.792] [[Timing]] Chunk (-2,0,0): Chunk=1.73ms Mesh=70.21ms Send=0.16ms Total=72.18ms
+[18:29:31.797] [[Server]] Tick 300 | Cache: 19/20000
+[18:29:31.797]   Requests: 19 | Avg Times: Chunk=2.29ms Mesh=77.37ms Send=0.29ms Total=79.95ms
+[18:29:31.799] [[Generation]] (0,1,0): Render vertices=0
+[18:29:31.799] [[Timing]] Chunk (0,1,0): Chunk=1.80ms Mesh=4.07ms Send=0.08ms Total=6.02ms
+[18:29:31.926] [[Generation]] (0,0,2): Render vertices=4101
+[18:29:31.927] [[Timing]] Chunk (0,0,2): Chunk=3.06ms Mesh=123.84ms Send=0.26ms Total=127.26ms
+[18:29:32.026] [[Generation]] (2,0,0): Render vertices=4104
+[18:29:32.026] [[Timing]] Chunk (2,0,0): Chunk=1.82ms Mesh=94.80ms Send=0.20ms Total=96.91ms
+[18:29:32.097] [[Generation]] (0,0,-2): Render vertices=4098
+[18:29:32.098] [[Timing]] Chunk (0,0,-2): Chunk=1.91ms Mesh=68.60ms Send=0.27ms Total=70.90ms
+[18:29:32.173] [[Generation]] (1,0,-2): Render vertices=3306
+[18:29:32.174] [[Timing]] Chunk (1,0,-2): Chunk=3.20ms Mesh=72.09ms Send=0.20ms Total=75.59ms
+[18:29:32.274] [[Generation]] (2,0,1): Render vertices=4629
+[18:29:32.274] [[Timing]] Chunk (2,0,1): Chunk=1.51ms Mesh=98.55ms Send=0.14ms Total=100.40ms
+[18:29:32.281] [[Generation]] (-1,1,0): Render vertices=0
+[18:29:32.281] [[Timing]] Chunk (-1,1,0): Chunk=1.61ms Mesh=4.36ms Send=0.06ms Total=6.11ms
+[18:29:32.289] [[Generation]] (0,1,1): Render vertices=0
+[18:29:32.289] [[Timing]] Chunk (0,1,1): Chunk=2.48ms Mesh=4.59ms Send=0.08ms Total=7.24ms
+[18:29:32.380] [[Generation]] (2,0,-1): Render vertices=3357
+[18:29:32.380] [[Timing]] Chunk (2,0,-1): Chunk=1.79ms Mesh=88.53ms Send=0.09ms Total=90.49ms
+[18:29:32.388] [[Generation]] (0,1,-1): Render vertices=0
+[18:29:32.388] [[Timing]] Chunk (0,1,-1): Chunk=2.04ms Mesh=5.34ms Send=0.13ms Total=7.61ms
+[18:29:32.509] [[Generation]] (-1,0,2): Render vertices=4647
+[18:29:32.510] [[Timing]] Chunk (-1,0,2): Chunk=3.59ms Mesh=116.90ms Send=0.19ms Total=120.75ms
+[18:29:32.604] [[Generation]] (-2,0,1): Render vertices=3819
+[18:29:32.604] [[Timing]] Chunk (-2,0,1): Chunk=2.83ms Mesh=90.98ms Send=0.14ms Total=94.02ms
+[18:29:32.670] [[Generation]] (-1,0,-2): Render vertices=3207
+[18:29:32.670] [[Timing]] Chunk (-1,0,-2): Chunk=1.55ms Mesh=62.79ms Send=0.15ms Total=64.58ms
+[18:29:32.747] [[Generation]] (-2,0,-1): Render vertices=4494
+[18:29:32.747] [[Timing]] Chunk (-2,0,-1): Chunk=1.59ms Mesh=74.60ms Send=0.18ms Total=76.43ms
+[18:29:32.842] [[Generation]] (1,0,2): Render vertices=3639
+[18:29:32.842] [[Timing]] Chunk (1,0,2): Chunk=2.02ms Mesh=91.12ms Send=0.13ms Total=93.39ms
+[18:29:32.848] [[Generation]] (1,1,0): Render vertices=0
+[18:29:32.848] [[Timing]] Chunk (1,1,0): Chunk=1.79ms Mesh=4.12ms Send=0.07ms Total=6.07ms
+[18:29:32.856] [[Generation]] (-1,1,-1): Render vertices=0
+[18:29:32.857] [[Timing]] Chunk (-1,1,-1): Chunk=2.00ms Mesh=5.67ms Send=0.09ms Total=7.85ms
+[18:29:32.863] [[Generation]] (-1,1,1): Render vertices=0
+[18:29:32.863] [[Timing]] Chunk (-1,1,1): Chunk=1.72ms Mesh=4.10ms Send=0.14ms Total=6.06ms
+[18:29:32.870] [[Generation]] (1,1,-1): Render vertices=0
+[18:29:32.870] [[Timing]] Chunk (1,1,-1): Chunk=1.65ms Mesh=4.05ms Send=0.11ms Total=5.87ms
+[18:29:32.877] [[Generation]] (1,1,1): Render vertices=0
+[18:29:32.877] [[Timing]] Chunk (1,1,1): Chunk=1.68ms Mesh=5.13ms Send=0.08ms Total=6.96ms
+[18:29:32.978] [[Generation]] (0,-1,2): Render vertices=0
+[18:29:32.978] [[Timing]] Chunk (0,-1,2): Chunk=1.88ms Mesh=98.52ms Send=0.12ms Total=100.60ms
+[18:29:32.984] [[Generation]] (-2,1,0): Render vertices=0
+[18:29:32.984] [[Timing]] Chunk (-2,1,0): Chunk=1.87ms Mesh=3.74ms Send=0.09ms Total=5.79ms
+[18:29:33.076] [[Generation]] (-2,-1,0): Render vertices=7668
+[18:29:33.076] [[Timing]] Chunk (-2,-1,0): Chunk=1.54ms Mesh=89.38ms Send=0.26ms Total=91.23ms
+[18:29:33.164] [[Generation]] (-2,0,-2): Render vertices=3333
+[18:29:33.164] [[Timing]] Chunk (-2,0,-2): Chunk=3.31ms Mesh=83.50ms Send=0.25ms Total=87.13ms
+[18:29:33.249] [[Generation]] (0,-1,-2): Render vertices=4440
+[18:29:33.249] [[Timing]] Chunk (0,-1,-2): Chunk=1.58ms Mesh=82.33ms Send=0.37ms Total=84.42ms
+[18:29:33.257] [[Generation]] (0,1,-2): Render vertices=0
+[18:29:33.258] [[Timing]] Chunk (0,1,-2): Chunk=3.25ms Mesh=3.99ms Send=0.06ms Total=7.36ms
+[18:29:33.264] [[Generation]] (0,1,2): Render vertices=0
+[18:29:33.264] [[Timing]] Chunk (0,1,2): Chunk=1.56ms Mesh=4.40ms Send=0.08ms Total=6.13ms
+[18:29:33.377] [[Generation]] (-2,0,2): Render vertices=2340
+[18:29:33.378] [[Timing]] Chunk (-2,0,2): Chunk=1.90ms Mesh=111.07ms Send=0.19ms Total=113.22ms
+[18:29:33.473] [[Generation]] (2,0,2): Render vertices=4467
+[18:29:33.473] [[Timing]] Chunk (2,0,2): Chunk=1.99ms Mesh=91.55ms Send=0.19ms Total=93.91ms
+[18:29:33.560] [[Generation]] (2,0,-2): Render vertices=3390
+[18:29:33.560] [[Timing]] Chunk (2,0,-2): Chunk=3.44ms Mesh=82.31ms Send=0.27ms Total=86.16ms
+[18:29:33.638] [[Generation]] (2,-1,0): Render vertices=2238
+[18:29:33.638] [[Timing]] Chunk (2,-1,0): Chunk=1.81ms Mesh=75.39ms Send=0.33ms Total=77.71ms
+[18:29:33.643] [[Generation]] (2,1,0): Render vertices=0
+[18:29:33.643] [[Timing]] Chunk (2,1,0): Chunk=1.49ms Mesh=2.81ms Send=0.07ms Total=4.44ms
+[18:29:33.649] [[Generation]] (1,1,2): Render vertices=0
+[18:29:33.649] [[Timing]] Chunk (1,1,2): Chunk=1.66ms Mesh=3.57ms Send=0.10ms Total=5.41ms
+[18:29:33.656] [[Generation]] (-1,1,-2): Render vertices=0
+[18:29:33.656] [[Timing]] Chunk (-1,1,-2): Chunk=2.79ms Mesh=3.80ms Send=0.04ms Total=6.71ms
+[18:29:33.746] [[Generation]] (3,0,0): Render vertices=3837
+[18:29:33.746] [[Timing]] Chunk (3,0,0): Chunk=1.49ms Mesh=87.61ms Send=0.10ms Total=89.28ms
+[18:29:33.752] [[Generation]] (2,1,1): Render vertices=0
+[18:29:33.752] [[Timing]] Chunk (2,1,1): Chunk=1.89ms Mesh=3.17ms Send=0.08ms Total=5.25ms
+[18:29:33.837] [[Generation]] (2,-1,1): Render vertices=13968
+[18:29:33.837] [[Timing]] Chunk (2,-1,1): Chunk=2.14ms Mesh=82.42ms Send=0.32ms Total=84.92ms
+[18:29:33.844] [[Generation]] (-1,1,2): Render vertices=0
+[18:29:33.844] [[Timing]] Chunk (-1,1,2): Chunk=2.08ms Mesh=3.58ms Send=0.14ms Total=5.90ms
+[18:29:33.926] [[Generation]] (1,-1,2): Render vertices=2727
+[18:29:33.926] [[Timing]] Chunk (1,-1,2): Chunk=2.82ms Mesh=78.93ms Send=0.10ms Total=81.92ms
+[18:29:33.933] [[Generation]] (2,1,-1): Render vertices=0
+[18:29:33.933] [[Timing]] Chunk (2,1,-1): Chunk=1.72ms Mesh=4.38ms Send=0.05ms Total=6.22ms
+[18:29:34.013] [[Generation]] (2,-1,-1): Render vertices=0
+[18:29:34.014] [[Timing]] Chunk (2,-1,-1): Chunk=1.76ms Mesh=78.36ms Send=0.10ms Total=80.33ms
+[18:29:34.120] [[Generation]] (0,0,3): Render vertices=4623
+[18:29:34.120] [[Timing]] Chunk (0,0,3): Chunk=1.88ms Mesh=103.77ms Send=0.16ms Total=105.87ms
+[18:29:34.197] [[Generation]] (1,-1,-2): Render vertices=450
+[18:29:34.197] [[Timing]] Chunk (1,-1,-2): Chunk=1.77ms Mesh=74.62ms Send=0.09ms Total=76.57ms
+[18:29:34.282] [[Generation]] (-1,-1,-2): Render vertices=7950
+[18:29:34.283] [[Timing]] Chunk (-1,-1,-2): Chunk=1.43ms Mesh=83.03ms Send=0.23ms Total=84.77ms
+[18:29:34.367] [[Generation]] (-1,-1,2): Render vertices=270
+[18:29:34.367] [[Timing]] Chunk (-1,-1,2): Chunk=1.55ms Mesh=82.01ms Send=0.07ms Total=83.71ms
+[18:29:34.373] [[Generation]] (1,1,-2): Render vertices=0
+[18:29:34.373] [[Timing]] Chunk (1,1,-2): Chunk=1.59ms Mesh=4.07ms Send=0.07ms Total=5.81ms
+[18:29:34.380] [[Generation]] (-2,1,1): Render vertices=0
+[18:29:34.380] [[Timing]] Chunk (-2,1,1): Chunk=2.68ms Mesh=3.92ms Send=0.07ms Total=6.74ms
+[18:29:34.463] [[Generation]] (-2,-1,1): Render vertices=8475
+[18:29:34.463] [[Timing]] Chunk (-2,-1,1): Chunk=1.61ms Mesh=80.67ms Send=0.32ms Total=82.67ms
+[18:29:34.469] [[Generation]] (-2,1,-1): Render vertices=0
+[18:29:34.469] [[Timing]] Chunk (-2,1,-1): Chunk=1.44ms Mesh=3.51ms Send=0.06ms Total=5.07ms
+[18:29:34.544] [[Generation]] (-2,-1,-1): Render vertices=522
+[18:29:34.545] [[Timing]] Chunk (-2,-1,-1): Chunk=1.53ms Mesh=73.63ms Send=0.13ms Total=75.35ms
+[18:29:34.608] [[Generation]] (0,0,-3): Render vertices=4359
+[18:29:34.608] [[Timing]] Chunk (0,0,-3): Chunk=1.73ms Mesh=61.03ms Send=0.18ms Total=62.99ms
+[18:29:34.686] [[Generation]] (-3,0,0): Render vertices=4071
+[18:29:34.686] [[Timing]] Chunk (-3,0,0): Chunk=1.47ms Mesh=75.52ms Send=0.08ms Total=77.12ms
+[18:29:34.757] [[Generation]] (1,0,-3): Render vertices=3453
+[18:29:34.757] [[Timing]] Chunk (1,0,-3): Chunk=1.51ms Mesh=68.69ms Send=0.16ms Total=70.42ms
+[18:29:34.878] [[Generation]] (-1,0,3): Render vertices=4911
+[18:29:34.878] [[Timing]] Chunk (-1,0,3): Chunk=1.75ms Mesh=118.50ms Send=0.15ms Total=120.49ms
+[18:29:34.986] [[Generation]] (1,0,3): Render vertices=4056
+[18:29:34.986] [[Timing]] Chunk (1,0,3): Chunk=2.76ms Mesh=104.70ms Send=0.09ms Total=107.60ms
+[18:29:35.114] [[Generation]] (-3,0,1): Render vertices=3255
+[18:29:35.114] [[Timing]] Chunk (-3,0,1): Chunk=2.38ms Mesh=124.53ms Send=0.21ms Total=127.31ms
+[18:29:35.228] [[Generation]] (3,0,1): Render vertices=3675
+[18:29:35.228] [[Timing]] Chunk (3,0,1): Chunk=2.99ms Mesh=110.11ms Send=0.18ms Total=113.35ms
+[18:29:35.301] [[Generation]] (-1,0,-3): Render vertices=3210
+[18:29:35.301] [[Timing]] Chunk (-1,0,-3): Chunk=3.64ms Mesh=68.38ms Send=0.12ms Total=72.21ms
+[18:29:35.375] [[Generation]] (-3,0,-1): Render vertices=4347
+[18:29:35.375] [[Timing]] Chunk (-3,0,-1): Chunk=2.26ms Mesh=71.46ms Send=0.19ms Total=73.97ms
+[18:29:35.456] [[Generation]] (3,0,-1): Render vertices=3624
+[18:29:35.456] [[Timing]] Chunk (3,0,-1): Chunk=1.67ms Mesh=78.46ms Send=0.10ms Total=80.28ms
+[18:29:35.462] [[Generation]] (-2,1,2): Render vertices=0
+[18:29:35.462] [[Timing]] Chunk (-2,1,2): Chunk=1.69ms Mesh=3.56ms Send=0.07ms Total=5.40ms
+[18:29:35.535] [[Generation]] (-2,-1,2): Render vertices=4881
+[18:29:35.535] [[Timing]] Chunk (-2,-1,2): Chunk=1.60ms Mesh=71.21ms Send=0.13ms Total=72.99ms
+[18:29:35.542] [[Generation]] (-2,1,-2): Render vertices=0
+[18:29:35.542] [[Timing]] Chunk (-2,1,-2): Chunk=1.77ms Mesh=3.90ms Send=0.10ms Total=5.87ms
+[18:29:35.611] [[Generation]] (2,-1,-2): Render vertices=0
+[18:29:35.614] [[Server]] Error handling chunk (2,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[18:29:36.806] [[Server]] Tick 600 | Cache: 83/20000
+[18:29:36.806]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:29:41.795] [[Server]] Tick 900 | Cache: 83/20000
+[18:29:41.795]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:29:46.795] [[Server]] Tick 1200 | Cache: 83/20000
+[18:29:46.795]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:29:51.804] [[Server]] Tick 1500 | Cache: 83/20000
+[18:29:51.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:29:56.805] [[Server]] Tick 1800 | Cache: 83/20000
+[18:29:56.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:01.797] [[Server]] Tick 2100 | Cache: 83/20000
+[18:30:01.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:06.804] [[Server]] Tick 2400 | Cache: 83/20000
+[18:30:06.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:11.796] [[Server]] Tick 2700 | Cache: 83/20000
+[18:30:11.796]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:16.800] [[Server]] Tick 3000 | Cache: 83/20000
+[18:30:16.801]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:26.801] [[Server]] Tick 3600 | Cache: 83/20000
+[18:30:26.802]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:31.797] [[Server]] Tick 3900 | Cache: 83/20000
+[18:30:31.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:36.796] [[Server]] Tick 4200 | Cache: 83/20000
+[18:30:36.796]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:41.807] [[Server]] Tick 4500 | Cache: 83/20000
+[18:30:41.807]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:46.803] [[Server]] Tick 4800 | Cache: 83/20000
+[18:30:46.803]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:51.805] [[Server]] Tick 5100 | Cache: 83/20000
+[18:30:51.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:30:56.804] [[Server]] Tick 5400 | Cache: 83/20000
+[18:30:56.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:01.801] [[Server]] Tick 5700 | Cache: 83/20000
+[18:31:01.801]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:06.809] [[Server]] Tick 6000 | Cache: 83/20000
+[18:31:06.809]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:11.798] [[Server]] Tick 6300 | Cache: 83/20000
+[18:31:11.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:16.794] [[Server]] Tick 6600 | Cache: 83/20000
+[18:31:16.794]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:21.797] [[Server]] Tick 6900 | Cache: 83/20000
+[18:31:21.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:26.804] [[Server]] Tick 7200 | Cache: 83/20000
+[18:31:26.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:31.797] [[Server]] Tick 7500 | Cache: 83/20000
+[18:31:31.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:36.796] [[Server]] Tick 7800 | Cache: 83/20000
+[18:31:36.796]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:41.794] [[Server]] Tick 8100 | Cache: 83/20000
+[18:31:41.794]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:41.811] [[Server]] Tick 8100 | Cache: 83/20000
+[18:31:41.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:46.806] [[Server]] Tick 8400 | Cache: 83/20000
+[18:31:46.807]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:51.805] [[Server]] Tick 8700 | Cache: 83/20000
+[18:31:51.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:31:56.803] [[Server]] Tick 9000 | Cache: 83/20000
+[18:31:56.803]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:01.805] [[Server]] Tick 9300 | Cache: 83/20000
+[18:32:01.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:06.797] [[Server]] Tick 9600 | Cache: 83/20000
+[18:32:06.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:11.799] [[Server]] Tick 9900 | Cache: 83/20000
+[18:32:11.800]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:16.810] [[Server]] Tick 10200 | Cache: 83/20000
+[18:32:16.810]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:21.811] [[Server]] Tick 10500 | Cache: 83/20000
+[18:32:21.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:26.811] [[Server]] Tick 10800 | Cache: 83/20000
+[18:32:26.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:31.797] [[Server]] Tick 11100 | Cache: 83/20000
+[18:32:31.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:36.808] [[Server]] Tick 11400 | Cache: 83/20000
+[18:32:36.808]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:41.806] [[Server]] Tick 11700 | Cache: 83/20000
+[18:32:41.806]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:46.796] [[Server]] Tick 12000 | Cache: 83/20000
+[18:32:46.796]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:51.798] [[Server]] Tick 12300 | Cache: 83/20000
+[18:32:51.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:32:56.802] [[Server]] Tick 12600 | Cache: 83/20000
+[18:32:56.802]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:01.797] [[Server]] Tick 12900 | Cache: 83/20000
+[18:33:01.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:06.812] [[Server]] Tick 13200 | Cache: 83/20000
+[18:33:06.812]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:11.810] [[Server]] Tick 13500 | Cache: 83/20000
+[18:33:11.810]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:16.799] [[Server]] Tick 13800 | Cache: 83/20000
+[18:33:16.799]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:21.804] [[Server]] Tick 14100 | Cache: 83/20000
+[18:33:21.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:26.805] [[Server]] Tick 14400 | Cache: 83/20000
+[18:33:26.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:31.803] [[Server]] Tick 14700 | Cache: 83/20000
+[18:33:31.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:36.811] [[Server]] Tick 15000 | Cache: 83/20000
+[18:33:36.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:41.804] [[Server]] Tick 15300 | Cache: 83/20000
+[18:33:41.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:46.798] [[Server]] Tick 15600 | Cache: 83/20000
+[18:33:46.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:51.811] [[Server]] Tick 15900 | Cache: 83/20000
+[18:33:51.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:33:56.808] [[Server]] Tick 16200 | Cache: 83/20000
+[18:33:56.808]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:01.801] [[Server]] Tick 16500 | Cache: 83/20000
+[18:34:01.801]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:06.801] [[Server]] Tick 16800 | Cache: 83/20000
+[18:34:06.801]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:11.812] [[Server]] Tick 17100 | Cache: 83/20000
+[18:34:11.812]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:16.808] [[Server]] Tick 17400 | Cache: 83/20000
+[18:34:16.808]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:21.798] [[Server]] Tick 17700 | Cache: 83/20000
+[18:34:21.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:26.810] [[Server]] Tick 18000 | Cache: 83/20000
+[18:34:26.810]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:31.797] [[Server]] Tick 18300 | Cache: 83/20000
+[18:34:31.797]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:31.813] [[Server]] Tick 18300 | Cache: 83/20000
+[18:34:31.813]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:36.809] [[Server]] Tick 18600 | Cache: 83/20000
+[18:34:36.809]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:41.805] [[Server]] Tick 18900 | Cache: 83/20000
+[18:34:41.805]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:46.798] [[Server]] Tick 19200 | Cache: 83/20000
+[18:34:46.798]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:51.812] [[Server]] Tick 19500 | Cache: 83/20000
+[18:34:51.812]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:34:56.803] [[Server]] Tick 19800 | Cache: 83/20000
+[18:34:56.803]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:01.812] [[Server]] Tick 20100 | Cache: 83/20000
+[18:35:01.812]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:06.811] [[Server]] Tick 20400 | Cache: 83/20000
+[18:35:06.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:11.811] [[Server]] Tick 20700 | Cache: 83/20000
+[18:35:11.811]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:16.803] [[Server]] Tick 21000 | Cache: 83/20000
+[18:35:16.803]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:21.810] [[Server]] Tick 21300 | Cache: 83/20000
+[18:35:21.810]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:26.810] [[Server]] Tick 21600 | Cache: 83/20000
+[18:35:26.810]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:31.813] [[Server]] Tick 21900 | Cache: 83/20000
+[18:35:31.813]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:36.800] [[Server]] Tick 22200 | Cache: 83/20000
+[18:35:36.800]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:41.808] [[Server]] Tick 22500 | Cache: 83/20000
+[18:35:41.808]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:46.799] [[Server]] Tick 22800 | Cache: 83/20000
+[18:35:46.799]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:51.804] [[Server]] Tick 23100 | Cache: 83/20000
+[18:35:51.804]   Requests: 82 | Avg Times: Chunk=2.10ms Mesh=61.44ms Send=0.18ms Total=63.72ms
+[18:35:54.005] [[UDP]] Loop cancelled

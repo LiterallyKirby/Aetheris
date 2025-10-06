@@ -1,770 +1,657 @@
-﻿[2025-10-06 15:24:16.111] [Logging] Started logging to 'physics_debug.log' (overwritten).
-[2025-10-06 15:24:16.114] [SimpleThreadDispatcher] Created 8 worker threads with buffer pools
-[2025-10-06 15:24:16.178] [PhysicsManager] Initialized with gravity=-20
-[2025-10-06 15:24:16.178] [Game] PhysicsManager initialized
-[2025-10-06 15:24:16.190] [PSX Effects] Shaders compiled successfully
-[2025-10-06 15:24:16.200] [Player] Q3-style physics body created at (16, 50, 16)
-[2025-10-06 15:24:16.200] [Game] Player initialized with physics
-[2025-10-06 15:24:16.205] [Game] Found atlas at: textures/atlas.png
-[2025-10-06 15:24:16.311] [AtlasManager] Loaded image: textures/atlas.png (256x256)
-[2025-10-06 15:24:16.311] [AtlasManager] Using preferred tile size: 64
-[2025-10-06 15:24:16.311] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
-[2025-10-06 15:24:16.317] [AtlasManager] Successfully uploaded to GL texture 1
-[2025-10-06 15:24:16.317] [AtlasManager] Verified texture dimensions: 256x256
-[2025-10-06 15:24:16.320] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
-[2025-10-06 15:24:16.320] [Game] AtlasManager loaded: 256x256, tileSize=64, texture ID=1
-[2025-10-06 15:24:16.320] [Game] Texture verified: 256x256, format=6408
-[2025-10-06 15:24:16.321] [Game] Loaded 0 chunks
-[2025-10-06 15:24:16.321] [Game] Physics colliders registered with renderer
-[2025-10-06 15:24:16.702] [Client] Chunk update loop starting...
-[2025-10-06 15:24:16.810] [Client] At (0,0,0), need 147 chunks
-[2025-10-06 15:24:16.955] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:16.995] [MarchingCubes] Sample vertex 0: (2.00, 1.67, -0.00)
-[2025-10-06 15:24:16.995] [MarchingCubes] Sample vertex 1: (2.00, 1.67, 2.00)
-[2025-10-06 15:24:16.995] [MarchingCubes] Sample vertex 2: (0.00, 1.67, -0.00)
-[2025-10-06 15:24:17.007] [Client] Received collider mesh: 12546 floats (1394 triangles)
-[2025-10-06 15:24:17.076] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.089] [Renderer] Chunk (0,0,0) BEFORE conversion:
-[2025-10-06 15:24:17.090]   Length: 29274, vertices: 4182
-[2025-10-06 15:24:17.090]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
-[2025-10-06 15:24:17.098] [Renderer] Chunk (0,0,0) AFTER conversion:
-[2025-10-06 15:24:17.098]   Length: 33456, vertices: 4182
-[2025-10-06 15:24:17.098]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0635,0.2480)
-[2025-10-06 15:24:17.103] [Renderer] Uploaded chunk (0,0,0): VAO=1, VBO=1, 4182 vertices
-[2025-10-06 15:24:17.120] [Game] Registered physics collider: chunk (0,0,0), 1394 triangles, 12546 floats
-[2025-10-06 15:24:17.124] [MarchingCubes] Sample vertex 0: (-30.00, 1.47, 0.00)
-[2025-10-06 15:24:17.124] [MarchingCubes] Sample vertex 1: (-30.00, 1.57, 2.00)
-[2025-10-06 15:24:17.124] [MarchingCubes] Sample vertex 2: (-32.00, 1.40, 0.00)
-[2025-10-06 15:24:17.127] [Client] Received collider mesh: 13284 floats (1476 triangles)
-[2025-10-06 15:24:17.154] [Game] Registered physics collider: chunk (-1,0,0), 1476 triangles, 13284 floats
-[2025-10-06 15:24:17.159] [Renderer] Chunk (-1,0,0) BEFORE conversion:
-[2025-10-06 15:24:17.159]   Length: 30996, vertices: 4428
-[2025-10-06 15:24:17.159]   First vertex: pos=(-30.00,1.47,0.00), normal=(0.04,-1.00,0.05), blockType=1
-[2025-10-06 15:24:17.161] [Renderer] Chunk (-1,0,0) AFTER conversion:
-[2025-10-06 15:24:17.161]   Length: 35424, vertices: 4428
-[2025-10-06 15:24:17.161]   First vertex: pos=(-30.00,1.47,0.00), normal=(0.04,-1.00,0.05), uv=(0.0020,0.1865)
-[2025-10-06 15:24:17.161] [Renderer] Uploaded chunk (-1,0,0): VAO=2, VBO=2, 4428 vertices
-[2025-10-06 15:24:17.200] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.220] [MarchingCubes] Sample vertex 0: (2.00, 1.69, -32.00)
-[2025-10-06 15:24:17.220] [MarchingCubes] Sample vertex 1: (2.00, 1.69, -30.00)
-[2025-10-06 15:24:17.220] [MarchingCubes] Sample vertex 2: (0.00, 1.68, -32.00)
-[2025-10-06 15:24:17.221] [Client] Received collider mesh: 10035 floats (1115 triangles)
-[2025-10-06 15:24:17.221] [Renderer] Chunk (0,0,-1) BEFORE conversion:
-[2025-10-06 15:24:17.222]   Length: 23415, vertices: 3345
-[2025-10-06 15:24:17.222]   First vertex: pos=(2.00,1.69,-32.00), normal=(0.00,-1.00,0.00), blockType=1
-[2025-10-06 15:24:17.223] [Renderer] Chunk (0,0,-1) AFTER conversion:
-[2025-10-06 15:24:17.224]   Length: 26760, vertices: 3345
-[2025-10-06 15:24:17.224]   First vertex: pos=(2.00,1.69,-32.00), normal=(0.00,-1.00,0.00), uv=(0.0020,0.1865)
-[2025-10-06 15:24:17.301] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.301] [Game] Registered physics collider: chunk (0,0,-1), 1115 triangles, 10035 floats
-[2025-10-06 15:24:17.325] [MarchingCubes] Sample vertex 0: (34.00, 1.72, -0.00)
-[2025-10-06 15:24:17.325] [MarchingCubes] Sample vertex 1: (34.00, 1.68, 2.00)
-[2025-10-06 15:24:17.325] [MarchingCubes] Sample vertex 2: (32.00, 1.80, -0.00)
-[2025-10-06 15:24:17.326] [Client] Received collider mesh: 10251 floats (1139 triangles)
-[2025-10-06 15:24:17.340] [Game] Registered physics collider: chunk (1,0,0), 1139 triangles, 10251 floats
-[2025-10-06 15:24:17.419] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.436] [MarchingCubes] Sample vertex 0: (2.00, 1.51, 32.00)
-[2025-10-06 15:24:17.436] [MarchingCubes] Sample vertex 1: (2.00, 1.48, 34.00)
-[2025-10-06 15:24:17.436] [MarchingCubes] Sample vertex 2: (-0.00, 1.69, 32.00)
-[2025-10-06 15:24:17.437] [Client] Received collider mesh: 10899 floats (1211 triangles)
-[2025-10-06 15:24:17.449] [Game] Registered physics collider: chunk (0,0,1), 1211 triangles, 10899 floats
-[2025-10-06 15:24:17.520] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.523] [MarchingCubes] Sample vertex 0: (-30.00, 1.50, -32.00)
-[2025-10-06 15:24:17.523] [MarchingCubes] Sample vertex 1: (-30.00, 1.50, -30.00)
-[2025-10-06 15:24:17.523] [MarchingCubes] Sample vertex 2: (-32.00, 1.54, -32.00)
-[2025-10-06 15:24:17.523] [Client] Received collider mesh: 10062 floats (1118 triangles)
-[2025-10-06 15:24:17.544] [Game] Registered physics collider: chunk (-1,0,-1), 1118 triangles, 10062 floats
-[2025-10-06 15:24:17.621] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.645] [MarchingCubes] Sample vertex 0: (-30.00, 1.50, 32.00)
-[2025-10-06 15:24:17.645] [MarchingCubes] Sample vertex 1: (-30.00, 1.39, 34.00)
-[2025-10-06 15:24:17.645] [MarchingCubes] Sample vertex 2: (-32.00, 1.39, 32.00)
-[2025-10-06 15:24:17.646] [Client] Received collider mesh: 13293 floats (1477 triangles)
-[2025-10-06 15:24:17.665] [Game] Registered physics collider: chunk (-1,0,1), 1477 triangles, 13293 floats
-[2025-10-06 15:24:17.722] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.752] [MarchingCubes] Sample vertex 0: (34.00, 1.78, 32.00)
-[2025-10-06 15:24:17.752] [MarchingCubes] Sample vertex 1: (34.00, 1.81, 34.00)
-[2025-10-06 15:24:17.752] [MarchingCubes] Sample vertex 2: (32.00, 1.78, 32.00)
-[2025-10-06 15:24:17.753] [Client] Received collider mesh: 11133 floats (1237 triangles)
-[2025-10-06 15:24:17.790] [PhysicsManager] Removed chunk 10423274 collider
-[2025-10-06 15:24:17.816] [Game] Registered physics collider: chunk (1,0,1), 1237 triangles, 11133 floats
-[2025-10-06 15:24:17.821] [Client] At (0,0,0), need 115 chunks
-[2025-10-06 15:24:17.849] [MarchingCubes] Sample vertex 0: (34.00, 1.68, -32.00)
-[2025-10-06 15:24:17.849] [MarchingCubes] Sample vertex 1: (34.00, 1.68, -30.00)
-[2025-10-06 15:24:17.849] [MarchingCubes] Sample vertex 2: (32.00, 1.69, -32.00)
-[2025-10-06 15:24:17.850] [Client] Received collider mesh: 10107 floats (1123 triangles)
-[2025-10-06 15:24:17.865] [PhysicsManager] Removed chunk -10423276 collider
-[2025-10-06 15:24:17.891] [Game] Registered physics collider: chunk (1,0,-1), 1123 triangles, 10107 floats
-[2025-10-06 15:24:17.917] [MarchingCubes] Sample vertex 0: (2.00, 1.70, -64.00)
-[2025-10-06 15:24:17.917] [MarchingCubes] Sample vertex 1: (2.00, 1.70, -62.00)
-[2025-10-06 15:24:17.917] [MarchingCubes] Sample vertex 2: (-0.00, 1.70, -64.00)
-[2025-10-06 15:24:17.918] [Client] Received collider mesh: 12294 floats (1366 triangles)
-[2025-10-06 15:24:17.969] [Game] Registered physics collider: chunk (0,0,-2), 1366 triangles, 12294 floats
-[2025-10-06 15:24:18.018] [MarchingCubes] Sample vertex 0: (2.00, -78.98, -0.00)
-[2025-10-06 15:24:18.018] [MarchingCubes] Sample vertex 1: (2.00, -79.05, 2.00)
-[2025-10-06 15:24:18.018] [MarchingCubes] Sample vertex 2: (-0.00, -78.49, -0.00)
-[2025-10-06 15:24:18.023] [Client] Received collider mesh: 32742 floats (3638 triangles)
-[2025-10-06 15:24:18.032] [Client] Empty collider mesh received
-[2025-10-06 15:24:18.061] [Game] Registered physics collider: chunk (0,-1,0), 3638 triangles, 32742 floats
-[2025-10-06 15:24:18.061] [Game] Skipping physics registration for chunk (0,1,0) - empty mesh
-[2025-10-06 15:24:18.116] [MarchingCubes] Sample vertex 0: (-62.00, 1.70, -0.00)
-[2025-10-06 15:24:18.116] [MarchingCubes] Sample vertex 1: (-62.00, 1.67, 2.00)
-[2025-10-06 15:24:18.116] [MarchingCubes] Sample vertex 2: (-64.00, 1.68, -0.00)
-[2025-10-06 15:24:18.116] [Client] Received collider mesh: 14805 floats (1645 triangles)
-[2025-10-06 15:24:18.218] [Game] Registered physics collider: chunk (-2,0,0), 1645 triangles, 14805 floats
-[2025-10-06 15:24:18.234] [MarchingCubes] Sample vertex 0: (2.00, 1.30, 64.00)
-[2025-10-06 15:24:18.234] [MarchingCubes] Sample vertex 1: (2.00, 1.32, 66.00)
-[2025-10-06 15:24:18.234] [MarchingCubes] Sample vertex 2: (0.00, 1.26, 64.00)
-[2025-10-06 15:24:18.235] [Client] Received collider mesh: 12303 floats (1367 triangles)
-[2025-10-06 15:24:18.246] [Game] Registered physics collider: chunk (0,0,2), 1367 triangles, 12303 floats
-[2025-10-06 15:24:18.338] [MarchingCubes] Sample vertex 0: (66.00, 1.96, -0.00)
-[2025-10-06 15:24:18.338] [MarchingCubes] Sample vertex 1: (66.00, 1.93, 2.00)
-[2025-10-06 15:24:18.338] [MarchingCubes] Sample vertex 2: (64.00, 1.79, -0.00)
-[2025-10-06 15:24:18.339] [Client] Received collider mesh: 12312 floats (1368 triangles)
-[2025-10-06 15:24:18.354] [Game] Registered physics collider: chunk (2,0,0), 1368 triangles, 12312 floats
-[2025-10-06 15:24:18.440] [MarchingCubes] Sample vertex 0: (-62.00, 1.16, 32.00)
-[2025-10-06 15:24:18.440] [MarchingCubes] Sample vertex 1: (-62.00, 1.05, 34.00)
-[2025-10-06 15:24:18.440] [MarchingCubes] Sample vertex 2: (-64.00, 1.20, 32.00)
-[2025-10-06 15:24:18.441] [Client] Received collider mesh: 11457 floats (1273 triangles)
-[2025-10-06 15:24:18.513] [Game] Registered physics collider: chunk (-2,0,1), 1273 triangles, 11457 floats
-[2025-10-06 15:24:18.520] [MarchingCubes] Sample vertex 0: (34.00, 1.70, -64.00)
-[2025-10-06 15:24:18.520] [MarchingCubes] Sample vertex 1: (34.00, 1.70, -62.00)
-[2025-10-06 15:24:18.520] [MarchingCubes] Sample vertex 2: (32.00, 1.70, -64.00)
-[2025-10-06 15:24:18.521] [Client] Received collider mesh: 9918 floats (1102 triangles)
-[2025-10-06 15:24:18.538] [Game] Registered physics collider: chunk (1,0,-2), 1102 triangles, 9918 floats
-[2025-10-06 15:24:18.617] [MarchingCubes] Sample vertex 0: (32.00, -84.06, 2.00)
-[2025-10-06 15:24:18.617] [MarchingCubes] Sample vertex 1: (34.00, -84.00, 0.22)
-[2025-10-06 15:24:18.617] [MarchingCubes] Sample vertex 2: (34.00, -84.80, 2.00)
-[2025-10-06 15:24:18.619] [Client] Received collider mesh: 35730 floats (3970 triangles)
-[2025-10-06 15:24:18.626] [Client] Empty collider mesh received
-[2025-10-06 15:24:18.633] [Client] Empty collider mesh received
-[2025-10-06 15:24:18.650] [Game] Registered physics collider: chunk (1,-1,0), 3970 triangles, 35730 floats
-[2025-10-06 15:24:18.650] [Game] Skipping physics registration for chunk (0,1,-1) - empty mesh
-[2025-10-06 15:24:18.650] [Game] Skipping physics registration for chunk (1,1,0) - empty mesh
-[2025-10-06 15:24:18.729] [MarchingCubes] Sample vertex 0: (34.00, 1.47, 64.00)
-[2025-10-06 15:24:18.729] [MarchingCubes] Sample vertex 1: (34.00, 1.49, 66.00)
-[2025-10-06 15:24:18.729] [MarchingCubes] Sample vertex 2: (32.00, 1.47, 64.00)
-[2025-10-06 15:24:18.730] [Client] Received collider mesh: 10917 floats (1213 triangles)
-[2025-10-06 15:24:18.826] [Game] Registered physics collider: chunk (1,0,2), 1213 triangles, 10917 floats
-[2025-10-06 15:24:18.867] [MarchingCubes] Sample vertex 0: (-32.00, 1.08, 66.00)
-[2025-10-06 15:24:18.867] [MarchingCubes] Sample vertex 1: (-30.00, 2.00, 64.78)
-[2025-10-06 15:24:18.867] [MarchingCubes] Sample vertex 2: (-30.00, 1.39, 66.00)
-[2025-10-06 15:24:18.868] [Client] Received collider mesh: 13941 floats (1549 triangles)
-[2025-10-06 15:24:18.939] [Game] Registered physics collider: chunk (-1,0,2), 1549 triangles, 13941 floats
-[2025-10-06 15:24:18.957] [MarchingCubes] Sample vertex 0: (66.00, 1.67, -32.00)
-[2025-10-06 15:24:18.957] [MarchingCubes] Sample vertex 1: (66.00, 1.67, -30.00)
-[2025-10-06 15:24:18.957] [MarchingCubes] Sample vertex 2: (64.00, 1.67, -32.00)
-[2025-10-06 15:24:18.958] [Client] Received collider mesh: 10071 floats (1119 triangles)
-[2025-10-06 15:24:18.966] [Game] Registered physics collider: chunk (2,0,-1), 1119 triangles, 10071 floats
-[2025-10-06 15:24:18.968] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.028] [Game] Skipping physics registration for chunk (-1,1,0) - empty mesh
-[2025-10-06 15:24:19.054] [MarchingCubes] Sample vertex 0: (-30.00, -39.43, 2.00)
-[2025-10-06 15:24:19.054] [MarchingCubes] Sample vertex 1: (-31.44, -38.00, -0.00)
-[2025-10-06 15:24:19.054] [MarchingCubes] Sample vertex 2: (-30.00, -39.08, -0.00)
-[2025-10-06 15:24:19.056] [Client] Received collider mesh: 30420 floats (3380 triangles)
-[2025-10-06 15:24:19.107] [Game] Registered physics collider: chunk (-1,-1,0), 3380 triangles, 30420 floats
-[2025-10-06 15:24:19.160] [MarchingCubes] Sample vertex 0: (66.00, 1.47, 32.00)
-[2025-10-06 15:24:19.160] [MarchingCubes] Sample vertex 1: (66.00, 1.44, 34.00)
-[2025-10-06 15:24:19.160] [MarchingCubes] Sample vertex 2: (64.00, 1.46, 32.00)
-[2025-10-06 15:24:19.162] [Client] Received collider mesh: 13887 floats (1543 triangles)
-[2025-10-06 15:24:19.225] [Game] Registered physics collider: chunk (2,0,1), 1543 triangles, 13887 floats
-[2025-10-06 15:24:19.235] [MarchingCubes] Sample vertex 0: (-30.00, 1.59, -64.00)
-[2025-10-06 15:24:19.235] [MarchingCubes] Sample vertex 1: (-30.00, 1.58, -62.00)
-[2025-10-06 15:24:19.235] [MarchingCubes] Sample vertex 2: (-32.00, 1.61, -64.00)
-[2025-10-06 15:24:19.236] [Client] Received collider mesh: 9621 floats (1069 triangles)
-[2025-10-06 15:24:19.244] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.252] [Game] Registered physics collider: chunk (-1,0,-2), 1069 triangles, 9621 floats
-[2025-10-06 15:24:19.252] [Game] Skipping physics registration for chunk (0,1,1) - empty mesh
-[2025-10-06 15:24:19.339] [MarchingCubes] Sample vertex 0: (2.00, -36.57, 32.00)
-[2025-10-06 15:24:19.339] [MarchingCubes] Sample vertex 1: (-0.00, -36.00, 32.03)
-[2025-10-06 15:24:19.339] [MarchingCubes] Sample vertex 2: (-0.00, -36.05, 32.00)
-[2025-10-06 15:24:19.341] [Client] Received collider mesh: 13023 floats (1447 triangles)
-[2025-10-06 15:24:19.424] [Game] Registered physics collider: chunk (0,-1,1), 1447 triangles, 13023 floats
-[2025-10-06 15:24:19.432] [MarchingCubes] Sample vertex 0: (2.00, -78.21, -32.00)
-[2025-10-06 15:24:19.432] [MarchingCubes] Sample vertex 1: (2.00, -78.21, -30.00)
-[2025-10-06 15:24:19.432] [MarchingCubes] Sample vertex 2: (0.00, -78.23, -32.00)
-[2025-10-06 15:24:19.434] [Client] Received collider mesh: 15858 floats (1762 triangles)
-[2025-10-06 15:24:19.445] [Game] Registered physics collider: chunk (0,-1,-1), 1762 triangles, 15858 floats
-[2025-10-06 15:24:19.523] [MarchingCubes] Sample vertex 0: (-62.00, 1.69, -32.00)
-[2025-10-06 15:24:19.523] [MarchingCubes] Sample vertex 1: (-62.00, 1.69, -30.00)
-[2025-10-06 15:24:19.523] [MarchingCubes] Sample vertex 2: (-64.00, 1.69, -32.00)
-[2025-10-06 15:24:19.524] [Client] Received collider mesh: 13482 floats (1498 triangles)
-[2025-10-06 15:24:19.548] [Game] Registered physics collider: chunk (-2,0,-1), 1498 triangles, 13482 floats
-[2025-10-06 15:24:19.612] [MarchingCubes] Sample vertex 0: (32.36, -78.00, -30.00)
-[2025-10-06 15:24:19.612] [MarchingCubes] Sample vertex 1: (32.00, -78.01, -32.00)
-[2025-10-06 15:24:19.612] [MarchingCubes] Sample vertex 2: (32.07, -78.00, -32.00)
-[2025-10-06 15:24:19.613] [Client] Received collider mesh: 6228 floats (692 triangles)
-[2025-10-06 15:24:19.621] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.626] [Game] Registered physics collider: chunk (1,-1,-1), 692 triangles, 6228 floats
-[2025-10-06 15:24:19.626] [Game] Skipping physics registration for chunk (-1,1,-1) - empty mesh
-[2025-10-06 15:24:19.709] [MarchingCubes] Sample vertex 0: (-30.99, -40.00, 32.00)
-[2025-10-06 15:24:19.709] [MarchingCubes] Sample vertex 1: (-32.00, -40.00, 32.29)
-[2025-10-06 15:24:19.709] [MarchingCubes] Sample vertex 2: (-32.00, -40.52, 32.00)
-[2025-10-06 15:24:19.711] [Client] Received collider mesh: 17442 floats (1938 triangles)
-[2025-10-06 15:24:19.717] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.719] [PhysicsManager] Removed chunk 28855157 collider
-[2025-10-06 15:24:19.786] [Game] Registered physics collider: chunk (-1,-1,1), 1938 triangles, 17442 floats
-[2025-10-06 15:24:19.786] [Game] Skipping physics registration for chunk (-1,1,1) - empty mesh
-[2025-10-06 15:24:19.820] [MarchingCubes] Sample vertex 0: (-30.00, -34.35, -20.00)
-[2025-10-06 15:24:19.820] [MarchingCubes] Sample vertex 1: (-31.79, -34.00, -20.00)
-[2025-10-06 15:24:19.820] [MarchingCubes] Sample vertex 2: (-30.00, -34.00, -20.34)
-[2025-10-06 15:24:19.822] [Client] Received collider mesh: 26838 floats (2982 triangles)
-[2025-10-06 15:24:19.832] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.849] [Game] Registered physics collider: chunk (-1,-1,-1), 2982 triangles, 26838 floats
-[2025-10-06 15:24:19.849] [Game] Skipping physics registration for chunk (1,1,-1) - empty mesh
-[2025-10-06 15:24:19.936] [MarchingCubes] Sample vertex 0: (34.00, -78.04, 32.00)
-[2025-10-06 15:24:19.936] [MarchingCubes] Sample vertex 1: (34.00, -78.00, 32.24)
-[2025-10-06 15:24:19.936] [MarchingCubes] Sample vertex 2: (33.63, -78.00, 32.00)
-[2025-10-06 15:24:19.938] [Client] Received collider mesh: 35352 floats (3928 triangles)
-[2025-10-06 15:24:19.939] [PhysicsManager] Removed chunk -28855157 collider
-[2025-10-06 15:24:19.947] [Client] Empty collider mesh received
-[2025-10-06 15:24:19.975] [Game] Registered physics collider: chunk (1,-1,1), 3928 triangles, 35352 floats
-[2025-10-06 15:24:19.975] [Game] Skipping physics registration for chunk (1,1,1) - empty mesh
-[2025-10-06 15:24:20.040] [MarchingCubes] Sample vertex 0: (0.00, -56.00, -48.48)
-[2025-10-06 15:24:20.040] [MarchingCubes] Sample vertex 1: (0.03, -58.00, -48.00)
-[2025-10-06 15:24:20.040] [MarchingCubes] Sample vertex 2: (0.00, -58.00, -48.02)
-[2025-10-06 15:24:20.041] [Client] Received collider mesh: 13320 floats (1480 triangles)
-[2025-10-06 15:24:20.138] [Game] Registered physics collider: chunk (0,-1,-2), 1480 triangles, 13320 floats
-[2025-10-06 15:24:20.162] [MarchingCubes] Sample vertex 0: (-62.00, 45.76, 64.00)
-[2025-10-06 15:24:20.162] [MarchingCubes] Sample vertex 1: (-64.00, 45.68, 64.00)
-[2025-10-06 15:24:20.162] [MarchingCubes] Sample vertex 2: (-62.00, 45.80, 66.00)
-[2025-10-06 15:24:20.162] [Client] Received collider mesh: 7020 floats (780 triangles)
-[2025-10-06 15:24:20.226] [Game] Registered physics collider: chunk (-2,0,2), 780 triangles, 7020 floats
-[2025-10-06 15:24:20.240] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.247] [Game] Skipping physics registration for chunk (0,-1,2) - empty mesh
-[2025-10-06 15:24:20.247] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.310] [Game] Skipping physics registration for chunk (-2,1,0) - empty mesh
-[2025-10-06 15:24:20.331] [MarchingCubes] Sample vertex 0: (-64.00, -30.90, 28.00)
-[2025-10-06 15:24:20.331] [MarchingCubes] Sample vertex 1: (-62.00, -30.00, 27.57)
-[2025-10-06 15:24:20.331] [MarchingCubes] Sample vertex 2: (-62.00, -30.60, 28.00)
-[2025-10-06 15:24:20.332] [Client] Received collider mesh: 23004 floats (2556 triangles)
-[2025-10-06 15:24:20.340] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.357] [Game] Registered physics collider: chunk (-2,-1,0), 2556 triangles, 23004 floats
-[2025-10-06 15:24:20.357] [Game] Skipping physics registration for chunk (0,1,2) - empty mesh
-[2025-10-06 15:24:20.411] [MarchingCubes] Sample vertex 0: (-64.00, 1.92, -62.00)
-[2025-10-06 15:24:20.411] [MarchingCubes] Sample vertex 1: (-62.00, 2.00, -63.02)
-[2025-10-06 15:24:20.411] [MarchingCubes] Sample vertex 2: (-62.00, 1.91, -62.00)
-[2025-10-06 15:24:20.412] [Client] Received collider mesh: 9999 floats (1111 triangles)
-[2025-10-06 15:24:20.421] [Game] Registered physics collider: chunk (-2,0,-2), 1111 triangles, 9999 floats
-[2025-10-06 15:24:20.421] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.480] [Game] Skipping physics registration for chunk (0,1,-2) - empty mesh
-[2025-10-06 15:24:20.501] [MarchingCubes] Sample vertex 0: (66.00, 1.69, -64.00)
-[2025-10-06 15:24:20.501] [MarchingCubes] Sample vertex 1: (66.00, 1.69, -62.00)
-[2025-10-06 15:24:20.501] [MarchingCubes] Sample vertex 2: (64.00, 1.69, -64.00)
-[2025-10-06 15:24:20.505] [Client] Received collider mesh: 10170 floats (1130 triangles)
-[2025-10-06 15:24:20.574] [PhysicsManager] Removed chunk -20846552 collider
-[2025-10-06 15:24:20.581] [Game] Registered physics collider: chunk (2,0,-2), 1130 triangles, 10170 floats
-[2025-10-06 15:24:20.598] [MarchingCubes] Sample vertex 0: (66.00, 1.23, 64.00)
-[2025-10-06 15:24:20.598] [MarchingCubes] Sample vertex 1: (66.00, 1.28, 66.00)
-[2025-10-06 15:24:20.598] [MarchingCubes] Sample vertex 2: (64.00, 1.26, 64.00)
-[2025-10-06 15:24:20.599] [Client] Received collider mesh: 13401 floats (1489 triangles)
-[2025-10-06 15:24:20.602] [PhysicsManager] Removed chunk 20846548 collider
-[2025-10-06 15:24:20.610] [Game] Registered physics collider: chunk (2,0,2), 1489 triangles, 13401 floats
-[2025-10-06 15:24:20.691] [MarchingCubes] Sample vertex 0: (64.00, -66.00, 17.34)
-[2025-10-06 15:24:20.691] [MarchingCubes] Sample vertex 1: (64.83, -66.00, 18.00)
-[2025-10-06 15:24:20.691] [MarchingCubes] Sample vertex 2: (64.00, -67.36, 18.00)
-[2025-10-06 15:24:20.691] [Client] Received collider mesh: 6714 floats (746 triangles)
-[2025-10-06 15:24:20.699] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.702] [Game] Registered physics collider: chunk (2,-1,0), 746 triangles, 6714 floats
-[2025-10-06 15:24:20.702] [Game] Skipping physics registration for chunk (2,1,0) - empty mesh
-[2025-10-06 15:24:20.708] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.716] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.775] [Game] Skipping physics registration for chunk (1,1,2) - empty mesh
-[2025-10-06 15:24:20.775] [Game] Skipping physics registration for chunk (-1,1,-2) - empty mesh
-[2025-10-06 15:24:20.800] [MarchingCubes] Sample vertex 0: (-30.00, -56.10, -56.00)
-[2025-10-06 15:24:20.800] [MarchingCubes] Sample vertex 1: (-30.19, -56.00, -56.00)
-[2025-10-06 15:24:20.800] [MarchingCubes] Sample vertex 2: (-30.00, -56.00, -56.10)
-[2025-10-06 15:24:20.800] [Client] Received collider mesh: 23850 floats (2650 triangles)
-[2025-10-06 15:24:20.894] [Game] Registered physics collider: chunk (-1,-1,-2), 2650 triangles, 23850 floats
-[2025-10-06 15:24:20.904] [MarchingCubes] Sample vertex 0: (98.00, 1.64, -0.00)
-[2025-10-06 15:24:20.904] [MarchingCubes] Sample vertex 1: (98.00, 1.64, 2.00)
-[2025-10-06 15:24:20.904] [MarchingCubes] Sample vertex 2: (96.00, 1.64, -0.00)
-[2025-10-06 15:24:20.905] [Client] Received collider mesh: 11511 floats (1279 triangles)
-[2025-10-06 15:24:20.927] [Game] Registered physics collider: chunk (3,0,0), 1279 triangles, 11511 floats
-[2025-10-06 15:24:20.981] [MarchingCubes] Sample vertex 0: (-32.00, -8.00, 65.96)
-[2025-10-06 15:24:20.981] [MarchingCubes] Sample vertex 1: (-31.65, -8.00, 66.00)
-[2025-10-06 15:24:20.981] [MarchingCubes] Sample vertex 2: (-32.00, -8.23, 66.00)
-[2025-10-06 15:24:20.981] [Client] Received collider mesh: 810 floats (90 triangles)
-[2025-10-06 15:24:20.988] [Client] Empty collider mesh received
-[2025-10-06 15:24:20.989] [Game] Registered physics collider: chunk (-1,-1,2), 90 triangles, 810 floats
-[2025-10-06 15:24:20.989] [Game] Skipping physics registration for chunk (-1,1,2) - empty mesh
-[2025-10-06 15:24:21.050] [MarchingCubes] Sample vertex 0: (2.00, 1.70, -96.00)
-[2025-10-06 15:24:21.050] [MarchingCubes] Sample vertex 1: (2.00, 1.80, -94.00)
-[2025-10-06 15:24:21.050] [MarchingCubes] Sample vertex 2: (0.00, 1.70, -96.00)
-[2025-10-06 15:24:21.050] [Client] Received collider mesh: 13077 floats (1453 triangles)
-[2025-10-06 15:24:21.057] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.065] [Game] Registered physics collider: chunk (0,0,-3), 1453 triangles, 13077 floats
-[2025-10-06 15:24:21.065] [Game] Skipping physics registration for chunk (2,1,1) - empty mesh
-[2025-10-06 15:24:21.144] [MarchingCubes] Sample vertex 0: (66.00, -88.24, 34.00)
-[2025-10-06 15:24:21.144] [MarchingCubes] Sample vertex 1: (64.31, -88.00, 34.00)
-[2025-10-06 15:24:21.144] [MarchingCubes] Sample vertex 2: (66.00, -88.00, 33.79)
-[2025-10-06 15:24:21.146] [Client] Received collider mesh: 41904 floats (4656 triangles)
-[2025-10-06 15:24:21.154] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.176] [Game] Registered physics collider: chunk (2,-1,1), 4656 triangles, 41904 floats
-[2025-10-06 15:24:21.176] [Game] Skipping physics registration for chunk (-2,1,1) - empty mesh
-[2025-10-06 15:24:21.239] [MarchingCubes] Sample vertex 0: (-64.00, -36.26, 34.00)
-[2025-10-06 15:24:21.239] [MarchingCubes] Sample vertex 1: (-62.00, -36.00, 32.86)
-[2025-10-06 15:24:21.239] [MarchingCubes] Sample vertex 2: (-62.00, -36.75, 34.00)
-[2025-10-06 15:24:21.240] [Client] Received collider mesh: 25425 floats (2825 triangles)
-[2025-10-06 15:24:21.250] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.255] [Game] Registered physics collider: chunk (-2,-1,1), 2825 triangles, 25425 floats
-[2025-10-06 15:24:21.255] [Game] Skipping physics registration for chunk (-2,1,-1) - empty mesh
-[2025-10-06 15:24:21.346] [MarchingCubes] Sample vertex 0: (-38.00, -33.28, -0.00)
-[2025-10-06 15:24:21.346] [MarchingCubes] Sample vertex 1: (-38.82, -32.00, -0.00)
-[2025-10-06 15:24:21.346] [MarchingCubes] Sample vertex 2: (-38.00, -32.00, -1.38)
-[2025-10-06 15:24:21.346] [Client] Received collider mesh: 1566 floats (174 triangles)
-[2025-10-06 15:24:21.362] [Game] Registered physics collider: chunk (-2,-1,-1), 174 triangles, 1566 floats
-[2025-10-06 15:24:21.487] [MarchingCubes] Sample vertex 0: (2.00, 1.66, 96.00)
-[2025-10-06 15:24:21.487] [MarchingCubes] Sample vertex 1: (2.00, 1.64, 98.00)
-[2025-10-06 15:24:21.487] [MarchingCubes] Sample vertex 2: (0.00, 1.58, 96.00)
-[2025-10-06 15:24:21.487] [Client] Received collider mesh: 13869 floats (1541 triangles)
-[2025-10-06 15:24:21.511] [Game] Registered physics collider: chunk (0,0,3), 1541 triangles, 13869 floats
-[2025-10-06 15:24:21.578] [MarchingCubes] Sample vertex 0: (34.00, -64.23, -46.00)
-[2025-10-06 15:24:21.578] [MarchingCubes] Sample vertex 1: (33.83, -64.00, -46.00)
-[2025-10-06 15:24:21.578] [MarchingCubes] Sample vertex 2: (34.00, -64.00, -46.03)
-[2025-10-06 15:24:21.579] [Client] Received collider mesh: 1350 floats (150 triangles)
-[2025-10-06 15:24:21.581] [Game] Registered physics collider: chunk (1,-1,-2), 150 triangles, 1350 floats
-[2025-10-06 15:24:21.587] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.657] [Game] Skipping physics registration for chunk (1,1,-2) - empty mesh
-[2025-10-06 15:24:21.679] [MarchingCubes] Sample vertex 0: (56.00, -39.44, 64.00)
-[2025-10-06 15:24:21.679] [MarchingCubes] Sample vertex 1: (56.00, -38.00, 64.05)
-[2025-10-06 15:24:21.679] [MarchingCubes] Sample vertex 2: (55.97, -38.00, 64.00)
-[2025-10-06 15:24:21.680] [Client] Received collider mesh: 8181 floats (909 triangles)
-[2025-10-06 15:24:21.689] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.695] [Game] Registered physics collider: chunk (1,-1,2), 909 triangles, 8181 floats
-[2025-10-06 15:24:21.695] [Game] Skipping physics registration for chunk (2,1,-1) - empty mesh
-[2025-10-06 15:24:21.781] [MarchingCubes] Sample vertex 0: (-94.00, 1.68, -0.00)
-[2025-10-06 15:24:21.781] [MarchingCubes] Sample vertex 1: (-94.00, 1.68, 2.00)
-[2025-10-06 15:24:21.781] [MarchingCubes] Sample vertex 2: (-96.00, 1.68, -0.00)
-[2025-10-06 15:24:21.782] [Client] Received collider mesh: 12213 floats (1357 triangles)
-[2025-10-06 15:24:21.864] [Game] Registered physics collider: chunk (-3,0,0), 1357 triangles, 12213 floats
-[2025-10-06 15:24:21.874] [Client] Empty collider mesh received
-[2025-10-06 15:24:21.875] [Game] Skipping physics registration for chunk (2,-1,-1) - empty mesh
-[2025-10-06 15:24:21.978] [MarchingCubes] Sample vertex 0: (98.00, 1.49, 32.00)
-[2025-10-06 15:24:21.978] [MarchingCubes] Sample vertex 1: (98.00, 1.45, 34.00)
-[2025-10-06 15:24:21.978] [MarchingCubes] Sample vertex 2: (96.00, 1.49, 32.00)
-[2025-10-06 15:24:21.979] [Client] Received collider mesh: 11025 floats (1225 triangles)
-[2025-10-06 15:24:22.001] [Game] Registered physics collider: chunk (3,0,1), 1225 triangles, 11025 floats
-[2025-10-06 15:24:22.061] [MarchingCubes] Sample vertex 0: (34.00, 1.74, -96.00)
-[2025-10-06 15:24:22.061] [MarchingCubes] Sample vertex 1: (34.00, 1.70, -94.00)
-[2025-10-06 15:24:22.062] [MarchingCubes] Sample vertex 2: (32.00, 1.70, -96.00)
-[2025-10-06 15:24:22.063] [Client] Received collider mesh: 10359 floats (1151 triangles)
-[2025-10-06 15:24:22.083] [Game] Registered physics collider: chunk (1,0,-3), 1151 triangles, 10359 floats
-[2025-10-06 15:24:22.172] [MarchingCubes] Sample vertex 0: (34.00, 1.57, 96.00)
-[2025-10-06 15:24:22.172] [MarchingCubes] Sample vertex 1: (34.00, 1.57, 98.00)
-[2025-10-06 15:24:22.172] [MarchingCubes] Sample vertex 2: (32.00, 1.57, 96.00)
-[2025-10-06 15:24:22.173] [Client] Received collider mesh: 12168 floats (1352 triangles)
-[2025-10-06 15:24:22.183] [Game] Registered physics collider: chunk (1,0,3), 1352 triangles, 12168 floats
-[2025-10-06 15:24:22.263] [MarchingCubes] Sample vertex 0: (-30.00, 1.67, -96.00)
-[2025-10-06 15:24:22.263] [MarchingCubes] Sample vertex 1: (-30.00, 1.67, -94.00)
-[2025-10-06 15:24:22.263] [MarchingCubes] Sample vertex 2: (-32.00, 1.68, -96.00)
-[2025-10-06 15:24:22.264] [Client] Received collider mesh: 9630 floats (1070 triangles)
-[2025-10-06 15:24:22.265] [PhysicsManager] Removed chunk 176884600 collider
-[2025-10-06 15:24:22.268] [Game] Registered physics collider: chunk (-1,0,-3), 1070 triangles, 9630 floats
-[2025-10-06 15:24:22.359] [MarchingCubes] Sample vertex 0: (-94.00, 1.44, 32.00)
-[2025-10-06 15:24:22.359] [MarchingCubes] Sample vertex 1: (-94.00, 1.39, 34.00)
-[2025-10-06 15:24:22.359] [MarchingCubes] Sample vertex 2: (-96.00, 1.56, 32.00)
-[2025-10-06 15:24:22.360] [Client] Received collider mesh: 9765 floats (1085 triangles)
-[2025-10-06 15:24:22.465] [Game] Registered physics collider: chunk (-3,0,1), 1085 triangles, 9765 floats
-[2025-10-06 15:24:22.510] [MarchingCubes] Sample vertex 0: (-30.00, 1.22, 96.00)
-[2025-10-06 15:24:22.510] [MarchingCubes] Sample vertex 1: (-30.00, 1.23, 98.00)
-[2025-10-06 15:24:22.510] [MarchingCubes] Sample vertex 2: (-32.00, 1.16, 96.00)
-[2025-10-06 15:24:22.511] [Client] Received collider mesh: 14733 floats (1637 triangles)
-[2025-10-06 15:24:22.518] [PhysicsManager] Removed chunk -176884602 collider
-[2025-10-06 15:24:22.520] [Game] Registered physics collider: chunk (-1,0,3), 1637 triangles, 14733 floats
-[2025-10-06 15:24:22.594] [MarchingCubes] Sample vertex 0: (-94.00, 1.69, -32.00)
-[2025-10-06 15:24:22.594] [MarchingCubes] Sample vertex 1: (-94.00, 1.69, -30.00)
-[2025-10-06 15:24:22.594] [MarchingCubes] Sample vertex 2: (-96.00, 1.69, -32.00)
-[2025-10-06 15:24:22.595] [Client] Received collider mesh: 13041 floats (1449 triangles)
-[2025-10-06 15:24:22.597] [PhysicsManager] Removed chunk 164438688 collider
-[2025-10-06 15:24:22.599] [Game] Registered physics collider: chunk (-3,0,-1), 1449 triangles, 13041 floats
-[2025-10-06 15:24:22.698] [MarchingCubes] Sample vertex 0: (98.00, 1.66, -32.00)
-[2025-10-06 15:24:22.698] [MarchingCubes] Sample vertex 1: (98.00, 1.66, -30.00)
-[2025-10-06 15:24:22.698] [MarchingCubes] Sample vertex 2: (96.00, 1.66, -32.00)
-[2025-10-06 15:24:22.699] [Client] Received collider mesh: 10872 floats (1208 triangles)
-[2025-10-06 15:24:22.717] [PhysicsManager] Removed chunk -164438690 collider
-[2025-10-06 15:24:22.719] [Game] Registered physics collider: chunk (3,0,-1), 1208 triangles, 10872 floats
-[2025-10-06 15:24:22.810] [MarchingCubes] Sample vertex 0: (66.00, -67.13, 66.00)
-[2025-10-06 15:24:22.810] [MarchingCubes] Sample vertex 1: (64.75, -66.00, 64.00)
-[2025-10-06 15:24:22.810] [MarchingCubes] Sample vertex 2: (66.00, -67.09, 64.00)
-[2025-10-06 15:24:22.812] [Client] Received collider mesh: 33300 floats (3700 triangles)
-[2025-10-06 15:24:22.821] [Client] Empty collider mesh received
-[2025-10-06 15:24:22.823] [Game] Registered physics collider: chunk (2,-1,2), 3700 triangles, 33300 floats
-[2025-10-06 15:24:22.823] [Game] Skipping physics registration for chunk (-2,1,2) - empty mesh
-[2025-10-06 15:24:22.918] [MarchingCubes] Sample vertex 0: (-62.00, -24.85, 64.00)
-[2025-10-06 15:24:22.918] [MarchingCubes] Sample vertex 1: (-62.00, -24.00, 65.12)
-[2025-10-06 15:24:22.918] [MarchingCubes] Sample vertex 2: (-63.25, -24.00, 64.00)
-[2025-10-06 15:24:22.919] [Client] Received collider mesh: 14643 floats (1627 triangles)
-[2025-10-06 15:24:22.928] [Client] Empty collider mesh received
-[2025-10-06 15:24:22.930] [Game] Registered physics collider: chunk (-2,-1,2), 1627 triangles, 14643 floats
-[2025-10-06 15:24:22.930] [Game] Skipping physics registration for chunk (-2,1,-2) - empty mesh
-[2025-10-06 15:24:22.936] [Client] Empty collider mesh received
-[2025-10-06 15:24:22.944] [Game] Skipping physics registration for chunk (2,1,-2) - empty mesh
-[2025-10-06 15:24:23.034] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.041] [Game] Skipping physics registration for chunk (-2,-1,-2) - empty mesh
-[2025-10-06 15:24:23.042] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.051] [Game] Skipping physics registration for chunk (2,1,2) - empty mesh
-[2025-10-06 15:24:23.137] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.141] [Game] Skipping physics registration for chunk (2,-1,-2) - empty mesh
-[2025-10-06 15:24:23.232] [MarchingCubes] Sample vertex 0: (98.00, 1.67, -64.00)
-[2025-10-06 15:24:23.232] [MarchingCubes] Sample vertex 1: (98.00, 1.67, -62.00)
-[2025-10-06 15:24:23.232] [MarchingCubes] Sample vertex 2: (96.00, 1.68, -64.00)
-[2025-10-06 15:24:23.235] [Client] Received collider mesh: 12132 floats (1348 triangles)
-[2025-10-06 15:24:23.319] [Game] Registered physics collider: chunk (3,0,-2), 1348 triangles, 12132 floats
-[2025-10-06 15:24:23.350] [MarchingCubes] Sample vertex 0: (66.00, 1.55, 96.00)
-[2025-10-06 15:24:23.350] [MarchingCubes] Sample vertex 1: (66.00, 1.56, 98.00)
-[2025-10-06 15:24:23.350] [MarchingCubes] Sample vertex 2: (64.00, 1.56, 96.00)
-[2025-10-06 15:24:23.351] [Client] Received collider mesh: 14337 floats (1593 triangles)
-[2025-10-06 15:24:23.361] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.362] [Game] Registered physics collider: chunk (2,0,3), 1593 triangles, 14337 floats
-[2025-10-06 15:24:23.362] [Game] Skipping physics registration for chunk (3,1,0) - empty mesh
-[2025-10-06 15:24:23.445] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.453] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.515] [Game] Skipping physics registration for chunk (0,-1,3) - empty mesh
-[2025-10-06 15:24:23.515] [Game] Skipping physics registration for chunk (0,1,-3) - empty mesh
-[2025-10-06 15:24:23.533] [MarchingCubes] Sample vertex 0: (96.58, -0.00, 64.00)
-[2025-10-06 15:24:23.533] [MarchingCubes] Sample vertex 1: (96.94, -0.00, 66.00)
-[2025-10-06 15:24:23.533] [MarchingCubes] Sample vertex 2: (96.00, 0.97, 66.00)
-[2025-10-06 15:24:23.533] [Client] Received collider mesh: 8946 floats (994 triangles)
-[2025-10-06 15:24:23.596] [Game] Registered physics collider: chunk (3,0,2), 994 triangles, 8946 floats
-[2025-10-06 15:24:23.611] [MarchingCubes] Sample vertex 0: (96.00, -60.00, 29.70)
-[2025-10-06 15:24:23.612] [MarchingCubes] Sample vertex 1: (97.38, -60.00, 30.00)
-[2025-10-06 15:24:23.612] [MarchingCubes] Sample vertex 2: (96.00, -60.62, 30.00)
-[2025-10-06 15:24:23.612] [Client] Received collider mesh: 4113 floats (457 triangles)
-[2025-10-06 15:24:23.619] [Game] Registered physics collider: chunk (3,-1,0), 457 triangles, 4113 floats
-[2025-10-06 15:24:23.678] [MarchingCubes] Sample vertex 0: (66.00, 1.70, -96.00)
-[2025-10-06 15:24:23.678] [MarchingCubes] Sample vertex 1: (66.00, 1.73, -94.00)
-[2025-10-06 15:24:23.678] [MarchingCubes] Sample vertex 2: (64.00, 1.70, -96.00)
-[2025-10-06 15:24:23.679] [Client] Received collider mesh: 12807 floats (1423 triangles)
-[2025-10-06 15:24:23.689] [Game] Registered physics collider: chunk (2,0,-3), 1423 triangles, 12807 floats
-[2025-10-06 15:24:23.752] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.813] [Game] Skipping physics registration for chunk (0,-1,-3) - empty mesh
-[2025-10-06 15:24:23.833] [MarchingCubes] Sample vertex 0: (-96.00, -34.00, 31.32)
-[2025-10-06 15:24:23.833] [MarchingCubes] Sample vertex 1: (-95.32, -34.00, 32.00)
-[2025-10-06 15:24:23.833] [MarchingCubes] Sample vertex 2: (-96.00, -34.87, 32.00)
-[2025-10-06 15:24:23.833] [Client] Received collider mesh: 1242 floats (138 triangles)
-[2025-10-06 15:24:23.834] [Game] Registered physics collider: chunk (-3,-1,0), 138 triangles, 1242 floats
-[2025-10-06 15:24:23.934] [MarchingCubes] Sample vertex 0: (-96.00, 40.00, 66.00)
-[2025-10-06 15:24:23.934] [MarchingCubes] Sample vertex 1: (-95.97, 40.00, 64.00)
-[2025-10-06 15:24:23.934] [MarchingCubes] Sample vertex 2: (-96.00, 39.97, 64.00)
-[2025-10-06 15:24:23.934] [Client] Received collider mesh: 8667 floats (963 triangles)
-[2025-10-06 15:24:23.941] [Game] Registered physics collider: chunk (-3,0,2), 963 triangles, 8667 floats
-[2025-10-06 15:24:23.942] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.950] [Client] Empty collider mesh received
-[2025-10-06 15:24:23.952] [Game] Skipping physics registration for chunk (0,1,3) - empty mesh
-[2025-10-06 15:24:23.952] [Game] Skipping physics registration for chunk (-3,1,0) - empty mesh
-[2025-10-06 15:24:24.025] [MarchingCubes] Sample vertex 0: (-62.00, 1.70, -96.00)
-[2025-10-06 15:24:24.026] [MarchingCubes] Sample vertex 1: (-62.00, 1.70, -94.00)
-[2025-10-06 15:24:24.026] [MarchingCubes] Sample vertex 2: (-64.00, 1.70, -96.00)
-[2025-10-06 15:24:24.026] [Client] Received collider mesh: 10575 floats (1175 triangles)
-[2025-10-06 15:24:24.029] [Game] Registered physics collider: chunk (-2,0,-3), 1175 triangles, 10575 floats
-[2025-10-06 15:24:24.140] [MarchingCubes] Sample vertex 0: (-62.23, -0.00, 96.00)
-[2025-10-06 15:24:24.140] [MarchingCubes] Sample vertex 1: (-62.00, -0.00, 96.48)
-[2025-10-06 15:24:24.140] [MarchingCubes] Sample vertex 2: (-62.00, 0.38, 98.00)
-[2025-10-06 15:24:24.141] [Client] Received collider mesh: 13428 floats (1492 triangles)
-[2025-10-06 15:24:24.153] [Game] Registered physics collider: chunk (-2,0,3), 1492 triangles, 13428 floats
-[2025-10-06 15:24:24.214] [MarchingCubes] Sample vertex 0: (-94.00, 1.73, -64.00)
-[2025-10-06 15:24:24.214] [MarchingCubes] Sample vertex 1: (-94.00, 1.70, -62.00)
-[2025-10-06 15:24:24.214] [MarchingCubes] Sample vertex 2: (-96.00, 1.70, -64.00)
-[2025-10-06 15:24:24.215] [Client] Received collider mesh: 9684 floats (1076 triangles)
-[2025-10-06 15:24:24.260] [Game] Registered physics collider: chunk (-3,0,-2), 1076 triangles, 9684 floats
-[2025-10-06 15:24:24.299] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.301] [Game] Skipping physics registration for chunk (1,-1,-3) - empty mesh
-[2025-10-06 15:24:24.307] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.315] [Game] Skipping physics registration for chunk (3,1,1) - empty mesh
-[2025-10-06 15:24:24.395] [MarchingCubes] Sample vertex 0: (54.00, -40.10, 128.00)
-[2025-10-06 15:24:24.395] [MarchingCubes] Sample vertex 1: (53.95, -40.00, 128.00)
-[2025-10-06 15:24:24.396] [MarchingCubes] Sample vertex 2: (54.00, -40.00, 127.87)
-[2025-10-06 15:24:24.396] [Client] Received collider mesh: 4329 floats (481 triangles)
-[2025-10-06 15:24:24.401] [Game] Registered physics collider: chunk (1,-1,3), 481 triangles, 4329 floats
-[2025-10-06 15:24:24.403] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.410] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.412] [Game] Skipping physics registration for chunk (1,1,3) - empty mesh
-[2025-10-06 15:24:24.412] [Game] Skipping physics registration for chunk (-1,1,3) - empty mesh
-[2025-10-06 15:24:24.502] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.572] [Game] Skipping physics registration for chunk (-1,-1,3) - empty mesh
-[2025-10-06 15:24:24.584] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.591] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.593] [Game] Skipping physics registration for chunk (3,-1,-1) - empty mesh
-[2025-10-06 15:24:24.593] [Game] Skipping physics registration for chunk (3,1,-1) - empty mesh
-[2025-10-06 15:24:24.663] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.669] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.670] [Game] Skipping physics registration for chunk (-1,-1,-3) - empty mesh
-[2025-10-06 15:24:24.671] [Game] Skipping physics registration for chunk (1,1,-3) - empty mesh
-[2025-10-06 15:24:24.676] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.682] [Game] Skipping physics registration for chunk (-1,1,-3) - empty mesh
-[2025-10-06 15:24:24.767] [MarchingCubes] Sample vertex 0: (96.00, -70.00, 33.86)
-[2025-10-06 15:24:24.767] [MarchingCubes] Sample vertex 1: (96.66, -70.00, 34.00)
-[2025-10-06 15:24:24.767] [MarchingCubes] Sample vertex 2: (96.00, -70.41, 34.00)
-[2025-10-06 15:24:24.769] [Client] Received collider mesh: 26568 floats (2952 triangles)
-[2025-10-06 15:24:24.781] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.781] [Game] Registered physics collider: chunk (3,-1,1), 2952 triangles, 26568 floats
-[2025-10-06 15:24:24.781] [Game] Skipping physics registration for chunk (-3,1,-1) - empty mesh
-[2025-10-06 15:24:24.788] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.794] [Game] Skipping physics registration for chunk (-3,1,1) - empty mesh
-[2025-10-06 15:24:24.875] [MarchingCubes] Sample vertex 0: (-96.00, -36.00, 33.56)
-[2025-10-06 15:24:24.875] [MarchingCubes] Sample vertex 1: (-94.74, -36.00, 34.00)
-[2025-10-06 15:24:24.875] [MarchingCubes] Sample vertex 2: (-96.00, -36.30, 34.00)
-[2025-10-06 15:24:24.877] [Client] Received collider mesh: 30402 floats (3378 triangles)
-[2025-10-06 15:24:24.901] [Game] Registered physics collider: chunk (-3,-1,1), 3378 triangles, 30402 floats
-[2025-10-06 15:24:24.960] [Client] Empty collider mesh received
-[2025-10-06 15:24:24.968] [Game] Skipping physics registration for chunk (-3,-1,-1) - empty mesh
-[2025-10-06 15:24:25.039] [MarchingCubes] Sample vertex 0: (-126.00, 1.95, 2.00)
-[2025-10-06 15:24:25.039] [MarchingCubes] Sample vertex 1: (-126.43, 2.00, 2.00)
-[2025-10-06 15:24:25.039] [MarchingCubes] Sample vertex 2: (-126.00, 2.00, 1.42)
-[2025-10-06 15:24:25.040] [Client] Received collider mesh: 10656 floats (1184 triangles)
-[2025-10-06 15:24:25.110] [Game] Registered physics collider: chunk (-4,0,0), 1184 triangles, 10656 floats
-[2025-10-06 15:24:25.121] [MarchingCubes] Sample vertex 0: (130.00, 1.62, -0.00)
-[2025-10-06 15:24:25.121] [MarchingCubes] Sample vertex 1: (130.00, 1.61, 2.00)
-[2025-10-06 15:24:25.121] [MarchingCubes] Sample vertex 2: (128.00, 1.63, -0.00)
-[2025-10-06 15:24:25.121] [Client] Received collider mesh: 13266 floats (1474 triangles)
-[2025-10-06 15:24:25.176] [Game] Registered physics collider: chunk (4,0,0), 1474 triangles, 13266 floats
-[2025-10-06 15:24:25.191] [MarchingCubes] Sample vertex 0: (2.00, 1.70, -128.00)
-[2025-10-06 15:24:25.191] [MarchingCubes] Sample vertex 1: (2.00, 1.70, -126.00)
-[2025-10-06 15:24:25.191] [MarchingCubes] Sample vertex 2: (0.00, 1.70, -128.00)
-[2025-10-06 15:24:25.192] [Client] Received collider mesh: 10827 floats (1203 triangles)
-[2025-10-06 15:24:25.200] [Game] Registered physics collider: chunk (0,0,-4), 1203 triangles, 10827 floats
-[2025-10-06 15:24:25.340] [MarchingCubes] Sample vertex 0: (2.00, 1.25, 128.00)
-[2025-10-06 15:24:25.340] [MarchingCubes] Sample vertex 1: (2.00, 1.28, 130.00)
-[2025-10-06 15:24:25.340] [MarchingCubes] Sample vertex 2: (-0.00, 1.29, 128.00)
-[2025-10-06 15:24:25.341] [Client] Received collider mesh: 11511 floats (1279 triangles)
-[2025-10-06 15:24:25.347] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.348] [Game] Registered physics collider: chunk (0,0,4), 1279 triangles, 11511 floats
-[2025-10-06 15:24:25.348] [Game] Skipping physics registration for chunk (3,1,-2) - empty mesh
-[2025-10-06 15:24:25.430] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.435] [Game] Skipping physics registration for chunk (3,-1,-2) - empty mesh
-[2025-10-06 15:24:25.438] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.502] [Game] Skipping physics registration for chunk (2,1,3) - empty mesh
-[2025-10-06 15:24:25.522] [MarchingCubes] Sample vertex 0: (66.00, -50.21, 98.00)
-[2025-10-06 15:24:25.522] [MarchingCubes] Sample vertex 1: (65.79, -50.00, 96.00)
-[2025-10-06 15:24:25.522] [MarchingCubes] Sample vertex 2: (66.00, -50.58, 96.00)
-[2025-10-06 15:24:25.524] [Client] Received collider mesh: 28350 floats (3150 triangles)
-[2025-10-06 15:24:25.530] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.535] [Game] Registered physics collider: chunk (2,-1,3), 3150 triangles, 28350 floats
-[2025-10-06 15:24:25.535] [Game] Skipping physics registration for chunk (2,1,-3) - empty mesh
-[2025-10-06 15:24:25.537] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.544] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.545] [Game] Skipping physics registration for chunk (-2,1,3) - empty mesh
-[2025-10-06 15:24:25.545] [Game] Skipping physics registration for chunk (3,1,2) - empty mesh
-[2025-10-06 15:24:25.619] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.624] [Game] Skipping physics registration for chunk (-3,-1,-2) - empty mesh
-[2025-10-06 15:24:25.626] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.685] [Game] Skipping physics registration for chunk (-3,1,-2) - empty mesh
-[2025-10-06 15:24:25.701] [MarchingCubes] Sample vertex 0: (-96.00, -12.00, 65.80)
-[2025-10-06 15:24:25.701] [MarchingCubes] Sample vertex 1: (-94.00, -12.06, 66.00)
-[2025-10-06 15:24:25.701] [MarchingCubes] Sample vertex 2: (-94.62, -12.00, 66.00)
-[2025-10-06 15:24:25.702] [Client] Received collider mesh: 13455 floats (1495 triangles)
-[2025-10-06 15:24:25.708] [Game] Registered physics collider: chunk (-3,-1,2), 1495 triangles, 13455 floats
-[2025-10-06 15:24:25.709] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.767] [Game] Skipping physics registration for chunk (-3,1,2) - empty mesh
-[2025-10-06 15:24:25.786] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.793] [Client] Empty collider mesh received
-[2025-10-06 15:24:25.800] [Game] Skipping physics registration for chunk (-2,-1,-3) - empty mesh
-[2025-10-06 15:24:25.800] [Game] Skipping physics registration for chunk (-2,1,-3) - empty mesh
-[2025-10-06 15:24:25.883] [MarchingCubes] Sample vertex 0: (-62.00, -5.56, 96.00)
-[2025-10-06 15:24:25.884] [MarchingCubes] Sample vertex 1: (-62.00, -4.00, 97.58)
-[2025-10-06 15:24:25.884] [MarchingCubes] Sample vertex 2: (-62.98, -4.00, 96.00)
-[2025-10-06 15:24:25.885] [Client] Received collider mesh: 12600 floats (1400 triangles)
-[2025-10-06 15:24:25.908] [Game] Registered physics collider: chunk (-2,-1,3), 1400 triangles, 12600 floats
-[2025-10-06 15:24:25.979] [MarchingCubes] Sample vertex 0: (96.71, -36.00, 66.00)
-[2025-10-06 15:24:25.979] [MarchingCubes] Sample vertex 1: (96.00, -37.67, 64.00)
-[2025-10-06 15:24:25.979] [MarchingCubes] Sample vertex 2: (97.69, -36.00, 64.00)
-[2025-10-06 15:24:25.980] [Client] Received collider mesh: 15975 floats (1775 triangles)
-[2025-10-06 15:24:26.043] [Game] Registered physics collider: chunk (3,-1,2), 1775 triangles, 15975 floats
-[2025-10-06 15:24:26.057] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.063] [Game] Skipping physics registration for chunk (2,-1,-3) - empty mesh
-[2025-10-06 15:24:26.064] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.121] [Game] Skipping physics registration for chunk (0,1,4) - empty mesh
-[2025-10-06 15:24:26.144] [MarchingCubes] Sample vertex 0: (-128.00, -42.00, 15.02)
-[2025-10-06 15:24:26.144] [MarchingCubes] Sample vertex 1: (-127.48, -42.00, 16.00)
-[2025-10-06 15:24:26.144] [MarchingCubes] Sample vertex 2: (-128.00, -42.41, 16.00)
-[2025-10-06 15:24:26.144] [Client] Received collider mesh: 5436 floats (604 triangles)
-[2025-10-06 15:24:26.151] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.151] [Game] Registered physics collider: chunk (-4,-1,0), 604 triangles, 5436 floats
-[2025-10-06 15:24:26.152] [Game] Skipping physics registration for chunk (0,1,-4) - empty mesh
-[2025-10-06 15:24:26.236] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.247] [Game] Skipping physics registration for chunk (0,-1,-4) - empty mesh
-[2025-10-06 15:24:26.330] [MarchingCubes] Sample vertex 0: (130.00, -48.03, 22.00)
-[2025-10-06 15:24:26.330] [MarchingCubes] Sample vertex 1: (129.91, -48.00, 22.00)
-[2025-10-06 15:24:26.330] [MarchingCubes] Sample vertex 2: (130.00, -48.00, 21.98)
-[2025-10-06 15:24:26.332] [Client] Received collider mesh: 23319 floats (2591 triangles)
-[2025-10-06 15:24:26.341] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.344] [Game] Registered physics collider: chunk (4,-1,0), 2591 triangles, 23319 floats
-[2025-10-06 15:24:26.344] [Game] Skipping physics registration for chunk (-4,1,0) - empty mesh
-[2025-10-06 15:24:26.427] [MarchingCubes] Sample vertex 0: (14.00, -29.45, 148.00)
-[2025-10-06 15:24:26.427] [MarchingCubes] Sample vertex 1: (12.41, -28.00, 148.00)
-[2025-10-06 15:24:26.427] [MarchingCubes] Sample vertex 2: (14.00, -28.00, 146.83)
-[2025-10-06 15:24:26.427] [Client] Received collider mesh: 5643 floats (627 triangles)
-[2025-10-06 15:24:26.434] [Client] Empty collider mesh received
-[2025-10-06 15:24:26.434] [Game] Registered physics collider: chunk (0,-1,4), 627 triangles, 5643 floats
-[2025-10-06 15:24:26.434] [Game] Skipping physics registration for chunk (4,1,0) - empty mesh
-[2025-10-06 15:24:27.799] [MarchingCubes] Sample vertex 0: (130.00, 1.18, 32.00)
-[2025-10-06 15:24:27.799] [MarchingCubes] Sample vertex 1: (130.00, 1.29, 34.00)
-[2025-10-06 15:24:27.799] [MarchingCubes] Sample vertex 2: (128.00, 1.20, 32.00)
-[2025-10-06 15:24:27.800] [Client] Received collider mesh: 7803 floats (867 triangles)
-[2025-10-06 15:24:27.863] [Game] Registered physics collider: chunk (4,0,1), 867 triangles, 7803 floats
-[2025-10-06 15:24:27.872] [MarchingCubes] Sample vertex 0: (130.00, 1.65, -32.00)
-[2025-10-06 15:24:27.872] [MarchingCubes] Sample vertex 1: (130.00, 1.65, -30.00)
-[2025-10-06 15:24:27.872] [MarchingCubes] Sample vertex 2: (128.00, 1.80, -32.00)
-[2025-10-06 15:24:27.873] [Client] Received collider mesh: 11835 floats (1315 triangles)
-[2025-10-06 15:24:27.934] [Game] Registered physics collider: chunk (4,0,-1), 1315 triangles, 11835 floats
-[2025-10-06 15:24:27.947] [MarchingCubes] Sample vertex 0: (130.00, 23.22, -64.00)
-[2025-10-06 15:24:27.947] [MarchingCubes] Sample vertex 1: (130.00, 23.60, -62.00)
-[2025-10-06 15:24:27.947] [MarchingCubes] Sample vertex 2: (128.00, 23.37, -64.00)
-[2025-10-06 15:24:27.948] [Client] Received collider mesh: 12303 floats (1367 triangles)
-[2025-10-06 15:24:27.957] [Game] Registered physics collider: chunk (4,0,-2), 1367 triangles, 12303 floats
-[2025-10-06 15:24:28.031] [MarchingCubes] Sample vertex 0: (98.00, 1.65, -96.00)
-[2025-10-06 15:24:28.031] [MarchingCubes] Sample vertex 1: (98.00, 1.65, -94.00)
-[2025-10-06 15:24:28.031] [MarchingCubes] Sample vertex 2: (96.00, 1.64, -96.00)
-[2025-10-06 15:24:28.032] [Client] Received collider mesh: 13797 floats (1533 triangles)
-[2025-10-06 15:24:28.040] [Game] Registered physics collider: chunk (3,0,-3), 1533 triangles, 13797 floats
-[2025-10-06 15:24:28.132] [MarchingCubes] Sample vertex 0: (130.00, 37.97, 66.00)
-[2025-10-06 15:24:28.132] [MarchingCubes] Sample vertex 1: (130.00, 37.94, 64.00)
-[2025-10-06 15:24:28.132] [MarchingCubes] Sample vertex 2: (129.94, 38.00, 64.00)
-[2025-10-06 15:24:28.133] [Client] Received collider mesh: 15642 floats (1738 triangles)
-[2025-10-06 15:24:28.140] [Game] Registered physics collider: chunk (4,0,2), 1738 triangles, 15642 floats
-[2025-10-06 15:24:28.253] [MarchingCubes] Sample vertex 0: (98.00, 0.84, 96.00)
-[2025-10-06 15:24:28.254] [MarchingCubes] Sample vertex 1: (98.00, 0.87, 98.00)
-[2025-10-06 15:24:28.254] [MarchingCubes] Sample vertex 2: (96.00, 0.97, 96.00)
-[2025-10-06 15:24:28.254] [Client] Received collider mesh: 13527 floats (1503 triangles)
-[2025-10-06 15:24:28.258] [Game] Registered physics collider: chunk (3,0,3), 1503 triangles, 13527 floats
-[2025-10-06 15:24:28.262] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.271] [Game] Skipping physics registration for chunk (4,1,1) - empty mesh
-[2025-10-06 15:24:28.338] [MarchingCubes] Sample vertex 0: (154.00, -38.44, -0.00)
-[2025-10-06 15:24:28.338] [MarchingCubes] Sample vertex 1: (153.72, -38.00, -0.00)
-[2025-10-06 15:24:28.338] [MarchingCubes] Sample vertex 2: (154.00, -38.00, -0.62)
-[2025-10-06 15:24:28.338] [Client] Received collider mesh: 1026 floats (114 triangles)
-[2025-10-06 15:24:28.342] [Game] Registered physics collider: chunk (4,-1,-1), 114 triangles, 1026 floats
-[2025-10-06 15:24:28.344] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.355] [Game] Skipping physics registration for chunk (4,1,-1) - empty mesh
-[2025-10-06 15:24:28.432] [MarchingCubes] Sample vertex 0: (129.43, -42.00, 32.00)
-[2025-10-06 15:24:28.432] [MarchingCubes] Sample vertex 1: (128.00, -42.00, 32.47)
-[2025-10-06 15:24:28.432] [MarchingCubes] Sample vertex 2: (128.00, -42.61, 32.00)
-[2025-10-06 15:24:28.434] [Client] Received collider mesh: 24399 floats (2711 triangles)
-[2025-10-06 15:24:28.445] [Game] Registered physics collider: chunk (4,-1,1), 2711 triangles, 24399 floats
-[2025-10-06 15:24:28.508] [MarchingCubes] Sample vertex 0: (162.00, 0.83, -0.00)
-[2025-10-06 15:24:28.508] [MarchingCubes] Sample vertex 1: (162.00, 0.73, 2.00)
-[2025-10-06 15:24:28.508] [MarchingCubes] Sample vertex 2: (160.00, 1.00, -0.00)
-[2025-10-06 15:24:28.509] [Client] Received collider mesh: 9729 floats (1081 triangles)
-[2025-10-06 15:24:28.560] [Game] Registered physics collider: chunk (5,0,0), 1081 triangles, 9729 floats
-[2025-10-06 15:24:28.576] [MarchingCubes] Sample vertex 0: (34.00, 1.70, -128.00)
-[2025-10-06 15:24:28.577] [MarchingCubes] Sample vertex 1: (34.00, 1.70, -126.00)
-[2025-10-06 15:24:28.577] [MarchingCubes] Sample vertex 2: (32.00, 1.70, -128.00)
-[2025-10-06 15:24:28.577] [Client] Received collider mesh: 9468 floats (1052 triangles)
-[2025-10-06 15:24:28.669] [Game] Registered physics collider: chunk (1,0,-4), 1052 triangles, 9468 floats
-[2025-10-06 15:24:28.707] [MarchingCubes] Sample vertex 0: (34.00, 1.64, 128.00)
-[2025-10-06 15:24:28.707] [MarchingCubes] Sample vertex 1: (34.00, 1.63, 130.00)
-[2025-10-06 15:24:28.707] [MarchingCubes] Sample vertex 2: (32.00, 1.61, 128.00)
-[2025-10-06 15:24:28.709] [Client] Received collider mesh: 13446 floats (1494 triangles)
-[2025-10-06 15:24:28.712] [Game] Registered physics collider: chunk (1,0,4), 1494 triangles, 13446 floats
-[2025-10-06 15:24:28.802] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.806] [Game] Skipping physics registration for chunk (3,-1,-3) - empty mesh
-[2025-10-06 15:24:28.809] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.816] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.817] [Game] Skipping physics registration for chunk (4,1,2) - empty mesh
-[2025-10-06 15:24:28.817] [Game] Skipping physics registration for chunk (3,1,-3) - empty mesh
-[2025-10-06 15:24:28.905] [MarchingCubes] Sample vertex 0: (96.40, -30.00, 98.00)
-[2025-10-06 15:24:28.905] [MarchingCubes] Sample vertex 1: (96.00, -30.20, 96.00)
-[2025-10-06 15:24:28.905] [MarchingCubes] Sample vertex 2: (96.23, -30.00, 96.00)
-[2025-10-06 15:24:28.906] [Client] Received collider mesh: 4707 floats (523 triangles)
-[2025-10-06 15:24:28.912] [Client] Empty collider mesh received
-[2025-10-06 15:24:28.914] [Game] Registered physics collider: chunk (3,-1,3), 523 triangles, 4707 floats
-[2025-10-06 15:24:28.914] [Game] Skipping physics registration for chunk (3,1,3) - empty mesh
-[2025-10-06 15:24:28.988] [MarchingCubes] Sample vertex 0: (158.00, -30.22, -62.00)
-[2025-10-06 15:24:28.989] [MarchingCubes] Sample vertex 1: (157.90, -30.00, -62.00)
-[2025-10-06 15:24:28.989] [MarchingCubes] Sample vertex 2: (158.00, -30.00, -62.35)
-[2025-10-06 15:24:28.989] [Client] Received collider mesh: 270 floats (30 triangles)
-[2025-10-06 15:24:28.995] [Game] Registered physics collider: chunk (4,-1,-2), 30 triangles, 270 floats
-[2025-10-06 15:24:28.996] [Client] Empty collider mesh received
-[2025-10-06 15:24:29.052] [Game] Skipping physics registration for chunk (4,1,-2) - empty mesh
-[2025-10-06 15:24:29.077] [MarchingCubes] Sample vertex 0: (129.14, -16.00, 64.00)
-[2025-10-06 15:24:29.077] [MarchingCubes] Sample vertex 1: (128.00, -16.00, 64.98)
-[2025-10-06 15:24:29.077] [MarchingCubes] Sample vertex 2: (128.00, -16.90, 64.00)
-[2025-10-06 15:24:29.078] [Client] Received collider mesh: 5823 floats (647 triangles)
-[2025-10-06 15:24:29.085] [Game] Registered physics collider: chunk (4,-1,2), 647 triangles, 5823 floats
-[2025-10-06 15:24:29.163] [MarchingCubes] Sample vertex 0: (162.00, -47.14, 2.00)
-[2025-10-06 15:24:29.163] [MarchingCubes] Sample vertex 1: (160.71, -46.00, 2.00)
-[2025-10-06 15:24:29.163] [MarchingCubes] Sample vertex 2: (162.00, -46.00, 0.57)
-[2025-10-06 15:24:29.166] [Client] Received collider mesh: 51597 floats (5733 triangles)
-[2025-10-06 15:24:29.173] [Game] Registered physics collider: chunk (5,-1,0), 5733 triangles, 51597 floats
-[2025-10-06 15:24:29.248] [Client] Empty collider mesh received
-[2025-10-06 15:24:29.306] [Game] Skipping physics registration for chunk (1,-1,-4) - empty mesh
-[2025-10-06 15:24:29.330] [MarchingCubes] Sample vertex 0: (32.00, -34.68, 146.00)
-[2025-10-06 15:24:29.330] [MarchingCubes] Sample vertex 1: (34.00, -34.00, 145.38)
-[2025-10-06 15:24:29.330] [MarchingCubes] Sample vertex 2: (34.00, -35.32, 146.00)
-[2025-10-06 15:24:29.331] [Client] Received collider mesh: 26370 floats (2930 triangles)
-[2025-10-06 15:24:29.338] [Client] Empty collider mesh received
-[2025-10-06 15:24:29.340] [Game] Registered physics collider: chunk (1,-1,4), 2930 triangles, 26370 floats
-[2025-10-06 15:24:29.341] [Game] Skipping physics registration for chunk (1,1,-4) - empty mesh
-[2025-10-06 15:24:29.344] [Client] Empty collider mesh received
-[2025-10-06 15:24:29.351] [Game] Skipping physics registration for chunk (1,1,4) - empty mesh
-[2025-10-06 15:24:29.352] [Client] Empty collider mesh received
-[2025-10-06 15:24:29.362] [Game] Skipping physics registration for chunk (5,1,0) - empty mesh
-[2025-10-06 15:24:30.420] [MarchingCubes] Sample vertex 0: (66.00, 1.48, 128.00)
-[2025-10-06 15:24:30.421] [MarchingCubes] Sample vertex 1: (66.00, 1.47, 130.00)
-[2025-10-06 15:24:30.421] [MarchingCubes] Sample vertex 2: (64.00, 1.49, 128.00)
-[2025-10-06 15:24:30.421] [Client] Received collider mesh: 15390 floats (1710 triangles)
-[2025-10-06 15:24:30.431] [Game] Registered physics collider: chunk (2,0,4), 1710 triangles, 15390 floats
-[2025-10-06 15:24:30.559] [MarchingCubes] Sample vertex 0: (-30.00, 0.80, 128.00)
-[2025-10-06 15:24:30.559] [MarchingCubes] Sample vertex 1: (-30.00, 0.78, 130.00)
-[2025-10-06 15:24:30.559] [MarchingCubes] Sample vertex 2: (-32.00, 0.75, 128.00)
-[2025-10-06 15:24:30.560] [Client] Received collider mesh: 13005 floats (1445 triangles)
-[2025-10-06 15:24:30.564] [Game] Registered physics collider: chunk (-1,0,4), 1445 triangles, 13005 floats
-[2025-10-06 15:24:30.689] [MarchingCubes] Sample vertex 0: (130.00, 1.37, 96.00)
-[2025-10-06 15:24:30.689] [MarchingCubes] Sample vertex 1: (130.00, 1.40, 98.00)
-[2025-10-06 15:24:30.689] [MarchingCubes] Sample vertex 2: (128.00, 1.35, 96.00)
-[2025-10-06 15:24:30.690] [Client] Received collider mesh: 12924 floats (1436 triangles)
-[2025-10-06 15:24:30.693] [Game] Registered physics collider: chunk (4,0,3), 1436 triangles, 12924 floats
-[2025-10-06 15:24:30.855] [MarchingCubes] Sample vertex 0: (96.64, 2.00, 128.00)
-[2025-10-06 15:24:30.855] [MarchingCubes] Sample vertex 1: (96.00, 1.93, 130.00)
-[2025-10-06 15:24:30.855] [MarchingCubes] Sample vertex 2: (96.00, 2.00, 129.39)
-[2025-10-06 15:24:30.856] [Client] Received collider mesh: 12285 floats (1365 triangles)
-[2025-10-06 15:24:30.860] [Game] Registered physics collider: chunk (3,0,4), 1365 triangles, 12285 floats
-[2025-10-06 15:24:30.865] [Client] Empty collider mesh received
-[2025-10-06 15:24:30.870] [Game] Skipping physics registration for chunk (2,1,4) - empty mesh
-[2025-10-06 15:24:30.940] [MarchingCubes] Sample vertex 0: (64.47, -78.00, 128.00)
-[2025-10-06 15:24:30.940] [MarchingCubes] Sample vertex 1: (64.00, -78.05, 130.00)
-[2025-10-06 15:24:30.940] [MarchingCubes] Sample vertex 2: (64.00, -78.00, 129.24)
-[2025-10-06 15:24:30.941] [Client] Received collider mesh: 30276 floats (3364 triangles)
-[2025-10-06 15:24:30.954] [Game] Registered physics collider: chunk (2,-1,4), 3364 triangles, 30276 floats
-[2025-10-06 15:24:31.070] [MarchingCubes] Sample vertex 0: (34.00, 1.25, 160.00)
-[2025-10-06 15:24:31.070] [MarchingCubes] Sample vertex 1: (34.00, 1.29, 162.00)
-[2025-10-06 15:24:31.070] [MarchingCubes] Sample vertex 2: (32.00, 1.21, 160.00)
-[2025-10-06 15:24:31.071] [Client] Received collider mesh: 13869 floats (1541 triangles)
-[2025-10-06 15:24:31.080] [Game] Registered physics collider: chunk (1,0,5), 1541 triangles, 13869 floats
-[2025-10-06 15:24:31.154] [MarchingCubes] Sample vertex 0: (162.00, 33.89, 32.00)
-[2025-10-06 15:24:31.154] [MarchingCubes] Sample vertex 1: (160.00, 33.88, 32.00)
-[2025-10-06 15:24:31.154] [MarchingCubes] Sample vertex 2: (162.00, 33.89, 34.00)
-[2025-10-06 15:24:31.155] [Client] Received collider mesh: 10521 floats (1169 triangles)
-[2025-10-06 15:24:31.161] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.162] [Game] Registered physics collider: chunk (5,0,1), 1169 triangles, 10521 floats
-[2025-10-06 15:24:31.162] [Game] Skipping physics registration for chunk (4,1,3) - empty mesh
-[2025-10-06 15:24:31.246] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.252] [Game] Skipping physics registration for chunk (4,-1,3) - empty mesh
-[2025-10-06 15:24:31.254] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.317] [Game] Skipping physics registration for chunk (3,1,4) - empty mesh
-[2025-10-06 15:24:31.333] [MarchingCubes] Sample vertex 0: (-32.00, -12.52, 134.00)
-[2025-10-06 15:24:31.333] [MarchingCubes] Sample vertex 1: (-30.00, -12.00, 133.16)
-[2025-10-06 15:24:31.333] [MarchingCubes] Sample vertex 2: (-30.00, -12.35, 134.00)
-[2025-10-06 15:24:31.334] [Client] Received collider mesh: 4968 floats (552 triangles)
-[2025-10-06 15:24:31.338] [Game] Registered physics collider: chunk (-1,-1,4), 552 triangles, 4968 floats
-[2025-10-06 15:24:31.341] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.400] [Game] Skipping physics registration for chunk (-1,1,4) - empty mesh
-[2025-10-06 15:24:31.431] [MarchingCubes] Sample vertex 0: (96.00, -54.00, 128.85)
-[2025-10-06 15:24:31.432] [MarchingCubes] Sample vertex 1: (96.43, -54.00, 130.00)
-[2025-10-06 15:24:31.432] [MarchingCubes] Sample vertex 2: (96.00, -54.58, 130.00)
-[2025-10-06 15:24:31.432] [Client] Received collider mesh: 20709 floats (2301 triangles)
-[2025-10-06 15:24:31.439] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.443] [Game] Registered physics collider: chunk (3,-1,4), 2301 triangles, 20709 floats
-[2025-10-06 15:24:31.443] [Game] Skipping physics registration for chunk (1,1,5) - empty mesh
-[2025-10-06 15:24:31.530] [MarchingCubes] Sample vertex 0: (34.00, -78.03, 160.00)
-[2025-10-06 15:24:31.530] [MarchingCubes] Sample vertex 1: (34.00, -78.01, 162.00)
-[2025-10-06 15:24:31.530] [MarchingCubes] Sample vertex 2: (32.00, -78.02, 160.00)
-[2025-10-06 15:24:31.532] [Client] Received collider mesh: 16911 floats (1879 triangles)
-[2025-10-06 15:24:31.535] [Game] Registered physics collider: chunk (1,-1,5), 1879 triangles, 16911 floats
-[2025-10-06 15:24:31.616] [MarchingCubes] Sample vertex 0: (160.00, -36.00, 33.80)
-[2025-10-06 15:24:31.617] [MarchingCubes] Sample vertex 1: (160.15, -36.00, 34.00)
-[2025-10-06 15:24:31.617] [MarchingCubes] Sample vertex 2: (160.00, -36.25, 34.00)
-[2025-10-06 15:24:31.618] [Client] Received collider mesh: 6786 floats (754 triangles)
-[2025-10-06 15:24:31.621] [Game] Registered physics collider: chunk (5,-1,1), 754 triangles, 6786 floats
-[2025-10-06 15:24:31.625] [Client] Empty collider mesh received
-[2025-10-06 15:24:31.631] [Game] Skipping physics registration for chunk (5,1,1) - empty mesh
+﻿[2025-10-06 18:50:04.427] [Logging] Started logging to 'physics_debug.log' (overwritten).
+[2025-10-06 18:50:04.447] [Game] PhysicsManager initialized
+[2025-10-06 18:50:04.458] [PSX Effects] Shaders compiled successfully
+[2025-10-06 18:50:04.469] [Player] Manual collision system initialized at (16, 50, 16)
+[2025-10-06 18:50:04.469] [Game] Player initialized with physics
+[2025-10-06 18:50:04.474] [Game] Found atlas at: textures/atlas.png
+[2025-10-06 18:50:04.588] [AtlasManager] Loaded image: textures/atlas.png (256x256)
+[2025-10-06 18:50:04.589] [AtlasManager] Using preferred tile size: 64
+[2025-10-06 18:50:04.589] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
+[2025-10-06 18:50:04.595] [AtlasManager] Successfully uploaded to GL texture 1
+[2025-10-06 18:50:04.595] [AtlasManager] Verified texture dimensions: 256x256
+[2025-10-06 18:50:04.599] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
+[2025-10-06 18:50:04.599] [Game] AtlasManager loaded: 256x256, tileSize=64, texture ID=1
+[2025-10-06 18:50:04.599] [Game] Texture verified: 256x256, format=6408
+[2025-10-06 18:50:04.600] [Game] Loaded 0 chunks
+[2025-10-06 18:50:04.600] [Game] Physics colliders registered with renderer
+[2025-10-06 18:50:04.726] [Player] Pos: (16.0, 49.8, 16.0), Vel: (0.0, -2.4, 0.0), Grounded: False
+[2025-10-06 18:50:04.804] [Player] Pos: (16.0, 49.6, 16.0), Vel: (0.0, -4.0, 0.0), Grounded: False
+[2025-10-06 18:50:04.887] [Player] Pos: (16.0, 49.2, 16.0), Vel: (0.0, -5.7, 0.0), Grounded: False
+[2025-10-06 18:50:04.962] [Player] Pos: (16.0, 48.7, 16.0), Vel: (0.0, -7.2, 0.0), Grounded: False
+[2025-10-06 18:50:04.972] [Client] Chunk update loop starting...
+[2025-10-06 18:50:05.046] [Player] Pos: (16.0, 48.0, 16.0), Vel: (0.0, -8.8, 0.0), Grounded: False
+[2025-10-06 18:50:05.106] [Client] Requesting chunk (0,0,0)
+[2025-10-06 18:50:05.110] [Player] Pos: (16.0, 47.4, 16.0), Vel: (0.0, -10.2, 0.0), Grounded: False
+[2025-10-06 18:50:05.120] [Client] Received chunk (0,0,0): 29274 floats
+[2025-10-06 18:50:05.126] [Client] Requesting chunk (1,0,0)
+[2025-10-06 18:50:05.133] [Client] Requesting chunk (0,0,1)
+[2025-10-06 18:50:05.133] [Client] Received chunk (1,0,0): 23919 floats
+[2025-10-06 18:50:05.134] [Client] Received chunk (0,0,1): 25431 floats
+[2025-10-06 18:50:05.135] [Client] Requesting chunk (0,0,-1)
+[2025-10-06 18:50:05.136] [Client] Received chunk (0,0,-1): 23415 floats
+[2025-10-06 18:50:05.136] [Client] Requesting chunk (-1,0,0)
+[2025-10-06 18:50:05.136] [Client] Requesting chunk (1,0,1)
+[2025-10-06 18:50:05.137] [Renderer] Chunk (0,0,0)
+[2025-10-06 18:50:05.137] [Client] Requesting chunk (1,0,-1)
+[2025-10-06 18:50:05.137] [Client] Received chunk (-1,0,0): 30996 floats
+[2025-10-06 18:50:05.137] [Client] Requesting chunk (-1,0,1)
+[2025-10-06 18:50:05.137] [Client] Requesting chunk (-1,0,-1)
+[2025-10-06 18:50:05.138] [Client] Received chunk (1,0,1): 25977 floats
+[2025-10-06 18:50:05.138] [Client] Requesting chunk (0,-1,0)
+[2025-10-06 18:50:05.138] [Client] Received chunk (1,0,-1): 23583 floats
+[2025-10-06 18:50:05.138] [Client] Requesting chunk (1,-1,0)
+[2025-10-06 18:50:05.139] [Client] Received chunk (-1,0,1): 31017 floats
+[2025-10-06 18:50:05.139] [Client] Requesting chunk (0,-1,1)
+[2025-10-06 18:50:05.139] [Client] Received chunk (-1,0,-1): 23478 floats
+[2025-10-06 18:50:05.141] [Client] Requesting chunk (-1,-1,0)
+[2025-10-06 18:50:05.142] [Client] Received chunk (0,-1,0): 76398 floats
+[2025-10-06 18:50:05.142] [Client] Requesting chunk (0,-1,-1)
+[2025-10-06 18:50:05.142] [Renderer]   Expected world range: (0-32, 0-96, 0-32)
+[2025-10-06 18:50:05.143] [Client] Received chunk (1,-1,0): 83370 floats
+[2025-10-06 18:50:05.144] [Client] Requesting chunk (-1,-1,1)
+[2025-10-06 18:50:05.144] [Renderer]   First vertex at: (2.0, 1.7, -0.0)
+[2025-10-06 18:50:05.144] [Renderer]   Vertex in expected range: False
+[2025-10-06 18:50:05.144] [Renderer] Chunk (0,0,0) BEFORE conversion:
+[2025-10-06 18:50:05.145]   Length: 29274, vertices: 4182
+[2025-10-06 18:50:05.145]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
+[2025-10-06 18:50:05.145] [Client] Received chunk (0,-1,1): 30387 floats
+[2025-10-06 18:50:05.145] [Client] Requesting chunk (-1,-1,-1)
+[2025-10-06 18:50:05.146] [Client] Received chunk (-1,-1,0): 70980 floats
+[2025-10-06 18:50:05.147] [Client] Requesting chunk (1,-1,-1)
+[2025-10-06 18:50:05.148] [Client] Received chunk (0,-1,-1): 37002 floats
+[2025-10-06 18:50:05.148] [Client] Requesting chunk (1,-1,1)
+[2025-10-06 18:50:05.150] [Client] Received chunk (-1,-1,1): 40698 floats
+[2025-10-06 18:50:05.150] [Client] Requesting chunk (-2,0,0)
+[2025-10-06 18:50:05.150] [Client] Received chunk (-1,-1,-1): 62622 floats
+[2025-10-06 18:50:05.150] [Client] Requesting chunk (0,1,0)
+[2025-10-06 18:50:05.151] [Client] Received chunk (1,-1,-1): 14532 floats
+[2025-10-06 18:50:05.151] [Client] Requesting chunk (0,0,2)
+[2025-10-06 18:50:05.151] [Client] Received chunk (1,-1,1): 82488 floats
+[2025-10-06 18:50:05.151] [Client] Requesting chunk (2,0,0)
+[2025-10-06 18:50:05.152] [Client] Received chunk (-2,0,0): 34545 floats
+[2025-10-06 18:50:05.152] [Client] Requesting chunk (0,0,-2)
+[2025-10-06 18:50:05.152] [Client] Received chunk (0,1,0): 0 floats
+[2025-10-06 18:50:05.153] [Client] Received chunk (0,0,2): 28707 floats
+[2025-10-06 18:50:05.153] [Client] Requesting chunk (1,0,-2)
+[2025-10-06 18:50:05.153] [Client] Requesting chunk (2,0,1)
+[2025-10-06 18:50:05.154] [Client] Received chunk (2,0,0): 28728 floats
+[2025-10-06 18:50:05.154] [Client] Requesting chunk (-1,1,0)
+[2025-10-06 18:50:05.154] [Client] Received chunk (0,0,-2): 28686 floats
+[2025-10-06 18:50:05.154] [Client] Requesting chunk (0,1,1)
+[2025-10-06 18:50:05.154] [Client] Received chunk (1,0,-2): 23142 floats
+[2025-10-06 18:50:05.154] [Client] Requesting chunk (2,0,-1)
+[2025-10-06 18:50:05.155] [Client] Received chunk (2,0,1): 32403 floats
+[2025-10-06 18:50:05.155] [Client] Requesting chunk (0,1,-1)
+[2025-10-06 18:50:05.155] [Client] Received chunk (-1,1,0): 0 floats
+[2025-10-06 18:50:05.155] [Client] Requesting chunk (-1,0,2)
+[2025-10-06 18:50:05.155] [Client] Received chunk (0,1,1): 0 floats
+[2025-10-06 18:50:05.155] [Client] Requesting chunk (-2,0,1)
+[2025-10-06 18:50:05.155] [Client] Received chunk (2,0,-1): 23499 floats
+[2025-10-06 18:50:05.155] [Client] Requesting chunk (-1,0,-2)
+[2025-10-06 18:50:05.156] [Client] Received chunk (0,1,-1): 0 floats
+[2025-10-06 18:50:05.156] [Client] Received chunk (-1,0,2): 32529 floats
+[2025-10-06 18:50:05.156] [Client] Received chunk (-2,0,1): 26733 floats
+[2025-10-06 18:50:05.157] [Client] Received chunk (-1,0,-2): 22449 floats
+[2025-10-06 18:50:05.158] [Renderer] Chunk (0,0,0) AFTER conversion:
+[2025-10-06 18:50:05.158]   Length: 33456, vertices: 4182
+[2025-10-06 18:50:05.158]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0635,0.2480)
+[2025-10-06 18:50:05.164] [Renderer] Uploaded chunk (0,0,0): VAO=1, VBO=1, 4182 vertices
+[2025-10-06 18:50:05.164] [Renderer] Chunk (1,0,0)
+[2025-10-06 18:50:05.164] [Renderer]   Expected world range: (32-64, 0-96, 0-32)
+[2025-10-06 18:50:05.164] [Renderer]   First vertex at: (34.0, 1.7, -0.0)
+[2025-10-06 18:50:05.164] [Renderer]   Vertex in expected range: False
+[2025-10-06 18:50:05.164] [Renderer] Chunk (1,0,0) BEFORE conversion:
+[2025-10-06 18:50:05.164]   Length: 23919, vertices: 3417
+[2025-10-06 18:50:05.164]   First vertex: pos=(34.00,1.72,-0.00), normal=(-0.04,-1.00,-0.02), blockType=1
+[2025-10-06 18:50:05.166] [Renderer] Chunk (1,0,0) AFTER conversion:
+[2025-10-06 18:50:05.166]   Length: 27336, vertices: 3417
+[2025-10-06 18:50:05.166]   First vertex: pos=(34.00,1.72,-0.00), normal=(-0.04,-1.00,-0.02), uv=(0.0635,0.2480)
+[2025-10-06 18:50:05.166] [Renderer] Uploaded chunk (1,0,0): VAO=2, VBO=2, 3417 vertices
+[2025-10-06 18:50:05.166] [Renderer] Chunk (0,0,1)
+[2025-10-06 18:50:05.166] [Renderer]   Expected world range: (0-32, 0-96, 32-64)
+[2025-10-06 18:50:05.166] [Renderer]   First vertex at: (2.0, 1.5, 32.0)
+[2025-10-06 18:50:05.166] [Renderer]   Vertex in expected range: False
+[2025-10-06 18:50:05.166] [Renderer] Chunk (0,0,1) BEFORE conversion:
+[2025-10-06 18:50:05.166]   Length: 25431, vertices: 3633
+[2025-10-06 18:50:05.166]   First vertex: pos=(2.00,1.51,32.00), normal=(-0.09,-1.00,-0.02), blockType=1
+[2025-10-06 18:50:05.168] [Renderer] Chunk (0,0,1) AFTER conversion:
+[2025-10-06 18:50:05.168]   Length: 29064, vertices: 3633
+[2025-10-06 18:50:05.168]   First vertex: pos=(2.00,1.51,32.00), normal=(-0.09,-1.00,-0.02), uv=(0.0635,0.2480)
+[2025-10-06 18:50:05.206] [Client] Requesting chunk (-2,0,-1)
+[2025-10-06 18:50:05.206] [Client] Requesting chunk (1,0,2)
+[2025-10-06 18:50:05.206] [Client] Requesting chunk (1,1,0)
+[2025-10-06 18:50:05.206] [Client] Requesting chunk (-1,1,-1)
+[2025-10-06 18:50:05.207] [Client] Received chunk (-2,0,-1): 31458 floats
+[2025-10-06 18:50:05.207] [Client] Requesting chunk (-1,1,1)
+[2025-10-06 18:50:05.207] [Client] Received chunk (1,0,2): 25473 floats
+[2025-10-06 18:50:05.207] [Client] Requesting chunk (1,1,-1)
+[2025-10-06 18:50:05.207] [Client] Received chunk (1,1,0): 0 floats
+[2025-10-06 18:50:05.207] [Client] Requesting chunk (1,1,1)
+[2025-10-06 18:50:05.208] [Client] Received chunk (-1,1,-1): 0 floats
+[2025-10-06 18:50:05.208] [Client] Requesting chunk (0,-1,2)
+[2025-10-06 18:50:05.208] [Client] Received chunk (-1,1,1): 0 floats
+[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,1,0)
+[2025-10-06 18:50:05.208] [Client] Received chunk (1,1,-1): 0 floats
+[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,-1,0)
+[2025-10-06 18:50:05.208] [Client] Received chunk (1,1,1): 0 floats
+[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,0,-2)
+[2025-10-06 18:50:05.208] [Client] Received chunk (0,-1,2): 0 floats
+[2025-10-06 18:50:05.208] [Client] Requesting chunk (0,-1,-2)
+[2025-10-06 18:50:05.209] [Client] Received chunk (-2,1,0): 0 floats
+[2025-10-06 18:50:05.209] [Client] Requesting chunk (0,1,-2)
+[2025-10-06 18:50:05.210] [Client] Received chunk (-2,-1,0): 53676 floats
+[2025-10-06 18:50:05.210] [Client] Requesting chunk (0,1,2)
+[2025-10-06 18:50:05.211] [Client] Received chunk (-2,0,-2): 23331 floats
+[2025-10-06 18:50:05.211] [Client] Requesting chunk (-2,0,2)
+[2025-10-06 18:50:05.212] [Client] Received chunk (0,-1,-2): 31080 floats
+[2025-10-06 18:50:05.212] [Client] Requesting chunk (2,0,2)
+[2025-10-06 18:50:05.213] [Client] Received chunk (0,1,-2): 0 floats
+[2025-10-06 18:50:05.213] [Client] Requesting chunk (2,0,-2)
+[2025-10-06 18:50:05.213] [Client] Received chunk (0,1,2): 0 floats
+[2025-10-06 18:50:05.213] [Client] Requesting chunk (2,-1,0)
+[2025-10-06 18:50:05.216] [Client] Received chunk (-2,0,2): 16380 floats
+[2025-10-06 18:50:05.216] [Client] Requesting chunk (2,1,0)
+[2025-10-06 18:50:05.216] [Client] Received chunk (2,0,2): 31269 floats
+[2025-10-06 18:50:05.217] [Client] Requesting chunk (1,1,2)
+[2025-10-06 18:50:05.217] [Client] Received chunk (2,0,-2): 23730 floats
+[2025-10-06 18:50:05.217] [Client] Requesting chunk (-1,1,-2)
+[2025-10-06 18:50:05.218] [Client] Received chunk (2,-1,0): 15666 floats
+[2025-10-06 18:50:05.219] [Client] Received chunk (-1,1,-2): 0 floats
+[2025-10-06 18:50:05.219] [Client] Requesting chunk (3,0,0)
+[2025-10-06 18:50:05.219] [Client] Received chunk (1,1,2): 0 floats
+[2025-10-06 18:50:05.219] [Client] Received chunk (2,1,0): 0 floats
+[2025-10-06 18:50:05.220] [Client] Received chunk (3,0,0): 26859 floats
+[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,1,1)
+[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,-1,1)
+[2025-10-06 18:50:05.220] [Client] Requesting chunk (-1,1,2)
+[2025-10-06 18:50:05.220] [Client] Requesting chunk (1,-1,2)
+[2025-10-06 18:50:05.220] [Client] Received chunk (2,1,1): 0 floats
+[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,1,-1)
+[2025-10-06 18:50:05.222] [Client] Received chunk (2,-1,1): 97776 floats
+[2025-10-06 18:50:05.222] [Client] Requesting chunk (2,-1,-1)
+[2025-10-06 18:50:05.222] [Client] Received chunk (-1,1,2): 0 floats
+[2025-10-06 18:50:05.222] [Client] Requesting chunk (0,0,3)
+[2025-10-06 18:50:05.222] [Client] Received chunk (1,-1,2): 19089 floats
+[2025-10-06 18:50:05.222] [Client] Requesting chunk (1,-1,-2)
+[2025-10-06 18:50:05.222] [Client] Received chunk (2,1,-1): 0 floats
+[2025-10-06 18:50:05.222] [Client] Requesting chunk (-1,-1,-2)
+[2025-10-06 18:50:05.222] [Client] Received chunk (2,-1,-1): 0 floats
+[2025-10-06 18:50:05.223] [Client] Requesting chunk (-1,-1,2)
+[2025-10-06 18:50:05.223] [Client] Received chunk (1,-1,-2): 3150 floats
+[2025-10-06 18:50:05.223] [Client] Received chunk (0,0,3): 32361 floats
+[2025-10-06 18:50:05.223] [Client] Received chunk (-1,-1,-2): 55650 floats
+[2025-10-06 18:50:05.224] [Client] Received chunk (-1,-1,2): 1890 floats
+[2025-10-06 18:50:05.305] [Client] Requesting chunk (1,1,-2)
+[2025-10-06 18:50:05.305] [Client] Requesting chunk (-2,1,1)
+[2025-10-06 18:50:05.305] [Client] Requesting chunk (-2,-1,1)
+[2025-10-06 18:50:05.306] [Client] Requesting chunk (-2,1,-1)
+[2025-10-06 18:50:05.306] [Client] Received chunk (1,1,-2): 0 floats
+[2025-10-06 18:50:05.306] [Client] Requesting chunk (-2,-1,-1)
+[2025-10-06 18:50:05.306] [Client] Received chunk (-2,1,1): 0 floats
+[2025-10-06 18:50:05.307] [Client] Requesting chunk (0,0,-3)
+[2025-10-06 18:50:05.307] [Client] Received chunk (-2,-1,1): 59325 floats
+[2025-10-06 18:50:05.307] [Client] Requesting chunk (-3,0,0)
+[2025-10-06 18:50:05.308] [Client] Received chunk (-2,1,-1): 0 floats
+[2025-10-06 18:50:05.308] [Client] Requesting chunk (1,0,-3)
+[2025-10-06 18:50:05.308] [Client] Received chunk (-2,-1,-1): 3654 floats
+[2025-10-06 18:50:05.309] [Client] Requesting chunk (-1,0,3)
+[2025-10-06 18:50:05.310] [Client] Received chunk (0,0,-3): 30513 floats
+[2025-10-06 18:50:05.310] [Client] Requesting chunk (1,0,3)
+[2025-10-06 18:50:05.311] [Client] Received chunk (-3,0,0): 28497 floats
+[2025-10-06 18:50:05.311] [Client] Requesting chunk (-3,0,1)
+[2025-10-06 18:50:05.311] [Client] Received chunk (1,0,-3): 24171 floats
+[2025-10-06 18:50:05.311] [Client] Requesting chunk (3,0,1)
+[2025-10-06 18:50:05.312] [Client] Received chunk (-1,0,3): 34377 floats
+[2025-10-06 18:50:05.312] [Client] Requesting chunk (-1,0,-3)
+[2025-10-06 18:50:05.312] [Client] Received chunk (1,0,3): 28392 floats
+[2025-10-06 18:50:05.313] [Client] Requesting chunk (-3,0,-1)
+[2025-10-06 18:50:05.313] [Client] Received chunk (-3,0,1): 22785 floats
+[2025-10-06 18:50:05.314] [Client] Requesting chunk (3,0,-1)
+[2025-10-06 18:50:05.314] [Client] Received chunk (3,0,1): 25725 floats
+[2025-10-06 18:50:05.314] [Client] Requesting chunk (-2,1,2)
+[2025-10-06 18:50:05.314] [Client] Received chunk (-1,0,-3): 22470 floats
+[2025-10-06 18:50:05.314] [Client] Requesting chunk (-2,-1,2)
+[2025-10-06 18:50:05.315] [Client] Received chunk (-3,0,-1): 30429 floats
+[2025-10-06 18:50:05.315] [Client] Requesting chunk (-2,1,-2)
+[2025-10-06 18:50:05.316] [Client] Received chunk (3,0,-1): 25368 floats
+[2025-10-06 18:50:05.316] [Client] Requesting chunk (2,-1,-2)
+[2025-10-06 18:50:05.316] [Client] Received chunk (-2,1,2): 0 floats
+[2025-10-06 18:50:05.316] [Client] Requesting chunk (-2,-1,-2)
+[2025-10-06 18:50:05.316] [Client] Received chunk (-2,-1,2): 34167 floats
+[2025-10-06 18:50:05.316] [Client] Requesting chunk (2,1,2)
+[2025-10-06 18:50:05.316] [Client] Received chunk (-2,1,-2): 0 floats
+[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,-1,2)
+[2025-10-06 18:50:05.317] [Client] Received chunk (2,-1,-2): 0 floats
+[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,1,-2)
+[2025-10-06 18:50:05.317] [Client] Received chunk (-2,-1,-2): 0 floats
+[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,0,3)
+[2025-10-06 18:50:05.317] [Client] Received chunk (2,1,2): 0 floats
+[2025-10-06 18:50:05.317] [Client] Requesting chunk (0,-1,3)
+[2025-10-06 18:50:05.318] [Client] Received chunk (2,-1,2): 77700 floats
+[2025-10-06 18:50:05.318] [Client] Requesting chunk (0,1,3)
+[2025-10-06 18:50:05.318] [Client] Received chunk (2,1,-2): 0 floats
+[2025-10-06 18:50:05.318] [Client] Requesting chunk (3,0,-2)
+[2025-10-06 18:50:05.319] [Client] Received chunk (2,0,3): 33453 floats
+[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,-1,0)
+[2025-10-06 18:50:05.319] [Client] Received chunk (0,-1,3): 0 floats
+[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,1,0)
+[2025-10-06 18:50:05.319] [Client] Received chunk (0,1,3): 0 floats
+[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,0,2)
+[2025-10-06 18:50:05.319] [Client] Received chunk (3,0,-2): 28308 floats
+[2025-10-06 18:50:05.319] [Client] Requesting chunk (0,1,-3)
+[2025-10-06 18:50:05.320] [Client] Received chunk (3,-1,0): 9597 floats
+[2025-10-06 18:50:05.320] [Client] Requesting chunk (2,0,-3)
+[2025-10-06 18:50:05.320] [Client] Received chunk (3,1,0): 0 floats
+[2025-10-06 18:50:05.321] [Client] Received chunk (3,0,2): 20874 floats
+[2025-10-06 18:50:05.322] [Client] Received chunk (0,1,-3): 0 floats
+[2025-10-06 18:50:05.322] [Client] Received chunk (2,0,-3): 29883 floats
+[2025-10-06 18:50:05.402] [Client] Requesting chunk (-3,-1,0)
+[2025-10-06 18:50:05.402] [Client] Requesting chunk (-3,0,2)
+[2025-10-06 18:50:05.403] [Client] Requesting chunk (0,-1,-3)
+[2025-10-06 18:50:05.403] [Client] Requesting chunk (-3,1,0)
+[2025-10-06 18:50:05.403] [Client] Received chunk (-3,-1,0): 2898 floats
+[2025-10-06 18:50:05.403] [Client] Requesting chunk (-2,0,-3)
+[2025-10-06 18:50:05.403] [Client] Received chunk (-3,0,2): 20223 floats
+[2025-10-06 18:50:05.404] [Client] Requesting chunk (-2,0,3)
+[2025-10-06 18:50:05.404] [Client] Received chunk (0,-1,-3): 0 floats
+[2025-10-06 18:50:05.404] [Client] Requesting chunk (-3,0,-2)
+[2025-10-06 18:50:05.404] [Client] Received chunk (-3,1,0): 0 floats
+[2025-10-06 18:50:05.404] [Client] Requesting chunk (1,-1,-3)
+[2025-10-06 18:50:05.404] [Client] Received chunk (-2,0,-3): 24675 floats
+[2025-10-06 18:50:05.404] [Client] Requesting chunk (3,1,1)
+[2025-10-06 18:50:05.405] [Client] Received chunk (-2,0,3): 31332 floats
+[2025-10-06 18:50:05.405] [Client] Requesting chunk (1,-1,3)
+[2025-10-06 18:50:05.406] [Client] Received chunk (-3,0,-2): 22596 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (1,1,3)
+[2025-10-06 18:50:05.406] [Client] Received chunk (1,-1,-3): 0 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,1,3)
+[2025-10-06 18:50:05.406] [Client] Received chunk (3,1,1): 0 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,-1,3)
+[2025-10-06 18:50:05.406] [Client] Received chunk (1,-1,3): 10101 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (3,-1,-1)
+[2025-10-06 18:50:05.406] [Client] Received chunk (1,1,3): 0 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (3,1,-1)
+[2025-10-06 18:50:05.406] [Client] Received chunk (-1,1,3): 0 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,-1,-3)
+[2025-10-06 18:50:05.406] [Client] Received chunk (-1,-1,3): 0 floats
+[2025-10-06 18:50:05.406] [Client] Requesting chunk (1,1,-3)
+[2025-10-06 18:50:05.407] [Client] Received chunk (3,-1,-1): 0 floats
+[2025-10-06 18:50:05.407] [Client] Requesting chunk (-1,1,-3)
+[2025-10-06 18:50:05.407] [Client] Received chunk (3,1,-1): 0 floats
+[2025-10-06 18:50:05.407] [Client] Requesting chunk (3,-1,1)
+[2025-10-06 18:50:05.407] [Client] Received chunk (-1,-1,-3): 0 floats
+[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,1,-1)
+[2025-10-06 18:50:05.407] [Client] Received chunk (1,1,-3): 0 floats
+[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,1,1)
+[2025-10-06 18:50:05.407] [Client] Received chunk (-1,1,-3): 0 floats
+[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,-1,1)
+[2025-10-06 18:50:05.408] [Client] Received chunk (3,-1,1): 61992 floats
+[2025-10-06 18:50:05.408] [Client] Requesting chunk (-3,-1,-1)
+[2025-10-06 18:50:05.408] [Client] Received chunk (-3,1,-1): 0 floats
+[2025-10-06 18:50:05.408] [Client] Requesting chunk (-4,0,0)
+[2025-10-06 18:50:05.408] [Client] Received chunk (-3,1,1): 0 floats
+[2025-10-06 18:50:05.408] [Client] Requesting chunk (4,0,0)
+[2025-10-06 18:50:05.409] [Client] Received chunk (-3,-1,1): 70938 floats
+[2025-10-06 18:50:05.410] [Client] Requesting chunk (0,0,-4)
+[2025-10-06 18:50:05.410] [Client] Received chunk (-3,-1,-1): 0 floats
+[2025-10-06 18:50:05.410] [Client] Requesting chunk (0,0,4)
+[2025-10-06 18:50:05.411] [Client] Received chunk (-4,0,0): 24864 floats
+[2025-10-06 18:50:05.411] [Client] Requesting chunk (3,1,-2)
+[2025-10-06 18:50:05.412] [Client] Received chunk (4,0,0): 30954 floats
+[2025-10-06 18:50:05.412] [Client] Requesting chunk (3,-1,-2)
+[2025-10-06 18:50:05.415] [Client] Received chunk (0,0,-4): 25263 floats
+[2025-10-06 18:50:05.415] [Client] Requesting chunk (2,1,3)
+[2025-10-06 18:50:05.416] [Client] Received chunk (0,0,4): 26859 floats
+[2025-10-06 18:50:05.416] [Client] Requesting chunk (2,-1,3)
+[2025-10-06 18:50:05.416] [Client] Received chunk (3,1,-2): 0 floats
+[2025-10-06 18:50:05.416] [Client] Requesting chunk (2,1,-3)
+[2025-10-06 18:50:05.416] [Client] Received chunk (3,-1,-2): 0 floats
+[2025-10-06 18:50:05.416] [Client] Received chunk (2,1,3): 0 floats
+[2025-10-06 18:50:05.417] [Client] Received chunk (2,-1,3): 66150 floats
+[2025-10-06 18:50:05.417] [Client] Received chunk (2,1,-3): 0 floats
+[2025-10-06 18:50:05.510] [Client] Requesting chunk (-2,1,3)
+[2025-10-06 18:50:05.511] [Client] Requesting chunk (3,1,2)
+[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,-1,-2)
+[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,1,-2)
+[2025-10-06 18:50:05.511] [Client] Received chunk (-2,1,3): 0 floats
+[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,-1,2)
+[2025-10-06 18:50:05.512] [Client] Received chunk (3,1,2): 0 floats
+[2025-10-06 18:50:05.512] [Client] Requesting chunk (-3,1,2)
+[2025-10-06 18:50:05.512] [Client] Received chunk (-3,-1,-2): 0 floats
+[2025-10-06 18:50:05.513] [Client] Requesting chunk (-2,-1,-3)
+[2025-10-06 18:50:05.513] [Client] Received chunk (-3,1,-2): 0 floats
+[2025-10-06 18:50:05.514] [Client] Requesting chunk (-2,1,-3)
+[2025-10-06 18:50:05.514] [Client] Received chunk (-3,-1,2): 31395 floats
+[2025-10-06 18:50:05.514] [Client] Requesting chunk (-2,-1,3)
+[2025-10-06 18:50:05.514] [Client] Received chunk (-3,1,2): 0 floats
+[2025-10-06 18:50:05.514] [Client] Requesting chunk (3,-1,2)
+[2025-10-06 18:50:05.514] [Client] Received chunk (-2,-1,-3): 0 floats
+[2025-10-06 18:50:05.515] [Client] Requesting chunk (2,-1,-3)
+[2025-10-06 18:50:05.515] [Client] Received chunk (-2,1,-3): 0 floats
+[2025-10-06 18:50:05.515] [Client] Requesting chunk (0,1,4)
+[2025-10-06 18:50:05.515] [Client] Received chunk (-2,-1,3): 29400 floats
+[2025-10-06 18:50:05.516] [Client] Requesting chunk (-4,-1,0)
+[2025-10-06 18:50:05.516] [Client] Received chunk (3,-1,2): 37275 floats
+[2025-10-06 18:50:05.516] [Client] Requesting chunk (0,1,-4)
+[2025-10-06 18:50:05.517] [Client] Received chunk (2,-1,-3): 0 floats
+[2025-10-06 18:50:05.517] [Client] Requesting chunk (0,-1,-4)
+[2025-10-06 18:50:05.517] [Client] Received chunk (0,1,4): 0 floats
+[2025-10-06 18:50:05.518] [Client] Requesting chunk (4,-1,0)
+[2025-10-06 18:50:05.518] [Client] Received chunk (-4,-1,0): 12684 floats
+[2025-10-06 18:50:05.518] [Client] Requesting chunk (-4,1,0)
+[2025-10-06 18:50:05.518] [Client] Received chunk (0,1,-4): 0 floats
+[2025-10-06 18:50:05.518] [Client] Requesting chunk (0,-1,4)
+[2025-10-06 18:50:05.518] [Client] Received chunk (0,-1,-4): 0 floats
+[2025-10-06 18:50:05.518] [Client] Requesting chunk (4,1,0)
+[2025-10-06 18:50:05.518] [Client] Received chunk (4,-1,0): 54411 floats
+[2025-10-06 18:50:05.518] [Client] Received chunk (-4,1,0): 0 floats
+[2025-10-06 18:50:05.519] [Client] Received chunk (0,-1,4): 13167 floats
+[2025-10-06 18:50:05.519] [Client] Received chunk (4,1,0): 0 floats
+[2025-10-06 18:50:05.539] [Player] Pos: (16.0, 41.1, 16.0), Vel: (0.0, -18.7, 0.0), Grounded: False
+[2025-10-06 18:50:05.795] [Player] Pos: (16.0, 36.1, 16.0), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:06.174] [Player] Pos: (16.0, 36.1, 16.0), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:06.545] [Player] Pos: (15.0, 36.1, 15.3), Vel: (-6.6, 0.0, -4.6), Grounded: True
+[2025-10-06 18:50:06.888] [Player] Pos: (14.1, 36.1, 14.7), Vel: (-0.8, 0.0, -0.1), Grounded: False
+[2025-10-06 18:50:07.226] [Player] Pos: (13.6, 36.4, 15.2), Vel: (-3.9, 0.0, 1.5), Grounded: True
+[2025-10-06 18:50:07.567] [Player] Pos: (12.7, 37.4, 15.5), Vel: (-7.9, -0.2, 1.4), Grounded: False
+[2025-10-06 18:50:07.905] [Player] Pos: (11.9, 38.1, 15.8), Vel: (-4.6, -0.3, 6.6), Grounded: False
+[2025-10-06 18:50:08.253] [Player] Pos: (11.1, 38.1, 16.9), Vel: (-4.6, 0.0, 6.6), Grounded: True
+[2025-10-06 18:50:08.618] [Player] Pos: (10.4, 38.1, 18.0), Vel: (-4.6, 0.0, 6.6), Grounded: True
+[2025-10-06 18:50:08.985] [Player] Pos: (9.1, 38.1, 18.7), Vel: (-7.7, 0.0, 2.2), Grounded: True
+[2025-10-06 18:50:09.353] [Player] Pos: (7.8, 38.1, 19.0), Vel: (-7.9, 0.0, 1.5), Grounded: True
+[2025-10-06 18:50:09.709] [Player] Pos: (6.6, 38.1, 19.8), Vel: (-5.3, 0.0, 6.1), Grounded: True
+[2025-10-06 18:50:10.053] [Player] Pos: (6.1, 38.4, 20.7), Vel: (-0.2, 0.0, 0.3), Grounded: True
+[2025-10-06 18:50:10.390] [Player] Pos: (5.3, 38.4, 21.7), Vel: (-4.6, -0.3, 6.6), Grounded: False
+[2025-10-06 18:50:10.740] [Player] Pos: (4.7, 39.4, 22.8), Vel: (-4.6, 0.0, 6.6), Grounded: False
+[2025-10-06 18:50:11.082] [Player] Pos: (4.0, 40.1, 23.8), Vel: (-4.6, 0.0, 6.6), Grounded: False
+[2025-10-06 18:50:11.428] [Player] Pos: (3.4, 40.1, 24.8), Vel: (-3.1, 0.0, 4.4), Grounded: True
+[2025-10-06 18:50:11.790] [Player] Pos: (3.3, 40.1, 24.9), Vel: (-0.3, 0.0, 0.4), Grounded: True
+[2025-10-06 18:50:12.217] [Player] Pos: (3.3, 40.1, 24.9), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:12.641] [Player] Pos: (3.0, 40.4, 26.1), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:13.067] [Player] Pos: (2.6, 40.4, 27.7), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:13.498] [Player] Pos: (2.4, 41.4, 28.7), Vel: (-0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:13.907] [Player] Pos: (2.6, 42.1, 30.2), Vel: (0.2, 0.0, 8.4), Grounded: True
+[2025-10-06 18:50:14.325] [Player] Pos: (2.3, 42.4, 31.8), Vel: (-2.1, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:14.732] [Player] Pos: (2.3, 42.4, 32.0), Vel: (0.7, 0.0, 1.2), Grounded: False
+[2025-10-06 18:50:14.946] [Client] Requesting chunk (-1,0,4)
+[2025-10-06 18:50:14.946] [Client] Requesting chunk (1,0,4)
+[2025-10-06 18:50:14.946] [Client] Requesting chunk (2,0,4)
+[2025-10-06 18:50:14.946] [Client] Requesting chunk (-3,0,3)
+[2025-10-06 18:50:14.947] [Client] Received chunk (-1,0,4): 30345 floats
+[2025-10-06 18:50:14.947] [Client] Requesting chunk (3,0,3)
+[2025-10-06 18:50:14.947] [Client] Received chunk (1,0,4): 31374 floats
+[2025-10-06 18:50:14.947] [Client] Requesting chunk (-2,0,4)
+[2025-10-06 18:50:14.948] [Client] Received chunk (2,0,4): 35910 floats
+[2025-10-06 18:50:14.948] [Client] Requesting chunk (1,1,4)
+[2025-10-06 18:50:14.948] [Client] Received chunk (-3,0,3): 29547 floats
+[2025-10-06 18:50:14.948] [Client] Requesting chunk (1,-1,4)
+[2025-10-06 18:50:14.949] [Client] Received chunk (3,0,3): 31563 floats
+[2025-10-06 18:50:14.949] [Client] Requesting chunk (-1,-1,4)
+[2025-10-06 18:50:14.949] [Client] Received chunk (-2,0,4): 30954 floats
+[2025-10-06 18:50:14.949] [Client] Requesting chunk (-1,1,4)
+[2025-10-06 18:50:14.949] [Client] Received chunk (1,1,4): 0 floats
+[2025-10-06 18:50:14.949] [Client] Requesting chunk (4,0,1)
+[2025-10-06 18:50:14.950] [Client] Received chunk (1,-1,4): 61530 floats
+[2025-10-06 18:50:14.950] [Client] Requesting chunk (0,0,5)
+[2025-10-06 18:50:14.950] [Client] Received chunk (-1,-1,4): 11592 floats
+[2025-10-06 18:50:14.950] [Client] Requesting chunk (-4,0,1)
+[2025-10-06 18:50:14.950] [Client] Received chunk (-1,1,4): 0 floats
+[2025-10-06 18:50:14.951] [Client] Requesting chunk (3,1,3)
+[2025-10-06 18:50:14.951] [Client] Received chunk (4,0,1): 18207 floats
+[2025-10-06 18:50:14.951] [Client] Requesting chunk (-2,1,4)
+[2025-10-06 18:50:14.951] [Client] Received chunk (0,0,5): 41559 floats
+[2025-10-06 18:50:14.951] [Client] Requesting chunk (-2,-1,4)
+[2025-10-06 18:50:14.951] [Client] Received chunk (-4,0,1): 21588 floats
+[2025-10-06 18:50:14.951] [Client] Requesting chunk (-3,1,3)
+[2025-10-06 18:50:14.951] [Client] Received chunk (3,1,3): 0 floats
+[2025-10-06 18:50:14.951] [Client] Requesting chunk (-3,-1,3)
+[2025-10-06 18:50:14.951] [Client] Received chunk (-2,1,4): 0 floats
+[2025-10-06 18:50:14.952] [Client] Requesting chunk (2,-1,4)
+[2025-10-06 18:50:14.952] [Client] Received chunk (-2,-1,4): 42294 floats
+[2025-10-06 18:50:14.952] [Client] Requesting chunk (2,1,4)
+[2025-10-06 18:50:14.952] [Client] Received chunk (-3,1,3): 0 floats
+[2025-10-06 18:50:14.952] [Client] Requesting chunk (3,-1,3)
+[2025-10-06 18:50:14.952] [Client] Received chunk (-3,-1,3): 462 floats
+[2025-10-06 18:50:14.952] [Client] Requesting chunk (4,-1,1)
+[2025-10-06 18:50:14.953] [Client] Received chunk (2,-1,4): 70644 floats
+[2025-10-06 18:50:14.953] [Client] Requesting chunk (-4,-1,1)
+[2025-10-06 18:50:14.953] [Client] Received chunk (2,1,4): 0 floats
+[2025-10-06 18:50:14.953] [Client] Requesting chunk (0,-1,5)
+[2025-10-06 18:50:14.953] [Client] Received chunk (3,-1,3): 10983 floats
+[2025-10-06 18:50:14.953] [Client] Requesting chunk (-4,1,1)
+[2025-10-06 18:50:14.953] [Client] Received chunk (4,-1,1): 56931 floats
+[2025-10-06 18:50:14.954] [Client] Requesting chunk (0,1,5)
+[2025-10-06 18:50:14.954] [Client] Received chunk (-4,-1,1): 78813 floats
+[2025-10-06 18:50:14.955] [Client] Requesting chunk (4,1,1)
+[2025-10-06 18:50:14.955] [Client] Received chunk (0,-1,5): 28119 floats
+[2025-10-06 18:50:14.955] [Client] Received chunk (-4,1,1): 0 floats
+[2025-10-06 18:50:14.955] [Client] Received chunk (0,1,5): 0 floats
+[2025-10-06 18:50:14.955] [Client] Received chunk (4,1,1): 0 floats
+[2025-10-06 18:50:15.184] [Player] Pos: (2.4, 43.4, 33.0), Vel: (-0.4, 0.0, 1.5), Grounded: True
+[2025-10-06 18:50:15.633] [Player] Pos: (2.2, 43.8, 33.7), Vel: (-0.5, -0.0, 1.8), Grounded: False
+[2025-10-06 18:50:16.057] [Player] Pos: (2.2, 44.1, 35.1), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:16.484] [Player] Pos: (2.3, 45.1, 36.9), Vel: (-1.0, -0.3, 8.1), Grounded: False
+[2025-10-06 18:50:16.892] [Player] Pos: (2.2, 45.9, 37.7), Vel: (1.9, 0.0, 3.5), Grounded: False
+[2025-10-06 18:50:17.287] [Player] Pos: (2.4, 45.9, 38.0), Vel: (-0.1, 0.0, 0.4), Grounded: False
+[2025-10-06 18:50:17.689] [Player] Pos: (2.1, 46.1, 39.0), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:18.101] [Player] Pos: (1.7, 46.1, 40.5), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:18.516] [Player] Pos: (1.7, 46.1, 42.1), Vel: (2.9, 0.0, 7.6), Grounded: True
+[2025-10-06 18:50:18.921] [Player] Pos: (2.2, 46.1, 43.6), Vel: (0.2, 0.0, 8.4), Grounded: True
+[2025-10-06 18:50:19.324] [Player] Pos: (2.1, 46.4, 45.0), Vel: (-0.7, 0.0, 2.3), Grounded: False
+[2025-10-06 18:50:19.738] [Player] Pos: (1.7, 46.4, 46.3), Vel: (-2.2, 0.0, 7.7), Grounded: False
+[2025-10-06 18:50:20.164] [Player] Pos: (1.3, 46.6, 48.0), Vel: (-2.2, 0.0, 7.7), Grounded: False
+[2025-10-06 18:50:20.582] [Player] Pos: (1.0, 47.9, 49.2), Vel: (-2.2, 0.0, 7.7), Grounded: False
+[2025-10-06 18:50:20.979] [Player] Pos: (0.7, 48.1, 50.5), Vel: (-2.2, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:21.384] [Player] Pos: (0.4, 48.1, 51.5), Vel: (-0.6, 0.0, 2.0), Grounded: True
+[2025-10-06 18:50:21.768] [Player] Pos: (0.4, 48.1, 51.5), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:22.104] [Player] Pos: (0.9, 48.1, 52.3), Vel: (3.8, 0.0, 7.1), Grounded: True
+[2025-10-06 18:50:22.420] [Player] Pos: (1.4, 48.4, 53.3), Vel: (3.8, -0.3, 7.1), Grounded: False
+[2025-10-06 18:50:22.735] [Player] Pos: (2.0, 49.1, 54.2), Vel: (1.4, 0.0, 2.6), Grounded: True
+[2025-10-06 18:50:23.065] [Player] Pos: (2.5, 50.1, 55.3), Vel: (3.8, 0.0, 7.1), Grounded: True
+[2025-10-06 18:50:23.382] [Player] Pos: (3.1, 50.4, 56.3), Vel: (3.8, 0.0, 7.1), Grounded: True
+[2025-10-06 18:50:23.672] [Player] Pos: (3.4, 50.4, 56.6), Vel: (0.7, 0.0, 1.3), Grounded: True
+[2025-10-06 18:50:23.972] [Player] Pos: (3.5, 50.4, 56.6), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:24.330] [Player] Pos: (3.6, 50.4, 56.6), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:24.701] [Player] Pos: (3.8, 50.4, 57.0), Vel: (3.2, 0.0, 7.3), Grounded: False
+[2025-10-06 18:50:25.081] [Player] Pos: (4.4, 50.4, 58.4), Vel: (3.2, 0.0, 7.3), Grounded: True
+[2025-10-06 18:50:25.456] [Player] Pos: (4.9, 51.1, 59.5), Vel: (2.0, 0.0, 4.6), Grounded: False
+[2025-10-06 18:50:25.832] [Player] Pos: (5.5, 51.9, 60.3), Vel: (3.2, 0.0, 7.3), Grounded: False
+[2025-10-06 18:50:26.196] [Player] Pos: (5.8, 52.1, 61.5), Vel: (-0.2, -0.2, 8.5), Grounded: False
+[2025-10-06 18:50:26.567] [Player] Pos: (5.5, 52.1, 62.8), Vel: (-2.6, 0.0, 7.6), Grounded: True
+[2025-10-06 18:50:26.950] [Player] Pos: (5.1, 52.1, 64.3), Vel: (-0.0, 0.0, 8.7), Grounded: True
+[2025-10-06 18:50:26.989] [Client] Requesting chunk (-1,0,5)
+[2025-10-06 18:50:26.990] [Client] Requesting chunk (1,0,5)
+[2025-10-06 18:50:26.990] [Client] Requesting chunk (2,0,5)
+[2025-10-06 18:50:26.990] [Client] Requesting chunk (-3,0,4)
+[2025-10-06 18:50:27.109] [Client] Received chunk (-1,0,5): 52269 floats
+[2025-10-06 18:50:27.109] [Client] Requesting chunk (3,0,4)
+[2025-10-06 18:50:27.109] [Client] Received chunk (1,0,5): 32361 floats
+[2025-10-06 18:50:27.110] [Client] Requesting chunk (-2,0,5)
+[2025-10-06 18:50:27.110] [Client] Received chunk (2,0,5): 47187 floats
+[2025-10-06 18:50:27.110] [Client] Requesting chunk (1,1,5)
+[2025-10-06 18:50:27.251] [Client] Received chunk (-3,0,4): 30009 floats
+[2025-10-06 18:50:27.251] [Client] Requesting chunk (1,-1,5)
+[2025-10-06 18:50:27.251] [Client] Received chunk (3,0,4): 28665 floats
+[2025-10-06 18:50:27.251] [Client] Requesting chunk (-1,-1,5)
+[2025-10-06 18:50:27.375] [Client] Received chunk (-2,0,5): 29001 floats
+[2025-10-06 18:50:27.375] [Client] Requesting chunk (-1,1,5)
+[2025-10-06 18:50:27.376] [Client] Received chunk (1,1,5): 0 floats
+[2025-10-06 18:50:27.376] [Client] Requesting chunk (4,0,2)
+[2025-10-06 18:50:27.377] [Client] Received chunk (1,-1,5): 39459 floats
+[2025-10-06 18:50:27.377] [Client] Requesting chunk (0,0,6)
+[2025-10-06 18:50:27.478] [Client] Received chunk (-1,-1,5): 15540 floats
+[2025-10-06 18:50:27.478] [Client] Requesting chunk (-4,0,2)
+[2025-10-06 18:50:27.485] [Client] Received chunk (-1,1,5): 0 floats
+[2025-10-06 18:50:27.485] [Client] Requesting chunk (3,1,4)
+[2025-10-06 18:50:27.486] [Client] Received chunk (4,0,2): 36498 floats
+[2025-10-06 18:50:27.486] [Client] Requesting chunk (-2,1,5)
+[2025-10-06 18:50:27.565] [Player] Pos: (6.2, 52.1, 67.8), Vel: (3.1, 0.0, 7.4), Grounded: True
+[2025-10-06 18:50:27.632] [Client] Received chunk (0,0,6): 32676 floats
+[2025-10-06 18:50:27.632] [Client] Requesting chunk (-2,-1,5)
+[2025-10-06 18:50:27.727] [Client] Received chunk (-4,0,2): 36645 floats
+[2025-10-06 18:50:27.727] [Client] Requesting chunk (-3,1,4)
+[2025-10-06 18:50:27.727] [Client] Received chunk (3,1,4): 0 floats
+[2025-10-06 18:50:27.728] [Client] Requesting chunk (-3,-1,4)
+[2025-10-06 18:50:27.735] [Client] Received chunk (-2,1,5): 0 floats
+[2025-10-06 18:50:27.736] [Client] Requesting chunk (2,-1,5)
+[2025-10-06 18:50:27.832] [Client] Received chunk (-2,-1,5): 67683 floats
+[2025-10-06 18:50:27.832] [Client] Requesting chunk (2,1,5)
+[2025-10-06 18:50:27.842] [Client] Received chunk (-3,1,4): 0 floats
+[2025-10-06 18:50:27.842] [Client] Requesting chunk (3,-1,4)
+[2025-10-06 18:50:27.935] [Client] Received chunk (-3,-1,4): 1386 floats
+[2025-10-06 18:50:27.935] [Client] Requesting chunk (4,-1,2)
+[2025-10-06 18:50:27.936] [Client] Received chunk (2,-1,5): 36246 floats
+[2025-10-06 18:50:27.936] [Client] Requesting chunk (-4,-1,2)
+[2025-10-06 18:50:27.936] [Client] Received chunk (2,1,5): 0 floats
+[2025-10-06 18:50:27.936] [Client] Requesting chunk (0,-1,6)
+[2025-10-06 18:50:27.937] [Client] Received chunk (3,-1,4): 48321 floats
+[2025-10-06 18:50:27.937] [Client] Requesting chunk (-4,1,2)
+[2025-10-06 18:50:27.937] [Client] Received chunk (4,-1,2): 13587 floats
+[2025-10-06 18:50:27.938] [Client] Requesting chunk (0,1,6)
+[2025-10-06 18:50:28.028] [Client] Received chunk (-4,-1,2): 23961 floats
+[2025-10-06 18:50:28.028] [Client] Requesting chunk (4,1,2)
+[2025-10-06 18:50:28.120] [Player] Pos: (8.4, 52.4, 70.5), Vel: (4.9, -0.5, 6.6), Grounded: False
+[2025-10-06 18:50:28.124] [Client] Received chunk (0,-1,6): 0 floats
+[2025-10-06 18:50:28.134] [Client] Received chunk (-4,1,2): 0 floats
+[2025-10-06 18:50:28.142] [Client] Received chunk (0,1,6): 0 floats
+[2025-10-06 18:50:28.142] [Client] Received chunk (4,1,2): 0 floats
+[2025-10-06 18:50:28.537] [Player] Pos: (9.8, 52.4, 71.5), Vel: (7.3, -0.2, 3.4), Grounded: False
+[2025-10-06 18:50:28.949] [Player] Pos: (10.9, 52.4, 72.8), Vel: (3.6, -0.3, 7.2), Grounded: False
+[2025-10-06 18:50:29.349] [Player] Pos: (11.6, 52.4, 74.2), Vel: (3.2, 0.0, 7.3), Grounded: True
+[2025-10-06 18:50:29.752] [Player] Pos: (12.2, 52.4, 75.6), Vel: (3.2, 0.0, 7.3), Grounded: False
+[2025-10-06 18:50:30.154] [Player] Pos: (12.8, 52.1, 76.9), Vel: (3.2, 0.0, 7.3), Grounded: True
+[2025-10-06 18:50:30.567] [Player] Pos: (13.0, 52.1, 78.6), Vel: (-5.6, 0.0, 7.2), Grounded: True
+[2025-10-06 18:50:30.971] [Player] Pos: (11.8, 52.1, 79.4), Vel: (-3.8, 0.0, 2.1), Grounded: True
+[2025-10-06 18:50:31.381] [Player] Pos: (12.1, 52.1, 80.5), Vel: (2.9, 0.0, 7.5), Grounded: True
+[2025-10-06 18:50:31.779] [Player] Pos: (12.7, 51.7, 81.9), Vel: (3.1, -3.9, 7.4), Grounded: False
+[2025-10-06 18:50:32.178] [Player] Pos: (13.4, 50.8, 83.3), Vel: (3.2, -5.5, 7.3), Grounded: False
+[2025-10-06 18:50:32.586] [Player] Pos: (14.0, 50.4, 84.8), Vel: (3.2, 0.0, 7.3), Grounded: False
+[2025-10-06 18:50:32.998] [Player] Pos: (14.2, 50.4, 86.4), Vel: (-2.1, 0.0, 7.8), Grounded: False
+[2025-10-06 18:50:33.405] [Player] Pos: (14.0, 50.4, 87.6), Vel: (-2.9, 0.0, 7.4), Grounded: True
+[2025-10-06 18:50:33.821] [Player] Pos: (13.4, 50.1, 89.1), Vel: (-2.9, 0.0, 7.4), Grounded: True
+[2025-10-06 18:50:34.251] [Player] Pos: (12.7, 50.1, 90.7), Vel: (-2.9, 0.0, 7.4), Grounded: True
+[2025-10-06 18:50:34.683] [Player] Pos: (12.7, 50.1, 92.4), Vel: (2.3, 0.0, 7.7), Grounded: True
+[2025-10-06 18:50:35.114] [Player] Pos: (13.2, 50.1, 93.8), Vel: (1.3, 0.0, 3.2), Grounded: True
+[2025-10-06 18:50:35.550] [Player] Pos: (13.1, 49.9, 94.4), Vel: (-1.7, 0.0, 7.8), Grounded: True
+[2025-10-06 18:50:35.966] [Player] Pos: (12.8, 48.8, 95.9), Vel: (-1.7, -6.3, 7.8), Grounded: False
+[2025-10-06 18:50:36.233] [Client] Requesting chunk (-1,0,6)
+[2025-10-06 18:50:36.233] [Client] Requesting chunk (1,0,6)
+[2025-10-06 18:50:36.233] [Client] Requesting chunk (2,0,6)
+[2025-10-06 18:50:36.233] [Client] Requesting chunk (-3,0,5)
+[2025-10-06 18:50:36.335] [Client] Received chunk (-1,0,6): 38346 floats
+[2025-10-06 18:50:36.335] [Client] Requesting chunk (3,0,5)
+[2025-10-06 18:50:36.474] [Client] Received chunk (1,0,6): 28287 floats
+[2025-10-06 18:50:36.475] [Client] Requesting chunk (-2,0,6)
+[2025-10-06 18:50:36.491] [Player] Pos: (12.2, 48.1, 98.6), Vel: (-1.8, -0.5, 7.8), Grounded: False
+[2025-10-06 18:50:36.631] [Client] Received chunk (2,0,6): 34671 floats
+[2025-10-06 18:50:36.631] [Client] Requesting chunk (1,1,6)
+[2025-10-06 18:50:36.749] [Client] Received chunk (-3,0,5): 28581 floats
+[2025-10-06 18:50:36.749] [Client] Requesting chunk (1,-1,6)
+[2025-10-06 18:50:36.749] [Client] Received chunk (3,0,5): 27342 floats
+[2025-10-06 18:50:36.749] [Client] Requesting chunk (-1,-1,6)
+[2025-10-06 18:50:36.857] [Client] Received chunk (-2,0,6): 30135 floats
+[2025-10-06 18:50:36.857] [Client] Requesting chunk (-1,1,6)
+[2025-10-06 18:50:36.866] [Client] Received chunk (1,1,6): 0 floats
+[2025-10-06 18:50:36.867] [Client] Requesting chunk (4,0,3)
+[2025-10-06 18:50:36.973] [Client] Received chunk (1,-1,6): 7056 floats
+[2025-10-06 18:50:36.973] [Client] Requesting chunk (0,0,7)
+[2025-10-06 18:50:37.071] [Client] Received chunk (-1,-1,6): 168 floats
+[2025-10-06 18:50:37.071] [Client] Requesting chunk (-4,0,3)
+[2025-10-06 18:50:37.079] [Client] Received chunk (-1,1,6): 0 floats
+[2025-10-06 18:50:37.079] [Client] Requesting chunk (3,1,5)
+[2025-10-06 18:50:37.079] [Client] Received chunk (4,0,3): 30156 floats
+[2025-10-06 18:50:37.079] [Client] Requesting chunk (-2,1,6)
+[2025-10-06 18:50:37.198] [Client] Received chunk (0,0,7): 42840 floats
+[2025-10-06 18:50:37.198] [Client] Requesting chunk (-2,-1,6)
+[2025-10-06 18:50:37.201] [Player] Pos: (11.2, 48.1, 103.2), Vel: (-1.8, 0.0, 7.8), Grounded: True
+[2025-10-06 18:50:37.308] [Client] Received chunk (-4,0,3): 28056 floats
+[2025-10-06 18:50:37.308] [Client] Requesting chunk (-3,1,5)
+[2025-10-06 18:50:37.308] [Client] Received chunk (3,1,5): 0 floats
+[2025-10-06 18:50:37.308] [Client] Requesting chunk (-3,-1,5)
+[2025-10-06 18:50:37.318] [Client] Received chunk (-2,1,6): 0 floats
+[2025-10-06 18:50:37.318] [Client] Requesting chunk (2,-1,6)
+[2025-10-06 18:50:37.425] [Client] Received chunk (-2,-1,6): 66465 floats
+[2025-10-06 18:50:37.425] [Client] Requesting chunk (2,1,6)
+[2025-10-06 18:50:37.432] [Client] Received chunk (-3,1,5): 0 floats
+[2025-10-06 18:50:37.432] [Client] Requesting chunk (3,-1,5)
+[2025-10-06 18:50:37.526] [Client] Received chunk (-3,-1,5): 61845 floats
+[2025-10-06 18:50:37.526] [Client] Requesting chunk (4,-1,3)
+[2025-10-06 18:50:37.619] [Client] Received chunk (2,-1,6): 3654 floats
+[2025-10-06 18:50:37.619] [Client] Requesting chunk (-4,-1,3)
+[2025-10-06 18:50:37.626] [Client] Received chunk (2,1,6): 0 floats
+[2025-10-06 18:50:37.626] [Client] Requesting chunk (0,-1,7)
+[2025-10-06 18:50:37.627] [Client] Received chunk (3,-1,5): 31080 floats
+[2025-10-06 18:50:37.627] [Client] Requesting chunk (-4,1,3)
+[2025-10-06 18:50:37.627] [Client] Received chunk (4,-1,3): 0 floats
+[2025-10-06 18:50:37.627] [Client] Requesting chunk (0,1,7)
+[2025-10-06 18:50:37.722] [Client] Received chunk (-4,-1,3): 0 floats
+[2025-10-06 18:50:37.723] [Client] Requesting chunk (4,1,3)
+[2025-10-06 18:50:37.812] [Player] Pos: (11.6, 50.1, 106.0), Vel: (2.8, 0.0, 8.9), Grounded: True
+[2025-10-06 18:50:37.818] [Client] Received chunk (0,-1,7): 7056 floats
+[2025-10-06 18:50:37.824] [Client] Received chunk (-4,1,3): 0 floats
+[2025-10-06 18:50:37.832] [Client] Received chunk (0,1,7): 0 floats
+[2025-10-06 18:50:37.832] [Client] Received chunk (4,1,3): 0 floats
+[2025-10-06 18:50:38.252] [Player] Pos: (11.6, 50.1, 107.4), Vel: (-1.0, 0.0, 5.8), Grounded: True
+[2025-10-06 18:50:38.695] [Player] Pos: (11.6, 50.1, 107.6), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:39.103] [Player] Pos: (11.6, 50.1, 107.6), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:39.498] [Player] Pos: (11.6, 50.1, 108.5), Vel: (0.3, 0.0, 8.0), Grounded: True
+[2025-10-06 18:50:39.881] [Player] Pos: (11.5, 50.9, 109.5), Vel: (0.0, 0.0, 0.6), Grounded: False
+[2025-10-06 18:50:40.260] [Player] Pos: (11.8, 51.8, 109.6), Vel: (0.1, 0.0, 3.4), Grounded: False
+[2025-10-06 18:50:40.632] [Player] Pos: (11.8, 51.3, 109.6), Vel: (0.0, 0.0, 0.8), Grounded: False
+[2025-10-06 18:50:41.018] [Player] Pos: (11.7, 51.7, 109.5), Vel: (0.0, 0.0, 0.5), Grounded: False
+[2025-10-06 18:50:41.392] [Player] Pos: (11.8, 51.8, 109.6), Vel: (0.0, 0.0, 0.2), Grounded: False
+[2025-10-06 18:50:41.764] [Player] Pos: (11.7, 52.2, 109.7), Vel: (0.0, 0.0, 0.4), Grounded: False
+[2025-10-06 18:50:42.143] [Player] Pos: (11.8, 51.9, 109.6), Vel: (0.1, 0.0, 1.5), Grounded: False
+[2025-10-06 18:50:42.517] [Player] Pos: (11.8, 51.6, 109.6), Vel: (0.1, 0.0, 4.1), Grounded: False
+[2025-10-06 18:50:42.894] [Player] Pos: (11.9, 51.3, 109.6), Vel: (0.1, 0.0, 1.9), Grounded: False
+[2025-10-06 18:50:43.279] [Player] Pos: (11.7, 52.2, 109.7), Vel: (0.1, 0.0, 1.8), Grounded: False
+[2025-10-06 18:50:43.660] [Player] Pos: (11.5, 51.9, 109.6), Vel: (0.1, 0.0, 3.2), Grounded: False
+[2025-10-06 18:50:44.028] [Player] Pos: (11.4, 51.9, 109.5), Vel: (0.1, 0.0, 1.9), Grounded: False
+[2025-10-06 18:50:44.398] [Player] Pos: (11.5, 51.3, 109.6), Vel: (0.1, 0.0, 3.8), Grounded: False
+[2025-10-06 18:50:44.791] [Player] Pos: (11.4, 52.1, 109.7), Vel: (0.2, -0.2, 4.9), Grounded: False
+[2025-10-06 18:50:45.179] [Player] Pos: (11.5, 52.2, 109.7), Vel: (0.0, 0.0, 0.4), Grounded: False
+[2025-10-06 18:50:45.568] [Player] Pos: (11.5, 54.1, 109.8), Vel: (0.1, 0.0, 2.4), Grounded: False
+[2025-10-06 18:50:45.962] [Player] Pos: (11.4, 54.2, 109.7), Vel: (0.1, 0.0, 2.2), Grounded: False
+[2025-10-06 18:50:46.324] [Player] Pos: (11.5, 54.3, 109.9), Vel: (0.1, -1.9, 3.3), Grounded: False
+[2025-10-06 18:50:46.695] [Player] Pos: (11.5, 54.0, 109.9), Vel: (0.0, -2.0, 0.6), Grounded: False
+[2025-10-06 18:50:47.067] [Player] Pos: (11.5, 54.9, 110.0), Vel: (0.1, 0.0, 2.4), Grounded: False
+[2025-10-06 18:50:47.414] [Player] Pos: (11.4, 55.2, 110.0), Vel: (0.1, 0.0, 2.3), Grounded: False
+[2025-10-06 18:50:47.740] [Player] Pos: (11.5, 56.1, 110.0), Vel: (0.2, -0.1, 4.8), Grounded: False
+[2025-10-06 18:50:48.010] [Player] Pos: (11.5, 57.4, 110.2), Vel: (0.1, 0.0, 1.7), Grounded: False
+[2025-10-06 18:50:48.210] [Player] Pos: (11.6, 58.4, 110.4), Vel: (0.0, 0.0, 0.1), Grounded: False
+[2025-10-06 18:50:48.417] [Player] Pos: (11.8, 58.9, 110.7), Vel: (0.3, 0.0, 8.0), Grounded: False
+[2025-10-06 18:50:48.644] [Player] Pos: (12.0, 59.4, 111.2), Vel: (0.1, 0.0, 1.7), Grounded: False
+[2025-10-06 18:50:48.794] [Player] Pos: (12.0, 59.9, 111.4), Vel: (0.1, 0.0, 4.4), Grounded: False
+[2025-10-06 18:50:48.995] [Player] Pos: (12.1, 60.4, 112.0), Vel: (0.3, 0.0, 8.0), Grounded: False
+[2025-10-06 18:50:49.159] [Player] Pos: (12.2, 60.9, 112.5), Vel: (0.1, 0.0, 2.8), Grounded: True
+[2025-10-06 18:50:49.360] [Player] Pos: (12.3, 61.6, 113.2), Vel: (0.3, 0.0, 8.0), Grounded: False
+[2025-10-06 18:50:49.511] [Player] Pos: (12.3, 61.4, 113.6), Vel: (0.3, -2.9, 8.0), Grounded: False
+[2025-10-06 18:50:49.679] [Player] Pos: (12.4, 61.7, 113.7), Vel: (0.0, -2.2, 0.0), Grounded: False
+[2025-10-06 18:50:49.833] [Player] Pos: (12.5, 61.8, 113.7), Vel: (0.0, -2.0, 0.0), Grounded: False
+[2025-10-06 18:50:49.996] [Player] Pos: (12.6, 61.9, 113.7), Vel: (0.0, 0.0, 0.0), Grounded: False
+[2025-10-06 18:50:50.156] [Player] Pos: (12.6, 61.7, 113.7), Vel: (0.0, -2.5, 0.0), Grounded: False
+[2025-10-06 18:50:50.346] [Player] Pos: (12.6, 61.6, 113.9), Vel: (0.1, 0.0, 8.0), Grounded: False
+[2025-10-06 18:50:50.533] [Player] Pos: (12.7, 61.8, 114.5), Vel: (0.1, -1.0, 8.0), Grounded: False
+[2025-10-06 18:50:50.692] [Player] Pos: (12.8, 61.8, 115.0), Vel: (0.1, -0.2, 8.0), Grounded: False
+[2025-10-06 18:50:50.851] [Player] Pos: (12.8, 61.9, 115.5), Vel: (0.1, 0.0, 8.0), Grounded: False
+[2025-10-06 18:50:51.013] [Player] Pos: (12.8, 61.6, 116.0), Vel: (0.1, -3.3, 8.0), Grounded: False
+[2025-10-06 18:50:51.178] [Player] Pos: (12.9, 61.6, 116.4), Vel: (0.1, -0.6, 6.4), Grounded: False
+[2025-10-06 18:50:51.325] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, 0.0, 2.6), Grounded: False
+[2025-10-06 18:50:51.505] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.1, 1.0), Grounded: False
+[2025-10-06 18:50:51.814] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.3, 0.0), Grounded: False
+[2025-10-06 18:50:52.179] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.3, 0.0), Grounded: False
+[2025-10-06 18:50:52.581] [Player] Pos: (12.6, 62.1, 117.2), Vel: (3.7, 0.0, 1.8), Grounded: False
+[2025-10-06 18:50:52.973] [Player] Pos: (14.0, 60.5, 117.9), Vel: (7.2, -7.9, 3.6), Grounded: False
+[2025-10-06 18:50:53.377] [Player] Pos: (14.4, 60.4, 118.1), Vel: (0.7, 0.0, 0.3), Grounded: False
+[2025-10-06 18:50:53.763] [Player] Pos: (14.4, 60.4, 118.1), Vel: (0.0, -0.4, 0.0), Grounded: False
+[2025-10-06 18:50:54.247] [Player] Pos: (14.3, 60.4, 118.1), Vel: (-7.7, -0.1, -2.1), Grounded: False
+[2025-10-06 18:50:54.827] [Player] Pos: (13.3, 61.4, 116.8), Vel: (-0.3, 0.0, -0.1), Grounded: False
+[2025-10-06 18:50:55.426] [Player] Pos: (11.3, 62.1, 116.2), Vel: (-3.5, 0.0, -1.0), Grounded: True
+[2025-10-06 18:50:55.976] [Player] Pos: (11.2, 62.1, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:56.425] [Player] Pos: (10.5, 62.1, 115.5), Vel: (-1.5, 0.0, -1.3), Grounded: True
+[2025-10-06 18:50:56.874] [Player] Pos: (10.1, 62.1, 115.9), Vel: (-5.6, 0.0, 5.7), Grounded: True
+[2025-10-06 18:50:57.295] [Player] Pos: (9.9, 62.7, 116.2), Vel: (-0.5, -2.6, 0.5), Grounded: False
+[2025-10-06 18:50:57.711] [Player] Pos: (10.0, 62.6, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:58.107] [Player] Pos: (10.0, 62.4, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:58.509] [Player] Pos: (10.0, 62.4, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
+[2025-10-06 18:50:58.522] [Player] Manual collision system cleaned up
