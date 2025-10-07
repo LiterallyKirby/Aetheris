@@ -21,20 +21,25 @@ namespace Aetheris
         public bool IsGrounded => isGrounded;
 
         // Player dimensions (box collision)
-        // === Made bigger here ===
-        private const float PLAYER_WIDTH = 1.2f;   // X/Z dimensions (was 0.6)
-        private const float PLAYER_HEIGHT = 3.6f;  // Y dimension (was 1.8)
-        private static readonly float EYE_HEIGHT = PLAYER_HEIGHT - 0.4f; // derived, keeps eye near top
+        private const float PLAYER_WIDTH = 1.2f;   // X/Z dimensions
+        private const float PLAYER_HEIGHT = 3.6f;  // Y dimension
+        private static readonly float EYE_HEIGHT = PLAYER_HEIGHT - 0.4f;
 
-        // Movement parameters (unchanged)
-        private const float GROUND_ACCEL = 14f;
-        private const float AIR_ACCEL = 2f;
-        private const float MAX_VELOCITY = 8f;
-        private const float FRICTION = 8f;
-        private const float STOP_SPEED = 1.5f;
-        private const float JUMP_VELOCITY = 7f;
+        // Movement / PM parameters (Quake-like tuning)
+        private const float MAX_VELOCITY = 9.5f;    // horizontal speed cap
+        private const float GROUND_ACCEL = 14f;     // ground acceleration
+        private const float AIR_ACCEL = 2.8f;       // air acceleration (thrust)
+        private const float AIR_CONTROL = 0.95f;    // air control (rotate velocity in air)
+        private const float FRICTION = 6f;          // ground friction
+        private const float STOP_SPEED = 0.1f;      // friction control
+        private const float JUMP_VELOCITY = 7f;     
         private const float GRAVITY = 20f;
-        private const float AIR_CONTROL = 0.3f;
+        private const float STRAFE_ACCEL_MULT = 1.0f;
+        private const float BHOP_PRESERVE = 1.0f;   // 1 => preserve horizontal velocity on jump
+
+        // Step and slope tuning
+        private const float STEP_HEIGHT = 1.25f;    // how high the player can step up
+        private const float DROP_SNAP = 0.4f;       // slope follow/drop snap distance
 
         // Mouse
         private float mouseSensitivity = 0.2f;
@@ -49,38 +54,29 @@ namespace Aetheris
 
         private Vector3 FindSafeSpawn(Vector3 start)
         {
-            // Search downward for a safe position (air with ground below).
-            // Return position to use as the player's "feet" location (matching the rest of the code).
             for (int y = (int)start.Y; y > (int)start.Y - 200; y--)
             {
                 Vector3 testPos = new Vector3(start.X, y, start.Z);
-
-                // Check if this position is air and has ground below
                 if (!IsBoxInSolid(testPos) && IsGroundBelow(testPos))
                 {
-                    // keep the player feet slightly above block center to avoid being stuck
-                    return testPos + Vector3.UnitY * 0.1f; // small offset; you can increase if you clip into floors
+                    return testPos + Vector3.UnitY * 0.1f;
                 }
             }
-
-            // Fallback: spawn high and fall
             return new Vector3(start.X, 100f, start.Z);
         }
 
         private bool IsGroundBelow(Vector3 pos)
         {
-            // Check if there's solid ground within 3 units below (in case player is tall)
+            // check a few units below (account for taller player)
             for (int i = 1; i <= 3; i++)
             {
-                if (IsSolidAt(pos - Vector3.UnitY * i))
-                    return true;
+                if (IsSolidAt(pos - Vector3.UnitY * i)) return true;
             }
             return false;
         }
 
         public Matrix4 GetViewMatrix()
         {
-            // Position is feet; eye is feet + EYE_HEIGHT
             Vector3 eyePos = Position + Vector3.UnitY * EYE_HEIGHT;
             Vector3 front = GetFront();
             return Matrix4.LookAt(eyePos, eyePos + front, Vector3.UnitY);
@@ -94,37 +90,41 @@ namespace Aetheris
 
             UpdateMouseLook(mouse);
 
-            Vector3 wishDir = GetWishDirection(keys);
-
-            // Ground check
+            // perform ground check first
             CheckGround();
 
-            // Jumping
+            // compute wish direction (horizontal only)
+            Vector3 wishDir = GetWishDirection(keys);
+
+            // Jumping (bunnyhop-friendly: preserves horizontal velocity)
             if (keys.IsKeyDown(Keys.Space) && isGrounded)
             {
+                // preserve horizontal momentum (BHOP_PRESERVE == 1.0 keeps everything)
                 velocity.Y = JUMP_VELOCITY;
                 isGrounded = false;
             }
 
-            // Movement
+            // Movement: ground vs air
             if (isGrounded)
             {
                 ApplyFriction(deltaTime);
-                Accelerate(wishDir, GROUND_ACCEL, deltaTime);
-
-                // Clamp downward velocity when grounded
-                if (velocity.Y < 0)
-                    velocity.Y = 0;
+                Accelerate(wishDir, GROUND_ACCEL, deltaTime, true);
+                
+                // clamp small downward velocity
+                if (velocity.Y < 0) velocity.Y = 0;
             }
             else
             {
-                float accel = AIR_ACCEL + (wishDir.LengthSquared > 0.001f ? AIR_CONTROL : 0);
-                Accelerate(wishDir, accel, deltaTime);
+                // air thrust + Q3-like air control
+                Accelerate(wishDir, AIR_ACCEL, deltaTime, false);
+                AirControl(wishDir, deltaTime);
+
+                // gravity
                 velocity.Y -= GRAVITY * deltaTime;
-                velocity.Y = Math.Max(velocity.Y, -50f); // Terminal velocity
+                velocity.Y = Math.Max(velocity.Y, -50f);
             }
 
-            // Collide and slide
+            // Move and collide (includes step-up and slope snapping)
             MoveAndSlide(deltaTime);
 
             // Safety respawn
@@ -158,30 +158,23 @@ namespace Aetheris
             Vector3 front = GetFrontHorizontal();
             Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
 
-            Vector3 wishDir = Vector3.Zero;
+            Vector3 wish = Vector3.Zero;
+            if (keys.IsKeyDown(Keys.W)) wish += front;
+            if (keys.IsKeyDown(Keys.S)) wish -= front;
+            if (keys.IsKeyDown(Keys.D)) wish += right;
+            if (keys.IsKeyDown(Keys.A)) wish -= right;
 
-            if (keys.IsKeyDown(Keys.W)) wishDir += front;
-            if (keys.IsKeyDown(Keys.S)) wishDir -= front;
-            if (keys.IsKeyDown(Keys.D)) wishDir += right;
-            if (keys.IsKeyDown(Keys.A)) wishDir -= right;
-
-            if (wishDir.LengthSquared > 0.001f)
-                wishDir = Vector3.Normalize(wishDir);
-
-            return wishDir;
+            if (wish.LengthSquared > 0.001f) wish = Vector3.Normalize(wish);
+            return wish;
         }
 
         private void CheckGround()
         {
-            // Position represents feet. Sample slightly below the feet plane for ground.
             Vector3 feetPos = Position;
-
-            // Check slightly below feet
             bool hasGround = false;
-            float groundDistance = 0.4f; // increased because player is taller/wider
+            float groundDistance = 0.4f;
             Vector3 groundCheck = feetPos - Vector3.UnitY * groundDistance;
 
-            // Check multiple points across the base for stability
             Vector3[] offsets = {
                 Vector3.Zero,
                 new Vector3(PLAYER_WIDTH * 0.45f, 0, 0),
@@ -192,21 +185,15 @@ namespace Aetheris
 
             foreach (var offset in offsets)
             {
-                Vector3 checkPos = groundCheck + offset;
-                if (IsSolidAt(checkPos))
+                if (IsSolidAt(groundCheck + offset))
                 {
                     hasGround = true;
                     break;
                 }
             }
 
-            // Only grounded if we have ground AND moving down or stationary
             isGrounded = hasGround && velocity.Y <= 0.1f;
-
-            if (isGrounded)
-            {
-                velocity.Y = 0;
-            }
+            if (isGrounded) velocity.Y = 0;
         }
 
         private void ApplyFriction(float deltaTime)
@@ -214,7 +201,7 @@ namespace Aetheris
             Vector3 horizontalVel = new Vector3(velocity.X, 0, velocity.Z);
             float speed = horizontalVel.Length;
 
-            if (speed < 0.1f)
+            if (speed < 0.001f)
             {
                 velocity.X = 0;
                 velocity.Z = 0;
@@ -225,7 +212,7 @@ namespace Aetheris
             float drop = control * FRICTION * deltaTime;
             float newSpeed = Math.Max(speed - drop, 0f);
 
-            if (speed > 0)
+            if (newSpeed != speed)
             {
                 float scale = newSpeed / speed;
                 velocity.X *= scale;
@@ -233,67 +220,97 @@ namespace Aetheris
             }
         }
 
-        private void Accelerate(Vector3 wishDir, float accel, float deltaTime)
+        // Quake-style accelerate (works for ground and air thrust)
+        private void Accelerate(Vector3 wishDir, float accel, float deltaTime, bool onGround)
         {
-            if (wishDir.LengthSquared < 0.001f) return;
+            if (wishDir.LengthSquared < 0.0001f) return;
 
-            float currentSpeed = Vector3.Dot(velocity, wishDir);
-            float addSpeed = MAX_VELOCITY - currentSpeed;
+            float wishSpeed = MAX_VELOCITY;
 
-            if (addSpeed <= 0) return;
+            Vector3 velH = new Vector3(velocity.X, 0, velocity.Z);
+            float currentSpeed = Vector3.Dot(velH, wishDir);
+            float addSpeed = wishSpeed - currentSpeed;
+            if (addSpeed <= 0f) return;
 
-            float accelSpeed = accel * MAX_VELOCITY * deltaTime;
+            // base accel contribution
+            float accelSpeed = accel * wishSpeed * deltaTime;
+
             if (accelSpeed > addSpeed) accelSpeed = addSpeed;
 
-            velocity += wishDir * accelSpeed;
+            // in-air tweak: allow smaller controlled increments (gives bhop potential)
+            if (!onGround)
+            {
+                accelSpeed = accel * deltaTime * (wishSpeed * 0.7f);
+                if (accelSpeed > addSpeed) accelSpeed = addSpeed;
+            }
+
+            Vector3 add = wishDir * accelSpeed;
+            velocity.X += add.X;
+            velocity.Z += add.Z;
         }
 
-        private const float STEP_HEIGHT = 1.25f; // how high the player can step up; tune down if too floaty
+        // Quake-like air control: rotate horizontal velocity toward wishDir
+        private void AirControl(Vector3 wishDir, float deltaTime)
+        {
+            if (wishDir.LengthSquared < 0.0001f) return;
 
-        // replace your MoveAndSlide(...) with this implementation
+            Vector3 velH = new Vector3(velocity.X, 0, velocity.Z);
+            float speed = velH.Length;
+            if (speed < 0.0001f) return;
+
+            Vector3 vNorm = velH / speed;
+            float dot = Vector3.Dot(vNorm, wishDir);
+            // only apply control when somewhat aligned; dot can be negative but then k small
+            float k = AIR_CONTROL * dot * dot * deltaTime * 8f;
+            if (k <= 0f) return;
+
+            Vector3 newDir = Vector3.Normalize(vNorm + wishDir * k);
+            velocity.X = newDir.X * speed;
+            velocity.Z = newDir.Z * speed;
+        }
+
+        // Step-up + sub-step Move + slope snapping
         private void MoveAndSlide(float deltaTime)
         {
             Vector3 movement = velocity * deltaTime;
 
-            // break big moves into smaller sub-steps to avoid snagging on geometry
+            // sub-step to avoid snagging
             int subSteps = Math.Max(1, (int)Math.Ceiling(movement.Length / 0.2f));
             Vector3 stepMove = movement / subSteps;
 
             for (int s = 0; s < subSteps; s++)
             {
-                // try the full small step first
+                // try full small step
                 if (!IsBoxInSolid(Position + stepMove))
                 {
                     Position += stepMove;
                     continue;
                 }
 
-                // horizontal-only attempt
+                // try horizontal-only
                 Vector3 horizontal = new Vector3(stepMove.X, 0, stepMove.Z);
                 if (horizontal.LengthSquared > 0.0001f)
                 {
-                    // if horizontal-only is clear, do it
                     if (!IsBoxInSolid(Position + horizontal))
                     {
                         Position += horizontal;
                         continue;
                     }
 
-                    // Try stepping up: check feet + STEP_HEIGHT and feet + STEP_HEIGHT + horizontal are free,
-                    // and that there's ground underneath the destination (so we don't step into mid-air)
+                    // attempt step-up
                     Vector3 up = Vector3.UnitY * STEP_HEIGHT;
                     if (!IsBoxInSolid(Position + up) && !IsBoxInSolid(Position + up + horizontal))
                     {
                         if (IsGroundBelow(Position + up + horizontal))
                         {
                             Position += up + horizontal;
-                            velocity.Y = 0f; // clear vertical velocity on a successful step-up
+                            velocity.Y = 0f;
                             isGrounded = true;
                             continue;
                         }
                     }
 
-                    // fallback: try axis-aligned moves (helps slide along walls)
+                    // axis-aligned fallback (slide along walls)
                     Vector3 xMove = new Vector3(horizontal.X, 0, 0);
                     if (xMove.LengthSquared > 0.0001f && !IsBoxInSolid(Position + xMove))
                     {
@@ -317,7 +334,7 @@ namespace Aetheris
                     }
                 }
 
-                // vertical-only attempt (stairs, falling, ceiling)
+                // vertical attempt
                 Vector3 vertical = new Vector3(0, stepMove.Y, 0);
                 if (vertical.LengthSquared > 0.0001f && !IsBoxInSolid(Position + vertical))
                 {
@@ -334,20 +351,17 @@ namespace Aetheris
                     continue;
                 }
 
-                // if all else fails: nudge horizontal velocity off so player won't keep pressing into the wall forever
+                // if nothing works, kill horizontal vel so we don't keep pushing
                 velocity.X = 0f;
                 velocity.Z = 0f;
                 break;
             }
 
-            // Basic slope snapping: if we're considered grounded, attempt to follow small drops so the player
-            // smoothly walks down ramps instead of hovering (tunable drop value).
+            // slope follow / drop snap when grounded
             if (isGrounded)
             {
-                const float DROP_SNAP = 0.4f;
                 for (float d = 0.05f; d <= DROP_SNAP; d += 0.05f)
                 {
-                    // if there's space below but ground exists a little further down, drop to it.
                     if (!IsBoxInSolid(Position - Vector3.UnitY * d))
                     {
                         if (IsGroundBelow(Position - Vector3.UnitY * d + Vector3.UnitY * 0.05f))
@@ -359,31 +373,24 @@ namespace Aetheris
                 }
             }
         }
+
         private bool IsBoxInSolid(Vector3 center)
         {
-            // center is treated as the player's feet location in this code.
             float hw = PLAYER_WIDTH * 0.5f;
-            float hh = PLAYER_HEIGHT; // we'll sample relative to feet, so use full height
-
-            // Sample multiple heights from near the feet up to near the head (more samples for larger body).
             float[] heights = {
-                0.05f,                       // just above feet
+                0.05f,
                 PLAYER_HEIGHT * 0.25f,
                 PLAYER_HEIGHT * 0.5f,
                 PLAYER_HEIGHT * 0.75f,
-                PLAYER_HEIGHT - 0.1f         // just below the top
+                PLAYER_HEIGHT - 0.1f
             };
-            float cornerOffset = hw * 0.9f; // reach closer to edges for wide players
+            float cornerOffset = hw * 0.9f;
 
             foreach (float height in heights)
             {
                 Vector3 checkPos = center + Vector3.UnitY * height;
+                if (IsSolidAt(checkPos)) return true;
 
-                // Check center
-                if (IsSolidAt(checkPos))
-                    return true;
-
-                // Check 4 corners at this height
                 Vector3[] corners = {
                     checkPos + new Vector3(-cornerOffset, 0, -cornerOffset),
                     checkPos + new Vector3(cornerOffset, 0, -cornerOffset),
@@ -391,10 +398,9 @@ namespace Aetheris
                     checkPos + new Vector3(cornerOffset, 0, cornerOffset),
                 };
 
-                foreach (var corner in corners)
+                foreach (var c in corners)
                 {
-                    if (IsSolidAt(corner))
-                        return true;
+                    if (IsSolidAt(c)) return true;
                 }
             }
 
