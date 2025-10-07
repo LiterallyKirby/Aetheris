@@ -6,7 +6,9 @@ using OpenTK.Mathematics;
 
 namespace Aetheris
 {
-    public static class MarchingCubes
+
+
+    public static partial class MarchingCubes
     {
         [ThreadStatic]
         private static List<float>? threadLocalVerts;

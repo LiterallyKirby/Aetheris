@@ -31,6 +31,19 @@
           }
         }
       },
+      "Jitter2/2.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Jitter2.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Jitter2.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "OpenTK/4.9.4": {
         "type": "package",
         "dependencies": {
@@ -290,6 +303,25 @@
         "lib/net8.0/BepuUtilities.xml"
       ]
     },
+    "Jitter2/2.4.1": {
+      "sha512": "qlwfHlxyqWC6knqb3I7Kfb6MobjAcuhtHrsCPoNyoUyF3FuulZh3SFZHbYXcPRZZxk5viutdUUuLvPaLecU9OQ==",
+      "type": "package",
+      "path": "jitter2/2.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "jitter2.2.4.1.nupkg.sha512",
+        "jitter2.nuspec",
+        "lib/net6.0/Jitter2.dll",
+        "lib/net6.0/Jitter2.xml",
+        "lib/net7.0/Jitter2.dll",
+        "lib/net7.0/Jitter2.xml",
+        "lib/net8.0/Jitter2.dll",
+        "lib/net8.0/Jitter2.xml",
+        "readme.md"
+      ]
+    },
     "OpenTK/4.9.4": {
       "sha512": "fp9ZI6akO4ZuIGzuUE0QRU5zRJhXbSXa5racehFoTdvodhRDecXCOcH68mRsZaMwnxLO9ECnf2LGM9BmiJKvhw==",
       "type": "package",
@@ -532,6 +564,7 @@
     "net9.0": [
       "BepuPhysics >= 2.5.0-beta.27",
       "BepuUtilities >= 2.5.0-beta.27",
+      "Jitter2 >= 2.4.1",
       "OpenTK >= 4.9.4",
       "SixLabors.ImageSharp >= 3.1.11",
       "StbImageSharp >= 2.30.15"
@@ -587,6 +620,10 @@
           "BepuUtilities": {
             "target": "Package",
             "version": "[2.5.0-beta.27, )"
+          },
+          "Jitter2": {
+            "target": "Package",
+            "version": "[2.4.1, )"
           },
           "OpenTK": {
             "target": "Package",

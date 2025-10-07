@@ -17,15 +17,13 @@ namespace Aetheris
         private readonly Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks;
         private readonly Player player;
         private readonly Client? client;
+        private readonly ChunkManager chunkManager;
 
         private int renderDistance = ClientConfig.RENDER_DISTANCE;
         private float chunkUpdateTimer = 0f;
         private const float CHUNK_UPDATE_INTERVAL = 0.5f;
-        private bool physicsReady = false;
-        private HashSet<(int, int, int)> registeredChunks = new HashSet<(int, int, int)>();
-        private object physicsLock = new object();
-        private bool forcePhysicsStep = false;
-        // --- Logging fields ---
+        
+        // Logging
         private const string LogFileName = "physics_debug.log";
         private StreamWriter? logWriter;
         private TextWriter? originalConsoleOut;
@@ -33,60 +31,56 @@ namespace Aetheris
         private TeeTextWriter? teeWriter;
 
         public Game(Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks, Client? client = null)
-            : base(GameWindowSettings.Default, new NativeWindowSettings()
-            {
-                Size = new Vector2i(1920, 1080),
-                Title = "Aetheris Client"
-            })
+        : base(GameWindowSettings.Default, new NativeWindowSettings()
+        {
+            ClientSize = new Vector2i(1920, 1080),
+            Title = "Aetheris Client"
+        })
         {
             this.loadedChunks = loadedChunks ?? new Dictionary<(int, int, int), Aetheris.Chunk>();
             this.client = client;
 
-            // Initialize logging very early so all Console writes are captured.
             SetupLogging();
 
-            // Initialize physics FIRST
+            // Initialize WorldGen
+            WorldGen.Initialize();
+            Console.WriteLine("[Game] WorldGen initialized");
 
-            Console.WriteLine("[Game] PhysicsManager initialized");
+            // Create ChunkManager for collision detection
+            chunkManager = new ChunkManager();
+            chunkManager.GenerateCollisionMeshes = true;
+            Console.WriteLine("[Game] ChunkManager initialized with collision support");
 
             Renderer = new Renderer();
+            Console.WriteLine("[Game] Renderer initialized");
 
-
-            // Create player with physics manager
-            player = new Player(new Vector3(16, 50, 16), this);
-            Console.WriteLine("[Game] Player initialized with physics");
+            // Create player with collision-enabled ChunkManager
+            player = new Player(new Vector3(16, 50, 16));
+            Console.WriteLine("[Game] Player initialized with capsule collision physics");
         }
 
         private void SetupLogging()
         {
             try
             {
-                // Delete existing file so we always start fresh
                 if (File.Exists(LogFileName))
-                {
                     File.Delete(LogFileName);
-                }
 
-                // Open file for writing with read sharing (so you can tail/read while program runs)
                 var fs = new FileStream(LogFileName, FileMode.Create, FileAccess.Write, FileShare.Read);
                 logWriter = new StreamWriter(fs, Encoding.UTF8) { AutoFlush = true };
 
-                // Keep original console writers so we can still output to console
                 originalConsoleOut = Console.Out;
                 originalConsoleError = Console.Error;
 
-                // Create a tee writer that writes to both original console and file, with timestamps
                 teeWriter = new TeeTextWriter(originalConsoleOut, logWriter);
 
-                // Redirect console output & error to the tee writer
                 Console.SetOut(teeWriter);
                 Console.SetError(teeWriter);
 
-                Console.WriteLine($"[Logging] Started logging to '{LogFileName}' (overwritten).");
+                Console.WriteLine($"[Logging] Started logging to '{LogFileName}'");
             }
             catch (Exception ex)
             {
-                // If logging setup fails, fall back to console and avoid throwing here.
                 try
                 {
                     Console.SetOut(Console.Out);
@@ -103,7 +97,7 @@ namespace Aetheris
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
             GL.Enable(EnableCap.CullFace);
-            GL.CullFace(CullFaceMode.Back);
+            GL.CullFace(TriangleFace.Back);
             GL.FrontFace(FrontFaceDirection.Ccw);
             CursorState = CursorState.Grabbed;
 
@@ -134,67 +128,38 @@ namespace Aetheris
                 Renderer.CreateProceduralAtlas();
             }
 
-            // Verify atlas
-            if (AtlasManager.IsLoaded)
-            {
-                Console.WriteLine($"[Game] AtlasManager loaded: {AtlasManager.AtlasWidth}x{AtlasManager.AtlasHeight}, " +
-                                 $"tileSize={AtlasManager.TileSize}, texture ID={AtlasManager.AtlasTextureId}");
-
-                GL.BindTexture(TextureTarget.Texture2D, AtlasManager.AtlasTextureId);
-                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out int w);
-                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureHeight, out int h);
-                GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureInternalFormat, out int fmt);
-                Console.WriteLine($"[Game] Texture verified: {w}x{h}, format={fmt}");
-                GL.BindTexture(TextureTarget.Texture2D, 0);
-            }
-
-            // Load all pre-fetched chunks
+            // Load pre-fetched chunks into both renderer and chunk manager
             foreach (var kv in loadedChunks)
             {
                 var coord = kv.Key;
                 var chunk = kv.Value;
-                var meshFloats = MarchingCubes.GenerateMesh(chunk, 0.5f);
+                
+                var chunkCoord = new ChunkCoord(coord.Item1, coord.Item2, coord.Item3);
+                
+                // Generate mesh for rendering
+                var meshFloats = MarchingCubes.GenerateMesh(chunk, chunkCoord, chunkManager, 0.5f);
+                
+                // Generate collision mesh for physics
+                chunk.GenerateCollisionMesh(meshFloats);
+                
+                // Store chunk in manager for collision queries
+                // Note: You may need to add a method to add pre-generated chunks
+                // For now, the chunk will be generated on-demand when player collides
+                
                 Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 7} vertices");
                 Renderer.LoadMeshForChunk(coord.Item1, coord.Item2, coord.Item3, meshFloats);
             }
 
             Console.WriteLine($"[Game] Loaded {loadedChunks.Count} chunks");
-            Console.WriteLine("[Game] Physics colliders registered with renderer");
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
 
-            // CRITICAL: Wait for minimum physics chunks before allowing full updates
+            float delta = (float)e.Time;
 
-
-            // Still process pending mesh uploads while waiting
-            Renderer.ProcessPendingUploads();
-
-            // Check if player is falling too fast (no ground loaded yet)
-
-
-            // Trigger chunk loading even while waiting
-            if (chunkUpdateTimer == 0f)
-            {
-                Vector3 playerChunk = player.GetPlayersChunk();
-                client?.UpdateLoadedChunks(playerChunk, renderDistance);
-            }
-
-            chunkUpdateTimer += (float)e.Time;
-            if (chunkUpdateTimer >= CHUNK_UPDATE_INTERVAL)
-            {
-                chunkUpdateTimer = 0f;
-                Vector3 playerChunk = player.GetPlayersChunk();
-                client?.UpdateLoadedChunks(playerChunk, renderDistance);
-            }
-
-
-
-
-            // Normal update logic once physics is ready
-
+            // Process pending mesh uploads
             Renderer.ProcessPendingUploads();
 
             if (IsKeyDown(Keys.Escape))
@@ -203,15 +168,14 @@ namespace Aetheris
             // Update player
             player.Update(e, KeyboardState, MouseState);
 
-            // Trigger immediate load on first frame
+            // Chunk loading
             if (chunkUpdateTimer == 0f)
             {
                 Vector3 playerChunk = player.GetPlayersChunk();
                 client?.UpdateLoadedChunks(playerChunk, renderDistance);
             }
 
-            // Periodically update chunk loading
-            chunkUpdateTimer += (float)e.Time;
+            chunkUpdateTimer += delta;
             if (chunkUpdateTimer >= CHUNK_UPDATE_INTERVAL)
             {
                 chunkUpdateTimer = 0f;
@@ -230,7 +194,6 @@ namespace Aetheris
                 renderDistance = Math.Max(renderDistance - 1, 1);
                 Console.WriteLine($"[Game] Render distance: {renderDistance}");
             }
-
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -238,7 +201,7 @@ namespace Aetheris
             base.OnRenderFrame(e);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            // Debug: Raycast to see what player is looking at
+            // Debug: Raycast
             if (KeyboardState.IsKeyPressed(Keys.R))
             {
                 Vector3 forward = player.GetForward();
@@ -255,16 +218,7 @@ namespace Aetheris
                 }
             }
 
-            if (KeyboardState.IsKeyPressed(Keys.D1))
-            {
-                player.TeleportTo(new Vector3(
-                    player.Position.X,
-                    player.Position.Y + 10,
-                    player.Position.Z
-                ));
-            }
-
-            // Debug: Show biome info
+            // Debug: Biome info
             if (KeyboardState.IsKeyPressed(Keys.B))
             {
                 int px = (int)player.Position.X;
@@ -274,7 +228,7 @@ namespace Aetheris
             }
 
             var projection = Matrix4.CreatePerspectiveFieldOfView(
-                MathHelper.DegreesToRadians(60f),
+                OpenTK.Mathematics.MathHelper.DegreesToRadians(60f),
                 Size.X / (float)Size.Y,
                 0.1f,
                 1000f);
@@ -285,43 +239,22 @@ namespace Aetheris
             SwapBuffers();
         }
 
-
-
-        public bool IsPhysicsReady()
-        {
-            lock (physicsLock)
-            {
-                return physicsReady;
-            }
-        }
-        private static int ChunkKey(int cx, int cy, int cz)
-        {
-            unchecked
-            {
-                return (cx * 73856093) ^ (cy * 19349663) ^ (cz * 83492791);
-            }
-        }
         protected override void OnUnload()
         {
             base.OnUnload();
-            player.Cleanup();
 
             Renderer.Dispose();
 
-            // Restore console and close log file cleanly
+            // Restore console
             try
             {
                 if (originalConsoleOut != null)
-                {
                     Console.SetOut(originalConsoleOut);
-                }
                 if (originalConsoleError != null)
-                {
                     Console.SetError(originalConsoleError);
-                }
                 logWriter?.Flush();
                 logWriter?.Dispose();
-                Console.WriteLine("[Game] Cleanup complete (logging stopped)");
+                Console.WriteLine("[Game] Cleanup complete");
             }
             catch (Exception ex)
             {
@@ -329,14 +262,10 @@ namespace Aetheris
             }
         }
 
-        public Vector3 GetPlayerPosition()
-        {
-            return player.Position;
-        }
+        public Vector3 GetPlayerPosition() => player.Position;
 
         public void RunGame() => Run();
 
-        // --- Helper tee writer --- (writes to both original console writer and the log file with timestamps)
         private class TeeTextWriter : TextWriter
         {
             private readonly TextWriter consoleWriter;
@@ -351,7 +280,6 @@ namespace Aetheris
 
             public override Encoding Encoding => Encoding.UTF8;
 
-            // Prefer overriding WriteLine(string) and Write(string) & Write(char)
             public override void WriteLine(string? value)
             {
                 lock (writeLock)
@@ -366,7 +294,6 @@ namespace Aetheris
             {
                 lock (writeLock)
                 {
-                    // For intermediate Writes (no newline), write without timestamp.
                     try { consoleWriter.Write(value); } catch { }
                     try { fileWriter.Write(value); } catch { }
                 }

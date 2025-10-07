@@ -1,657 +1,290 @@
-﻿[2025-10-06 18:50:04.427] [Logging] Started logging to 'physics_debug.log' (overwritten).
-[2025-10-06 18:50:04.447] [Game] PhysicsManager initialized
-[2025-10-06 18:50:04.458] [PSX Effects] Shaders compiled successfully
-[2025-10-06 18:50:04.469] [Player] Manual collision system initialized at (16, 50, 16)
-[2025-10-06 18:50:04.469] [Game] Player initialized with physics
-[2025-10-06 18:50:04.474] [Game] Found atlas at: textures/atlas.png
-[2025-10-06 18:50:04.588] [AtlasManager] Loaded image: textures/atlas.png (256x256)
-[2025-10-06 18:50:04.589] [AtlasManager] Using preferred tile size: 64
-[2025-10-06 18:50:04.589] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
-[2025-10-06 18:50:04.595] [AtlasManager] Successfully uploaded to GL texture 1
-[2025-10-06 18:50:04.595] [AtlasManager] Verified texture dimensions: 256x256
-[2025-10-06 18:50:04.599] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
-[2025-10-06 18:50:04.599] [Game] AtlasManager loaded: 256x256, tileSize=64, texture ID=1
-[2025-10-06 18:50:04.599] [Game] Texture verified: 256x256, format=6408
-[2025-10-06 18:50:04.600] [Game] Loaded 0 chunks
-[2025-10-06 18:50:04.600] [Game] Physics colliders registered with renderer
-[2025-10-06 18:50:04.726] [Player] Pos: (16.0, 49.8, 16.0), Vel: (0.0, -2.4, 0.0), Grounded: False
-[2025-10-06 18:50:04.804] [Player] Pos: (16.0, 49.6, 16.0), Vel: (0.0, -4.0, 0.0), Grounded: False
-[2025-10-06 18:50:04.887] [Player] Pos: (16.0, 49.2, 16.0), Vel: (0.0, -5.7, 0.0), Grounded: False
-[2025-10-06 18:50:04.962] [Player] Pos: (16.0, 48.7, 16.0), Vel: (0.0, -7.2, 0.0), Grounded: False
-[2025-10-06 18:50:04.972] [Client] Chunk update loop starting...
-[2025-10-06 18:50:05.046] [Player] Pos: (16.0, 48.0, 16.0), Vel: (0.0, -8.8, 0.0), Grounded: False
-[2025-10-06 18:50:05.106] [Client] Requesting chunk (0,0,0)
-[2025-10-06 18:50:05.110] [Player] Pos: (16.0, 47.4, 16.0), Vel: (0.0, -10.2, 0.0), Grounded: False
-[2025-10-06 18:50:05.120] [Client] Received chunk (0,0,0): 29274 floats
-[2025-10-06 18:50:05.126] [Client] Requesting chunk (1,0,0)
-[2025-10-06 18:50:05.133] [Client] Requesting chunk (0,0,1)
-[2025-10-06 18:50:05.133] [Client] Received chunk (1,0,0): 23919 floats
-[2025-10-06 18:50:05.134] [Client] Received chunk (0,0,1): 25431 floats
-[2025-10-06 18:50:05.135] [Client] Requesting chunk (0,0,-1)
-[2025-10-06 18:50:05.136] [Client] Received chunk (0,0,-1): 23415 floats
-[2025-10-06 18:50:05.136] [Client] Requesting chunk (-1,0,0)
-[2025-10-06 18:50:05.136] [Client] Requesting chunk (1,0,1)
-[2025-10-06 18:50:05.137] [Renderer] Chunk (0,0,0)
-[2025-10-06 18:50:05.137] [Client] Requesting chunk (1,0,-1)
-[2025-10-06 18:50:05.137] [Client] Received chunk (-1,0,0): 30996 floats
-[2025-10-06 18:50:05.137] [Client] Requesting chunk (-1,0,1)
-[2025-10-06 18:50:05.137] [Client] Requesting chunk (-1,0,-1)
-[2025-10-06 18:50:05.138] [Client] Received chunk (1,0,1): 25977 floats
-[2025-10-06 18:50:05.138] [Client] Requesting chunk (0,-1,0)
-[2025-10-06 18:50:05.138] [Client] Received chunk (1,0,-1): 23583 floats
-[2025-10-06 18:50:05.138] [Client] Requesting chunk (1,-1,0)
-[2025-10-06 18:50:05.139] [Client] Received chunk (-1,0,1): 31017 floats
-[2025-10-06 18:50:05.139] [Client] Requesting chunk (0,-1,1)
-[2025-10-06 18:50:05.139] [Client] Received chunk (-1,0,-1): 23478 floats
-[2025-10-06 18:50:05.141] [Client] Requesting chunk (-1,-1,0)
-[2025-10-06 18:50:05.142] [Client] Received chunk (0,-1,0): 76398 floats
-[2025-10-06 18:50:05.142] [Client] Requesting chunk (0,-1,-1)
-[2025-10-06 18:50:05.142] [Renderer]   Expected world range: (0-32, 0-96, 0-32)
-[2025-10-06 18:50:05.143] [Client] Received chunk (1,-1,0): 83370 floats
-[2025-10-06 18:50:05.144] [Client] Requesting chunk (-1,-1,1)
-[2025-10-06 18:50:05.144] [Renderer]   First vertex at: (2.0, 1.7, -0.0)
-[2025-10-06 18:50:05.144] [Renderer]   Vertex in expected range: False
-[2025-10-06 18:50:05.144] [Renderer] Chunk (0,0,0) BEFORE conversion:
-[2025-10-06 18:50:05.145]   Length: 29274, vertices: 4182
-[2025-10-06 18:50:05.145]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
-[2025-10-06 18:50:05.145] [Client] Received chunk (0,-1,1): 30387 floats
-[2025-10-06 18:50:05.145] [Client] Requesting chunk (-1,-1,-1)
-[2025-10-06 18:50:05.146] [Client] Received chunk (-1,-1,0): 70980 floats
-[2025-10-06 18:50:05.147] [Client] Requesting chunk (1,-1,-1)
-[2025-10-06 18:50:05.148] [Client] Received chunk (0,-1,-1): 37002 floats
-[2025-10-06 18:50:05.148] [Client] Requesting chunk (1,-1,1)
-[2025-10-06 18:50:05.150] [Client] Received chunk (-1,-1,1): 40698 floats
-[2025-10-06 18:50:05.150] [Client] Requesting chunk (-2,0,0)
-[2025-10-06 18:50:05.150] [Client] Received chunk (-1,-1,-1): 62622 floats
-[2025-10-06 18:50:05.150] [Client] Requesting chunk (0,1,0)
-[2025-10-06 18:50:05.151] [Client] Received chunk (1,-1,-1): 14532 floats
-[2025-10-06 18:50:05.151] [Client] Requesting chunk (0,0,2)
-[2025-10-06 18:50:05.151] [Client] Received chunk (1,-1,1): 82488 floats
-[2025-10-06 18:50:05.151] [Client] Requesting chunk (2,0,0)
-[2025-10-06 18:50:05.152] [Client] Received chunk (-2,0,0): 34545 floats
-[2025-10-06 18:50:05.152] [Client] Requesting chunk (0,0,-2)
-[2025-10-06 18:50:05.152] [Client] Received chunk (0,1,0): 0 floats
-[2025-10-06 18:50:05.153] [Client] Received chunk (0,0,2): 28707 floats
-[2025-10-06 18:50:05.153] [Client] Requesting chunk (1,0,-2)
-[2025-10-06 18:50:05.153] [Client] Requesting chunk (2,0,1)
-[2025-10-06 18:50:05.154] [Client] Received chunk (2,0,0): 28728 floats
-[2025-10-06 18:50:05.154] [Client] Requesting chunk (-1,1,0)
-[2025-10-06 18:50:05.154] [Client] Received chunk (0,0,-2): 28686 floats
-[2025-10-06 18:50:05.154] [Client] Requesting chunk (0,1,1)
-[2025-10-06 18:50:05.154] [Client] Received chunk (1,0,-2): 23142 floats
-[2025-10-06 18:50:05.154] [Client] Requesting chunk (2,0,-1)
-[2025-10-06 18:50:05.155] [Client] Received chunk (2,0,1): 32403 floats
-[2025-10-06 18:50:05.155] [Client] Requesting chunk (0,1,-1)
-[2025-10-06 18:50:05.155] [Client] Received chunk (-1,1,0): 0 floats
-[2025-10-06 18:50:05.155] [Client] Requesting chunk (-1,0,2)
-[2025-10-06 18:50:05.155] [Client] Received chunk (0,1,1): 0 floats
-[2025-10-06 18:50:05.155] [Client] Requesting chunk (-2,0,1)
-[2025-10-06 18:50:05.155] [Client] Received chunk (2,0,-1): 23499 floats
-[2025-10-06 18:50:05.155] [Client] Requesting chunk (-1,0,-2)
-[2025-10-06 18:50:05.156] [Client] Received chunk (0,1,-1): 0 floats
-[2025-10-06 18:50:05.156] [Client] Received chunk (-1,0,2): 32529 floats
-[2025-10-06 18:50:05.156] [Client] Received chunk (-2,0,1): 26733 floats
-[2025-10-06 18:50:05.157] [Client] Received chunk (-1,0,-2): 22449 floats
-[2025-10-06 18:50:05.158] [Renderer] Chunk (0,0,0) AFTER conversion:
-[2025-10-06 18:50:05.158]   Length: 33456, vertices: 4182
-[2025-10-06 18:50:05.158]   First vertex: pos=(2.00,1.67,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0635,0.2480)
-[2025-10-06 18:50:05.164] [Renderer] Uploaded chunk (0,0,0): VAO=1, VBO=1, 4182 vertices
-[2025-10-06 18:50:05.164] [Renderer] Chunk (1,0,0)
-[2025-10-06 18:50:05.164] [Renderer]   Expected world range: (32-64, 0-96, 0-32)
-[2025-10-06 18:50:05.164] [Renderer]   First vertex at: (34.0, 1.7, -0.0)
-[2025-10-06 18:50:05.164] [Renderer]   Vertex in expected range: False
-[2025-10-06 18:50:05.164] [Renderer] Chunk (1,0,0) BEFORE conversion:
-[2025-10-06 18:50:05.164]   Length: 23919, vertices: 3417
-[2025-10-06 18:50:05.164]   First vertex: pos=(34.00,1.72,-0.00), normal=(-0.04,-1.00,-0.02), blockType=1
-[2025-10-06 18:50:05.166] [Renderer] Chunk (1,0,0) AFTER conversion:
-[2025-10-06 18:50:05.166]   Length: 27336, vertices: 3417
-[2025-10-06 18:50:05.166]   First vertex: pos=(34.00,1.72,-0.00), normal=(-0.04,-1.00,-0.02), uv=(0.0635,0.2480)
-[2025-10-06 18:50:05.166] [Renderer] Uploaded chunk (1,0,0): VAO=2, VBO=2, 3417 vertices
-[2025-10-06 18:50:05.166] [Renderer] Chunk (0,0,1)
-[2025-10-06 18:50:05.166] [Renderer]   Expected world range: (0-32, 0-96, 32-64)
-[2025-10-06 18:50:05.166] [Renderer]   First vertex at: (2.0, 1.5, 32.0)
-[2025-10-06 18:50:05.166] [Renderer]   Vertex in expected range: False
-[2025-10-06 18:50:05.166] [Renderer] Chunk (0,0,1) BEFORE conversion:
-[2025-10-06 18:50:05.166]   Length: 25431, vertices: 3633
-[2025-10-06 18:50:05.166]   First vertex: pos=(2.00,1.51,32.00), normal=(-0.09,-1.00,-0.02), blockType=1
-[2025-10-06 18:50:05.168] [Renderer] Chunk (0,0,1) AFTER conversion:
-[2025-10-06 18:50:05.168]   Length: 29064, vertices: 3633
-[2025-10-06 18:50:05.168]   First vertex: pos=(2.00,1.51,32.00), normal=(-0.09,-1.00,-0.02), uv=(0.0635,0.2480)
-[2025-10-06 18:50:05.206] [Client] Requesting chunk (-2,0,-1)
-[2025-10-06 18:50:05.206] [Client] Requesting chunk (1,0,2)
-[2025-10-06 18:50:05.206] [Client] Requesting chunk (1,1,0)
-[2025-10-06 18:50:05.206] [Client] Requesting chunk (-1,1,-1)
-[2025-10-06 18:50:05.207] [Client] Received chunk (-2,0,-1): 31458 floats
-[2025-10-06 18:50:05.207] [Client] Requesting chunk (-1,1,1)
-[2025-10-06 18:50:05.207] [Client] Received chunk (1,0,2): 25473 floats
-[2025-10-06 18:50:05.207] [Client] Requesting chunk (1,1,-1)
-[2025-10-06 18:50:05.207] [Client] Received chunk (1,1,0): 0 floats
-[2025-10-06 18:50:05.207] [Client] Requesting chunk (1,1,1)
-[2025-10-06 18:50:05.208] [Client] Received chunk (-1,1,-1): 0 floats
-[2025-10-06 18:50:05.208] [Client] Requesting chunk (0,-1,2)
-[2025-10-06 18:50:05.208] [Client] Received chunk (-1,1,1): 0 floats
-[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,1,0)
-[2025-10-06 18:50:05.208] [Client] Received chunk (1,1,-1): 0 floats
-[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,-1,0)
-[2025-10-06 18:50:05.208] [Client] Received chunk (1,1,1): 0 floats
-[2025-10-06 18:50:05.208] [Client] Requesting chunk (-2,0,-2)
-[2025-10-06 18:50:05.208] [Client] Received chunk (0,-1,2): 0 floats
-[2025-10-06 18:50:05.208] [Client] Requesting chunk (0,-1,-2)
-[2025-10-06 18:50:05.209] [Client] Received chunk (-2,1,0): 0 floats
-[2025-10-06 18:50:05.209] [Client] Requesting chunk (0,1,-2)
-[2025-10-06 18:50:05.210] [Client] Received chunk (-2,-1,0): 53676 floats
-[2025-10-06 18:50:05.210] [Client] Requesting chunk (0,1,2)
-[2025-10-06 18:50:05.211] [Client] Received chunk (-2,0,-2): 23331 floats
-[2025-10-06 18:50:05.211] [Client] Requesting chunk (-2,0,2)
-[2025-10-06 18:50:05.212] [Client] Received chunk (0,-1,-2): 31080 floats
-[2025-10-06 18:50:05.212] [Client] Requesting chunk (2,0,2)
-[2025-10-06 18:50:05.213] [Client] Received chunk (0,1,-2): 0 floats
-[2025-10-06 18:50:05.213] [Client] Requesting chunk (2,0,-2)
-[2025-10-06 18:50:05.213] [Client] Received chunk (0,1,2): 0 floats
-[2025-10-06 18:50:05.213] [Client] Requesting chunk (2,-1,0)
-[2025-10-06 18:50:05.216] [Client] Received chunk (-2,0,2): 16380 floats
-[2025-10-06 18:50:05.216] [Client] Requesting chunk (2,1,0)
-[2025-10-06 18:50:05.216] [Client] Received chunk (2,0,2): 31269 floats
-[2025-10-06 18:50:05.217] [Client] Requesting chunk (1,1,2)
-[2025-10-06 18:50:05.217] [Client] Received chunk (2,0,-2): 23730 floats
-[2025-10-06 18:50:05.217] [Client] Requesting chunk (-1,1,-2)
-[2025-10-06 18:50:05.218] [Client] Received chunk (2,-1,0): 15666 floats
-[2025-10-06 18:50:05.219] [Client] Received chunk (-1,1,-2): 0 floats
-[2025-10-06 18:50:05.219] [Client] Requesting chunk (3,0,0)
-[2025-10-06 18:50:05.219] [Client] Received chunk (1,1,2): 0 floats
-[2025-10-06 18:50:05.219] [Client] Received chunk (2,1,0): 0 floats
-[2025-10-06 18:50:05.220] [Client] Received chunk (3,0,0): 26859 floats
-[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,1,1)
-[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,-1,1)
-[2025-10-06 18:50:05.220] [Client] Requesting chunk (-1,1,2)
-[2025-10-06 18:50:05.220] [Client] Requesting chunk (1,-1,2)
-[2025-10-06 18:50:05.220] [Client] Received chunk (2,1,1): 0 floats
-[2025-10-06 18:50:05.220] [Client] Requesting chunk (2,1,-1)
-[2025-10-06 18:50:05.222] [Client] Received chunk (2,-1,1): 97776 floats
-[2025-10-06 18:50:05.222] [Client] Requesting chunk (2,-1,-1)
-[2025-10-06 18:50:05.222] [Client] Received chunk (-1,1,2): 0 floats
-[2025-10-06 18:50:05.222] [Client] Requesting chunk (0,0,3)
-[2025-10-06 18:50:05.222] [Client] Received chunk (1,-1,2): 19089 floats
-[2025-10-06 18:50:05.222] [Client] Requesting chunk (1,-1,-2)
-[2025-10-06 18:50:05.222] [Client] Received chunk (2,1,-1): 0 floats
-[2025-10-06 18:50:05.222] [Client] Requesting chunk (-1,-1,-2)
-[2025-10-06 18:50:05.222] [Client] Received chunk (2,-1,-1): 0 floats
-[2025-10-06 18:50:05.223] [Client] Requesting chunk (-1,-1,2)
-[2025-10-06 18:50:05.223] [Client] Received chunk (1,-1,-2): 3150 floats
-[2025-10-06 18:50:05.223] [Client] Received chunk (0,0,3): 32361 floats
-[2025-10-06 18:50:05.223] [Client] Received chunk (-1,-1,-2): 55650 floats
-[2025-10-06 18:50:05.224] [Client] Received chunk (-1,-1,2): 1890 floats
-[2025-10-06 18:50:05.305] [Client] Requesting chunk (1,1,-2)
-[2025-10-06 18:50:05.305] [Client] Requesting chunk (-2,1,1)
-[2025-10-06 18:50:05.305] [Client] Requesting chunk (-2,-1,1)
-[2025-10-06 18:50:05.306] [Client] Requesting chunk (-2,1,-1)
-[2025-10-06 18:50:05.306] [Client] Received chunk (1,1,-2): 0 floats
-[2025-10-06 18:50:05.306] [Client] Requesting chunk (-2,-1,-1)
-[2025-10-06 18:50:05.306] [Client] Received chunk (-2,1,1): 0 floats
-[2025-10-06 18:50:05.307] [Client] Requesting chunk (0,0,-3)
-[2025-10-06 18:50:05.307] [Client] Received chunk (-2,-1,1): 59325 floats
-[2025-10-06 18:50:05.307] [Client] Requesting chunk (-3,0,0)
-[2025-10-06 18:50:05.308] [Client] Received chunk (-2,1,-1): 0 floats
-[2025-10-06 18:50:05.308] [Client] Requesting chunk (1,0,-3)
-[2025-10-06 18:50:05.308] [Client] Received chunk (-2,-1,-1): 3654 floats
-[2025-10-06 18:50:05.309] [Client] Requesting chunk (-1,0,3)
-[2025-10-06 18:50:05.310] [Client] Received chunk (0,0,-3): 30513 floats
-[2025-10-06 18:50:05.310] [Client] Requesting chunk (1,0,3)
-[2025-10-06 18:50:05.311] [Client] Received chunk (-3,0,0): 28497 floats
-[2025-10-06 18:50:05.311] [Client] Requesting chunk (-3,0,1)
-[2025-10-06 18:50:05.311] [Client] Received chunk (1,0,-3): 24171 floats
-[2025-10-06 18:50:05.311] [Client] Requesting chunk (3,0,1)
-[2025-10-06 18:50:05.312] [Client] Received chunk (-1,0,3): 34377 floats
-[2025-10-06 18:50:05.312] [Client] Requesting chunk (-1,0,-3)
-[2025-10-06 18:50:05.312] [Client] Received chunk (1,0,3): 28392 floats
-[2025-10-06 18:50:05.313] [Client] Requesting chunk (-3,0,-1)
-[2025-10-06 18:50:05.313] [Client] Received chunk (-3,0,1): 22785 floats
-[2025-10-06 18:50:05.314] [Client] Requesting chunk (3,0,-1)
-[2025-10-06 18:50:05.314] [Client] Received chunk (3,0,1): 25725 floats
-[2025-10-06 18:50:05.314] [Client] Requesting chunk (-2,1,2)
-[2025-10-06 18:50:05.314] [Client] Received chunk (-1,0,-3): 22470 floats
-[2025-10-06 18:50:05.314] [Client] Requesting chunk (-2,-1,2)
-[2025-10-06 18:50:05.315] [Client] Received chunk (-3,0,-1): 30429 floats
-[2025-10-06 18:50:05.315] [Client] Requesting chunk (-2,1,-2)
-[2025-10-06 18:50:05.316] [Client] Received chunk (3,0,-1): 25368 floats
-[2025-10-06 18:50:05.316] [Client] Requesting chunk (2,-1,-2)
-[2025-10-06 18:50:05.316] [Client] Received chunk (-2,1,2): 0 floats
-[2025-10-06 18:50:05.316] [Client] Requesting chunk (-2,-1,-2)
-[2025-10-06 18:50:05.316] [Client] Received chunk (-2,-1,2): 34167 floats
-[2025-10-06 18:50:05.316] [Client] Requesting chunk (2,1,2)
-[2025-10-06 18:50:05.316] [Client] Received chunk (-2,1,-2): 0 floats
-[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,-1,2)
-[2025-10-06 18:50:05.317] [Client] Received chunk (2,-1,-2): 0 floats
-[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,1,-2)
-[2025-10-06 18:50:05.317] [Client] Received chunk (-2,-1,-2): 0 floats
-[2025-10-06 18:50:05.317] [Client] Requesting chunk (2,0,3)
-[2025-10-06 18:50:05.317] [Client] Received chunk (2,1,2): 0 floats
-[2025-10-06 18:50:05.317] [Client] Requesting chunk (0,-1,3)
-[2025-10-06 18:50:05.318] [Client] Received chunk (2,-1,2): 77700 floats
-[2025-10-06 18:50:05.318] [Client] Requesting chunk (0,1,3)
-[2025-10-06 18:50:05.318] [Client] Received chunk (2,1,-2): 0 floats
-[2025-10-06 18:50:05.318] [Client] Requesting chunk (3,0,-2)
-[2025-10-06 18:50:05.319] [Client] Received chunk (2,0,3): 33453 floats
-[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,-1,0)
-[2025-10-06 18:50:05.319] [Client] Received chunk (0,-1,3): 0 floats
-[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,1,0)
-[2025-10-06 18:50:05.319] [Client] Received chunk (0,1,3): 0 floats
-[2025-10-06 18:50:05.319] [Client] Requesting chunk (3,0,2)
-[2025-10-06 18:50:05.319] [Client] Received chunk (3,0,-2): 28308 floats
-[2025-10-06 18:50:05.319] [Client] Requesting chunk (0,1,-3)
-[2025-10-06 18:50:05.320] [Client] Received chunk (3,-1,0): 9597 floats
-[2025-10-06 18:50:05.320] [Client] Requesting chunk (2,0,-3)
-[2025-10-06 18:50:05.320] [Client] Received chunk (3,1,0): 0 floats
-[2025-10-06 18:50:05.321] [Client] Received chunk (3,0,2): 20874 floats
-[2025-10-06 18:50:05.322] [Client] Received chunk (0,1,-3): 0 floats
-[2025-10-06 18:50:05.322] [Client] Received chunk (2,0,-3): 29883 floats
-[2025-10-06 18:50:05.402] [Client] Requesting chunk (-3,-1,0)
-[2025-10-06 18:50:05.402] [Client] Requesting chunk (-3,0,2)
-[2025-10-06 18:50:05.403] [Client] Requesting chunk (0,-1,-3)
-[2025-10-06 18:50:05.403] [Client] Requesting chunk (-3,1,0)
-[2025-10-06 18:50:05.403] [Client] Received chunk (-3,-1,0): 2898 floats
-[2025-10-06 18:50:05.403] [Client] Requesting chunk (-2,0,-3)
-[2025-10-06 18:50:05.403] [Client] Received chunk (-3,0,2): 20223 floats
-[2025-10-06 18:50:05.404] [Client] Requesting chunk (-2,0,3)
-[2025-10-06 18:50:05.404] [Client] Received chunk (0,-1,-3): 0 floats
-[2025-10-06 18:50:05.404] [Client] Requesting chunk (-3,0,-2)
-[2025-10-06 18:50:05.404] [Client] Received chunk (-3,1,0): 0 floats
-[2025-10-06 18:50:05.404] [Client] Requesting chunk (1,-1,-3)
-[2025-10-06 18:50:05.404] [Client] Received chunk (-2,0,-3): 24675 floats
-[2025-10-06 18:50:05.404] [Client] Requesting chunk (3,1,1)
-[2025-10-06 18:50:05.405] [Client] Received chunk (-2,0,3): 31332 floats
-[2025-10-06 18:50:05.405] [Client] Requesting chunk (1,-1,3)
-[2025-10-06 18:50:05.406] [Client] Received chunk (-3,0,-2): 22596 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (1,1,3)
-[2025-10-06 18:50:05.406] [Client] Received chunk (1,-1,-3): 0 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,1,3)
-[2025-10-06 18:50:05.406] [Client] Received chunk (3,1,1): 0 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,-1,3)
-[2025-10-06 18:50:05.406] [Client] Received chunk (1,-1,3): 10101 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (3,-1,-1)
-[2025-10-06 18:50:05.406] [Client] Received chunk (1,1,3): 0 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (3,1,-1)
-[2025-10-06 18:50:05.406] [Client] Received chunk (-1,1,3): 0 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (-1,-1,-3)
-[2025-10-06 18:50:05.406] [Client] Received chunk (-1,-1,3): 0 floats
-[2025-10-06 18:50:05.406] [Client] Requesting chunk (1,1,-3)
-[2025-10-06 18:50:05.407] [Client] Received chunk (3,-1,-1): 0 floats
-[2025-10-06 18:50:05.407] [Client] Requesting chunk (-1,1,-3)
-[2025-10-06 18:50:05.407] [Client] Received chunk (3,1,-1): 0 floats
-[2025-10-06 18:50:05.407] [Client] Requesting chunk (3,-1,1)
-[2025-10-06 18:50:05.407] [Client] Received chunk (-1,-1,-3): 0 floats
-[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,1,-1)
-[2025-10-06 18:50:05.407] [Client] Received chunk (1,1,-3): 0 floats
-[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,1,1)
-[2025-10-06 18:50:05.407] [Client] Received chunk (-1,1,-3): 0 floats
-[2025-10-06 18:50:05.407] [Client] Requesting chunk (-3,-1,1)
-[2025-10-06 18:50:05.408] [Client] Received chunk (3,-1,1): 61992 floats
-[2025-10-06 18:50:05.408] [Client] Requesting chunk (-3,-1,-1)
-[2025-10-06 18:50:05.408] [Client] Received chunk (-3,1,-1): 0 floats
-[2025-10-06 18:50:05.408] [Client] Requesting chunk (-4,0,0)
-[2025-10-06 18:50:05.408] [Client] Received chunk (-3,1,1): 0 floats
-[2025-10-06 18:50:05.408] [Client] Requesting chunk (4,0,0)
-[2025-10-06 18:50:05.409] [Client] Received chunk (-3,-1,1): 70938 floats
-[2025-10-06 18:50:05.410] [Client] Requesting chunk (0,0,-4)
-[2025-10-06 18:50:05.410] [Client] Received chunk (-3,-1,-1): 0 floats
-[2025-10-06 18:50:05.410] [Client] Requesting chunk (0,0,4)
-[2025-10-06 18:50:05.411] [Client] Received chunk (-4,0,0): 24864 floats
-[2025-10-06 18:50:05.411] [Client] Requesting chunk (3,1,-2)
-[2025-10-06 18:50:05.412] [Client] Received chunk (4,0,0): 30954 floats
-[2025-10-06 18:50:05.412] [Client] Requesting chunk (3,-1,-2)
-[2025-10-06 18:50:05.415] [Client] Received chunk (0,0,-4): 25263 floats
-[2025-10-06 18:50:05.415] [Client] Requesting chunk (2,1,3)
-[2025-10-06 18:50:05.416] [Client] Received chunk (0,0,4): 26859 floats
-[2025-10-06 18:50:05.416] [Client] Requesting chunk (2,-1,3)
-[2025-10-06 18:50:05.416] [Client] Received chunk (3,1,-2): 0 floats
-[2025-10-06 18:50:05.416] [Client] Requesting chunk (2,1,-3)
-[2025-10-06 18:50:05.416] [Client] Received chunk (3,-1,-2): 0 floats
-[2025-10-06 18:50:05.416] [Client] Received chunk (2,1,3): 0 floats
-[2025-10-06 18:50:05.417] [Client] Received chunk (2,-1,3): 66150 floats
-[2025-10-06 18:50:05.417] [Client] Received chunk (2,1,-3): 0 floats
-[2025-10-06 18:50:05.510] [Client] Requesting chunk (-2,1,3)
-[2025-10-06 18:50:05.511] [Client] Requesting chunk (3,1,2)
-[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,-1,-2)
-[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,1,-2)
-[2025-10-06 18:50:05.511] [Client] Received chunk (-2,1,3): 0 floats
-[2025-10-06 18:50:05.511] [Client] Requesting chunk (-3,-1,2)
-[2025-10-06 18:50:05.512] [Client] Received chunk (3,1,2): 0 floats
-[2025-10-06 18:50:05.512] [Client] Requesting chunk (-3,1,2)
-[2025-10-06 18:50:05.512] [Client] Received chunk (-3,-1,-2): 0 floats
-[2025-10-06 18:50:05.513] [Client] Requesting chunk (-2,-1,-3)
-[2025-10-06 18:50:05.513] [Client] Received chunk (-3,1,-2): 0 floats
-[2025-10-06 18:50:05.514] [Client] Requesting chunk (-2,1,-3)
-[2025-10-06 18:50:05.514] [Client] Received chunk (-3,-1,2): 31395 floats
-[2025-10-06 18:50:05.514] [Client] Requesting chunk (-2,-1,3)
-[2025-10-06 18:50:05.514] [Client] Received chunk (-3,1,2): 0 floats
-[2025-10-06 18:50:05.514] [Client] Requesting chunk (3,-1,2)
-[2025-10-06 18:50:05.514] [Client] Received chunk (-2,-1,-3): 0 floats
-[2025-10-06 18:50:05.515] [Client] Requesting chunk (2,-1,-3)
-[2025-10-06 18:50:05.515] [Client] Received chunk (-2,1,-3): 0 floats
-[2025-10-06 18:50:05.515] [Client] Requesting chunk (0,1,4)
-[2025-10-06 18:50:05.515] [Client] Received chunk (-2,-1,3): 29400 floats
-[2025-10-06 18:50:05.516] [Client] Requesting chunk (-4,-1,0)
-[2025-10-06 18:50:05.516] [Client] Received chunk (3,-1,2): 37275 floats
-[2025-10-06 18:50:05.516] [Client] Requesting chunk (0,1,-4)
-[2025-10-06 18:50:05.517] [Client] Received chunk (2,-1,-3): 0 floats
-[2025-10-06 18:50:05.517] [Client] Requesting chunk (0,-1,-4)
-[2025-10-06 18:50:05.517] [Client] Received chunk (0,1,4): 0 floats
-[2025-10-06 18:50:05.518] [Client] Requesting chunk (4,-1,0)
-[2025-10-06 18:50:05.518] [Client] Received chunk (-4,-1,0): 12684 floats
-[2025-10-06 18:50:05.518] [Client] Requesting chunk (-4,1,0)
-[2025-10-06 18:50:05.518] [Client] Received chunk (0,1,-4): 0 floats
-[2025-10-06 18:50:05.518] [Client] Requesting chunk (0,-1,4)
-[2025-10-06 18:50:05.518] [Client] Received chunk (0,-1,-4): 0 floats
-[2025-10-06 18:50:05.518] [Client] Requesting chunk (4,1,0)
-[2025-10-06 18:50:05.518] [Client] Received chunk (4,-1,0): 54411 floats
-[2025-10-06 18:50:05.518] [Client] Received chunk (-4,1,0): 0 floats
-[2025-10-06 18:50:05.519] [Client] Received chunk (0,-1,4): 13167 floats
-[2025-10-06 18:50:05.519] [Client] Received chunk (4,1,0): 0 floats
-[2025-10-06 18:50:05.539] [Player] Pos: (16.0, 41.1, 16.0), Vel: (0.0, -18.7, 0.0), Grounded: False
-[2025-10-06 18:50:05.795] [Player] Pos: (16.0, 36.1, 16.0), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:06.174] [Player] Pos: (16.0, 36.1, 16.0), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:06.545] [Player] Pos: (15.0, 36.1, 15.3), Vel: (-6.6, 0.0, -4.6), Grounded: True
-[2025-10-06 18:50:06.888] [Player] Pos: (14.1, 36.1, 14.7), Vel: (-0.8, 0.0, -0.1), Grounded: False
-[2025-10-06 18:50:07.226] [Player] Pos: (13.6, 36.4, 15.2), Vel: (-3.9, 0.0, 1.5), Grounded: True
-[2025-10-06 18:50:07.567] [Player] Pos: (12.7, 37.4, 15.5), Vel: (-7.9, -0.2, 1.4), Grounded: False
-[2025-10-06 18:50:07.905] [Player] Pos: (11.9, 38.1, 15.8), Vel: (-4.6, -0.3, 6.6), Grounded: False
-[2025-10-06 18:50:08.253] [Player] Pos: (11.1, 38.1, 16.9), Vel: (-4.6, 0.0, 6.6), Grounded: True
-[2025-10-06 18:50:08.618] [Player] Pos: (10.4, 38.1, 18.0), Vel: (-4.6, 0.0, 6.6), Grounded: True
-[2025-10-06 18:50:08.985] [Player] Pos: (9.1, 38.1, 18.7), Vel: (-7.7, 0.0, 2.2), Grounded: True
-[2025-10-06 18:50:09.353] [Player] Pos: (7.8, 38.1, 19.0), Vel: (-7.9, 0.0, 1.5), Grounded: True
-[2025-10-06 18:50:09.709] [Player] Pos: (6.6, 38.1, 19.8), Vel: (-5.3, 0.0, 6.1), Grounded: True
-[2025-10-06 18:50:10.053] [Player] Pos: (6.1, 38.4, 20.7), Vel: (-0.2, 0.0, 0.3), Grounded: True
-[2025-10-06 18:50:10.390] [Player] Pos: (5.3, 38.4, 21.7), Vel: (-4.6, -0.3, 6.6), Grounded: False
-[2025-10-06 18:50:10.740] [Player] Pos: (4.7, 39.4, 22.8), Vel: (-4.6, 0.0, 6.6), Grounded: False
-[2025-10-06 18:50:11.082] [Player] Pos: (4.0, 40.1, 23.8), Vel: (-4.6, 0.0, 6.6), Grounded: False
-[2025-10-06 18:50:11.428] [Player] Pos: (3.4, 40.1, 24.8), Vel: (-3.1, 0.0, 4.4), Grounded: True
-[2025-10-06 18:50:11.790] [Player] Pos: (3.3, 40.1, 24.9), Vel: (-0.3, 0.0, 0.4), Grounded: True
-[2025-10-06 18:50:12.217] [Player] Pos: (3.3, 40.1, 24.9), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:12.641] [Player] Pos: (3.0, 40.4, 26.1), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:13.067] [Player] Pos: (2.6, 40.4, 27.7), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:13.498] [Player] Pos: (2.4, 41.4, 28.7), Vel: (-0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:13.907] [Player] Pos: (2.6, 42.1, 30.2), Vel: (0.2, 0.0, 8.4), Grounded: True
-[2025-10-06 18:50:14.325] [Player] Pos: (2.3, 42.4, 31.8), Vel: (-2.1, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:14.732] [Player] Pos: (2.3, 42.4, 32.0), Vel: (0.7, 0.0, 1.2), Grounded: False
-[2025-10-06 18:50:14.946] [Client] Requesting chunk (-1,0,4)
-[2025-10-06 18:50:14.946] [Client] Requesting chunk (1,0,4)
-[2025-10-06 18:50:14.946] [Client] Requesting chunk (2,0,4)
-[2025-10-06 18:50:14.946] [Client] Requesting chunk (-3,0,3)
-[2025-10-06 18:50:14.947] [Client] Received chunk (-1,0,4): 30345 floats
-[2025-10-06 18:50:14.947] [Client] Requesting chunk (3,0,3)
-[2025-10-06 18:50:14.947] [Client] Received chunk (1,0,4): 31374 floats
-[2025-10-06 18:50:14.947] [Client] Requesting chunk (-2,0,4)
-[2025-10-06 18:50:14.948] [Client] Received chunk (2,0,4): 35910 floats
-[2025-10-06 18:50:14.948] [Client] Requesting chunk (1,1,4)
-[2025-10-06 18:50:14.948] [Client] Received chunk (-3,0,3): 29547 floats
-[2025-10-06 18:50:14.948] [Client] Requesting chunk (1,-1,4)
-[2025-10-06 18:50:14.949] [Client] Received chunk (3,0,3): 31563 floats
-[2025-10-06 18:50:14.949] [Client] Requesting chunk (-1,-1,4)
-[2025-10-06 18:50:14.949] [Client] Received chunk (-2,0,4): 30954 floats
-[2025-10-06 18:50:14.949] [Client] Requesting chunk (-1,1,4)
-[2025-10-06 18:50:14.949] [Client] Received chunk (1,1,4): 0 floats
-[2025-10-06 18:50:14.949] [Client] Requesting chunk (4,0,1)
-[2025-10-06 18:50:14.950] [Client] Received chunk (1,-1,4): 61530 floats
-[2025-10-06 18:50:14.950] [Client] Requesting chunk (0,0,5)
-[2025-10-06 18:50:14.950] [Client] Received chunk (-1,-1,4): 11592 floats
-[2025-10-06 18:50:14.950] [Client] Requesting chunk (-4,0,1)
-[2025-10-06 18:50:14.950] [Client] Received chunk (-1,1,4): 0 floats
-[2025-10-06 18:50:14.951] [Client] Requesting chunk (3,1,3)
-[2025-10-06 18:50:14.951] [Client] Received chunk (4,0,1): 18207 floats
-[2025-10-06 18:50:14.951] [Client] Requesting chunk (-2,1,4)
-[2025-10-06 18:50:14.951] [Client] Received chunk (0,0,5): 41559 floats
-[2025-10-06 18:50:14.951] [Client] Requesting chunk (-2,-1,4)
-[2025-10-06 18:50:14.951] [Client] Received chunk (-4,0,1): 21588 floats
-[2025-10-06 18:50:14.951] [Client] Requesting chunk (-3,1,3)
-[2025-10-06 18:50:14.951] [Client] Received chunk (3,1,3): 0 floats
-[2025-10-06 18:50:14.951] [Client] Requesting chunk (-3,-1,3)
-[2025-10-06 18:50:14.951] [Client] Received chunk (-2,1,4): 0 floats
-[2025-10-06 18:50:14.952] [Client] Requesting chunk (2,-1,4)
-[2025-10-06 18:50:14.952] [Client] Received chunk (-2,-1,4): 42294 floats
-[2025-10-06 18:50:14.952] [Client] Requesting chunk (2,1,4)
-[2025-10-06 18:50:14.952] [Client] Received chunk (-3,1,3): 0 floats
-[2025-10-06 18:50:14.952] [Client] Requesting chunk (3,-1,3)
-[2025-10-06 18:50:14.952] [Client] Received chunk (-3,-1,3): 462 floats
-[2025-10-06 18:50:14.952] [Client] Requesting chunk (4,-1,1)
-[2025-10-06 18:50:14.953] [Client] Received chunk (2,-1,4): 70644 floats
-[2025-10-06 18:50:14.953] [Client] Requesting chunk (-4,-1,1)
-[2025-10-06 18:50:14.953] [Client] Received chunk (2,1,4): 0 floats
-[2025-10-06 18:50:14.953] [Client] Requesting chunk (0,-1,5)
-[2025-10-06 18:50:14.953] [Client] Received chunk (3,-1,3): 10983 floats
-[2025-10-06 18:50:14.953] [Client] Requesting chunk (-4,1,1)
-[2025-10-06 18:50:14.953] [Client] Received chunk (4,-1,1): 56931 floats
-[2025-10-06 18:50:14.954] [Client] Requesting chunk (0,1,5)
-[2025-10-06 18:50:14.954] [Client] Received chunk (-4,-1,1): 78813 floats
-[2025-10-06 18:50:14.955] [Client] Requesting chunk (4,1,1)
-[2025-10-06 18:50:14.955] [Client] Received chunk (0,-1,5): 28119 floats
-[2025-10-06 18:50:14.955] [Client] Received chunk (-4,1,1): 0 floats
-[2025-10-06 18:50:14.955] [Client] Received chunk (0,1,5): 0 floats
-[2025-10-06 18:50:14.955] [Client] Received chunk (4,1,1): 0 floats
-[2025-10-06 18:50:15.184] [Player] Pos: (2.4, 43.4, 33.0), Vel: (-0.4, 0.0, 1.5), Grounded: True
-[2025-10-06 18:50:15.633] [Player] Pos: (2.2, 43.8, 33.7), Vel: (-0.5, -0.0, 1.8), Grounded: False
-[2025-10-06 18:50:16.057] [Player] Pos: (2.2, 44.1, 35.1), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:16.484] [Player] Pos: (2.3, 45.1, 36.9), Vel: (-1.0, -0.3, 8.1), Grounded: False
-[2025-10-06 18:50:16.892] [Player] Pos: (2.2, 45.9, 37.7), Vel: (1.9, 0.0, 3.5), Grounded: False
-[2025-10-06 18:50:17.287] [Player] Pos: (2.4, 45.9, 38.0), Vel: (-0.1, 0.0, 0.4), Grounded: False
-[2025-10-06 18:50:17.689] [Player] Pos: (2.1, 46.1, 39.0), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:18.101] [Player] Pos: (1.7, 46.1, 40.5), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:18.516] [Player] Pos: (1.7, 46.1, 42.1), Vel: (2.9, 0.0, 7.6), Grounded: True
-[2025-10-06 18:50:18.921] [Player] Pos: (2.2, 46.1, 43.6), Vel: (0.2, 0.0, 8.4), Grounded: True
-[2025-10-06 18:50:19.324] [Player] Pos: (2.1, 46.4, 45.0), Vel: (-0.7, 0.0, 2.3), Grounded: False
-[2025-10-06 18:50:19.738] [Player] Pos: (1.7, 46.4, 46.3), Vel: (-2.2, 0.0, 7.7), Grounded: False
-[2025-10-06 18:50:20.164] [Player] Pos: (1.3, 46.6, 48.0), Vel: (-2.2, 0.0, 7.7), Grounded: False
-[2025-10-06 18:50:20.582] [Player] Pos: (1.0, 47.9, 49.2), Vel: (-2.2, 0.0, 7.7), Grounded: False
-[2025-10-06 18:50:20.979] [Player] Pos: (0.7, 48.1, 50.5), Vel: (-2.2, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:21.384] [Player] Pos: (0.4, 48.1, 51.5), Vel: (-0.6, 0.0, 2.0), Grounded: True
-[2025-10-06 18:50:21.768] [Player] Pos: (0.4, 48.1, 51.5), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:22.104] [Player] Pos: (0.9, 48.1, 52.3), Vel: (3.8, 0.0, 7.1), Grounded: True
-[2025-10-06 18:50:22.420] [Player] Pos: (1.4, 48.4, 53.3), Vel: (3.8, -0.3, 7.1), Grounded: False
-[2025-10-06 18:50:22.735] [Player] Pos: (2.0, 49.1, 54.2), Vel: (1.4, 0.0, 2.6), Grounded: True
-[2025-10-06 18:50:23.065] [Player] Pos: (2.5, 50.1, 55.3), Vel: (3.8, 0.0, 7.1), Grounded: True
-[2025-10-06 18:50:23.382] [Player] Pos: (3.1, 50.4, 56.3), Vel: (3.8, 0.0, 7.1), Grounded: True
-[2025-10-06 18:50:23.672] [Player] Pos: (3.4, 50.4, 56.6), Vel: (0.7, 0.0, 1.3), Grounded: True
-[2025-10-06 18:50:23.972] [Player] Pos: (3.5, 50.4, 56.6), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:24.330] [Player] Pos: (3.6, 50.4, 56.6), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:24.701] [Player] Pos: (3.8, 50.4, 57.0), Vel: (3.2, 0.0, 7.3), Grounded: False
-[2025-10-06 18:50:25.081] [Player] Pos: (4.4, 50.4, 58.4), Vel: (3.2, 0.0, 7.3), Grounded: True
-[2025-10-06 18:50:25.456] [Player] Pos: (4.9, 51.1, 59.5), Vel: (2.0, 0.0, 4.6), Grounded: False
-[2025-10-06 18:50:25.832] [Player] Pos: (5.5, 51.9, 60.3), Vel: (3.2, 0.0, 7.3), Grounded: False
-[2025-10-06 18:50:26.196] [Player] Pos: (5.8, 52.1, 61.5), Vel: (-0.2, -0.2, 8.5), Grounded: False
-[2025-10-06 18:50:26.567] [Player] Pos: (5.5, 52.1, 62.8), Vel: (-2.6, 0.0, 7.6), Grounded: True
-[2025-10-06 18:50:26.950] [Player] Pos: (5.1, 52.1, 64.3), Vel: (-0.0, 0.0, 8.7), Grounded: True
-[2025-10-06 18:50:26.989] [Client] Requesting chunk (-1,0,5)
-[2025-10-06 18:50:26.990] [Client] Requesting chunk (1,0,5)
-[2025-10-06 18:50:26.990] [Client] Requesting chunk (2,0,5)
-[2025-10-06 18:50:26.990] [Client] Requesting chunk (-3,0,4)
-[2025-10-06 18:50:27.109] [Client] Received chunk (-1,0,5): 52269 floats
-[2025-10-06 18:50:27.109] [Client] Requesting chunk (3,0,4)
-[2025-10-06 18:50:27.109] [Client] Received chunk (1,0,5): 32361 floats
-[2025-10-06 18:50:27.110] [Client] Requesting chunk (-2,0,5)
-[2025-10-06 18:50:27.110] [Client] Received chunk (2,0,5): 47187 floats
-[2025-10-06 18:50:27.110] [Client] Requesting chunk (1,1,5)
-[2025-10-06 18:50:27.251] [Client] Received chunk (-3,0,4): 30009 floats
-[2025-10-06 18:50:27.251] [Client] Requesting chunk (1,-1,5)
-[2025-10-06 18:50:27.251] [Client] Received chunk (3,0,4): 28665 floats
-[2025-10-06 18:50:27.251] [Client] Requesting chunk (-1,-1,5)
-[2025-10-06 18:50:27.375] [Client] Received chunk (-2,0,5): 29001 floats
-[2025-10-06 18:50:27.375] [Client] Requesting chunk (-1,1,5)
-[2025-10-06 18:50:27.376] [Client] Received chunk (1,1,5): 0 floats
-[2025-10-06 18:50:27.376] [Client] Requesting chunk (4,0,2)
-[2025-10-06 18:50:27.377] [Client] Received chunk (1,-1,5): 39459 floats
-[2025-10-06 18:50:27.377] [Client] Requesting chunk (0,0,6)
-[2025-10-06 18:50:27.478] [Client] Received chunk (-1,-1,5): 15540 floats
-[2025-10-06 18:50:27.478] [Client] Requesting chunk (-4,0,2)
-[2025-10-06 18:50:27.485] [Client] Received chunk (-1,1,5): 0 floats
-[2025-10-06 18:50:27.485] [Client] Requesting chunk (3,1,4)
-[2025-10-06 18:50:27.486] [Client] Received chunk (4,0,2): 36498 floats
-[2025-10-06 18:50:27.486] [Client] Requesting chunk (-2,1,5)
-[2025-10-06 18:50:27.565] [Player] Pos: (6.2, 52.1, 67.8), Vel: (3.1, 0.0, 7.4), Grounded: True
-[2025-10-06 18:50:27.632] [Client] Received chunk (0,0,6): 32676 floats
-[2025-10-06 18:50:27.632] [Client] Requesting chunk (-2,-1,5)
-[2025-10-06 18:50:27.727] [Client] Received chunk (-4,0,2): 36645 floats
-[2025-10-06 18:50:27.727] [Client] Requesting chunk (-3,1,4)
-[2025-10-06 18:50:27.727] [Client] Received chunk (3,1,4): 0 floats
-[2025-10-06 18:50:27.728] [Client] Requesting chunk (-3,-1,4)
-[2025-10-06 18:50:27.735] [Client] Received chunk (-2,1,5): 0 floats
-[2025-10-06 18:50:27.736] [Client] Requesting chunk (2,-1,5)
-[2025-10-06 18:50:27.832] [Client] Received chunk (-2,-1,5): 67683 floats
-[2025-10-06 18:50:27.832] [Client] Requesting chunk (2,1,5)
-[2025-10-06 18:50:27.842] [Client] Received chunk (-3,1,4): 0 floats
-[2025-10-06 18:50:27.842] [Client] Requesting chunk (3,-1,4)
-[2025-10-06 18:50:27.935] [Client] Received chunk (-3,-1,4): 1386 floats
-[2025-10-06 18:50:27.935] [Client] Requesting chunk (4,-1,2)
-[2025-10-06 18:50:27.936] [Client] Received chunk (2,-1,5): 36246 floats
-[2025-10-06 18:50:27.936] [Client] Requesting chunk (-4,-1,2)
-[2025-10-06 18:50:27.936] [Client] Received chunk (2,1,5): 0 floats
-[2025-10-06 18:50:27.936] [Client] Requesting chunk (0,-1,6)
-[2025-10-06 18:50:27.937] [Client] Received chunk (3,-1,4): 48321 floats
-[2025-10-06 18:50:27.937] [Client] Requesting chunk (-4,1,2)
-[2025-10-06 18:50:27.937] [Client] Received chunk (4,-1,2): 13587 floats
-[2025-10-06 18:50:27.938] [Client] Requesting chunk (0,1,6)
-[2025-10-06 18:50:28.028] [Client] Received chunk (-4,-1,2): 23961 floats
-[2025-10-06 18:50:28.028] [Client] Requesting chunk (4,1,2)
-[2025-10-06 18:50:28.120] [Player] Pos: (8.4, 52.4, 70.5), Vel: (4.9, -0.5, 6.6), Grounded: False
-[2025-10-06 18:50:28.124] [Client] Received chunk (0,-1,6): 0 floats
-[2025-10-06 18:50:28.134] [Client] Received chunk (-4,1,2): 0 floats
-[2025-10-06 18:50:28.142] [Client] Received chunk (0,1,6): 0 floats
-[2025-10-06 18:50:28.142] [Client] Received chunk (4,1,2): 0 floats
-[2025-10-06 18:50:28.537] [Player] Pos: (9.8, 52.4, 71.5), Vel: (7.3, -0.2, 3.4), Grounded: False
-[2025-10-06 18:50:28.949] [Player] Pos: (10.9, 52.4, 72.8), Vel: (3.6, -0.3, 7.2), Grounded: False
-[2025-10-06 18:50:29.349] [Player] Pos: (11.6, 52.4, 74.2), Vel: (3.2, 0.0, 7.3), Grounded: True
-[2025-10-06 18:50:29.752] [Player] Pos: (12.2, 52.4, 75.6), Vel: (3.2, 0.0, 7.3), Grounded: False
-[2025-10-06 18:50:30.154] [Player] Pos: (12.8, 52.1, 76.9), Vel: (3.2, 0.0, 7.3), Grounded: True
-[2025-10-06 18:50:30.567] [Player] Pos: (13.0, 52.1, 78.6), Vel: (-5.6, 0.0, 7.2), Grounded: True
-[2025-10-06 18:50:30.971] [Player] Pos: (11.8, 52.1, 79.4), Vel: (-3.8, 0.0, 2.1), Grounded: True
-[2025-10-06 18:50:31.381] [Player] Pos: (12.1, 52.1, 80.5), Vel: (2.9, 0.0, 7.5), Grounded: True
-[2025-10-06 18:50:31.779] [Player] Pos: (12.7, 51.7, 81.9), Vel: (3.1, -3.9, 7.4), Grounded: False
-[2025-10-06 18:50:32.178] [Player] Pos: (13.4, 50.8, 83.3), Vel: (3.2, -5.5, 7.3), Grounded: False
-[2025-10-06 18:50:32.586] [Player] Pos: (14.0, 50.4, 84.8), Vel: (3.2, 0.0, 7.3), Grounded: False
-[2025-10-06 18:50:32.998] [Player] Pos: (14.2, 50.4, 86.4), Vel: (-2.1, 0.0, 7.8), Grounded: False
-[2025-10-06 18:50:33.405] [Player] Pos: (14.0, 50.4, 87.6), Vel: (-2.9, 0.0, 7.4), Grounded: True
-[2025-10-06 18:50:33.821] [Player] Pos: (13.4, 50.1, 89.1), Vel: (-2.9, 0.0, 7.4), Grounded: True
-[2025-10-06 18:50:34.251] [Player] Pos: (12.7, 50.1, 90.7), Vel: (-2.9, 0.0, 7.4), Grounded: True
-[2025-10-06 18:50:34.683] [Player] Pos: (12.7, 50.1, 92.4), Vel: (2.3, 0.0, 7.7), Grounded: True
-[2025-10-06 18:50:35.114] [Player] Pos: (13.2, 50.1, 93.8), Vel: (1.3, 0.0, 3.2), Grounded: True
-[2025-10-06 18:50:35.550] [Player] Pos: (13.1, 49.9, 94.4), Vel: (-1.7, 0.0, 7.8), Grounded: True
-[2025-10-06 18:50:35.966] [Player] Pos: (12.8, 48.8, 95.9), Vel: (-1.7, -6.3, 7.8), Grounded: False
-[2025-10-06 18:50:36.233] [Client] Requesting chunk (-1,0,6)
-[2025-10-06 18:50:36.233] [Client] Requesting chunk (1,0,6)
-[2025-10-06 18:50:36.233] [Client] Requesting chunk (2,0,6)
-[2025-10-06 18:50:36.233] [Client] Requesting chunk (-3,0,5)
-[2025-10-06 18:50:36.335] [Client] Received chunk (-1,0,6): 38346 floats
-[2025-10-06 18:50:36.335] [Client] Requesting chunk (3,0,5)
-[2025-10-06 18:50:36.474] [Client] Received chunk (1,0,6): 28287 floats
-[2025-10-06 18:50:36.475] [Client] Requesting chunk (-2,0,6)
-[2025-10-06 18:50:36.491] [Player] Pos: (12.2, 48.1, 98.6), Vel: (-1.8, -0.5, 7.8), Grounded: False
-[2025-10-06 18:50:36.631] [Client] Received chunk (2,0,6): 34671 floats
-[2025-10-06 18:50:36.631] [Client] Requesting chunk (1,1,6)
-[2025-10-06 18:50:36.749] [Client] Received chunk (-3,0,5): 28581 floats
-[2025-10-06 18:50:36.749] [Client] Requesting chunk (1,-1,6)
-[2025-10-06 18:50:36.749] [Client] Received chunk (3,0,5): 27342 floats
-[2025-10-06 18:50:36.749] [Client] Requesting chunk (-1,-1,6)
-[2025-10-06 18:50:36.857] [Client] Received chunk (-2,0,6): 30135 floats
-[2025-10-06 18:50:36.857] [Client] Requesting chunk (-1,1,6)
-[2025-10-06 18:50:36.866] [Client] Received chunk (1,1,6): 0 floats
-[2025-10-06 18:50:36.867] [Client] Requesting chunk (4,0,3)
-[2025-10-06 18:50:36.973] [Client] Received chunk (1,-1,6): 7056 floats
-[2025-10-06 18:50:36.973] [Client] Requesting chunk (0,0,7)
-[2025-10-06 18:50:37.071] [Client] Received chunk (-1,-1,6): 168 floats
-[2025-10-06 18:50:37.071] [Client] Requesting chunk (-4,0,3)
-[2025-10-06 18:50:37.079] [Client] Received chunk (-1,1,6): 0 floats
-[2025-10-06 18:50:37.079] [Client] Requesting chunk (3,1,5)
-[2025-10-06 18:50:37.079] [Client] Received chunk (4,0,3): 30156 floats
-[2025-10-06 18:50:37.079] [Client] Requesting chunk (-2,1,6)
-[2025-10-06 18:50:37.198] [Client] Received chunk (0,0,7): 42840 floats
-[2025-10-06 18:50:37.198] [Client] Requesting chunk (-2,-1,6)
-[2025-10-06 18:50:37.201] [Player] Pos: (11.2, 48.1, 103.2), Vel: (-1.8, 0.0, 7.8), Grounded: True
-[2025-10-06 18:50:37.308] [Client] Received chunk (-4,0,3): 28056 floats
-[2025-10-06 18:50:37.308] [Client] Requesting chunk (-3,1,5)
-[2025-10-06 18:50:37.308] [Client] Received chunk (3,1,5): 0 floats
-[2025-10-06 18:50:37.308] [Client] Requesting chunk (-3,-1,5)
-[2025-10-06 18:50:37.318] [Client] Received chunk (-2,1,6): 0 floats
-[2025-10-06 18:50:37.318] [Client] Requesting chunk (2,-1,6)
-[2025-10-06 18:50:37.425] [Client] Received chunk (-2,-1,6): 66465 floats
-[2025-10-06 18:50:37.425] [Client] Requesting chunk (2,1,6)
-[2025-10-06 18:50:37.432] [Client] Received chunk (-3,1,5): 0 floats
-[2025-10-06 18:50:37.432] [Client] Requesting chunk (3,-1,5)
-[2025-10-06 18:50:37.526] [Client] Received chunk (-3,-1,5): 61845 floats
-[2025-10-06 18:50:37.526] [Client] Requesting chunk (4,-1,3)
-[2025-10-06 18:50:37.619] [Client] Received chunk (2,-1,6): 3654 floats
-[2025-10-06 18:50:37.619] [Client] Requesting chunk (-4,-1,3)
-[2025-10-06 18:50:37.626] [Client] Received chunk (2,1,6): 0 floats
-[2025-10-06 18:50:37.626] [Client] Requesting chunk (0,-1,7)
-[2025-10-06 18:50:37.627] [Client] Received chunk (3,-1,5): 31080 floats
-[2025-10-06 18:50:37.627] [Client] Requesting chunk (-4,1,3)
-[2025-10-06 18:50:37.627] [Client] Received chunk (4,-1,3): 0 floats
-[2025-10-06 18:50:37.627] [Client] Requesting chunk (0,1,7)
-[2025-10-06 18:50:37.722] [Client] Received chunk (-4,-1,3): 0 floats
-[2025-10-06 18:50:37.723] [Client] Requesting chunk (4,1,3)
-[2025-10-06 18:50:37.812] [Player] Pos: (11.6, 50.1, 106.0), Vel: (2.8, 0.0, 8.9), Grounded: True
-[2025-10-06 18:50:37.818] [Client] Received chunk (0,-1,7): 7056 floats
-[2025-10-06 18:50:37.824] [Client] Received chunk (-4,1,3): 0 floats
-[2025-10-06 18:50:37.832] [Client] Received chunk (0,1,7): 0 floats
-[2025-10-06 18:50:37.832] [Client] Received chunk (4,1,3): 0 floats
-[2025-10-06 18:50:38.252] [Player] Pos: (11.6, 50.1, 107.4), Vel: (-1.0, 0.0, 5.8), Grounded: True
-[2025-10-06 18:50:38.695] [Player] Pos: (11.6, 50.1, 107.6), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:39.103] [Player] Pos: (11.6, 50.1, 107.6), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:39.498] [Player] Pos: (11.6, 50.1, 108.5), Vel: (0.3, 0.0, 8.0), Grounded: True
-[2025-10-06 18:50:39.881] [Player] Pos: (11.5, 50.9, 109.5), Vel: (0.0, 0.0, 0.6), Grounded: False
-[2025-10-06 18:50:40.260] [Player] Pos: (11.8, 51.8, 109.6), Vel: (0.1, 0.0, 3.4), Grounded: False
-[2025-10-06 18:50:40.632] [Player] Pos: (11.8, 51.3, 109.6), Vel: (0.0, 0.0, 0.8), Grounded: False
-[2025-10-06 18:50:41.018] [Player] Pos: (11.7, 51.7, 109.5), Vel: (0.0, 0.0, 0.5), Grounded: False
-[2025-10-06 18:50:41.392] [Player] Pos: (11.8, 51.8, 109.6), Vel: (0.0, 0.0, 0.2), Grounded: False
-[2025-10-06 18:50:41.764] [Player] Pos: (11.7, 52.2, 109.7), Vel: (0.0, 0.0, 0.4), Grounded: False
-[2025-10-06 18:50:42.143] [Player] Pos: (11.8, 51.9, 109.6), Vel: (0.1, 0.0, 1.5), Grounded: False
-[2025-10-06 18:50:42.517] [Player] Pos: (11.8, 51.6, 109.6), Vel: (0.1, 0.0, 4.1), Grounded: False
-[2025-10-06 18:50:42.894] [Player] Pos: (11.9, 51.3, 109.6), Vel: (0.1, 0.0, 1.9), Grounded: False
-[2025-10-06 18:50:43.279] [Player] Pos: (11.7, 52.2, 109.7), Vel: (0.1, 0.0, 1.8), Grounded: False
-[2025-10-06 18:50:43.660] [Player] Pos: (11.5, 51.9, 109.6), Vel: (0.1, 0.0, 3.2), Grounded: False
-[2025-10-06 18:50:44.028] [Player] Pos: (11.4, 51.9, 109.5), Vel: (0.1, 0.0, 1.9), Grounded: False
-[2025-10-06 18:50:44.398] [Player] Pos: (11.5, 51.3, 109.6), Vel: (0.1, 0.0, 3.8), Grounded: False
-[2025-10-06 18:50:44.791] [Player] Pos: (11.4, 52.1, 109.7), Vel: (0.2, -0.2, 4.9), Grounded: False
-[2025-10-06 18:50:45.179] [Player] Pos: (11.5, 52.2, 109.7), Vel: (0.0, 0.0, 0.4), Grounded: False
-[2025-10-06 18:50:45.568] [Player] Pos: (11.5, 54.1, 109.8), Vel: (0.1, 0.0, 2.4), Grounded: False
-[2025-10-06 18:50:45.962] [Player] Pos: (11.4, 54.2, 109.7), Vel: (0.1, 0.0, 2.2), Grounded: False
-[2025-10-06 18:50:46.324] [Player] Pos: (11.5, 54.3, 109.9), Vel: (0.1, -1.9, 3.3), Grounded: False
-[2025-10-06 18:50:46.695] [Player] Pos: (11.5, 54.0, 109.9), Vel: (0.0, -2.0, 0.6), Grounded: False
-[2025-10-06 18:50:47.067] [Player] Pos: (11.5, 54.9, 110.0), Vel: (0.1, 0.0, 2.4), Grounded: False
-[2025-10-06 18:50:47.414] [Player] Pos: (11.4, 55.2, 110.0), Vel: (0.1, 0.0, 2.3), Grounded: False
-[2025-10-06 18:50:47.740] [Player] Pos: (11.5, 56.1, 110.0), Vel: (0.2, -0.1, 4.8), Grounded: False
-[2025-10-06 18:50:48.010] [Player] Pos: (11.5, 57.4, 110.2), Vel: (0.1, 0.0, 1.7), Grounded: False
-[2025-10-06 18:50:48.210] [Player] Pos: (11.6, 58.4, 110.4), Vel: (0.0, 0.0, 0.1), Grounded: False
-[2025-10-06 18:50:48.417] [Player] Pos: (11.8, 58.9, 110.7), Vel: (0.3, 0.0, 8.0), Grounded: False
-[2025-10-06 18:50:48.644] [Player] Pos: (12.0, 59.4, 111.2), Vel: (0.1, 0.0, 1.7), Grounded: False
-[2025-10-06 18:50:48.794] [Player] Pos: (12.0, 59.9, 111.4), Vel: (0.1, 0.0, 4.4), Grounded: False
-[2025-10-06 18:50:48.995] [Player] Pos: (12.1, 60.4, 112.0), Vel: (0.3, 0.0, 8.0), Grounded: False
-[2025-10-06 18:50:49.159] [Player] Pos: (12.2, 60.9, 112.5), Vel: (0.1, 0.0, 2.8), Grounded: True
-[2025-10-06 18:50:49.360] [Player] Pos: (12.3, 61.6, 113.2), Vel: (0.3, 0.0, 8.0), Grounded: False
-[2025-10-06 18:50:49.511] [Player] Pos: (12.3, 61.4, 113.6), Vel: (0.3, -2.9, 8.0), Grounded: False
-[2025-10-06 18:50:49.679] [Player] Pos: (12.4, 61.7, 113.7), Vel: (0.0, -2.2, 0.0), Grounded: False
-[2025-10-06 18:50:49.833] [Player] Pos: (12.5, 61.8, 113.7), Vel: (0.0, -2.0, 0.0), Grounded: False
-[2025-10-06 18:50:49.996] [Player] Pos: (12.6, 61.9, 113.7), Vel: (0.0, 0.0, 0.0), Grounded: False
-[2025-10-06 18:50:50.156] [Player] Pos: (12.6, 61.7, 113.7), Vel: (0.0, -2.5, 0.0), Grounded: False
-[2025-10-06 18:50:50.346] [Player] Pos: (12.6, 61.6, 113.9), Vel: (0.1, 0.0, 8.0), Grounded: False
-[2025-10-06 18:50:50.533] [Player] Pos: (12.7, 61.8, 114.5), Vel: (0.1, -1.0, 8.0), Grounded: False
-[2025-10-06 18:50:50.692] [Player] Pos: (12.8, 61.8, 115.0), Vel: (0.1, -0.2, 8.0), Grounded: False
-[2025-10-06 18:50:50.851] [Player] Pos: (12.8, 61.9, 115.5), Vel: (0.1, 0.0, 8.0), Grounded: False
-[2025-10-06 18:50:51.013] [Player] Pos: (12.8, 61.6, 116.0), Vel: (0.1, -3.3, 8.0), Grounded: False
-[2025-10-06 18:50:51.178] [Player] Pos: (12.9, 61.6, 116.4), Vel: (0.1, -0.6, 6.4), Grounded: False
-[2025-10-06 18:50:51.325] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, 0.0, 2.6), Grounded: False
-[2025-10-06 18:50:51.505] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.1, 1.0), Grounded: False
-[2025-10-06 18:50:51.814] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.3, 0.0), Grounded: False
-[2025-10-06 18:50:52.179] [Player] Pos: (12.9, 61.6, 116.5), Vel: (0.0, -0.3, 0.0), Grounded: False
-[2025-10-06 18:50:52.581] [Player] Pos: (12.6, 62.1, 117.2), Vel: (3.7, 0.0, 1.8), Grounded: False
-[2025-10-06 18:50:52.973] [Player] Pos: (14.0, 60.5, 117.9), Vel: (7.2, -7.9, 3.6), Grounded: False
-[2025-10-06 18:50:53.377] [Player] Pos: (14.4, 60.4, 118.1), Vel: (0.7, 0.0, 0.3), Grounded: False
-[2025-10-06 18:50:53.763] [Player] Pos: (14.4, 60.4, 118.1), Vel: (0.0, -0.4, 0.0), Grounded: False
-[2025-10-06 18:50:54.247] [Player] Pos: (14.3, 60.4, 118.1), Vel: (-7.7, -0.1, -2.1), Grounded: False
-[2025-10-06 18:50:54.827] [Player] Pos: (13.3, 61.4, 116.8), Vel: (-0.3, 0.0, -0.1), Grounded: False
-[2025-10-06 18:50:55.426] [Player] Pos: (11.3, 62.1, 116.2), Vel: (-3.5, 0.0, -1.0), Grounded: True
-[2025-10-06 18:50:55.976] [Player] Pos: (11.2, 62.1, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:56.425] [Player] Pos: (10.5, 62.1, 115.5), Vel: (-1.5, 0.0, -1.3), Grounded: True
-[2025-10-06 18:50:56.874] [Player] Pos: (10.1, 62.1, 115.9), Vel: (-5.6, 0.0, 5.7), Grounded: True
-[2025-10-06 18:50:57.295] [Player] Pos: (9.9, 62.7, 116.2), Vel: (-0.5, -2.6, 0.5), Grounded: False
-[2025-10-06 18:50:57.711] [Player] Pos: (10.0, 62.6, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:58.107] [Player] Pos: (10.0, 62.4, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:58.509] [Player] Pos: (10.0, 62.4, 116.2), Vel: (0.0, 0.0, 0.0), Grounded: True
-[2025-10-06 18:50:58.522] [Player] Manual collision system cleaned up
+﻿[2025-10-07 11:36:12.365] [Logging] Started logging to 'physics_debug.log'
+[2025-10-07 11:36:12.365] [Game] WorldGen initialized
+[2025-10-07 11:36:12.366] [Game] ChunkManager initialized with collision support
+[2025-10-07 11:36:12.377] [PSX Effects] Shaders compiled successfully
+[2025-10-07 11:36:12.378] [Game] Renderer initialized
+[2025-10-07 11:36:12.389] [Player] Spawned at (16, 37.1, 16)
+[2025-10-07 11:36:12.389] [Game] Player initialized with capsule collision physics
+[2025-10-07 11:36:12.394] [Game] Found atlas at: textures/atlas.png
+[2025-10-07 11:36:12.483] [AtlasManager] Loaded image: textures/atlas.png (256x256)
+[2025-10-07 11:36:12.483] [AtlasManager] Using preferred tile size: 64
+[2025-10-07 11:36:12.484] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
+[2025-10-07 11:36:12.488] [AtlasManager] Successfully uploaded to GL texture 1
+[2025-10-07 11:36:12.488] [AtlasManager] Verified texture dimensions: 256x256
+[2025-10-07 11:36:12.491] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
+[2025-10-07 11:36:12.491] [Game] Loaded 0 chunks
+[2025-10-07 11:36:12.891] [Client] Chunk update loop starting...
+[2025-10-07 11:36:13.013] [Client] Requesting chunk (0,0,0)
+[2025-10-07 11:36:13.027] [Client] Requesting chunk (1,0,0)
+[2025-10-07 11:36:13.031] [Client] Requesting chunk (0,0,1)
+[2025-10-07 11:36:13.032] [Client] Requesting chunk (0,0,-1)
+[2025-10-07 11:36:13.280] [Client] Received chunk (0,0,0): 115542 render floats, 16506 collision verts
+[2025-10-07 11:36:13.283] [Client] Requesting chunk (-1,0,0)
+[2025-10-07 11:36:13.310] [Renderer] Chunk (0,0,0)
+[2025-10-07 11:36:13.313] [Renderer]   Expected world range: (0-32, 0-96, 0-32)
+[2025-10-07 11:36:13.314] [Renderer]   First vertex at: (1.0, 0.8, -0.0)
+[2025-10-07 11:36:13.314] [Renderer]   Vertex in expected range: False
+[2025-10-07 11:36:13.314] [Renderer] Chunk (0,0,0) BEFORE conversion:
+[2025-10-07 11:36:13.314]   Length: 115542, vertices: 16506
+[2025-10-07 11:36:13.314]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
+[2025-10-07 11:36:13.344] [Renderer] Chunk (0,0,0) AFTER conversion:
+[2025-10-07 11:36:13.344]   Length: 132048, vertices: 16506
+[2025-10-07 11:36:13.344]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0328,0.2480)
+[2025-10-07 11:36:13.350] [Renderer] Uploaded chunk (0,0,0): VAO=1, VBO=1, 16506 vertices
+[2025-10-07 11:36:13.491] [Client] Received chunk (1,0,0): 93261 render floats, 13323 collision verts
+[2025-10-07 11:36:13.491] [Client] Requesting chunk (1,0,1)
+[2025-10-07 11:36:13.492] [Renderer] Chunk (1,0,0)
+[2025-10-07 11:36:13.492] [Renderer]   Expected world range: (32-64, 0-96, 0-32)
+[2025-10-07 11:36:13.492] [Renderer]   First vertex at: (33.0, 0.9, 0.0)
+[2025-10-07 11:36:13.492] [Renderer]   Vertex in expected range: True
+[2025-10-07 11:36:13.492] [Renderer] Chunk (1,0,0) BEFORE conversion:
+[2025-10-07 11:36:13.492]   Length: 93261, vertices: 13323
+[2025-10-07 11:36:13.492]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), blockType=1
+[2025-10-07 11:36:13.498] [Renderer] Chunk (1,0,0) AFTER conversion:
+[2025-10-07 11:36:13.498]   Length: 106584, vertices: 13323
+[2025-10-07 11:36:13.499]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), uv=(0.0327,0.0020)
+[2025-10-07 11:36:13.500] [Renderer] Uploaded chunk (1,0,0): VAO=2, VBO=2, 13323 vertices
+[2025-10-07 11:36:13.759] [Client] Received chunk (0,0,1): 97965 render floats, 13995 collision verts
+[2025-10-07 11:36:13.759] [Renderer] Chunk (0,0,1)
+[2025-10-07 11:36:13.759] [Client] Requesting chunk (1,0,-1)
+[2025-10-07 11:36:13.759] [Renderer]   Expected world range: (0-32, 0-96, 32-64)
+[2025-10-07 11:36:13.759] [Renderer]   First vertex at: (1.0, 0.8, 32.0)
+[2025-10-07 11:36:13.759] [Renderer]   Vertex in expected range: False
+[2025-10-07 11:36:13.759] [Renderer] Chunk (0,0,1) BEFORE conversion:
+[2025-10-07 11:36:13.759]   Length: 97965, vertices: 13995
+[2025-10-07 11:36:13.759]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), blockType=1
+[2025-10-07 11:36:13.768] [Renderer] Chunk (0,0,1) AFTER conversion:
+[2025-10-07 11:36:13.768]   Length: 111960, vertices: 13995
+[2025-10-07 11:36:13.768]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), uv=(0.0327,0.2480)
+[2025-10-07 11:36:13.966] [Client] Received chunk (0,0,-1): 92001 render floats, 13143 collision verts
+[2025-10-07 11:36:13.966] [Client] Requesting chunk (-1,0,1)
+[2025-10-07 11:36:14.198] [Client] Received chunk (-1,0,0): 127302 render floats, 18186 collision verts
+[2025-10-07 11:36:14.199] [Client] Requesting chunk (-1,0,-1)
+[2025-10-07 11:36:14.424] [Client] Received chunk (1,0,1): 97251 render floats, 13893 collision verts
+[2025-10-07 11:36:14.424] [Client] Requesting chunk (0,-1,0)
+[2025-10-07 11:36:14.625] [Client] Received chunk (1,0,-1): 91392 render floats, 13056 collision verts
+[2025-10-07 11:36:14.625] [Client] Requesting chunk (1,-1,0)
+[2025-10-07 11:36:14.901] [Client] Received chunk (-1,0,1): 126840 render floats, 18120 collision verts
+[2025-10-07 11:36:14.901] [Client] Requesting chunk (0,-1,1)
+[2025-10-07 11:36:15.105] [Client] Received chunk (-1,0,-1): 90363 render floats, 12909 collision verts
+[2025-10-07 11:36:15.105] [Client] Requesting chunk (-1,-1,0)
+[2025-10-07 11:36:15.330] [Client] Received chunk (0,-1,0): 323106 render floats, 46158 collision verts
+[2025-10-07 11:36:15.331] [Client] Requesting chunk (0,-1,-1)
+[2025-10-07 11:36:15.571] [Client] Received chunk (1,-1,0): 326739 render floats, 46677 collision verts
+[2025-10-07 11:36:15.572] [Client] Requesting chunk (-1,-1,1)
+[2025-10-07 11:36:15.763] [Client] Received chunk (0,-1,1): 127533 render floats, 18219 collision verts
+[2025-10-07 11:36:15.763] [Client] Requesting chunk (-1,-1,-1)
+[2025-10-07 11:36:15.983] [Client] Received chunk (-1,-1,0): 330036 render floats, 47148 collision verts
+[2025-10-07 11:36:15.983] [Client] Requesting chunk (1,-1,-1)
+[2025-10-07 11:36:16.197] [Client] Received chunk (0,-1,-1): 159453 render floats, 22779 collision verts
+[2025-10-07 11:36:16.199] [Client] Requesting chunk (1,-1,1)
+[2025-10-07 11:36:16.397] [Client] Received chunk (-1,-1,1): 196287 render floats, 28041 collision verts
+[2025-10-07 11:36:16.398] [Client] Requesting chunk (-2,0,0)
+[2025-10-07 11:36:16.607] [Client] Received chunk (-1,-1,-1): 304605 render floats, 43515 collision verts
+[2025-10-07 11:36:16.607] [Client] Requesting chunk (0,1,0)
+[2025-10-07 11:36:16.814] [Client] Received chunk (1,-1,-1): 58527 render floats, 8361 collision verts
+[2025-10-07 11:36:16.815] [Client] Requesting chunk (0,0,2)
+[2025-10-07 11:36:17.030] [Client] Received chunk (1,-1,1): 349503 render floats, 49929 collision verts
+[2025-10-07 11:36:17.031] [Client] Requesting chunk (2,0,0)
+[2025-10-07 11:36:17.230] [Client] Received chunk (-2,0,0): 136185 render floats, 19455 collision verts
+[2025-10-07 11:36:17.230] [Client] Requesting chunk (0,0,-2)
+[2025-10-07 11:36:17.251] [Client] Received chunk (0,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:17.251] [Client] Requesting chunk (1,0,-2)
+[2025-10-07 11:36:17.515] [Client] Received chunk (0,0,2): 111300 render floats, 15900 collision verts
+[2025-10-07 11:36:17.515] [Client] Requesting chunk (2,0,1)
+[2025-10-07 11:36:17.722] [Client] Received chunk (2,0,0): 111510 render floats, 15930 collision verts
+[2025-10-07 11:36:17.722] [Client] Requesting chunk (-1,1,0)
+[2025-10-07 11:36:17.881] [Client] Received chunk (0,0,-2): 114030 render floats, 16290 collision verts
+[2025-10-07 11:36:17.881] [Client] Requesting chunk (0,1,1)
+[2025-10-07 11:36:18.054] [Client] Received chunk (1,0,-2): 91497 render floats, 13071 collision verts
+[2025-10-07 11:36:18.054] [Client] Requesting chunk (2,0,-1)
+[2025-10-07 11:36:18.282] [Client] Received chunk (2,0,1): 126756 render floats, 18108 collision verts
+[2025-10-07 11:36:18.282] [Client] Requesting chunk (0,1,-1)
+[2025-10-07 11:36:18.307] [Client] Received chunk (-1,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:18.307] [Client] Requesting chunk (-1,0,2)
+[2025-10-07 11:36:18.330] [Client] Received chunk (0,1,1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:18.330] [Client] Requesting chunk (-2,0,1)
+[2025-10-07 11:36:18.520] [Client] Received chunk (2,0,-1): 93282 render floats, 13326 collision verts
+[2025-10-07 11:36:18.520] [Client] Requesting chunk (-1,0,-2)
+[2025-10-07 11:36:18.542] [Client] Received chunk (0,1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:18.542] [Client] Requesting chunk (-2,0,-1)
+[2025-10-07 11:36:18.818] [Client] Received chunk (-1,0,2): 131166 render floats, 18738 collision verts
+[2025-10-07 11:36:18.818] [Client] Requesting chunk (1,0,2)
+[2025-10-07 11:36:19.055] [Client] Received chunk (-2,0,1): 104433 render floats, 14919 collision verts
+[2025-10-07 11:36:19.056] [Client] Requesting chunk (1,1,0)
+[2025-10-07 11:36:19.237] [Client] Received chunk (-1,0,-2): 87507 render floats, 12501 collision verts
+[2025-10-07 11:36:19.237] [Client] Requesting chunk (-1,1,-1)
+[2025-10-07 11:36:19.434] [Client] Received chunk (-2,0,-1): 124719 render floats, 17817 collision verts
+[2025-10-07 11:36:19.434] [Client] Requesting chunk (-1,1,1)
+[2025-10-07 11:36:19.661] [Client] Received chunk (1,0,2): 98238 render floats, 14034 collision verts
+[2025-10-07 11:36:19.661] [Client] Requesting chunk (1,1,-1)
+[2025-10-07 11:36:19.679] [Client] Received chunk (1,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.679] [Client] Requesting chunk (1,1,1)
+[2025-10-07 11:36:19.700] [Client] Received chunk (-1,1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.700] [Client] Requesting chunk (0,-1,2)
+[2025-10-07 11:36:19.723] [Client] Received chunk (-1,1,1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.723] [Client] Requesting chunk (-2,1,0)
+[2025-10-07 11:36:19.745] [Client] Received chunk (1,1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.745] [Client] Requesting chunk (-2,-1,0)
+[2025-10-07 11:36:19.766] [Client] Received chunk (1,1,1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.766] [Client] Requesting chunk (-2,0,-2)
+[2025-10-07 11:36:19.941] [Client] Received chunk (0,-1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.941] [Client] Requesting chunk (0,-1,-2)
+[2025-10-07 11:36:19.964] [Client] Received chunk (-2,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:19.964] [Client] Requesting chunk (0,1,-2)
+[2025-10-07 11:36:20.169] [Client] Received chunk (-2,-1,0): 269136 render floats, 38448 collision verts
+[2025-10-07 11:36:20.169] [Client] Requesting chunk (0,1,2)
+[2025-10-07 11:36:20.333] [Client] Received chunk (-2,0,-2): 93408 render floats, 13344 collision verts
+[2025-10-07 11:36:20.333] [Client] Requesting chunk (-2,0,2)
+[2025-10-07 11:36:20.529] [Client] Received chunk (0,-1,-2): 144144 render floats, 20592 collision verts
+[2025-10-07 11:36:20.529] [Client] Requesting chunk (2,0,2)
+[2025-10-07 11:36:20.550] [Client] Received chunk (0,1,-2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:20.550] [Client] Requesting chunk (2,0,-2)
+[2025-10-07 11:36:20.570] [Client] Received chunk (0,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:20.570] [Client] Requesting chunk (2,-1,0)
+[2025-10-07 11:36:20.831] [Client] Received chunk (-2,0,2): 64848 render floats, 9264 collision verts
+[2025-10-07 11:36:20.831] [Client] Requesting chunk (2,1,0)
+[2025-10-07 11:36:21.042] [Client] Received chunk (2,0,2): 124446 render floats, 17778 collision verts
+[2025-10-07 11:36:21.042] [Client] Requesting chunk (1,1,2)
+[2025-10-07 11:36:21.232] [Client] Received chunk (2,0,-2): 92421 render floats, 13203 collision verts
+[2025-10-07 11:36:21.232] [Client] Requesting chunk (-1,1,-2)
+[2025-10-07 11:36:21.422] [Client] Received chunk (2,-1,0): 62727 render floats, 8961 collision verts
+[2025-10-07 11:36:21.422] [Client] Requesting chunk (3,0,0)
+[2025-10-07 11:36:21.443] [Client] Received chunk (2,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:21.443] [Client] Requesting chunk (2,1,1)
+[2025-10-07 11:36:21.465] [Client] Received chunk (1,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:21.465] [Client] Requesting chunk (2,-1,1)
+[2025-10-07 11:36:21.488] [Client] Received chunk (-1,1,-2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:21.488] [Client] Requesting chunk (-1,1,2)
+[2025-10-07 11:36:21.714] [Client] Received chunk (3,0,0): 106974 render floats, 15282 collision verts
+[2025-10-07 11:36:21.714] [Client] Requesting chunk (1,-1,2)
+[2025-10-07 11:36:21.733] [Client] Received chunk (2,1,1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:21.734] [Client] Requesting chunk (2,1,-1)
+[2025-10-07 11:36:21.960] [Client] Received chunk (2,-1,1): 415989 render floats, 59427 collision verts
+[2025-10-07 11:36:21.960] [Client] Requesting chunk (2,-1,-1)
+[2025-10-07 11:36:21.979] [Client] Received chunk (-1,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:21.980] [Client] Requesting chunk (0,0,3)
+[2025-10-07 11:36:22.183] [Client] Received chunk (1,-1,2): 84924 render floats, 12132 collision verts
+[2025-10-07 11:36:22.183] [Client] Requesting chunk (1,-1,-2)
+[2025-10-07 11:36:22.203] [Client] Received chunk (2,1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:22.204] [Client] Requesting chunk (-1,-1,-2)
+[2025-10-07 11:36:22.376] [Client] Received chunk (2,-1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:22.376] [Client] Requesting chunk (-1,-1,2)
+[2025-10-07 11:36:22.664] [Client] Received chunk (0,0,3): 127323 render floats, 18189 collision verts
+[2025-10-07 11:36:22.665] [Client] Requesting chunk (2,-1,2)
+[2025-10-07 11:36:22.863] [Client] Received chunk (1,-1,-2): 13986 render floats, 1998 collision verts
+[2025-10-07 11:36:22.863] [Client] Requesting chunk (3,0,1)
+[2025-10-07 11:36:23.065] [Client] Received chunk (-1,-1,-2): 254478 render floats, 36354 collision verts
+[2025-10-07 11:36:23.065] [Client] Requesting chunk (1,0,3)
+[2025-10-07 11:36:23.236] [Client] Received chunk (-1,-1,2): 9030 render floats, 1290 collision verts
+[2025-10-07 11:36:23.236] [Client] Requesting chunk (3,0,2)
+[2025-10-07 11:36:23.453] [Client] Received chunk (2,-1,2): 333396 render floats, 47628 collision verts
+[2025-10-07 11:36:23.453] [Client] Requesting chunk (2,0,3)
+[2025-10-07 11:36:23.672] [Client] Received chunk (3,0,1): 98301 render floats, 14043 collision verts
+[2025-10-07 11:36:23.672] [Client] Requesting chunk (2,1,2)
+[2025-10-07 11:36:23.909] [Client] Received chunk (1,0,3): 109179 render floats, 15597 collision verts
+[2025-10-07 11:36:23.909] [Client] Requesting chunk (1,-1,3)
+[2025-10-07 11:36:24.097] [Client] Received chunk (3,0,2): 79401 render floats, 11343 collision verts
+[2025-10-07 11:36:24.097] [Client] Requesting chunk (3,0,3)
+[2025-10-07 11:36:24.341] [Client] Received chunk (2,0,3): 134589 render floats, 19227 collision verts
+[2025-10-07 11:36:24.341] [Client] Requesting chunk (3,1,1)
+[2025-10-07 11:36:24.362] [Client] Received chunk (2,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:24.362] [Client] Requesting chunk (3,-1,1)
+[2025-10-07 11:36:24.550] [Client] Received chunk (1,-1,3): 41097 render floats, 5871 collision verts
+[2025-10-07 11:36:24.550] [Client] Requesting chunk (-1,0,3)
+[2025-10-07 11:36:24.806] [Client] Received chunk (3,0,3): 121905 render floats, 17415 collision verts
+[2025-10-07 11:36:24.806] [Client] Requesting chunk (1,1,3)
+[2025-10-07 11:36:24.829] [Client] Received chunk (3,1,1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:24.829] [Client] Requesting chunk (3,0,-1)
+[2025-10-07 11:36:25.048] [Client] Received chunk (3,-1,1): 275604 render floats, 39372 collision verts
+[2025-10-07 11:36:25.048] [Client] Requesting chunk (1,0,4)
+[2025-10-07 11:36:25.352] [Client] Received chunk (-1,0,3): 133203 render floats, 19029 collision verts
+[2025-10-07 11:36:25.352] [Client] Requesting chunk (2,1,3)
+[2025-10-07 11:36:25.372] [Client] Received chunk (1,1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:25.373] [Client] Requesting chunk (0,1,3)
+[2025-10-07 11:36:25.580] [Client] Received chunk (3,0,-1): 99540 render floats, 14220 collision verts
+[2025-10-07 11:36:25.580] [Client] Requesting chunk (0,-1,3)
+[2025-10-07 11:36:25.857] [Client] Received chunk (1,0,4): 119721 render floats, 17103 collision verts
+[2025-10-07 11:36:25.857] [Client] Requesting chunk (3,1,0)
+[2025-10-07 11:36:25.881] [Client] Received chunk (2,1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:25.881] [Client] Requesting chunk (3,-1,0)
+[2025-10-07 11:36:25.903] [Client] Received chunk (0,1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:25.903] [Client] Requesting chunk (3,-1,2)
+[2025-10-07 11:36:26.080] [Client] Received chunk (0,-1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:26.080] [Client] Requesting chunk (3,1,2)
+[2025-10-07 11:36:26.102] [Client] Received chunk (3,1,0): 0 render floats, 0 collision verts
+[2025-10-07 11:36:26.103] [Client] Requesting chunk (4,0,1)
+[2025-10-07 11:36:26.301] [Client] Received chunk (3,-1,0): 39417 render floats, 5631 collision verts
+[2025-10-07 11:36:26.301] [Client] Requesting chunk (2,-1,3)
+[2025-10-07 11:36:26.512] [Client] Received chunk (3,-1,2): 185052 render floats, 26436 collision verts
+[2025-10-07 11:36:26.512] [Client] Requesting chunk (4,0,0)
+[2025-10-07 11:36:26.530] [Client] Received chunk (3,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:26.530] [Client] Requesting chunk (2,0,4)
+[2025-10-07 11:36:26.728] [Client] Received chunk (4,0,1): 67389 render floats, 9627 collision verts
+[2025-10-07 11:36:26.728] [Client] Requesting chunk (4,0,2)
+[2025-10-07 11:36:26.937] [Client] Received chunk (2,-1,3): 271215 render floats, 38745 collision verts
+[2025-10-07 11:36:26.937] [Client] Requesting chunk (0,0,4)
+[2025-10-07 11:36:27.149] [Client] Received chunk (4,0,0): 118272 render floats, 16896 collision verts
+[2025-10-07 11:36:27.149] [Client] Requesting chunk (3,1,-1)
+[2025-10-07 11:36:27.443] [Client] Received chunk (2,0,4): 143094 render floats, 20442 collision verts
+[2025-10-07 11:36:27.443] [Client] Requesting chunk (3,1,3)
+[2025-10-07 11:36:27.670] [Client] Received chunk (4,0,2): 145005 render floats, 20715 collision verts
+[2025-10-07 11:36:27.670] [Client] Requesting chunk (3,-1,3)
+[2025-10-07 11:36:27.991] [Client] Received chunk (0,0,4): 102564 render floats, 14652 collision verts
+[2025-10-07 11:36:27.991] [Client] Requesting chunk (-1,-1,3)
+[2025-10-07 11:36:28.012] [Client] Received chunk (3,1,-1): 0 render floats, 0 collision verts
+[2025-10-07 11:36:28.012] [Client] Requesting chunk (-1,1,3)
+[2025-10-07 11:36:28.033] [Client] Received chunk (3,1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:28.033] [Client] Requesting chunk (1,1,4)
+[2025-10-07 11:36:28.232] [Client] Received chunk (3,-1,3): 44856 render floats, 6408 collision verts
+[2025-10-07 11:36:28.232] [Client] Requesting chunk (1,-1,4)
+[2025-10-07 11:36:28.414] [Client] Received chunk (-1,-1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:28.414] [Client] Requesting chunk (-1,0,4)
+[2025-10-07 11:36:28.438] [Client] Received chunk (-1,1,3): 0 render floats, 0 collision verts
+[2025-10-07 11:36:28.438] [Client] Requesting chunk (3,0,4)
+[2025-10-07 11:36:28.460] [Client] Received chunk (1,1,4): 0 render floats, 0 collision verts
+[2025-10-07 11:36:28.461] [Client] Requesting chunk (0,-1,4)
+[2025-10-07 11:36:28.676] [Client] Received chunk (1,-1,4): 253155 render floats, 36165 collision verts
+[2025-10-07 11:36:28.677] [Client] Requesting chunk (1,0,5)
+[2025-10-07 11:36:28.982] [Client] Received chunk (-1,0,4): 118461 render floats, 16923 collision verts
+[2025-10-07 11:36:28.983] [Client] Requesting chunk (0,1,4)
+[2025-10-07 11:36:29.324] [Client] Received chunk (3,0,4): 111300 render floats, 15900 collision verts
+[2025-10-07 11:36:29.324] [Client] Requesting chunk (2,1,4)
+[2025-10-07 11:36:29.514] [Client] Received chunk (0,-1,4): 60039 render floats, 8577 collision verts
+[2025-10-07 11:36:29.514] [Client] Requesting chunk (2,-1,4)
+[2025-10-07 11:36:29.827] [Client] Received chunk (1,0,5): 126840 render floats, 18120 collision verts
+[2025-10-07 11:36:29.827] [Client] Requesting chunk (2,0,5)
+[2025-10-07 11:36:29.848] [Client] Received chunk (0,1,4): 0 render floats, 0 collision verts
+[2025-10-07 11:36:29.848] [Client] Requesting chunk (4,0,3)
+[2025-10-07 11:36:29.870] [Client] Received chunk (2,1,4): 0 render floats, 0 collision verts
+[2025-10-07 11:36:29.870] [Client] Requesting chunk (-2,0,3)
+[2025-10-07 11:36:30.093] [Client] Received chunk (2,-1,4): 295659 render floats, 42237 collision verts
+[2025-10-07 11:36:30.093] [Client] Requesting chunk (0,0,5)
+[2025-10-07 11:36:30.363] [Client] Received chunk (2,0,5): 217539 render floats, 31077 collision verts
+[2025-10-07 11:36:30.364] [Client] Requesting chunk (3,-1,4)
+[2025-10-07 11:36:30.638] [Client] Received chunk (4,0,3): 117642 render floats, 16806 collision verts
+[2025-10-07 11:36:30.639] [Client] Requesting chunk (3,1,4)
+[2025-10-07 11:36:30.901] [Client] Received chunk (-2,0,3): 116886 render floats, 16698 collision verts
+[2025-10-07 11:36:30.901] [Client] Requesting chunk (-1,-1,4)
+[2025-10-07 11:36:31.239] [Client] Received chunk (0,0,5): 180096 render floats, 25728 collision verts
+[2025-10-07 11:36:31.240] [Client] Requesting chunk (-1,1,4)
+[2025-10-07 11:36:31.442] [Client] Received chunk (3,-1,4): 198555 render floats, 28365 collision verts
+[2025-10-07 11:36:31.442] [Client] Requesting chunk (4,0,4)
+[2025-10-07 11:36:31.462] [Client] Received chunk (3,1,4): 0 render floats, 0 collision verts
+[2025-10-07 11:36:31.462] [Client] Requesting chunk (3,0,5)
+[2025-10-07 11:36:31.653] [Client] Received chunk (-1,-1,4): 47796 render floats, 6828 collision verts
+[2025-10-07 11:36:31.654] [Client] Requesting chunk (1,-1,5)
+[2025-10-07 11:36:31.676] [Client] Received chunk (-1,1,4): 0 render floats, 0 collision verts
+[2025-10-07 11:36:31.676] [Client] Requesting chunk (4,-1,2)
+[2025-10-07 11:36:32.030] [Client] Received chunk (4,0,4): 124551 render floats, 17793 collision verts
+[2025-10-07 11:36:32.030] [Client] Requesting chunk (4,1,2)
+[2025-10-07 11:36:32.355] [Client] Received chunk (3,0,5): 105147 render floats, 15021 collision verts
+[2025-10-07 11:36:32.355] [Client] Requesting chunk (1,1,5)
+[2025-10-07 11:36:32.557] [Client] Received chunk (1,-1,5): 159453 render floats, 22779 collision verts
+[2025-10-07 11:36:32.558] [Client] Requesting chunk (-1,0,5)
+[2025-10-07 11:36:32.749] [Client] Received chunk (4,-1,2): 70476 render floats, 10068 collision verts
+[2025-10-07 11:36:32.749] [Client] Requesting chunk (-2,0,4)
+[2025-10-07 11:36:32.772] [Client] Received chunk (4,1,2): 0 render floats, 0 collision verts
+[2025-10-07 11:36:32.772] [Client] Requesting chunk (-2,-1,2)
+[2025-10-07 11:36:32.795] [Client] Received chunk (1,1,5): 0 render floats, 0 collision verts
+[2025-10-07 11:36:32.795] [Client] Requesting chunk (-2,1,2)

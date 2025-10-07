@@ -34,3 +34,4 @@
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/SixLabors.ImageSharp.dll
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuPhysics.dll
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuUtilities.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/Jitter2.dll

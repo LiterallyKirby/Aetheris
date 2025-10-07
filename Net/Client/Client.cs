@@ -264,21 +264,26 @@ namespace Aetheris
             await Task.WhenAll(activeTasks);
         }
 
+
         private async Task LoadChunkAsync((int cx, int cy, int cz, float priority) chunk, CancellationToken token)
         {
             try
             {
                 Console.WriteLine($"[Client] Requesting chunk ({chunk.cx},{chunk.cy},{chunk.cz})");
-                
-                var renderMesh = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
 
-                Console.WriteLine($"[Client] Received chunk ({chunk.cx},{chunk.cy},{chunk.cz}): {renderMesh.Length} floats");
+                var (renderMesh, collisionMesh) = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
+
+                Console.WriteLine($"[Client] Received chunk ({chunk.cx},{chunk.cy},{chunk.cz}): " +
+                                 $"{renderMesh.Length} render floats, {collisionMesh.Vertices.Count} collision verts");
 
                 // Mark chunk as loaded
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = new Aetheris.Chunk();
 
-                // Enqueue render mesh
+                // Enqueue render mesh for GPU
                 game?.Renderer.EnqueueMeshForChunk(chunk.cx, chunk.cy, chunk.cz, renderMesh);
+
+                // TODO: Add collision mesh to physics world here
+                // game?.PhysicsWorld.AddChunkCollider(chunk.cx, chunk.cy, chunk.cz, collisionMesh);
             }
             catch (Exception ex)
             {
@@ -287,7 +292,9 @@ namespace Aetheris
             }
         }
 
-        private async Task<float[]> RequestChunkMeshAsync(int cx, int cy, int cz, CancellationToken token)
+
+        private async Task<(float[] renderMesh, CollisionMesh collisionMesh)> RequestChunkMeshAsync(
+         int cx, int cy, int cz, CancellationToken token)
         {
             // Ensure connection
             if (stream == null || tcp == null || !tcp.Connected)
@@ -310,13 +317,98 @@ namespace Aetheris
             try
             {
                 await SendChunkRequestAsync(cx, cy, cz, token);
-                float[] renderMesh = await ReceiveMeshPayloadAsync(token);
-                return renderMesh;
+
+                // Receive both meshes
+                float[] renderMesh = await ReceiveRenderMeshAsync(token);
+                CollisionMesh collisionMesh = await ReceiveCollisionMeshAsync(token);
+
+                return (renderMesh, collisionMesh);
             }
             finally
             {
                 networkSemaphore.Release();
             }
+        }
+
+        private async Task<float[]> ReceiveRenderMeshAsync(CancellationToken token)
+        {
+            var lenBuf = new byte[4];
+            await ReadFullAsync(stream!, lenBuf, 0, 4, token);
+            int payloadLen = BitConverter.ToInt32(lenBuf, 0);
+
+            if (payloadLen < 0 || payloadLen > 100_000_000)
+                throw new Exception($"Invalid payload length: {payloadLen}");
+
+            if (payloadLen == 0)
+            {
+                Console.WriteLine("[Client] Received empty render mesh");
+                return Array.Empty<float>();
+            }
+
+            var payload = new byte[payloadLen];
+            await ReadFullAsync(stream!, payload, 0, payloadLen, token);
+
+            int vertexCount = BitConverter.ToInt32(payload, 0);
+            const int floatsPerVertex = 7;
+            int floatsCount = vertexCount * floatsPerVertex;
+
+            var floats = new float[floatsCount];
+            Buffer.BlockCopy(payload, 4, floats, 0, floatsCount * sizeof(float));
+
+            return floats;
+        }
+
+
+
+        private async Task<CollisionMesh> ReceiveCollisionMeshAsync(CancellationToken token)
+        {
+            var lenBuf = new byte[4];
+            await ReadFullAsync(stream!, lenBuf, 0, 4, token);
+            int payloadLen = BitConverter.ToInt32(lenBuf, 0);
+
+            if (payloadLen < 0 || payloadLen > 100_000_000)
+                throw new Exception($"Invalid collision payload length: {payloadLen}");
+
+            if (payloadLen == 0)
+            {
+                Console.WriteLine("[Client] Received empty collision mesh");
+                return new CollisionMesh
+                {
+                    Vertices = new List<Vector3>(),
+                    Indices = new List<int>()
+                };
+            }
+
+            var payload = new byte[payloadLen];
+            await ReadFullAsync(stream!, payload, 0, payloadLen, token);
+
+            int offset = 0;
+            int vertexCount = BitConverter.ToInt32(payload, offset);
+            offset += sizeof(int);
+            int indexCount = BitConverter.ToInt32(payload, offset);
+            offset += sizeof(int);
+
+            var vertices = new List<Vector3>(vertexCount);
+            for (int i = 0; i < vertexCount; i++)
+            {
+                float x = BitConverter.ToSingle(payload, offset);
+                offset += sizeof(float);
+                float y = BitConverter.ToSingle(payload, offset);
+                offset += sizeof(float);
+                float z = BitConverter.ToSingle(payload, offset);
+                offset += sizeof(float);
+
+                vertices.Add(new Vector3(x, y, z));
+            }
+
+            var indices = new List<int>(indexCount);
+            for (int i = 0; i < indexCount; i++)
+            {
+                indices.Add(BitConverter.ToInt32(payload, offset));
+                offset += sizeof(int);
+            }
+
+            return new CollisionMesh { Vertices = vertices, Indices = indices };
         }
 
         private async Task SendChunkRequestAsync(int cx, int cy, int cz, CancellationToken token)

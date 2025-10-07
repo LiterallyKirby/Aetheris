@@ -14,7 +14,7 @@ namespace Aetheris
             {
                 bool runServer = args.Contains("--server");
                 bool runClient = args.Contains("--client");
-
+                
                 // Default: run both if no flags
                 if (!runServer && !runClient)
                 {
@@ -43,12 +43,12 @@ namespace Aetheris
                     Console.WriteLine("[INFO] Launching client...");
                     var client = new Client();
                     client.Run(); // This blocks until the game window closes
+                    // Note: client.Run() now handles game creation internally
                 }
                 else if (runServer)
                 {
                     // Server-only mode: keep it running until Ctrl+C
                     Console.WriteLine("[INFO] Server running. Press Ctrl+C to stop.");
-
                     var cts = new CancellationTokenSource();
                     Console.CancelKeyPress += (sender, e) =>
                     {
@@ -91,11 +91,12 @@ namespace Aetheris
                         $"Inner Exception:\n{ex.InnerException}");
                     
                     Console.WriteLine($"[ERROR] Program crashed! Crash log saved to: {logPath}");
+                    Console.WriteLine($"[ERROR] {ex.Message}");
                 }
                 catch
                 {
-                    // If even that fails… just die quietly.
                     Console.WriteLine("[FATAL] Crash logging failed.");
+                    Console.WriteLine($"[FATAL] {ex.Message}");
                 }
             }
         }

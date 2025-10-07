@@ -2,860 +2,137 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Common;
 using System;
-using OtkMath = OpenTK.Mathematics.MathHelper;
 
 namespace Aetheris
 {
     public class Player
     {
-        public Vector3 Position { get; set; }
+        // Position and rotation
+        public Vector3 Position { get; private set; }
         public float Pitch { get; private set; } = 0f;
         public float Yaw { get; private set; } = -90f;
-
-        // Movement parameters
-        private const float GroundAcceleration = 80f;
-        private const float AirAcceleration = 12f;
-        private const float MaxGroundSpeed = 8f;
-        private const float MaxAirSpeed = 8f;
-        private const float Friction = 6f;
-        private const float StopSpeed = 1.0f;
-        private const float JumpSpeed = 8.5f;
-        private const float SprintMultiplier = 1.5f;
-        private const float Gravity = 20f;
-
-        private float mouseSensitivity = 0.2f;
-        private Vector2 lastMousePos;
-        private bool firstMouse = true;
-
-        // Collision parameters
-        private readonly float playerRadius = 0.4f;
-        private readonly float playerHeight = 1.8f;
-        private readonly float eyeHeight = 1.6f;
 
         // Physics state
         private Vector3 velocity = Vector3.Zero;
         private bool isGrounded = false;
-        private float timeSinceGrounded = 0f;
-        private float timeSinceJump = 999f;
 
-        // Feel improvements
-        private const float CoyoteTime = 0.12f;
-        private const float JumpBufferTime = 0.15f;
-        private float jumpBufferTimer = 0f;
+        // Debug properties
+        public Vector3 Velocity => velocity;
+        public bool IsGrounded => isGrounded;
 
-        // Collision detection tuning
-        private const float SkinWidth = 0.02f;
-        private const float MaxStepHeight = 0.6f;
+        // Player dimensions (box collision)
+        // === Made bigger here ===
+        private const float PLAYER_WIDTH = 1.2f;   // X/Z dimensions (was 0.6)
+        private const float PLAYER_HEIGHT = 3.6f;  // Y dimension (was 1.8)
+        private static readonly float EYE_HEIGHT = PLAYER_HEIGHT - 0.4f; // derived, keeps eye near top
 
-        private int debugCounter = 0;
+        // Movement parameters (unchanged)
+        private const float GROUND_ACCEL = 14f;
+        private const float AIR_ACCEL = 2f;
+        private const float MAX_VELOCITY = 8f;
+        private const float FRICTION = 8f;
+        private const float STOP_SPEED = 1.5f;
+        private const float JUMP_VELOCITY = 7f;
+        private const float GRAVITY = 20f;
+        private const float AIR_CONTROL = 0.3f;
 
-        private Game? game;
+        // Mouse
+        private float mouseSensitivity = 0.2f;
+        private Vector2 lastMousePos;
+        private bool firstMouse = true;
 
-        public Player(Vector3 startPosition, Game? gameRef = null)
+        public Player(Vector3 startPosition)
         {
-            Position = startPosition;
-            game = gameRef;
-            Console.WriteLine($"[Player] Manual collision system initialized at {startPosition}");
+            Position = FindSafeSpawn(startPosition);
+            Console.WriteLine($"[Player] Spawned at {Position}");
         }
 
-        public void SetGame(Game gameRef)
+        private Vector3 FindSafeSpawn(Vector3 start)
         {
-            game = gameRef;
+            // Search downward for a safe position (air with ground below).
+            // Return position to use as the player's "feet" location (matching the rest of the code).
+            for (int y = (int)start.Y; y > (int)start.Y - 200; y--)
+            {
+                Vector3 testPos = new Vector3(start.X, y, start.Z);
+
+                // Check if this position is air and has ground below
+                if (!IsBoxInSolid(testPos) && IsGroundBelow(testPos))
+                {
+                    // keep the player feet slightly above block center to avoid being stuck
+                    return testPos + Vector3.UnitY * 0.1f; // small offset; you can increase if you clip into floors
+                }
+            }
+
+            // Fallback: spawn high and fall
+            return new Vector3(start.X, 100f, start.Z);
+        }
+
+        private bool IsGroundBelow(Vector3 pos)
+        {
+            // Check if there's solid ground within 3 units below (in case player is tall)
+            for (int i = 1; i <= 3; i++)
+            {
+                if (IsSolidAt(pos - Vector3.UnitY * i))
+                    return true;
+            }
+            return false;
         }
 
         public Matrix4 GetViewMatrix()
         {
+            // Position is feet; eye is feet + EYE_HEIGHT
+            Vector3 eyePos = Position + Vector3.UnitY * EYE_HEIGHT;
             Vector3 front = GetFront();
-            Vector3 eyePosition = Position + new Vector3(0, eyeHeight, 0);
-            return Matrix4.LookAt(eyePosition, eyePosition + front, Vector3.UnitY);
+            return Matrix4.LookAt(eyePos, eyePos + front, Vector3.UnitY);
         }
 
         public Vector3 GetForward() => GetFront();
 
-        public void TeleportTo(Vector3 newPosition)
-        {
-            Position = newPosition;
-            velocity = Vector3.Zero;
-            timeSinceGrounded = 999f;
-            Console.WriteLine($"[Player] Teleported to {newPosition}");
-        }
-
         public void Update(FrameEventArgs e, KeyboardState keys, MouseState mouse)
         {
-            float delta = (float)e.Time;
+            float deltaTime = (float)e.Time;
+
             UpdateMouseLook(mouse);
-            UpdateManualPhysics(delta, keys);
-        }
 
-        private void UpdateManualPhysics(float delta, KeyboardState keys)
-        {
-            delta = Math.Min(delta, 0.1f);
+            Vector3 wishDir = GetWishDirection(keys);
 
-            // Clear collision cache periodically
-            collisionCacheFrame++;
-            if (collisionCacheFrame >= CacheClearInterval)
+            // Ground check
+            CheckGround();
+
+            // Jumping
+            if (keys.IsKeyDown(Keys.Space) && isGrounded)
             {
-                collisionCache.Clear();
-                collisionCacheFrame = 0;
+                velocity.Y = JUMP_VELOCITY;
+                isGrounded = false;
             }
 
-            // Update timers
+            // Movement
             if (isGrounded)
-                timeSinceGrounded = 0f;
-            else
-                timeSinceGrounded += delta;
-
-            timeSinceJump += delta;
-
-            // Jump buffering
-            if (keys.IsKeyPressed(Keys.Space))
-                jumpBufferTimer = JumpBufferTime;
-            jumpBufferTimer -= delta;
-
-            // Movement input
-            Vector3 front = GetFront();
-            Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
-            front.Y = 0;
-            front = front.LengthSquared > 0.01f ? Vector3.Normalize(front) : Vector3.Zero;
-            right.Y = 0;
-            right = right.LengthSquared > 0.01f ? Vector3.Normalize(right) : Vector3.Zero;
-
-            Vector3 wishDir = Vector3.Zero;
-            if (keys.IsKeyDown(Keys.W)) wishDir += front;
-            if (keys.IsKeyDown(Keys.S)) wishDir -= front;
-            if (keys.IsKeyDown(Keys.A)) wishDir -= right;
-            if (keys.IsKeyDown(Keys.D)) wishDir += right;
-
-            if (wishDir.LengthSquared > 0.01f)
-                wishDir = Vector3.Normalize(wishDir);
-
-            // Apply movement
-            bool canJump = timeSinceGrounded < CoyoteTime && timeSinceJump > 0.2f;
-
-            if (timeSinceGrounded < CoyoteTime * 0.5f)
             {
-                ApplyFriction(delta);
+                ApplyFriction(deltaTime);
+                Accelerate(wishDir, GROUND_ACCEL, deltaTime);
 
-                float wishSpeed = MaxGroundSpeed;
-                if (keys.IsKeyDown(Keys.LeftShift))
-                    wishSpeed *= SprintMultiplier;
-
-                Accelerate(wishDir, wishSpeed, GroundAcceleration, delta);
+                // Clamp downward velocity when grounded
+                if (velocity.Y < 0)
+                    velocity.Y = 0;
             }
             else
             {
-                float wishSpeed = MaxAirSpeed;
-                Accelerate(wishDir, wishSpeed, AirAcceleration, delta);
-            }
-
-            // Jump
-            if (jumpBufferTimer > 0 && canJump)
-            {
-                velocity.Y = JumpSpeed;
-                jumpBufferTimer = 0f;
-                timeSinceJump = 0f;
-                timeSinceGrounded = 999f;
-            }
-
-            // Gravity
-            if (!isGrounded)
-            {
-                velocity.Y -= Gravity * delta;
+                float accel = AIR_ACCEL + (wishDir.LengthSquared > 0.001f ? AIR_CONTROL : 0);
+                Accelerate(wishDir, accel, deltaTime);
+                velocity.Y -= GRAVITY * deltaTime;
                 velocity.Y = Math.Max(velocity.Y, -50f); // Terminal velocity
             }
 
-            // Move with collision
-            MoveWithCollision(delta);
+            // Collide and slide
+            MoveAndSlide(deltaTime);
 
-            // Ground check AFTER movement
-            PerformGroundCheck();
-            ResolveAndFixIfStuck();
-            // Debug output
-            debugCounter++;
-            if (debugCounter % 120 == 0)
+            // Safety respawn
+            if (Position.Y < -200f)
             {
-                Console.WriteLine($"[Player] Pos: {Position:F1}, Vel: {velocity:F1}, Grounded: {isGrounded}");
+                Position = new Vector3(Position.X, 100f, Position.Z);
+                velocity = Vector3.Zero;
             }
-        }
-
-        private void PerformGroundCheck()
-        {
-            // Check from actual feet position
-            Vector3 feetPos = Position;
-
-            // Check if we're standing on solid ground
-            float checkDist = 0.15f;
-            int hits = 0;
-
-            // Check multiple points around player base
-            Vector3[] checkPoints = new Vector3[]
-            {
-                feetPos, // Center
-                feetPos + new Vector3(playerRadius * 0.6f, 0, 0),
-                feetPos + new Vector3(-playerRadius * 0.6f, 0, 0),
-                feetPos + new Vector3(0, 0, playerRadius * 0.6f),
-                feetPos + new Vector3(0, 0, -playerRadius * 0.6f),
-            };
-
-            foreach (var point in checkPoints)
-            {
-                // Check just below feet
-                for (float d = 0.01f; d <= checkDist; d += 0.05f)
-                {
-                    Vector3 checkPos = point + new Vector3(0, -d, 0);
-                    if (IsSolid(checkPos))
-                    {
-                        hits++;
-                        break;
-                    }
-                }
-            }
-
-            isGrounded = hits >= 2;
-
-            // Stop downward velocity when grounded
-            if (isGrounded && velocity.Y < 0)
-            {
-                velocity.Y = 0;
-            }
-        }
-        private float FindGroundBelow(Vector3 pos, float maxDrop)
-        {
-            // Step downward in small increments to find first collision beneath pos.
-            // This is a conservative but simple approach for small drops (step heights).
-            const float step = 0.01f;
-            float traveled = 0f;
-
-            for (; traveled <= maxDrop; traveled += step)
-            {
-                Vector3 test = pos + new Vector3(0, -traveled, 0);
-                if (WouldCollide(test))
-                {
-                    // we hit geometry at this offset; return traveled (distance to collision)
-                    return traveled;
-                }
-            }
-
-            // nothing found within maxDrop
-            return -1f;
-        }
-        private void SnapToGroundBelow()
-        {
-            // Start the probe a little above the player so we don't miss shallow floors.
-            float probeAbove = MaxStepHeight + 0.4f;
-            Vector3 probeStart = Position + new Vector3(0f, probeAbove, 0f);
-
-            float maxDrop = probeAbove + 0.4f;
-            float drop = FindGroundBelow(probeStart, maxDrop); // returns distance to collision or -1
-
-            if (drop >= 0f)
-            {
-                // Place player just above collision using SkinWidth so we're not intersecting.
-                Position = probeStart + new Vector3(0f, -drop + SkinWidth, 0f);
-                // Make sure we don't have tiny downward velocity leftover that would cause immediate penetration
-                if (velocity.Y < 0f) velocity.Y = 0f;
-            }
-        }
-        private void ResolvePenetrationAndSnap(float maxRadius = 0.8f, bool allowVerticalLift = true)
-        {
-            // quick sanity: if clean, just snap down
-            if (!WouldCollide(Position))
-            {
-                SnapToGroundBelow();
-                return;
-            }
-
-            const float radialStep = 0.05f;
-            const int angleStepDeg = 30; // try 12 directions per ring
-            float maxUpTry = allowVerticalLift ? MaxStepHeight : 0f;
-
-            // Rings outward in horizontal plane — prefer horizontal shifts so we don't accidentally climb.
-            for (float r = radialStep; r <= maxRadius; r += radialStep)
-            {
-                for (int a = 0; a < 360; a += angleStepDeg)
-                {
-                    float rad = a * MathF.PI / 180f;
-                    Vector3 offset = new Vector3(MathF.Cos(rad) * r, 0f, MathF.Sin(rad) * r);
-
-                    // 1) Try same Y first (pure horizontal nudge)
-                    if (!WouldCollide(Position + offset))
-                    {
-                        Position += offset;
-                        SnapToGroundBelow();
-                        return;
-                    }
-
-                    // 2) Try small upward lifts at this offset (to step up over a low edge)
-                    if (maxUpTry > 0f)
-                    {
-                        for (float up = radialStep; up <= maxUpTry; up += radialStep)
-                        {
-                            Vector3 tryPos = Position + offset + new Vector3(0f, up + SkinWidth, 0f);
-                            if (!WouldCollide(tryPos))
-                            {
-                                // Ensure this lift actually lands on ground within MaxStepHeight.
-                                float groundY = GetGroundYAt(tryPos);
-                                if (!float.IsNaN(groundY))
-                                {
-                                    float currentGroundY = GetGroundYAt(Position);
-                                    if (!float.IsNaN(currentGroundY))
-                                    {
-                                        float diff = groundY - currentGroundY;
-                                        // only accept small step-ups
-                                        if (diff >= 0.01f && diff <= MaxStepHeight + 0.05f)
-                                        {
-                                            Position = new Vector3(tryPos.X, groundY + SkinWidth, tryPos.Z);
-                                            if (velocity.Y < 0f) velocity.Y = 0f;
-                                            SnapToGroundBelow();
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 3) As a last resort: small straight-up tries, but only up to MaxStepHeight and only if allowed.
-            if (allowVerticalLift && Math.Abs(velocity.Y) <= 0.6f)
-            {
-                for (float up = radialStep; up <= MaxStepHeight; up += radialStep)
-                {
-                    Vector3 tryPos = Position + new Vector3(0f, up + SkinWidth, 0f);
-                    if (!WouldCollide(tryPos))
-                    {
-                        float groundY = GetGroundYAt(tryPos);
-                        float currentGroundY = GetGroundYAt(Position);
-                        if (!float.IsNaN(groundY) && !float.IsNaN(currentGroundY))
-                        {
-                            float diff = groundY - currentGroundY;
-                            if (diff >= 0.01f && diff <= MaxStepHeight + 0.05f)
-                            {
-                                Position = new Vector3(tryPos.X, groundY + SkinWidth, tryPos.Z);
-                                if (velocity.Y < 0f) velocity.Y = 0f;
-                                SnapToGroundBelow();
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // If we get here, nothing worked within conservative limits — don't teleport far.
-            // Log so we can tune parameters later.
-            // Console.WriteLine("[Player] ResolvePenetrationAndSnap: couldn't find non-colliding spot within conservative limits.");
-        }
-        private void ResolveAndFixIfStuck()
-        {
-            // quick early-out
-            if (!WouldCollide(Position))
-            {
-                // if we're grounded, make sure Y sits on the surface
-                if (isGrounded) SnapToGroundBelow();
-                return;
-            }
-
-            // If the player is moving vertically fast (jump/fall), don't aggressively lift them — try mild horizontal nudges first.
-            // This prevents the resolver from helping the player "climb" while in mid-air.
-            if (Math.Abs(velocity.Y) > 0.6f)
-            {
-                // Only allow small horizontal escape attempts when in motion
-                ResolvePenetrationAndSnap(maxRadius: 0.4f, allowVerticalLift: false);
-            }
-            else
-            {
-                // If mostly still (likely wedged), allow full resolver but keep vertical lifts conservative.
-                ResolvePenetrationAndSnap(maxRadius: 0.8f, allowVerticalLift: true);
-            }
-        }
-
-        private void ResolvePenetrationAndSnap(float maxRadius = 0.8f)
-        {
-            // If we're already clean, just snap to ground to make sure our Y is correct.
-            if (!WouldCollide(Position))
-            {
-                SnapToGroundBelow();
-                return;
-            }
-
-            const float radialStep = 0.05f;
-            const int angleStepDeg = 30; // try 12 directions per ring
-            float maxUpTry = MaxStepHeight;
-
-            // Try rings outward in horizontal plane, with small upward attempts at each angle.
-            for (float r = radialStep; r <= maxRadius; r += radialStep)
-            {
-                for (int a = 0; a < 360; a += angleStepDeg)
-                {
-                    float rad = a * MathF.PI / 180f;
-                    Vector3 offset = new Vector3(MathF.Cos(rad) * r, 0f, MathF.Sin(rad) * r);
-
-                    // 1) Try same Y
-                    if (!WouldCollide(Position + offset))
-                    {
-                        Position += offset;
-                        SnapToGroundBelow();
-                        return;
-                    }
-
-                    // 2) Try small upward lifts at this offset (to step up over an edge)
-                    for (float up = radialStep; up <= maxUpTry; up += radialStep)
-                    {
-                        Vector3 tryPos = Position + offset + new Vector3(0f, up + SkinWidth, 0f);
-                        if (!WouldCollide(tryPos))
-                        {
-                            Position = tryPos;
-                            SnapToGroundBelow();
-                            return;
-                        }
-                    }
-                }
-            }
-
-            // 3) As a last resort, try lifting straight up until free (avoid teleporting too far)
-            for (float up = radialStep; up <= maxRadius; up += radialStep)
-            {
-                Vector3 tryPos = Position + new Vector3(0f, up + SkinWidth, 0f);
-                if (!WouldCollide(tryPos))
-                {
-                    Position = tryPos;
-                    SnapToGroundBelow();
-                    return;
-                }
-            }
-
-            // If we get here, we failed to find a safe spot within the radius — log so we can tweak.
-            Console.WriteLine("[Player] ResolvePenetrationAndSnap: couldn't find non-colliding spot (increase maxRadius?)");
-        }
-
-        private void MoveWithCollision(float delta)
-        {
-            Vector3 movement = velocity * delta;
-
-            // Horizontal movement first
-            Vector3 horizontalMove = new Vector3(movement.X, 0, movement.Z);
-
-            if (horizontalMove.LengthSquared > 0.001f)
-            {
-                // Probe movement from current position
-                Vector3 actualHorizontal = MoveAxis(Position, horizontalMove);
-
-                // If blocked significantly and grounded, try a step-up (only if player was grounded)
-                if (isGrounded && actualHorizontal.LengthSquared < horizontalMove.LengthSquared * 0.9f)
-                {
-                    if (TryStepUp(horizontalMove, out Vector3 stepMove))
-                    {
-                        // Apply the step move (which contains the upward + forward + drop to ground)
-                        Position += stepMove;
-
-                        // landed, stop vertical velocity
-                        velocity.Y = 0f;
-
-                        // we've applied horizontal move already
-                        horizontalMove = Vector3.Zero;
-                    }
-                    else
-                    {
-                        // no step possible, apply best-effort horizontal movement
-                        Position += actualHorizontal;
-                    }
-                }
-                else
-                {
-                    Position += actualHorizontal;
-                }
-
-                // Reduce horizontal velocity if severely blocked (keep momentum otherwise)
-                if (actualHorizontal.LengthSquared < horizontalMove.LengthSquared * 0.5f)
-                {
-                    float blockAmount = 1f - (actualHorizontal.Length / Math.Max(horizontalMove.Length, 1e-6f));
-                    velocity.X *= (1f - blockAmount);
-                    velocity.Z *= (1f - blockAmount);
-                }
-            }
-
-            // Vertical movement second
-            Vector3 verticalMove = new Vector3(0, movement.Y, 0);
-            Vector3 actualVertical = MoveAxis(Position, verticalMove);
-            Position += actualVertical;
-
-            // If we hit something vertically, stop vertical velocity
-            if (Math.Abs(actualVertical.Y) < Math.Abs(verticalMove.Y) * 0.9f)
-            {
-                velocity.Y = 0;
-            }
-        }
-
-
-        private float GetGroundYAt(Vector3 pos, float probeAbove = -1f, float maxDrop = -1f)
-        {
-            // Defaults tuned around MaxStepHeight
-            if (probeAbove <= 0f) probeAbove = MaxStepHeight + 0.5f;
-            if (maxDrop <= 0f) maxDrop = probeAbove + 0.5f;
-
-            Vector3 probeStart = pos + new Vector3(0f, probeAbove, 0f);
-            float drop = FindGroundBelow(probeStart, maxDrop);
-            if (drop < 0f) return float.NaN;
-            return probeStart.Y - drop;
-        }
-
-        private bool TryStepUp(Vector3 horizontalMove, out Vector3 finalMove)
-        {
-            finalMove = Vector3.Zero;
-
-            if (horizontalMove.LengthSquared < 1e-8f) return false;
-
-            // Get current ground height (if any). If we have no ground under us, don't step.
-            float currentGroundY = GetGroundYAt(Position);
-            if (float.IsNaN(currentGroundY))
-                return false;
-
-            const float probeStep = 0.05f;
-            const float forwardPassThreshold = 0.85f; // fraction of forward movement we require
-            const float minStepToConsider = 0.05f;     // ignore micro-steps
-
-            for (float stepHeight = probeStep; stepHeight <= MaxStepHeight + 0.0001f; stepHeight += probeStep)
-            {
-                // position raised to attempt stepping (a tiny SkinWidth lift so we truly clear the obstruction)
-                Vector3 upPos = Position + new Vector3(0f, stepHeight + SkinWidth, 0f);
-
-                // must be free at raised position
-                if (WouldCollide(upPos))
-                    continue;
-
-                // attempt to advance forward at that raised position
-                Vector3 forwardActual = MoveAxis(upPos, horizontalMove);
-
-                // require a large fraction of the requested forward displacement to avoid sneaking up walls
-                if (forwardActual.LengthSquared < horizontalMove.LengthSquared * forwardPassThreshold)
-                    continue;
-
-                // candidate location after moving
-                Vector3 candidate = upPos + forwardActual;
-
-                // find real ground height under candidate
-                float candidateGroundY = GetGroundYAt(candidate);
-                if (float.IsNaN(candidateGroundY))
-                    continue; // no ground under candidate -> probably a ledge or wall
-
-                // height difference between candidate ground and our current ground
-                float heightDiff = candidateGroundY - currentGroundY;
-
-                // we only want to step up onto ground that is slightly higher,
-                // and within the MaxStepHeight range (ignore tiny bumps too)
-                if (heightDiff < minStepToConsider || heightDiff > MaxStepHeight + 0.05f)
-                    continue;
-
-                // Construct final position sitting just above candidate ground (using SkinWidth)
-                Vector3 finalPos = new Vector3(candidate.X, candidateGroundY + SkinWidth, candidate.Z);
-
-                // sanity: ensure final position is free
-                if (WouldCollide(finalPos))
-                    continue;
-
-                // success: return the delta (will be applied to Position by caller)
-                finalMove = finalPos - Position;
-                return true;
-            }
-
-            return false;
-        }
-
-
-        private Vector3 MoveAxis(Vector3 startPos, Vector3 movement)
-        {
-            if (movement.LengthSquared <= 1e-8f) return Vector3.Zero;
-
-            // Quick test: if target position is free, take it.
-            Vector3 targetPos = startPos + movement;
-            if (!WouldCollide(targetPos))
-                return movement;
-
-            // Binary search for maximum safe fraction of movement
-            float low = 0f;
-            float high = 1f;
-            float safe = 0f;
-
-            for (int i = 0; i < 10; i++) // 10 iterations gives good precision
-            {
-                float mid = (low + high) * 0.5f;
-                Vector3 testPos = startPos + movement * mid;
-                if (WouldCollide(testPos))
-                {
-                    high = mid;
-                }
-                else
-                {
-                    safe = mid;
-                    low = mid;
-                }
-            }
-
-            return movement * safe;
-        }
-
-        private bool WouldCollide(Vector3 position)
-        {
-            // Check bottom capsule cap
-            if (CheckSphereCollision(position + new Vector3(0, playerRadius, 0), playerRadius - SkinWidth))
-                return true;
-
-            // Check top capsule cap
-            if (CheckSphereCollision(position + new Vector3(0, playerHeight - playerRadius, 0), playerRadius - SkinWidth))
-                return true;
-
-            // Check middle cylinder with more samples
-            for (float h = playerRadius + 0.2f; h < playerHeight - playerRadius; h += 0.2f)
-            {
-                Vector3 center = position + new Vector3(0, h, 0);
-
-                // Check 8 points around perimeter
-                for (int angle = 0; angle < 360; angle += 45)
-                {
-                    float rad = angle * MathF.PI / 180f;
-                    float r = playerRadius - SkinWidth;
-                    Vector3 checkPos = center + new Vector3(
-                        MathF.Cos(rad) * r,
-                        0,
-                        MathF.Sin(rad) * r
-                    );
-
-                    if (IsSolid(checkPos))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool CheckSphereCollision(Vector3 center, float radius)
-        {
-            int checks = (int)Math.Ceiling(radius) + 1;
-
-            for (int x = -checks; x <= checks; x++)
-            {
-                for (int y = -checks; y <= checks; y++)
-                {
-                    for (int z = -checks; z <= checks; z++)
-                    {
-                        Vector3 offset = new Vector3(x * 0.25f, y * 0.25f, z * 0.25f);
-                        if (offset.LengthSquared <= radius * radius)
-                        {
-                            Vector3 checkPos = center + offset;
-                            if (IsSolid(checkPos))
-                                return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        // Collision cache
-        private readonly Dictionary<(int, int, int), bool> collisionCache = new();
-        private int collisionCacheFrame = 0;
-        private const int CacheClearInterval = 30; // Clear cache every 30 frames
-
-        private bool IsSolid(Vector3 position)
-        {
-            if (game == null)
-            {
-                // Fallback to density sampling if no game reference
-                return SampleDensityAt(position) > 0.5f;
-            }
-
-            try
-            {
-                // Cache key based on position rounded to 0.25 block precision
-                int cacheX = (int)(position.X * 4);
-                int cacheY = (int)(position.Y * 4);
-                int cacheZ = (int)(position.Z * 4);
-                var cacheKey = (cacheX, cacheY, cacheZ);
-
-                // Check cache first
-                if (collisionCache.TryGetValue(cacheKey, out bool cached))
-                    return cached;
-
-                // Only check the chunk containing this position
-                int chunkX = (int)Math.Floor(position.X / ClientConfig.CHUNK_SIZE);
-                int chunkY = (int)Math.Floor(position.Y / ClientConfig.CHUNK_SIZE_Y);
-                int chunkZ = (int)Math.Floor(position.Z / ClientConfig.CHUNK_SIZE);
-
-                bool result = CheckMeshCollisionFast(chunkX, chunkY, chunkZ, position);
-
-                // Cache the result
-                collisionCache[cacheKey] = result;
-
-                return result;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private bool CheckMeshCollisionFast(int cx, int cy, int cz, Vector3 point)
-        {
-            var meshData = game?.Renderer.GetMeshData(cx, cy, cz);
-            if (meshData == null || meshData.Length < 24)
-            {
-                // Fallback to density if mesh not loaded yet
-                return SampleDensityAt(point) > 0.5f;
-            }
-
-            // Broad phase: Only check triangles in a small radius
-            const float checkRadius = 2.0f;
-
-            // Check every Nth triangle for performance (trade accuracy for speed)
-            const int stride = 24; // Check every triangle
-
-            for (int i = 0; i < meshData.Length; i += stride)
-            {
-                // Extract first vertex for quick distance check
-                float vx = meshData[i + 0];
-                float vy = meshData[i + 1];
-                float vz = meshData[i + 2];
-
-                // Quick distance check
-                float dx = vx - point.X;
-                float dy = vy - point.Y;
-                float dz = vz - point.Z;
-                float distSq = dx * dx + dy * dy + dz * dz;
-
-                if (distSq > checkRadius * checkRadius)
-                    continue;
-
-                // Extract all three vertices
-                Vector3 v0 = new Vector3(meshData[i + 0], meshData[i + 1], meshData[i + 2]);
-                Vector3 v1 = new Vector3(meshData[i + 8], meshData[i + 9], meshData[i + 10]);
-                Vector3 v2 = new Vector3(meshData[i + 16], meshData[i + 17], meshData[i + 18]);
-
-                // Simplified point-in-triangle test
-                if (PointNearTriangleFast(point, v0, v1, v2))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool PointNearTriangleFast(Vector3 point, Vector3 v0, Vector3 v1, Vector3 v2)
-        {
-            // Calculate triangle normal
-            Vector3 edge1 = v1 - v0;
-            Vector3 edge2 = v2 - v0;
-            Vector3 normal = Vector3.Cross(edge1, edge2);
-            float normalLen = normal.Length;
-
-            if (normalLen < 0.0001f) return false;
-
-            normal /= normalLen;
-
-            // Distance to plane
-            Vector3 toPoint = point - v0;
-            float distanceToPlane = Vector3.Dot(toPoint, normal);
-
-            // Check if point is within thickness threshold
-            const float thickness = 0.4f;
-            if (Math.Abs(distanceToPlane) > thickness)
-                return false;
-
-            // Simplified inside-triangle check using sign of cross products
-            Vector3 edge0 = v1 - v0;
-            Vector3 edge1b = v2 - v1;
-            Vector3 edge2b = v0 - v2;
-
-            Vector3 vp0 = point - v0;
-            Vector3 vp1 = point - v1;
-            Vector3 vp2 = point - v2;
-
-            // Check if point is on the same side of all edges
-            float c0 = Vector3.Dot(normal, Vector3.Cross(edge0, vp0));
-            float c1 = Vector3.Dot(normal, Vector3.Cross(edge1b, vp1));
-            float c2 = Vector3.Dot(normal, Vector3.Cross(edge2b, vp2));
-
-            // All same sign = inside
-            return (c0 >= -0.01f && c1 >= -0.01f && c2 >= -0.01f) ||
-                   (c0 <= 0.01f && c1 <= 0.01f && c2 <= 0.01f);
-        }
-
-        private float SampleDensityAt(Vector3 position)
-        {
-            float fx = position.X;
-            float fy = position.Y;
-            float fz = position.Z;
-
-            int x0 = (int)Math.Floor(fx);
-            int y0 = (int)Math.Floor(fy);
-            int z0 = (int)Math.Floor(fz);
-
-            int x1 = x0 + 1;
-            int y1 = y0 + 1;
-            int z1 = z0 + 1;
-
-            float tx = fx - x0;
-            float ty = fy - y0;
-            float tz = fz - z0;
-
-            // Sample density at 8 corners
-            float d000 = WorldGen.SampleDensity(x0, y0, z0);
-            float d100 = WorldGen.SampleDensity(x1, y0, z0);
-            float d010 = WorldGen.SampleDensity(x0, y1, z0);
-            float d110 = WorldGen.SampleDensity(x1, y1, z0);
-            float d001 = WorldGen.SampleDensity(x0, y0, z1);
-            float d101 = WorldGen.SampleDensity(x1, y0, z1);
-            float d011 = WorldGen.SampleDensity(x0, y1, z1);
-            float d111 = WorldGen.SampleDensity(x1, y1, z1);
-
-            // Trilinear interpolation
-            float d00 = d000 * (1 - tx) + d100 * tx;
-            float d01 = d001 * (1 - tx) + d101 * tx;
-            float d10 = d010 * (1 - tx) + d110 * tx;
-            float d11 = d011 * (1 - tx) + d111 * tx;
-
-            float d0 = d00 * (1 - ty) + d10 * ty;
-            float d1 = d01 * (1 - ty) + d11 * ty;
-
-            return d0 * (1 - tz) + d1 * tz;
-        }
-
-        private void ApplyFriction(float delta)
-        {
-            float speed = new Vector3(velocity.X, 0, velocity.Z).Length;
-            if (speed < 0.1f)
-            {
-                velocity.X = 0;
-                velocity.Z = 0;
-                return;
-            }
-
-            float control = speed < StopSpeed ? StopSpeed : speed;
-            float drop = control * Friction * delta;
-            float newSpeed = Math.Max(speed - drop, 0f);
-
-            if (speed > 0.01f)
-            {
-                float scale = newSpeed / speed;
-                velocity.X *= scale;
-                velocity.Z *= scale;
-            }
-        }
-
-        private void Accelerate(Vector3 wishDir, float wishSpeed, float accel, float delta)
-        {
-            if (wishDir.LengthSquared < 0.01f) return;
-
-            Vector3 horizVel = new Vector3(velocity.X, 0, velocity.Z);
-            float currentSpeed = Vector3.Dot(horizVel, wishDir);
-            float addSpeed = wishSpeed - currentSpeed;
-
-            if (addSpeed <= 0) return;
-
-            float accelSpeed = Math.Min(accel * delta * wishSpeed, addSpeed);
-
-            velocity.X += wishDir.X * accelSpeed;
-            velocity.Z += wishDir.Z * accelSpeed;
         }
 
         private void UpdateMouseLook(MouseState mouse)
@@ -871,24 +148,286 @@ namespace Aetheris
             float dy = lastMousePos.Y - mouse.Y;
             lastMousePos = new Vector2(mouse.X, mouse.Y);
 
-            dx *= mouseSensitivity;
-            dy *= mouseSensitivity;
-
-            Yaw += dx;
-            Pitch += dy;
+            Yaw += dx * mouseSensitivity;
+            Pitch += dy * mouseSensitivity;
             Pitch = Math.Clamp(Pitch, -89f, 89f);
+        }
+
+        private Vector3 GetWishDirection(KeyboardState keys)
+        {
+            Vector3 front = GetFrontHorizontal();
+            Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
+
+            Vector3 wishDir = Vector3.Zero;
+
+            if (keys.IsKeyDown(Keys.W)) wishDir += front;
+            if (keys.IsKeyDown(Keys.S)) wishDir -= front;
+            if (keys.IsKeyDown(Keys.D)) wishDir += right;
+            if (keys.IsKeyDown(Keys.A)) wishDir -= right;
+
+            if (wishDir.LengthSquared > 0.001f)
+                wishDir = Vector3.Normalize(wishDir);
+
+            return wishDir;
+        }
+
+        private void CheckGround()
+        {
+            // Position represents feet. Sample slightly below the feet plane for ground.
+            Vector3 feetPos = Position;
+
+            // Check slightly below feet
+            bool hasGround = false;
+            float groundDistance = 0.4f; // increased because player is taller/wider
+            Vector3 groundCheck = feetPos - Vector3.UnitY * groundDistance;
+
+            // Check multiple points across the base for stability
+            Vector3[] offsets = {
+                Vector3.Zero,
+                new Vector3(PLAYER_WIDTH * 0.45f, 0, 0),
+                new Vector3(-PLAYER_WIDTH * 0.45f, 0, 0),
+                new Vector3(0, 0, PLAYER_WIDTH * 0.45f),
+                new Vector3(0, 0, -PLAYER_WIDTH * 0.45f)
+            };
+
+            foreach (var offset in offsets)
+            {
+                Vector3 checkPos = groundCheck + offset;
+                if (IsSolidAt(checkPos))
+                {
+                    hasGround = true;
+                    break;
+                }
+            }
+
+            // Only grounded if we have ground AND moving down or stationary
+            isGrounded = hasGround && velocity.Y <= 0.1f;
+
+            if (isGrounded)
+            {
+                velocity.Y = 0;
+            }
+        }
+
+        private void ApplyFriction(float deltaTime)
+        {
+            Vector3 horizontalVel = new Vector3(velocity.X, 0, velocity.Z);
+            float speed = horizontalVel.Length;
+
+            if (speed < 0.1f)
+            {
+                velocity.X = 0;
+                velocity.Z = 0;
+                return;
+            }
+
+            float control = speed < STOP_SPEED ? STOP_SPEED : speed;
+            float drop = control * FRICTION * deltaTime;
+            float newSpeed = Math.Max(speed - drop, 0f);
+
+            if (speed > 0)
+            {
+                float scale = newSpeed / speed;
+                velocity.X *= scale;
+                velocity.Z *= scale;
+            }
+        }
+
+        private void Accelerate(Vector3 wishDir, float accel, float deltaTime)
+        {
+            if (wishDir.LengthSquared < 0.001f) return;
+
+            float currentSpeed = Vector3.Dot(velocity, wishDir);
+            float addSpeed = MAX_VELOCITY - currentSpeed;
+
+            if (addSpeed <= 0) return;
+
+            float accelSpeed = accel * MAX_VELOCITY * deltaTime;
+            if (accelSpeed > addSpeed) accelSpeed = addSpeed;
+
+            velocity += wishDir * accelSpeed;
+        }
+
+        private const float STEP_HEIGHT = 1.25f; // how high the player can step up; tune down if too floaty
+
+        // replace your MoveAndSlide(...) with this implementation
+        private void MoveAndSlide(float deltaTime)
+        {
+            Vector3 movement = velocity * deltaTime;
+
+            // break big moves into smaller sub-steps to avoid snagging on geometry
+            int subSteps = Math.Max(1, (int)Math.Ceiling(movement.Length / 0.2f));
+            Vector3 stepMove = movement / subSteps;
+
+            for (int s = 0; s < subSteps; s++)
+            {
+                // try the full small step first
+                if (!IsBoxInSolid(Position + stepMove))
+                {
+                    Position += stepMove;
+                    continue;
+                }
+
+                // horizontal-only attempt
+                Vector3 horizontal = new Vector3(stepMove.X, 0, stepMove.Z);
+                if (horizontal.LengthSquared > 0.0001f)
+                {
+                    // if horizontal-only is clear, do it
+                    if (!IsBoxInSolid(Position + horizontal))
+                    {
+                        Position += horizontal;
+                        continue;
+                    }
+
+                    // Try stepping up: check feet + STEP_HEIGHT and feet + STEP_HEIGHT + horizontal are free,
+                    // and that there's ground underneath the destination (so we don't step into mid-air)
+                    Vector3 up = Vector3.UnitY * STEP_HEIGHT;
+                    if (!IsBoxInSolid(Position + up) && !IsBoxInSolid(Position + up + horizontal))
+                    {
+                        if (IsGroundBelow(Position + up + horizontal))
+                        {
+                            Position += up + horizontal;
+                            velocity.Y = 0f; // clear vertical velocity on a successful step-up
+                            isGrounded = true;
+                            continue;
+                        }
+                    }
+
+                    // fallback: try axis-aligned moves (helps slide along walls)
+                    Vector3 xMove = new Vector3(horizontal.X, 0, 0);
+                    if (xMove.LengthSquared > 0.0001f && !IsBoxInSolid(Position + xMove))
+                    {
+                        Position += xMove;
+                        continue;
+                    }
+                    else
+                    {
+                        velocity.X = 0f;
+                    }
+
+                    Vector3 zMove = new Vector3(0, 0, horizontal.Z);
+                    if (zMove.LengthSquared > 0.0001f && !IsBoxInSolid(Position + zMove))
+                    {
+                        Position += zMove;
+                        continue;
+                    }
+                    else
+                    {
+                        velocity.Z = 0f;
+                    }
+                }
+
+                // vertical-only attempt (stairs, falling, ceiling)
+                Vector3 vertical = new Vector3(0, stepMove.Y, 0);
+                if (vertical.LengthSquared > 0.0001f && !IsBoxInSolid(Position + vertical))
+                {
+                    Position += vertical;
+                    if (vertical.Y < 0)
+                    {
+                        velocity.Y = 0;
+                        isGrounded = true;
+                    }
+                    else if (vertical.Y > 0)
+                    {
+                        velocity.Y = 0;
+                    }
+                    continue;
+                }
+
+                // if all else fails: nudge horizontal velocity off so player won't keep pressing into the wall forever
+                velocity.X = 0f;
+                velocity.Z = 0f;
+                break;
+            }
+
+            // Basic slope snapping: if we're considered grounded, attempt to follow small drops so the player
+            // smoothly walks down ramps instead of hovering (tunable drop value).
+            if (isGrounded)
+            {
+                const float DROP_SNAP = 0.4f;
+                for (float d = 0.05f; d <= DROP_SNAP; d += 0.05f)
+                {
+                    // if there's space below but ground exists a little further down, drop to it.
+                    if (!IsBoxInSolid(Position - Vector3.UnitY * d))
+                    {
+                        if (IsGroundBelow(Position - Vector3.UnitY * d + Vector3.UnitY * 0.05f))
+                        {
+                            Position -= Vector3.UnitY * d;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        private bool IsBoxInSolid(Vector3 center)
+        {
+            // center is treated as the player's feet location in this code.
+            float hw = PLAYER_WIDTH * 0.5f;
+            float hh = PLAYER_HEIGHT; // we'll sample relative to feet, so use full height
+
+            // Sample multiple heights from near the feet up to near the head (more samples for larger body).
+            float[] heights = {
+                0.05f,                       // just above feet
+                PLAYER_HEIGHT * 0.25f,
+                PLAYER_HEIGHT * 0.5f,
+                PLAYER_HEIGHT * 0.75f,
+                PLAYER_HEIGHT - 0.1f         // just below the top
+            };
+            float cornerOffset = hw * 0.9f; // reach closer to edges for wide players
+
+            foreach (float height in heights)
+            {
+                Vector3 checkPos = center + Vector3.UnitY * height;
+
+                // Check center
+                if (IsSolidAt(checkPos))
+                    return true;
+
+                // Check 4 corners at this height
+                Vector3[] corners = {
+                    checkPos + new Vector3(-cornerOffset, 0, -cornerOffset),
+                    checkPos + new Vector3(cornerOffset, 0, -cornerOffset),
+                    checkPos + new Vector3(-cornerOffset, 0, cornerOffset),
+                    checkPos + new Vector3(cornerOffset, 0, cornerOffset),
+                };
+
+                foreach (var corner in corners)
+                {
+                    if (IsSolidAt(corner))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsSolidAt(Vector3 pos)
+        {
+            float density = WorldGen.SampleDensity(
+                (int)MathF.Round(pos.X),
+                (int)MathF.Round(pos.Y),
+                (int)MathF.Round(pos.Z)
+            );
+
+            return density > 0.5f;
         }
 
         private Vector3 GetFront()
         {
-            float yawRad = OtkMath.DegreesToRadians(Yaw);
-            float pitchRad = OtkMath.DegreesToRadians(Pitch);
+            float yawRad = MathHelper.DegreesToRadians(Yaw);
+            float pitchRad = MathHelper.DegreesToRadians(Pitch);
 
-            Vector3 front;
-            front.X = MathF.Cos(pitchRad) * MathF.Cos(yawRad);
-            front.Y = MathF.Sin(pitchRad);
-            front.Z = MathF.Cos(pitchRad) * MathF.Sin(yawRad);
-            return Vector3.Normalize(front);
+            return Vector3.Normalize(new Vector3(
+                MathF.Cos(pitchRad) * MathF.Cos(yawRad),
+                MathF.Sin(pitchRad),
+                MathF.Cos(pitchRad) * MathF.Sin(yawRad)
+            ));
+        }
+
+        private Vector3 GetFrontHorizontal()
+        {
+            float yawRad = MathHelper.DegreesToRadians(Yaw);
+            return Vector3.Normalize(new Vector3(MathF.Cos(yawRad), 0, MathF.Sin(yawRad)));
         }
 
         public Vector3 GetPlayersChunk()
@@ -898,16 +437,6 @@ namespace Aetheris
                 (int)Math.Floor(Position.Y / ClientConfig.CHUNK_SIZE_Y),
                 (int)Math.Floor(Position.Z / ClientConfig.CHUNK_SIZE)
             );
-        }
-
-        public void Cleanup()
-        {
-            Console.WriteLine("[Player] Manual collision system cleaned up");
-        }
-
-        public BepuPhysics.BodyHandle GetBodyHandle()
-        {
-            return default;
         }
     }
 }

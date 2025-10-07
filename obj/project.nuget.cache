@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NmnV65ynI08=",
+  "dgSpecHash": "LBy/QBY4FU0=",
   "success": true,
   "projectFilePath": "/home/kirby/Programming/Aetheris/Aetheris.csproj",
   "expectedPackageFiles": [
     "/home/kirby/.nuget/packages/bepuphysics/2.5.0-beta.27/bepuphysics.2.5.0-beta.27.nupkg.sha512",
     "/home/kirby/.nuget/packages/bepuutilities/2.5.0-beta.27/bepuutilities.2.5.0-beta.27.nupkg.sha512",
+    "/home/kirby/.nuget/packages/jitter2/2.4.1/jitter2.2.4.1.nupkg.sha512",
     "/home/kirby/.nuget/packages/opentk/4.9.4/opentk.4.9.4.nupkg.sha512",
     "/home/kirby/.nuget/packages/opentk.audio.openal/4.9.4/opentk.audio.openal.4.9.4.nupkg.sha512",
     "/home/kirby/.nuget/packages/opentk.compute/4.9.4/opentk.compute.4.9.4.nupkg.sha512",

@@ -19,7 +19,9 @@ namespace Aetheris
         private readonly ChunkManager chunkManager = new();
 
         // Mesh cache with LRU eviction
-        private readonly ConcurrentDictionary<ChunkCoord, float[]> meshCache = new();
+     
+private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, CollisionMesh collisionMesh)> meshCache = new();
+
         private readonly ConcurrentDictionary<ChunkCoord, SemaphoreSlim> generationLocks = new();
 
         private const int MaxCachedMeshes = 20000;
@@ -230,6 +232,84 @@ namespace Aetheris
             }
         }
 
+
+        // New method to send both meshes:
+        private async Task SendBothMeshesAsync(
+            NetworkStream stream, float[] renderMesh, CollisionMesh collisionMesh,
+            ChunkCoord coord, CancellationToken token)
+        {
+            // Render mesh
+            int renderVertexCount = renderMesh.Length / 7;
+            int renderPayloadSize = sizeof(int) + renderMesh.Length * sizeof(float);
+
+            // Collision mesh
+            int collisionVertexCount = collisionMesh.Vertices.Count;
+            int collisionIndexCount = collisionMesh.Indices.Count;
+            int collisionPayloadSize = sizeof(int) * 2 + // vertex count + index count
+                                       collisionVertexCount * sizeof(float) * 3 + // vertices (Vector3)
+                                       collisionIndexCount * sizeof(int); // indices
+
+            var renderPayload = ArrayPool<byte>.Shared.Rent(renderPayloadSize);
+            var collisionPayload = ArrayPool<byte>.Shared.Rent(collisionPayloadSize);
+
+            try
+            {
+                // Pack render mesh
+                Array.Copy(BitConverter.GetBytes(renderVertexCount), 0, renderPayload, 0, sizeof(int));
+                Buffer.BlockCopy(renderMesh, 0, renderPayload, sizeof(int), renderMesh.Length * sizeof(float));
+
+                // Pack collision mesh
+                int offset = 0;
+                Array.Copy(BitConverter.GetBytes(collisionVertexCount), 0, collisionPayload, offset, sizeof(int));
+                offset += sizeof(int);
+                Array.Copy(BitConverter.GetBytes(collisionIndexCount), 0, collisionPayload, offset, sizeof(int));
+                offset += sizeof(int);
+
+                // Pack vertices
+                foreach (var v in collisionMesh.Vertices)
+                {
+                    Array.Copy(BitConverter.GetBytes(v.X), 0, collisionPayload, offset, sizeof(float));
+                    offset += sizeof(float);
+                    Array.Copy(BitConverter.GetBytes(v.Y), 0, collisionPayload, offset, sizeof(float));
+                    offset += sizeof(float);
+                    Array.Copy(BitConverter.GetBytes(v.Z), 0, collisionPayload, offset, sizeof(float));
+                    offset += sizeof(float);
+                }
+
+                // Pack indices
+                foreach (var idx in collisionMesh.Indices)
+                {
+                    Array.Copy(BitConverter.GetBytes(idx), 0, collisionPayload, offset, sizeof(int));
+                    offset += sizeof(int);
+                }
+
+                await sendSemaphore.WaitAsync(token);
+                try
+                {
+                    // Send render mesh length
+                    var renderLenBytes = BitConverter.GetBytes(renderPayloadSize);
+                    await stream.WriteAsync(renderLenBytes, 0, renderLenBytes.Length, token);
+                    await stream.WriteAsync(renderPayload, 0, renderPayloadSize, token);
+
+                    // Send collision mesh length
+                    var collisionLenBytes = BitConverter.GetBytes(collisionPayloadSize);
+                    await stream.WriteAsync(collisionLenBytes, 0, collisionLenBytes.Length, token);
+                    await stream.WriteAsync(collisionPayload, 0, collisionPayloadSize, token);
+
+                    await stream.FlushAsync(token);
+                }
+                finally
+                {
+                    sendSemaphore.Release();
+                }
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return(renderPayload);
+                ArrayPool<byte>.Shared.Return(collisionPayload);
+            }
+        }
+
         private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
             if (data.Length < 33) return;
@@ -331,7 +411,7 @@ namespace Aetheris
                                 meshTime = result.meshGenTime;
 
                                 var sendSw = Stopwatch.StartNew();
-                                await SendMeshAsync(stream, result.renderMesh, coord.Value, token);
+                                await SendBothMeshesAsync(stream, result.renderMesh, result.collisionMesh, coord.Value, token);
                                 sendTime = sendSw.Elapsed.TotalMilliseconds;
 
                                 lock (perfLock)
@@ -358,7 +438,6 @@ namespace Aetheris
                 }
             }
         }
-
         private async Task<ChunkCoord?> ReadChunkRequestAsync(NetworkStream stream, CancellationToken token)
         {
             var buf = ArrayPool<byte>.Shared.Rent(12);
@@ -389,13 +468,14 @@ namespace Aetheris
             }
         }
 
-        private async Task<(float[] renderMesh, double chunkGenTime, double meshGenTime)> GetOrGenerateMeshAsync(ChunkCoord coord, CancellationToken token)
+        private async Task<(float[] renderMesh, CollisionMesh collisionMesh, double chunkGenTime, double meshGenTime)>
+         GetOrGenerateMeshAsync(ChunkCoord coord, CancellationToken token)
         {
             // Check cache first
             if (meshCache.TryGetValue(coord, out var cached))
             {
                 Log($"[[Cache]] Hit for {coord}");
-                return (cached, 0, 0);
+                return (cached.renderMesh, cached.collisionMesh, 0, 0);
             }
 
             var lockObj = generationLocks.GetOrAdd(coord, _ => new SemaphoreSlim(1, 1));
@@ -406,7 +486,7 @@ namespace Aetheris
                 if (meshCache.TryGetValue(coord, out cached))
                 {
                     Log($"[[Cache]] Hit after lock for {coord}");
-                    return (cached, 0, 0);
+                    return (cached.renderMesh, cached.collisionMesh, 0, 0);
                 }
 
                 // Generate chunk
@@ -414,24 +494,19 @@ namespace Aetheris
                 var chunk = await Task.Run(() => chunkManager.GetOrGenerateChunk(coord), token);
                 double chunkGenTime = chunkSw.Elapsed.TotalMilliseconds;
 
-                // Generate render mesh
+                // Generate BOTH render and collision meshes
                 var meshSw = Stopwatch.StartNew();
-                var renderMesh = await Task.Run(() => MarchingCubes.GenerateMesh(chunk, coord, chunkManager, isoLevel: 0.5f), token);
+                var (renderMesh, collisionMesh) = await Task.Run(() =>
+                    MarchingCubes.GenerateMeshes(chunk, coord, chunkManager, isoLevel: 0.5f), token);
                 double meshGenTime = meshSw.Elapsed.TotalMilliseconds;
 
-                // Cache mesh
-                meshCache[coord] = renderMesh;
+                // Cache both meshes
+                meshCache[coord] = (renderMesh, collisionMesh);
                 Interlocked.Increment(ref cacheSize);
-if (renderMesh.Length >= 7)
-{
-    Console.WriteLine($"[[Generation]] Chunk coord ({coord.X},{coord.Y},{coord.Z})");
-    Console.WriteLine($"[[Generation]] Chunk world pos: ({coord.X * ServerConfig.CHUNK_SIZE}, {coord.Y * ServerConfig.CHUNK_SIZE_Y}, {coord.Z * ServerConfig.CHUNK_SIZE})");
-    Console.WriteLine($"[[Generation]] First vertex: ({renderMesh[0]:F1}, {renderMesh[1]:F1}, {renderMesh[2]:F1})");
-}
 
-                Log($"[[Generation]] {coord}: Render vertices={renderMesh.Length / 7}");
+                Log($"[[Generation]] {coord}: Render verts={renderMesh.Length / 7}, Collision verts={collisionMesh.Vertices.Count}");
 
-                return (renderMesh, chunkGenTime, meshGenTime);
+                return (renderMesh, collisionMesh, chunkGenTime, meshGenTime);
             }
             finally
             {
@@ -482,7 +557,7 @@ if (renderMesh.Length >= 7)
                     if (cacheSize > MaxCachedMeshes)
                     {
                         var cleanupSw = Stopwatch.StartNew();
-                        
+
                         // Simple cleanup - remove 25% of cache
                         int toRemove = cacheSize / 4;
                         int removed = 0;
@@ -490,7 +565,7 @@ if (renderMesh.Length >= 7)
                         foreach (var coord in meshCache.Keys)
                         {
                             if (removed >= toRemove) break;
-                            
+
                             if (meshCache.TryRemove(coord, out _))
                             {
                                 removed++;

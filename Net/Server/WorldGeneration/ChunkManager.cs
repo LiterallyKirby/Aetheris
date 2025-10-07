@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 namespace Aetheris
 {
     /// <summary>
-    /// ULTRA OPTIMIZED: Lightweight chunk manager with parallel column generation
+    /// ULTRA OPTIMIZED: Lightweight chunk manager with parallel column generation and collision mesh support
     /// </summary>
     public class ChunkManager
     {
         private readonly ConcurrentDictionary<ChunkCoord, Chunk> chunks = new();
         private readonly ConcurrentDictionary<ChunkCoord, WorldGen.ColumnData[,]> columnCache = new();
-        private const int MaxCachedColumns = 20000; // Increased from 10000
+        private const int MaxCachedColumns = 20000;
         
         // Track cache access times for LRU eviction
         private readonly ConcurrentDictionary<ChunkCoord, long> cacheAccessTimes = new();
         private long accessCounter = 0;
+        
+        // Option to enable/disable collision mesh generation
+        public bool GenerateCollisionMeshes { get; set; } = true;
+        
+        // Option to simplify collision meshes (improves performance)
+        public float CollisionSimplification { get; set; } = 1f; // 1 = no simplification, 2 = half triangles, etc.
 
         public Chunk GetOrGenerateChunk(ChunkCoord coord)
         {
@@ -52,7 +58,6 @@ namespace Aetheris
             int baseZ = coord.Z * ServerConfig.CHUNK_SIZE;
 
             // OPTIMIZATION: Parallel column generation for better CPU utilization
-            // Only parallelize for larger chunks (64x64+)
             if (ServerConfig.CHUNK_SIZE >= 64)
             {
                 Parallel.For(0, ServerConfig.CHUNK_SIZE, lx =>
@@ -67,7 +72,6 @@ namespace Aetheris
             }
             else
             {
-                // Sequential for small chunks (less parallel overhead)
                 for (int lx = 0; lx < ServerConfig.CHUNK_SIZE; lx++)
                 {
                     for (int lz = 0; lz < ServerConfig.CHUNK_SIZE; lz++)
@@ -90,7 +94,6 @@ namespace Aetheris
 
         private void EvictOldestCacheEntries()
         {
-            // Find oldest 20% of entries
             int toRemove = MaxCachedColumns / 5;
             var sorted = new System.Collections.Generic.List<(ChunkCoord coord, long time)>();
             
@@ -99,10 +102,8 @@ namespace Aetheris
                 sorted.Add((kvp.Key, kvp.Value));
             }
             
-            // Sort by access time (oldest first)
             sorted.Sort((a, b) => a.time.CompareTo(b.time));
             
-            // Remove oldest entries
             for (int i = 0; i < Math.Min(toRemove, sorted.Count); i++)
             {
                 var coord = sorted[i].coord;
@@ -121,7 +122,59 @@ namespace Aetheris
             _ = GetColumnDataForChunk(coord);
 
             var chunk = new Chunk(worldX, worldY, worldZ);
+            
+            // Generate collision mesh if enabled
+            if (GenerateCollisionMeshes)
+            {
+                GenerateChunkCollisionMesh(chunk, coord);
+            }
+            
             return chunk;
+        }
+        
+        /// <summary>
+        /// Generate collision mesh for a chunk using marching cubes
+        /// </summary>
+        private void GenerateChunkCollisionMesh(Chunk chunk, ChunkCoord coord)
+        {
+            try
+            {
+                // Generate mesh using marching cubes
+                float[] meshData = MarchingCubes.GenerateMesh(chunk, coord, this);
+                
+                if (meshData != null && meshData.Length > 0)
+                {
+                    // Generate collision mesh (simplified if requested)
+                    if (CollisionSimplification > 1f)
+                    {
+                        chunk.GenerateSimplifiedCollisionMesh(meshData, CollisionSimplification);
+                    }
+                    else
+                    {
+                        chunk.GenerateCollisionMesh(meshData);
+                    }
+                }
+                else
+                {
+                    chunk.ClearCollisionMesh();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ChunkManager] Error generating collision mesh for {coord}: {ex.Message}");
+                chunk.ClearCollisionMesh();
+            }
+        }
+        
+        /// <summary>
+        /// Regenerate collision mesh for an existing chunk (useful after terrain modifications)
+        /// </summary>
+        public void RegenerateCollisionMesh(ChunkCoord coord)
+        {
+            if (TryGetChunk(coord, out var chunk) && chunk != null)
+            {
+                GenerateChunkCollisionMesh(chunk, coord);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -162,6 +215,17 @@ namespace Aetheris
         {
             columnCache.Clear();
             cacheAccessTimes.Clear();
+        }
+        
+        /// <summary>
+        /// Clear all collision meshes to save memory
+        /// </summary>
+        public void ClearAllCollisionMeshes()
+        {
+            foreach (var chunk in chunks.Values)
+            {
+                chunk.ClearCollisionMesh();
+            }
         }
     }
 }
