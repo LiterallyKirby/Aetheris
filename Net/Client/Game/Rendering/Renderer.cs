@@ -16,7 +16,7 @@ namespace Aetheris
     {
         private record MeshData(int Vao, int Vbo, int VertexCount, Matrix4 Model, Vector3 Center, float Radius);
 
-        private PSXVisualEffects psxEffects;
+        public PSXVisualEffects psxEffects;
         private readonly Dictionary<(int cx, int cy, int cz), MeshData> meshes = new();
         private readonly ConcurrentQueue<Action> uploadQueue = new();
         private readonly List<MeshData> visibleMeshes = new(1024);

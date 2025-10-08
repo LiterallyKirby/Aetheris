@@ -1,4 +1,2 @@
-/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/publish/Aetheris.pdb
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/publish/textures/atlas.png
-/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/publish/glfw3.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/publish/Aetheris.exe

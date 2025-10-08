@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LBy/QBY4FU0=",
+  "dgSpecHash": "DLcMozAy9iw=",
   "success": true,
   "projectFilePath": "/home/kirby/Programming/Aetheris/Aetheris.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,7 @@
     "/home/kirby/.nuget/packages/sixlabors.imagesharp/3.1.11/sixlabors.imagesharp.3.1.11.nupkg.sha512",
     "/home/kirby/.nuget/packages/stbimagesharp/2.30.15/stbimagesharp.2.30.15.nupkg.sha512",
     "/home/kirby/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "/home/kirby/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
+    "/home/kirby/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.8/microsoft.aspnetcore.app.ref.9.0.8.nupkg.sha512"
   ],
   "logs": []
 }

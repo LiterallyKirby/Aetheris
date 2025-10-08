@@ -32,7 +32,7 @@ namespace Aetheris
         private const float AIR_CONTROL = 0.95f;    // air control (rotate velocity in air)
         private const float FRICTION = 6f;          // ground friction
         private const float STOP_SPEED = 0.1f;      // friction control
-        private const float JUMP_VELOCITY = 7f;     
+        private const float JUMP_VELOCITY = 7f;
         private const float GRAVITY = 20f;
         private const float STRAFE_ACCEL_MULT = 1.0f;
         private const float BHOP_PRESERVE = 1.0f;   // 1 => preserve horizontal velocity on jump
@@ -109,7 +109,7 @@ namespace Aetheris
             {
                 ApplyFriction(deltaTime);
                 Accelerate(wishDir, GROUND_ACCEL, deltaTime, true);
-                
+
                 // clamp small downward velocity
                 if (velocity.Y < 0) velocity.Y = 0;
             }
@@ -274,8 +274,8 @@ namespace Aetheris
         {
             Vector3 movement = velocity * deltaTime;
 
-            // sub-step to avoid snagging
-            int subSteps = Math.Max(1, (int)Math.Ceiling(movement.Length / 0.2f));
+            // sub-step more finely to avoid edge snags
+            int subSteps = Math.Max(2, (int)Math.Ceiling(movement.Length / 0.15f));
             Vector3 stepMove = movement / subSteps;
 
             for (int s = 0; s < subSteps; s++)
@@ -287,17 +287,41 @@ namespace Aetheris
                     continue;
                 }
 
-                // try horizontal-only
+                // separate horizontal and vertical early
                 Vector3 horizontal = new Vector3(stepMove.X, 0, stepMove.Z);
+                Vector3 vertical = new Vector3(0, stepMove.Y, 0);
+
+                // handle vertical first if moving down (landing)
+                if (vertical.Y < 0 && !IsBoxInSolid(Position + vertical))
+                {
+                    Position += vertical;
+                    velocity.Y = 0;
+                    isGrounded = true;
+
+                    // retry horizontal after landing
+                    if (horizontal.LengthSquared > 0.0001f && !IsBoxInSolid(Position + horizontal))
+                    {
+                        Position += horizontal;
+                        continue;
+                    }
+                }
+
+                // try horizontal-only movement
                 if (horizontal.LengthSquared > 0.0001f)
                 {
                     if (!IsBoxInSolid(Position + horizontal))
                     {
                         Position += horizontal;
+                        // apply vertical separately after successful horizontal
+                        if (vertical.LengthSquared > 0.0001f && !IsBoxInSolid(Position + vertical))
+                        {
+                            Position += vertical;
+                            if (vertical.Y < 0) velocity.Y = 0;
+                        }
                         continue;
                     }
 
-                    // attempt step-up
+                    // attempt step-up before sliding
                     Vector3 up = Vector3.UnitY * STEP_HEIGHT;
                     if (!IsBoxInSolid(Position + up) && !IsBoxInSolid(Position + up + horizontal))
                     {
@@ -310,66 +334,39 @@ namespace Aetheris
                         }
                     }
 
-                    // axis-aligned fallback (slide along walls)
+                    // slide along walls - try each axis independently
+                    bool movedX = false;
                     Vector3 xMove = new Vector3(horizontal.X, 0, 0);
                     if (xMove.LengthSquared > 0.0001f && !IsBoxInSolid(Position + xMove))
                     {
                         Position += xMove;
-                        continue;
-                    }
-                    else
-                    {
-                        velocity.X = 0f;
+                        movedX = true;
                     }
 
+                    bool movedZ = false;
                     Vector3 zMove = new Vector3(0, 0, horizontal.Z);
                     if (zMove.LengthSquared > 0.0001f && !IsBoxInSolid(Position + zMove))
                     {
                         Position += zMove;
-                        continue;
+                        movedZ = true;
                     }
-                    else
-                    {
-                        velocity.Z = 0f;
-                    }
+
+                    // only zero velocity for axes that truly collided
+                    if (!movedX && xMove.LengthSquared > 0.0001f) velocity.X = 0f;
+                    if (!movedZ && zMove.LengthSquared > 0.0001f) velocity.Z = 0f;
+
+                    if (movedX || movedZ) continue;
                 }
 
-                // vertical attempt
-                Vector3 vertical = new Vector3(0, stepMove.Y, 0);
-                if (vertical.LengthSquared > 0.0001f && !IsBoxInSolid(Position + vertical))
+                // handle vertical separately if moving up (hitting ceiling)
+                if (vertical.Y > 0 && !IsBoxInSolid(Position + vertical))
                 {
                     Position += vertical;
-                    if (vertical.Y < 0)
-                    {
-                        velocity.Y = 0;
-                        isGrounded = true;
-                    }
-                    else if (vertical.Y > 0)
-                    {
-                        velocity.Y = 0;
-                    }
                     continue;
                 }
-
-                // if nothing works, kill horizontal vel so we don't keep pushing
-                velocity.X = 0f;
-                velocity.Z = 0f;
-                break;
-            }
-
-            // slope follow / drop snap when grounded
-            if (isGrounded)
-            {
-                for (float d = 0.05f; d <= DROP_SNAP; d += 0.05f)
+                else if (vertical.Y > 0)
                 {
-                    if (!IsBoxInSolid(Position - Vector3.UnitY * d))
-                    {
-                        if (IsGroundBelow(Position - Vector3.UnitY * d + Vector3.UnitY * 0.05f))
-                        {
-                            Position -= Vector3.UnitY * d;
-                            break;
-                        }
-                    }
+                    velocity.Y = 0;
                 }
             }
         }
@@ -444,5 +441,60 @@ namespace Aetheris
                 (int)Math.Floor(Position.Z / ClientConfig.CHUNK_SIZE)
             );
         }
+        public void SetPosition(Vector3 position)
+        {
+            Position = position;
+        }
+
+        public void SetVelocity(Vector3 vel)
+        {
+            velocity = vel;
+        }
+
+        public void SetRotation(float yaw, float pitch)
+        {
+            Yaw = yaw;
+            Pitch = pitch;
+        }
+
+        public void SimulateInput(PlayerInputState input)
+        {
+            Vector3 wishDir = Vector3.Zero;
+            Vector3 front = GetFrontHorizontal();
+            Vector3 right = Vector3.Normalize(Vector3.Cross(front, Vector3.UnitY));
+
+            if (input.Forward) wishDir += front;
+            if (input.Backward) wishDir -= front;
+            if (input.Right) wishDir += right;
+            if (input.Left) wishDir -= right;
+
+            if (wishDir.LengthSquared > 0.001f)
+                wishDir = Vector3.Normalize(wishDir);
+
+            CheckGround();
+
+            if (input.Jump && isGrounded)
+            {
+                velocity.Y = JUMP_VELOCITY;
+                isGrounded = false;
+            }
+
+            if (isGrounded)
+            {
+                ApplyFriction(input.DeltaTime);
+                Accelerate(wishDir, GROUND_ACCEL, input.DeltaTime, true);
+                if (velocity.Y < 0) velocity.Y = 0;
+            }
+            else
+            {
+                Accelerate(wishDir, AIR_ACCEL, input.DeltaTime, false);
+                AirControl(wishDir, input.DeltaTime);
+                velocity.Y -= GRAVITY * input.DeltaTime;
+                velocity.Y = Math.Max(velocity.Y, -50f);
+            }
+
+            MoveAndSlide(input.DeltaTime);
+        }
     }
 }
+

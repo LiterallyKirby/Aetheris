@@ -7,12 +7,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using OpenTK.Mathematics;
 
+using System.Net;
 namespace Aetheris
 {
     public class Client
     {
         private Game? game;
         private TcpClient? tcp;
+        private UdpClient? udp;
+
+        private IPEndPoint? serverUdpEndpoint;
+
         private NetworkStream? stream;
         private readonly ConcurrentDictionary<(int, int, int), Aetheris.Chunk> loadedChunks = new();
         private readonly ConcurrentQueue<(int cx, int cy, int cz, float priority)> requestQueue = new();
@@ -24,6 +29,7 @@ namespace Aetheris
         private readonly SemaphoreSlim networkSemaphore = new SemaphoreSlim(1, 1);
         private readonly SemaphoreSlim connectionSemaphore = new SemaphoreSlim(1, 1);
         private int currentRenderDistance;
+        private readonly int udpPort = ClientConfig.SERVER_PORT + 1;
 
         // Auto-tuned parameters
         public int MaxConcurrentLoads { get; set; } = 16;
@@ -44,7 +50,7 @@ namespace Aetheris
 
             loaderTask = Task.Run(() => ChunkLoaderLoopAsync(cts.Token));
             updateTask = Task.Run(() => ChunkUpdateLoopAsync(cts.Token));
-
+_ = Task.Run(() => ListenForUdpAsync(cts.Token));
             game.RunGame();
             Cleanup();
         }
@@ -90,13 +96,139 @@ namespace Aetheris
         {
             Console.WriteLine($"[Client] Connecting to {host}:{port}...");
             tcp = new TcpClient();
+            udp = new UdpClient();
+
             await tcp.ConnectAsync(host, port);
+
+            serverUdpEndpoint = new IPEndPoint(IPAddress.Parse(host), udpPort);
+            udp.Connect(serverUdpEndpoint);
+
+
+
             stream = tcp.GetStream();
             tcp.NoDelay = true;
             tcp.SendTimeout = 5000;
             tcp.ReceiveTimeout = 5000;
             Console.WriteLine("[Client] Connected to server.");
         }
+        private void HandleUdpPacket(byte[] data)
+        {
+            if (data.Length < 1) return;
+
+            byte packetType = data[0];
+
+            switch (packetType)
+            {
+                case 3: // EntityUpdate - other player positions
+                    HandleRemotePlayerUpdate(data);
+                    break;
+
+                case 4: // KeepAlive
+                    _ = udp?.SendAsync(data, data.Length, serverUdpEndpoint);
+                    break;
+
+                case 5: // PositionAck - server correction
+                    HandleServerPositionUpdate(data);
+                    break;
+
+                default:
+                    Console.WriteLine($"[Client] Unknown UDP packet type: {packetType}");
+                    break;
+            }
+        }
+
+        private void HandleServerPositionUpdate(byte[] data)
+        {
+            if (data.Length < 37) return;
+
+            var update = new ServerPlayerUpdate
+            {
+                AcknowledgedSequence = BitConverter.ToUInt32(data, 1),
+                Position = new Vector3(
+                    BitConverter.ToSingle(data, 5),
+                    BitConverter.ToSingle(data, 9),
+                    BitConverter.ToSingle(data, 13)
+                ),
+                Velocity = new Vector3(
+                    BitConverter.ToSingle(data, 17),
+                    BitConverter.ToSingle(data, 21),
+                    BitConverter.ToSingle(data, 25)
+                ),
+                Yaw = BitConverter.ToSingle(data, 29),
+                Pitch = BitConverter.ToSingle(data, 33),
+                Timestamp = DateTime.UtcNow.Ticks
+            };
+
+            game?.NetworkController?.OnServerUpdate(update);
+        }
+
+        private void HandleRemotePlayerUpdate(byte[] data)
+        {
+            if (data.Length < 38) return;
+
+            // Extract player ID (simplified - first 4 bytes)
+            string playerId = BitConverter.ToUInt32(data, 1).ToString();
+
+            var update = new ServerPlayerUpdate
+            {
+                Position = new Vector3(
+                    BitConverter.ToSingle(data, 5),
+                    BitConverter.ToSingle(data, 9),
+                    BitConverter.ToSingle(data, 13)
+                ),
+                Velocity = new Vector3(
+                    BitConverter.ToSingle(data, 17),
+                    BitConverter.ToSingle(data, 21),
+                    BitConverter.ToSingle(data, 25)
+                ),
+                Yaw = BitConverter.ToSingle(data, 29),
+                Pitch = BitConverter.ToSingle(data, 33),
+                Timestamp = DateTime.UtcNow.Ticks
+            };
+
+            game?.NetworkController?.OnRemotePlayerUpdate(playerId, update);
+        }
+    
+
+        public async Task SendUdpAsync(byte[] packet)
+        {
+            if (udp != null && serverUdpEndpoint != null)
+            {
+                try
+                {
+                  await udp.SendAsync(packet, packet.Length);
+		}
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Client] UDP send error: {ex.Message}");
+                }
+            }
+        }
+
+
+        private async Task ListenForUdpAsync(CancellationToken token)
+        {
+            if (udp == null) return;
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    var result = await udp.ReceiveAsync(token);
+                    HandleUdpPacket(result.Buffer);
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Client] UDP recv error: {ex}");
+                }
+            }
+        }
+
+
+  
 
         private async Task ChunkUpdateLoopAsync(CancellationToken token)
         {

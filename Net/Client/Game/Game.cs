@@ -18,31 +18,32 @@ namespace Aetheris
         private readonly Player player;
         private readonly Client? client;
         private readonly ChunkManager chunkManager;
-
+        public PlayerNetworkController? NetworkController { get; private set; }
         private int renderDistance = ClientConfig.RENDER_DISTANCE;
         private float chunkUpdateTimer = 0f;
         private const float CHUNK_UPDATE_INTERVAL = 0.5f;
-        
+
         // Logging
         private const string LogFileName = "physics_debug.log";
         private StreamWriter? logWriter;
         private TextWriter? originalConsoleOut;
         private TextWriter? originalConsoleError;
         private TeeTextWriter? teeWriter;
-
+        private EntityRenderer? entityRenderer;
+        private PlayerNetworkController? networkController;
         public Game(Dictionary<(int, int, int), Aetheris.Chunk> loadedChunks, Client? client = null)
-        : base(GameWindowSettings.Default, new NativeWindowSettings()
-        {
-            ClientSize = new Vector2i(1920, 1080),
-            Title = "Aetheris Client"
-        })
+       : base(GameWindowSettings.Default, new NativeWindowSettings()
+       {
+           ClientSize = new Vector2i(1920, 1080),
+           Title = "Aetheris Client"
+       })
         {
             this.loadedChunks = loadedChunks ?? new Dictionary<(int, int, int), Aetheris.Chunk>();
             this.client = client;
 
             SetupLogging();
 
-            // Initialize WorldGen
+            // Initialize WorldGen FIRST (needed for player collision)
             WorldGen.Initialize();
             Console.WriteLine("[Game] WorldGen initialized");
 
@@ -51,12 +52,29 @@ namespace Aetheris
             chunkManager.GenerateCollisionMeshes = true;
             Console.WriteLine("[Game] ChunkManager initialized with collision support");
 
+            // Create Renderer
             Renderer = new Renderer();
             Console.WriteLine("[Game] Renderer initialized");
 
-            // Create player with collision-enabled ChunkManager
+            // Create EntityRenderer
+            entityRenderer = new EntityRenderer();
+            Console.WriteLine("[Game] EntityRenderer initialized");
+
+            // Create player (MUST be after WorldGen.Initialize())
             player = new Player(new Vector3(16, 50, 16));
-            Console.WriteLine("[Game] Player initialized with capsule collision physics");
+            Console.WriteLine("[Game] Player initialized at position: {0}", player.Position);
+
+            // Create network controller (MUST be after player is created)
+            if (client != null)
+            {
+                NetworkController = new PlayerNetworkController(player, client);
+                networkController = NetworkController; // Keep both references in sync
+                Console.WriteLine("[Game] Network controller initialized");
+            }
+            else
+            {
+                Console.WriteLine("[Game] Running in single-player mode (no network)");
+            }
         }
 
         private void SetupLogging()
@@ -133,19 +151,19 @@ namespace Aetheris
             {
                 var coord = kv.Key;
                 var chunk = kv.Value;
-                
+
                 var chunkCoord = new ChunkCoord(coord.Item1, coord.Item2, coord.Item3);
-                
+
                 // Generate mesh for rendering
                 var meshFloats = MarchingCubes.GenerateMesh(chunk, chunkCoord, chunkManager, 0.5f);
-                
+
                 // Generate collision mesh for physics
                 chunk.GenerateCollisionMesh(meshFloats);
-                
+
                 // Store chunk in manager for collision queries
                 // Note: You may need to add a method to add pre-generated chunks
                 // For now, the chunk will be generated on-demand when player collides
-                
+
                 Console.WriteLine($"[Game] Loading chunk {coord} with {meshFloats.Length / 7} vertices");
                 Renderer.LoadMeshForChunk(coord.Item1, coord.Item2, coord.Item3, meshFloats);
             }
@@ -166,8 +184,22 @@ namespace Aetheris
                 Close();
 
             // Update player
-            player.Update(e, KeyboardState, MouseState);
-
+            if (NetworkController != null)
+            {
+                NetworkController.Update(e, KeyboardState, MouseState);
+            }
+            else
+            {
+                player.Update(e, KeyboardState, MouseState);
+            }
+            if (networkController != null)
+            {
+                networkController.Update(e, KeyboardState, MouseState);
+            }
+            else
+            {
+                player.Update(e, KeyboardState, MouseState);
+            }
             // Chunk loading
             if (chunkUpdateTimer == 0f)
             {
@@ -234,7 +266,21 @@ namespace Aetheris
                 1000f);
 
             var view = player.GetViewMatrix();
+
+            // === RENDER TERRAIN ===
             Renderer.Render(projection, view, player.Position);
+
+            // === RENDER OTHER PLAYERS ===
+            if (entityRenderer != null && networkController != null)
+            {
+                var remotePlayers = networkController.RemotePlayers;
+                entityRenderer.RenderPlayers(
+                    remotePlayers as Dictionary<string, RemotePlayer>,
+                    Renderer.psxEffects,
+                    player.Position,
+                    Renderer.UsePSXEffects
+                );
+            }
 
             SwapBuffers();
         }

@@ -19,8 +19,8 @@ namespace Aetheris
         private readonly ChunkManager chunkManager = new();
 
         // Mesh cache with LRU eviction
-     
-private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, CollisionMesh collisionMesh)> meshCache = new();
+
+        private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, CollisionMesh collisionMesh)> meshCache = new();
 
         private readonly ConcurrentDictionary<ChunkCoord, SemaphoreSlim> generationLocks = new();
 
@@ -36,20 +36,301 @@ private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, Collision
 
         private class PlayerState
         {
+            public string PlayerId { get; set; } = Guid.NewGuid().ToString();
             public Vector3 Position { get; set; }
             public Vector3 Velocity { get; set; }
-            public Vector2 Rotation { get; set; }
+            public Vector2 Rotation { get; set; } // X = Yaw, Y = Pitch
             public long LastUpdate { get; set; }
             public IPEndPoint? EndPoint { get; set; }
+            public bool IsGrounded { get; set; }
+
+            // Input validation
+            public uint LastProcessedSequence { get; set; }
+            public Vector3 LastValidatedPosition { get; set; }
+            public long LastValidationTime { get; set; }
+
+            // Anti-cheat tuned for Quake movement
+            private const float BASE_MAX_SPEED = 9.5f;      // Normal max speed from Player.cs
+            private const float BHOP_MAX_SPEED = 25f;       // Allow bunnyhopping up to this speed
+            private const float ACCELERATION_TOLERANCE = 1.3f; // Allow 30% over expected accel
+            private const float VERTICAL_SPEED_MAX = 60f;   // Max vertical speed (gravity/jumps)
+
+            // Track movement history for better validation
+            private Queue<Vector3> recentPositions = new Queue<Vector3>(5);
+            private Queue<float> recentSpeeds = new Queue<float>(5);
+            private int violationCount = 0;
+            private const int MAX_VIOLATIONS = 5; // Allow some packet loss/jitter
+
+            public bool ValidatePosition(Vector3 newPosition, float deltaTime)
+            {
+                if (LastValidatedPosition == Vector3.Zero || deltaTime > 1.0f)
+                {
+                    // First update or reconnection - accept it
+                    LastValidatedPosition = newPosition;
+                    LastValidationTime = DateTime.UtcNow.Ticks;
+                    recentPositions.Clear();
+                    recentSpeeds.Clear();
+                    violationCount = 0;
+                    return true;
+                }
+
+                // Clamp deltaTime to reasonable values
+                deltaTime = Math.Clamp(deltaTime, 0.001f, 0.5f);
+
+                // Calculate movement
+                Vector3 movement = newPosition - LastValidatedPosition;
+                float distance = movement.Length();
+                float horizontalDistance = new Vector3(movement.X, 0, movement.Z).Length();
+                float verticalDistance = Math.Abs(movement.Y);
+
+                // Calculate current speed
+                float currentSpeed = distance / deltaTime;
+                float horizontalSpeed = horizontalDistance / deltaTime;
+                float verticalSpeed = verticalDistance / deltaTime;
+
+                // Track recent speeds for pattern analysis
+                recentSpeeds.Enqueue(horizontalSpeed);
+                if (recentSpeeds.Count > 5) recentSpeeds.Dequeue();
+
+                bool isValid = true;
+                string reason = "";
+
+                // 1. Check vertical speed (catches flying/jetpack cheats)
+                if (verticalSpeed > VERTICAL_SPEED_MAX)
+                {
+                    isValid = false;
+                    reason = $"excessive vertical speed: {verticalSpeed:F2} m/s (max {VERTICAL_SPEED_MAX})";
+                }
+                // 2. Check horizontal speed with bhop tolerance
+                else if (horizontalSpeed > BHOP_MAX_SPEED)
+                {
+                    isValid = false;
+                    reason = $"excessive horizontal speed: {horizontalSpeed:F2} m/s (max {BHOP_MAX_SPEED})";
+                }
+                // 3. Check for impossible acceleration (teleportation detection)
+                else if (recentSpeeds.Count >= 2)
+                {
+                    float avgRecentSpeed = recentSpeeds.Average();
+                    float speedChange = Math.Abs(horizontalSpeed - avgRecentSpeed);
+
+                    // Allow reasonable acceleration jumps (ground accel = 14, air = 2.8)
+                    // In deltaTime, max accel = 14 * 9.5 * deltaTime ≈ 133 * deltaTime
+                    float maxAccelChange = 150f * deltaTime; // Generous buffer
+
+                    if (speedChange > maxAccelChange && horizontalSpeed > avgRecentSpeed)
+                    {
+                        isValid = false;
+                        reason = $"impossible acceleration: {speedChange:F2} m/s in {deltaTime:F3}s";
+                    }
+                }
+                // 4. Check for teleportation (distance too far for any speed)
+                else if (distance > BHOP_MAX_SPEED * deltaTime * ACCELERATION_TOLERANCE)
+                {
+                    isValid = false;
+                    reason = $"teleport detected: {distance:F2}m in {deltaTime:F3}s (max {BHOP_MAX_SPEED * deltaTime:F2}m)";
+                }
+
+                if (!isValid)
+                {
+                    violationCount++;
+
+                    if (violationCount >= MAX_VIOLATIONS)
+                    {
+                        Console.WriteLine($"[AntiCheat] Player {PlayerId} validation failed: {reason}");
+                        Console.WriteLine($"  Position: {LastValidatedPosition} -> {newPosition}");
+                        Console.WriteLine($"  Speed: H={horizontalSpeed:F2} V={verticalSpeed:F2} Total={currentSpeed:F2}");
+                        Console.WriteLine($"  Violations: {violationCount}/{MAX_VIOLATIONS}");
+
+                        // Reset violation counter after logging
+                        violationCount = Math.Max(0, violationCount - 2);
+                        return false;
+                    }
+                    else
+                    {
+                        // Allow minor violations (packet loss, jitter)
+                        isValid = true;
+                    }
+                }
+                else
+                {
+                    // Decay violations on good behavior
+                    if (violationCount > 0) violationCount--;
+                }
+
+                // Update tracking
+                LastValidatedPosition = newPosition;
+                LastValidationTime = DateTime.UtcNow.Ticks;
+
+                recentPositions.Enqueue(newPosition);
+                if (recentPositions.Count > 5) recentPositions.Dequeue();
+
+                return isValid;
+            }
+
+            // Optional: Reset validation state (useful for respawns)
+            public void ResetValidation()
+            {
+                recentPositions.Clear();
+                recentSpeeds.Clear();
+                violationCount = 0;
+                LastValidatedPosition = Position;
+            }
         }
 
+        private async Task SendPositionAcknowledgment(PlayerState state, uint sequence)
+        {
+            if (state.EndPoint == null || udpServer == null) return;
+
+            // Packet format:
+            // [0] = PacketType (5 = PositionAck)
+            // [1-4] = Acknowledged sequence
+            // [5-8] = Position X (server's validated position)
+            // [9-12] = Position Y
+            // [13-16] = Position Z
+            // [17-20] = Velocity X
+            // [21-24] = Velocity Y
+            // [25-28] = Velocity Z
+            // [29-32] = Yaw
+            // [33-36] = Pitch
+
+            byte[] packet = new byte[37];
+            packet[0] = 5; // PositionAck packet type
+
+            BitConverter.TryWriteBytes(packet.AsSpan(1, 4), sequence);
+            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), state.Position.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), state.Position.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(13, 4), state.Position.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(17, 4), state.Velocity.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(21, 4), state.Velocity.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(25, 4), state.Velocity.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(29, 4), state.Rotation.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(33, 4), state.Rotation.Y);
+
+            try
+            {
+                await udpServer.SendAsync(packet, packet.Length, state.EndPoint);
+            }
+            catch (Exception ex)
+            {
+                Log($"[UDP] Error sending ack to {state.PlayerId}: {ex.Message}");
+            }
+        }
+
+        private async Task BroadcastPlayerState(string excludePlayer, PlayerState state)
+        {
+            byte[] packet = new byte[38];
+            packet[0] = (byte)UdpPacketType.EntityUpdate;
+
+            // Include player ID (first 4 bytes of GUID as simple identifier)
+            var playerIdBytes = Guid.Parse(state.PlayerId).ToByteArray();
+            Array.Copy(playerIdBytes, 0, packet, 1, 4);
+
+            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), state.Position.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), state.Position.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(13, 4), state.Position.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(17, 4), state.Velocity.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(21, 4), state.Velocity.Y);
+            BitConverter.TryWriteBytes(packet.AsSpan(25, 4), state.Velocity.Z);
+            BitConverter.TryWriteBytes(packet.AsSpan(29, 4), state.Rotation.X);
+            BitConverter.TryWriteBytes(packet.AsSpan(33, 4), state.Rotation.Y);
+            packet[37] = (byte)(state.IsGrounded ? 1 : 0);
+
+            foreach (var player in playerStates)
+            {
+                if (player.Key != excludePlayer && player.Value.EndPoint != null)
+                {
+                    try
+                    {
+                        await udpServer!.SendAsync(packet, packet.Length, player.Value.EndPoint);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"[UDP] Error broadcasting to {player.Key}: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        // Add PositionAck to UdpPacketType enum
         private enum UdpPacketType : byte
         {
             PlayerPosition = 1,
             PlayerInput = 2,
             EntityUpdate = 3,
-            KeepAlive = 4
+            KeepAlive = 4,
+            PositionAck = 5  // New packet type
         }
+
+
+        private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
+        {
+            if (data.Length < 38) return;
+
+            string playerKey = remoteEndPoint.ToString();
+
+            // Parse packet
+            uint sequence = BitConverter.ToUInt32(data, 1);
+            float x = BitConverter.ToSingle(data, 5);
+            float y = BitConverter.ToSingle(data, 9);
+            float z = BitConverter.ToSingle(data, 13);
+            float velX = BitConverter.ToSingle(data, 17);
+            float velY = BitConverter.ToSingle(data, 21);
+            float velZ = BitConverter.ToSingle(data, 25);
+            float yaw = BitConverter.ToSingle(data, 29);
+            float pitch = BitConverter.ToSingle(data, 33);
+            byte inputFlags = data[37];
+
+            var state = playerStates.GetOrAdd(playerKey, _ => new PlayerState
+            {
+                EndPoint = remoteEndPoint,
+                PlayerId = Guid.NewGuid().ToString()
+            });
+
+            // Calculate time since last update
+            long now = DateTime.UtcNow.Ticks;
+            float deltaTime = state.LastUpdate > 0
+                ? (float)TimeSpan.FromTicks(now - state.LastUpdate).TotalSeconds
+                : 0.016f;
+
+            Vector3 newPosition = new Vector3(x, y, z);
+
+            // Validate position (anti-cheat)
+            bool isValid = state.ValidatePosition(newPosition, deltaTime);
+
+            if (isValid)
+            {
+                // Accept client's position
+                state.Position = newPosition;
+                state.Velocity = new Vector3(velX, velY, velZ);
+                state.Rotation = new Vector2(yaw, pitch);
+                state.LastProcessedSequence = sequence;
+            }
+            else
+            {
+                // Position rejected - force correction
+                Log($"[Server] Rejecting position from {playerKey}, forcing correction");
+                newPosition = state.Position; // Use last valid position
+            }
+
+            state.LastUpdate = now;
+            state.EndPoint = remoteEndPoint;
+
+            // Send acknowledgment back to client
+            _ = SendPositionAcknowledgment(state, sequence);
+
+            // Broadcast to other players
+            _ = BroadcastPlayerState(playerKey, state);
+        }
+        [Flags]
+        private enum PlayerStateFlags : byte
+        {
+            None = 0,
+            IsGrounded = 1,
+            IsJumping = 2,
+            IsCrouching = 4
+        }
+
+
 
         // Performance tracking
         private long totalRequests = 0;
@@ -310,30 +591,7 @@ private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, Collision
             }
         }
 
-        private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
-        {
-            if (data.Length < 33) return;
 
-            string playerKey = remoteEndPoint.ToString();
-
-            float x = BitConverter.ToSingle(data, 1);
-            float y = BitConverter.ToSingle(data, 5);
-            float z = BitConverter.ToSingle(data, 9);
-            float velX = BitConverter.ToSingle(data, 13);
-            float velY = BitConverter.ToSingle(data, 17);
-            float velZ = BitConverter.ToSingle(data, 21);
-            float yaw = BitConverter.ToSingle(data, 25);
-            float pitch = BitConverter.ToSingle(data, 29);
-
-            var state = playerStates.GetOrAdd(playerKey, _ => new PlayerState { EndPoint = remoteEndPoint });
-            state.Position = new Vector3(x, y, z);
-            state.Velocity = new Vector3(velX, velY, velZ);
-            state.Rotation = new Vector2(yaw, pitch);
-            state.LastUpdate = DateTime.UtcNow.Ticks;
-            state.EndPoint = remoteEndPoint;
-
-            _ = BroadcastPlayerState(playerKey, state);
-        }
 
         private void HandlePlayerInputPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
@@ -347,7 +605,7 @@ private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, Collision
             {
                 try
                 {
-                    await udpServer!.SendAsync(data, data.Length, remoteEndPoint);
+                    await udpServer!.SendAsync(data, data.Length);
                 }
                 catch (Exception ex)
                 {
@@ -356,34 +614,7 @@ private readonly ConcurrentDictionary<ChunkCoord, (float[] renderMesh, Collision
             });
         }
 
-        private async Task BroadcastPlayerState(string excludePlayer, PlayerState state)
-        {
-            byte[] packet = new byte[33];
-            packet[0] = (byte)UdpPacketType.EntityUpdate;
-            BitConverter.TryWriteBytes(packet.AsSpan(1, 4), state.Position.X);
-            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), state.Position.Y);
-            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), state.Position.Z);
-            BitConverter.TryWriteBytes(packet.AsSpan(13, 4), state.Velocity.X);
-            BitConverter.TryWriteBytes(packet.AsSpan(17, 4), state.Velocity.Y);
-            BitConverter.TryWriteBytes(packet.AsSpan(21, 4), state.Velocity.Z);
-            BitConverter.TryWriteBytes(packet.AsSpan(25, 4), state.Rotation.X);
-            BitConverter.TryWriteBytes(packet.AsSpan(29, 4), state.Rotation.Y);
 
-            foreach (var player in playerStates)
-            {
-                if (player.Key != excludePlayer && player.Value.EndPoint != null)
-                {
-                    try
-                    {
-                        await udpServer!.SendAsync(packet, packet.Length, player.Value.EndPoint);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log($"[[UDP]] Error broadcasting to {player.Key}: {ex.Message}");
-                    }
-                }
-            }
-        }
 
         private async Task HandleClientAsync(TcpClient client, CancellationToken token)
         {

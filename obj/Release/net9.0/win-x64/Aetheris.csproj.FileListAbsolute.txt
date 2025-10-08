@@ -3,7 +3,6 @@
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/Aetheris.deps.json
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/Aetheris.runtimeconfig.json
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/Aetheris.dll
-/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/Aetheris.pdb
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/OpenTK.Audio.OpenAL.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/OpenTK.Compute.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/OpenTK.Core.dll
@@ -196,7 +195,6 @@
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/hostfxr.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/hostpolicy.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/mscordaccore.dll
-/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/mscordaccore_amd64_amd64_9.0.925.41916.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/mscordbi.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/mscorrc.dll
 /home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/msquic.dll
@@ -205,10 +203,12 @@
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.AssemblyInfoInputs.cache
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.AssemblyInfo.cs
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.csproj.CoreCompileInputs.cache
-/home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.sourcelink.json
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.csproj.Up2Date
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.dll
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/refint/Aetheris.dll
-/home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.pdb
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/Aetheris.genruntimeconfig.cache
 /home/kirby/Programming/Aetheris/obj/Release/net9.0/win-x64/ref/Aetheris.dll
+/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/BepuPhysics.dll
+/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/BepuUtilities.dll
+/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/Jitter2.dll
+/home/kirby/Programming/Aetheris/bin/Release/net9.0/win-x64/mscordaccore_amd64_amd64_9.0.825.36511.dll
