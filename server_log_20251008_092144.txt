@@ -1,0 +1,1082 @@
+[09:21:44.374] [[Server]] Log file created: server_log_20251008_092144.txt
+[09:21:44.376] [[Server]] Initializing world generation...
+[09:21:44.386] [[Server]] UDP listening on port 42070
+[09:21:44.396] [[Server]] Listening on port 42069 @ 60 TPS
+[09:21:44.396] [[Server]] Performance timing enabled - waiting for connections...
+[09:21:44.415] [[Server]] Tick 0 | Cache: 0/20000
+[09:21:44.869] [[Server]] Client connected: 127.0.0.1:41896
+[09:21:46.020] [[Generation]] (0,0,0): Render verts=16506, Collision verts=16506
+[09:21:46.034] [[Timing]] Chunk (0,0,0): Chunk=156.02ms Mesh=116.93ms Send=7.04ms Total=292.20ms
+[09:21:46.844] [[Generation]] (1,0,0): Render verts=13323, Collision verts=13323
+[09:21:46.848] [[Timing]] Chunk (1,0,0): Chunk=254.40ms Mesh=551.02ms Send=3.52ms Total=809.20ms
+[09:21:47.096] [[Generation]] (-1,0,0): Render verts=18186, Collision verts=18186
+[09:21:47.102] [[Generation]] (0,0,-1): Render verts=13143, Collision verts=13143
+[09:21:47.103] [[Timing]] Chunk (-1,0,0): Chunk=763.64ms Mesh=279.97ms Send=7.42ms Total=1051.28ms
+[09:21:47.106] [[Timing]] Chunk (0,0,-1): Chunk=429.89ms Mesh=489.01ms Send=4.48ms Total=923.54ms
+[09:21:47.112] [[Generation]] (0,0,1): Render verts=13995, Collision verts=13995
+[09:21:47.115] [[Timing]] Chunk (0,0,1): Chunk=556.12ms Mesh=381.68ms Send=2.30ms Total=940.21ms
+[09:21:49.425] [[Server]] Tick 300 | Cache: 5/20000
+[09:21:49.425]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:21:54.418] [[Server]] Tick 600 | Cache: 5/20000
+[09:21:54.418]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:21:59.419] [[Server]] Tick 900 | Cache: 5/20000
+[09:21:59.419]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:04.428] [[Server]] Tick 1200 | Cache: 5/20000
+[09:22:04.428]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:09.416] [[Server]] Tick 1500 | Cache: 5/20000
+[09:22:09.416]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:14.424] [[Server]] Tick 1800 | Cache: 5/20000
+[09:22:14.424]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:19.432] [[Server]] Tick 2100 | Cache: 5/20000
+[09:22:19.432]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:24.422] [[Server]] Tick 2400 | Cache: 5/20000
+[09:22:24.422]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:29.423] [[Server]] Tick 2700 | Cache: 5/20000
+[09:22:29.423]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:34.417] [[Server]] Tick 3000 | Cache: 5/20000
+[09:22:34.418]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:39.434] [[Server]] Tick 3300 | Cache: 5/20000
+[09:22:39.434]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:44.431] [[Server]] Tick 3600 | Cache: 5/20000
+[09:22:44.431]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:49.427] [[Server]] Tick 3900 | Cache: 5/20000
+[09:22:49.427]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:54.430] [[Server]] Tick 4200 | Cache: 5/20000
+[09:22:54.430]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:22:59.427] [[Server]] Tick 4500 | Cache: 5/20000
+[09:22:59.427]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:04.423] [[Server]] Tick 4800 | Cache: 5/20000
+[09:23:04.423]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:09.422] [[Server]] Tick 5100 | Cache: 5/20000
+[09:23:09.422]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:14.425] [[Server]] Tick 5400 | Cache: 5/20000
+[09:23:14.425]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:19.433] [[Server]] Tick 5700 | Cache: 5/20000
+[09:23:19.433]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:24.430] [[Server]] Tick 6000 | Cache: 5/20000
+[09:23:24.430]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:29.429] [[Server]] Tick 6300 | Cache: 5/20000
+[09:23:29.429]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:34.435] [[Server]] Tick 6600 | Cache: 5/20000
+[09:23:34.435]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:39.433] [[Server]] Tick 6900 | Cache: 5/20000
+[09:23:39.433]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:44.423] [[Server]] Tick 7200 | Cache: 5/20000
+[09:23:44.423]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:49.422] [[Server]] Tick 7500 | Cache: 5/20000
+[09:23:49.422]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:54.425] [[Server]] Tick 7800 | Cache: 5/20000
+[09:23:54.425]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:23:59.437] [[Server]] Tick 8100 | Cache: 5/20000
+[09:23:59.437]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:04.428] [[Server]] Tick 8400 | Cache: 5/20000
+[09:24:04.428]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:09.425] [[Server]] Tick 8700 | Cache: 5/20000
+[09:24:09.425]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:14.427] [[Server]] Tick 9000 | Cache: 5/20000
+[09:24:14.427]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:19.433] [[Server]] Tick 9300 | Cache: 5/20000
+[09:24:19.433]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:24.429] [[Server]] Tick 9600 | Cache: 5/20000
+[09:24:24.429]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:29.439] [[Server]] Tick 9900 | Cache: 5/20000
+[09:24:29.439]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:34.434] [[Server]] Tick 10200 | Cache: 5/20000
+[09:24:34.434]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:39.440] [[Server]] Tick 10500 | Cache: 5/20000
+[09:24:39.440]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:44.433] [[Server]] Tick 10800 | Cache: 5/20000
+[09:24:44.433]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:49.436] [[Server]] Tick 11100 | Cache: 5/20000
+[09:24:49.436]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:54.441] [[Server]] Tick 11400 | Cache: 5/20000
+[09:24:54.441]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:24:59.429] [[Server]] Tick 11700 | Cache: 5/20000
+[09:24:59.429]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:04.443] [[Server]] Tick 12000 | Cache: 5/20000
+[09:25:04.443]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:09.440] [[Server]] Tick 12300 | Cache: 5/20000
+[09:25:09.440]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:14.437] [[Server]] Tick 12600 | Cache: 5/20000
+[09:25:14.437]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:19.442] [[Server]] Tick 12900 | Cache: 5/20000
+[09:25:19.442]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:24.442] [[Server]] Tick 13200 | Cache: 5/20000
+[09:25:24.442]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:29.431] [[Server]] Tick 13500 | Cache: 5/20000
+[09:25:29.431]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:34.442] [[Server]] Tick 13800 | Cache: 5/20000
+[09:25:34.442]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:39.440] [[Server]] Tick 14100 | Cache: 5/20000
+[09:25:39.440]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:44.445] [[Server]] Tick 14400 | Cache: 5/20000
+[09:25:44.445]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:49.461] [[Server]] Tick 14700 | Cache: 5/20000
+[09:25:49.461]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:54.445] [[Server]] Tick 15000 | Cache: 5/20000
+[09:25:54.445]   Requests: 5 | Avg Times: Chunk=432.01ms Mesh=363.72ms Send=4.95ms Total=800.68ms
+[09:25:57.897] [[Server]] Client connected: 127.0.0.1:40952
+[09:25:58.873] [[Cache]] Hit for (0,0,0)
+[09:25:58.888] [[Timing]] Chunk (0,0,0): Chunk=0.00ms Mesh=0.00ms Send=13.89ms Total=15.63ms
+[09:25:58.903] [[Cache]] Hit for (1,0,0)
+[09:25:58.914] [[Timing]] Chunk (1,0,0): Chunk=0.00ms Mesh=0.00ms Send=10.55ms Total=10.62ms
+[09:25:58.918] [[Cache]] Hit for (0,0,1)
+[09:25:58.924] [[Timing]] Chunk (0,0,1): Chunk=0.00ms Mesh=0.00ms Send=6.61ms Total=6.66ms
+[09:25:58.927] [[Cache]] Hit for (0,0,-1)
+[09:25:58.934] [[Timing]] Chunk (0,0,-1): Chunk=0.00ms Mesh=0.00ms Send=7.07ms Total=7.16ms
+[09:25:58.936] [[Cache]] Hit for (-1,0,0)
+[09:25:58.947] [[Timing]] Chunk (-1,0,0): Chunk=0.00ms Mesh=0.00ms Send=10.66ms Total=10.81ms
+[09:25:59.323] [[Generation]] (1,0,1): Render verts=13893, Collision verts=13893
+[09:25:59.327] [[Timing]] Chunk (1,0,1): Chunk=190.91ms Mesh=181.48ms Send=4.48ms Total=377.04ms
+[09:25:59.709] [[Generation]] (1,0,-1): Render verts=13056, Collision verts=13056
+[09:25:59.712] [[Timing]] Chunk (1,0,-1): Chunk=191.47ms Mesh=181.28ms Send=3.10ms Total=375.96ms
+[09:26:00.165] [[Generation]] (-1,0,1): Render verts=18120, Collision verts=18120
+[09:26:00.173] [[Timing]] Chunk (-1,0,1): Chunk=236.93ms Mesh=211.55ms Send=7.85ms Total=456.43ms
+[09:26:00.523] [[Generation]] (-1,0,-1): Render verts=12909, Collision verts=12909
+[09:26:00.527] [[Timing]] Chunk (-1,0,-1): Chunk=186.11ms Mesh=159.89ms Send=4.58ms Total=350.74ms
+[09:26:00.922] [[Generation]] (0,-1,0): Render verts=46158, Collision verts=46158
+[09:26:00.940] [[Timing]] Chunk (0,-1,0): Chunk=205.95ms Mesh=182.88ms Send=17.21ms Total=406.14ms
+[09:26:01.101] [Server] Rejecting position from 127.0.0.1:36391, forcing correction
+[09:26:01.365] [[Generation]] (1,-1,0): Render verts=46677, Collision verts=46677
+[09:26:01.383] [[Timing]] Chunk (1,-1,0): Chunk=205.02ms Mesh=208.49ms Send=17.61ms Total=431.21ms
+[09:26:01.728] [Server] Rejecting position from 127.0.0.1:36391, forcing correction
+[09:26:01.756] [[Generation]] (0,-1,1): Render verts=18219, Collision verts=18219
+[09:26:01.764] [[Timing]] Chunk (0,-1,1): Chunk=174.05ms Mesh=187.72ms Send=5.53ms Total=368.93ms
+[09:26:02.142] [[Generation]] (-1,-1,0): Render verts=47148, Collision verts=47148
+[09:26:02.156] [[Timing]] Chunk (-1,-1,0): Chunk=202.83ms Mesh=172.75ms Send=14.25ms Total=389.96ms
+[09:26:02.530] [[Generation]] (0,-1,-1): Render verts=22779, Collision verts=22779
+[09:26:02.538] [[Timing]] Chunk (0,-1,-1): Chunk=193.28ms Mesh=164.44ms Send=8.16ms Total=372.68ms
+[09:26:02.882] [[Generation]] (1,-1,-1): Render verts=8361, Collision verts=8361
+[09:26:02.885] [[Timing]] Chunk (1,-1,-1): Chunk=161.28ms Mesh=173.39ms Send=2.17ms Total=336.98ms
+[09:26:03.237] [[Generation]] (-1,-1,-1): Render verts=43515, Collision verts=43515
+[09:26:03.249] [[Timing]] Chunk (-1,-1,-1): Chunk=170.88ms Mesh=179.67ms Send=11.18ms Total=361.90ms
+[09:26:03.578] [[Generation]] (-1,-1,1): Render verts=28041, Collision verts=28041
+[09:26:03.586] [[Timing]] Chunk (-1,-1,1): Chunk=163.37ms Mesh=159.37ms Send=7.64ms Total=330.54ms
+[09:26:03.973] [[Generation]] (1,-1,1): Render verts=49929, Collision verts=49929
+[09:26:03.988] [[Timing]] Chunk (1,-1,1): Chunk=181.27ms Mesh=203.30ms Send=15.54ms Total=400.20ms
+[09:26:04.340] [[Generation]] (-2,0,0): Render verts=19455, Collision verts=19455
+[09:26:04.345] [[Timing]] Chunk (-2,0,0): Chunk=171.38ms Mesh=174.37ms Send=5.10ms Total=350.95ms
+[09:26:04.673] [[Generation]] (0,0,-2): Render verts=16290, Collision verts=16290
+[09:26:04.680] [[Timing]] Chunk (0,0,-2): Chunk=180.99ms Mesh=143.37ms Send=6.75ms Total=331.23ms
+[09:26:04.780] [[Generation]] (0,1,0): Render verts=0, Collision verts=0
+[09:26:04.780] [[Timing]] Chunk (0,1,0): Chunk=47.87ms Mesh=50.20ms Send=0.09ms Total=98.24ms
+[09:26:05.319] [[Generation]] (0,0,2): Render verts=15900, Collision verts=15900
+[09:26:05.325] [[Timing]] Chunk (0,0,2): Chunk=302.40ms Mesh=234.25ms Send=6.53ms Total=543.26ms
+[09:26:05.760] [[Generation]] (2,0,0): Render verts=15930, Collision verts=15930
+[09:26:05.765] [[Timing]] Chunk (2,0,0): Chunk=208.49ms Mesh=216.79ms Send=5.28ms Total=430.63ms
+[09:26:06.150] [[Generation]] (1,0,-2): Render verts=13071, Collision verts=13071
+[09:26:06.154] [[Timing]] Chunk (1,0,-2): Chunk=148.80ms Mesh=230.07ms Send=4.50ms Total=383.44ms
+[09:26:06.638] [[Generation]] (-2,0,1): Render verts=14919, Collision verts=14919
+[09:26:06.640] [[Timing]] Chunk (-2,0,1): Chunk=273.14ms Mesh=206.41ms Send=2.69ms Total=482.31ms
+[09:26:06.985] [[Generation]] (-2,0,-1): Render verts=17817, Collision verts=17817
+[09:26:06.990] [[Timing]] Chunk (-2,0,-1): Chunk=163.91ms Mesh=178.88ms Send=5.05ms Total=347.98ms
+[09:26:07.093] [[Generation]] (0,1,-1): Render verts=0, Collision verts=0
+[09:26:07.093] [[Timing]] Chunk (0,1,-1): Chunk=50.79ms Mesh=50.10ms Send=0.11ms Total=101.06ms
+[09:26:07.195] [[Generation]] (0,1,1): Render verts=0, Collision verts=0
+[09:26:07.195] [[Timing]] Chunk (0,1,1): Chunk=57.99ms Mesh=42.98ms Send=0.22ms Total=101.28ms
+[09:26:07.570] [[Generation]] (1,0,2): Render verts=14034, Collision verts=14034
+[09:26:07.573] [[Timing]] Chunk (1,0,2): Chunk=186.36ms Mesh=188.22ms Send=2.65ms Total=377.32ms
+[09:26:08.016] [[Generation]] (2,0,1): Render verts=18108, Collision verts=18108
+[09:26:08.021] [[Timing]] Chunk (2,0,1): Chunk=254.09ms Mesh=187.68ms Send=5.11ms Total=446.98ms
+[09:26:08.114] [[Generation]] (1,1,0): Render verts=0, Collision verts=0
+[09:26:08.114] [[Timing]] Chunk (1,1,0): Chunk=48.32ms Mesh=42.12ms Send=0.13ms Total=90.67ms
+[09:26:08.487] [[Generation]] (2,0,-1): Render verts=13326, Collision verts=13326
+[09:26:08.490] [[Timing]] Chunk (2,0,-1): Chunk=190.88ms Mesh=180.57ms Send=2.30ms Total=373.83ms
+[09:26:08.598] [[Generation]] (-1,1,0): Render verts=0, Collision verts=0
+[09:26:08.598] [[Timing]] Chunk (-1,1,0): Chunk=52.51ms Mesh=53.25ms Send=0.10ms Total=105.97ms
+[09:26:08.896] [[Generation]] (-1,0,-2): Render verts=12501, Collision verts=12501
+[09:26:08.899] [[Timing]] Chunk (-1,0,-2): Chunk=154.87ms Mesh=142.72ms Send=3.15ms Total=300.81ms
+[09:26:09.328] [Server] Rejecting position from 127.0.0.1:36391, forcing correction
+[09:26:09.373] [[Generation]] (-1,0,2): Render verts=18738, Collision verts=18738
+[09:26:09.379] [[Timing]] Chunk (-1,0,2): Chunk=241.46ms Mesh=229.67ms Send=5.39ms Total=476.70ms
+[09:26:09.431] [[Server]] Tick 15900 | Cache: 35/20000
+[09:26:09.431]   Requests: 40 | Avg Times: Chunk=183.94ms Mesh=168.41ms Send=6.20ms Total=358.55ms
+[09:26:09.459] [[Server]] Tick 15900 | Cache: 35/20000
+[09:26:09.459]   Requests: 40 | Avg Times: Chunk=183.94ms Mesh=168.41ms Send=6.20ms Total=358.55ms
+[09:26:09.486] [[Generation]] (1,1,1): Render verts=0, Collision verts=0
+[09:26:09.488] [[Timing]] Chunk (1,1,1): Chunk=51.01ms Mesh=54.10ms Send=0.15ms Total=106.67ms
+[09:26:09.595] [[Generation]] (-1,1,-1): Render verts=0, Collision verts=0
+[09:26:09.595] [[Timing]] Chunk (-1,1,-1): Chunk=55.05ms Mesh=48.71ms Send=0.11ms Total=103.96ms
+[09:26:09.710] [[Generation]] (1,1,-1): Render verts=0, Collision verts=0
+[09:26:09.710] [[Timing]] Chunk (1,1,-1): Chunk=50.41ms Mesh=64.60ms Send=0.14ms Total=115.20ms
+[09:26:09.840] [[Generation]] (-1,1,1): Render verts=0, Collision verts=0
+[09:26:09.841] [[Timing]] Chunk (-1,1,1): Chunk=65.07ms Mesh=44.29ms Send=0.47ms Total=109.90ms
+[09:26:10.178] [[Generation]] (-2,-1,0): Render verts=38448, Collision verts=38448
+[09:26:10.187] [[Timing]] Chunk (-2,-1,0): Chunk=176.47ms Mesh=160.15ms Send=8.42ms Total=345.17ms
+[09:26:10.293] [[Generation]] (0,1,-2): Render verts=0, Collision verts=0
+[09:26:10.293] [[Timing]] Chunk (0,1,-2): Chunk=49.16ms Mesh=49.41ms Send=0.14ms Total=98.79ms
+[09:26:10.622] [[Generation]] (2,-1,0): Render verts=8961, Collision verts=8961
+[09:26:10.628] [[Timing]] Chunk (2,-1,0): Chunk=161.78ms Mesh=166.68ms Send=6.10ms Total=334.64ms
+[09:26:10.929] [[Generation]] (-2,0,-2): Render verts=13344, Collision verts=13344
+[09:26:10.933] [[Timing]] Chunk (-2,0,-2): Chunk=174.93ms Mesh=124.55ms Send=3.92ms Total=303.48ms
+[09:26:11.234] [[Generation]] (0,-1,2): Render verts=0, Collision verts=0
+[09:26:11.235] [[Timing]] Chunk (0,-1,2): Chunk=164.10ms Mesh=134.42ms Send=1.15ms Total=299.77ms
+[09:26:11.610] [[Generation]] (2,0,-2): Render verts=13203, Collision verts=13203
+[09:26:11.614] [[Timing]] Chunk (2,0,-2): Chunk=196.24ms Mesh=173.60ms Send=3.65ms Total=373.60ms
+[09:26:11.737] [[Generation]] (0,1,2): Render verts=0, Collision verts=0
+[09:26:11.738] [[Timing]] Chunk (0,1,2): Chunk=62.60ms Mesh=58.52ms Send=1.03ms Total=122.43ms
+[09:26:12.116] [[Generation]] (2,0,2): Render verts=17778, Collision verts=17778
+[09:26:12.121] [[Timing]] Chunk (2,0,2): Chunk=196.65ms Mesh=180.62ms Send=5.44ms Total=382.85ms
+[09:26:12.627] [[Generation]] (-2,0,2): Render verts=9264, Collision verts=9264
+[09:26:12.630] [[Timing]] Chunk (-2,0,2): Chunk=257.86ms Mesh=245.98ms Send=2.25ms Total=506.16ms
+[09:26:12.737] [[Generation]] (2,1,0): Render verts=0, Collision verts=0
+[09:26:12.738] [[Timing]] Chunk (2,1,0): Chunk=46.99ms Mesh=58.21ms Send=0.16ms Total=105.41ms
+[09:26:13.105] [[Generation]] (0,-1,-2): Render verts=20592, Collision verts=20592
+[09:26:13.111] [[Timing]] Chunk (0,-1,-2): Chunk=143.92ms Mesh=186.59ms Send=6.09ms Total=336.67ms
+[09:26:13.206] [[Generation]] (-2,1,0): Render verts=0, Collision verts=0
+[09:26:13.207] [[Timing]] Chunk (-2,1,0): Chunk=38.19ms Mesh=55.14ms Send=0.12ms Total=93.52ms
+[09:26:13.532] [[Generation]] (0,0,-3): Render verts=17547, Collision verts=17547
+[09:26:13.535] [[Timing]] Chunk (0,0,-3): Chunk=147.83ms Mesh=129.62ms Send=3.00ms Total=280.51ms
+[09:26:13.635] [[Generation]] (1,1,-2): Render verts=0, Collision verts=0
+[09:26:13.635] [[Timing]] Chunk (1,1,-2): Chunk=48.54ms Mesh=49.19ms Send=0.14ms Total=97.92ms
+[09:26:13.673] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:13.676] [Server] Broadcasted block break at (11, 33, 10) to 2 clients
+[09:26:13.980] [[Generation]] (-1,-1,-2): Render verts=36354, Collision verts=36354
+[09:26:13.994] [[Timing]] Chunk (-1,-1,-2): Chunk=158.96ms Mesh=144.40ms Send=14.21ms Total=317.66ms
+[09:26:14.002] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.002] [Server] Broadcasted block break at (12, 34, 9) to 2 clients
+[09:26:14.006] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.007] [Server] Broadcasted block break at (11, 34, 10) to 2 clients
+[09:26:14.007] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.007] [Server] Broadcasted block break at (11, 34, 10) to 2 clients
+[09:26:14.008] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.008] [Server] Broadcasted block break at (12, 34, 10) to 2 clients
+[09:26:14.012] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.012] [Server] Broadcasted block break at (9, 35, 13) to 2 clients
+[09:26:14.018] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.018] [Server] Broadcasted block break at (12, 33, 11) to 2 clients
+[09:26:14.039] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.039] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.040] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.040] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.040] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.044] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.052] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.053] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.053] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.053] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.053] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.053] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.053] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.053] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.053] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.053] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.325] [[Generation]] (2,1,-1): Render verts=0, Collision verts=0
+[09:26:14.325] [[Timing]] Chunk (2,1,-1): Chunk=138.18ms Mesh=184.74ms Send=0.13ms Total=323.12ms
+[09:26:14.328] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.328] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.379] [[Generation]] (-1,1,2): Render verts=0, Collision verts=0
+[09:26:14.379] [[Timing]] Chunk (-1,1,2): Chunk=144.96ms Mesh=226.40ms Send=0.05ms Total=371.48ms
+[09:26:14.422] [Server] Invalidated chunk (0,0,0) due to block break
+[09:26:14.424] [Server] Broadcasted block break at (12, 34, 11) to 2 clients
+[09:26:14.434] [[Generation]] (-4,1,-3): Render verts=0, Collision verts=0
+[09:26:14.434] [[Timing]] Chunk (-4,1,-3): Chunk=175.72ms Mesh=149.24ms Send=0.20ms Total=325.27ms
+[09:26:14.474] [[Server]] Tick 16200 | Cache: 57/20000
+[09:26:14.474]   Requests: 62 | Avg Times: Chunk=162.29ms Mesh=152.03ms Send=4.92ms Total=319.24ms
+[09:26:14.708] [[Generation]] (-4,1,4): Render verts=0, Collision verts=0
+[09:26:14.708] [[Timing]] Chunk (-4,1,4): Chunk=130.23ms Mesh=152.93ms Send=0.10ms Total=283.31ms
+[09:26:14.762] [[Generation]] (2,1,1): Render verts=0, Collision verts=0
+[09:26:14.762] [[Timing]] Chunk (2,1,1): Chunk=149.97ms Mesh=137.62ms Send=0.12ms Total=287.76ms
+[09:26:15.076] [[Generation]] (-2,1,-1): Render verts=0, Collision verts=0
+[09:26:15.076] [[Timing]] Chunk (-2,1,-1): Chunk=115.26ms Mesh=198.91ms Send=0.06ms Total=314.29ms
+[09:26:15.076] [[Cache]] Hit for (2,1,-1)
+[09:26:15.076] [[Timing]] Chunk (2,1,-1): Chunk=0.00ms Mesh=0.00ms Send=0.05ms Total=0.07ms
+[09:26:15.078] [[Generation]] (-4,1,-4): Render verts=0, Collision verts=0
+[09:26:15.078] [[Timing]] Chunk (-4,1,-4): Chunk=195.88ms Mesh=174.03ms Send=0.09ms Total=370.05ms
+[09:26:16.331] [[Generation]] (-1,-1,2): Render verts=1290, Collision verts=1290
+[09:26:16.382] [[Generation]] (-3,0,-1): Render verts=17604, Collision verts=17604
+[09:26:16.417] [[Generation]] (-1,0,-5): Render verts=13686, Collision verts=13686
+[09:26:16.420] [[Server]] Client disconnected: 127.0.0.1:40952
+[09:26:16.431] [[Server]] Error handling chunk (-1,-1,2): Unable to write data to the transport connection: Connection reset by peer.
+[09:26:16.432] [[Server]] Error handling chunk (-3,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.432] [[Server]] Error handling chunk (-1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.463] [[Generation]] (1,-1,-2): Render verts=1998, Collision verts=1998
+[09:26:16.468] [[Generation]] (-1,0,-3): Render verts=12459, Collision verts=12459
+[09:26:16.469] [[Server]] Error handling chunk (1,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.471] [[Server]] Error handling chunk (-1,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.472] [[Cache]] Hit for (-3,0,-1)
+[09:26:16.477] [[Server]] Error handling chunk (-3,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.545] [[Generation]] (-5,0,-1): Render verts=19641, Collision verts=19641
+[09:26:16.548] [[Server]] Error handling chunk (-5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.595] [[Generation]] (-5,0,-2): Render verts=14427, Collision verts=14427
+[09:26:16.600] [[Server]] Error handling chunk (-5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.702] [[Generation]] (1,-1,2): Render verts=12132, Collision verts=12132
+[09:26:16.707] [[Server]] Error handling chunk (1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.741] [[Generation]] (6,0,0): Render verts=24405, Collision verts=24405
+[09:26:16.742] [[Generation]] (-3,0,0): Render verts=16095, Collision verts=16095
+[09:26:16.750] [[Server]] Error handling chunk (6,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.752] [[Server]] Error handling chunk (-3,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.753] [[Cache]] Hit after lock for (-3,0,0)
+[09:26:16.764] [[Server]] Error handling chunk (-3,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.772] [[Generation]] (-1,1,-2): Render verts=0, Collision verts=0
+[09:26:16.772] [[Server]] Error handling chunk (-1,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:16.992] [[Generation]] (2,-1,-1): Render verts=0, Collision verts=0
+[09:26:16.993] [[Server]] Error handling chunk (2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.168] [[Generation]] (1,0,3): Render verts=15597, Collision verts=15597
+[09:26:17.173] [[Server]] Error handling chunk (1,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.303] [[Generation]] (1,1,2): Render verts=0, Collision verts=0
+[09:26:17.304] [[Server]] Error handling chunk (1,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.304] [[Cache]] Hit for (1,-1,2)
+[09:26:17.309] [[Server]] Error handling chunk (1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.309] [[Cache]] Hit for (1,-1,-2)
+[09:26:17.313] [[Server]] Error handling chunk (1,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.314] [[Cache]] Hit for (-1,1,2)
+[09:26:17.314] [[Server]] Error handling chunk (-1,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.314] [[Cache]] Hit for (-1,-1,2)
+[09:26:17.314] [[Server]] Error handling chunk (-1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.314] [[Cache]] Hit for (-1,1,-2)
+[09:26:17.314] [[Server]] Error handling chunk (-1,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:17.314] [[Cache]] Hit for (-1,-1,-2)
+[09:26:17.330] [[Server]] Error handling chunk (-1,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.092] [[Generation]] (1,0,-3): Render verts=13326, Collision verts=13326
+[09:26:18.097] [[Server]] Error handling chunk (1,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.553] [[Generation]] (5,0,-2): Render verts=18093, Collision verts=18093
+[09:26:18.558] [[Server]] Error handling chunk (5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.752] [[Generation]] (-4,-1,4): Render verts=0, Collision verts=0
+[09:26:18.753] [[Server]] Error handling chunk (-4,-1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.850] [[Generation]] (2,-1,1): Render verts=59427, Collision verts=59427
+[09:26:18.882] [[Server]] Error handling chunk (2,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.882] [[Cache]] Hit for (2,1,1)
+[09:26:18.882] [[Server]] Error handling chunk (2,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.882] [[Cache]] Hit for (2,-1,-1)
+[09:26:18.882] [[Server]] Error handling chunk (2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:18.995] [[Generation]] (-2,-1,1): Render verts=38139, Collision verts=38139
+[09:26:19.017] [[Server]] Error handling chunk (-2,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.018] [[Cache]] Hit after lock for (-2,-1,1)
+[09:26:19.025] [[Server]] Error handling chunk (-2,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.041] [[Generation]] (-3,0,1): Render verts=12780, Collision verts=12780
+[09:26:19.047] [[Server]] Error handling chunk (-3,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.152] [[Generation]] (3,0,-1): Render verts=14220, Collision verts=14220
+[09:26:19.156] [[Server]] Error handling chunk (3,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.184] [[Generation]] (0,0,3): Render verts=18189, Collision verts=18189
+[09:26:19.187] [[Server]] Error handling chunk (0,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.187] [[Cache]] Hit after lock for (0,0,3)
+[09:26:19.190] [[Server]] Error handling chunk (0,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.293] [[Generation]] (-2,1,1): Render verts=0, Collision verts=0
+[09:26:19.294] [[Server]] Error handling chunk (-2,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.294] [[Cache]] Hit for (-2,1,-1)
+[09:26:19.294] [[Server]] Error handling chunk (-2,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.294] [[Cache]] Hit for (1,1,2)
+[09:26:19.294] [[Server]] Error handling chunk (1,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.342] [[Generation]] (-2,-1,-1): Render verts=2202, Collision verts=2202
+[09:26:19.343] [[Server]] Error handling chunk (-2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.343] [[Cache]] Hit after lock for (-2,-1,-1)
+[09:26:19.343] [[Server]] Error handling chunk (-2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.343] [[Cache]] Hit for (-2,1,1)
+[09:26:19.343] [[Server]] Error handling chunk (-2,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.425] [[Generation]] (3,0,1): Render verts=14043, Collision verts=14043
+[09:26:19.429] [[Server]] Error handling chunk (3,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.429] [[Cache]] Hit for (-3,0,1)
+[09:26:19.431] [[Server]] Error handling chunk (-3,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.439] [[Generation]] (5,1,0): Render verts=0, Collision verts=0
+[09:26:19.439] [[Server]] Error handling chunk (5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.486] [[Generation]] (-1,0,5): Render verts=33468, Collision verts=33468
+[09:26:19.493] [[Server]] Error handling chunk (-1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.544] [[Generation]] (3,1,4): Render verts=0, Collision verts=0
+[09:26:19.545] [[Server]] Error handling chunk (3,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.706] [[Generation]] (-4,1,3): Render verts=0, Collision verts=0
+[09:26:19.706] [[Server]] Error handling chunk (-4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.802] [[Generation]] (3,1,-4): Render verts=0, Collision verts=0
+[09:26:19.802] [[Server]] Error handling chunk (3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:19.943] [[Generation]] (-4,-1,-3): Render verts=876, Collision verts=876
+[09:26:19.944] [[Server]] Error handling chunk (-4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:20.037] [[Generation]] (-3,1,-4): Render verts=0, Collision verts=0
+[09:26:20.037] [[Server]] Error handling chunk (-3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:20.713] [[Generation]] (-2,0,-5): Render verts=13524, Collision verts=13524
+[09:26:20.715] [[Server]] Error handling chunk (-2,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:20.807] [[Generation]] (-2,0,5): Render verts=16320, Collision verts=16320
+[09:26:20.810] [[Server]] Error handling chunk (-2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:20.988] [[Generation]] (5,-1,0): Render verts=78618, Collision verts=78618
+[09:26:21.009] [[Generation]] (0,1,-5): Render verts=0, Collision verts=0
+[09:26:21.009] [[Server]] Error handling chunk (0,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.013] [[Server]] Error handling chunk (5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.136] [[Generation]] (4,1,3): Render verts=0, Collision verts=0
+[09:26:21.136] [[Server]] Error handling chunk (4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.152] [[Generation]] (0,1,5): Render verts=0, Collision verts=0
+[09:26:21.152] [[Server]] Error handling chunk (0,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.301] [[Generation]] (3,-1,4): Render verts=28365, Collision verts=28365
+[09:26:21.314] [[Server]] Error handling chunk (3,-1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.316] [[Generation]] (1,0,-5): Render verts=14571, Collision verts=14571
+[09:26:21.321] [[Server]] Error handling chunk (1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.673] [[Generation]] (3,0,0): Render verts=15282, Collision verts=15282
+[09:26:21.678] [[Server]] Error handling chunk (3,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.679] [[Cache]] Hit after lock for (3,0,0)
+[09:26:21.688] [[Server]] Error handling chunk (3,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.688] [[Cache]] Hit for (-3,0,0)
+[09:26:21.700] [[Server]] Error handling chunk (-3,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.700] [[Cache]] Hit for (-2,-1,-1)
+[09:26:21.706] [[Server]] Error handling chunk (-2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:21.706] [[Cache]] Hit for (2,-1,-1)
+[09:26:21.706] [[Server]] Error handling chunk (2,-1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.014] [[Generation]] (0,-1,-5): Render verts=0, Collision verts=0
+[09:26:22.014] [[Server]] Error handling chunk (0,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.216] [[Generation]] (0,0,6): Render verts=19311, Collision verts=19311
+[09:26:22.222] [[Server]] Error handling chunk (0,0,6): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.276] [[Generation]] (-5,-1,0): Render verts=54798, Collision verts=54798
+[09:26:22.293] [[Server]] Error handling chunk (-5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.514] [[Generation]] (5,0,2): Render verts=17502, Collision verts=17502
+[09:26:22.519] [[Server]] Error handling chunk (5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.723] [[Cache]] Hit for (2,1,1)
+[09:26:22.723] [[Server]] Error handling chunk (2,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.723] [[Cache]] Hit for (2,-1,1)
+[09:26:22.733] [[Server]] Error handling chunk (2,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.733] [[Cache]] Hit for (2,1,-1)
+[09:26:22.733] [[Server]] Error handling chunk (2,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.733] [[Cache]] Hit for (-1,1,2)
+[09:26:22.733] [[Server]] Error handling chunk (-1,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.733] [[Cache]] Hit for (-2,1,-1)
+[09:26:22.733] [[Server]] Error handling chunk (-2,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.733] [[Cache]] Hit for (-2,-1,1)
+[09:26:22.745] [[Generation]] (-5,1,0): Render verts=0, Collision verts=0
+[09:26:22.745] [[Server]] Error handling chunk (-5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.746] [[Server]] Error handling chunk (-2,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.746] [[Cache]] Hit for (-2,1,1)
+[09:26:22.746] [[Server]] Error handling chunk (-2,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.746] [[Cache]] Hit for (1,1,2)
+[09:26:22.746] [[Server]] Error handling chunk (1,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.746] [[Cache]] Hit for (1,-1,2)
+[09:26:22.751] [[Server]] Error handling chunk (1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.751] [[Cache]] Hit for (1,-1,-2)
+[09:26:22.751] [[Server]] Error handling chunk (1,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.751] [[Cache]] Hit for (-1,-1,-2)
+[09:26:22.762] [[Server]] Error handling chunk (-1,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.762] [[Cache]] Hit for (-1,1,-2)
+[09:26:22.762] [[Server]] Error handling chunk (-1,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.762] [[Cache]] Hit for (-1,-1,2)
+[09:26:22.763] [[Server]] Error handling chunk (-1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.763] [[Cache]] Hit for (0,0,3)
+[09:26:22.769] [[Server]] Error handling chunk (0,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.769] [[Cache]] Hit for (-4,1,4)
+[09:26:22.770] [[Server]] Error handling chunk (-4,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.770] [[Cache]] Hit for (-4,1,-4)
+[09:26:22.770] [[Server]] Error handling chunk (-4,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.770] [[Cache]] Hit for (6,0,0)
+[09:26:22.777] [[Server]] Error handling chunk (6,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.777] [[Cache]] Hit for (-4,-1,4)
+[09:26:22.777] [[Server]] Error handling chunk (-4,-1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.777] [[Cache]] Hit for (0,0,6)
+[09:26:22.784] [[Server]] Error handling chunk (0,0,6): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:22.904] [[Generation]] (4,1,-3): Render verts=0, Collision verts=0
+[09:26:22.904] [[Server]] Error handling chunk (4,1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.238] [[Generation]] (-1,0,3): Render verts=19029, Collision verts=19029
+[09:26:23.246] [[Server]] Error handling chunk (-1,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.247] [[Cache]] Hit for (-1,0,-3)
+[09:26:23.250] [[Server]] Error handling chunk (-1,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.367] [[Cache]] Hit for (1,0,-3)
+[09:26:23.372] [[Server]] Error handling chunk (1,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.475] [[Generation]] (0,-1,5): Render verts=16308, Collision verts=16308
+[09:26:23.479] [[Server]] Error handling chunk (0,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.645] [[Generation]] (-4,-1,3): Render verts=0, Collision verts=0
+[09:26:23.645] [[Server]] Error handling chunk (-4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.645] [[Cache]] Hit for (0,0,3)
+[09:26:23.652] [[Server]] Error handling chunk (0,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.655] [[Generation]] (-5,0,2): Render verts=19572, Collision verts=19572
+[09:26:23.655] [[Generation]] (4,-1,3): Render verts=0, Collision verts=0
+[09:26:23.657] [[Server]] Error handling chunk (4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.660] [[Server]] Error handling chunk (-5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.718] [[Generation]] (2,1,-2): Render verts=0, Collision verts=0
+[09:26:23.718] [[Server]] Error handling chunk (2,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.719] [[Cache]] Hit for (3,0,1)
+[09:26:23.726] [[Server]] Error handling chunk (3,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.742] [[Cache]] Hit for (1,0,3)
+[09:26:23.748] [[Cache]] Hit for (-1,-1,2)
+[09:26:23.749] [[Server]] Error handling chunk (-1,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.755] [[Server]] Error handling chunk (1,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.889] [[Generation]] (5,0,-1): Render verts=17211, Collision verts=17211
+[09:26:23.894] [[Server]] Error handling chunk (5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:23.945] [[Generation]] (4,-1,-3): Render verts=198, Collision verts=198
+[09:26:23.945] [[Server]] Error handling chunk (4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.346] [[Generation]] (3,-1,-4): Render verts=0, Collision verts=0
+[09:26:24.346] [[Server]] Error handling chunk (3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.649] [[Generation]] (-3,-1,-4): Render verts=0, Collision verts=0
+[09:26:24.649] [[Server]] Error handling chunk (-3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.779] [[Generation]] (2,0,5): Render verts=31077, Collision verts=31077
+[09:26:24.782] [[Generation]] (-5,0,1): Render verts=13071, Collision verts=13071
+[09:26:24.790] [[Server]] Error handling chunk (-5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.798] [[Server]] Error handling chunk (2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.855] [[Generation]] (-5,0,-3): Render verts=18912, Collision verts=18912
+[09:26:24.862] [[Server]] Error handling chunk (-5,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.862] [[Cache]] Hit after lock for (-5,0,-3)
+[09:26:24.866] [[Server]] Error handling chunk (-5,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.980] [[Generation]] (-6,0,0): Render verts=9666, Collision verts=9666
+[09:26:24.986] [[Server]] Error handling chunk (-6,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:24.986] [[Cache]] Hit after lock for (-6,0,0)
+[09:26:24.989] [[Server]] Error handling chunk (-6,0,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.132] [[Generation]] (5,0,1): Render verts=13710, Collision verts=13710
+[09:26:25.135] [[Server]] Error handling chunk (5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.281] [[Generation]] (-5,1,2): Render verts=0, Collision verts=0
+[09:26:25.281] [[Server]] Error handling chunk (-5,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.545] [[Generation]] (1,0,5): Render verts=18120, Collision verts=18120
+[09:26:25.545] [[Generation]] (5,1,-2): Render verts=0, Collision verts=0
+[09:26:25.546] [[Server]] Error handling chunk (5,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.549] [[Server]] Error handling chunk (1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.686] [[Generation]] (-3,0,-5): Render verts=15198, Collision verts=15198
+[09:26:25.692] [[Server]] Error handling chunk (-3,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.692] [[Cache]] Hit after lock for (-3,0,-5)
+[09:26:25.697] [[Server]] Error handling chunk (-3,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.885] [[Generation]] (5,1,2): Render verts=0, Collision verts=0
+[09:26:25.885] [[Server]] Error handling chunk (5,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.918] [[Generation]] (2,1,-5): Render verts=0, Collision verts=0
+[09:26:25.918] [[Server]] Error handling chunk (2,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:25.989] [[Generation]] (2,1,5): Render verts=0, Collision verts=0
+[09:26:25.989] [[Server]] Error handling chunk (2,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.176] [[Generation]] (-4,0,3): Render verts=15243, Collision verts=15243
+[09:26:26.180] [[Server]] Error handling chunk (-4,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.208] [[Generation]] (-5,0,3): Render verts=19983, Collision verts=19983
+[09:26:26.212] [[Server]] Error handling chunk (-5,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.212] [[Cache]] Hit after lock for (-5,0,3)
+[09:26:26.215] [[Server]] Error handling chunk (-5,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.229] [[Generation]] (-5,1,-2): Render verts=0, Collision verts=0
+[09:26:26.229] [[Server]] Error handling chunk (-5,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.461] [[Generation]] (5,0,-3): Render verts=12561, Collision verts=12561
+[09:26:26.464] [[Server]] Error handling chunk (5,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.464] [[Cache]] Hit after lock for (5,0,-3)
+[09:26:26.466] [[Server]] Error handling chunk (5,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.508] [[Generation]] (3,0,-5): Render verts=17055, Collision verts=17055
+[09:26:26.513] [[Server]] Error handling chunk (3,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.513] [[Cache]] Hit after lock for (3,0,-5)
+[09:26:26.524] [[Server]] Error handling chunk (3,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.596] [[Generation]] (-5,-1,2): Render verts=42996, Collision verts=42996
+[09:26:26.605] [[Server]] Error handling chunk (-5,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.605] [[Cache]] Hit after lock for (-5,-1,2)
+[09:26:26.611] [[Server]] Error handling chunk (-5,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (-5,1,2)
+[09:26:26.611] [[Server]] Error handling chunk (-5,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (5,1,-2)
+[09:26:26.611] [[Server]] Error handling chunk (5,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (5,1,2)
+[09:26:26.611] [[Server]] Error handling chunk (5,1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (2,1,-5)
+[09:26:26.611] [[Server]] Error handling chunk (2,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (2,1,5)
+[09:26:26.611] [[Server]] Error handling chunk (2,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.611] [[Cache]] Hit for (-5,1,-2)
+[09:26:26.611] [[Server]] Error handling chunk (-5,1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.729] [[Generation]] (-3,0,5): Render verts=15714, Collision verts=15714
+[09:26:26.735] [[Server]] Error handling chunk (-3,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.735] [[Cache]] Hit after lock for (-3,0,5)
+[09:26:26.740] [[Server]] Error handling chunk (-3,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.809] [[Generation]] (-2,1,5): Render verts=0, Collision verts=0
+[09:26:26.810] [[Server]] Error handling chunk (-2,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.810] [[Cache]] Hit after lock for (-2,1,5)
+[09:26:26.810] [[Server]] Error handling chunk (-2,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.862] [[Generation]] (5,-1,-2): Render verts=53298, Collision verts=53298
+[09:26:26.877] [[Server]] Error handling chunk (5,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.877] [[Cache]] Hit after lock for (5,-1,-2)
+[09:26:26.888] [[Server]] Error handling chunk (5,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.921] [[Generation]] (-2,1,-5): Render verts=0, Collision verts=0
+[09:26:26.921] [[Server]] Error handling chunk (-2,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:26.921] [[Cache]] Hit after lock for (-2,1,-5)
+[09:26:26.921] [[Server]] Error handling chunk (-2,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.155] [[Generation]] (5,1,-1): Render verts=0, Collision verts=0
+[09:26:27.155] [[Server]] Error handling chunk (5,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.191] [[Generation]] (-5,1,-1): Render verts=0, Collision verts=0
+[09:26:27.191] [[Server]] Error handling chunk (-5,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.266] [[Generation]] (3,0,5): Render verts=15021, Collision verts=15021
+[09:26:27.270] [[Server]] Error handling chunk (3,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.270] [[Cache]] Hit after lock for (3,0,5)
+[09:26:27.273] [[Server]] Error handling chunk (3,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.492] [[Generation]] (5,0,3): Render verts=16269, Collision verts=16269
+[09:26:27.497] [[Server]] Error handling chunk (5,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.498] [[Cache]] Hit after lock for (5,0,3)
+[09:26:27.503] [[Server]] Error handling chunk (5,0,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.505] [[Generation]] (-5,1,1): Render verts=0, Collision verts=0
+[09:26:27.505] [[Server]] Error handling chunk (-5,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.684] [[Generation]] (5,-1,2): Render verts=0, Collision verts=0
+[09:26:27.684] [[Server]] Error handling chunk (5,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.684] [[Cache]] Hit after lock for (5,-1,2)
+[09:26:27.684] [[Server]] Error handling chunk (5,-1,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.800] [[Generation]] (1,1,5): Render verts=0, Collision verts=0
+[09:26:27.800] [[Server]] Error handling chunk (1,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.938] [[Generation]] (2,-1,5): Render verts=20907, Collision verts=20907
+[09:26:27.938] [[Generation]] (-1,1,5): Render verts=0, Collision verts=0
+[09:26:27.939] [[Server]] Error handling chunk (-1,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.957] [[Server]] Error handling chunk (2,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:27.957] [[Cache]] Hit after lock for (2,-1,5)
+[09:26:27.961] [[Server]] Error handling chunk (2,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.067] [[Generation]] (5,1,1): Render verts=0, Collision verts=0
+[09:26:28.067] [[Server]] Error handling chunk (5,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.174] [[Generation]] (-4,0,-3): Render verts=13428, Collision verts=13428
+[09:26:28.178] [[Server]] Error handling chunk (-4,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.180] [[Generation]] (2,-1,-5): Render verts=29625, Collision verts=29625
+[09:26:28.186] [[Server]] Error handling chunk (2,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.186] [[Cache]] Hit after lock for (2,-1,-5)
+[09:26:28.192] [[Server]] Error handling chunk (2,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.288] [[Generation]] (-1,1,-5): Render verts=0, Collision verts=0
+[09:26:28.288] [[Server]] Error handling chunk (-1,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.299] [[Generation]] (-5,-1,-2): Render verts=39174, Collision verts=39174
+[09:26:28.309] [[Server]] Error handling chunk (-5,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.310] [[Cache]] Hit after lock for (-5,-1,-2)
+[09:26:28.318] [[Server]] Error handling chunk (-5,-1,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.497] [[Generation]] (-2,-1,-5): Render verts=0, Collision verts=0
+[09:26:28.498] [[Server]] Error handling chunk (-2,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.498] [[Cache]] Hit after lock for (-2,-1,-5)
+[09:26:28.498] [[Server]] Error handling chunk (-2,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.500] [[Cache]] Hit for (3,-1,-4)
+[09:26:28.500] [[Server]] Error handling chunk (3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.500] [[Cache]] Hit for (0,-1,5)
+[09:26:28.503] [[Server]] Error handling chunk (0,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.503] [[Cache]] Hit for (-2,0,-5)
+[09:26:28.510] [[Server]] Error handling chunk (-2,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.510] [[Cache]] Hit for (-3,-1,-4)
+[09:26:28.510] [[Server]] Error handling chunk (-3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.510] [[Cache]] Hit for (-3,1,-4)
+[09:26:28.510] [[Server]] Error handling chunk (-3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.510] [[Cache]] Hit for (-5,0,-2)
+[09:26:28.514] [[Server]] Error handling chunk (-5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.554] [[Generation]] (1,1,-5): Render verts=0, Collision verts=0
+[09:26:28.555] [[Server]] Error handling chunk (1,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (4,-1,-3)
+[09:26:28.555] [[Server]] Error handling chunk (4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (4,1,-3)
+[09:26:28.555] [[Server]] Error handling chunk (4,1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (0,1,-5)
+[09:26:28.555] [[Server]] Error handling chunk (0,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (0,1,5)
+[09:26:28.555] [[Server]] Error handling chunk (0,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (5,1,0)
+[09:26:28.555] [[Server]] Error handling chunk (5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.555] [[Cache]] Hit for (5,-1,0)
+[09:26:28.570] [[Server]] Error handling chunk (5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.570] [[Cache]] Hit for (2,0,5)
+[09:26:28.578] [[Server]] Error handling chunk (2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.827] [[Generation]] (4,0,-4): Render verts=13023, Collision verts=13023
+[09:26:28.830] [[Server]] Error handling chunk (4,0,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.830] [[Cache]] Hit after lock for (4,0,-4)
+[09:26:28.833] [[Server]] Error handling chunk (4,0,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.833] [[Cache]] Hit for (-4,1,3)
+[09:26:28.833] [[Server]] Error handling chunk (-4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.833] [[Cache]] Hit for (-4,-1,3)
+[09:26:28.833] [[Server]] Error handling chunk (-4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.834] [[Cache]] Hit for (4,-1,3)
+[09:26:28.834] [[Server]] Error handling chunk (4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.834] [[Cache]] Hit for (5,0,-2)
+[09:26:28.841] [[Server]] Error handling chunk (5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.841] [[Cache]] Hit for (4,1,3)
+[09:26:28.841] [[Server]] Error handling chunk (4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.841] [[Cache]] Hit for (3,1,-4)
+[09:26:28.841] [[Server]] Error handling chunk (3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.841] [[Cache]] Hit for (0,-1,-5)
+[09:26:28.841] [[Server]] Error handling chunk (0,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.841] [[Cache]] Hit for (-4,-1,-3)
+[09:26:28.842] [[Server]] Error handling chunk (-4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.842] [[Cache]] Hit for (-5,-1,0)
+[09:26:28.857] [[Server]] Error handling chunk (-5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.861] [[Generation]] (-2,-1,5): Render verts=39813, Collision verts=39813
+[09:26:28.875] [[Server]] Error handling chunk (-2,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.898] [[Generation]] (-4,0,-4): Render verts=14253, Collision verts=14253
+[09:26:28.901] [[Server]] Error handling chunk (-4,0,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.907] [[Generation]] (-3,1,4): Render verts=0, Collision verts=0
+[09:26:28.907] [[Server]] Error handling chunk (-3,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.907] [[Cache]] Hit for (-5,1,0)
+[09:26:28.907] [[Server]] Error handling chunk (-5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:28.907] [[Cache]] Hit for (-4,1,-3)
+[09:26:28.907] [[Server]] Error handling chunk (-4,1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.169] [[Generation]] (-1,-1,5): Render verts=9246, Collision verts=9246
+[09:26:29.171] [[Server]] Error handling chunk (-1,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.171] [[Cache]] Hit for (3,1,4)
+[09:26:29.171] [[Server]] Error handling chunk (3,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.171] [[Cache]] Hit for (-2,0,5)
+[09:26:29.179] [[Server]] Error handling chunk (-2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.179] [[Cache]] Hit for (3,-1,4)
+[09:26:29.189] [[Server]] Error handling chunk (3,-1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.190] [[Cache]] Hit for (-5,0,2)
+[09:26:29.195] [[Server]] Error handling chunk (-5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.195] [[Cache]] Hit for (5,0,2)
+[09:26:29.199] [[Server]] Error handling chunk (5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.199] [[Cache]] Hit for (-1,0,-5)
+[09:26:29.200] [[Server]] Error handling chunk (-1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.200] [[Cache]] Hit for (-5,0,-1)
+[09:26:29.204] [[Server]] Error handling chunk (-5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.204] [[Cache]] Hit for (5,0,1)
+[09:26:29.208] [[Server]] Error handling chunk (5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.208] [[Cache]] Hit for (1,0,5)
+[09:26:29.211] [[Server]] Error handling chunk (1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.211] [[Cache]] Hit for (5,0,-1)
+[09:26:29.215] [[Server]] Error handling chunk (5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.216] [[Cache]] Hit for (1,0,-5)
+[09:26:29.217] [[Generation]] (-4,0,4): Render verts=18630, Collision verts=18630
+[09:26:29.219] [[Server]] Error handling chunk (1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.219] [[Cache]] Hit for (-5,0,1)
+[09:26:29.222] [[Server]] Error handling chunk (-4,0,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.222] [[Cache]] Hit after lock for (-4,0,4)
+[09:26:29.223] [[Server]] Error handling chunk (-5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.224] [[Cache]] Hit for (-1,0,5)
+[09:26:29.225] [[Server]] Error handling chunk (-4,0,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.225] [[Cache]] Hit for (-4,0,-4)
+[09:26:29.228] [[Server]] Error handling chunk (-4,0,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.228] [[Cache]] Hit for (5,1,-1)
+[09:26:29.228] [[Server]] Error handling chunk (5,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.228] [[Cache]] Hit for (-5,1,-1)
+[09:26:29.228] [[Server]] Error handling chunk (-5,1,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.231] [[Server]] Error handling chunk (-1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.234] [[Cache]] Hit for (-1,-1,5)
+[09:26:29.235] [[Server]] Error handling chunk (-1,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.235] [[Cache]] Hit for (-5,1,1)
+[09:26:29.236] [[Server]] Error handling chunk (-5,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (-1,1,5)
+[09:26:29.236] [[Server]] Error handling chunk (-1,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (1,1,5)
+[09:26:29.236] [[Server]] Error handling chunk (1,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (5,1,1)
+[09:26:29.236] [[Server]] Error handling chunk (5,1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (-1,1,-5)
+[09:26:29.236] [[Server]] Error handling chunk (-1,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (1,1,-5)
+[09:26:29.236] [[Server]] Error handling chunk (1,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (3,-1,-4)
+[09:26:29.236] [[Server]] Error handling chunk (3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.236] [[Cache]] Hit for (0,-1,5)
+[09:26:29.243] [[Server]] Error handling chunk (0,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.243] [[Cache]] Hit for (-2,0,-5)
+[09:26:29.250] [[Server]] Error handling chunk (-2,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.250] [[Cache]] Hit for (-3,-1,-4)
+[09:26:29.250] [[Server]] Error handling chunk (-3,-1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.250] [[Cache]] Hit for (-3,1,-4)
+[09:26:29.250] [[Server]] Error handling chunk (-3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.250] [[Cache]] Hit for (-5,0,-2)
+[09:26:29.253] [[Server]] Error handling chunk (-5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.256] [[Cache]] Hit for (4,-1,-3)
+[09:26:29.256] [[Server]] Error handling chunk (4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.256] [[Cache]] Hit for (4,1,-3)
+[09:26:29.256] [[Server]] Error handling chunk (4,1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.256] [[Cache]] Hit for (0,1,-5)
+[09:26:29.256] [[Server]] Error handling chunk (0,1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.256] [[Cache]] Hit for (0,1,5)
+[09:26:29.257] [[Server]] Error handling chunk (0,1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.257] [[Cache]] Hit for (5,1,0)
+[09:26:29.257] [[Server]] Error handling chunk (5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.257] [[Cache]] Hit for (5,-1,0)
+[09:26:29.278] [[Server]] Error handling chunk (5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.278] [[Cache]] Hit for (2,0,5)
+[09:26:29.285] [[Server]] Error handling chunk (2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.285] [[Cache]] Hit for (-3,1,4)
+[09:26:29.285] [[Server]] Error handling chunk (-3,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.285] [[Cache]] Hit for (-4,1,3)
+[09:26:29.285] [[Server]] Error handling chunk (-4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.285] [[Cache]] Hit for (-4,-1,3)
+[09:26:29.285] [[Server]] Error handling chunk (-4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.285] [[Cache]] Hit for (4,-1,3)
+[09:26:29.285] [[Server]] Error handling chunk (4,-1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.286] [[Cache]] Hit for (5,0,-2)
+[09:26:29.290] [[Server]] Error handling chunk (5,0,-2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.290] [[Cache]] Hit for (4,1,3)
+[09:26:29.290] [[Server]] Error handling chunk (4,1,3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.290] [[Cache]] Hit for (3,1,-4)
+[09:26:29.290] [[Server]] Error handling chunk (3,1,-4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.291] [[Cache]] Hit for (0,-1,-5)
+[09:26:29.291] [[Server]] Error handling chunk (0,-1,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.291] [[Cache]] Hit for (-4,-1,-3)
+[09:26:29.291] [[Server]] Error handling chunk (-4,-1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.291] [[Cache]] Hit for (-5,-1,0)
+[09:26:29.303] [[Server]] Error handling chunk (-5,-1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.303] [[Cache]] Hit for (-5,1,0)
+[09:26:29.303] [[Server]] Error handling chunk (-5,1,0): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.303] [[Cache]] Hit for (-4,1,-3)
+[09:26:29.304] [[Server]] Error handling chunk (-4,1,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.304] [[Cache]] Hit for (3,1,4)
+[09:26:29.304] [[Server]] Error handling chunk (3,1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.304] [[Cache]] Hit for (-2,0,5)
+[09:26:29.307] [[Server]] Error handling chunk (-2,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.307] [[Cache]] Hit for (3,-1,4)
+[09:26:29.311] [[Server]] Error handling chunk (3,-1,4): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.311] [[Cache]] Hit for (-5,0,2)
+[09:26:29.315] [[Server]] Error handling chunk (-5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.315] [[Cache]] Hit for (5,0,2)
+[09:26:29.320] [[Server]] Error handling chunk (5,0,2): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.320] [[Cache]] Hit for (-1,0,-5)
+[09:26:29.322] [[Server]] Error handling chunk (-1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.322] [[Cache]] Hit for (-5,0,-1)
+[09:26:29.327] [[Server]] Error handling chunk (-5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.327] [[Cache]] Hit for (5,0,1)
+[09:26:29.331] [[Server]] Error handling chunk (5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.331] [[Cache]] Hit for (1,0,5)
+[09:26:29.336] [[Server]] Error handling chunk (1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.336] [[Cache]] Hit for (5,0,-1)
+[09:26:29.337] [[Server]] Error handling chunk (5,0,-1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.337] [[Cache]] Hit for (1,0,-5)
+[09:26:29.340] [[Server]] Error handling chunk (1,0,-5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.340] [[Cache]] Hit for (-5,0,1)
+[09:26:29.343] [[Server]] Error handling chunk (-5,0,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.343] [[Cache]] Hit for (-1,0,5)
+[09:26:29.347] [[Generation]] (1,-1,5): Render verts=22779, Collision verts=22779
+[09:26:29.355] [[Server]] Error handling chunk (-1,0,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.359] [[Server]] Error handling chunk (1,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.360] [[Cache]] Hit after lock for (1,-1,5)
+[09:26:29.365] [[Server]] Error handling chunk (1,-1,5): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.703] [[Generation]] (5,-1,1): Render verts=10842, Collision verts=10842
+[09:26:29.705] [[Server]] Error handling chunk (5,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.705] [[Cache]] Hit after lock for (5,-1,1)
+[09:26:29.709] [[Server]] Error handling chunk (5,-1,1): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.709] [[Cache]] Hit for (-4,0,-3)
+[09:26:29.711] [[Server]] Error handling chunk (-4,0,-3): Cannot access a disposed object.
+Object name: 'System.Net.Sockets.NetworkStream'.
+[09:26:29.793] [[Generation]] (-5,-1,1): Render verts=59049, Collision verts=59049
+[09:26:29.794] [[Server]] Error handling chunk (-5,-1,1): Cannot access a disposed object.
+Object name: 'System.Threading.SemaphoreSlim'.
+[09:26:29.800] [[Cache]] Hit after lock for (-2,-1,5)
+[09:26:29.800] [[Server]] Error handling chunk (-2,-1,5): Cannot access a disposed object.
+Object name: 'System.Threading.SemaphoreSlim'.
+[09:26:29.800] [[UDP]] Loop cancelled
+[09:26:29.801] [[Server]] Client disconnected: 127.0.0.1:41896

@@ -1,5 +1,5 @@
 ===== Aetheris Crash Report =====
-Time: 10/8/2025 9:04:36 AM
+Time: 10/8/2025 9:26:29 AM
 Message: One or more errors occurred. (Operation canceled)
 Source: System.Private.CoreLib
 Stack Trace:

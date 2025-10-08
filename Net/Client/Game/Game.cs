@@ -183,20 +183,14 @@ namespace Aetheris
             int y = (int)blockPos.Y;
             int z = (int)blockPos.Z;
 
-            // Send to server
+            // Send to server via TCP (reliable)
             if (client != null)
             {
-                byte[] packet = new byte[13];
-                packet[0] = 6; // BlockBreak
-                BitConverter.TryWriteBytes(packet.AsSpan(1, 4), x);
-                BitConverter.TryWriteBytes(packet.AsSpan(5, 4), y);
-                BitConverter.TryWriteBytes(packet.AsSpan(9, 4), z);
-
-                _ = client.SendUdpAsync(packet);
+                _ = client.SendBlockBreakAsync(x, y, z);
             }
 
             // Client-side prediction: reduce density in the area (SMOOTH REMOVAL)
-            WorldGen.RemoveBlock(x, y, z, radius: 5.0f, strength: 3.0f);
+            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
 
             // Queue regeneration for next frame to ensure modifications complete
             lock (mainThreadLock)

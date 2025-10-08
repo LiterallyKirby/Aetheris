@@ -33,7 +33,11 @@ namespace Aetheris
         private long tickCount = 0;
 
         private readonly ConcurrentDictionary<string, PlayerState> playerStates = new();
-
+        private enum TcpPacketType : byte
+        {
+            ChunkRequest = 0,
+            BlockBreak = 1
+        }
         private class PlayerState
         {
             public string PlayerId { get; set; } = Guid.NewGuid().ToString();
@@ -54,6 +58,7 @@ namespace Aetheris
             private const float BHOP_MAX_SPEED = 25f;       // Allow bunnyhopping up to this speed
             private const float ACCELERATION_TOLERANCE = 1.3f; // Allow 30% over expected accel
             private const float VERTICAL_SPEED_MAX = 60f;   // Max vertical speed (gravity/jumps)
+
 
             // Track movement history for better validation
             private Queue<Vector3> recentPositions = new Queue<Vector3>(5);
@@ -263,56 +268,202 @@ namespace Aetheris
             BlockBreak = 6  // NEW
         }
 
-   private void HandleBlockBreakPacket(byte[] data, IPEndPoint remoteEndPoint)
-{
-    if (data.Length < 13) return;
 
-    int x = BitConverter.ToInt32(data, 1);
-    int y = BitConverter.ToInt32(data, 5);
-    int z = BitConverter.ToInt32(data, 9);
 
-    Console.WriteLine($"[Server] Block broken at ({x}, {y}, {z})");
-
-    // Use density-based removal for smoother terrain modification
-    WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
-
-    // Invalidate affected chunk meshes
-    InvalidateChunksAroundBlock(x, y, z, radius: 1.5f);
-
-    // Broadcast to all clients
-    _ = BroadcastBlockBreak(x, y, z);
-}
-
-private void InvalidateChunksAroundBlock(int x, int y, int z, float radius)
-{
-    int affectRadius = (int)Math.Ceiling(radius);
-    HashSet<ChunkCoord> chunksToInvalidate = new HashSet<ChunkCoord>();
-    
-    for (int dx = -affectRadius; dx <= affectRadius; dx++)
-    {
-        for (int dy = -affectRadius; dy <= affectRadius; dy++)
+        private async Task HandleBlockBreakTcpAsync(NetworkStream stream, CancellationToken token)
         {
-            for (int dz = -affectRadius; dz <= affectRadius; dz++)
+            // Read block coordinates (12 bytes)
+            var buf = new byte[12];
+            int totalRead = 0;
+            while (totalRead < 12)
             {
-                int wx = x + dx;
-                int wy = y + dy;
-                int wz = z + dz;
-                
-                int cx = wx / ServerConfig.CHUNK_SIZE;
-                int cy = wy / ServerConfig.CHUNK_SIZE_Y;
-                int cz = wz / ServerConfig.CHUNK_SIZE;
-                
-                chunksToInvalidate.Add(new ChunkCoord(cx, cy, cz));
+                int bytesRead = await stream.ReadAsync(buf, totalRead, 12 - totalRead, token);
+                if (bytesRead == 0) return;
+                totalRead += bytesRead;
+            }
+
+            int x = BitConverter.ToInt32(buf, 0);
+            int y = BitConverter.ToInt32(buf, 4);
+            int z = BitConverter.ToInt32(buf, 8);
+
+            Console.WriteLine($"[Server] Block broken at ({x}, {y}, {z}) via TCP");
+
+            // Use density-based removal for smoother terrain modification
+            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+
+            // Invalidate affected chunk meshes
+            InvalidateChunksAroundBlock(x, y, z, radius: 1.5f);
+
+            // Broadcast to all clients via TCP
+            await BroadcastBlockBreakTcp(x, y, z);
+        }
+
+        // Store active client streams for broadcasting
+        private readonly ConcurrentDictionary<string, NetworkStream> activeClientStreams = new();
+
+        // Update HandleClientAsync to track streams
+        private async Task HandleClientAsync(TcpClient client, CancellationToken token)
+        {
+            using (client)
+            {
+                var stream = client.GetStream();
+                string clientId = client.Client.RemoteEndPoint?.ToString() ?? Guid.NewGuid().ToString();
+
+                // Register this client's stream
+                activeClientStreams[clientId] = stream;
+                Log($"[[Server]] Client connected: {clientId}");
+
+                try
+                {
+                    while (!token.IsCancellationRequested && client.Connected)
+                    {
+                        // Read packet type first (1 byte)
+                        var packetTypeBuf = new byte[1];
+                        int bytesRead = await stream.ReadAsync(packetTypeBuf, 0, 1, token);
+                        if (bytesRead == 0) break;
+
+                        TcpPacketType packetType = (TcpPacketType)packetTypeBuf[0];
+
+                        switch (packetType)
+                        {
+                            case TcpPacketType.ChunkRequest:
+                                await HandleChunkRequestAsync(stream, clientId, token);
+                                break;
+
+                            case TcpPacketType.BlockBreak:
+                                await HandleBlockBreakTcpAsync(stream, token);
+                                break;
+
+                            default:
+                                Log($"[[Server]] Unknown TCP packet type: {packetType} from {clientId}");
+                                break;
+                        }
+                    }
+                }
+                catch (Exception ex) when (!(ex is OperationCanceledException))
+                {
+                    Log($"[[Server]] Client error ({clientId}): {ex.Message}");
+                }
+                finally
+                {
+                    // Unregister client stream
+                    activeClientStreams.TryRemove(clientId, out _);
+                    Log($"[[Server]] Client disconnected: {clientId}");
+                }
             }
         }
-    }
-    
-    foreach (var coord in chunksToInvalidate)
-    {
-        meshCache.TryRemove(coord, out _);
-        Log($"[Server] Invalidated chunk {coord} due to block break");
-    }
-}
+
+        private async Task BroadcastBlockBreakTcp(int x, int y, int z)
+        {
+            // Packet format:
+            // [0] = PacketType (1 = BlockBreak)
+            // [1-4] = Block X
+            // [5-8] = Block Y
+            // [9-12] = Block Z
+            byte[] packet = new byte[13];
+            packet[0] = (byte)TcpPacketType.BlockBreak;
+
+            BitConverter.TryWriteBytes(packet.AsSpan(1, 4), x);
+            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), y);
+            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), z);
+
+            var deadStreams = new List<string>();
+
+            // Broadcast to all connected clients
+            foreach (var kvp in activeClientStreams)
+            {
+                try
+                {
+                    await kvp.Value.WriteAsync(packet, 0, packet.Length);
+                    await kvp.Value.FlushAsync();
+                }
+                catch (Exception ex)
+                {
+                    Log($"[Server] Error broadcasting block break to {kvp.Key}: {ex.Message}");
+                    deadStreams.Add(kvp.Key);
+                }
+            }
+
+            // Clean up dead streams
+            foreach (var id in deadStreams)
+            {
+                activeClientStreams.TryRemove(id, out _);
+            }
+
+            Log($"[Server] Broadcasted block break at ({x}, {y}, {z}) to {activeClientStreams.Count} clients");
+        }
+
+
+        private async Task HandleChunkRequestAsync(NetworkStream stream, string clientId, CancellationToken token)
+        {
+            // Read chunk coordinates (12 bytes)
+            var coord = await ReadChunkRequestAsync(stream, token);
+            if (!coord.HasValue)
+                return;
+
+            _ = Task.Run(async () =>
+            {
+                var requestSw = Stopwatch.StartNew();
+                double chunkTime = 0, meshTime = 0, sendTime = 0;
+
+                try
+                {
+                    var result = await GetOrGenerateMeshAsync(coord.Value, token);
+                    chunkTime = result.chunkGenTime;
+                    meshTime = result.meshGenTime;
+
+                    var sendSw = Stopwatch.StartNew();
+                    await SendBothMeshesAsync(stream, result.renderMesh, result.collisionMesh, coord.Value, token);
+                    sendTime = sendSw.Elapsed.TotalMilliseconds;
+
+                    lock (perfLock)
+                    {
+                        totalRequests++;
+                        totalChunkGenTime += chunkTime;
+                        totalMeshGenTime += meshTime;
+                        totalSendTime += sendTime;
+                    }
+
+                    double totalTime = requestSw.Elapsed.TotalMilliseconds;
+                    Log($"[[Timing]] Chunk {coord.Value}: Chunk={chunkTime:F2}ms Mesh={meshTime:F2}ms Send={sendTime:F2}ms Total={totalTime:F2}ms");
+                }
+                catch (Exception ex)
+                {
+                    Log($"[[Server]] Error handling chunk {coord.Value}: {ex.Message}");
+                }
+            }, token);
+        }
+
+        private void InvalidateChunksAroundBlock(int x, int y, int z, float radius)
+        {
+            int affectRadius = (int)Math.Ceiling(radius);
+            HashSet<ChunkCoord> chunksToInvalidate = new HashSet<ChunkCoord>();
+
+            for (int dx = -affectRadius; dx <= affectRadius; dx++)
+            {
+                for (int dy = -affectRadius; dy <= affectRadius; dy++)
+                {
+                    for (int dz = -affectRadius; dz <= affectRadius; dz++)
+                    {
+                        int wx = x + dx;
+                        int wy = y + dy;
+                        int wz = z + dz;
+
+                        int cx = wx / ServerConfig.CHUNK_SIZE;
+                        int cy = wy / ServerConfig.CHUNK_SIZE_Y;
+                        int cz = wz / ServerConfig.CHUNK_SIZE;
+
+                        chunksToInvalidate.Add(new ChunkCoord(cx, cy, cz));
+                    }
+                }
+            }
+
+            foreach (var coord in chunksToInvalidate)
+            {
+                meshCache.TryRemove(coord, out _);
+                Log($"[Server] Invalidated chunk {coord} due to block break");
+            }
+        }
 
         // Add this method to Server.cs
 
@@ -601,9 +752,7 @@ private void InvalidateChunksAroundBlock(int x, int y, int z, float radius)
                     case UdpPacketType.KeepAlive:
                         HandleKeepAlivePacket(data, remoteEndPoint);
                         break;
-                    case UdpPacketType.BlockBreak:
-                        HandleBlockBreakPacket(data, remoteEndPoint);
-                        break;
+
                     default:
                         Log($"[[UDP]] Unknown packet type: {packetType}");
                         break;
@@ -717,60 +866,6 @@ private void InvalidateChunksAroundBlock(int x, int y, int z, float radius)
         }
 
 
-
-        private async Task HandleClientAsync(TcpClient client, CancellationToken token)
-        {
-            using (client)
-            {
-                var stream = client.GetStream();
-
-                try
-                {
-                    while (!token.IsCancellationRequested && client.Connected)
-                    {
-                        var coord = await ReadChunkRequestAsync(stream, token);
-                        if (!coord.HasValue)
-                            break;
-
-                        _ = Task.Run(async () =>
-                        {
-                            var requestSw = Stopwatch.StartNew();
-                            double chunkTime = 0, meshTime = 0, sendTime = 0;
-
-                            try
-                            {
-                                var result = await GetOrGenerateMeshAsync(coord.Value, token);
-                                chunkTime = result.chunkGenTime;
-                                meshTime = result.meshGenTime;
-
-                                var sendSw = Stopwatch.StartNew();
-                                await SendBothMeshesAsync(stream, result.renderMesh, result.collisionMesh, coord.Value, token);
-                                sendTime = sendSw.Elapsed.TotalMilliseconds;
-
-                                lock (perfLock)
-                                {
-                                    totalRequests++;
-                                    totalChunkGenTime += chunkTime;
-                                    totalMeshGenTime += meshTime;
-                                    totalSendTime += sendTime;
-                                }
-
-                                double totalTime = requestSw.Elapsed.TotalMilliseconds;
-                                Log($"[[Timing]] Chunk {coord.Value}: Chunk={chunkTime:F2}ms Mesh={meshTime:F2}ms Send={sendTime:F2}ms Total={totalTime:F2}ms");
-                            }
-                            catch (Exception ex)
-                            {
-                                Log($"[[Server]] Error handling chunk {coord.Value}: {ex.Message}");
-                            }
-                        }, token);
-                    }
-                }
-                catch (Exception ex) when (!(ex is OperationCanceledException))
-                {
-                    Log($"[[Server]] Client error: {ex.Message}");
-                }
-            }
-        }
         private async Task<ChunkCoord?> ReadChunkRequestAsync(NetworkStream stream, CancellationToken token)
         {
             var buf = ArrayPool<byte>.Shared.Rent(12);

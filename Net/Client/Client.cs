@@ -6,30 +6,42 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenTK.Mathematics;
-
 using System.Net;
+
 namespace Aetheris
 {
     public class Client
     {
+private readonly ConcurrentQueue<(TcpPacketType type, byte[] data)> tcpPacketQueue = new();
+private readonly Dictionary<int, TaskCompletionSource<byte[]>> pendingChunkRequests = new();
+private int nextRequestId = 0;
         private Game? game;
         private TcpClient? tcp;
         private UdpClient? udp;
-
         private IPEndPoint? serverUdpEndpoint;
-
         private NetworkStream? stream;
+        
         private readonly ConcurrentDictionary<(int, int, int), Aetheris.Chunk> loadedChunks = new();
         private readonly ConcurrentQueue<(int cx, int cy, int cz, float priority)> requestQueue = new();
         private readonly ConcurrentDictionary<(int, int, int), byte> requestedChunks = new();
+        
         private Vector3 lastPlayerChunk = new Vector3(float.MinValue, float.MinValue, float.MinValue);
         private CancellationTokenSource? cts;
         private Task? loaderTask;
         private Task? updateTask;
+        private Task? tcpListenerTask;
+        
         private readonly SemaphoreSlim networkSemaphore = new SemaphoreSlim(1, 1);
         private readonly SemaphoreSlim connectionSemaphore = new SemaphoreSlim(1, 1);
         private int currentRenderDistance;
         private readonly int udpPort = ClientConfig.SERVER_PORT + 1;
+
+        // TCP Packet Types
+        private enum TcpPacketType : byte
+        {
+            ChunkRequest = 0,
+            BlockBreak = 1
+        }
 
         // Auto-tuned parameters
         public int MaxConcurrentLoads { get; set; } = 16;
@@ -50,7 +62,9 @@ namespace Aetheris
 
             loaderTask = Task.Run(() => ChunkLoaderLoopAsync(cts.Token));
             updateTask = Task.Run(() => ChunkUpdateLoopAsync(cts.Token));
+            //tcpListenerTask = Task.Run(() => TcpBroadcastListenerAsync(cts.Token));
             _ = Task.Run(() => ListenForUdpAsync(cts.Token));
+            
             game.RunGame();
             Cleanup();
         }
@@ -103,14 +117,133 @@ namespace Aetheris
             serverUdpEndpoint = new IPEndPoint(IPAddress.Parse(host), udpPort);
             udp.Connect(serverUdpEndpoint);
 
-
-
             stream = tcp.GetStream();
             tcp.NoDelay = true;
             tcp.SendTimeout = 5000;
             tcp.ReceiveTimeout = 5000;
             Console.WriteLine("[Client] Connected to server.");
         }
+
+        // TCP Broadcast Listener - listens for server-initiated messages
+        private async Task TcpBroadcastListenerAsync(CancellationToken token)
+        {
+            Console.WriteLine("[Client] TCP broadcast listener started");
+            
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    if (stream == null || tcp == null || !tcp.Connected)
+                    {
+                        await Task.Delay(100, token);
+                        continue;
+                    }
+
+                    try
+                    {
+                        // Peek to see if data is available without blocking chunk requests
+                        if (tcp.Available > 0)
+                        {
+                            // Read packet type (1 byte)
+                            var packetTypeBuf = new byte[1];
+                            int bytesRead = await stream.ReadAsync(packetTypeBuf, 0, 1, token);
+                            
+                            if (bytesRead == 0)
+                            {
+                                Console.WriteLine("[Client] Server closed connection");
+                                break;
+                            }
+
+                            TcpPacketType packetType = (TcpPacketType)packetTypeBuf[0];
+
+                            switch (packetType)
+                            {
+                                case TcpPacketType.BlockBreak:
+                                    await HandleBlockBreakBroadcastAsync(token);
+                                    break;
+
+                                default:
+                                    Console.WriteLine($"[Client] Unknown TCP broadcast packet type: {packetType}");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            // No data available, small delay
+                            await Task.Delay(10, token);
+                        }
+                    }
+                    catch (Exception ex) when (!(ex is OperationCanceledException))
+                    {
+                        Console.WriteLine($"[Client] TCP listener error: {ex.Message}");
+                        await Task.Delay(1000, token);
+                    }
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("[Client] TCP broadcast listener cancelled");
+            }
+        }
+
+        private async Task HandleBlockBreakBroadcastAsync(CancellationToken token)
+        {
+            // Read block coordinates (12 bytes)
+            var buf = new byte[12];
+            await ReadFullAsync(stream!, buf, 0, 12, token);
+
+            int x = BitConverter.ToInt32(buf, 0);
+            int y = BitConverter.ToInt32(buf, 4);
+            int z = BitConverter.ToInt32(buf, 8);
+
+            Console.WriteLine($"[Client] Received block break broadcast at ({x}, {y}, {z})");
+
+            // Update local density field with smooth removal
+            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+
+            // Queue regeneration on the game's main thread
+            var blockPos = new Vector3(x, y, z);
+            _ = Task.Run(() =>
+            {
+                Thread.Sleep(10);
+                game?.RegenerateMeshForBlock(blockPos);
+            });
+        }
+
+        // Send block break to server via TCP
+        public async Task SendBlockBreakAsync(int x, int y, int z)
+        {
+            if (stream == null || tcp == null || !tcp.Connected)
+            {
+                Console.WriteLine("[Client] Cannot send block break - not connected");
+                return;
+            }
+
+            await networkSemaphore.WaitAsync();
+            try
+            {
+                byte[] packet = new byte[13];
+                packet[0] = (byte)TcpPacketType.BlockBreak;
+
+                BitConverter.TryWriteBytes(packet.AsSpan(1, 4), x);
+                BitConverter.TryWriteBytes(packet.AsSpan(5, 4), y);
+                BitConverter.TryWriteBytes(packet.AsSpan(9, 4), z);
+
+                await stream.WriteAsync(packet, 0, packet.Length);
+                await stream.FlushAsync();
+
+                Console.WriteLine($"[Client] Sent block break at ({x}, {y}, {z}) via TCP");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Client] Error sending block break: {ex.Message}");
+            }
+            finally
+            {
+                networkSemaphore.Release();
+            }
+        }
+
         private void HandleUdpPacket(byte[] data)
         {
             if (data.Length < 1) return;
@@ -130,37 +263,11 @@ namespace Aetheris
                 case 5: // PositionAck - server correction
                     HandleServerPositionUpdate(data);
                     break;
-                case 6: // BlockBreak broadcast from server
-                    HandleRemoteBlockBreak(data);
-                    break;
+
                 default:
                     Console.WriteLine($"[Client] Unknown UDP packet type: {packetType}");
                     break;
             }
-        }
-
-        // In Client.cs
-         private void HandleRemoteBlockBreak(byte[] data)
-        {
-            if (data.Length < 13) return;
-
-            int x = BitConverter.ToInt32(data, 1);
-            int y = BitConverter.ToInt32(data, 5);
-            int z = BitConverter.ToInt32(data, 9);
-
-            Console.WriteLine($"[Client] Remote block break at ({x}, {y}, {z})");
-
-            // Update local density field with smooth removal
-            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
-
-            // Queue regeneration on the game's main thread
-            var blockPos = new Vector3(x, y, z);
-            _ = System.Threading.Tasks.Task.Run(() =>
-            {
-                // Small delay to ensure modifications complete
-                System.Threading.Thread.Sleep(10);
-                game?.RegenerateMeshForBlock(blockPos);
-            });
         }
 
         private void HandleServerPositionUpdate(byte[] data)
@@ -192,11 +299,8 @@ namespace Aetheris
         {
             if (data.Length < 38) return;
 
-            // Extract player ID - convert 4 bytes to a proper hex string for uniqueness
             uint playerIdHash = BitConverter.ToUInt32(data, 1);
-            string playerId = playerIdHash.ToString("X8"); // Use hex format for better uniqueness
-
-            Console.WriteLine($"[Client] Received remote player update: ID={playerId}");
+            string playerId = playerIdHash.ToString("X8");
 
             var update = new ServerPlayerUpdate
             {
@@ -218,7 +322,6 @@ namespace Aetheris
             game?.NetworkController?.OnRemotePlayerUpdate(playerId, update);
         }
 
-
         public async Task SendUdpAsync(byte[] packet)
         {
             if (udp != null && serverUdpEndpoint != null)
@@ -233,7 +336,6 @@ namespace Aetheris
                 }
             }
         }
-
 
         private async Task ListenForUdpAsync(CancellationToken token)
         {
@@ -256,12 +358,9 @@ namespace Aetheris
             }
         }
 
-
-
-
         private async Task ChunkUpdateLoopAsync(CancellationToken token)
         {
-            await Task.Delay(500, token); // Wait for game init
+            await Task.Delay(500, token);
             Console.WriteLine("[Client] Chunk update loop starting...");
 
             while (!token.IsCancellationRequested)
@@ -324,7 +423,6 @@ namespace Aetheris
                         {
                             float distance = MathF.Sqrt(dx * dx + dy * dy * 4 + dz * dz);
 
-                            // Give priority to chunks directly under/around player
                             if (Math.Abs(dx) <= 1 && Math.Abs(dz) <= 1 && dy <= 0)
                             {
                                 distance *= 0.01f;
@@ -425,26 +523,14 @@ namespace Aetheris
             await Task.WhenAll(activeTasks);
         }
 
-
         private async Task LoadChunkAsync((int cx, int cy, int cz, float priority) chunk, CancellationToken token)
         {
             try
             {
-
-
                 var (renderMesh, collisionMesh) = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
 
-
-
-
-                // Mark chunk as loaded
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = new Aetheris.Chunk();
-
-                // Enqueue render mesh for GPU
                 game?.Renderer.EnqueueMeshForChunk(chunk.cx, chunk.cy, chunk.cz, renderMesh);
-
-                // TODO: Add collision mesh to physics world here
-                // game?.PhysicsWorld.AddChunkCollider(chunk.cx, chunk.cy, chunk.cz, collisionMesh);
             }
             catch (Exception ex)
             {
@@ -453,11 +539,9 @@ namespace Aetheris
             }
         }
 
-
         private async Task<(float[] renderMesh, CollisionMesh collisionMesh)> RequestChunkMeshAsync(
-         int cx, int cy, int cz, CancellationToken token)
+            int cx, int cy, int cz, CancellationToken token)
         {
-            // Ensure connection
             if (stream == null || tcp == null || !tcp.Connected)
             {
                 await connectionSemaphore.WaitAsync(token);
@@ -479,7 +563,6 @@ namespace Aetheris
             {
                 await SendChunkRequestAsync(cx, cy, cz, token);
 
-                // Receive both meshes
                 float[] renderMesh = await ReceiveRenderMeshAsync(token);
                 CollisionMesh collisionMesh = await ReceiveCollisionMeshAsync(token);
 
@@ -489,6 +572,18 @@ namespace Aetheris
             {
                 networkSemaphore.Release();
             }
+        }
+
+        private async Task SendChunkRequestAsync(int cx, int cy, int cz, CancellationToken token)
+        {
+            var req = new byte[13];
+            req[0] = (byte)TcpPacketType.ChunkRequest;
+            BitConverter.TryWriteBytes(req.AsSpan(1, 4), cx);
+            BitConverter.TryWriteBytes(req.AsSpan(5, 4), cy);
+            BitConverter.TryWriteBytes(req.AsSpan(9, 4), cz);
+
+            await stream!.WriteAsync(req, token);
+            await stream.FlushAsync(token);
         }
 
         private async Task<float[]> ReceiveRenderMeshAsync(CancellationToken token)
@@ -518,8 +613,6 @@ namespace Aetheris
 
             return floats;
         }
-
-
 
         private async Task<CollisionMesh> ReceiveCollisionMeshAsync(CancellationToken token)
         {
@@ -572,46 +665,6 @@ namespace Aetheris
             return new CollisionMesh { Vertices = vertices, Indices = indices };
         }
 
-        private async Task SendChunkRequestAsync(int cx, int cy, int cz, CancellationToken token)
-        {
-            var req = new byte[12];
-            BitConverter.TryWriteBytes(req.AsSpan(0, 4), cx);
-            BitConverter.TryWriteBytes(req.AsSpan(4, 4), cy);
-            BitConverter.TryWriteBytes(req.AsSpan(8, 4), cz);
-
-            await stream!.WriteAsync(req, token);
-            await stream.FlushAsync(token);
-        }
-
-        private async Task<float[]> ReceiveMeshPayloadAsync(CancellationToken token)
-        {
-            var lenBuf = new byte[4];
-            await ReadFullAsync(stream!, lenBuf, 0, 4, token);
-            int payloadLen = BitConverter.ToInt32(lenBuf, 0);
-
-            if (payloadLen < 0 || payloadLen > 100_000_000)
-                throw new Exception($"Invalid payload length: {payloadLen}");
-
-            if (payloadLen == 0)
-            {
-                Console.WriteLine("[Client] Received empty mesh");
-                return Array.Empty<float>();
-            }
-
-            var payload = new byte[payloadLen];
-            await ReadFullAsync(stream!, payload, 0, payloadLen, token);
-
-            // Render mesh has vertex count header
-            int vertexCount = BitConverter.ToInt32(payload, 0);
-            const int floatsPerVertex = 7;
-            int floatsCount = vertexCount * floatsPerVertex;
-
-            var floats = new float[floatsCount];
-            Buffer.BlockCopy(payload, 4, floats, 0, floatsCount * sizeof(float));
-
-            return floats;
-        }
-
         private static async Task ReadFullAsync(NetworkStream stream, byte[] buf, int off, int count, CancellationToken token)
         {
             int read = 0;
@@ -631,9 +684,11 @@ namespace Aetheris
 
             loaderTask?.Wait(TimeSpan.FromSeconds(2));
             updateTask?.Wait(TimeSpan.FromSeconds(1));
+            tcpListenerTask?.Wait(TimeSpan.FromSeconds(1));
 
             stream?.Dispose();
             tcp?.Close();
+            udp?.Close();
             networkSemaphore?.Dispose();
             connectionSemaphore?.Dispose();
             cts?.Dispose();
