@@ -1,0 +1,14 @@
+[00:14:54.043] [[Server]] Log file created: server_log_20251008_001454.txt
+[00:14:54.046] [[Server]] Initializing world generation...
+[00:14:54.056] [[Server]] UDP listening on port 42070
+[00:14:54.066] [[Server]] Listening on port 42069 @ 60 TPS
+[00:14:54.066] [[Server]] Performance timing enabled - waiting for connections...
+[00:14:54.085] [[Server]] Tick 0 | Cache: 0/20000
+[00:14:59.097] [[Server]] Tick 300 | Cache: 0/20000
+[00:15:04.089] [[Server]] Tick 600 | Cache: 0/20000
+[00:15:09.099] [[Server]] Tick 900 | Cache: 0/20000
+[00:15:14.098] [[Server]] Tick 1200 | Cache: 0/20000
+[00:15:19.093] [[Server]] Tick 1500 | Cache: 0/20000
+[00:15:24.095] [[Server]] Tick 1800 | Cache: 0/20000
+[00:15:29.093] [[Server]] Tick 2100 | Cache: 0/20000
+[00:15:31.886] [[UDP]] Loop cancelled

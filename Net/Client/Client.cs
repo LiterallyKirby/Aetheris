@@ -130,11 +130,32 @@ namespace Aetheris
                 case 5: // PositionAck - server correction
                     HandleServerPositionUpdate(data);
                     break;
-
+                case 6: // BlockBreak broadcast from server
+                    HandleRemoteBlockBreak(data);
+                    break;
                 default:
                     Console.WriteLine($"[Client] Unknown UDP packet type: {packetType}");
                     break;
             }
+        }
+
+        // In Client.cs
+        private void HandleRemoteBlockBreak(byte[] data)
+        {
+            if (data.Length < 13) return;
+
+            int x = BitConverter.ToInt32(data, 1);
+            int y = BitConverter.ToInt32(data, 5);
+            int z = BitConverter.ToInt32(data, 9);
+
+            Console.WriteLine($"[Client] Remote block break at ({x}, {y}, {z})");
+
+            // Update local density field with smooth removal
+            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+
+            // Regenerate affected chunks
+            var blockPos = new Vector3(x, y, z);
+            game?.RegenerateMeshForBlock(blockPos);
         }
 
         private void HandleServerPositionUpdate(byte[] data)
@@ -404,12 +425,12 @@ namespace Aetheris
         {
             try
             {
-                Console.WriteLine($"[Client] Requesting chunk ({chunk.cx},{chunk.cy},{chunk.cz})");
+
 
                 var (renderMesh, collisionMesh) = await RequestChunkMeshAsync(chunk.cx, chunk.cy, chunk.cz, token);
 
-                Console.WriteLine($"[Client] Received chunk ({chunk.cx},{chunk.cy},{chunk.cz}): " +
-                                 $"{renderMesh.Length} render floats, {collisionMesh.Vertices.Count} collision verts");
+
+
 
                 // Mark chunk as loaded
                 loadedChunks[(chunk.cx, chunk.cy, chunk.cz)] = new Aetheris.Chunk();

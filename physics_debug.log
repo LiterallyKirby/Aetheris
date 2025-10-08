@@ -1,818 +1,213 @@
-﻿[2025-10-07 23:23:49.327] [Logging] Started logging to 'physics_debug.log'
-[2025-10-07 23:23:49.327] [Game] WorldGen initialized
-[2025-10-07 23:23:49.327] [Game] ChunkManager initialized with collision support
-[2025-10-07 23:23:49.371] [PSX Effects] Shaders compiled successfully
-[2025-10-07 23:23:49.372] [Game] Renderer initialized
-[2025-10-07 23:23:49.384] [EntityRenderer] Generated player mesh: 480 vertices, VAO=1, VBO=1
-[2025-10-07 23:23:49.384] [Game] EntityRenderer initialized
-[2025-10-07 23:23:49.398] [Player] Spawned at (16, 37.1, 16)
-[2025-10-07 23:23:49.398] [Game] Player initialized at position: (16, 37.1, 16)
-[2025-10-07 23:23:49.399] [Game] Network controller initialized
-[2025-10-07 23:23:49.403] [Game] Found atlas at: textures/atlas.png
-[2025-10-07 23:23:49.503] [AtlasManager] Loaded image: textures/atlas.png (256x256)
-[2025-10-07 23:23:49.503] [AtlasManager] Using preferred tile size: 64
-[2025-10-07 23:23:49.503] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
-[2025-10-07 23:23:49.508] [AtlasManager] Successfully uploaded to GL texture 1
-[2025-10-07 23:23:49.508] [AtlasManager] Verified texture dimensions: 256x256
-[2025-10-07 23:23:49.511] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
-[2025-10-07 23:23:49.511] [Game] Loaded 0 chunks
-[2025-10-07 23:23:49.901] [Client] Chunk update loop starting...
-[2025-10-07 23:23:50.086] [Client] Requesting chunk (0,0,0)
-[2025-10-07 23:23:50.101] [Client] Requesting chunk (1,0,0)
-[2025-10-07 23:23:50.102] [Client] Requesting chunk (0,0,1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (0,0,-1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (-1,0,0)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (1,0,1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (1,0,-1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (-1,0,1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (-1,0,-1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (0,-1,0)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (1,-1,0)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (0,-1,1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (-1,-1,0)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (0,-1,-1)
-[2025-10-07 23:23:50.103] [Client] Requesting chunk (1,-1,-1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (-1,-1,-1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (-1,-1,1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (1,-1,1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (-2,0,0)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (0,0,-2)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (0,1,0)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (0,0,2)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (2,0,0)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (1,0,-2)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (-2,0,1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (-2,0,-1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (0,1,-1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (0,1,1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (1,0,2)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (2,0,1)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (1,1,0)
-[2025-10-07 23:23:50.104] [Client] Requesting chunk (2,0,-1)
-[2025-10-07 23:23:50.353] [Client] Received chunk (0,0,0): 115542 render floats, 16506 collision verts
-[2025-10-07 23:23:50.356] [Client] Requesting chunk (-1,1,0)
-[2025-10-07 23:23:50.395] [Renderer] Chunk (0,0,0)
-[2025-10-07 23:23:50.395] [Renderer]   Expected world range: (0-32, 0-96, 0-32)
-[2025-10-07 23:23:50.396] [Renderer]   First vertex at: (1.0, 0.8, -0.0)
-[2025-10-07 23:23:50.398] [Renderer]   Vertex in expected range: False
-[2025-10-07 23:23:50.398] [Renderer] Chunk (0,0,0) BEFORE conversion:
-[2025-10-07 23:23:50.398]   Length: 115542, vertices: 16506
-[2025-10-07 23:23:50.398]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
-[2025-10-07 23:23:50.424] [Renderer] Chunk (0,0,0) AFTER conversion:
-[2025-10-07 23:23:50.425]   Length: 132048, vertices: 16506
-[2025-10-07 23:23:50.425]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0328,0.2480)
-[2025-10-07 23:23:50.428] [Renderer] Uploaded chunk (0,0,0): VAO=2, VBO=2, 16506 vertices
-[2025-10-07 23:23:50.571] [Client] Received chunk (1,0,0): 93261 render floats, 13323 collision verts
-[2025-10-07 23:23:50.571] [Client] Requesting chunk (-1,0,-2)
-[2025-10-07 23:23:50.573] [Renderer] Chunk (1,0,0)
-[2025-10-07 23:23:50.573] [Renderer]   Expected world range: (32-64, 0-96, 0-32)
-[2025-10-07 23:23:50.573] [Renderer]   First vertex at: (33.0, 0.9, 0.0)
-[2025-10-07 23:23:50.573] [Renderer]   Vertex in expected range: True
-[2025-10-07 23:23:50.573] [Renderer] Chunk (1,0,0) BEFORE conversion:
-[2025-10-07 23:23:50.573]   Length: 93261, vertices: 13323
-[2025-10-07 23:23:50.573]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), blockType=1
-[2025-10-07 23:23:50.577] [Renderer] Chunk (1,0,0) AFTER conversion:
-[2025-10-07 23:23:50.577]   Length: 106584, vertices: 13323
-[2025-10-07 23:23:50.577]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), uv=(0.0327,0.0020)
-[2025-10-07 23:23:50.578] [Renderer] Uploaded chunk (1,0,0): VAO=3, VBO=3, 13323 vertices
-[2025-10-07 23:23:50.859] [Client] Received chunk (0,0,1): 97965 render floats, 13995 collision verts
-[2025-10-07 23:23:50.860] [Client] Requesting chunk (-1,0,2)
-[2025-10-07 23:23:50.860] [Renderer] Chunk (0,0,1)
-[2025-10-07 23:23:50.860] [Renderer]   Expected world range: (0-32, 0-96, 32-64)
-[2025-10-07 23:23:50.860] [Renderer]   First vertex at: (1.0, 0.8, 32.0)
-[2025-10-07 23:23:50.860] [Renderer]   Vertex in expected range: False
-[2025-10-07 23:23:50.860] [Renderer] Chunk (0,0,1) BEFORE conversion:
-[2025-10-07 23:23:50.860]   Length: 97965, vertices: 13995
-[2025-10-07 23:23:50.860]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), blockType=1
-[2025-10-07 23:23:50.866] [Renderer] Chunk (0,0,1) AFTER conversion:
-[2025-10-07 23:23:50.866]   Length: 111960, vertices: 13995
-[2025-10-07 23:23:50.866]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), uv=(0.0327,0.2480)
-[2025-10-07 23:23:51.075] [Client] Received chunk (0,0,-1): 92001 render floats, 13143 collision verts
-[2025-10-07 23:23:51.075] [Client] Requesting chunk (1,1,1)
-[2025-10-07 23:23:51.327] [Client] Received chunk (-1,0,0): 127302 render floats, 18186 collision verts
-[2025-10-07 23:23:51.327] [Client] Requesting chunk (-1,1,-1)
-[2025-10-07 23:23:51.346] [Prediction] Error: 15.0cm - reconciling
-[2025-10-07 23:23:51.434] [Client] UDP recv error: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+﻿[2025-10-08 01:04:48.890] [Logging] Started logging to 'physics_debug.log'
+[2025-10-08 01:04:48.890] [Game] WorldGen initialized
+[2025-10-08 01:04:48.891] [Game] ChunkManager initialized with collision support
+[2025-10-08 01:04:48.899] [PSX Effects] Shaders compiled successfully
+[2025-10-08 01:04:48.899] [Game] Renderer initialized
+[2025-10-08 01:04:48.910] [EntityRenderer] Generated player mesh: 480 vertices, VAO=1, VBO=1
+[2025-10-08 01:04:48.910] [Game] EntityRenderer initialized
+[2025-10-08 01:04:48.925] [Player] Spawned at (16, 37.1, 16)
+[2025-10-08 01:04:48.925] [Game] Player initialized at position: (16, 37.1, 16)
+[2025-10-08 01:04:48.926] [Game] Network controller initialized
+[2025-10-08 01:04:48.931] [Game] Found atlas at: textures/atlas.png
+[2025-10-08 01:04:48.988] [AtlasManager] Loaded image: textures/atlas.png (256x256)
+[2025-10-08 01:04:48.989] [AtlasManager] Using preferred tile size: 64
+[2025-10-08 01:04:48.989] [AtlasManager] Detected: tileSize=64, tilesPerRow=4, tilesPerCol=4
+[2025-10-08 01:04:48.994] [AtlasManager] Successfully uploaded to GL texture 1
+[2025-10-08 01:04:48.995] [AtlasManager] Verified texture dimensions: 256x256
+[2025-10-08 01:04:48.996] [Renderer] AtlasManager loaded atlas: textures/atlas.png (GL id 1)
+[2025-10-08 01:04:48.997] [Game] Loaded 0 chunks
+[2025-10-08 01:04:49.429] [Client] Chunk update loop starting...
+[2025-10-08 01:04:49.980] [Renderer] Chunk (0,0,0)
+[2025-10-08 01:04:49.980] [Renderer]   Expected world range: (0-32, 0-96, 0-32)
+[2025-10-08 01:04:49.981] [Renderer]   First vertex at: (1.0, 0.8, -0.0)
+[2025-10-08 01:04:49.981] [Renderer]   Vertex in expected range: False
+[2025-10-08 01:04:49.981] [Renderer] Chunk (0,0,0) BEFORE conversion:
+[2025-10-08 01:04:49.981]   Length: 115542, vertices: 16506
+[2025-10-08 01:04:49.981]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), blockType=1
+[2025-10-08 01:04:50.012] [Renderer] Chunk (0,0,0) AFTER conversion:
+[2025-10-08 01:04:50.012]   Length: 132048, vertices: 16506
+[2025-10-08 01:04:50.012]   First vertex: pos=(1.00,0.83,-0.00), normal=(0.00,-1.00,-0.00), uv=(0.0328,0.2480)
+[2025-10-08 01:04:50.016] [Renderer] Uploaded chunk (0,0,0): VAO=2, VBO=2, 16506 vertices
+[2025-10-08 01:04:50.159] [Renderer] Chunk (1,0,0)
+[2025-10-08 01:04:50.160] [Renderer]   Expected world range: (32-64, 0-96, 0-32)
+[2025-10-08 01:04:50.160] [Renderer]   First vertex at: (33.0, 0.9, 0.0)
+[2025-10-08 01:04:50.160] [Renderer]   Vertex in expected range: True
+[2025-10-08 01:04:50.160] [Renderer] Chunk (1,0,0) BEFORE conversion:
+[2025-10-08 01:04:50.160]   Length: 93261, vertices: 13323
+[2025-10-08 01:04:50.160]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), blockType=1
+[2025-10-08 01:04:50.166] [Renderer] Chunk (1,0,0) AFTER conversion:
+[2025-10-08 01:04:50.166]   Length: 106584, vertices: 13323
+[2025-10-08 01:04:50.166]   First vertex: pos=(33.00,0.86,0.00), normal=(-0.03,-1.00,0.02), uv=(0.0327,0.0020)
+[2025-10-08 01:04:50.166] [Renderer] Uploaded chunk (1,0,0): VAO=3, VBO=3, 13323 vertices
+[2025-10-08 01:04:50.457] [Renderer] Chunk (0,0,1)
+[2025-10-08 01:04:50.457] [Renderer]   Expected world range: (0-32, 0-96, 32-64)
+[2025-10-08 01:04:50.458] [Renderer]   First vertex at: (1.0, 0.8, 32.0)
+[2025-10-08 01:04:50.458] [Renderer]   Vertex in expected range: False
+[2025-10-08 01:04:50.458] [Renderer] Chunk (0,0,1) BEFORE conversion:
+[2025-10-08 01:04:50.458]   Length: 97965, vertices: 13995
+[2025-10-08 01:04:50.458]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), blockType=1
+[2025-10-08 01:04:50.465] [Renderer] Chunk (0,0,1) AFTER conversion:
+[2025-10-08 01:04:50.465]   Length: 111960, vertices: 13995
+[2025-10-08 01:04:50.465]   First vertex: pos=(1.00,0.76,32.00), normal=(-0.04,-1.00,-0.02), uv=(0.0327,0.2480)
+[2025-10-08 01:04:52.449] [Client] Mined 15 at (15, 35, 15)
+[2025-10-08 01:04:52.450] [Server] Block broken at (15, 35, 15)
+[2025-10-08 01:04:52.456] [Client] Regenerating 1 chunks affected by mining at (15, 35, 15)
+[2025-10-08 01:04:52.460] [Client] Remote block break at (15, 35, 15)
+[2025-10-08 01:04:52.460] [Client] Regenerating 1 chunks affected by mining at (15, 35, 15)
+[2025-10-08 01:04:52.905] [Client] Regenerated chunk (0, 0, 0) - 16506 vertices
+[2025-10-08 01:04:52.921] [Client] Regenerated chunk (0, 0, 0) - 16506 vertices
+[2025-10-08 01:04:53.964] [Client] Mined 15 at (15, 35, 15)
+[2025-10-08 01:04:53.964] [Client] Regenerating 1 chunks affected by mining at (15, 35, 15)
+[2025-10-08 01:04:53.981] [Server] Block broken at (15, 35, 15)
+[2025-10-08 01:04:53.981] [Client] Remote block break at (15, 35, 15)
+[2025-10-08 01:04:53.982] [Client] Regenerating 1 chunks affected by mining at (15, 35, 15)
+[2025-10-08 01:04:54.224] [Client] Regenerated chunk (0, 0, 0) - 16506 vertices
+[2025-10-08 01:04:54.240] [Client] Regenerated chunk (0, 0, 0) - 16506 vertices
+[2025-10-08 01:04:55.633] [Prediction] Error: 74.2cm - reconciling
+[2025-10-08 01:04:55.643] [Prediction] Replayed 12 inputs
+[2025-10-08 01:04:55.643] [Prediction] Error: 99.8cm - reconciling
+[2025-10-08 01:04:55.645] [Prediction] Replayed 12 inputs
+[2025-10-08 01:04:55.646] [Prediction] Error: 98.1cm - reconciling
+[2025-10-08 01:04:55.647] [Prediction] Replayed 9 inputs
+[2025-10-08 01:04:55.647] [Prediction] Error: 74.3cm - reconciling
+[2025-10-08 01:04:55.648] [Prediction] Replayed 6 inputs
+[2025-10-08 01:04:55.648] [Prediction] Error: 38.6cm - reconciling
+[2025-10-08 01:04:55.648] [Prediction] Replayed 3 inputs
+[2025-10-08 01:04:55.649] [Prediction] Error: 39.3cm - reconciling
+[2025-10-08 01:04:55.741] [Prediction] Error: 116.6cm - reconciling
+[2025-10-08 01:04:55.743] [Prediction] Replayed 7 inputs
+[2025-10-08 01:04:55.743] [Prediction] Error: 75.3cm - reconciling
+[2025-10-08 01:04:55.744] [Prediction] Replayed 4 inputs
+[2025-10-08 01:04:55.744] [Prediction] Error: 24.6cm - reconciling
+[2025-10-08 01:04:55.744] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:55.753] [Prediction] Error: 15.5cm - reconciling
+[2025-10-08 01:04:55.754] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:55.854] [Prediction] Error: 84.8cm - reconciling
+[2025-10-08 01:04:55.855] [Prediction] Replayed 7 inputs
+[2025-10-08 01:04:55.856] [Prediction] Error: 44.8cm - reconciling
+[2025-10-08 01:04:55.856] [Prediction] Replayed 4 inputs
+[2025-10-08 01:04:55.856] [Prediction] Error: 12.1cm - reconciling
+[2025-10-08 01:04:55.857] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:55.859] [AntiCheat] Player 0885ce36-7859-450e-bc9e-c0f6f34516c3 validation failed: excessive horizontal speed: 75.02 m/s (max 25)
+[2025-10-08 01:04:55.859]   Position: <20.32093, 34.889503, 15.350794> -> <20.668186, 34.889503, 15.29862>
+[2025-10-08 01:04:55.859]   Speed: H=75.02 V=0.00 Total=75.02
+[2025-10-08 01:04:55.859]   Violations: 5/5
+[2025-10-08 01:04:55.860] [Prediction] Error: 35.1cm - reconciling
+[2025-10-08 01:04:55.945] [Prediction] Error: 39.2cm - reconciling
+[2025-10-08 01:04:55.945] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.123] [Prediction] Error: 51.2cm - reconciling
+[2025-10-08 01:04:56.124] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.185] [Prediction] Error: 11.9cm - reconciling
+[2025-10-08 01:04:56.185] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.221] [Prediction] Error: 51.5cm - reconciling
+[2025-10-08 01:04:56.222] [Prediction] Replayed 4 inputs
+[2025-10-08 01:04:56.224] [Prediction] Error: 12.9cm - reconciling
+[2025-10-08 01:04:56.224] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.260] [Prediction] Error: 10.6cm - reconciling
+[2025-10-08 01:04:56.261] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.310] [Prediction] Error: 14.8cm - reconciling
+[2025-10-08 01:04:56.310] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.347] [Prediction] Error: 35.6cm - reconciling
+[2025-10-08 01:04:56.349] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.469] [Prediction] Error: 24.5cm - reconciling
+[2025-10-08 01:04:56.470] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.494] [Prediction] Error: 14.7cm - reconciling
+[2025-10-08 01:04:56.495] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.611] [Prediction] Error: 90.6cm - reconciling
+[2025-10-08 01:04:56.613] [Prediction] Replayed 8 inputs
+[2025-10-08 01:04:56.614] [Prediction] Error: 54.2cm - reconciling
+[2025-10-08 01:04:56.615] [Prediction] Replayed 5 inputs
+[2025-10-08 01:04:56.615] [Prediction] Error: 21.6cm - reconciling
+[2025-10-08 01:04:56.616] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.714] [Prediction] Error: 76.2cm - reconciling
+[2025-10-08 01:04:56.715] [Prediction] Replayed 4 inputs
+[2025-10-08 01:04:56.715] [Prediction] Error: 37.9cm - reconciling
+[2025-10-08 01:04:56.716] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.829] [Prediction] Error: 20.9cm - reconciling
+[2025-10-08 01:04:56.829] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:56.871] [Prediction] Error: 50.2cm - reconciling
+[2025-10-08 01:04:56.872] [Prediction] Replayed 5 inputs
+[2025-10-08 01:04:56.924] [Prediction] Error: 10.7cm - reconciling
+[2025-10-08 01:04:56.924] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:56.958] [Prediction] Error: 10.6cm - reconciling
+[2025-10-08 01:04:56.959] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:57.080] [Prediction] Error: 16.5cm - reconciling
+[2025-10-08 01:04:57.081] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:58.582] [Prediction] Error: 31.7cm - reconciling
+[2025-10-08 01:04:58.584] [Prediction] Replayed 12 inputs
+[2025-10-08 01:04:58.585] [Prediction] Error: 53.1cm - reconciling
+[2025-10-08 01:04:58.588] [Prediction] Replayed 11 inputs
+[2025-10-08 01:04:58.588] [Prediction] Error: 49.7cm - reconciling
+[2025-10-08 01:04:58.590] [Prediction] Replayed 8 inputs
+[2025-10-08 01:04:58.591] [Prediction] Error: 34.9cm - reconciling
+[2025-10-08 01:04:58.592] [Prediction] Replayed 4 inputs
+[2025-10-08 01:04:58.592] [Prediction] Error: 47.6cm - reconciling
+[2025-10-08 01:04:58.592] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:58.683] [Prediction] Error: 123.4cm - reconciling
+[2025-10-08 01:04:58.686] [Prediction] Replayed 9 inputs
+[2025-10-08 01:04:58.686] [Prediction] Error: 81.2cm - reconciling
+[2025-10-08 01:04:58.687] [Prediction] Replayed 5 inputs
+[2025-10-08 01:04:58.687] [Prediction] Error: 41.5cm - reconciling
+[2025-10-08 01:04:58.688] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:58.789] [Prediction] Error: 32.1cm - reconciling
+[2025-10-08 01:04:58.790] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:58.817] [Prediction] Error: 35.3cm - reconciling
+[2025-10-08 01:04:58.820] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:58.941] [Prediction] Error: 60.9cm - reconciling
+[2025-10-08 01:04:58.942] [Prediction] Replayed 3 inputs
+[2025-10-08 01:04:58.942] [Prediction] Error: 20.3cm - reconciling
+[2025-10-08 01:04:58.942] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:58.956] [Prediction] Error: 21.2cm - reconciling
+[2025-10-08 01:04:58.958] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.030] [Prediction] Error: 10.4cm - reconciling
+[2025-10-08 01:04:59.030] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.046] [Prediction] Error: 11.0cm - reconciling
+[2025-10-08 01:04:59.047] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.077] [Prediction] Error: 21.4cm - reconciling
+[2025-10-08 01:04:59.077] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.106] [Prediction] Error: 12.1cm - reconciling
+[2025-10-08 01:04:59.106] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.155] [Prediction] Error: 21.1cm - reconciling
+[2025-10-08 01:04:59.155] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.156] [Prediction] Error: 18.7cm - reconciling
+[2025-10-08 01:04:59.157] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.210] [Prediction] Error: 10.2cm - reconciling
+[2025-10-08 01:04:59.210] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.289] [Prediction] Error: 104.0cm - reconciling
+[2025-10-08 01:04:59.291] [Prediction] Replayed 9 inputs
+[2025-10-08 01:04:59.291] [Prediction] Error: 71.3cm - reconciling
+[2025-10-08 01:04:59.362] [Client] UDP recv error: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
    at System.Collections.Generic.Queue`1.Enumerator.MoveNext()
    at Aetheris.PlayerNetworkController.ReconcilePosition(ServerPlayerUpdate update) in /home/kirby/Programming/Aetheris/Net/Shared/PlayerNetworkController.cs:line 157
    at Aetheris.PlayerNetworkController.OnServerUpdate(ServerPlayerUpdate update) in /home/kirby/Programming/Aetheris/Net/Shared/PlayerNetworkController.cs:line 138
-   at Aetheris.Client.HandleServerPositionUpdate(Byte[] data) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 162
+   at Aetheris.Client.HandleServerPositionUpdate(Byte[] data) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 183
    at Aetheris.Client.HandleUdpPacket(Byte[] data) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 131
-   at Aetheris.Client.ListenForUdpAsync(CancellationToken token) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 220
-[2025-10-07 23:23:51.434] [Prediction] Error: 118.4cm - reconciling
-[2025-10-07 23:23:51.436] [Client] UDP recv error: System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
-   at System.Collections.Generic.Queue`1.Enumerator.MoveNext()
-   at Aetheris.PlayerNetworkController.ReconcilePosition(ServerPlayerUpdate update) in /home/kirby/Programming/Aetheris/Net/Shared/PlayerNetworkController.cs:line 157
-   at Aetheris.PlayerNetworkController.OnServerUpdate(ServerPlayerUpdate update) in /home/kirby/Programming/Aetheris/Net/Shared/PlayerNetworkController.cs:line 138
-   at Aetheris.Client.HandleServerPositionUpdate(Byte[] data) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 162
-   at Aetheris.Client.HandleUdpPacket(Byte[] data) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 131
-   at Aetheris.Client.ListenForUdpAsync(CancellationToken token) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 220
-[2025-10-07 23:23:51.437] [Prediction] Error: 27.7cm - reconciling
-[2025-10-07 23:23:51.447] [Prediction] Replayed 56 inputs
-[2025-10-07 23:23:51.447] [Prediction] Error: 73.5cm - reconciling
-[2025-10-07 23:23:51.454] [Prediction] Replayed 57 inputs
-[2025-10-07 23:23:51.454] [Prediction] Error: 55.8cm - reconciling
-[2025-10-07 23:23:51.463] [Prediction] Replayed 55 inputs
-[2025-10-07 23:23:51.470] [Prediction] Error: 148.6cm - reconciling
-[2025-10-07 23:23:51.502] [Prediction] Replayed 41 inputs
-[2025-10-07 23:23:51.506] [Prediction] Error: 17.5cm - reconciling
-[2025-10-07 23:23:51.529] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 604.13 m/s (max 25)
-[2025-10-07 23:23:51.534]   Position: <15.019979, 35.859665, 14.800854> -> <14.637673, 35.853138, 14.333071>
-[2025-10-07 23:23:51.535]   Speed: H=604.13 V=6.53 Total=604.17
-[2025-10-07 23:23:51.535]   Violations: 5/5
-[2025-10-07 23:23:51.542] [Prediction] Replayed 41 inputs
-[2025-10-07 23:23:51.542] [Prediction] Error: 251.6cm - reconciling
-[2025-10-07 23:23:51.544] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 192.62 m/s (max 25)
-[2025-10-07 23:23:51.545]   Position: <14.144707, 35.824207, 13.729877> -> <15.203138, 35.86251, 15.024971>
-[2025-10-07 23:23:51.545]   Speed: H=192.62 V=4.41 Total=192.67
-[2025-10-07 23:23:51.545]   Violations: 5/5
-[2025-10-07 23:23:51.563] [Prediction] Replayed 52 inputs
-[2025-10-07 23:23:51.563] [Prediction] Error: 108.0cm - reconciling
-[2025-10-07 23:23:51.574] [Prediction] Replayed 56 inputs
-[2025-10-07 23:23:51.574] [Prediction] Error: 156.0cm - reconciling
-[2025-10-07 23:23:51.580] [Prediction] Replayed 60 inputs
-[2025-10-07 23:23:51.581] [Prediction] Error: 20.5cm - reconciling
-[2025-10-07 23:23:51.583] [Prediction] Replayed 27 inputs
-[2025-10-07 23:23:51.602] [Client] Received chunk (1,0,1): 97251 render floats, 13893 collision verts
-[2025-10-07 23:23:51.602] [Client] Requesting chunk (1,1,-1)
-[2025-10-07 23:23:51.660] [Prediction] Error: 81.5cm - reconciling
-[2025-10-07 23:23:51.672] [Prediction] Replayed 27 inputs
-[2025-10-07 23:23:51.672] [Prediction] Error: 74.3cm - reconciling
-[2025-10-07 23:23:51.684] [Prediction] Replayed 30 inputs
-[2025-10-07 23:23:51.684] [Prediction] Error: 63.3cm - reconciling
-[2025-10-07 23:23:51.689] [Prediction] Replayed 26 inputs
-[2025-10-07 23:23:51.690] [Prediction] Error: 48.4cm - reconciling
-[2025-10-07 23:23:51.693] [Prediction] Replayed 14 inputs
-[2025-10-07 23:23:51.795] [Prediction] Error: 142.6cm - reconciling
-[2025-10-07 23:23:51.805] [Prediction] Replayed 47 inputs
-[2025-10-07 23:23:51.805] [Prediction] Error: 127.1cm - reconciling
-[2025-10-07 23:23:51.810] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 29.29 m/s (max 25)
-[2025-10-07 23:23:51.810]   Position: <11.824967, 34.881126, 10.891454> -> <12.104365, 35.196556, 11.233327>
-[2025-10-07 23:23:51.810]   Speed: H=29.29 V=20.92 Total=36.00
-[2025-10-07 23:23:51.810]   Violations: 5/5
-[2025-10-07 23:23:51.814] [Prediction] Replayed 45 inputs
-[2025-10-07 23:23:51.814] [Prediction] Error: 105.4cm - reconciling
-[2025-10-07 23:23:51.819] [Prediction] Replayed 48 inputs
-[2025-10-07 23:23:51.819] [Prediction] Error: 72.2cm - reconciling
-[2025-10-07 23:23:51.824] [Prediction] Replayed 35 inputs
-[2025-10-07 23:23:51.824] [Prediction] Error: 61.4cm - reconciling
-[2025-10-07 23:23:51.831] [Prediction] Replayed 34 inputs
-[2025-10-07 23:23:51.831] [Prediction] Error: 72.0cm - reconciling
-[2025-10-07 23:23:51.837] [Prediction] Replayed 30 inputs
-[2025-10-07 23:23:51.837] [Prediction] Error: 40.5cm - reconciling
-[2025-10-07 23:23:51.840] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:51.855] [Client] Received chunk (1,0,-1): 91392 render floats, 13056 collision verts
-[2025-10-07 23:23:51.855] [Client] Requesting chunk (-1,1,1)
-[2025-10-07 23:23:51.871] [Prediction] Error: 18.5cm - reconciling
-[2025-10-07 23:23:51.873] [Prediction] Replayed 5 inputs
-[2025-10-07 23:23:51.967] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 167.05 m/s (max 25)
-[2025-10-07 23:23:51.967]   Position: <10.445888, 34.881126, 9.204019> -> <10.340177, 34.881126, 9.07467>
-[2025-10-07 23:23:51.967]   Speed: H=167.05 V=0.00 Total=167.05
-[2025-10-07 23:23:51.967]   Violations: 5/5
-[2025-10-07 23:23:51.967] [Prediction] Error: 126.9cm - reconciling
-[2025-10-07 23:23:51.987] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:51.988] [Prediction] Error: 81.4cm - reconciling
-[2025-10-07 23:23:52.000] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.000] [Prediction] Error: 70.0cm - reconciling
-[2025-10-07 23:23:52.014] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.014] [Prediction] Error: 58.4cm - reconciling
-[2025-10-07 23:23:52.026] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.026] [Prediction] Error: 41.3cm - reconciling
-[2025-10-07 23:23:52.040] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.040] [Prediction] Error: 46.1cm - reconciling
-[2025-10-07 23:23:52.052] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.053] [Prediction] Error: 56.2cm - reconciling
-[2025-10-07 23:23:52.066] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.066] [Prediction] Error: 36.2cm - reconciling
-[2025-10-07 23:23:52.079] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:52.079] [Prediction] Error: 24.1cm - reconciling
-[2025-10-07 23:23:52.093] [Prediction] Replayed 59 inputs
-[2025-10-07 23:23:52.094] [Prediction] Error: 53.4cm - reconciling
-[2025-10-07 23:23:52.103] [Prediction] Replayed 37 inputs
-[2025-10-07 23:23:52.104] [Prediction] Error: 46.6cm - reconciling
-[2025-10-07 23:23:52.115] [Prediction] Replayed 30 inputs
-[2025-10-07 23:23:52.116] [Prediction] Error: 21.6cm - reconciling
-[2025-10-07 23:23:52.122] [Prediction] Replayed 14 inputs
-[2025-10-07 23:23:52.123] [Prediction] Error: 47.0cm - reconciling
-[2025-10-07 23:23:52.127] [Prediction] Replayed 10 inputs
-[2025-10-07 23:23:52.235] [Client] Received chunk (-1,0,1): 126840 render floats, 18120 collision verts
-[2025-10-07 23:23:52.236] [Client] Requesting chunk (-2,-1,0)
-[2025-10-07 23:23:52.258] [Prediction] Error: 17.3cm - reconciling
-[2025-10-07 23:23:52.259] [Prediction] Replayed 4 inputs
-[2025-10-07 23:23:52.286] [Prediction] Error: 29.4cm - reconciling
-[2025-10-07 23:23:52.303] [Prediction] Replayed 12 inputs
-[2025-10-07 23:23:52.304] [Prediction] Error: 31.8cm - reconciling
-[2025-10-07 23:23:52.304] [Prediction] Replayed 1 inputs
-[2025-10-07 23:23:52.388] [Prediction] Error: 42.7cm - reconciling
-[2025-10-07 23:23:52.393] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:52.394] [Prediction] Error: 20.3cm - reconciling
-[2025-10-07 23:23:52.399] [Prediction] Replayed 9 inputs
-[2025-10-07 23:23:52.449] [Client] Received chunk (-1,0,-1): 90363 render floats, 12909 collision verts
-[2025-10-07 23:23:52.449] [Client] Requesting chunk (0,1,-2)
-[2025-10-07 23:23:52.473] [Prediction] Error: 21.0cm - reconciling
-[2025-10-07 23:23:52.475] [Prediction] Replayed 8 inputs
-[2025-10-07 23:23:52.503] [Prediction] Error: 12.0cm - reconciling
-[2025-10-07 23:23:52.504] [Prediction] Replayed 3 inputs
-[2025-10-07 23:23:52.629] [Prediction] Error: 50.1cm - reconciling
-[2025-10-07 23:23:52.631] [Prediction] Replayed 13 inputs
-[2025-10-07 23:23:52.631] [Prediction] Error: 14.0cm - reconciling
-[2025-10-07 23:23:52.632] [Prediction] Replayed 3 inputs
-[2025-10-07 23:23:52.701] [Client] Received chunk (0,-1,0): 323106 render floats, 46158 collision verts
-[2025-10-07 23:23:52.702] [Client] Requesting chunk (2,-1,0)
-[2025-10-07 23:23:52.759] [Prediction] Error: 62.9cm - reconciling
-[2025-10-07 23:23:52.762] [Prediction] Replayed 9 inputs
-[2025-10-07 23:23:52.762] [Prediction] Error: 40.7cm - reconciling
-[2025-10-07 23:23:52.765] [Prediction] Replayed 9 inputs
-[2025-10-07 23:23:52.765] [Prediction] Error: 39.4cm - reconciling
-[2025-10-07 23:23:52.766] [Prediction] Replayed 5 inputs
-[2025-10-07 23:23:52.909] [Prediction] Error: 149.6cm - reconciling
-[2025-10-07 23:23:52.913] [Prediction] Replayed 30 inputs
-[2025-10-07 23:23:52.913] [Prediction] Error: 134.6cm - reconciling
-[2025-10-07 23:23:52.917] [Prediction] Replayed 21 inputs
-[2025-10-07 23:23:52.917] [Prediction] Error: 126.4cm - reconciling
-[2025-10-07 23:23:52.918] [Prediction] Replayed 7 inputs
-[2025-10-07 23:23:53.014] [Client] Received chunk (1,-1,0): 326739 render floats, 46677 collision verts
-[2025-10-07 23:23:53.014] [Client] Requesting chunk (-2,0,-2)
-[2025-10-07 23:23:53.104] [Prediction] Error: 128.1cm - reconciling
-[2025-10-07 23:23:53.109] [Prediction] Replayed 38 inputs
-[2025-10-07 23:23:53.109] [Prediction] Error: 100.4cm - reconciling
-[2025-10-07 23:23:53.116] [Prediction] Replayed 40 inputs
-[2025-10-07 23:23:53.116] [Prediction] Error: 82.2cm - reconciling
-[2025-10-07 23:23:53.120] [Prediction] Replayed 32 inputs
-[2025-10-07 23:23:53.120] [Prediction] Error: 57.9cm - reconciling
-[2025-10-07 23:23:53.125] [Prediction] Replayed 28 inputs
-[2025-10-07 23:23:53.125] [Prediction] Error: 55.0cm - reconciling
-[2025-10-07 23:23:53.128] [Prediction] Replayed 18 inputs
-[2025-10-07 23:23:53.158] [Prediction] Error: 28.3cm - reconciling
-[2025-10-07 23:23:53.165] [Prediction] Replayed 11 inputs
-[2025-10-07 23:23:53.213] [Prediction] Error: 84.3cm - reconciling
-[2025-10-07 23:23:53.216] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:53.216] [Prediction] Error: 45.5cm - reconciling
-[2025-10-07 23:23:53.220] [Prediction] Replayed 9 inputs
-[2025-10-07 23:23:53.220] [Prediction] Error: 11.8cm - reconciling
-[2025-10-07 23:23:53.224] [Prediction] Replayed 4 inputs
-[2025-10-07 23:23:53.276] [Client] Received chunk (0,-1,1): 127533 render floats, 18219 collision verts
-[2025-10-07 23:23:53.276] [Client] Requesting chunk (0,-1,2)
-[2025-10-07 23:23:53.328] [Prediction] Error: 29.0cm - reconciling
-[2025-10-07 23:23:53.330] [Prediction] Replayed 11 inputs
-[2025-10-07 23:23:53.338] [Prediction] Error: 11.4cm - reconciling
-[2025-10-07 23:23:53.339] [Prediction] Replayed 1 inputs
-[2025-10-07 23:23:53.476] [Prediction] Error: 17.6cm - reconciling
-[2025-10-07 23:23:53.487] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:53.488] [Prediction] Error: 11.6cm - reconciling
-[2025-10-07 23:23:53.489] [Prediction] Replayed 10 inputs
-[2025-10-07 23:23:53.569] [Client] Received chunk (-1,-1,0): 330036 render floats, 47148 collision verts
-[2025-10-07 23:23:53.570] [Client] Requesting chunk (2,0,-2)
-[2025-10-07 23:23:53.811] [Client] Received chunk (0,-1,-1): 159453 render floats, 22779 collision verts
-[2025-10-07 23:23:53.811] [Client] Requesting chunk (0,1,2)
-[2025-10-07 23:23:54.030] [Client] Received chunk (1,-1,-1): 58527 render floats, 8361 collision verts
-[2025-10-07 23:23:54.031] [Client] Requesting chunk (2,0,2)
-[2025-10-07 23:23:54.300] [Client] Received chunk (-1,-1,-1): 304605 render floats, 43515 collision verts
-[2025-10-07 23:23:54.300] [Client] Requesting chunk (-2,0,2)
-[2025-10-07 23:23:54.546] [Client] Received chunk (-1,-1,1): 196287 render floats, 28041 collision verts
-[2025-10-07 23:23:54.546] [Client] Requesting chunk (2,1,0)
-[2025-10-07 23:23:54.784] [Client] Received chunk (1,-1,1): 349503 render floats, 49929 collision verts
-[2025-10-07 23:23:54.784] [Client] Requesting chunk (0,-1,-2)
-[2025-10-07 23:23:55.027] [Client] Received chunk (-2,0,0): 136185 render floats, 19455 collision verts
-[2025-10-07 23:23:55.027] [Client] Requesting chunk (-2,1,0)
-[2025-10-07 23:23:55.217] [Client] Received chunk (0,0,-2): 114030 render floats, 16290 collision verts
-[2025-10-07 23:23:55.220] [Client] Requesting chunk (0,0,-3)
-[2025-10-07 23:23:55.242] [Client] Received chunk (0,1,0): 0 render floats, 0 collision verts
-[2025-10-07 23:23:55.243] [Client] Requesting chunk (1,1,-2)
-[2025-10-07 23:23:55.540] [Client] Received chunk (0,0,2): 111300 render floats, 15900 collision verts
-[2025-10-07 23:23:55.540] [Client] Requesting chunk (-1,-1,-2)
-[2025-10-07 23:23:55.766] [Client] Received chunk (2,0,0): 111510 render floats, 15930 collision verts
-[2025-10-07 23:23:55.766] [Client] Requesting chunk (2,1,-1)
-[2025-10-07 23:23:55.956] [Client] Received chunk (1,0,-2): 91497 render floats, 13071 collision verts
-[2025-10-07 23:23:55.956] [Client] Requesting chunk (-1,-1,2)
-[2025-10-07 23:23:56.222] [Client] Received chunk (-2,0,1): 104433 render floats, 14919 collision verts
-[2025-10-07 23:23:56.222] [Client] Requesting chunk (-1,1,2)
-[2025-10-07 23:23:56.268] [Prediction] Error: 36.0cm - reconciling
-[2025-10-07 23:23:56.269] [Prediction] Replayed 8 inputs
-[2025-10-07 23:23:56.370] [Prediction] Error: 30.5cm - reconciling
-[2025-10-07 23:23:56.372] [Prediction] Replayed 13 inputs
-[2025-10-07 23:23:56.376] [Prediction] Error: 42.7cm - reconciling
-[2025-10-07 23:23:56.378] [Prediction] Replayed 7 inputs
-[2025-10-07 23:23:56.432] [Client] Received chunk (-2,0,-1): 124719 render floats, 17817 collision verts
-[2025-10-07 23:23:56.432] [Client] Requesting chunk (2,-1,-1)
-[2025-10-07 23:23:56.455] [Client] Received chunk (0,1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:56.455] [Client] Requesting chunk (2,1,1)
-[2025-10-07 23:23:56.476] [Client] Received chunk (0,1,1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:56.476] [Client] Requesting chunk (2,-1,1)
-[2025-10-07 23:23:56.530] [Prediction] Error: 18.3cm - reconciling
-[2025-10-07 23:23:56.540] [Prediction] Replayed 20 inputs
-[2025-10-07 23:23:56.540] [Prediction] Error: 15.9cm - reconciling
-[2025-10-07 23:23:56.547] [Prediction] Replayed 18 inputs
-[2025-10-07 23:23:56.548] [Prediction] Error: 21.7cm - reconciling
-[2025-10-07 23:23:56.551] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:56.552] [Prediction] Error: 24.5cm - reconciling
-[2025-10-07 23:23:56.554] [Prediction] Replayed 6 inputs
-[2025-10-07 23:23:56.703] [Prediction] Error: 174.9cm - reconciling
-[2025-10-07 23:23:56.709] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 75.98 m/s (max 60)
-[2025-10-07 23:23:56.709]   Position: <-2.1791663, 36.743614, -1.8651748> -> <-2.7542996, 36.28482, -2.5689049>
-[2025-10-07 23:23:56.709]   Speed: H=150.50 V=75.98 Total=168.59
-[2025-10-07 23:23:56.709]   Violations: 5/5
-[2025-10-07 23:23:56.717] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:56.717] [Prediction] Error: 136.2cm - reconciling
-[2025-10-07 23:23:56.725] [Prediction] Replayed 64 inputs
-[2025-10-07 23:23:56.725] [Prediction] Error: 120.0cm - reconciling
-[2025-10-07 23:23:56.734] [Prediction] Replayed 63 inputs
-[2025-10-07 23:23:56.734] [Prediction] Error: 118.2cm - reconciling
-[2025-10-07 23:23:56.742] [Prediction] Replayed 51 inputs
-[2025-10-07 23:23:56.743] [Prediction] Error: 107.3cm - reconciling
-[2025-10-07 23:23:56.749] [Client] Received chunk (1,0,2): 98238 render floats, 14034 collision verts
-[2025-10-07 23:23:56.749] [Client] Requesting chunk (-1,1,-2)
-[2025-10-07 23:23:56.749] [Prediction] Replayed 46 inputs
-[2025-10-07 23:23:56.749] [Prediction] Error: 113.5cm - reconciling
-[2025-10-07 23:23:56.755] [Prediction] Replayed 39 inputs
-[2025-10-07 23:23:56.755] [Prediction] Error: 88.5cm - reconciling
-[2025-10-07 23:23:56.765] [Prediction] Replayed 28 inputs
-[2025-10-07 23:23:56.766] [Prediction] Error: 31.6cm - reconciling
-[2025-10-07 23:23:56.768] [Prediction] Replayed 10 inputs
-[2025-10-07 23:23:56.848] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 324.11 m/s (max 25)
-[2025-10-07 23:23:56.848]   Position: <-1.0588374, 37.104797, -0.49434486> -> <-0.85373473, 37.09446, -0.24338153>
-[2025-10-07 23:23:56.848]   Speed: H=324.11 V=10.34 Total=324.28
-[2025-10-07 23:23:56.848]   Violations: 5/5
-[2025-10-07 23:23:56.848] [Prediction] Error: 154.4cm - reconciling
-[2025-10-07 23:23:56.851] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 321.44 m/s (max 25)
-[2025-10-07 23:23:56.851]   Position: <-0.63847876, 37.061287, 0.020005142> -> <-1.204339, 37.09659, -0.67237985>
-[2025-10-07 23:23:56.851]   Speed: H=321.44 V=12.69 Total=321.69
-[2025-10-07 23:23:56.851]   Violations: 5/5
-[2025-10-07 23:23:56.857] [Prediction] Replayed 47 inputs
-[2025-10-07 23:23:56.857] [Prediction] Error: 143.0cm - reconciling
-[2025-10-07 23:23:56.863] [Prediction] Replayed 45 inputs
-[2025-10-07 23:23:56.863] [Prediction] Error: 124.6cm - reconciling
-[2025-10-07 23:23:56.868] [Prediction] Replayed 44 inputs
-[2025-10-07 23:23:56.868] [Prediction] Error: 127.9cm - reconciling
-[2025-10-07 23:23:56.873] [Prediction] Replayed 40 inputs
-[2025-10-07 23:23:56.873] [Prediction] Error: 43.7cm - reconciling
-[2025-10-07 23:23:56.878] [Prediction] Replayed 29 inputs
-[2025-10-07 23:23:56.878] [Prediction] Error: 88.2cm - reconciling
-[2025-10-07 23:23:56.883] [Prediction] Replayed 28 inputs
-[2025-10-07 23:23:56.883] [Prediction] Error: 43.6cm - reconciling
-[2025-10-07 23:23:56.885] [Prediction] Replayed 15 inputs
-[2025-10-07 23:23:56.963] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 167.86 m/s (max 60)
-[2025-10-07 23:23:56.963]   Position: <0.3440009, 36.576138, 1.2221657> -> <0.5476169, 36.408276, 1.47131>
-[2025-10-07 23:23:56.963]   Speed: H=321.76 V=167.86 Total=362.92
-[2025-10-07 23:23:56.963]   Violations: 5/5
-[2025-10-07 23:23:56.963] [Prediction] Error: 154.3cm - reconciling
-[2025-10-07 23:23:56.972] [Prediction] Replayed 48 inputs
-[2025-10-07 23:23:56.972] [Prediction] Error: 136.7cm - reconciling
-[2025-10-07 23:23:56.979] [Prediction] Replayed 42 inputs
-[2025-10-07 23:23:56.979] [Prediction] Error: 115.7cm - reconciling
-[2025-10-07 23:23:56.983] [Prediction] Replayed 38 inputs
-[2025-10-07 23:23:56.983] [Prediction] Error: 87.9cm - reconciling
-[2025-10-07 23:23:56.986] [Prediction] Replayed 32 inputs
-[2025-10-07 23:23:56.986] [Prediction] Error: 87.9cm - reconciling
-[2025-10-07 23:23:56.988] [Prediction] Replayed 21 inputs
-[2025-10-07 23:23:56.988] [Prediction] Error: 43.5cm - reconciling
-[2025-10-07 23:23:56.988] [Prediction] Replayed 8 inputs
-[2025-10-07 23:23:57.002] [Client] Received chunk (2,0,1): 126756 render floats, 18108 collision verts
-[2025-10-07 23:23:57.002] [Client] Requesting chunk (0,0,3)
-[2025-10-07 23:23:57.034] [Client] Received chunk (1,1,0): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.034] [Client] Requesting chunk (1,-1,-2)
-[2025-10-07 23:23:57.057] [Prediction] Error: 26.9cm - reconciling
-[2025-10-07 23:23:57.058] [Prediction] Replayed 6 inputs
-[2025-10-07 23:23:57.098] [Prediction] Error: 74.7cm - reconciling
-[2025-10-07 23:23:57.105] [Prediction] Replayed 18 inputs
-[2025-10-07 23:23:57.109] [Prediction] Error: 56.2cm - reconciling
-[2025-10-07 23:23:57.112] [Prediction] Replayed 14 inputs
-[2025-10-07 23:23:57.112] [Prediction] Error: 50.6cm - reconciling
-[2025-10-07 23:23:57.116] [Prediction] Replayed 9 inputs
-[2025-10-07 23:23:57.117] [Prediction] Error: 11.2cm - reconciling
-[2025-10-07 23:23:57.201] [Prediction] Error: 11.6cm - reconciling
-[2025-10-07 23:23:57.202] [Prediction] Replayed 8 inputs
-[2025-10-07 23:23:57.255] [Client] Received chunk (2,0,-1): 93282 render floats, 13326 collision verts
-[2025-10-07 23:23:57.255] [Client] Requesting chunk (1,-1,2)
-[2025-10-07 23:23:57.290] [Client] Received chunk (-1,1,0): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.291] [Client] Requesting chunk (1,1,2)
-[2025-10-07 23:23:57.547] [Client] Received chunk (-1,0,-2): 87507 render floats, 12501 collision verts
-[2025-10-07 23:23:57.547] [Client] Requesting chunk (-2,-1,-1)
-[2025-10-07 23:23:57.868] [Client] Received chunk (-1,0,2): 131166 render floats, 18738 collision verts
-[2025-10-07 23:23:57.868] [Client] Requesting chunk (-2,1,-1)
-[2025-10-07 23:23:57.892] [Client] Received chunk (1,1,1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.892] [Client] Requesting chunk (3,0,0)
-[2025-10-07 23:23:57.916] [Client] Received chunk (-1,1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.917] [Client] Requesting chunk (-2,1,1)
-[2025-10-07 23:23:57.940] [Client] Received chunk (1,1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.940] [Client] Requesting chunk (-2,-1,1)
-[2025-10-07 23:23:57.974] [Client] Received chunk (-1,1,1): 0 render floats, 0 collision verts
-[2025-10-07 23:23:57.974] [Client] Requesting chunk (-3,0,0)
-[2025-10-07 23:23:58.238] [Client] Received chunk (-2,-1,0): 269136 render floats, 38448 collision verts
-[2025-10-07 23:23:58.238] [Client] Requesting chunk (3,0,-1)
-[2025-10-07 23:23:58.263] [Client] Received chunk (0,1,-2): 0 render floats, 0 collision verts
-[2025-10-07 23:23:58.263] [Client] Requesting chunk (1,0,-3)
-[2025-10-07 23:23:58.490] [Client] Received chunk (2,-1,0): 62727 render floats, 8961 collision verts
-[2025-10-07 23:23:58.490] [Client] Requesting chunk (-3,0,-1)
-[2025-10-07 23:23:58.692] [Client] Received chunk (-2,0,-2): 93408 render floats, 13344 collision verts
-[2025-10-07 23:23:58.693] [Client] Requesting chunk (-1,0,-3)
-[2025-10-07 23:23:58.883] [Client] Received chunk (0,-1,2): 0 render floats, 0 collision verts
-[2025-10-07 23:23:58.883] [Client] Requesting chunk (-1,0,3)
-[2025-10-07 23:23:59.118] [Client] Received chunk (2,0,-2): 92421 render floats, 13203 collision verts
-[2025-10-07 23:23:59.119] [Client] Requesting chunk (-3,0,1)
-[2025-10-07 23:23:59.149] [Client] Received chunk (0,1,2): 0 render floats, 0 collision verts
-[2025-10-07 23:23:59.150] [Client] Requesting chunk (3,0,1)
-[2025-10-07 23:23:59.414] [Client] Received chunk (2,0,2): 124446 render floats, 17778 collision verts
-[2025-10-07 23:23:59.414] [Client] Requesting chunk (1,0,3)
-[2025-10-07 23:23:59.706] [Client] Received chunk (-2,0,2): 64848 render floats, 9264 collision verts
-[2025-10-07 23:23:59.706] [Client] Requesting chunk (2,1,-2)
-[2025-10-07 23:23:59.731] [Client] Received chunk (2,1,0): 0 render floats, 0 collision verts
-[2025-10-07 23:23:59.731] [Client] Requesting chunk (2,-1,2)
-[2025-10-07 23:23:59.872] [Prediction] Error: 13.4cm - reconciling
-[2025-10-07 23:23:59.873] [Prediction] Replayed 4 inputs
-[2025-10-07 23:23:59.898] [Prediction] Error: 31.6cm - reconciling
-[2025-10-07 23:23:59.902] [Prediction] Replayed 6 inputs
-[2025-10-07 23:23:59.906] [Prediction] Error: 132.0cm - reconciling
-[2025-10-07 23:23:59.907] [Prediction] Replayed 3 inputs
-[2025-10-07 23:23:59.953] [Client] Received chunk (0,-1,-2): 144144 render floats, 20592 collision verts
-[2025-10-07 23:23:59.954] [Client] Requesting chunk (2,1,2)
-[2025-10-07 23:23:59.980] [Client] Received chunk (-2,1,0): 0 render floats, 0 collision verts
-[2025-10-07 23:23:59.981] [Client] Requesting chunk (2,-1,-2)
-[2025-10-07 23:24:00.000] [Prediction] Error: 16.2cm - reconciling
-[2025-10-07 23:24:00.002] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:00.026] [Prediction] Error: 23.2cm - reconciling
-[2025-10-07 23:24:00.030] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:00.033] [Prediction] Error: 31.5cm - reconciling
-[2025-10-07 23:24:00.034] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:00.167] [Client] Received chunk (0,0,-3): 122829 render floats, 17547 collision verts
-[2025-10-07 23:24:00.167] [Client] Requesting chunk (-2,1,2)
-[2025-10-07 23:24:00.202] [Client] Received chunk (1,1,-2): 0 render floats, 0 collision verts
-[2025-10-07 23:24:00.202] [Client] Requesting chunk (-2,-1,-2)
-[2025-10-07 23:24:00.276] [Prediction] Error: 104.4cm - reconciling
-[2025-10-07 23:24:00.284] [Prediction] Replayed 36 inputs
-[2025-10-07 23:24:00.284] [Prediction] Error: 83.6cm - reconciling
-[2025-10-07 23:24:00.291] [Prediction] Replayed 33 inputs
-[2025-10-07 23:24:00.291] [Prediction] Error: 59.6cm - reconciling
-[2025-10-07 23:24:00.296] [Prediction] Replayed 26 inputs
-[2025-10-07 23:24:00.297] [Prediction] Error: 132.2cm - reconciling
-[2025-10-07 23:24:00.301] [Prediction] Replayed 19 inputs
-[2025-10-07 23:24:00.301] [Prediction] Error: 18.3cm - reconciling
-[2025-10-07 23:24:00.302] [Prediction] Replayed 10 inputs
-[2025-10-07 23:24:00.391] [Prediction] Error: 83.6cm - reconciling
-[2025-10-07 23:24:00.402] [Prediction] Replayed 36 inputs
-[2025-10-07 23:24:00.402] [Prediction] Error: 72.3cm - reconciling
-[2025-10-07 23:24:00.410] [Prediction] Replayed 32 inputs
-[2025-10-07 23:24:00.410] [Prediction] Error: 59.2cm - reconciling
-[2025-10-07 23:24:00.415] [Prediction] Replayed 25 inputs
-[2025-10-07 23:24:00.415] [Prediction] Error: 69.9cm - reconciling
-[2025-10-07 23:24:00.418] [Prediction] Replayed 12 inputs
-[2025-10-07 23:24:00.470] [Client] Received chunk (-1,-1,-2): 254478 render floats, 36354 collision verts
-[2025-10-07 23:24:00.470] [Client] Requesting chunk (-2,1,-2)
-[2025-10-07 23:24:00.500] [Client] Received chunk (2,1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:24:00.501] [Client] Requesting chunk (-2,-1,2)
-[2025-10-07 23:24:00.553] [Prediction] Error: 71.2cm - reconciling
-[2025-10-07 23:24:00.563] [Prediction] Replayed 17 inputs
-[2025-10-07 23:24:00.565] [Prediction] Error: 51.7cm - reconciling
-[2025-10-07 23:24:00.569] [Prediction] Replayed 13 inputs
-[2025-10-07 23:24:00.569] [Prediction] Error: 35.6cm - reconciling
-[2025-10-07 23:24:00.571] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:00.640] [Prediction] Error: 22.9cm - reconciling
-[2025-10-07 23:24:00.643] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:00.659] [Prediction] Error: 14.0cm - reconciling
-[2025-10-07 23:24:00.660] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:00.716] [Client] Received chunk (-1,-1,2): 9030 render floats, 1290 collision verts
-[2025-10-07 23:24:00.716] [Client] Requesting chunk (3,1,0)
-[2025-10-07 23:24:00.751] [Client] Received chunk (-1,1,2): 0 render floats, 0 collision verts
-[2025-10-07 23:24:00.751] [Client] Requesting chunk (2,0,-3)
-[2025-10-07 23:24:00.867] [Prediction] Error: 32.9cm - reconciling
-[2025-10-07 23:24:00.869] [Prediction] Replayed 7 inputs
-[2025-10-07 23:24:00.900] [Prediction] Error: 17.6cm - reconciling
-[2025-10-07 23:24:00.901] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:00.931] [Client] Received chunk (2,-1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:24:00.931] [Client] Requesting chunk (3,-1,0)
-[2025-10-07 23:24:00.960] [Client] Received chunk (2,1,1): 0 render floats, 0 collision verts
-[2025-10-07 23:24:00.960] [Client] Requesting chunk (3,0,-2)
-[2025-10-07 23:24:01.029] [Prediction] Error: 103.8cm - reconciling
-[2025-10-07 23:24:01.036] [Prediction] Replayed 22 inputs
-[2025-10-07 23:24:01.037] [Prediction] Error: 83.2cm - reconciling
-[2025-10-07 23:24:01.042] [Prediction] Replayed 21 inputs
-[2025-10-07 23:24:01.042] [Prediction] Error: 53.1cm - reconciling
-[2025-10-07 23:24:01.047] [Prediction] Replayed 15 inputs
-[2025-10-07 23:24:01.047] [Prediction] Error: 65.9cm - reconciling
-[2025-10-07 23:24:01.051] [Prediction] Replayed 12 inputs
-[2025-10-07 23:24:01.158] [Prediction] Error: 113.4cm - reconciling
-[2025-10-07 23:24:01.166] [Prediction] Replayed 35 inputs
-[2025-10-07 23:24:01.166] [Prediction] Error: 104.9cm - reconciling
-[2025-10-07 23:24:01.174] [Prediction] Replayed 31 inputs
-[2025-10-07 23:24:01.174] [Prediction] Error: 74.0cm - reconciling
-[2025-10-07 23:24:01.181] [Prediction] Replayed 22 inputs
-[2025-10-07 23:24:01.181] [Prediction] Error: 129.5cm - reconciling
-[2025-10-07 23:24:01.185] [Prediction] Replayed 17 inputs
-[2025-10-07 23:24:01.241] [Client] Received chunk (2,-1,1): 415989 render floats, 59427 collision verts
-[2025-10-07 23:24:01.241] [Client] Requesting chunk (-3,-1,0)
-[2025-10-07 23:24:01.276] [Client] Received chunk (-1,1,-2): 0 render floats, 0 collision verts
-[2025-10-07 23:24:01.277] [Client] Requesting chunk (-3,0,-2)
-[2025-10-07 23:24:01.384] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 199.18 m/s (max 60)
-[2025-10-07 23:24:01.384]   Position: <-3.7449932, 36.25487, -9.066431> -> <-3.4033747, 36.05569, -8.817993>
-[2025-10-07 23:24:01.384]   Speed: H=422.40 V=199.18 Total=467.01
-[2025-10-07 23:24:01.384]   Violations: 5/5
-[2025-10-07 23:24:01.385] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 247.25 m/s (max 60)
-[2025-10-07 23:24:01.385] [Prediction] Error: 256.4cm - reconciling
-[2025-10-07 23:24:01.386]   Position: <-3.0661216, 35.824604, -8.525896> -> <-2.764927, 35.57736, -8.197025>
-[2025-10-07 23:24:01.386]   Speed: H=445.95 V=247.25 Total=509.91
-[2025-10-07 23:24:01.387]   Violations: 5/5
-[2025-10-07 23:24:01.400] [Prediction] Replayed 62 inputs
-[2025-10-07 23:24:01.401] [Prediction] Error: 265.4cm - reconciling
-[2025-10-07 23:24:01.411] [Prediction] Replayed 61 inputs
-[2025-10-07 23:24:01.411] [Prediction] Error: 233.4cm - reconciling
-[2025-10-07 23:24:01.413] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 72.33 m/s (max 25)
-[2025-10-07 23:24:01.414]   Position: <-2.5883038, 35.414303, -7.9781203> -> <-3.2620811, 35.96265, -8.699848>
-[2025-10-07 23:24:01.414]   Speed: H=72.33 V=40.17 Total=82.73
-[2025-10-07 23:24:01.414]   Violations: 5/5
-[2025-10-07 23:24:01.421] [Prediction] Replayed 56 inputs
-[2025-10-07 23:24:01.421] [Prediction] Error: 277.2cm - reconciling
-[2025-10-07 23:24:01.427] [Prediction] Replayed 57 inputs
-[2025-10-07 23:24:01.427] [Prediction] Error: 146.6cm - reconciling
-[2025-10-07 23:24:01.434] [Prediction] Replayed 45 inputs
-[2025-10-07 23:24:01.434] [Prediction] Error: 216.0cm - reconciling
-[2025-10-07 23:24:01.440] [Prediction] Replayed 41 inputs
-[2025-10-07 23:24:01.440] [Prediction] Error: 104.1cm - reconciling
-[2025-10-07 23:24:01.444] [Prediction] Replayed 35 inputs
-[2025-10-07 23:24:01.444] [Prediction] Error: 124.8cm - reconciling
-[2025-10-07 23:24:01.447] [Prediction] Replayed 26 inputs
-[2025-10-07 23:24:01.448] [Prediction] Error: 102.5cm - reconciling
-[2025-10-07 23:24:01.450] [Prediction] Replayed 16 inputs
-[2025-10-07 23:24:01.450] [Prediction] Error: 40.2cm - reconciling
-[2025-10-07 23:24:01.451] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:01.471] [Prediction] Error: 12.2cm - reconciling
-[2025-10-07 23:24:01.473] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:01.523] [Prediction] Error: 137.5cm - reconciling
-[2025-10-07 23:24:01.534] [Prediction] Replayed 14 inputs
-[2025-10-07 23:24:01.534] [Prediction] Error: 35.7cm - reconciling
-[2025-10-07 23:24:01.535] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:01.618] [Client] Received chunk (0,0,3): 127323 render floats, 18189 collision verts
-[2025-10-07 23:24:01.618] [Client] Requesting chunk (-3,1,0)
-[2025-10-07 23:24:01.631] [Prediction] Error: 11.8cm - reconciling
-[2025-10-07 23:24:01.631] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:01.674] [Prediction] Error: 41.5cm - reconciling
-[2025-10-07 23:24:01.676] [Prediction] Replayed 7 inputs
-[2025-10-07 23:24:01.678] [Prediction] Error: 19.1cm - reconciling
-[2025-10-07 23:24:01.679] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:01.740] [Prediction] Error: 10.0cm - reconciling
-[2025-10-07 23:24:01.741] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:01.794] [Prediction] Error: 35.7cm - reconciling
-[2025-10-07 23:24:01.799] [Prediction] Replayed 9 inputs
-[2025-10-07 23:24:01.800] [Prediction] Error: 19.0cm - reconciling
-[2025-10-07 23:24:01.801] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:01.842] [Client] Received chunk (1,-1,-2): 13986 render floats, 1998 collision verts
-[2025-10-07 23:24:01.842] [Client] Requesting chunk (-3,0,2)
-[2025-10-07 23:24:01.872] [Prediction] Error: 14.0cm - reconciling
-[2025-10-07 23:24:01.873] [Prediction] Replayed 9 inputs
-[2025-10-07 23:24:01.893] [Prediction] Error: 13.4cm - reconciling
-[2025-10-07 23:24:01.893] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:01.979] [Prediction] Error: 14.6cm - reconciling
-[2025-10-07 23:24:01.980] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:02.030] [Prediction] Error: 45.1cm - reconciling
-[2025-10-07 23:24:02.032] [Prediction] Replayed 10 inputs
-[2025-10-07 23:24:02.084] [Client] Received chunk (1,-1,2): 84924 render floats, 12132 collision verts
-[2025-10-07 23:24:02.084] [Client] Requesting chunk (0,-1,3)
-[2025-10-07 23:24:02.110] [Client] Received chunk (1,1,2): 0 render floats, 0 collision verts
-[2025-10-07 23:24:02.110] [Client] Requesting chunk (-2,0,3)
-[2025-10-07 23:24:02.180] [Prediction] Error: 99.3cm - reconciling
-[2025-10-07 23:24:02.186] [Prediction] Replayed 28 inputs
-[2025-10-07 23:24:02.186] [Prediction] Error: 77.5cm - reconciling
-[2025-10-07 23:24:02.192] [Prediction] Replayed 24 inputs
-[2025-10-07 23:24:02.192] [Prediction] Error: 53.1cm - reconciling
-[2025-10-07 23:24:02.197] [Prediction] Replayed 18 inputs
-[2025-10-07 23:24:02.198] [Prediction] Error: 35.4cm - reconciling
-[2025-10-07 23:24:02.199] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:02.282] [Prediction] Error: 89.0cm - reconciling
-[2025-10-07 23:24:02.300] [Prediction] Replayed 32 inputs
-[2025-10-07 23:24:02.301] [Prediction] Error: 85.6cm - reconciling
-[2025-10-07 23:24:02.311] [Prediction] Replayed 34 inputs
-[2025-10-07 23:24:02.311] [Prediction] Error: 64.7cm - reconciling
-[2025-10-07 23:24:02.317] [Prediction] Replayed 28 inputs
-[2025-10-07 23:24:02.317] [Prediction] Error: 71.3cm - reconciling
-[2025-10-07 23:24:02.319] [Prediction] Replayed 18 inputs
-[2025-10-07 23:24:02.319] [Prediction] Error: 17.2cm - reconciling
-[2025-10-07 23:24:02.320] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:02.331] [Client] Received chunk (-2,-1,-1): 15414 render floats, 2202 collision verts
-[2025-10-07 23:24:02.331] [Client] Requesting chunk (3,0,2)
-[2025-10-07 23:24:02.362] [Client] Received chunk (-2,1,-1): 0 render floats, 0 collision verts
-[2025-10-07 23:24:02.363] [Client] Requesting chunk (2,0,3)
-[2025-10-07 23:24:02.441] [Prediction] Error: 130.4cm - reconciling
-[2025-10-07 23:24:02.451] [Prediction] Replayed 41 inputs
-[2025-10-07 23:24:02.452] [Prediction] Error: 106.9cm - reconciling
-[2025-10-07 23:24:02.461] [Prediction] Replayed 38 inputs
-[2025-10-07 23:24:02.461] [Prediction] Error: 87.9cm - reconciling
-[2025-10-07 23:24:02.468] [Prediction] Replayed 35 inputs
-[2025-10-07 23:24:02.468] [Prediction] Error: 78.0cm - reconciling
-[2025-10-07 23:24:02.470] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 43.17 m/s (max 25)
-[2025-10-07 23:24:02.470]   Position: <-12.286467, 37.165302, 2.1999698> -> <-12.783316, 37.04791, 1.6605637>
-[2025-10-07 23:24:02.470]   Speed: H=43.17 V=6.91 Total=43.72
-[2025-10-07 23:24:02.470]   Violations: 5/5
-[2025-10-07 23:24:02.472] [Prediction] Replayed 23 inputs
-[2025-10-07 23:24:02.472] [Prediction] Error: 125.2cm - reconciling
-[2025-10-07 23:24:02.475] [Prediction] Replayed 16 inputs
-[2025-10-07 23:24:02.475] [Prediction] Error: 54.0cm - reconciling
-[2025-10-07 23:24:02.476] [Prediction] Replayed 8 inputs
-[2025-10-07 23:24:02.519] [Prediction] Error: 36.1cm - reconciling
-[2025-10-07 23:24:02.521] [Prediction] Replayed 8 inputs
-[2025-10-07 23:24:02.522] [Prediction] Error: 23.8cm - reconciling
-[2025-10-07 23:24:02.526] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:02.550] [Prediction] Error: 24.3cm - reconciling
-[2025-10-07 23:24:02.551] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:02.641] [Client] Received chunk (3,0,0): 106974 render floats, 15282 collision verts
-[2025-10-07 23:24:02.642] [Client] Requesting chunk (0,-1,-3)
-[2025-10-07 23:24:02.681] [Client] Received chunk (-2,1,1): 0 render floats, 0 collision verts
-[2025-10-07 23:24:02.681] [Client] Requesting chunk (0,1,3)
-[2025-10-07 23:24:02.711] [Prediction] Error: 25.1cm - reconciling
-[2025-10-07 23:24:02.713] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:02.736] [Prediction] Error: 37.1cm - reconciling
-[2025-10-07 23:24:02.742] [Prediction] Replayed 8 inputs
-[2025-10-07 23:24:02.867] [Prediction] Error: 14.5cm - reconciling
-[2025-10-07 23:24:02.867] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:02.886] [Prediction] Error: 14.6cm - reconciling
-[2025-10-07 23:24:02.886] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:02.921] [Client] Received chunk (-2,-1,1): 266973 render floats, 38139 collision verts
-[2025-10-07 23:24:02.921] [Client] Requesting chunk (0,1,-3)
-[2025-10-07 23:24:02.987] [Prediction] Error: 12.6cm - reconciling
-[2025-10-07 23:24:02.987] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:03.090] [Prediction] Error: 126.8cm - reconciling
-[2025-10-07 23:24:03.106] [Prediction] Replayed 34 inputs
-[2025-10-07 23:24:03.106] [Prediction] Error: 123.1cm - reconciling
-[2025-10-07 23:24:03.114] [Prediction] Replayed 35 inputs
-[2025-10-07 23:24:03.114] [Prediction] Error: 96.5cm - reconciling
-[2025-10-07 23:24:03.121] [Prediction] Replayed 30 inputs
-[2025-10-07 23:24:03.122] [Prediction] Error: 81.5cm - reconciling
-[2025-10-07 23:24:03.125] [Prediction] Replayed 26 inputs
-[2025-10-07 23:24:03.126] [Prediction] Error: 175.6cm - reconciling
-[2025-10-07 23:24:03.128] [Prediction] Replayed 19 inputs
-[2025-10-07 23:24:03.128] [Prediction] Error: 36.9cm - reconciling
-[2025-10-07 23:24:03.130] [Prediction] Replayed 10 inputs
-[2025-10-07 23:24:03.155] [Client] Received chunk (-3,0,0): 112665 render floats, 16095 collision verts
-[2025-10-07 23:24:03.156] [Client] Requesting chunk (-2,0,-3)
-[2025-10-07 23:24:03.165] [Prediction] Error: 18.1cm - reconciling
-[2025-10-07 23:24:03.166] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:03.233] [Prediction] Error: 145.3cm - reconciling
-[2025-10-07 23:24:03.241] [Prediction] Replayed 36 inputs
-[2025-10-07 23:24:03.241] [Prediction] Error: 125.1cm - reconciling
-[2025-10-07 23:24:03.246] [Prediction] Replayed 32 inputs
-[2025-10-07 23:24:03.247] [Prediction] Error: 98.5cm - reconciling
-[2025-10-07 23:24:03.251] [Prediction] Replayed 24 inputs
-[2025-10-07 23:24:03.251] [Prediction] Error: 54.0cm - reconciling
-[2025-10-07 23:24:03.255] [Prediction] Replayed 14 inputs
-[2025-10-07 23:24:03.255] [Prediction] Error: 45.3cm - reconciling
-[2025-10-07 23:24:03.255] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:03.357] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 296.84 m/s (max 60)
-[2025-10-07 23:24:03.357]   Position: <-9.628715, 35.47886, -13.042802> -> <-9.149508, 35.182022, -13.074134>
-[2025-10-07 23:24:03.357]   Speed: H=480.23 V=296.84 Total=564.56
-[2025-10-07 23:24:03.357]   Violations: 5/5
-[2025-10-07 23:24:03.357] [Prediction] Error: 173.6cm - reconciling
-[2025-10-07 23:24:03.365] [Prediction] Replayed 45 inputs
-[2025-10-07 23:24:03.365] [Prediction] Error: 163.9cm - reconciling
-[2025-10-07 23:24:03.373] [Prediction] Replayed 38 inputs
-[2025-10-07 23:24:03.373] [Prediction] Error: 129.9cm - reconciling
-[2025-10-07 23:24:03.379] [Prediction] Replayed 31 inputs
-[2025-10-07 23:24:03.379] [Prediction] Error: 139.8cm - reconciling
-[2025-10-07 23:24:03.381] [Prediction] Replayed 26 inputs
-[2025-10-07 23:24:03.381] [Prediction] Error: 67.1cm - reconciling
-[2025-10-07 23:24:03.382] [Prediction] Replayed 13 inputs
-[2025-10-07 23:24:03.401] [Client] Received chunk (3,0,-1): 99540 render floats, 14220 collision verts
-[2025-10-07 23:24:03.402] [Client] Requesting chunk (-1,1,-3)
-[2025-10-07 23:24:03.457] [Prediction] Error: 135.6cm - reconciling
-[2025-10-07 23:24:03.463] [Prediction] Replayed 21 inputs
-[2025-10-07 23:24:03.464] [Prediction] Error: 116.0cm - reconciling
-[2025-10-07 23:24:03.468] [Prediction] Replayed 17 inputs
-[2025-10-07 23:24:03.468] [Prediction] Error: 67.7cm - reconciling
-[2025-10-07 23:24:03.470] [Prediction] Replayed 11 inputs
-[2025-10-07 23:24:03.470] [Prediction] Error: 101.4cm - reconciling
-[2025-10-07 23:24:03.472] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:03.493] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 27.41 m/s (max 25)
-[2025-10-07 23:24:03.493]   Position: <-7.263093, 35.364178, -12.682166> -> <-6.83809, 35.52284, -12.479489>
-[2025-10-07 23:24:03.493]   Speed: H=27.41 V=9.23 Total=28.92
-[2025-10-07 23:24:03.493]   Violations: 5/5
-[2025-10-07 23:24:03.494] [Prediction] Error: 50.7cm - reconciling
-[2025-10-07 23:24:03.494] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.516] [Prediction] Error: 14.4cm - reconciling
-[2025-10-07 23:24:03.525] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:03.538] [Prediction] Error: 13.0cm - reconciling
-[2025-10-07 23:24:03.538] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:03.563] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 27.77 m/s (max 25)
-[2025-10-07 23:24:03.563]   Position: <-6.0091877, 35.778362, -11.9495> -> <-5.619606, 35.86945, -11.6440935>
-[2025-10-07 23:24:03.563]   Speed: H=27.77 V=5.11 Total=28.24
-[2025-10-07 23:24:03.564]   Violations: 5/5
-[2025-10-07 23:24:03.564] [Prediction] Error: 50.3cm - reconciling
-[2025-10-07 23:24:03.564] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.613] [Client] Received chunk (1,0,-3): 93282 render floats, 13326 collision verts
-[2025-10-07 23:24:03.613] [Client] Requesting chunk (1,1,-3)
-[2025-10-07 23:24:03.637] [Prediction] Error: 50.7cm - reconciling
-[2025-10-07 23:24:03.638] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:03.644] [Prediction] Error: 21.8cm - reconciling
-[2025-10-07 23:24:03.646] [Prediction] Replayed 7 inputs
-[2025-10-07 23:24:03.660] [Prediction] Error: 16.4cm - reconciling
-[2025-10-07 23:24:03.660] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.676] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 35.30 m/s (max 25)
-[2025-10-07 23:24:03.676]   Position: <-4.1951246, 35.979572, -10.278024> -> <-3.79205, 35.931095, -9.811234>
-[2025-10-07 23:24:03.676]   Speed: H=35.30 V=2.77 Total=35.41
-[2025-10-07 23:24:03.676]   Violations: 5/5
-[2025-10-07 23:24:03.676] [Prediction] Error: 65.3cm - reconciling
-[2025-10-07 23:24:03.676] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.709] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 27.13 m/s (max 25)
-[2025-10-07 23:24:03.709]   Position: <-3.8879242, 35.9452, -9.909553> -> <-3.6131372, 35.890766, -9.517343>
-[2025-10-07 23:24:03.710]   Speed: H=27.13 V=3.08 Total=27.30
-[2025-10-07 23:24:03.710]   Violations: 5/5
-[2025-10-07 23:24:03.710] [Prediction] Error: 50.0cm - reconciling
-[2025-10-07 23:24:03.710] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.734] [Prediction] Error: 13.2cm - reconciling
-[2025-10-07 23:24:03.736] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:03.747] [Prediction] Error: 10.5cm - reconciling
-[2025-10-07 23:24:03.747] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:03.779] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 29.29 m/s (max 25)
-[2025-10-07 23:24:03.779]   Position: <-3.180849, 35.70831, -8.652461> -> <-3.029615, 35.583157, -8.200738>
-[2025-10-07 23:24:03.779]   Speed: H=29.29 V=7.69 Total=30.28
-[2025-10-07 23:24:03.779]   Violations: 5/5
-[2025-10-07 23:24:03.779] [Prediction] Error: 55.6cm - reconciling
-[2025-10-07 23:24:03.780] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:03.812] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 30.54 m/s (max 25)
-[2025-10-07 23:24:03.812]   Position: <-3.0216823, 35.57516, -8.173791> -> <-2.907476, 35.430256, -7.7187357>
-[2025-10-07 23:24:03.812]   Speed: H=30.54 V=9.43 Total=31.96
-[2025-10-07 23:24:03.812]   Violations: 5/5
-[2025-10-07 23:24:03.812] [Prediction] Error: 49.1cm - reconciling
-[2025-10-07 23:24:03.831] [Client] Received chunk (-3,0,-1): 123228 render floats, 17604 collision verts
-[2025-10-07 23:24:03.831] [Client] Requesting chunk (1,-1,-3)
-[2025-10-07 23:24:03.871] [Prediction] Error: 53.7cm - reconciling
-[2025-10-07 23:24:03.872] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:03.893] [Prediction] Error: 129.0cm - reconciling
-[2025-10-07 23:24:03.893] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.921] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 32.91 m/s (max 25)
-[2025-10-07 23:24:03.921]   Position: <-2.7221317, 36.226498, -5.612454> -> <-2.724177, 36.19827, -5.14226>
-[2025-10-07 23:24:03.921]   Speed: H=32.91 V=1.98 Total=32.97
-[2025-10-07 23:24:03.921]   Violations: 5/5
-[2025-10-07 23:24:03.922] [Prediction] Error: 48.9cm - reconciling
-[2025-10-07 23:24:03.922] [Prediction] Replayed 1 inputs
-[2025-10-07 23:24:03.947] [Prediction] Error: 17.1cm - reconciling
-[2025-10-07 23:24:03.948] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:03.969] [Prediction] Error: 15.7cm - reconciling
-[2025-10-07 23:24:03.971] [Prediction] Replayed 6 inputs
-[2025-10-07 23:24:04.028] [Client] Received chunk (-1,0,-3): 87213 render floats, 12459 collision verts
-[2025-10-07 23:24:04.028] [Client] Requesting chunk (3,1,-1)
-[2025-10-07 23:24:04.042] [Prediction] Error: 13.9cm - reconciling
-[2025-10-07 23:24:04.043] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:04.060] [Prediction] Error: 18.9cm - reconciling
-[2025-10-07 23:24:04.061] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:04.082] [Prediction] Error: 16.2cm - reconciling
-[2025-10-07 23:24:04.083] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:04.117] [Prediction] Error: 25.5cm - reconciling
-[2025-10-07 23:24:04.119] [Prediction] Replayed 8 inputs
-[2025-10-07 23:24:04.131] [Prediction] Error: 125.5cm - reconciling
-[2025-10-07 23:24:04.132] [Prediction] Replayed 3 inputs
-[2025-10-07 23:24:04.164] [Prediction] Error: 43.9cm - reconciling
-[2025-10-07 23:24:04.166] [Prediction] Replayed 15 inputs
-[2025-10-07 23:24:04.166] [Prediction] Error: 10.3cm - reconciling
-[2025-10-07 23:24:04.167] [Prediction] Replayed 4 inputs
-[2025-10-07 23:24:04.176] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 28.91 m/s (max 25)
-[2025-10-07 23:24:04.176]   Position: <-4.485065, 37.090824, -0.5721247> -> <-4.7293687, 37.031116, -0.32525468>
-[2025-10-07 23:24:04.176]   Speed: H=28.91 V=4.97 Total=29.34
-[2025-10-07 23:24:04.176]   Violations: 5/5
-[2025-10-07 23:24:04.176] [Prediction] Error: 35.2cm - reconciling
-[2025-10-07 23:24:04.288] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive vertical speed: 175.71 m/s (max 60)
-[2025-10-07 23:24:04.288]   Position: <-5.765796, 36.876637, 0.54113406> -> <-6.1384645, 37.05235, 0.6905711>
-[2025-10-07 23:24:04.288]   Speed: H=401.51 V=175.71 Total=438.28
-[2025-10-07 23:24:04.288]   Violations: 5/5
-[2025-10-07 23:24:04.289] [Prediction] Error: 151.7cm - reconciling
-[2025-10-07 23:24:04.302] [Prediction] Replayed 58 inputs
-[2025-10-07 23:24:04.302] [Prediction] Error: 166.7cm - reconciling
-[2025-10-07 23:24:04.315] [Prediction] Replayed 58 inputs
-[2025-10-07 23:24:04.315] [Prediction] Error: 162.9cm - reconciling
-[2025-10-07 23:24:04.326] [Prediction] Replayed 52 inputs
-[2025-10-07 23:24:04.326] [Prediction] Error: 150.0cm - reconciling
-[2025-10-07 23:24:04.334] [Prediction] Replayed 42 inputs
-[2025-10-07 23:24:04.334] [Prediction] Error: 171.9cm - reconciling
-[2025-10-07 23:24:04.340] [Prediction] Replayed 33 inputs
-[2025-10-07 23:24:04.340] [Prediction] Error: 80.2cm - reconciling
-[2025-10-07 23:24:04.343] [Prediction] Replayed 22 inputs
-[2025-10-07 23:24:04.343] [Prediction] Error: 96.8cm - reconciling
-[2025-10-07 23:24:04.345] [Prediction] Replayed 15 inputs
-[2025-10-07 23:24:04.345] [Prediction] Error: 57.7cm - reconciling
-[2025-10-07 23:24:04.346] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:04.377] [Client] Received chunk (-1,0,3): 133203 render floats, 19029 collision verts
-[2025-10-07 23:24:04.377] [Client] Requesting chunk (3,-1,1)
-[2025-10-07 23:24:04.444] [Prediction] Error: 117.2cm - reconciling
-[2025-10-07 23:24:04.456] [Prediction] Replayed 30 inputs
-[2025-10-07 23:24:04.456] [Prediction] Error: 105.0cm - reconciling
-[2025-10-07 23:24:04.462] [AntiCheat] Player d08a6383-bdd4-4b62-a70d-81ff95613135 validation failed: excessive horizontal speed: 27.92 m/s (max 25)
-[2025-10-07 23:24:04.462]   Position: <-8.657077, 38.073128, 1.1600269> -> <-8.166939, 38.058178, 1.1824377>
-[2025-10-07 23:24:04.462]   Speed: H=27.92 V=0.85 Total=27.93
-[2025-10-07 23:24:04.462]   Violations: 5/5
-[2025-10-07 23:24:04.467] [Prediction] Replayed 27 inputs
-[2025-10-07 23:24:04.467] [Prediction] Error: 88.6cm - reconciling
-[2025-10-07 23:24:04.472] [Prediction] Replayed 29 inputs
-[2025-10-07 23:24:04.472] [Prediction] Error: 51.1cm - reconciling
-[2025-10-07 23:24:04.477] [Prediction] Replayed 22 inputs
-[2025-10-07 23:24:04.477] [Prediction] Error: 74.8cm - reconciling
-[2025-10-07 23:24:04.479] [Prediction] Replayed 10 inputs
-[2025-10-07 23:24:04.586] [Prediction] Error: 85.6cm - reconciling
-[2025-10-07 23:24:04.593] [Prediction] Replayed 22 inputs
-[2025-10-07 23:24:04.594] [Prediction] Error: 58.0cm - reconciling
-[2025-10-07 23:24:04.597] [Prediction] Replayed 13 inputs
-[2025-10-07 23:24:04.597] [Prediction] Error: 83.4cm - reconciling
-[2025-10-07 23:24:04.599] [Prediction] Replayed 5 inputs
-[2025-10-07 23:24:04.652] [Client] Received chunk (-3,0,1): 89460 render floats, 12780 collision verts
-[2025-10-07 23:24:04.652] [Client] Requesting chunk (-3,1,1)
-[2025-10-07 23:24:04.665] [Prediction] Error: 13.8cm - reconciling
-[2025-10-07 23:24:04.665] [Prediction] Replayed 2 inputs
-[2025-10-07 23:24:04.712] [Prediction] Error: 21.0cm - reconciling
-[2025-10-07 23:24:04.713] [Prediction] Replayed 7 inputs
-[2025-10-07 23:24:04.717] [Prediction] Error: 22.7cm - reconciling
-[2025-10-07 23:24:04.718] [Prediction] Replayed 4 inputs
+   at Aetheris.Client.ListenForUdpAsync(CancellationToken token) in /home/kirby/Programming/Aetheris/Net/Client/Client.cs:line 241
+[2025-10-08 01:04:59.362] [Prediction] Error: 106.1cm - reconciling
+[2025-10-08 01:04:59.367] [Prediction] Replayed 17 inputs
+[2025-10-08 01:04:59.368] [Prediction] Error: 222.5cm - reconciling
+[2025-10-08 01:04:59.374] [Prediction] Replayed 15 inputs
+[2025-10-08 01:04:59.375] [Prediction] Error: 117.9cm - reconciling
+[2025-10-08 01:04:59.381] [Prediction] Replayed 12 inputs
+[2025-10-08 01:04:59.381] [Prediction] Error: 106.7cm - reconciling
+[2025-10-08 01:04:59.383] [Prediction] Replayed 10 inputs
+[2025-10-08 01:04:59.387] [Prediction] Error: 66.4cm - reconciling
+[2025-10-08 01:04:59.388] [Prediction] Replayed 6 inputs
+[2025-10-08 01:04:59.389] [Prediction] Error: 38.7cm - reconciling
+[2025-10-08 01:04:59.390] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:59.504] [Prediction] Error: 14.3cm - reconciling
+[2025-10-08 01:04:59.505] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.535] [Prediction] Error: 32.3cm - reconciling
+[2025-10-08 01:04:59.535] [Prediction] Replayed 2 inputs
+[2025-10-08 01:04:59.627] [Prediction] Error: 28.9cm - reconciling
+[2025-10-08 01:04:59.628] [Prediction] Replayed 3 inputs
+[2025-10-08 01:04:59.666] [Prediction] Error: 52.4cm - reconciling
+[2025-10-08 01:04:59.667] [Prediction] Replayed 5 inputs
+[2025-10-08 01:04:59.668] [Prediction] Error: 12.5cm - reconciling
+[2025-10-08 01:04:59.668] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.767] [Prediction] Error: 18.0cm - reconciling
+[2025-10-08 01:04:59.767] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.792] [Prediction] Error: 29.7cm - reconciling
+[2025-10-08 01:04:59.792] [Prediction] Replayed 1 inputs
+[2025-10-08 01:04:59.802] [Prediction] Error: 11.6cm - reconciling
+[2025-10-08 01:04:59.802] [Prediction] Replayed 1 inputs

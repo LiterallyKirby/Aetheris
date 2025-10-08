@@ -2,6 +2,18 @@ using System;
 using System.Runtime.CompilerServices;
 using static FastNoiseLite;
 
+using System.Buffers;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Numerics;
+using System.Collections.Generic;
+
+
 namespace Aetheris
 {
     public static class WorldGen
@@ -28,7 +40,12 @@ namespace Aetheris
             public float CaveIntensity;
             public float Moisture;
         }
+        private static ConcurrentDictionary<(int, int, int), BlockType> modifiedBlocks = new();
 
+        public static void SetBlock(int x, int y, int z, BlockType blockType)
+        {
+            modifiedBlocks[(x, y, z)] = blockType;
+        }
         public enum Biome
         {
             Plains,
@@ -115,7 +132,7 @@ namespace Aetheris
                 float dD = MathF.Abs(biomeValue - cDesert);
                 float dM = MathF.Abs(biomeValue - cMountains);
                 float minDist = MathF.Min(MathF.Min(dP, dF), MathF.Min(dD, dM));
-                
+
                 wPlains = (dP == minDist) ? 1f : 0f;
                 wForest = (dF == minDist) ? 1f : 0f;
                 wDesert = (dD == minDist) ? 1f : 0f;
@@ -127,6 +144,88 @@ namespace Aetheris
             wForest = rawForest / sum;
             wDesert = rawDesert / sum;
             wMountains = rawMountains / sum;
+        }
+private static ConcurrentDictionary<(int, int, int), float> densityModifications = new();
+      public static void RemoveBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
+        {
+            // Create a spherical density reduction
+            int iRadius = (int)Math.Ceiling(radius);
+            
+            for (int dx = -iRadius; dx <= iRadius; dx++)
+            {
+                for (int dy = -iRadius; dy <= iRadius; dy++)
+                {
+                    for (int dz = -iRadius; dz <= iRadius; dz++)
+                    {
+                        int px = x + dx;
+                        int py = y + dy;
+                        int pz = z + dz;
+                        
+                        // Calculate distance from center
+                        float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
+                        
+                        if (dist <= radius)
+                        {
+                            // Smooth falloff based on distance
+                            float falloff = 1f - (dist / radius);
+                            falloff = falloff * falloff; // Quadratic falloff for smoother edges
+                            
+                            float reduction = strength * falloff;
+                            
+                            var key = (px, py, pz);
+                            densityModifications.AddOrUpdate(
+                                key,
+                                -reduction,
+                                (k, existing) => existing - reduction
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+   public static void AddBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
+        {
+            int iRadius = (int)Math.Ceiling(radius);
+            
+            for (int dx = -iRadius; dx <= iRadius; dx++)
+            {
+                for (int dy = -iRadius; dy <= iRadius; dy++)
+                {
+                    for (int dz = -iRadius; dz <= iRadius; dz++)
+                    {
+                        int px = x + dx;
+                        int py = y + dy;
+                        int pz = z + dz;
+                        
+                        float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
+                        
+                        if (dist <= radius)
+                        {
+                            float falloff = 1f - (dist / radius);
+                            falloff = falloff * falloff;
+                            
+                            float increase = strength * falloff;
+                            
+                            var key = (px, py, pz);
+                            densityModifications.AddOrUpdate(
+                                key,
+                                increase,
+                                (k, existing) => existing + increase
+                            );
+                        }
+                    }
+                }
+            }
+        }
+       
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float GetDensityModification(int x, int y, int z)
+        {
+            if (densityModifications.TryGetValue((x, y, z), out float mod))
+                return mod;
+            return 0f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -147,7 +246,7 @@ namespace Aetheris
 
             float surfaceNoise = terrainNoise.GetNoise(x, z);
             float detailNoise = terrainDetailNoise.GetNoise(x, z) * 0.15f;
-            
+
             float surfaceY = baseHeight + (surfaceNoise * amplitude) + (detailNoise * amplitude * 0.3f);
 
             float ddP = 6f, ddF = 7f, ddD = 4f, ddM = 3f;
@@ -235,7 +334,7 @@ namespace Aetheris
 
                 // 3D worm caves using intersection for better continuity
                 float worm = MathF.Abs(r1) * MathF.Abs(r2);
-                
+
                 // Cavern formation
                 float cavern = n1 * n2;
 
@@ -259,7 +358,7 @@ namespace Aetheris
 
                 // CRITICAL: Use smooth, continuous functions instead of hard thresholds
                 // This prevents gaps at chunk boundaries
-                
+
                 // Surface-connected caves (very rare)
                 if (y > columnData.SurfaceY - 15)
                 {
@@ -272,7 +371,7 @@ namespace Aetheris
                 {
                     float wormIntensity = SmoothThreshold(worm, 0.12f, 0.03f);
                     density -= wormIntensity * 16f * caveFactor;
-                    
+
                     // Chambers with smooth transitions
                     if (cavern > 0.4f && nL > 0.55f)
                     {
@@ -342,12 +441,12 @@ namespace Aetheris
         {
             if (value < threshold - smoothness) return 0f;
             if (value > threshold + smoothness) return value - threshold;
-            
+
             // Smooth hermite interpolation in the transition zone
             float t = (value - (threshold - smoothness)) / (2f * smoothness);
             t = Clamp(t, 0f, 1f);
             float smooth = t * t * (3f - 2f * t);
-            
+
             return smooth * (value - (threshold - smoothness));
         }
 
@@ -370,7 +469,7 @@ namespace Aetheris
                     Biome.Plains => BlockType.Grass,
                     Biome.Forest => BlockType.Grass,
                     Biome.Desert => BlockType.Sand,
-                    Biome.Mountains => (columnData.SurfaceY > 50) ? BlockType.Snow : 
+                    Biome.Mountains => (columnData.SurfaceY > 50) ? BlockType.Snow :
                                        (columnData.SurfaceY > 42) ? BlockType.Stone : BlockType.Grass,
                     _ => BlockType.Grass
                 };
@@ -399,6 +498,22 @@ namespace Aetheris
             return BlockType.Stone;
         }
 
+   [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SampleDensity(int x, int y, int z)
+        {
+            if (!initialized) Initialize();
+            
+            // Get base procedural density
+            var columnData = GetColumnData(x, z);
+            float baseDensity = SampleDensityFast(x, y, z, columnData);
+            
+            // Apply any modifications
+            float modification = GetDensityModification(x, y, z);
+            
+            return baseDensity + modification;
+        }
+        
+
         // Legacy overloads
         public static BlockType GetBlockType(int x, int y, int z, float density)
         {
@@ -408,17 +523,17 @@ namespace Aetheris
 
         public static BlockType GetBlockType(int x, int y, int z)
         {
+            // Check modified blocks first
+            if (modifiedBlocks.TryGetValue((x, y, z), out var modifiedBlock))
+                return modifiedBlock;
+
+            // Fall back to procedural generation
             var columnData = GetColumnData(x, z);
             float density = SampleDensityFast(x, y, z, columnData);
             return GetBlockType(x, y, z, density, columnData);
         }
 
-        public static float SampleDensity(int x, int y, int z)
-        {
-            if (!initialized) Initialize();
-            var columnData = GetColumnData(x, z);
-            return SampleDensityFast(x, y, z, columnData);
-        }
+    
 
         public static bool IsSolid(int x, int y, int z)
         {

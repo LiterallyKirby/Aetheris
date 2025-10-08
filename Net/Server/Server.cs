@@ -252,15 +252,114 @@ namespace Aetheris
         }
 
         // Add PositionAck to UdpPacketType enum
+
         private enum UdpPacketType : byte
         {
             PlayerPosition = 1,
             PlayerInput = 2,
             EntityUpdate = 3,
             KeepAlive = 4,
-            PositionAck = 5  // New packet type
+            PositionAck = 5,
+            BlockBreak = 6  // NEW
         }
 
+   private void HandleBlockBreakPacket(byte[] data, IPEndPoint remoteEndPoint)
+{
+    if (data.Length < 13) return;
+
+    int x = BitConverter.ToInt32(data, 1);
+    int y = BitConverter.ToInt32(data, 5);
+    int z = BitConverter.ToInt32(data, 9);
+
+    Console.WriteLine($"[Server] Block broken at ({x}, {y}, {z})");
+
+    // Use density-based removal for smoother terrain modification
+    WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+
+    // Invalidate affected chunk meshes
+    InvalidateChunksAroundBlock(x, y, z, radius: 1.5f);
+
+    // Broadcast to all clients
+    _ = BroadcastBlockBreak(x, y, z);
+}
+
+private void InvalidateChunksAroundBlock(int x, int y, int z, float radius)
+{
+    int affectRadius = (int)Math.Ceiling(radius);
+    HashSet<ChunkCoord> chunksToInvalidate = new HashSet<ChunkCoord>();
+    
+    for (int dx = -affectRadius; dx <= affectRadius; dx++)
+    {
+        for (int dy = -affectRadius; dy <= affectRadius; dy++)
+        {
+            for (int dz = -affectRadius; dz <= affectRadius; dz++)
+            {
+                int wx = x + dx;
+                int wy = y + dy;
+                int wz = z + dz;
+                
+                int cx = wx / ServerConfig.CHUNK_SIZE;
+                int cy = wy / ServerConfig.CHUNK_SIZE_Y;
+                int cz = wz / ServerConfig.CHUNK_SIZE;
+                
+                chunksToInvalidate.Add(new ChunkCoord(cx, cy, cz));
+            }
+        }
+    }
+    
+    foreach (var coord in chunksToInvalidate)
+    {
+        meshCache.TryRemove(coord, out _);
+        Log($"[Server] Invalidated chunk {coord} due to block break");
+    }
+}
+
+        // Add this method to Server.cs
+
+        private async Task BroadcastBlockBreak(int x, int y, int z)
+        {
+            if (udpServer == null) return;
+
+            // Packet format:
+            // [0] = PacketType (6 = BlockBreak)
+            // [1-4] = Block X
+            // [5-8] = Block Y
+            // [9-12] = Block Z
+            byte[] packet = new byte[13];
+            packet[0] = (byte)UdpPacketType.BlockBreak;
+
+            BitConverter.TryWriteBytes(packet.AsSpan(1, 4), x);
+            BitConverter.TryWriteBytes(packet.AsSpan(5, 4), y);
+            BitConverter.TryWriteBytes(packet.AsSpan(9, 4), z);
+
+            // Broadcast to all connected players
+            foreach (var player in playerStates.Values)
+            {
+                if (player.EndPoint != null)
+                {
+                    try
+                    {
+                        await udpServer.SendAsync(packet, packet.Length, player.EndPoint);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"[UDP] Error broadcasting block break to {player.PlayerId}: {ex.Message}");
+                    }
+                }
+            }
+
+            Log($"[Server] Broadcasted block break at ({x}, {y}, {z}) to {playerStates.Count} players");
+        }
+
+        private void InvalidateChunkAt(int x, int y, int z)
+        {
+            int cx = x / ServerConfig.CHUNK_SIZE;
+            int cy = y / ServerConfig.CHUNK_SIZE_Y;
+            int cz = z / ServerConfig.CHUNK_SIZE;
+
+            var coord = new ChunkCoord(cx, cy, cz);
+            meshCache.TryRemove(coord, out _);
+        }
 
         private void HandlePlayerPositionPacket(byte[] data, IPEndPoint remoteEndPoint)
         {
@@ -501,6 +600,9 @@ namespace Aetheris
                         break;
                     case UdpPacketType.KeepAlive:
                         HandleKeepAlivePacket(data, remoteEndPoint);
+                        break;
+                    case UdpPacketType.BlockBreak:
+                        HandleBlockBreakPacket(data, remoteEndPoint);
                         break;
                     default:
                         Log($"[[UDP]] Unknown packet type: {packetType}");

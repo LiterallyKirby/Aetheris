@@ -23,6 +23,7 @@ namespace Aetheris
         private float chunkUpdateTimer = 0f;
         private const float CHUNK_UPDATE_INTERVAL = 0.5f;
 
+        private MiningSystem? miningSystem;
         // Logging
         private const string LogFileName = "physics_debug.log";
         private StreamWriter? logWriter;
@@ -118,7 +119,7 @@ namespace Aetheris
             GL.CullFace(TriangleFace.Back);
             GL.FrontFace(FrontFaceDirection.Ccw);
             CursorState = CursorState.Grabbed;
-
+            miningSystem = new MiningSystem(player, this, OnBlockMined);
             // Load atlas
             string[] atlasPaths = new[]
             {
@@ -171,6 +172,91 @@ namespace Aetheris
             Console.WriteLine($"[Game] Loaded {loadedChunks.Count} chunks");
         }
 
+        private void OnBlockMined(Vector3 blockPos, BlockType blockType)
+        {
+            Console.WriteLine($"[Client] Mined {blockType} at {blockPos}");
+
+            int x = (int)blockPos.X;
+            int y = (int)blockPos.Y;
+            int z = (int)blockPos.Z;
+
+            // Send to server
+            if (client != null)
+            {
+                byte[] packet = new byte[13];
+                packet[0] = 6; // BlockBreak
+                BitConverter.TryWriteBytes(packet.AsSpan(1, 4), x);
+                BitConverter.TryWriteBytes(packet.AsSpan(5, 4), y);
+                BitConverter.TryWriteBytes(packet.AsSpan(9, 4), z);
+
+                _ = client.SendUdpAsync(packet);
+            }
+
+            // Client-side prediction: reduce density in the area (SMOOTH REMOVAL)
+            // radius: 1.5 = affects ~3x3x3 area, strength: 3.0 = strong enough to remove solid block
+            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+
+            // Regenerate affected chunks
+            RegenerateMeshForBlock(blockPos);
+        }
+
+        public void RegenerateMeshForBlock(Vector3 blockPos)
+        {
+            int blockX = (int)blockPos.X;
+            int blockY = (int)blockPos.Y;
+            int blockZ = (int)blockPos.Z;
+
+            // Calculate affected area based on mining radius
+            float miningRadius = 1.5f;
+            int affectRadius = (int)Math.Ceiling(miningRadius);
+
+            // Determine all chunks that need regeneration
+            HashSet<(int, int, int)> chunksToUpdate = new HashSet<(int, int, int)>();
+
+            for (int dx = -affectRadius; dx <= affectRadius; dx++)
+            {
+                for (int dy = -affectRadius; dy <= affectRadius; dy++)
+                {
+                    for (int dz = -affectRadius; dz <= affectRadius; dz++)
+                    {
+                        int wx = blockX + dx;
+                        int wy = blockY + dy;
+                        int wz = blockZ + dz;
+
+                        int cx = (int)Math.Floor((float)wx / ClientConfig.CHUNK_SIZE);
+                        int cy = (int)Math.Floor((float)wy / ClientConfig.CHUNK_SIZE_Y);
+                        int cz = (int)Math.Floor((float)wz / ClientConfig.CHUNK_SIZE);
+
+                        chunksToUpdate.Add((cx, cy, cz));
+                    }
+                }
+            }
+
+            Console.WriteLine($"[Client] Regenerating {chunksToUpdate.Count} chunks affected by mining at ({blockX}, {blockY}, {blockZ})");
+
+            // Regenerate all affected chunks
+            foreach (var (cx, cy, cz) in chunksToUpdate)
+            {
+                RegenerateChunkMesh(cx, cy, cz);
+            }
+        }
+
+        private void RegenerateChunkMesh(int cx, int cy, int cz)
+        {
+            var coord = new ChunkCoord(cx, cy, cz);
+
+            // Get existing chunk or generate new one
+            var chunk = chunkManager.GetOrGenerateChunk(coord);
+
+            // Generate new mesh with updated density field (WorldGen.SampleDensity now applies modifications)
+            var meshFloats = MarchingCubes.GenerateMesh(chunk, coord, chunkManager, 0.5f);
+
+            // Update renderer immediately
+            Renderer.LoadMeshForChunk(cx, cy, cz, meshFloats);
+
+            Console.WriteLine($"[Client] Regenerated chunk ({cx}, {cy}, {cz}) - {meshFloats.Length / 7} vertices");
+        }
+
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
@@ -214,7 +300,10 @@ namespace Aetheris
                 Vector3 playerChunk = player.GetPlayersChunk();
                 client?.UpdateLoadedChunks(playerChunk, renderDistance);
             }
-
+            if (miningSystem != null)
+            {
+                miningSystem.Update((float)e.Time, MouseState, IsFocused);
+            }
             // Render distance controls
             if (KeyboardState.IsKeyPressed(Keys.Equal) || KeyboardState.IsKeyPressed(Keys.KeyPadAdd))
             {
