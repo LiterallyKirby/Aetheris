@@ -35,3 +35,7 @@
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuPhysics.dll
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/BepuUtilities.dll
 /home/kirby/Programming/Aetheris/bin/Debug/net9.0/Jitter2.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/StbTrueTypeSharp.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/assets/font.ttf
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/SixLabors.Fonts.dll
+/home/kirby/Programming/Aetheris/bin/Debug/net9.0/SixLabors.ImageSharp.Drawing.dll

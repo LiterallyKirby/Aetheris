@@ -1,8 +1,9 @@
 ===== Aetheris Crash Report =====
-Time: 10/7/2025 8:42:35 PM
+Time: 10/7/2025 11:24:04 PM
 Message: One or more errors occurred. (Operation canceled)
 Source: System.Private.CoreLib
 Stack Trace:
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
    at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout, CancellationToken cancellationToken)
    at System.Threading.Tasks.Task.Wait(TimeSpan timeout)

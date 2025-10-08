@@ -1,0 +1,25 @@
+[21:31:54.018] [[Server]] Log file created: server_log_20251007_213153.txt
+[21:31:54.021] [[Server]] Initializing world generation...
+[21:31:54.030] [[Server]] UDP listening on port 42070
+[21:31:54.039] [[Server]] Listening on port 42069 @ 60 TPS
+[21:31:54.039] [[Server]] Performance timing enabled - waiting for connections...
+[21:31:54.058] [[Server]] Tick 0 | Cache: 0/20000
+[21:31:55.610] [[Generation]] (0,0,0): Render verts=16506, Collision verts=16506
+[21:31:55.622] [[Timing]] Chunk (0,0,0): Chunk=152.60ms Mesh=110.97ms Send=5.65ms Total=281.29ms
+[21:31:55.865] [[Generation]] (1,0,0): Render verts=13323, Collision verts=13323
+[21:31:55.869] [[Timing]] Chunk (1,0,0): Chunk=114.08ms Mesh=125.29ms Send=3.82ms Total=243.32ms
+[21:31:56.145] [[Generation]] (0,0,1): Render verts=13995, Collision verts=13995
+[21:31:56.149] [[Timing]] Chunk (0,0,1): Chunk=123.09ms Mesh=149.79ms Send=4.13ms Total=277.14ms
+[21:31:56.378] [[Generation]] (0,0,-1): Render verts=13143, Collision verts=13143
+[21:31:56.380] [[Timing]] Chunk (0,0,-1): Chunk=128.22ms Mesh=98.68ms Send=2.45ms Total=229.48ms
+[21:31:56.651] [[Generation]] (-1,0,0): Render verts=18186, Collision verts=18186
+[21:31:56.657] [[Timing]] Chunk (-1,0,0): Chunk=149.51ms Mesh=114.74ms Send=5.72ms Total=270.12ms
+[21:31:56.932] [[Generation]] (1,0,1): Render verts=13893, Collision verts=13893
+[21:31:56.938] [[Timing]] Chunk (1,0,1): Chunk=125.80ms Mesh=145.41ms Send=5.82ms Total=277.16ms
+[21:31:57.218] [[Generation]] (1,0,-1): Render verts=13056, Collision verts=13056
+[21:31:57.224] [[Timing]] Chunk (1,0,-1): Chunk=139.90ms Mesh=136.82ms Send=5.82ms Total=282.68ms
+[21:31:57.554] [[Generation]] (-1,0,1): Render verts=18120, Collision verts=18120
+[21:31:57.558] [[Timing]] Chunk (-1,0,1): Chunk=190.64ms Mesh=136.38ms Send=4.21ms Total=331.36ms
+[21:31:57.790] [[Generation]] (-1,0,-1): Render verts=12909, Collision verts=12909
+[21:31:57.793] [[Timing]] Chunk (-1,0,-1): Chunk=113.66ms Mesh=115.05ms Send=3.02ms Total=231.91ms
+[21:31:58.020] [[UDP]] Loop cancelled

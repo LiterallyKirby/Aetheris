@@ -60,13 +60,25 @@
               "target": "Package",
               "version": "[4.9.4, )"
             },
+            "SixLabors.Fonts": {
+              "target": "Package",
+              "version": "[2.1.3, )"
+            },
             "SixLabors.ImageSharp": {
               "target": "Package",
               "version": "[3.1.11, )"
             },
+            "SixLabors.ImageSharp.Drawing": {
+              "target": "Package",
+              "version": "[2.1.7, )"
+            },
             "StbImageSharp": {
               "target": "Package",
               "version": "[2.30.15, )"
+            },
+            "StbTrueTypeSharp": {
+              "target": "Package",
+              "version": "[1.26.12, )"
             }
           },
           "imports": [
