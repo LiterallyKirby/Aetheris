@@ -587,8 +587,8 @@ void main()
                     GL.BindVertexArray(md.Vao);
                     GL.DrawArrays(PrimitiveType.Triangles, 0, md.VertexCount);
                 }
-                GL.BindVertexArray(0);
-                GL.UseProgram(0);
+
+
             }
             // === ORIGINAL SHADER PATH (Fallback) ===
             else
@@ -640,8 +640,8 @@ void main()
                     GL.DrawArrays(PrimitiveType.Triangles, 0, md.VertexCount);
                 }
 
-                GL.BindVertexArray(0);
-                GL.UseProgram(0);
+
+
             }
 
             frameCount++;

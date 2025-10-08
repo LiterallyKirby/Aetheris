@@ -1,8 +1,0 @@
-[18:29:45.301] [[Server]] Log file created: server_log_20251007_182945.txt
-[18:29:45.302] [[Server]] Initializing world generation...
-[18:29:45.309] [[Server]] UDP listening on port 42070
-[18:29:45.315] [[Server]] Listening on port 42069 @ 60 TPS
-[18:29:45.315] [[Server]] Performance timing enabled - waiting for connections...
-[18:29:45.335] [[Server]] Tick 0 | Cache: 0/20000
-[18:29:50.333] [[Server]] Tick 300 | Cache: 0/20000
-[18:29:50.839] [[UDP]] Loop cancelled

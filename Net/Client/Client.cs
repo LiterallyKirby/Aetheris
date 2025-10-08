@@ -50,7 +50,7 @@ namespace Aetheris
 
             loaderTask = Task.Run(() => ChunkLoaderLoopAsync(cts.Token));
             updateTask = Task.Run(() => ChunkUpdateLoopAsync(cts.Token));
-_ = Task.Run(() => ListenForUdpAsync(cts.Token));
+            _ = Task.Run(() => ListenForUdpAsync(cts.Token));
             game.RunGame();
             Cleanup();
         }
@@ -166,8 +166,11 @@ _ = Task.Run(() => ListenForUdpAsync(cts.Token));
         {
             if (data.Length < 38) return;
 
-            // Extract player ID (simplified - first 4 bytes)
-            string playerId = BitConverter.ToUInt32(data, 1).ToString();
+            // Extract player ID - convert 4 bytes to a proper hex string for uniqueness
+            uint playerIdHash = BitConverter.ToUInt32(data, 1);
+            string playerId = playerIdHash.ToString("X8"); // Use hex format for better uniqueness
+
+            Console.WriteLine($"[Client] Received remote player update: ID={playerId}");
 
             var update = new ServerPlayerUpdate
             {
@@ -188,7 +191,7 @@ _ = Task.Run(() => ListenForUdpAsync(cts.Token));
 
             game?.NetworkController?.OnRemotePlayerUpdate(playerId, update);
         }
-    
+
 
         public async Task SendUdpAsync(byte[] packet)
         {
@@ -196,8 +199,8 @@ _ = Task.Run(() => ListenForUdpAsync(cts.Token));
             {
                 try
                 {
-                  await udp.SendAsync(packet, packet.Length);
-		}
+                    await udp.SendAsync(packet, packet.Length);
+                }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"[Client] UDP send error: {ex.Message}");
@@ -228,7 +231,7 @@ _ = Task.Run(() => ListenForUdpAsync(cts.Token));
         }
 
 
-  
+
 
         private async Task ChunkUpdateLoopAsync(CancellationToken token)
         {

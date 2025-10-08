@@ -67,16 +67,44 @@ namespace Aetheris
             
             if (players.Count == 0) return;
             
-            Console.WriteLine($"[EntityRenderer] Rendering {players.Count} players, usePSX={usePSXShader}");
+            // DETAILED LOGGING FOR DEBUGGING
+            Console.WriteLine($"[EntityRenderer] === RENDER FRAME ===");
+            Console.WriteLine($"[EntityRenderer] Total players in dict: {players.Count}");
+            Console.WriteLine($"[EntityRenderer] Local player position: {localPlayerPos}");
+            Console.WriteLine($"[EntityRenderer] usePSXShader flag: {usePSXShader}");
             
-            // Ensure shader is active
-            if (!usePSXShader)
+            // Check what shader is actually bound
+            GL.GetInteger(GetPName.CurrentProgram, out int currentShader);
+            Console.WriteLine($"[EntityRenderer] Currently bound shader program: {currentShader}");
+            
+            foreach (var kvp in players)
             {
-                Console.WriteLine("[EntityRenderer] ERROR: PSX shader not active, skipping player render");
+                Vector3 pos = kvp.Value.GetDisplayPosition();
+                float dist = (pos - localPlayerPos).Length;
+                Console.WriteLine($"[EntityRenderer]   Player {kvp.Key}: pos={pos}, dist={dist:F1}");
+            }
+            
+            // Ensure shader is active - check the actual OpenGL state
+            if (currentShader == 0)
+            {
+                Console.WriteLine("[EntityRenderer] ERROR: No shader program bound! Cannot render players.");
+                return;
+            }
+            
+            // Get uniform locations from the currently active shader
+            int locModel = GL.GetUniformLocation(currentShader, "uModel");
+            int locNormalMatrix = GL.GetUniformLocation(currentShader, "uNormalMatrix");
+            
+            Console.WriteLine($"[EntityRenderer] Shader uniform locations - uModel: {locModel}, uNormalMatrix: {locNormalMatrix}");
+            
+            if (locModel < 0)
+            {
+                Console.WriteLine("[EntityRenderer] ERROR: uModel uniform not found in shader!");
                 return;
             }
             
             GL.BindVertexArray(playerVao);
+            Console.WriteLine($"[EntityRenderer] Bound player VAO: {playerVao}");
             
             float maxDistSq = MaxRenderDistance * MaxRenderDistance;
             int rendered = 0;
@@ -86,29 +114,29 @@ namespace Aetheris
                 Vector3 playerPos = player.GetDisplayPosition();
                 float distSq = (playerPos - localPlayerPos).LengthSquared;
                 
-                Console.WriteLine($"[EntityRenderer] Player at {playerPos}, local at {localPlayerPos}, distSq={distSq}");
-                
                 // Distance culling
                 if (distSq > maxDistSq) 
                 {
-                    Console.WriteLine($"[EntityRenderer] Player too far, skipping");
+                    Console.WriteLine($"[EntityRenderer] Player at {playerPos} too far (dist={MathF.Sqrt(distSq):F1}), skipping");
                     continue;
                 }
                 
                 // Get model matrix for this player
                 Matrix4 model = player.GetModelMatrix();
                 
-                Console.WriteLine($"[EntityRenderer] Model matrix: {model}");
+                // EXTRACT POSITION FROM MODEL MATRIX FOR DEBUGGING
+                Vector3 extractedPos = new Vector3(model.M41, model.M42, model.M43);
+                Console.WriteLine($"[EntityRenderer] Player display pos: {playerPos}, Extracted from matrix: {extractedPos}");
+                Console.WriteLine($"[EntityRenderer] Model matrix M41-M43: ({model.M41:F2}, {model.M42:F2}, {model.M43:F2})");
                 
                 // Set model matrix in active shader
-                psxEffects.SetModelMatrix(model);
+                GL.UniformMatrix4(locModel, false, ref model);
                 
-                // Set normal matrix too
-                Matrix3 normalMat = new Matrix3(model);
-                normalMat = Matrix3.Transpose(normalMat.Inverted());
-                int locNormalMatrix = GL.GetUniformLocation(GL.GetInteger(GetPName.CurrentProgram), "uNormalMatrix");
+                // Set normal matrix if available
                 if (locNormalMatrix >= 0)
                 {
+                    Matrix3 normalMat = new Matrix3(model);
+                    normalMat = Matrix3.Transpose(normalMat.Inverted());
                     GL.UniformMatrix3(locNormalMatrix, false, ref normalMat);
                 }
                 
@@ -116,7 +144,7 @@ namespace Aetheris
                 GL.DrawArrays(PrimitiveType.Triangles, 0, playerVertexCount);
                 rendered++;
                 
-                Console.WriteLine($"[EntityRenderer] Drew player with {playerVertexCount} vertices");
+                Console.WriteLine($"[EntityRenderer] ✓ Drew player at {playerPos} with {playerVertexCount} vertices");
             }
             
             GL.BindVertexArray(0);
@@ -177,7 +205,7 @@ namespace Aetheris
             
             GL.BindVertexArray(0);
             
-            Console.WriteLine($"[EntityRenderer] Generated player mesh: {playerVertexCount} vertices");
+            Console.WriteLine($"[EntityRenderer] Generated player mesh: {playerVertexCount} vertices, VAO={playerVao}, VBO={playerVbo}");
         }
         
         private void GenerateCylinder(List<float> verts, float radius, float height,
@@ -408,13 +436,29 @@ namespace Aetheris
         
         public Matrix4 GetModelMatrix()
         {
-            // Build transformation: Translate then Rotate (order matters!)
-            // In OpenTK, multiplication is RIGHT-TO-LEFT, so translation * rotation
-            Matrix4 rotation = Matrix4.CreateRotationY(MathHelper.DegreesToRadians(displayYaw));
-            Matrix4 translation = Matrix4.CreateTranslation(displayPosition);
+            // Manually build the model matrix to avoid any confusion
+            // We want: Translate to world position, then rotate around Y axis at that position
             
-            // Correct order: apply rotation first, then translation
-            return translation * rotation;
+            // Start with identity
+            Matrix4 model = Matrix4.Identity;
+            
+            // Apply rotation around Y axis
+            float yawRad = MathHelper.DegreesToRadians(displayYaw);
+            float cos = MathF.Cos(yawRad);
+            float sin = MathF.Sin(yawRad);
+            
+            // Rotation matrix (column-major for OpenGL)
+            model.M11 = cos;
+            model.M13 = sin;
+            model.M31 = -sin;
+            model.M33 = cos;
+            
+            // Translation (last column)
+            model.M41 = displayPosition.X;
+            model.M42 = displayPosition.Y;
+            model.M43 = displayPosition.Z;
+            
+            return model;
         }
         
         public bool IsStale(long currentTicks, long maxAgeMs = 5000)

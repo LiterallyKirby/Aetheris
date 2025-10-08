@@ -258,29 +258,34 @@ namespace Aetheris
                 WorldGen.PrintBiomeAt(px, pz);
                 Console.WriteLine($"Player at: {player.Position}");
             }
-
             var projection = Matrix4.CreatePerspectiveFieldOfView(
                 OpenTK.Mathematics.MathHelper.DegreesToRadians(60f),
                 Size.X / (float)Size.Y,
                 0.1f,
                 1000f);
-
             var view = player.GetViewMatrix();
 
-            // === RENDER TERRAIN ===
+            // === RENDER TERRAIN (sets up shader and keeps it active) ===
             Renderer.Render(projection, view, player.Position);
 
-            // === RENDER OTHER PLAYERS ===
+            // === RENDER OTHER PLAYERS (shader still active) ===
             if (entityRenderer != null && networkController != null)
             {
                 var remotePlayers = networkController.RemotePlayers;
-                entityRenderer.RenderPlayers(
-                    remotePlayers as Dictionary<string, RemotePlayer>,
-                    Renderer.psxEffects,
-                    player.Position,
-                    Renderer.UsePSXEffects
-                );
+                if (remotePlayers != null && remotePlayers.Count > 0)
+                {
+                    entityRenderer.RenderPlayers(
+                        remotePlayers as Dictionary<string, RemotePlayer>,
+                        Renderer.psxEffects,
+                        player.Position,
+                        Renderer.UsePSXEffects
+                    );
+                }
             }
+
+            // === CLEANUP ===
+            GL.BindVertexArray(0);
+            GL.UseProgram(0);
 
             SwapBuffers();
         }
