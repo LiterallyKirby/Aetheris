@@ -15,16 +15,40 @@ namespace Aetheris
                 bool runServer = args.Contains("--server");
                 bool runClient = args.Contains("--client");
                 
-                // Default: run both if no flags
+                // Show graphical menu if no command line flags
                 if (!runServer && !runClient)
                 {
-                    runServer = true;
-                    runClient = true;
+                    Console.WriteLine("[INFO] Launching main menu...");
+                    
+                    using (var menu = new MenuWindow())
+                    {
+                        menu.Run();
+                        
+                        // Handle menu result
+                        switch (menu.Result)
+                        {
+                            case MenuResult.SinglePlayer:
+                                runServer = true;
+                                runClient = true;
+                                Console.WriteLine("[INFO] Starting Single Player mode...");
+                                break;
+                            
+                            case MenuResult.Multiplayer:
+                                runClient = true;
+                                Console.WriteLine("[INFO] Starting Multiplayer Client...");
+                                break;
+                            
+                            case MenuResult.Exit:
+                            case MenuResult.None:
+                                Console.WriteLine("[INFO] Exiting Aetheris.");
+                                return;
+                        }
+                    }
                 }
-
+                
                 Task? serverTask = null;
                 Server? server = null;
-
+                
                 // Start server if requested
                 if (runServer)
                 {
@@ -32,18 +56,17 @@ namespace Aetheris
                     serverTask = Task.Run(() => server.RunServerAsync());
                     Console.WriteLine("[INFO] Server started.");
                 }
-
+                
                 // Give the server a moment to initialize before starting the client
                 if (runServer && runClient)
                     Thread.Sleep(500);
-
+                
                 // Start client (OpenTK must stay on the main thread)
                 if (runClient)
                 {
                     Console.WriteLine("[INFO] Launching client...");
                     var client = new Client();
                     client.Run(); // This blocks until the game window closes
-                    // Note: client.Run() now handles game creation internally
                 }
                 else if (runServer)
                 {
@@ -56,7 +79,7 @@ namespace Aetheris
                         cts.Cancel();
                         Console.WriteLine("\n[INFO] Shutdown requested...");
                     };
-
+                    
                     try
                     {
                         cts.Token.WaitHandle.WaitOne();
@@ -66,7 +89,7 @@ namespace Aetheris
                         // Expected
                     }
                 }
-
+                
                 // Stop the server if it was started
                 if (server != null)
                 {
@@ -74,7 +97,7 @@ namespace Aetheris
                     server.Stop();
                     serverTask?.Wait(TimeSpan.FromSeconds(2));
                 }
-
+                
                 Console.WriteLine("[INFO] Program finished.");
             }
             catch (Exception ex)
