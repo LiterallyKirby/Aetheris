@@ -140,7 +140,7 @@ namespace Aetheris
         }
 
         // In Client.cs
-        private void HandleRemoteBlockBreak(byte[] data)
+         private void HandleRemoteBlockBreak(byte[] data)
         {
             if (data.Length < 13) return;
 
@@ -153,9 +153,14 @@ namespace Aetheris
             // Update local density field with smooth removal
             WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
 
-            // Regenerate affected chunks
+            // Queue regeneration on the game's main thread
             var blockPos = new Vector3(x, y, z);
-            game?.RegenerateMeshForBlock(blockPos);
+            _ = System.Threading.Tasks.Task.Run(() =>
+            {
+                // Small delay to ensure modifications complete
+                System.Threading.Thread.Sleep(10);
+                game?.RegenerateMeshForBlock(blockPos);
+            });
         }
 
         private void HandleServerPositionUpdate(byte[] data)

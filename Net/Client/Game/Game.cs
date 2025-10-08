@@ -172,6 +172,9 @@ namespace Aetheris
             Console.WriteLine($"[Game] Loaded {loadedChunks.Count} chunks");
         }
 
+        private readonly Queue<Action> pendingMainThreadActions = new Queue<Action>();
+        private readonly object mainThreadLock = new object();
+
         private void OnBlockMined(Vector3 blockPos, BlockType blockType)
         {
             Console.WriteLine($"[Client] Mined {blockType} at {blockPos}");
@@ -193,11 +196,13 @@ namespace Aetheris
             }
 
             // Client-side prediction: reduce density in the area (SMOOTH REMOVAL)
-            // radius: 1.5 = affects ~3x3x3 area, strength: 3.0 = strong enough to remove solid block
-            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+            WorldGen.RemoveBlock(x, y, z, radius: 5.0f, strength: 3.0f);
 
-            // Regenerate affected chunks
-            RegenerateMeshForBlock(blockPos);
+            // Queue regeneration for next frame to ensure modifications complete
+            lock (mainThreadLock)
+            {
+                pendingMainThreadActions.Enqueue(() => RegenerateMeshForBlock(blockPos));
+            }
         }
 
         public void RegenerateMeshForBlock(Vector3 blockPos)
@@ -260,7 +265,21 @@ namespace Aetheris
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-
+            lock (mainThreadLock)
+            {
+                while (pendingMainThreadActions.Count > 0)
+                {
+                    var action = pendingMainThreadActions.Dequeue();
+                    try
+                    {
+                        action?.Invoke();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[Game] Error executing pending action: {ex.Message}");
+                    }
+                }
+            }
             float delta = (float)e.Time;
 
             // Process pending mesh uploads

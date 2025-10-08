@@ -25,7 +25,7 @@ namespace Aetheris
         private static FastNoiseLite caveLarge;
         private static FastNoiseLite biomeBlendNoise;
         private static FastNoiseLite terrainDetailNoise;
-
+        private static readonly object modificationLock = new object();
         private const float ISO = 0.5f;
         private const float EPSILON = 0.0001f;  // For numerical stability
         private static bool initialized = false;
@@ -145,88 +145,83 @@ namespace Aetheris
             wDesert = rawDesert / sum;
             wMountains = rawMountains / sum;
         }
-private static ConcurrentDictionary<(int, int, int), float> densityModifications = new();
-      public static void RemoveBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
+        private static ConcurrentDictionary<(int, int, int), float> densityModifications = new();
+        public static void RemoveBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
         {
-            // Create a spherical density reduction
-            int iRadius = (int)Math.Ceiling(radius);
-            
-            for (int dx = -iRadius; dx <= iRadius; dx++)
+            lock (modificationLock)
             {
-                for (int dy = -iRadius; dy <= iRadius; dy++)
+                int iRadius = (int)Math.Ceiling(radius);
+
+                for (int dx = -iRadius; dx <= iRadius; dx++)
                 {
-                    for (int dz = -iRadius; dz <= iRadius; dz++)
+                    for (int dy = -iRadius; dy <= iRadius; dy++)
                     {
-                        int px = x + dx;
-                        int py = y + dy;
-                        int pz = z + dz;
-                        
-                        // Calculate distance from center
-                        float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
-                        
-                        if (dist <= radius)
+                        for (int dz = -iRadius; dz <= iRadius; dz++)
                         {
-                            // Smooth falloff based on distance
-                            float falloff = 1f - (dist / radius);
-                            falloff = falloff * falloff; // Quadratic falloff for smoother edges
-                            
-                            float reduction = strength * falloff;
-                            
-                            var key = (px, py, pz);
-                            densityModifications.AddOrUpdate(
-                                key,
-                                -reduction,
-                                (k, existing) => existing - reduction
-                            );
+                            int px = x + dx;
+                            int py = y + dy;
+                            int pz = z + dz;
+
+                            float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
+
+                            if (dist <= radius)
+                            {
+                                float falloff = 1f - (dist / radius);
+                                falloff = falloff * falloff;
+
+                                float reduction = strength * falloff;
+
+                                var key = (px, py, pz);
+                                densityModifications.AddOrUpdate(
+                                    key,
+                                    -reduction,
+                                    (k, existing) => existing - reduction
+                                );
+                            }
                         }
                     }
                 }
             }
         }
 
-   public static void AddBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
+        public static void AddBlock(int x, int y, int z, float radius = 1.5f, float strength = 3f)
         {
-            int iRadius = (int)Math.Ceiling(radius);
-            
-            for (int dx = -iRadius; dx <= iRadius; dx++)
+            lock (modificationLock)
             {
-                for (int dy = -iRadius; dy <= iRadius; dy++)
+                int iRadius = (int)Math.Ceiling(radius);
+
+                for (int dx = -iRadius; dx <= iRadius; dx++)
                 {
-                    for (int dz = -iRadius; dz <= iRadius; dz++)
+                    for (int dy = -iRadius; dy <= iRadius; dy++)
                     {
-                        int px = x + dx;
-                        int py = y + dy;
-                        int pz = z + dz;
-                        
-                        float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
-                        
-                        if (dist <= radius)
+                        for (int dz = -iRadius; dz <= iRadius; dz++)
                         {
-                            float falloff = 1f - (dist / radius);
-                            falloff = falloff * falloff;
-                            
-                            float increase = strength * falloff;
-                            
-                            var key = (px, py, pz);
-                            densityModifications.AddOrUpdate(
-                                key,
-                                increase,
-                                (k, existing) => existing + increase
-                            );
+                            int px = x + dx;
+                            int py = y + dy;
+                            int pz = z + dz;
+
+                            float dist = MathF.Sqrt(dx * dx + dy * dy + dz * dz);
+
+                            if (dist <= radius)
+                            {
+                                float falloff = 1f - (dist / radius);
+                                falloff = falloff * falloff;
+
+                                float increase = strength * falloff;
+
+                                var key = (px, py, pz);
+                                densityModifications.AddOrUpdate(
+                                    key,
+                                    increase,
+                                    (k, existing) => existing + increase
+                                );
+                            }
                         }
                     }
                 }
             }
         }
-       
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static float GetDensityModification(int x, int y, int z)
-        {
-            if (densityModifications.TryGetValue((x, y, z), out float mod))
-                return mod;
-            return 0f;
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ColumnData GetColumnData(int x, int z)
@@ -293,6 +288,18 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
         /// <summary>
         /// Improved cave generation with continuous density field for seamless chunk boundaries
         /// </summary>
+        // In WorldGen.cs - Replace the SampleDensityFast method with this version that includes modifications:
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static float GetDensityModification(int x, int y, int z)
+        {
+            lock (modificationLock)
+            {
+                if (densityModifications.TryGetValue((x, y, z), out float mod))
+                    return mod;
+                return 0f;
+            }
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SampleDensityFast(int x, int y, int z, in ColumnData columnData)
         {
@@ -300,45 +307,40 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
             float density;
             if (y > columnData.SurfaceY)
             {
-                // Smooth transition above surface
                 float heightAbove = y - columnData.SurfaceY;
                 density = ISO - heightAbove * 0.12f;
             }
             else
             {
-                // Smooth transition below surface with gentler gradient
                 float depthBelowSurface = columnData.SurfaceY - y;
-                // Using a more gradual increase to avoid sudden density jumps
                 density = ISO + 1.2f + (depthBelowSurface * 0.012f);
             }
 
-            // No caves above surface
+            // Early return for air blocks (with modifications)
             if (y > columnData.SurfaceY + 2)
-                return density;
+            {
+                return density + GetDensityModification(x, y, z);
+            }
 
             if (columnData.CaveIntensity < 0.05f)
-                return density;
+            {
+                return density + GetDensityModification(x, y, z);
+            }
 
-            // Cave generation - using continuous thresholds
+            // Cave generation code here...
             if (y > -150 && y < columnData.SurfaceY)
             {
-                // Get raw noise values
                 float r1 = caveNoise1.GetNoise(x, y, z);
                 float r2 = caveNoise2.GetNoise(x, y, z);
                 float rL = caveLarge.GetNoise(x, y, z);
 
-                // Normalized values
                 float n1 = (r1 + 1f) * 0.5f;
                 float n2 = (r2 + 1f) * 0.5f;
                 float nL = Clamp(MathF.Abs(rL) * 1.2f, 0f, 1f);
 
-                // 3D worm caves using intersection for better continuity
                 float worm = MathF.Abs(r1) * MathF.Abs(r2);
-
-                // Cavern formation
                 float cavern = n1 * n2;
 
-                // Depth-based intensity with smooth falloff
                 float depthFactor = 1f;
                 if (y > 0)
                 {
@@ -346,7 +348,6 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
                     depthFactor = Clamp(distFromSurface / 20f, 0.15f, 1f);
                 }
 
-                // Mountain elevation attenuation (smoother transition)
                 float elevationAtten = 1f;
                 if (columnData.SurfaceY > 50f)
                 {
@@ -356,30 +357,22 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
 
                 float caveFactor = columnData.CaveIntensity * depthFactor * elevationAtten;
 
-                // CRITICAL: Use smooth, continuous functions instead of hard thresholds
-                // This prevents gaps at chunk boundaries
-
-                // Surface-connected caves (very rare)
                 if (y > columnData.SurfaceY - 15)
                 {
-                    // Smooth ramp instead of hard threshold
                     float wormIntensity = SmoothThreshold(worm, 0.08f, 0.02f);
                     density -= wormIntensity * 22f * caveFactor * 0.5f;
                 }
-                // Upper caves
                 else if (y > 0)
                 {
                     float wormIntensity = SmoothThreshold(worm, 0.12f, 0.03f);
                     density -= wormIntensity * 16f * caveFactor;
 
-                    // Chambers with smooth transitions
                     if (cavern > 0.4f && nL > 0.55f)
                     {
                         float chamberIntensity = SmoothThreshold(cavern, 0.5f, 0.05f);
                         density -= chamberIntensity * 32f * caveFactor;
                     }
                 }
-                // Mid-depth caves
                 else if (y > -80)
                 {
                     float wormIntensity = SmoothThreshold(worm, 0.15f, 0.04f);
@@ -391,7 +384,6 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
                     float largeIntensity = SmoothThreshold(nL, 0.55f, 0.05f);
                     density -= largeIntensity * 38f * caveFactor;
                 }
-                // Deep caves
                 else
                 {
                     float wormIntensity = SmoothThreshold(worm, 0.18f, 0.05f);
@@ -403,7 +395,6 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
                     float largeIntensity = SmoothThreshold(nL, 0.5f, 0.06f);
                     density -= largeIntensity * 55f * caveFactor;
 
-                    // Deep abyss with smooth transitions
                     if (y < -100)
                     {
                         float abyss = (cavern + nL) * 0.5f;
@@ -413,23 +404,31 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
                 }
             }
 
-            // Softer minimum density to allow better transitions
             density = MathF.Max(density, ISO - 20f);
 
-            // Smooth bedrock transition instead of sharp cutoff
             if (y <= -150)
             {
                 float bedrockDepth = -150 - y;
-                density += bedrockDepth * bedrockDepth * 5f; // Quadratic for smoother transition
+                density += bedrockDepth * bedrockDepth * 5f;
             }
             else if (y < -140)
             {
-                // Gradual bedrock approach
                 float approachDepth = -140 - y;
                 density += approachDepth * approachDepth * 0.5f;
             }
 
-            return density;
+            // Apply modifications ONCE at the end
+            return density + GetDensityModification(x, y, z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SampleDensity(int x, int y, int z)
+        {
+            if (!initialized) Initialize();
+
+            var columnData = GetColumnData(x, z);
+            // SampleDensityFast already includes modifications
+            return SampleDensityFast(x, y, z, columnData);
         }
 
         /// <summary>
@@ -498,21 +497,8 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
             return BlockType.Stone;
         }
 
-   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float SampleDensity(int x, int y, int z)
-        {
-            if (!initialized) Initialize();
-            
-            // Get base procedural density
-            var columnData = GetColumnData(x, z);
-            float baseDensity = SampleDensityFast(x, y, z, columnData);
-            
-            // Apply any modifications
-            float modification = GetDensityModification(x, y, z);
-            
-            return baseDensity + modification;
-        }
-        
+
+
 
         // Legacy overloads
         public static BlockType GetBlockType(int x, int y, int z, float density)
@@ -533,7 +519,7 @@ private static ConcurrentDictionary<(int, int, int), float> densityModifications
             return GetBlockType(x, y, z, density, columnData);
         }
 
-    
+
 
         public static bool IsSolid(int x, int y, int z)
         {
