@@ -1,0 +1,62 @@
+[10:29:11.073] [[Server]] Log file created: server_log_20251008_102911.txt
+[10:29:11.078] [[Server]] Initializing world generation...
+[10:29:11.101] [[Server]] UDP listening on port 42070
+[10:29:11.123] [[Server]] Listening on port 42069 @ 60 TPS
+[10:29:11.123] [[Server]] Performance timing enabled - waiting for connections...
+[10:29:11.146] [[Server]] Tick 0 | Cache: 0/20000
+[10:29:11.561] [[Server]] Client connected: 127.0.0.1:39188
+[10:29:13.316] [[Generation]] (0,0,0): Render verts=16506, Collision verts=16506
+[10:29:13.328] [[Timing]] Chunk (0,0,0): Chunk=389.87ms Mesh=279.45ms Send=9.47ms Total=702.88ms
+[10:29:15.727] [[Generation]] (0,0,1): Render verts=13995, Collision verts=13995
+[10:29:15.733] [[Timing]] Chunk (0,0,1): Chunk=1066.60ms Mesh=1315.46ms Send=5.90ms Total=2388.21ms
+[10:29:15.889] [[Generation]] (1,0,0): Render verts=13323, Collision verts=13323
+[10:29:15.895] [[Timing]] Chunk (1,0,0): Chunk=1049.78ms Mesh=1495.01ms Send=6.14ms Total=2551.13ms
+[10:29:16.131] [[Generation]] (0,-1,0): Render verts=46158, Collision verts=46158
+[10:29:16.156] [[Timing]] Chunk (0,-1,0): Chunk=725.26ms Mesh=1554.65ms Send=25.64ms Total=2305.71ms
+[10:29:16.209] [[Generation]] (0,0,-1): Render verts=13143, Collision verts=13143
+[10:29:16.217] [[Timing]] Chunk (0,0,-1): Chunk=1083.60ms Mesh=1778.46ms Send=8.00ms Total=2870.21ms
+[10:29:16.444] [[Generation]] (0,-1,1): Render verts=18219, Collision verts=18219
+[10:29:16.456] [[Timing]] Chunk (0,-1,1): Chunk=922.44ms Mesh=1180.56ms Send=12.52ms Total=2115.68ms
+[10:29:16.654] [[Generation]] (1,-1,0): Render verts=46677, Collision verts=46677
+[10:29:16.686] [[Timing]] Chunk (1,-1,0): Chunk=1524.10ms Mesh=1207.94ms Send=31.58ms Total=2763.82ms
+[10:29:17.243] [[Generation]] (1,0,-2): Render verts=13071, Collision verts=13071
+[10:29:17.250] [[Timing]] Chunk (1,0,-2): Chunk=1838.64ms Mesh=2026.86ms Send=6.42ms Total=3872.06ms
+[10:29:17.809] [[Generation]] (-1,0,-1): Render verts=12909, Collision verts=12909
+[10:29:17.816] [[Timing]] Chunk (-1,0,-1): Chunk=2069.05ms Mesh=2375.59ms Send=6.57ms Total=4452.14ms
+[10:29:18.079] [[Generation]] (1,-1,-1): Render verts=8361, Collision verts=8361
+[10:29:18.083] [[Timing]] Chunk (1,-1,-1): Chunk=856.20ms Mesh=1005.35ms Send=3.76ms Total=1865.46ms
+[10:29:18.370] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.370] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.370] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.371] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.371] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.547] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.548] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.548] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.728] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.729] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.729] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.785] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:18.962] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.020] [[Generation]] (-1,-1,0): Render verts=47148, Collision verts=47148
+[10:29:19.037] [[Timing]] Chunk (-1,-1,0): Chunk=1392.24ms Mesh=1467.28ms Send=17.20ms Total=2876.87ms
+[10:29:19.735] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.735] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.735] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.738] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.738] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.739] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.739] [Server] Rejecting position from 127.0.0.1:39169, forcing correction
+[10:29:19.824] [[Generation]] (0,-1,-1): Render verts=22779, Collision verts=22779
+[10:29:19.835] [[Timing]] Chunk (0,-1,-1): Chunk=1161.31ms Mesh=2460.35ms Send=10.40ms Total=3640.23ms
+[10:29:19.855] [[Generation]] (-1,-1,-1): Render verts=43515, Collision verts=43515
+[10:29:19.917] [[Generation]] (-1,0,0): Render verts=18186, Collision verts=18186
+[10:29:19.918] [[Server]] Error handling chunk (-1,0,0): Cannot access a disposed object.
+Object name: 'System.Threading.SemaphoreSlim'.
+[10:29:19.919] [[Server]] Error handling chunk (-1,-1,-1): Cannot access a disposed object.
+Object name: 'System.Threading.SemaphoreSlim'.
+[10:29:19.920] [[UDP]] Loop cancelled
+[10:29:19.920] [[Server]] Client disconnected: 127.0.0.1:39188
+[10:29:19.920] [[Generation]] (-1,-1,1): Render verts=28041, Collision verts=28041
+[10:29:19.921] [[Server]] Error handling chunk (-1,-1,1): Cannot access a disposed object.
+Object name: 'System.Threading.SemaphoreSlim'.

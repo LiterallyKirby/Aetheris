@@ -1,4 +1,4 @@
-// FontRenderer.cs
+// FontRenderer.cs - Enhanced with multi-font support and better scaling
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,6 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 
 using SixLabors.ImageSharp.Advanced;
-// SixLabors namespaces
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
@@ -15,47 +14,47 @@ using SixLabors.Fonts;
 
 namespace Aetheris.UI
 {
-    // Character glyph information
     public struct CharGlyph
     {
         public int TextureId;
-        public Vector2 Size;    // pixel size of the bitmap
-        public Vector2 Bearing; // x = left bearing (pixels), y = top offset from baseline (pixels)
-        public float Advance;   // advance in pixels
+        public Vector2 Size;
+        public Vector2 Bearing;
+        public float Advance;
     }
 
     public class FontRenderer : ITextRenderer, IDisposable
     {
-        private readonly Dictionary<char, CharGlyph> glyphs = new Dictionary<char, CharGlyph>();
+        // Store glyphs at multiple sizes for better quality
+        private readonly Dictionary<(char, int), CharGlyph> glyphCache = new Dictionary<(char, int), CharGlyph>();
         private readonly int shaderProgram;
         private readonly int vao;
         private readonly int vbo;
-        private readonly int fontSize;
+        private readonly int baseFontSize;
 
-        // SixLabors font objects
         private readonly FontCollection fontCollection;
         private readonly FontFamily fontFamily;
-        private readonly Font font;
+        
+        // Pregenerated font sizes for crisp rendering at common scales
+        private readonly int[] pregenSizes = { 24, 32, 48, 64, 96, 128 };
 
-        public FontRenderer(string fontPath, int fontSize = 24)
+        public FontRenderer(string fontPath, int baseFontSize = 48)
         {
-            this.fontSize = fontSize;
+            this.baseFontSize = baseFontSize;
 
-            // Load font using SixLabors.Fonts
             fontCollection = new FontCollection();
             fontFamily = fontCollection.Add(fontPath);
-            font = fontFamily.CreateFont(fontSize, FontStyle.Regular);
 
-            // Generate glyphs for ASCII printable characters
-            for (char c = (char)32; c < (char)127; c++)
+            // Pregenerate common sizes
+            foreach (int size in pregenSizes)
             {
-                GenerateGlyph(c);
+                for (char c = (char)32; c < (char)127; c++)
+                {
+                    GenerateGlyph(c, size);
+                }
             }
 
-            // Create shader for text rendering
             shaderProgram = CreateTextShader();
 
-            // Setup VAO/VBO for text quads
             vao = GL.GenVertexArray();
             vbo = GL.GenBuffer();
 
@@ -63,7 +62,6 @@ namespace Aetheris.UI
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
             GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float) * 6 * 4, IntPtr.Zero, BufferUsageHint.DynamicDraw);
 
-            // Position + TexCoords
             GL.VertexAttribPointer(0, 4, VertexAttribPointerType.Float, false, 4 * sizeof(float), 0);
             GL.EnableVertexAttribArray(0);
 
@@ -71,8 +69,9 @@ namespace Aetheris.UI
             GL.BindVertexArray(0);
         }
 
-        private void GenerateGlyph(char c)
+        private void GenerateGlyph(char c, int fontSize)
         {
+            var font = fontFamily.CreateFont(fontSize, FontStyle.Regular);
             var textOptions = new TextOptions(font)
             {
                 Dpi = 96,
@@ -84,7 +83,6 @@ namespace Aetheris.UI
             FontRectangle bounds = TextMeasurer.MeasureSize(s, textOptions);
             FontRectangle advanceRect = TextMeasurer.MeasureAdvance(s, textOptions);
 
-            // Add padding to ensure full glyph is captured
             int padding = 5;
             int width = Math.Max(1, (int)Math.Ceiling(bounds.Width) + padding * 2);
             int height = Math.Max(1, (int)Math.Ceiling(bounds.Height) + padding * 2);
@@ -120,14 +118,11 @@ namespace Aetheris.UI
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
-                // For top-left origin (Y increases downward):
-                // bearingX: horizontal offset from pen position to left edge of glyph
-                // bearingY: vertical offset from baseline to top of glyph
                 float bearingX = bounds.Left - padding;
-                float bearingY = bounds.Top + padding;  // Distance from baseline to top
+                float bearingY = bounds.Top + padding;
                 float advance = advanceRect.Width;
 
-                glyphs[c] = new CharGlyph
+                glyphCache[(c, fontSize)] = new CharGlyph
                 {
                     TextureId = texture,
                     Size = new Vector2(width, height),
@@ -138,11 +133,33 @@ namespace Aetheris.UI
                 GL.BindTexture(TextureTarget.Texture2D, 0);
             }
         }
+
+        private int GetBestFontSize(float scale)
+        {
+            int targetSize = (int)(baseFontSize * scale);
+            
+            // Find closest pregenerated size
+            int bestSize = pregenSizes[0];
+            int minDiff = Math.Abs(targetSize - bestSize);
+            
+            foreach (int size in pregenSizes)
+            {
+                int diff = Math.Abs(targetSize - size);
+                if (diff < minDiff)
+                {
+                    minDiff = diff;
+                    bestSize = size;
+                }
+            }
+            
+            return bestSize;
+        }
+
         private int CreateTextShader()
         {
             string vertexShader = @"
                 #version 330 core
-                layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>
+                layout (location = 0) in vec4 vertex;
                 out vec2 TexCoords;
 
                 uniform mat4 projection;
@@ -164,7 +181,6 @@ namespace Aetheris.UI
 
                 void main()
                 {
-                    // We uploaded alpha into the red channel, so sample .r
                     vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
                     color = textColor * sampled;
                 }
@@ -173,18 +189,15 @@ namespace Aetheris.UI
             int vertShader = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertShader, vertexShader);
             GL.CompileShader(vertShader);
-            CheckShaderCompilation(vertShader, "Vertex");
 
             int fragShader = GL.CreateShader(ShaderType.FragmentShader);
             GL.ShaderSource(fragShader, fragmentShader);
             GL.CompileShader(fragShader);
-            CheckShaderCompilation(fragShader, "Fragment");
 
             int program = GL.CreateProgram();
             GL.AttachShader(program, vertShader);
             GL.AttachShader(program, fragShader);
             GL.LinkProgram(program);
-            CheckProgramLinking(program);
 
             GL.DeleteShader(vertShader);
             GL.DeleteShader(fragShader);
@@ -192,31 +205,13 @@ namespace Aetheris.UI
             return program;
         }
 
-        private void CheckShaderCompilation(int shader, string type)
-        {
-            GL.GetShader(shader, ShaderParameter.CompileStatus, out int success);
-            if (success == 0)
-            {
-                string infoLog = GL.GetShaderInfoLog(shader);
-                throw new Exception($"{type} shader compilation failed: {infoLog}");
-            }
-        }
-
-        private void CheckProgramLinking(int program)
-        {
-            GL.GetProgram(program, GetProgramParameterName.LinkStatus, out int success);
-            if (success == 0)
-            {
-                string infoLog = GL.GetProgramInfoLog(program);
-                throw new Exception($"Program linking failed: {infoLog}");
-            }
-        }
-
         public void DrawText(string text, Vector2 position, float scale = 1f, Vector4? color = null)
         {
             if (string.IsNullOrEmpty(text)) return;
 
             var textColor = color ?? new Vector4(1, 1, 1, 1);
+            int fontSize = GetBestFontSize(scale);
+            float renderScale = (baseFontSize * scale) / fontSize;
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -231,30 +226,26 @@ namespace Aetheris.UI
 
             foreach (char c in text)
             {
-                if (!glyphs.ContainsKey(c))
+                if (!glyphCache.ContainsKey((c, fontSize)))
                     continue;
 
-                CharGlyph glyph = glyphs[c];
+                CharGlyph glyph = glyphCache[(c, fontSize)];
 
-                // For top-left origin with Y increasing downward:
-                // xpos: pen position + horizontal bearing
-                // ypos: baseline position - distance from baseline to top of glyph
-                float xpos = x + glyph.Bearing.X * scale;
-                float ypos = y - glyph.Bearing.Y * scale;
+                float xpos = x + glyph.Bearing.X * renderScale;
+                float ypos = y - glyph.Bearing.Y * renderScale;
 
-                float w = glyph.Size.X * scale;
-                float h = glyph.Size.Y * scale;
+                float w = glyph.Size.X * renderScale;
+                float h = glyph.Size.Y * renderScale;
 
-                // Texture coordinates: 0,0 is top-left in ImageSharp, which matches our screen coords
                 float[] vertices = {
-            xpos,     ypos,       0.0f, 0.0f,
-            xpos,     ypos + h,   0.0f, 1.0f,
-            xpos + w, ypos + h,   1.0f, 1.0f,
+                    xpos,     ypos,       0.0f, 0.0f,
+                    xpos,     ypos + h,   0.0f, 1.0f,
+                    xpos + w, ypos + h,   1.0f, 1.0f,
 
-            xpos,     ypos,       0.0f, 0.0f,
-            xpos + w, ypos + h,   1.0f, 1.0f,
-            xpos + w, ypos,       1.0f, 0.0f
-        };
+                    xpos,     ypos,       0.0f, 0.0f,
+                    xpos + w, ypos + h,   1.0f, 1.0f,
+                    xpos + w, ypos,       1.0f, 0.0f
+                };
 
                 GL.BindTexture(TextureTarget.Texture2D, glyph.TextureId);
                 GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
@@ -263,29 +254,33 @@ namespace Aetheris.UI
 
                 GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
 
-                x += glyph.Advance * scale;
+                x += glyph.Advance * renderScale;
             }
 
             GL.BindVertexArray(0);
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
+
         public Vector2 MeasureText(string text, float scale = 1f)
         {
             if (string.IsNullOrEmpty(text))
                 return Vector2.Zero;
+
+            int fontSize = GetBestFontSize(scale);
+            float renderScale = (baseFontSize * scale) / fontSize;
 
             float width = 0f;
             float maxHeight = 0f;
 
             foreach (char c in text)
             {
-                if (!glyphs.ContainsKey(c))
+                if (!glyphCache.ContainsKey((c, fontSize)))
                     continue;
 
-                CharGlyph glyph = glyphs[c];
-                width += glyph.Advance * scale;
+                CharGlyph glyph = glyphCache[(c, fontSize)];
+                width += glyph.Advance * renderScale;
 
-                float charHeight = glyph.Size.Y * scale;
+                float charHeight = glyph.Size.Y * renderScale;
                 if (charHeight > maxHeight)
                     maxHeight = charHeight;
             }
@@ -302,15 +297,55 @@ namespace Aetheris.UI
 
         public void Dispose()
         {
-            foreach (var g in glyphs.Values)
+            foreach (var g in glyphCache.Values)
             {
                 GL.DeleteTexture(g.TextureId);
             }
-            glyphs.Clear();
+            glyphCache.Clear();
 
             GL.DeleteVertexArray(vao);
             GL.DeleteBuffer(vbo);
             GL.DeleteProgram(shaderProgram);
+        }
+    }
+
+    // Multi-font manager for different font styles
+    public class FontManager : IDisposable
+    {
+        private readonly Dictionary<string, FontRenderer> fonts = new Dictionary<string, FontRenderer>();
+        private string currentFont = "default";
+
+        public void AddFont(string name, string path, int baseSize = 48)
+        {
+            if (!fonts.ContainsKey(name))
+            {
+                fonts[name] = new FontRenderer(path, baseSize);
+            }
+        }
+
+        public void SetCurrentFont(string name)
+        {
+            if (fonts.ContainsKey(name))
+                currentFont = name;
+        }
+
+        public FontRenderer GetFont(string name)
+        {
+            return fonts.ContainsKey(name) ? fonts[name] : fonts[currentFont];
+        }
+
+        public FontRenderer GetCurrentFont()
+        {
+            return fonts[currentFont];
+        }
+
+        public void Dispose()
+        {
+            foreach (var font in fonts.Values)
+            {
+                font.Dispose();
+            }
+            fonts.Clear();
         }
     }
 }

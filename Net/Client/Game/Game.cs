@@ -49,9 +49,9 @@ namespace Aetheris
             Console.WriteLine("[Game] WorldGen initialized");
 
             // Create ChunkManager for collision detection
-            chunkManager = new ChunkManager();
-            chunkManager.GenerateCollisionMeshes = true;
-            Console.WriteLine("[Game] ChunkManager initialized with collision support");
+           // chunkManager = new ChunkManager();
+            //chunkManager.GenerateCollisionMeshes = true;
+            //Console.WriteLine("[Game] ChunkManager initialized with collision support");
 
             // Create Renderer
             Renderer = new Renderer();
@@ -190,7 +190,7 @@ namespace Aetheris
             }
 
             // Client-side prediction: reduce density in the area (SMOOTH REMOVAL)
-            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+            // WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
 
             // Queue regeneration for next frame to ensure modifications complete
             lock (mainThreadLock)
@@ -231,12 +231,19 @@ namespace Aetheris
                 }
             }
 
-            Console.WriteLine($"[Client] Regenerating {chunksToUpdate.Count} chunks affected by mining at ({blockX}, {blockY}, {blockZ})");
+            Console.WriteLine($"[Client] Re-requesting {chunksToUpdate.Count} chunks from server after block break");
 
-            // Regenerate all affected chunks
+            // Tell client to re-request these chunks
             foreach (var (cx, cy, cz) in chunksToUpdate)
             {
-                RegenerateChunkMesh(cx, cy, cz);
+                // Remove from loaded so it gets re-requested
+                loadedChunks.Remove((cx, cy, cz));
+
+                // Force immediate re-request via client
+                if (client != null)
+                {
+                    client.ForceReloadChunk(cx, cy, cz);
+                }
             }
         }
 

@@ -451,6 +451,28 @@ void main()
             }
         }
 
+
+
+        public void ProcessPendingUploads()
+        {
+            const int maxPerFrame = 8;
+            int processed = 0;
+
+            while (processed < maxPerFrame && uploadQueue.TryDequeue(out var act))
+            {
+                try
+                {
+                    act();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[Renderer] Upload error: " + ex);
+                }
+                processed++;
+            }
+        }
+
+
         public void EnqueueMeshForChunk(int cx, int cy, int cz, float[] interleavedData)
         {
             uploadQueue.Enqueue(() => UploadMesh(cx, cy, cz, interleavedData));
@@ -462,16 +484,37 @@ void main()
             UploadMesh(cx, cy, cz, interleavedData);
         }
 
-        public void ProcessPendingUploads()
+        public void ClearChunkMesh(int cx, int cy, int cz)
         {
-            const int maxPerFrame = 8;
-            int processed = 0;
+            var key = (cx, cy, cz);
 
-            while (processed < maxPerFrame && uploadQueue.TryDequeue(out var act))
+            Console.WriteLine($"[Renderer] ClearChunkMesh: ({cx}, {cy}, {cz})");
+
+            // Remove from active meshes dictionary and delete GPU resources
+            if (meshes.Remove(key, out var mesh))
             {
-                try { act(); }
-                catch (Exception ex) { Console.WriteLine("[Renderer] Upload error: " + ex); }
-                processed++;
+                try
+                {
+                    if (mesh.Vbo != 0)
+                    {
+                        GL.DeleteBuffer(mesh.Vbo);
+                    }
+                    if (mesh.Vao != 0)
+                    {
+                        GL.DeleteVertexArray(mesh.Vao);
+                    }
+                    Console.WriteLine($"[Renderer]   Deleted GPU: VAO={mesh.Vao}, VBO={mesh.Vbo}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Renderer]   Error deleting GPU resources: {ex.Message}");
+                }
+            }
+
+            // CRITICAL: Clear mesh cache
+            if (meshCache.Remove((cx, cy, cz)))
+            {
+                Console.WriteLine($"[Renderer]   Cleared mesh cache");
             }
         }
 
@@ -695,37 +738,19 @@ void main()
         {
             if (interleavedData == null || interleavedData.Length == 0)
             {
-
+                // Clear cache for empty chunks
+                meshCache.Remove((cx, cy, cz));
                 return;
             }
 
             EnsureShader();
 
-
             float[] uploadData = interleavedData;
             int detectedStride = 0;
-            if (uploadData.Length >= 8 && meshes.Count < 3)
-            {
-                float expectedX = cx * ClientConfig.CHUNK_SIZE;
-                float expectedY = cy * ClientConfig.CHUNK_SIZE_Y;
-                float expectedZ = cz * ClientConfig.CHUNK_SIZE;
 
-                Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz})");
-                Console.WriteLine($"[Renderer]   Expected world range: ({expectedX}-{expectedX + ClientConfig.CHUNK_SIZE}, {expectedY}-{expectedY + ClientConfig.CHUNK_SIZE_Y}, {expectedZ}-{expectedZ + ClientConfig.CHUNK_SIZE})");
-                Console.WriteLine($"[Renderer]   First vertex at: ({uploadData[0]:F1}, {uploadData[1]:F1}, {uploadData[2]:F1})");
-
-                bool inExpectedRange =
-                    uploadData[0] >= expectedX && uploadData[0] <= expectedX + ClientConfig.CHUNK_SIZE &&
-                    uploadData[1] >= expectedY && uploadData[1] <= expectedY + ClientConfig.CHUNK_SIZE_Y &&
-                    uploadData[2] >= expectedZ && uploadData[2] <= expectedZ + ClientConfig.CHUNK_SIZE;
-
-                Console.WriteLine($"[Renderer]   Vertex in expected range: {inExpectedRange}");
-            }
-            // More robust stride detection
-            // Check if data has blockType (stride 7) by examining the 7th value
+            // Stride detection
             if (interleavedData.Length >= 7)
             {
-                // Sample a few vertices to check if 7th value looks like a blockType (0-8)
                 bool looksLikeBlockType = true;
                 int samplesToCheck = Math.Min(5, interleavedData.Length / 7);
 
@@ -735,7 +760,6 @@ void main()
                     if (idx >= interleavedData.Length) break;
 
                     float val = interleavedData[idx];
-                    // BlockType should be integer in range [0, 8]
                     if (val < -0.5f || val > 8.5f || Math.Abs(val - Math.Round(val)) > 0.1f)
                     {
                         looksLikeBlockType = false;
@@ -770,15 +794,6 @@ void main()
             // Convert if needed
             if (detectedStride == 7)
             {
-                if (meshes.Count < 3)
-                {
-                    Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) BEFORE conversion:");
-                    Console.WriteLine($"  Length: {interleavedData.Length}, vertices: {interleavedData.Length / 7}");
-                    Console.WriteLine($"  First vertex: pos=({interleavedData[0]:F2},{interleavedData[1]:F2},{interleavedData[2]:F2}), " +
-                                    $"normal=({interleavedData[3]:F2},{interleavedData[4]:F2},{interleavedData[5]:F2}), " +
-                                    $"blockType={interleavedData[6]:F0}");
-                }
-
                 try
                 {
                     uploadData = ConvertMeshWithBlockTypeToUVs(interleavedData);
@@ -786,29 +801,17 @@ void main()
                     if (uploadData == null || uploadData.Length == 0)
                     {
                         Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Conversion produced empty mesh");
+                        meshCache.Remove((cx, cy, cz));
                         return;
-                    }
-
-                    if (meshes.Count < 3)
-                    {
-                        Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) AFTER conversion:");
-                        Console.WriteLine($"  Length: {uploadData.Length}, vertices: {uploadData.Length / 8}");
-                        Console.WriteLine($"  First vertex: pos=({uploadData[0]:F2},{uploadData[1]:F2},{uploadData[2]:F2}), " +
-                                    $"normal=({uploadData[3]:F2},{uploadData[4]:F2},{uploadData[5]:F2}), " +
-                                    $"uv=({uploadData[6]:F4},{uploadData[7]:F4})");
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}) conversion error: {ex.Message}");
-                    Console.WriteLine($"[Renderer] Stack trace: {ex.StackTrace}");
                     return;
                 }
             }
-            if (uploadData.Length % 8 == 0 && uploadData.Length > 0)
-            {
-                meshCache[(cx, cy, cz)] = uploadData;
-            }
+
             // Final validation
             if (uploadData.Length % 8 != 0)
             {
@@ -820,6 +823,7 @@ void main()
             if (vertexCount == 0)
             {
                 Console.WriteLine($"[Renderer] Chunk ({cx},{cy},{cz}): Zero vertices after conversion");
+                meshCache.Remove((cx, cy, cz));
                 return;
             }
 
@@ -865,25 +869,22 @@ void main()
                 ClientConfig.CHUNK_SIZE * ClientConfig.CHUNK_SIZE
             ) * 0.5f;
 
+            // Update meshes dictionary
             meshes[(cx, cy, cz)] = new MeshData(vao, vbo, vertexCount, model, chunkCenter, radius);
 
-            // Register physics collider (if Physics manager assigned)
-
+            // Cache AFTER successful GPU upload
+            if (uploadData.Length % 8 == 0 && uploadData.Length > 0)
+            {
+                meshCache[(cx, cy, cz)] = uploadData;
+            }
 
             if (meshes.Count < 3)
             {
                 Console.WriteLine($"[Renderer] Uploaded chunk ({cx},{cy},{cz}): VAO={vao}, VBO={vbo}, {vertexCount} vertices");
             }
-            if (uploadData.Length % 8 == 0 && uploadData.Length > 0)
-            {
-                meshCache[(cx, cy, cz)] = uploadData;
 
-                // TRIGGER THE CALLBACK HERE
-
-            }
-
+            // Trigger callback LAST
             OnChunkMeshLoaded?.Invoke(cx, cy, cz, uploadData);
-
         }
         private void EnsureShader()
         {

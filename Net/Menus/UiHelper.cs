@@ -166,7 +166,7 @@ namespace Aetheris.UI
             {
                 foreach (var e in elements)
                     e.WasPressedThisFrame = e.IsHovered;
-                
+
                 // Set focus on click
                 if (hit != null && hit.CanFocus)
                 {
@@ -418,13 +418,18 @@ namespace Aetheris.UI
         public Action? OnPressed { get; set; }
         public float LabelScale { get; set; } = 1.0f;
         public TextAlign TextAlign { get; set; } = TextAlign.Center;
-        
+
+        // inside Button class
+        public Vector4 HaloColor { get; set; } = new Vector4(0.86f, 0.72f, 0.4f, 1f); // default warm gold
+        public float HaloIntensity { get; set; } = 1.0f; // multiplier for alpha/pulse
+                                                         // inside Button class
+
         public Vector4 Color { get; set; } = new Vector4(0.2f, 0.3f, 0.45f, 0.95f);
         public Vector4 HoverColor { get; set; } = new Vector4(0.28f, 0.42f, 0.7f, 1f);
         public Vector4 PressedColor { get; set; } = new Vector4(0.15f, 0.25f, 0.4f, 1f);
         public Vector4 TextColor { get; set; } = new Vector4(1, 1, 1, 1);
         public Vector4 BorderColor { get; set; } = new Vector4(0.7f, 0.8f, 1f, 1f);
-        
+
         public float CornerRadius { get; set; } = 4f;
         public bool ShowBorder { get; set; } = true;
 
@@ -434,18 +439,94 @@ namespace Aetheris.UI
             Padding = new Spacing(10, 20, 10, 20);
         }
 
+
+
         public override void Render()
         {
             if (Manager == null) return;
 
-            var col = WasPressedThisFrame && IsHovered ? PressedColor : (IsHovered ? HoverColor : Color);
-            Manager.DrawRect(Position.X, Position.Y, Size.X, Size.Y, col, CornerRadius);
+            // primary color based on state
+            var baseCol = WasPressedThisFrame && IsHovered ? PressedColor : (IsHovered ? HoverColor : Color);
 
-            if (ShowBorder && IsHovered)
+            // subtle gradient tints
+            Vector4 topTint = new Vector4(
+                MathF.Min(baseCol.X + 0.06f, 1f),
+                MathF.Min(baseCol.Y + 0.06f, 1f),
+                MathF.Min(baseCol.Z + 0.06f, 1f),
+                baseCol.W
+            );
+            Vector4 bottomTint = new Vector4(
+                MathF.Max(baseCol.X - 0.04f, 0f),
+                MathF.Max(baseCol.Y - 0.04f, 0f),
+                MathF.Max(baseCol.Z - 0.04f, 0f),
+                baseCol.W
+            );
+
+            // TIMING for subtle pulse
+            float t = (float)DateTime.Now.TimeOfDay.TotalSeconds;
+            float pulse = 0.9f + 0.2f * MathF.Sin(t * 1.8f + (Label?.GetHashCode() ?? 0) * 0.001f);
+
+            // --- OUTER halo (always present, faint) ---
             {
-                Manager.DrawBorder(Position.X, Position.Y, Size.X, Size.Y, 2f, BorderColor);
+                // additive blending so halo reads like light
+                GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);
+
+                int outerLayers = 3;
+                for (int i = outerLayers; i >= 1; i--)
+                {
+                    float layerFrac = i / (float)outerLayers;            // 1 .. 0.33
+                    float pad = 10f + layerFrac * 18f;                   // outer extent
+                                                                         // base faint alpha, scaled by HaloIntensity and a small pulse
+                    float alpha = 0.04f * HaloIntensity * (0.9f + 0.12f * pulse) * (1f / layerFrac);
+                    alpha = Math.Clamp(alpha, 0.005f, 0.18f);
+
+                    var layerCol = new Vector4(HaloColor.X, HaloColor.Y, HaloColor.Z, alpha);
+                    Manager.DrawRect(Position.X - pad, Position.Y - pad, Size.X + pad * 2f, Size.Y + pad * 2f, layerCol, CornerRadius + pad * 0.45f);
+                }
+
+                // restore normal blending for button draw
+                GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             }
 
+            // 1) draw the button base (gradient)
+            Manager.DrawGradientRect(Position.X, Position.Y, Size.X, Size.Y, topTint, bottomTint);
+
+            // inner subtle darker overlay for depth
+            var innerOverlay = new Vector4(0f, 0f, 0f, 0.06f);
+            Manager.DrawRect(Position.X + 4f, Position.Y + 4f, Size.X - 8f, Size.Y - 8f, innerOverlay, 0f);
+
+            // thin inner carved line
+            var innerLine = new Vector4(0f, 0f, 0f, 0.18f);
+            Manager.DrawRect(Position.X + 2f, Position.Y + Size.Y - 6f, Size.X - 4f, 2f, innerLine);
+
+            // border / rim
+            if (ShowBorder)
+            {
+                var rim = IsHovered ? new Vector4(BorderColor.X, BorderColor.Y, BorderColor.Z, 1.0f) :
+                                      new Vector4(BorderColor.X, BorderColor.Y, BorderColor.Z, 0.65f);
+                Manager.DrawBorder(Position.X, Position.Y, Size.X, Size.Y, 3f, rim);
+            }
+
+            // --- INNER halo ring (subtle always, stronger when hovered) ---
+            {
+                float innerPad = 4f;
+                float baseAlpha = 0.09f * HaloIntensity;
+                float hoverBoost = IsHovered ? 0.36f * HaloIntensity * (1f + 0.25f * MathF.Sin(t * 3.0f)) : 0f;
+                float alpha = Math.Clamp(baseAlpha + hoverBoost, 0f, 0.9f);
+
+                if (alpha > 0.005f)
+                {
+                    // additive to make it feel like light
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.One);
+
+                    var innerCol = new Vector4(HaloColor.X, HaloColor.Y, HaloColor.Z, alpha);
+                    Manager.DrawRect(Position.X - innerPad, Position.Y - innerPad, Size.X + innerPad * 2f, Size.Y + innerPad * 2f, innerCol, CornerRadius + innerPad * 0.3f);
+
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                }
+            }
+
+            // finally: draw the text (with small drop shadow when hovered)
             if (Manager.TextRenderer != null)
             {
                 var textSize = Manager.TextRenderer.MeasureText(Label, LabelScale);
@@ -459,9 +540,14 @@ namespace Aetheris.UI
                     case TextAlign.Right:
                         textPos = new Vector2(Position.X + Size.X - textSize.X - Padding.Right, Position.Y + (Size.Y - textSize.Y) / 2f);
                         break;
-                    default: // Center
+                    default:
                         textPos = new Vector2(Position.X + (Size.X - textSize.X) / 2f, Position.Y + (Size.Y - textSize.Y) / 2f);
                         break;
+                }
+
+                if (IsHovered)
+                {
+                    Manager.TextRenderer.DrawText(Label, textPos + new Vector2(0, 2), LabelScale, new Vector4(0f, 0f, 0f, 0.30f));
                 }
 
                 Manager.TextRenderer.DrawText(Label, textPos, LabelScale, TextColor);
@@ -532,13 +618,13 @@ namespace Aetheris.UI
         public int CaretIndex { get; private set; } = 0;
         public int MaxLength { get; set; } = 100;
         public float LabelScale { get; set; } = 1f;
-        
+
         public Vector4 BackgroundColor { get; set; } = new Vector4(0.08f, 0.08f, 0.1f, 0.95f);
         public Vector4 BorderColor { get; set; } = new Vector4(0.4f, 0.6f, 0.9f, 1f);
         public Vector4 FocusedBorderColor { get; set; } = new Vector4(0.5f, 0.7f, 1f, 1f);
         public Vector4 TextColor { get; set; } = new Vector4(1, 1, 1, 1);
         public Vector4 PlaceholderColor { get; set; } = new Vector4(0.5f, 0.5f, 0.5f, 1f);
-        
+
         private float caretTimer = 0f;
         private bool caretVisible = true;
         private const float CARET_BLINK_PERIOD = 0.6f;
@@ -579,7 +665,7 @@ namespace Aetheris.UI
             {
                 var contentPos = GetContentPosition();
                 var contentSize = GetContentSize();
-                
+
                 string displayText = string.IsNullOrEmpty(Text) ? Placeholder : Text;
                 var displayColor = string.IsNullOrEmpty(Text) ? PlaceholderColor : TextColor;
 
@@ -679,7 +765,7 @@ namespace Aetheris.UI
             if (Manager == null) return;
 
             Manager.DrawRect(Position.X, Position.Y, Size.X, Size.Y, BackgroundColor, CornerRadius);
-            
+
             if (ShowBorder && BorderThickness > 0)
             {
                 Manager.DrawBorder(Position.X, Position.Y, Size.X, Size.Y, BorderThickness, BorderColor);
@@ -693,11 +779,11 @@ namespace Aetheris.UI
         public string Label { get; set; }
         public bool Checked { get; set; } = false;
         public Action<bool>? OnChanged { get; set; }
-        
+
         public float CheckboxSize { get; set; } = 20f;
         public float LabelScale { get; set; } = 1f;
         public float Spacing { get; set; } = 10f;
-        
+
         public Vector4 BoxColor { get; set; } = new Vector4(0.2f, 0.2f, 0.25f, 1f);
         public Vector4 CheckColor { get; set; } = new Vector4(0.4f, 0.7f, 1f, 1f);
         public Vector4 BorderColor { get; set; } = new Vector4(0.4f, 0.5f, 0.6f, 1f);
@@ -724,10 +810,10 @@ namespace Aetheris.UI
             {
                 float padding = 4f;
                 Manager.DrawRect(
-                    Position.X + padding, 
-                    boxY + padding, 
-                    CheckboxSize - padding * 2, 
-                    CheckboxSize - padding * 2, 
+                    Position.X + padding,
+                    boxY + padding,
+                    CheckboxSize - padding * 2,
+                    CheckboxSize - padding * 2,
                     CheckColor
                 );
             }
@@ -760,16 +846,16 @@ namespace Aetheris.UI
         public float Min { get; set; } = 0f;
         public float Max { get; set; } = 1f;
         public Action<float>? OnValueChanged { get; set; }
-        
+
         public string Label { get; set; } = "";
         public float LabelScale { get; set; } = 1f;
         public bool ShowValue { get; set; } = true;
-        
+
         public Vector4 TrackColor { get; set; } = new Vector4(0.2f, 0.2f, 0.25f, 1f);
         public Vector4 FillColor { get; set; } = new Vector4(0.4f, 0.6f, 0.9f, 1f);
         public Vector4 HandleColor { get; set; } = new Vector4(0.6f, 0.8f, 1f, 1f);
         public Vector4 TextColor { get; set; } = new Vector4(1, 1, 1, 1);
-        
+
         public float TrackHeight { get; set; } = 6f;
         public float HandleSize { get; set; } = 16f;
 
@@ -795,10 +881,10 @@ namespace Aetheris.UI
                 float mouseX = Manager.window.MouseState.Position.X;
                 float trackX = Position.X;
                 float trackWidth = Size.X;
-                
+
                 float normalizedValue = (mouseX - trackX) / trackWidth;
                 normalizedValue = Math.Clamp(normalizedValue, 0f, 1f);
-                
+
                 float newValue = Min + normalizedValue * (Max - Min);
                 if (Math.Abs(newValue - Value) > 0.001f)
                 {
@@ -819,14 +905,14 @@ namespace Aetheris.UI
             if (Manager == null) return;
 
             float trackY = Position.Y + (Size.Y - TrackHeight) / 2f;
-            
+
             // Draw track
             Manager.DrawRect(Position.X, trackY, Size.X, TrackHeight, TrackColor);
-            
+
             // Draw filled portion
             float fillWidth = Size.X * Value;
             Manager.DrawRect(Position.X, trackY, fillWidth, TrackHeight, FillColor);
-            
+
             // Draw handle
             float handleX = Position.X + fillWidth - HandleSize / 2f;
             float handleY = Position.Y + (Size.Y - HandleSize) / 2f;

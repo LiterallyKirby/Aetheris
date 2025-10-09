@@ -41,7 +41,12 @@ namespace Aetheris
             public float Moisture;
         }
         private static ConcurrentDictionary<(int, int, int), BlockType> modifiedBlocks = new();
+        private static bool enableModifications = false;
 
+        public static void SetModificationsEnabled(bool enabled)
+        {
+            enableModifications = enabled;
+        }
         public static void SetBlock(int x, int y, int z, BlockType blockType)
         {
             modifiedBlocks[(x, y, z)] = blockType;

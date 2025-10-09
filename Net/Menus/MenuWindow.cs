@@ -16,6 +16,7 @@ namespace Aetheris
         Settings,
         Exit
     }
+
     public class MenuWindow : GameWindow
     {
         public MenuResult Result { get; private set; } = MenuResult.None;
@@ -26,38 +27,41 @@ namespace Aetheris
         private UIManager? uiManager;
         private FontRenderer? fontRenderer;
 
+        // Keep splashes exactly as defined
         private string[] Splashes = {
-    "I stole this from Minecraft!",
-    "I'm out of step!",
-    "Stop! You've violated the law!",
-    "I've got a straight edge!",
-    "I'm not trying to ruin your fun!",
-    "Poyo!",
-    "I'm Literally Kirby!",
-    "If you see this ur gay.",
-    "I'm running out of ideas",
-    "Born to rage, bound by mana.",
-    "Raise your horns, not the rent!",
-    "This realm runs on pure caffeine.",
-    "Everyone that plays chaotic neutral is edgy.",
-    "Fuck elves. All my homies hate elves.",
-    "Your mom failed her perception check.",
-    "Bro got ginug'd.",
-"Rat Republic!",
-    "My armor’s held together with safety pins.",
-    "Counterspell this!",
-};
+            "I stole this from Minecraft!",
+            "I'm out of step!",
+            "Stop! You've violated the law!",
+            "I've got a straight edge!",
+            "I'm not trying to ruin your fun!",
+            "Poyo!",
+	    "TCP, UDP, Bro just suck my P",
+            "I'm Literally Kirby!",
+            "If you see this ur gay.",
+            "I'm running out of ideas",
+            "Born to rage, bound by mana.",
+            "Raise your horns, not the rent!",
+            "This realm runs on pure caffeine.",
+            "Everyone that plays chaotic neutral is edgy.",
+            "Fuck elves. All my homies hate elves.",
+            "Your mom failed her perception check.",
+            "Bro got ginug'd.",
+            "Rat Republic!",
+            "My armor's held together with safety pins.",
+            "Counterspell this!",
+        };
 
         private float time = 0f;
+        private Random random = new Random();
 
         // UI Elements
         private Label? titleLabel;
+        private Label? subtitleLabel;
         private Button? singlePlayerBtn;
         private Button? multiplayerBtn;
         private Button? settingsBtn;
         private Button? exitBtn;
 
-    Random random = new Random(); 
         public MenuWindow()
             : base(GameWindowSettings.Default, new NativeWindowSettings()
             {
@@ -71,13 +75,11 @@ namespace Aetheris
         {
             base.OnLoad();
 
-            // Darker background for dark fantasy
-            GL.ClearColor(0.02f, 0.03f, 0.08f, 1.0f);
+            // Deep twilight background
+            GL.ClearColor(0.01f, 0.015f, 0.03f, 1.0f);
 
-            // Create shader for rendering
             CreateShader();
 
-            // Setup VAO/VBO
             vao = GL.GenVertexArray();
             vbo = GL.GenBuffer();
 
@@ -93,12 +95,11 @@ namespace Aetheris
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-            // Initialize UI Manager
             uiManager = new UIManager(this, shaderProgram, vao, vbo);
 
             try
             {
-                fontRenderer = new FontRenderer("assets/font.ttf", 32);
+                fontRenderer = new FontRenderer("assets/font.ttf", 48);
                 uiManager.TextRenderer = fontRenderer;
             }
             catch (Exception ex)
@@ -107,10 +108,9 @@ namespace Aetheris
                 Console.WriteLine("[MenuWindow] Menu will run without text rendering");
             }
 
-            // Create UI elements
             CreateUI();
 
-            Console.WriteLine("[MenuWindow] Menu initialized");
+            Console.WriteLine("[MenuWindow] Twilight Princess menu initialized");
         }
 
         private void CreateShader()
@@ -119,11 +119,8 @@ namespace Aetheris
                 #version 330 core
                 layout(location = 0) in vec2 aPosition;
                 layout(location = 1) in vec4 aColor;
-                
                 out vec4 fragColor;
-                
                 uniform mat4 projection;
-                
                 void main()
                 {
                     gl_Position = projection * vec4(aPosition, 0.0, 1.0);
@@ -135,77 +132,153 @@ namespace Aetheris
                 #version 330 core
                 in vec4 fragColor;
                 out vec4 finalColor;
-                
+                uniform vec2 u_resolution;
+                uniform float u_time;
+
+                float hash21(vec2 p) {
+                    p = fract(p * vec2(123.34, 456.21));
+                    p += dot(p, p + 78.233);
+                    return fract(p.x * p.y);
+                }
+
                 void main()
                 {
-                    finalColor = fragColor;
+                    vec2 uv = gl_FragCoord.xy / u_resolution;
+                    vec3 base = fragColor.rgb;
+
+                    // Ethereal glow from center top - blue-green tint
+                    vec2 center = vec2(0.5, 0.2);
+                    float dist = distance(uv, center);
+                    float glow = smoothstep(0.4, 0.0, dist);
+                    
+                    // Blue-green mystical tint
+                    vec3 glowColor = vec3(0.2, 0.6, 0.55) * pow(glow, 1.5) * 0.4;
+
+                    // Animated twilight particles
+                    float particle = 0.012 * sin(u_time * 0.7 + uv.y * 30.0 + uv.x * 15.0);
+
+                    // Vignette - darker edges
+                    float vignette = smoothstep(0.5, 1.2, dist + 0.2);
+
+                    // Film grain
+                    float grain = (hash21(gl_FragCoord.xy * (0.5 + mod(u_time, 1.0))) - 0.5) * 0.02;
+
+                    vec3 color = base + glowColor + particle + grain;
+                    
+                    // Deep blue-green tint on edges
+                    color *= mix(vec3(1.0), vec3(0.5, 0.7, 0.75), vignette * 0.7);
+
+                    finalColor = vec4(color, fragColor.a);
                 }
             ";
 
-            int vertShader = GL.CreateShader(ShaderType.VertexShader);
-            GL.ShaderSource(vertShader, vertexShader);
-            GL.CompileShader(vertShader);
+            int vs = GL.CreateShader(ShaderType.VertexShader);
+            GL.ShaderSource(vs, vertexShader);
+            GL.CompileShader(vs);
 
-            int fragShader = GL.CreateShader(ShaderType.FragmentShader);
-            GL.ShaderSource(fragShader, fragmentShader);
-            GL.CompileShader(fragShader);
+            int fs = GL.CreateShader(ShaderType.FragmentShader);
+            GL.ShaderSource(fs, fragmentShader);
+            GL.CompileShader(fs);
 
             shaderProgram = GL.CreateProgram();
-            GL.AttachShader(shaderProgram, vertShader);
-            GL.AttachShader(shaderProgram, fragShader);
+            GL.AttachShader(shaderProgram, vs);
+            GL.AttachShader(shaderProgram, fs);
             GL.LinkProgram(shaderProgram);
 
-            GL.DeleteShader(vertShader);
-            GL.DeleteShader(fragShader);
+            GL.DeleteShader(vs);
+            GL.DeleteShader(fs);
         }
 
         private void CreateUI()
         {
             if (uiManager == null) return;
 
-            float centerX = ClientSize.X / 2f;
-            float centerY = ClientSize.Y / 2f;
+            float cx = ClientSize.X / 2f;
+            float cy = ClientSize.Y / 2f;
 
-            // Title - Icy blue glow
+            // Large ethereal backdrop behind title
+            var backdrop = new Panel()
+            {
+                Position = new Vector2(cx - 400, 20),
+                Size = new Vector2(800, 260),
+                CornerRadius = 200f,
+                BackgroundColor = new Vector4(0.08f, 0.06f, 0.12f, 0.25f),
+                ShowBorder = false
+            };
+            uiManager.AddElement(backdrop);
+
+            // Triforce-inspired emblem
+            var emblem = new Label("▲")
+            {
+                Position = new Vector2(cx - 20, 70),
+                Size = new Vector2(40, 40),
+                Scale = 2.2f,
+                Color = new Vector4(0.4f, 0.8f, 0.75f, 0.8f), // Cyan-green
+                TextAlign = TextAlign.Center
+            };
+            uiManager.AddElement(emblem);
+
+            // Title with twilight glow
             titleLabel = new Label("AETHERIS")
             {
-                Position = new Vector2(centerX - 150, 120),
-                Size = new Vector2(300, 60),
-                Scale = 2.5f,
-                Color = new Vector4(0.4f, 0.7f, 1.0f, 1f),  // Bright icy blue
+                Position = new Vector2(cx - 280, 100),
+                Size = new Vector2(560, 90),
+                Scale = 3.2f,
+                Color = new Vector4(0.4f, 0.75f, 0.7f, 1f), // Cyan-green
                 TextAlign = TextAlign.Center
             };
             uiManager.AddElement(titleLabel);
 
-            // Subtitle - Ethereal blue
-        int roll = random.Next(0, Splashes.Length); // Generates a number between 1 and 6
-            var subtitleLabel = new Label(Splashes[roll])
+            // Decorative line under title
+            var line = new Panel()
             {
-                Position = new Vector2(centerX - 120, 190),
-                Size = new Vector2(240, 30),
-                Scale = 1.0f,
-                Color = new Vector4(0.3f, 0.5f, 0.8f, 0.7f),  // Muted ethereal blue
+                Position = new Vector2(cx - 250, 200),
+                Size = new Vector2(500, 2),
+                BackgroundColor = new Vector4(0.3f, 0.6f, 0.55f, 0.4f),
+                ShowBorder = false
+            };
+            uiManager.AddElement(line);
+
+            // Subtitle with splash text (moved down below title)
+            int roll = random.Next(0, Splashes.Length);
+            subtitleLabel = new Label(Splashes[roll])
+            {
+                Position = new Vector2(cx - 300, 220),
+                Size = new Vector2(600, 35),
+                Scale = 1.1f,
+                Color = new Vector4(0.5f, 0.7f, 0.85f, 0.75f), // Light blue
                 TextAlign = TextAlign.Center
             };
             uiManager.AddElement(subtitleLabel);
 
-            // Buttons - Dark blue/purple fantasy theme
-            float buttonWidth = 320f;
-            float buttonHeight = 65f;
-            float startY = centerY - 50f;
-            float spacing = 85f;
+            // Button layout
+            float buttonW = 380f;
+            float buttonH = 72f;
+            float startY = cy - 20f;
+            float spacing = 88f;
 
+            // Twilight color scheme - dark blue/green
+            Vector4 buttonBase = new Vector4(0.05f, 0.08f, 0.1f, 0.92f); // Dark blue-green
+            Vector4 hoverTint = new Vector4(0.15f, 0.25f, 0.3f, 0.96f); // Lighter blue-green
+            Vector4 pressedTint = new Vector4(0.02f, 0.04f, 0.05f, 0.92f);
+            Vector4 cyanText = new Vector4(0.5f, 0.85f, 0.8f, 1f); // Cyan text
+            Vector4 borderCyan = new Vector4(0.3f, 0.65f, 0.6f, 0.85f);
+
+            // SINGLE PLAYER
             singlePlayerBtn = new Button("Single Player")
             {
-                Position = new Vector2(centerX - buttonWidth / 2f, startY),
-                Size = new Vector2(buttonWidth, buttonHeight),
-                LabelScale = 1.2f,
+                Position = new Vector2(cx - buttonW / 2f, startY),
+                Size = new Vector2(buttonW, buttonH),
+                LabelScale = 1.4f,
                 CornerRadius = 8f,
-                Color = new Vector4(0.08f, 0.12f, 0.25f, 0.85f),          // Dark blue base
-                HoverColor = new Vector4(0.15f, 0.25f, 0.45f, 0.95f),     // Brighter blue hover
-                PressedColor = new Vector4(0.05f, 0.08f, 0.18f, 0.95f),   // Darker pressed
-                TextColor = new Vector4(0.6f, 0.8f, 1.0f, 1f),            // Ice blue text
-                BorderColor = new Vector4(0.2f, 0.4f, 0.7f, 0.8f)         // Blue border
+                Color = buttonBase,
+                HoverColor = hoverTint,
+                PressedColor = pressedTint,
+                TextColor = cyanText,
+                BorderColor = borderCyan,
+                ShowBorder = true,
+                HaloColor = new Vector4(0.4f, 0.8f, 0.75f, 1f), // Cyan-green glow
+                HaloIntensity = 1.2f
             };
             singlePlayerBtn.OnPressed = () =>
             {
@@ -214,17 +287,21 @@ namespace Aetheris
             };
             uiManager.AddElement(singlePlayerBtn);
 
+            // MULTIPLAYER
             multiplayerBtn = new Button("Multiplayer")
             {
-                Position = new Vector2(centerX - buttonWidth / 2f, startY + spacing),
-                Size = new Vector2(buttonWidth, buttonHeight),
-                LabelScale = 1.2f,
+                Position = new Vector2(cx - buttonW / 2f, startY + spacing),
+                Size = new Vector2(buttonW, buttonH),
+                LabelScale = 1.4f,
                 CornerRadius = 8f,
-                Color = new Vector4(0.08f, 0.12f, 0.25f, 0.85f),
-                HoverColor = new Vector4(0.15f, 0.25f, 0.45f, 0.95f),
-                PressedColor = new Vector4(0.05f, 0.08f, 0.18f, 0.95f),
-                TextColor = new Vector4(0.6f, 0.8f, 1.0f, 1f),
-                BorderColor = new Vector4(0.2f, 0.4f, 0.7f, 0.8f)
+                Color = buttonBase,
+                HoverColor = hoverTint,
+                PressedColor = pressedTint,
+                TextColor = cyanText,
+                BorderColor = borderCyan,
+                ShowBorder = true,
+                HaloColor = new Vector4(0.3f, 0.65f, 0.85f, 1f), // Blue glow
+                HaloIntensity = 1.0f
             };
             multiplayerBtn.OnPressed = () =>
             {
@@ -233,17 +310,21 @@ namespace Aetheris
             };
             uiManager.AddElement(multiplayerBtn);
 
+            // SETTINGS
             settingsBtn = new Button("Settings")
             {
-                Position = new Vector2(centerX - buttonWidth / 2f, startY + spacing * 2),
-                Size = new Vector2(buttonWidth, buttonHeight),
-                LabelScale = 1.2f,
+                Position = new Vector2(cx - buttonW / 2f, startY + spacing * 2),
+                Size = new Vector2(buttonW, buttonH),
+                LabelScale = 1.4f,
                 CornerRadius = 8f,
-                Color = new Vector4(0.08f, 0.12f, 0.25f, 0.85f),
-                HoverColor = new Vector4(0.15f, 0.25f, 0.45f, 0.95f),
-                PressedColor = new Vector4(0.05f, 0.08f, 0.18f, 0.95f),
-                TextColor = new Vector4(0.6f, 0.8f, 1.0f, 1f),
-                BorderColor = new Vector4(0.2f, 0.4f, 0.7f, 0.8f)
+                Color = buttonBase,
+                HoverColor = hoverTint,
+                PressedColor = pressedTint,
+                TextColor = cyanText,
+                BorderColor = borderCyan,
+                ShowBorder = true,
+                HaloColor = new Vector4(0.35f, 0.75f, 0.7f, 1f), // Teal glow
+                HaloIntensity = 0.9f
             };
             settingsBtn.OnPressed = () =>
             {
@@ -252,17 +333,21 @@ namespace Aetheris
             };
             uiManager.AddElement(settingsBtn);
 
+            // EXIT
             exitBtn = new Button("Exit")
             {
-                Position = new Vector2(centerX - buttonWidth / 2f, startY + spacing * 3),
-                Size = new Vector2(buttonWidth, buttonHeight),
-                LabelScale = 1.2f,
+                Position = new Vector2(cx - buttonW / 2f, startY + spacing * 3),
+                Size = new Vector2(buttonW, buttonH),
+                LabelScale = 1.4f,
                 CornerRadius = 8f,
-                Color = new Vector4(0.12f, 0.05f, 0.08f, 0.85f),          // Dark red-purple
-                HoverColor = new Vector4(0.25f, 0.08f, 0.12f, 0.95f),     // Blood red hover
-                PressedColor = new Vector4(0.08f, 0.03f, 0.05f, 0.95f),   // Darker pressed
-                TextColor = new Vector4(0.9f, 0.5f, 0.6f, 1f),            // Light red text
-                BorderColor = new Vector4(0.5f, 0.2f, 0.3f, 0.8f)         // Dark red border
+                Color = new Vector4(0.08f, 0.05f, 0.06f, 0.92f),
+                HoverColor = new Vector4(0.22f, 0.12f, 0.14f, 0.96f),
+                PressedColor = new Vector4(0.04f, 0.02f, 0.03f, 0.92f),
+                TextColor = new Vector4(0.8f, 0.6f, 0.65f, 1f),
+                BorderColor = new Vector4(0.45f, 0.25f, 0.28f, 0.85f),
+                ShowBorder = true,
+                HaloColor = new Vector4(0.8f, 0.4f, 0.5f, 1f), // Muted red glow
+                HaloIntensity = 0.8f
             };
             exitBtn.OnPressed = () =>
             {
@@ -271,34 +356,31 @@ namespace Aetheris
             };
             uiManager.AddElement(exitBtn);
 
-            // Footer text - Dim blue
-            var footerLabel = new Label("Press ESC to exit")
+            // Footer elements
+            var footer = new Label("Press ESC to exit")
             {
-                Position = new Vector2(centerX - 80, ClientSize.Y - 60),
-                Size = new Vector2(160, 30),
-                Scale = 0.8f,
-                Color = new Vector4(0.2f, 0.3f, 0.5f, 0.5f),
+                Position = new Vector2(cx - 90, ClientSize.Y - 65),
+                Size = new Vector2(180, 30),
+                Scale = 0.9f,
+                Color = new Vector4(0.45f, 0.65f, 0.7f, 0.5f), // Blue-green tint
                 TextAlign = TextAlign.Center
             };
-            uiManager.AddElement(footerLabel);
+            uiManager.AddElement(footer);
 
-            // Version label - Very dim
-            var versionLabel = new Label("v0.1.0 Alpha")
+            var version = new Label("v0.1.0 Alpha")
             {
-                Position = new Vector2(20, ClientSize.Y - 40),
+                Position = new Vector2(25, ClientSize.Y - 45),
                 Size = new Vector2(150, 30),
-                Scale = 0.7f,
-                Color = new Vector4(0.15f, 0.2f, 0.3f, 0.4f)
+                Scale = 0.75f,
+                Color = new Vector4(0.3f, 0.4f, 0.45f, 0.35f) // Dark blue-green
             };
-            uiManager.AddElement(versionLabel);
+            uiManager.AddElement(version);
         }
 
         protected override void OnResize(ResizeEventArgs e)
         {
             base.OnResize(e);
             GL.Viewport(0, 0, e.Width, e.Height);
-
-            // Recreate UI with new dimensions
             if (uiManager != null)
             {
                 uiManager.Clear();
@@ -309,13 +391,21 @@ namespace Aetheris
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-
             time += (float)e.Time;
-
-            // Update UI
             uiManager?.Update(MouseState, KeyboardState, (float)e.Time);
 
-            // ESC to exit
+            // Animate subtitle with gentle wave (blue-green tint)
+            if (subtitleLabel != null)
+            {
+                float wave = MathF.Sin(time * 1.2f) * 0.08f;
+                subtitleLabel.Color = new Vector4(
+                    0.5f + wave * 0.3f,
+                    0.7f + wave * 0.5f,
+                    0.85f + wave * 0.2f,
+                    0.75f + wave * 0.15f
+                );
+            }
+
             if (KeyboardState.IsKeyPressed(Keys.Escape))
             {
                 Result = MenuResult.Exit;
@@ -329,16 +419,20 @@ namespace Aetheris
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            // Set projection matrix
             var projection = Matrix4.CreateOrthographicOffCenter(0, ClientSize.X, ClientSize.Y, 0, -1, 1);
 
-            // Render animated background
+            GL.UseProgram(shaderProgram);
+            int projLoc = GL.GetUniformLocation(shaderProgram, "projection");
+            GL.UniformMatrix4(projLoc, false, ref projection);
+
+            int resLoc = GL.GetUniformLocation(shaderProgram, "u_resolution");
+            GL.Uniform2(resLoc, new Vector2(ClientSize.X, ClientSize.Y));
+            int timeLoc = GL.GetUniformLocation(shaderProgram, "u_time");
+            GL.Uniform1(timeLoc, time);
+
             RenderBackground(projection);
+            RenderTwilightEffects(projection);
 
-            // Render decorative elements
-            RenderDecorations(projection);
-
-            // Render UI
             uiManager?.Render(projection);
 
             SwapBuffers();
@@ -350,22 +444,18 @@ namespace Aetheris
             int projLoc = GL.GetUniformLocation(shaderProgram, "projection");
             GL.UniformMatrix4(projLoc, false, ref projection);
 
-            // Slower, more ominous wave
-            float wave = MathF.Sin(time * 0.3f) * 0.5f + 0.5f;
-
-            // Dark blue/purple gradient background
+            // Deep blue-green twilight gradient (top to bottom)
             float[] vertices = new float[]
             {
-                // Top: Very dark blue-black
-                0, 0,                 0.01f, 0.02f + wave * 0.01f, 0.06f, 1.0f,
-                ClientSize.X, 0,      0.02f, 0.03f, 0.08f + wave * 0.01f, 1.0f,
-                
-                // Bottom: Deep dark blue with purple tint
-                ClientSize.X, ClientSize.Y, 0.03f + wave * 0.01f, 0.04f, 0.12f, 1.0f,
+                // Top: deep dark blue
+                0, 0,                 0.01f, 0.02f, 0.04f, 1.0f,
+                ClientSize.X, 0,      0.02f, 0.04f, 0.06f, 1.0f,
 
-                0, 0,                 0.01f, 0.02f + wave * 0.01f, 0.06f, 1.0f,
-                ClientSize.X, ClientSize.Y, 0.03f + wave * 0.01f, 0.04f, 0.12f, 1.0f,
-                0, ClientSize.Y,      0.02f, 0.03f, 0.10f + wave * 0.01f, 1.0f,
+                // Bottom: dark teal-green
+                ClientSize.X, ClientSize.Y, 0.08f, 0.14f, 0.12f, 1.0f,
+                0, 0,                 0.01f, 0.02f, 0.04f, 1.0f,
+                ClientSize.X, ClientSize.Y, 0.08f, 0.14f, 0.12f, 1.0f,
+                0, ClientSize.Y,      0.05f, 0.10f, 0.09f, 1.0f,
             };
 
             GL.BindVertexArray(vao);
@@ -374,62 +464,65 @@ namespace Aetheris
             GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
         }
 
-        private void RenderDecorations(Matrix4 projection)
+        private void RenderTwilightEffects(Matrix4 projection)
         {
             GL.UseProgram(shaderProgram);
             int projLoc = GL.GetUniformLocation(shaderProgram, "projection");
             GL.UniformMatrix4(projLoc, false, ref projection);
 
-            // Mystical floating particles - slower, more ethereal
-            for (int i = 0; i < 25; i++)
+            // Floating cyan-green particles (ethereal wisps)
+            for (int i = 0; i < 30; i++)
             {
-                float offsetX = MathF.Sin(time * 0.15f + i * 0.8f) * 60f;
-                float offsetY = MathF.Cos(time * 0.1f + i * 0.6f) * 40f;
-                float x = 80f + i * 75f + offsetX;
-                float y = 60f + (i % 4) * 270f + offsetY;
+                float ox = MathF.Sin(time * (0.15f + i * 0.02f) + i * 0.5f) * 140f;
+                float oy = MathF.Cos(time * (0.12f + i * 0.015f) + i * 0.8f) * 90f;
+                float x = 80f + i * 100f + ox;
+                float y = 60f + (i % 4) * 270f + oy;
+                float size = 2.0f + MathF.Sin(time * 1.2f + i) * 1.2f;
+                float alpha = 0.35f + MathF.Sin(time * 1.4f + i * 0.3f) * 0.2f;
 
-                // Slower pulsing
-                float size = 2f + MathF.Sin(time * 1.2f + i * 0.4f) * 1.2f;
-
-                // Blue/cyan mystical particles
-                float brightness = 0.15f + MathF.Sin(time * 1.5f + i * 0.5f) * 0.1f;
-                float blue = 0.3f + MathF.Sin(time * 1.8f + i * 0.3f) * 0.15f;
-
+                // Cyan-green glow
                 RenderRect(x, y, size, size,
-                    new Vector4(brightness * 0.5f, brightness * 0.8f, blue, 0.7f),
+                    new Vector4(0.3f, 0.8f, 0.7f, alpha),
                     projection);
             }
 
-            // Larger, dimmer ambient particles
+            // Mystical deep blue wisps (fewer, slower)
             for (int i = 0; i < 12; i++)
             {
-                float offsetX = MathF.Sin(time * 0.08f + i * 1.2f) * 100f;
-                float offsetY = MathF.Cos(time * 0.06f + i * 0.9f) * 80f;
-                float x = 150f + i * 160f + offsetX;
-                float y = 100f + (i % 3) * 350f + offsetY;
+                float ox = MathF.Sin(time * (0.08f + i * 0.03f) + i * 0.7f) * 160f;
+                float oy = MathF.Cos(time * (0.06f + i * 0.025f) + i) * 70f;
+                float x = 120f + i * 200f + ox;
+                float y = 30f + (i % 5) * 250f + oy;
+                float w = 3.0f + MathF.Sin(time * 0.8f + i * 0.5f) * 1.6f;
+                float alpha = 0.22f + MathF.Sin(time * 1.0f + i * 0.4f) * 0.12f;
 
-                float size = 4f + MathF.Sin(time * 0.8f + i * 0.6f) * 2f;
-                float alpha = 0.15f + MathF.Sin(time * 1.2f + i * 0.4f) * 0.1f;
-
-                // Very dim blue glow
-                RenderRect(x, y, size, size,
-                    new Vector4(0.1f, 0.15f, 0.35f, alpha),
+                // Deep blue
+                RenderRect(x, y, w, w,
+                    new Vector4(0.25f, 0.5f, 0.75f, alpha),
                     projection);
             }
 
-            // Add some mystical wisps (elongated particles)
+            // Distant dark forest silhouette at bottom
             for (int i = 0; i < 8; i++)
             {
-                float offsetY = MathF.Sin(time * 0.12f + i * 0.7f) * 120f;
-                float x = 100f + i * 240f;
-                float y = -50f + offsetY;
+                float x = -150f + i * (ClientSize.X / 7f);
+                float y = ClientSize.Y - 180f - MathF.Sin(time * 0.04f + i * 0.5f) * 12f;
+                float w = ClientSize.X / 5f + 80f;
+                float h = 200f + MathF.Sin(i * 1.2f) * 40f;
+                
+                RenderRect(x, y, w, h, 
+                    new Vector4(0.01f, 0.02f, 0.03f, 0.75f), 
+                    projection);
+            }
 
-                float height = 60f + MathF.Sin(time + i) * 20f;
-                float alpha = 0.08f + MathF.Sin(time * 1.5f + i * 0.5f) * 0.05f;
-
-                // Vertical wisps with blue/cyan tint
-                RenderRect(x, y, 2f, height,
-                    new Vector4(0.15f, 0.25f, 0.5f, alpha),
+            // Subtle horizontal blue-green bands (atmospheric layers)
+            for (int i = 0; i < 3; i++)
+            {
+                float y = ClientSize.Y * 0.3f + i * 180f + MathF.Sin(time * 0.3f + i) * 20f;
+                float alpha = 0.03f + MathF.Sin(time * 0.5f + i * 2f) * 0.015f;
+                
+                RenderRect(0, y, ClientSize.X, 60f,
+                    new Vector4(0.2f, 0.5f, 0.45f, alpha),
                     projection);
             }
         }
@@ -438,13 +531,13 @@ namespace Aetheris
         {
             float[] vertices = new float[]
             {
-                x, y,         color.X, color.Y, color.Z, color.W,
-                x + w, y,     color.X, color.Y, color.Z, color.W,
+                x, y, color.X, color.Y, color.Z, color.W,
+                x + w, y, color.X, color.Y, color.Z, color.W,
                 x + w, y + h, color.X, color.Y, color.Z, color.W,
 
-                x, y,         color.X, color.Y, color.Z, color.W,
+                x, y, color.X, color.Y, color.Z, color.W,
                 x + w, y + h, color.X, color.Y, color.Z, color.W,
-                x, y + h,     color.X, color.Y, color.Z, color.W,
+                x, y + h, color.X, color.Y, color.Z, color.W
             };
 
             GL.BindVertexArray(vao);
@@ -456,11 +549,10 @@ namespace Aetheris
         protected override void OnUnload()
         {
             base.OnUnload();
-
             fontRenderer?.Dispose();
             uiManager?.Dispose();
-            GL.DeleteVertexArray(vao);
             GL.DeleteBuffer(vbo);
+            GL.DeleteVertexArray(vao);
             GL.DeleteProgram(shaderProgram);
         }
     }

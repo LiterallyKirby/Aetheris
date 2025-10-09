@@ -68,20 +68,20 @@ namespace Aetheris
             if (players.Count == 0) return;
             
             // DETAILED LOGGING FOR DEBUGGING
-            Console.WriteLine($"[EntityRenderer] === RENDER FRAME ===");
-            Console.WriteLine($"[EntityRenderer] Total players in dict: {players.Count}");
-            Console.WriteLine($"[EntityRenderer] Local player position: {localPlayerPos}");
-            Console.WriteLine($"[EntityRenderer] usePSXShader flag: {usePSXShader}");
+          //  Console.WriteLine($"[EntityRenderer] === RENDER FRAME ===");
+           // Console.WriteLine($"[EntityRenderer] Total players in dict: {players.Count}");
+            //Console.WriteLine($"[EntityRenderer] Local player position: {localPlayerPos}");
+           // Console.WriteLine($"[EntityRenderer] usePSXShader flag: {usePSXShader}");
             
             // Check what shader is actually bound
             GL.GetInteger(GetPName.CurrentProgram, out int currentShader);
-            Console.WriteLine($"[EntityRenderer] Currently bound shader program: {currentShader}");
+           // Console.WriteLine($"[EntityRenderer] Currently bound shader program: {currentShader}");
             
             foreach (var kvp in players)
             {
                 Vector3 pos = kvp.Value.GetDisplayPosition();
                 float dist = (pos - localPlayerPos).Length;
-                Console.WriteLine($"[EntityRenderer]   Player {kvp.Key}: pos={pos}, dist={dist:F1}");
+             //   Console.WriteLine($"[EntityRenderer]   Player {kvp.Key}: pos={pos}, dist={dist:F1}");
             }
             
             // Ensure shader is active - check the actual OpenGL state
@@ -95,7 +95,7 @@ namespace Aetheris
             int locModel = GL.GetUniformLocation(currentShader, "uModel");
             int locNormalMatrix = GL.GetUniformLocation(currentShader, "uNormalMatrix");
             
-            Console.WriteLine($"[EntityRenderer] Shader uniform locations - uModel: {locModel}, uNormalMatrix: {locNormalMatrix}");
+            //Console.WriteLine($"[EntityRenderer] Shader uniform locations - uModel: {locModel}, uNormalMatrix: {locNormalMatrix}");
             
             if (locModel < 0)
             {
@@ -104,7 +104,7 @@ namespace Aetheris
             }
             
             GL.BindVertexArray(playerVao);
-            Console.WriteLine($"[EntityRenderer] Bound player VAO: {playerVao}");
+            //Console.WriteLine($"[EntityRenderer] Bound player VAO: {playerVao}");
             
             float maxDistSq = MaxRenderDistance * MaxRenderDistance;
             int rendered = 0;
@@ -117,7 +117,7 @@ namespace Aetheris
                 // Distance culling
                 if (distSq > maxDistSq) 
                 {
-                    Console.WriteLine($"[EntityRenderer] Player at {playerPos} too far (dist={MathF.Sqrt(distSq):F1}), skipping");
+              //      Console.WriteLine($"[EntityRenderer] Player at {playerPos} too far (dist={MathF.Sqrt(distSq):F1}), skipping");
                     continue;
                 }
                 
@@ -126,8 +126,8 @@ namespace Aetheris
                 
                 // EXTRACT POSITION FROM MODEL MATRIX FOR DEBUGGING
                 Vector3 extractedPos = new Vector3(model.M41, model.M42, model.M43);
-                Console.WriteLine($"[EntityRenderer] Player display pos: {playerPos}, Extracted from matrix: {extractedPos}");
-                Console.WriteLine($"[EntityRenderer] Model matrix M41-M43: ({model.M41:F2}, {model.M42:F2}, {model.M43:F2})");
+                //Console.WriteLine($"[EntityRenderer] Player display pos: {playerPos}, Extracted from matrix: {extractedPos}");
+                //Console.WriteLine($"[EntityRenderer] Model matrix M41-M43: ({model.M41:F2}, {model.M42:F2}, {model.M43:F2})");
                 
                 // Set model matrix in active shader
                 GL.UniformMatrix4(locModel, false, ref model);

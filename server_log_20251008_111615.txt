@@ -1,0 +1,67 @@
+[11:16:15.375] [[Server]] Log file created: server_log_20251008_111615.txt
+[11:16:15.380] [[Server]] Initializing world generation...
+[11:16:15.403] [[Server]] UDP listening on port 42070
+[11:16:15.426] [[Server]] Listening on port 42069 @ 60 TPS
+[11:16:15.426] [[Server]] Performance timing enabled - waiting for connections...
+[11:16:15.447] [[Server]] Tick 0 | Cache: 0/20000
+[11:16:15.866] [[Server]] Client connected: 127.0.0.1:41540
+[11:16:17.392] [[Generation]] (0,0,0): Render verts=16506, Collision verts=16506
+[11:16:17.415] [[Timing]] Chunk (0,0,0): Chunk=283.97ms Mesh=205.43ms Send=11.22ms Total=519.85ms
+[11:16:19.653] [[Generation]] (1,0,0): Render verts=13323, Collision verts=13323
+[11:16:19.659] [[Timing]] Chunk (1,0,0): Chunk=356.51ms Mesh=1871.35ms Send=6.22ms Total=2234.35ms
+[11:16:19.875] [[Generation]] (0,0,-1): Render verts=13143, Collision verts=13143
+[11:16:19.884] [[Timing]] Chunk (0,0,-1): Chunk=1509.07ms Mesh=926.30ms Send=8.39ms Total=2443.92ms
+[11:16:20.288] [[Generation]] (1,0,-1): Render verts=13056, Collision verts=13056
+[11:16:20.298] [[Timing]] Chunk (1,0,-1): Chunk=1444.12ms Mesh=1144.14ms Send=10.54ms Total=2598.98ms
+[11:16:20.380] [[Generation]] (1,0,1): Render verts=13893, Collision verts=13893
+[11:16:20.388] [[Timing]] Chunk (1,0,1): Chunk=1402.27ms Mesh=1347.51ms Send=6.82ms Total=2756.78ms
+[11:16:20.575] [[Generation]] (-1,0,0): Render verts=18186, Collision verts=18186
+[11:16:20.587] [[Timing]] Chunk (-1,0,0): Chunk=1364.75ms Mesh=1760.23ms Send=10.78ms Total=3136.19ms
+[11:16:20.659] [[Generation]] (0,0,1): Render verts=13995, Collision verts=13995
+[11:16:20.668] [[Timing]] Chunk (0,0,1): Chunk=1539.51ms Mesh=1680.38ms Send=8.17ms Total=3228.24ms
+[11:16:20.796] [[Generation]] (0,-1,-1): Render verts=22779, Collision verts=22779
+[11:16:20.808] [[Timing]] Chunk (0,-1,-1): Chunk=1761.23ms Mesh=1565.36ms Send=12.49ms Total=3339.28ms
+[11:16:20.904] [[Generation]] (-1,0,1): Render verts=18120, Collision verts=18120
+[11:16:20.916] [[Timing]] Chunk (-1,0,1): Chunk=1533.14ms Mesh=1644.64ms Send=11.68ms Total=3189.86ms
+[11:16:21.211] [[Generation]] (-1,0,-1): Render verts=12909, Collision verts=12909
+[11:16:21.218] [[Timing]] Chunk (-1,0,-1): Chunk=1276.38ms Mesh=822.07ms Send=4.63ms Total=2105.34ms
+[11:16:23.435] [[Generation]] (0,-1,0): Render verts=46158, Collision verts=46158
+[11:16:23.465] [[Timing]] Chunk (0,-1,0): Chunk=1156.87ms Mesh=1959.39ms Send=29.42ms Total=3145.96ms
+[11:16:23.507] [[Generation]] (1,-1,0): Render verts=46677, Collision verts=46677
+[11:16:23.533] [[Timing]] Chunk (1,-1,0): Chunk=1113.03ms Mesh=1872.13ms Send=25.87ms Total=3011.20ms
+[11:16:24.032] [[Generation]] (1,-1,-1): Render verts=8361, Collision verts=8361
+[11:16:24.037] [[Timing]] Chunk (1,-1,-1): Chunk=1344.83ms Mesh=1838.20ms Send=3.50ms Total=3187.06ms
+[11:16:24.041] [[Generation]] (1,0,-2): Render verts=13071, Collision verts=13071
+[11:16:24.047] [[Timing]] Chunk (1,0,-2): Chunk=1432.21ms Mesh=1339.16ms Send=5.25ms Total=2776.95ms
+[11:16:24.114] [[Generation]] (2,0,0): Render verts=15930, Collision verts=15930
+[11:16:24.132] [[Timing]] Chunk (2,0,0): Chunk=1314.00ms Mesh=1580.64ms Send=16.32ms Total=2912.58ms
+[11:16:24.146] [[Generation]] (0,-1,1): Render verts=18219, Collision verts=18219
+[11:16:24.159] [[Timing]] Chunk (0,-1,1): Chunk=964.14ms Mesh=2592.93ms Send=10.30ms Total=3570.62ms
+[11:16:24.192] [[Generation]] (-1,-1,1): Render verts=28041, Collision verts=28041
+[11:16:24.208] [[Timing]] Chunk (-1,-1,1): Chunk=2092.76ms Mesh=1181.59ms Send=15.63ms Total=3290.19ms
+[11:16:24.210] [[Generation]] (-1,-1,0): Render verts=47148, Collision verts=47148
+[11:16:24.233] [[Timing]] Chunk (-1,-1,0): Chunk=1559.49ms Mesh=1927.67ms Send=22.91ms Total=3510.17ms
+[11:16:24.478] [[Generation]] (-1,-1,-1): Render verts=43515, Collision verts=43515
+[11:16:24.502] [[Timing]] Chunk (-1,-1,-1): Chunk=2065.20ms Mesh=1540.45ms Send=23.48ms Total=3629.27ms
+[11:16:24.517] [[Generation]] (0,1,1): Render verts=0, Collision verts=0
+[11:16:24.518] [[Timing]] Chunk (0,1,1): Chunk=159.23ms Mesh=192.67ms Send=0.05ms Total=352.11ms
+[11:16:24.574] [[Generation]] (1,-1,1): Render verts=49929, Collision verts=49929
+[11:16:24.601] [[Timing]] Chunk (1,-1,1): Chunk=1649.76ms Mesh=1961.01ms Send=26.78ms Total=3643.25ms
+[11:16:24.784] [[Generation]] (-2,0,-1): Render verts=17817, Collision verts=17817
+[11:16:24.791] [[Timing]] Chunk (-2,0,-1): Chunk=2564.61ms Mesh=924.56ms Send=7.85ms Total=3497.17ms
+[11:16:24.831] [[Generation]] (-2,0,1): Render verts=14919, Collision verts=14919
+[11:16:24.840] [[Timing]] Chunk (-2,0,1): Chunk=1474.94ms Mesh=2064.00ms Send=9.12ms Total=3548.18ms
+[11:16:24.867] [[Generation]] (0,1,-1): Render verts=0, Collision verts=0
+[11:16:24.868] [[Timing]] Chunk (0,1,-1): Chunk=162.34ms Mesh=185.81ms Send=0.17ms Total=348.50ms
+[11:16:25.263] [[Generation]] (0,1,0): Render verts=0, Collision verts=0
+[11:16:25.266] [[Timing]] Chunk (0,1,0): Chunk=307.49ms Mesh=161.19ms Send=2.57ms Total=471.84ms
+[11:16:25.406] [[Generation]] (-2,0,0): Render verts=19455, Collision verts=19455
+[11:16:25.410] [[Timing]] Chunk (-2,0,0): Chunk=1984.88ms Mesh=1260.12ms Send=4.14ms Total=3260.05ms
+[11:16:25.419] [[Generation]] (0,0,-2): Render verts=16290, Collision verts=16290
+[11:16:25.421] [[Generation]] (0,0,2): Render verts=15900, Collision verts=15900
+[11:16:25.425] [[Timing]] Chunk (0,0,-2): Chunk=537.33ms Mesh=224.53ms Send=5.55ms Total=767.57ms
+[11:16:25.427] [[Timing]] Chunk (0,0,2): Chunk=3431.75ms Mesh=1009.80ms Send=6.27ms Total=4447.97ms
+[11:16:25.458] [[Server]] Tick 600 | Cache: 28/20000
+[11:16:25.458]   Requests: 28 | Avg Times: Chunk=1349.49ms Mesh=1313.69ms Send=10.93ms Total=2674.11ms
+[11:16:30.447] [[Server]] Tick 900 | Cache: 28/20000
+[11:16:30.447]   Requests: 28 | Avg Times: Chunk=1349.49ms Mesh=1313.69ms Send=10.93ms Total=2674.11ms

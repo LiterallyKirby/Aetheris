@@ -289,13 +289,13 @@ namespace Aetheris
             Console.WriteLine($"[Server] Block broken at ({x}, {y}, {z}) via TCP");
 
             // Use density-based removal for smoother terrain modification
-            WorldGen.RemoveBlock(x, y, z, radius: 1.5f, strength: 3.0f);
+            WorldGen.RemoveBlock(x, y, z, radius: 5.0f, strength: 3.0f);
 
             // Invalidate affected chunk meshes
             InvalidateChunksAroundBlock(x, y, z, radius: 1.5f);
 
-            // Broadcast to all clients via TCP
-            await BroadcastBlockBreakTcp(x, y, z);
+            // Broadcast to all clients via UDP instead of TCP
+            await BroadcastBlockBreak(x, y, z); // Use existing UDP method
         }
 
         // Store active client streams for broadcasting
@@ -458,10 +458,18 @@ namespace Aetheris
                 }
             }
 
+            Log($"[Server] Invalidating {chunksToInvalidate.Count} chunks around block ({x}, {y}, {z})");
+
             foreach (var coord in chunksToInvalidate)
             {
+                // CRITICAL: Remove from mesh cache
                 meshCache.TryRemove(coord, out _);
-                Log($"[Server] Invalidated chunk {coord} due to block break");
+
+                // CRITICAL: Unload chunk from ChunkManager
+                // This forces regeneration with updated WorldGen density
+                chunkManager.UnloadChunk(coord);
+
+                Log($"[Server] Invalidated chunk {coord} (mesh + chunk data cleared)");
             }
         }
 
@@ -630,7 +638,7 @@ namespace Aetheris
 
             Log("[[Server]] Initializing world generation...");
             WorldGen.Initialize();
-
+            WorldGen.SetModificationsEnabled(true);
             listener = new TcpListener(IPAddress.Any, ServerConfig.SERVER_PORT);
             listener.Start();
             listener.Server.NoDelay = true;

@@ -1,0 +1,667 @@
+[10:27:46.858] [[Server]] Log file created: server_log_20251008_102746.txt
+[10:27:46.864] [[Server]] Initializing world generation...
+[10:27:46.886] [[Server]] UDP listening on port 42070
+[10:27:46.907] [[Server]] Listening on port 42069 @ 60 TPS
+[10:27:46.907] [[Server]] Performance timing enabled - waiting for connections...
+[10:27:46.928] [[Server]] Tick 0 | Cache: 0/20000
+[10:27:47.342] [[Server]] Client connected: 127.0.0.1:57722
+[10:27:48.946] [[Generation]] (0,0,0): Render verts=16506, Collision verts=16506
+[10:27:48.961] [[Timing]] Chunk (0,0,0): Chunk=301.77ms Mesh=216.33ms Send=13.45ms Total=555.07ms
+[10:27:49.500] [[Generation]] (1,0,0): Render verts=13323, Collision verts=13323
+[10:27:49.506] [[Timing]] Chunk (1,0,0): Chunk=245.06ms Mesh=278.09ms Send=5.35ms Total=528.67ms
+[10:27:50.094] [[Generation]] (0,0,1): Render verts=13995, Collision verts=13995
+[10:27:50.098] [[Timing]] Chunk (0,0,1): Chunk=283.59ms Mesh=303.13ms Send=3.27ms Total=590.20ms
+[10:27:50.586] [[Generation]] (0,0,-1): Render verts=13143, Collision verts=13143
+[10:27:50.590] [[Timing]] Chunk (0,0,-1): Chunk=244.63ms Mesh=237.87ms Send=3.51ms Total=487.55ms
+[10:27:50.782] [Server] Rejecting position from 127.0.0.1:58059, forcing correction
+[10:27:50.782] [Server] Rejecting position from 127.0.0.1:58059, forcing correction
+[10:27:51.117] [[Generation]] (-1,0,0): Render verts=18186, Collision verts=18186
+[10:27:51.125] [[Timing]] Chunk (-1,0,0): Chunk=258.35ms Mesh=264.12ms Send=7.51ms Total=530.13ms
+[10:27:51.660] [[Generation]] (1,0,1): Render verts=13893, Collision verts=13893
+[10:27:51.664] [[Timing]] Chunk (1,0,1): Chunk=276.84ms Mesh=253.86ms Send=3.44ms Total=534.32ms
+[10:27:52.024] [[Server]] Tick 300 | Cache: 6/20000
+[10:27:52.024]   Requests: 6 | Avg Times: Chunk=268.37ms Mesh=258.90ms Send=6.09ms Total=533.36ms
+[10:27:52.133] [[Generation]] (1,0,-1): Render verts=13056, Collision verts=13056
+[10:27:52.138] [[Timing]] Chunk (1,0,-1): Chunk=236.19ms Mesh=229.83ms Send=5.40ms Total=471.75ms
+[10:27:52.706] [[Generation]] (-1,0,1): Render verts=18120, Collision verts=18120
+[10:27:52.710] [[Timing]] Chunk (-1,0,1): Chunk=330.07ms Mesh=234.37ms Send=4.63ms Total=569.24ms
+[10:27:53.169] [[Generation]] (-1,0,-1): Render verts=12909, Collision verts=12909
+[10:27:53.175] [[Timing]] Chunk (-1,0,-1): Chunk=231.84ms Mesh=224.13ms Send=5.83ms Total=461.94ms
+[10:27:53.583] [[Generation]] (0,-1,0): Render verts=46158, Collision verts=46158
+[10:27:53.599] [[Timing]] Chunk (0,-1,0): Chunk=206.90ms Mesh=199.39ms Send=16.60ms Total=423.01ms
+[10:27:54.020] [[Generation]] (1,-1,0): Render verts=46677, Collision verts=46677
+[10:27:54.033] [[Timing]] Chunk (1,-1,0): Chunk=218.56ms Mesh=198.40ms Send=13.80ms Total=430.86ms
+[10:27:54.429] [[Generation]] (0,-1,1): Render verts=18219, Collision verts=18219
+[10:27:54.435] [[Timing]] Chunk (0,-1,1): Chunk=195.18ms Mesh=189.72ms Send=5.14ms Total=390.18ms
+[10:27:54.829] [[Generation]] (-1,-1,0): Render verts=47148, Collision verts=47148
+[10:27:54.845] [[Timing]] Chunk (-1,-1,0): Chunk=192.95ms Mesh=199.57ms Send=15.50ms Total=408.16ms
+[10:27:55.220] [[Generation]] (0,-1,-1): Render verts=22779, Collision verts=22779
+[10:27:55.228] [[Timing]] Chunk (0,-1,-1): Chunk=182.88ms Mesh=184.74ms Send=7.98ms Total=375.80ms
+[10:27:55.573] [[Generation]] (1,-1,-1): Render verts=8361, Collision verts=8361
+[10:27:55.576] [[Timing]] Chunk (1,-1,-1): Chunk=163.90ms Mesh=179.23ms Send=2.02ms Total=345.33ms
+[10:27:55.995] [[Generation]] (-1,-1,-1): Render verts=43515, Collision verts=43515
+[10:27:56.009] [[Timing]] Chunk (-1,-1,-1): Chunk=201.06ms Mesh=217.43ms Send=13.85ms Total=432.50ms
+[10:27:56.418] [[Generation]] (-1,-1,1): Render verts=28041, Collision verts=28041
+[10:27:56.430] [[Timing]] Chunk (-1,-1,1): Chunk=198.97ms Mesh=195.72ms Send=12.06ms Total=412.96ms
+[10:27:56.900] [[Generation]] (1,-1,1): Render verts=49929, Collision verts=49929
+[10:27:56.913] [[Timing]] Chunk (1,-1,1): Chunk=234.61ms Mesh=232.19ms Send=12.70ms Total=479.65ms
+[10:27:56.942] [[Server]] Tick 600 | Cache: 18/20000
+[10:27:56.942]   Requests: 18 | Avg Times: Chunk=233.52ms Mesh=224.34ms Send=8.45ms Total=466.30ms
+[10:27:57.339] [[Generation]] (-2,0,0): Render verts=19455, Collision verts=19455
+[10:27:57.343] [[Timing]] Chunk (-2,0,0): Chunk=220.51ms Mesh=197.94ms Send=3.87ms Total=422.44ms
+[10:27:57.716] [[Generation]] (0,0,-2): Render verts=16290, Collision verts=16290
+[10:27:57.721] [[Timing]] Chunk (0,0,-2): Chunk=176.97ms Mesh=194.00ms Send=4.83ms Total=375.92ms
+[10:27:57.924] [[Generation]] (0,1,0): Render verts=0, Collision verts=0
+[10:27:57.925] [[Timing]] Chunk (0,1,0): Chunk=98.29ms Mesh=102.57ms Send=0.28ms Total=201.26ms
+[10:27:58.371] [Server] Rejecting position from 127.0.0.1:58059, forcing correction
+[10:27:58.478] [[Generation]] (0,0,2): Render verts=15900, Collision verts=15900
+[10:27:58.484] [[Timing]] Chunk (0,0,2): Chunk=283.00ms Mesh=271.04ms Send=5.34ms Total=559.50ms
+[10:27:58.916] [[Generation]] (2,0,0): Render verts=15930, Collision verts=15930
+[10:27:58.922] [[Timing]] Chunk (2,0,0): Chunk=216.59ms Mesh=213.22ms Send=6.40ms Total=436.30ms
+[10:27:59.011] [Server] Rejecting position from 127.0.0.1:58059, forcing correction
+[10:27:59.348] [[Generation]] (1,0,-2): Render verts=13071, Collision verts=13071
+[10:27:59.354] [[Timing]] Chunk (1,0,-2): Chunk=215.18ms Mesh=207.71ms Send=5.67ms Total=428.77ms
+[10:27:59.895] [[Generation]] (-2,0,1): Render verts=14919, Collision verts=14919
+[10:27:59.899] [[Timing]] Chunk (-2,0,1): Chunk=268.51ms Mesh=268.92ms Send=3.94ms Total=541.49ms
+[10:28:00.329] [[Generation]] (-2,0,-1): Render verts=17817, Collision verts=17817
+[10:28:00.335] [[Timing]] Chunk (-2,0,-1): Chunk=223.74ms Mesh=204.11ms Send=5.64ms Total=433.64ms
+[10:28:00.519] [[Generation]] (0,1,-1): Render verts=0, Collision verts=0
+[10:28:00.520] [[Timing]] Chunk (0,1,-1): Chunk=92.51ms Mesh=88.63ms Send=0.11ms Total=181.35ms
+[10:28:00.708] [[Generation]] (0,1,1): Render verts=0, Collision verts=0
+[10:28:00.708] [[Timing]] Chunk (0,1,1): Chunk=99.18ms Mesh=88.74ms Send=0.13ms Total=188.16ms
+[10:28:01.240] [[Generation]] (1,0,2): Render verts=14034, Collision verts=14034
+[10:28:01.243] [[Timing]] Chunk (1,0,2): Chunk=286.66ms Mesh=244.40ms Send=3.18ms Total=534.33ms
+[10:28:01.702] [[Generation]] (2,0,1): Render verts=18108, Collision verts=18108
+[10:28:01.707] [[Timing]] Chunk (2,0,1): Chunk=246.77ms Mesh=210.66ms Send=5.53ms Total=463.08ms
+[10:28:01.883] [[Generation]] (1,1,0): Render verts=0, Collision verts=0
+[10:28:01.883] [[Timing]] Chunk (1,1,0): Chunk=81.43ms Mesh=92.70ms Send=0.12ms Total=174.39ms
+[10:28:02.313] [[Generation]] (2,0,-1): Render verts=13326, Collision verts=13326
+[10:28:02.315] [[Timing]] Chunk (2,0,-1): Chunk=216.48ms Mesh=212.70ms Send=2.78ms Total=432.05ms
+[10:28:02.497] [[Generation]] (-1,1,0): Render verts=0, Collision verts=0
+[10:28:02.497] [[Timing]] Chunk (-1,1,0): Chunk=91.48ms Mesh=88.25ms Send=0.10ms Total=179.92ms
+[10:28:02.892] [[Generation]] (-1,0,-2): Render verts=12501, Collision verts=12501
+[10:28:02.897] [[Timing]] Chunk (-1,0,-2): Chunk=207.55ms Mesh=186.98ms Send=5.38ms Total=400.02ms
+[10:28:03.434] [[Generation]] (-1,0,2): Render verts=18738, Collision verts=18738
+[10:28:03.442] [[Timing]] Chunk (-1,0,2): Chunk=265.92ms Mesh=268.96ms Send=7.69ms Total=542.73ms
+[10:28:03.651] [[Generation]] (1,1,1): Render verts=0, Collision verts=0
+[10:28:03.651] [[Timing]] Chunk (1,1,1): Chunk=103.63ms Mesh=101.59ms Send=0.14ms Total=205.48ms
+[10:28:03.832] [[Generation]] (-1,1,-1): Render verts=0, Collision verts=0
+[10:28:03.832] [[Timing]] Chunk (-1,1,-1): Chunk=89.01ms Mesh=91.52ms Send=0.12ms Total=180.91ms
+[10:28:04.020] [[Generation]] (1,1,-1): Render verts=0, Collision verts=0
+[10:28:04.020] [[Timing]] Chunk (1,1,-1): Chunk=92.63ms Mesh=95.12ms Send=0.09ms Total=187.93ms
+[10:28:04.208] [[Generation]] (-1,1,1): Render verts=0, Collision verts=0
+[10:28:04.208] [[Timing]] Chunk (-1,1,1): Chunk=92.73ms Mesh=94.60ms Send=0.12ms Total=187.59ms
+[10:28:04.611] [[Generation]] (-2,-1,0): Render verts=38448, Collision verts=38448
+[10:28:04.625] [[Timing]] Chunk (-2,-1,0): Chunk=204.68ms Mesh=198.17ms Send=13.85ms Total=416.81ms
+[10:28:04.812] [[Generation]] (0,1,-2): Render verts=0, Collision verts=0
+[10:28:04.813] [[Timing]] Chunk (0,1,-2): Chunk=94.24ms Mesh=87.33ms Send=0.13ms Total=181.85ms
+[10:28:05.197] [[Generation]] (2,-1,0): Render verts=8961, Collision verts=8961
+[10:28:05.201] [[Timing]] Chunk (2,-1,0): Chunk=190.84ms Mesh=193.11ms Send=4.24ms Total=388.39ms
+[10:28:05.226] [Server] Invalidated chunk (0,0,0) due to block break
+[10:28:05.230] [Server] Broadcasted block break at (12, 36, 19) to 1 clients
+[10:28:05.663] [[Generation]] (-2,0,-2): Render verts=13344, Collision verts=13344
+[10:28:05.666] [[Timing]] Chunk (-2,0,-2): Chunk=197.61ms Mesh=234.53ms Send=3.12ms Total=435.36ms
+[10:28:05.719] [Server] Invalidated chunk (0,0,0) due to block break
+[10:28:05.719] [Server] Broadcasted block break at (13, 37, 26) to 1 clients
+[10:28:06.690] [[Generation]] (1,1,-2): Render verts=0, Collision verts=0
+[10:28:06.690] [[Timing]] Chunk (1,1,-2): Chunk=299.78ms Mesh=715.21ms Send=0.16ms Total=1015.24ms
+[10:28:07.010] [[Generation]] (0,1,2): Render verts=0, Collision verts=0
+[10:28:07.010] [[Timing]] Chunk (0,1,2): Chunk=644.00ms Mesh=691.01ms Send=0.53ms Total=1335.73ms
+[10:28:07.076] [[Generation]] (3,1,1): Render verts=0, Collision verts=0
+[10:28:07.077] [[Timing]] Chunk (3,1,1): Chunk=658.10ms Mesh=688.00ms Send=0.20ms Total=1346.40ms
+[10:28:07.138] [[Generation]] (-2,1,0): Render verts=0, Collision verts=0
+[10:28:07.139] [[Timing]] Chunk (-2,1,0): Chunk=926.73ms Mesh=536.39ms Send=0.15ms Total=1463.44ms
+[10:28:07.868] [[Generation]] (3,1,2): Render verts=0, Collision verts=0
+[10:28:07.868] [[Timing]] Chunk (3,1,2): Chunk=486.55ms Mesh=511.78ms Send=0.30ms Total=998.75ms
+[10:28:08.185] [[Generation]] (-3,1,-1): Render verts=0, Collision verts=0
+[10:28:08.185] [[Timing]] Chunk (-3,1,-1): Chunk=525.86ms Mesh=582.03ms Send=0.14ms Total=1108.11ms
+[10:28:08.512] [[Generation]] (2,1,5): Render verts=0, Collision verts=0
+[10:28:08.512] [[Timing]] Chunk (2,1,5): Chunk=487.45ms Mesh=599.14ms Send=0.16ms Total=1086.86ms
+[10:28:09.652] [[Generation]] (0,0,0): Render verts=16566, Collision verts=16566
+[10:28:09.661] [[Timing]] Chunk (0,0,0): Chunk=0.02ms Mesh=3882.10ms Send=8.51ms Total=3891.01ms
+[10:28:09.733] [[Generation]] (0,0,-3): Render verts=17547, Collision verts=17547
+[10:28:09.740] [[Timing]] Chunk (0,0,-3): Chunk=1643.55ms Mesh=2411.93ms Send=6.40ms Total=4062.48ms
+[10:28:10.168] [[Generation]] (0,-1,2): Render verts=0, Collision verts=0
+[10:28:10.172] [[Timing]] Chunk (0,-1,2): Chunk=2254.39ms Mesh=2241.90ms Send=0.05ms Total=4500.05ms
+[10:28:10.178] [[Generation]] (2,0,-2): Render verts=13203, Collision verts=13203
+[10:28:10.182] [[Timing]] Chunk (2,0,-2): Chunk=1878.47ms Mesh=2630.53ms Send=4.66ms Total=4513.78ms
+[10:28:10.394] [[Generation]] (-5,1,-2): Render verts=0, Collision verts=0
+[10:28:10.394] [[Timing]] Chunk (-5,1,-2): Chunk=568.58ms Mesh=2084.90ms Send=0.04ms Total=2653.62ms
+[10:28:10.394] [[Cache]] Hit after lock for (-5,1,-2)
+[10:28:10.394] [[Timing]] Chunk (-5,1,-2): Chunk=0.00ms Mesh=0.00ms Send=0.01ms Total=2199.42ms
+[10:28:11.195] [[Generation]] (3,-1,-4): Render verts=0, Collision verts=0
+[10:28:11.195] [[Timing]] Chunk (3,-1,-4): Chunk=2583.92ms Mesh=1407.46ms Send=0.04ms Total=3991.54ms
+[10:28:11.303] [[Generation]] (2,0,-5): Render verts=21399, Collision verts=21399
+[10:28:11.312] [[Timing]] Chunk (2,0,-5): Chunk=2654.30ms Mesh=1508.92ms Send=8.82ms Total=4172.14ms
+[10:28:11.655] [[Generation]] (-5,-1,-2): Render verts=39174, Collision verts=39174
+[10:28:11.677] [[Cache]] Hit after lock for (-5,-1,-2)
+[10:28:11.692] [[Cache]] Hit after lock for (-5,-1,-2)
+[10:28:11.708] [[Cache]] Hit after lock for (-5,-1,-2)
+[10:28:11.726] [[Cache]] Hit for (2,1,5)
+[10:28:11.727] [[Cache]] Hit for (-5,1,-2)
+[10:28:11.858] [[Generation]] (-5,0,3): Render verts=19983, Collision verts=19983
+[10:28:11.863] [[Cache]] Hit after lock for (-5,0,3)
+[10:28:11.876] [[Cache]] Hit after lock for (-5,0,3)
+[10:28:11.888] [[Cache]] Hit after lock for (-5,0,3)
+[10:28:11.900] [[Cache]] Hit after lock for (-5,0,3)
+[10:28:11.910] [[Cache]] Hit for (-5,-1,-2)
+[10:28:11.924] [[Cache]] Hit for (2,1,5)
+[10:28:11.924] [[Cache]] Hit for (-5,1,-2)
+[10:28:12.038] [[Generation]] (5,1,2): Render verts=0, Collision verts=0
+[10:28:12.039] [[Cache]] Hit after lock for (5,1,2)
+[10:28:12.039] [[Cache]] Hit after lock for (5,1,2)
+[10:28:12.348] [[Generation]] (5,1,-2): Render verts=0, Collision verts=0
+[10:28:12.348] [[Cache]] Hit after lock for (5,1,-2)
+[10:28:12.616] [[Generation]] (5,0,3): Render verts=16269, Collision verts=16269
+[10:28:12.622] [[Cache]] Hit after lock for (5,0,3)
+[10:28:12.629] [[Cache]] Hit after lock for (5,0,3)
+[10:28:12.636] [[Cache]] Hit after lock for (5,0,3)
+[10:28:12.642] [[Cache]] Hit after lock for (5,0,3)
+[10:28:12.650] [[Cache]] Hit after lock for (5,0,3)
+[10:28:12.658] [[Cache]] Hit for (-5,0,3)
+[10:28:12.667] [[Cache]] Hit for (-5,-1,-2)
+[10:28:12.683] [[Cache]] Hit for (2,1,5)
+[10:28:12.684] [[Cache]] Hit for (-5,1,-2)
+[10:28:12.684] [[Cache]] Hit for (5,1,2)
+[10:28:12.684] [[Cache]] Hit for (5,1,-2)
+[10:28:12.800] [[Generation]] (-5,1,2): Render verts=0, Collision verts=0
+[10:28:12.800] [[Cache]] Hit after lock for (-5,1,2)
+[10:28:12.800] [[Cache]] Hit after lock for (-5,1,2)
+[10:28:12.904] [[Generation]] (-2,0,3): Render verts=16698, Collision verts=16698
+[10:28:13.550] [[Generation]] (1,0,4): Render verts=17103, Collision verts=17103
+[10:28:13.557] [[Cache]] Hit for (3,1,2)
+[10:28:13.881] [[Generation]] (-2,1,-5): Render verts=0, Collision verts=0
+[10:28:13.881] [[Cache]] Hit after lock for (-2,1,-5)
+[10:28:14.107] [[Generation]] (-5,1,-1): Render verts=0, Collision verts=0
+[10:28:14.108] [[Cache]] Hit after lock for (-5,1,-1)
+[10:28:14.228] [[Generation]] (-1,1,5): Render verts=0, Collision verts=0
+[10:28:14.228] [[Cache]] Hit after lock for (-1,1,5)
+[10:28:14.234] [[Generation]] (5,1,-1): Render verts=0, Collision verts=0
+[10:28:14.234] [[Cache]] Hit after lock for (5,1,-1)
+[10:28:14.323] [[Generation]] (-2,1,5): Render verts=0, Collision verts=0
+[10:28:14.323] [[Cache]] Hit after lock for (-2,1,5)
+[10:28:14.383] [[Generation]] (1,1,-5): Render verts=0, Collision verts=0
+[10:28:14.383] [[Cache]] Hit after lock for (1,1,-5)
+[10:28:15.106] [[Generation]] (2,-1,-5): Render verts=29625, Collision verts=29625
+[10:28:15.115] [[Cache]] Hit after lock for (2,-1,-5)
+[10:28:15.125] [[Generation]] (-1,1,-5): Render verts=0, Collision verts=0
+[10:28:15.134] [[Cache]] Hit after lock for (2,-1,-5)
+[10:28:15.152] [[Cache]] Hit after lock for (2,-1,-5)
+[10:28:15.333] [[Generation]] (2,-1,5): Render verts=20907, Collision verts=20907
+[10:28:15.343] [[Cache]] Hit after lock for (2,-1,5)
+[10:28:15.353] [[Cache]] Hit after lock for (2,-1,5)
+[10:28:15.362] [[Cache]] Hit after lock for (2,-1,5)
+[10:28:15.382] [[Generation]] (1,1,5): Render verts=0, Collision verts=0
+[10:28:15.589] [[Generation]] (3,0,5): Render verts=15021, Collision verts=15021
+[10:28:15.593] [[Cache]] Hit for (-5,1,2)
+[10:28:15.594] [[Cache]] Hit for (-5,1,-2)
+[10:28:15.594] [[Cache]] Hit for (-5,-1,-2)
+[10:28:15.619] [[Cache]] Hit for (5,1,2)
+[10:28:15.619] [[Cache]] Hit for (2,-1,-5)
+[10:28:15.633] [[Cache]] Hit for (5,1,-2)
+[10:28:15.633] [[Cache]] Hit for (2,1,5)
+[10:28:15.633] [[Cache]] Hit for (2,-1,5)
+[10:28:15.643] [[Cache]] Hit for (-2,1,5)
+[10:28:15.643] [[Cache]] Hit for (-2,1,-5)
+[10:28:15.643] [[Cache]] Hit for (-1,1,5)
+[10:28:15.643] [[Cache]] Hit for (1,1,-5)
+[10:28:15.643] [[Cache]] Hit for (-5,1,-1)
+[10:28:15.643] [[Cache]] Hit for (1,1,5)
+[10:28:15.643] [[Cache]] Hit for (-1,1,-5)
+[10:28:15.643] [[Cache]] Hit for (5,1,-1)
+[10:28:15.860] [[Generation]] (-5,1,1): Render verts=0, Collision verts=0
+[10:28:15.860] [[Cache]] Hit after lock for (-5,1,1)
+[10:28:16.172] [[Generation]] (5,1,1): Render verts=0, Collision verts=0
+[10:28:16.172] [[Cache]] Hit after lock for (5,1,1)
+[10:28:16.495] [[Generation]] (-4,1,3): Render verts=0, Collision verts=0
+[10:28:16.945] [[Generation]] (0,1,5): Render verts=0, Collision verts=0
+[10:28:17.002] [[Generation]] (-3,1,-4): Render verts=0, Collision verts=0
+[10:28:17.812] [[Generation]] (5,-1,2): Render verts=0, Collision verts=0
+[10:28:17.812] [[Cache]] Hit after lock for (5,-1,2)
+[10:28:17.812] [[Cache]] Hit after lock for (5,-1,2)
+[10:28:17.812] [[Cache]] Hit after lock for (5,-1,2)
+[10:28:17.812] [[Cache]] Hit after lock for (5,-1,2)
+[10:28:17.926] [[Generation]] (-3,1,4): Render verts=0, Collision verts=0
+[10:28:18.163] [[Generation]] (-4,1,-3): Render verts=0, Collision verts=0
+[10:28:18.690] [[Generation]] (-5,-1,2): Render verts=42996, Collision verts=42996
+[10:28:18.718] [[Cache]] Hit after lock for (-5,-1,2)
+[10:28:18.747] [[Cache]] Hit after lock for (-5,-1,2)
+[10:28:18.778] [[Cache]] Hit after lock for (-5,-1,2)
+[10:28:18.805] [[Cache]] Hit after lock for (-5,-1,2)
+[10:28:18.833] [[Cache]] Hit for (5,1,-2)
+[10:28:18.833] [[Cache]] Hit for (-5,1,2)
+[10:28:18.833] [[Cache]] Hit for (-2,1,-5)
+[10:28:18.833] [[Cache]] Hit for (-2,1,5)
+[10:28:18.833] [[Cache]] Hit for (-1,1,5)
+[10:28:18.833] [[Cache]] Hit for (5,1,-1)
+[10:28:18.833] [[Cache]] Hit for (-5,1,-1)
+[10:28:18.833] [[Cache]] Hit for (1,1,-5)
+[10:28:18.833] [[Cache]] Hit for (-1,1,-5)
+[10:28:18.833] [[Cache]] Hit for (1,1,5)
+[10:28:18.833] [[Cache]] Hit for (-5,1,1)
+[10:28:18.833] [[Cache]] Hit for (5,1,1)
+[10:28:18.833] [[Cache]] Hit for (-4,1,3)
+[10:28:18.833] [[Cache]] Hit for (0,1,5)
+[10:28:18.833] [[Cache]] Hit for (-3,1,-4)
+[10:28:18.833] [[Cache]] Hit for (-3,1,4)
+[10:28:18.833] [[Cache]] Hit for (-4,1,-3)
+[10:28:19.403] [[Generation]] (0,1,-5): Render verts=0, Collision verts=0
+[10:28:19.403] [[Cache]] Hit after lock for (0,1,-5)
+[10:28:19.849] [[Generation]] (5,-1,-2): Render verts=53298, Collision verts=53298
+[10:28:19.879] [[Cache]] Hit after lock for (5,-1,-2)
+[10:28:19.906] [[Cache]] Hit after lock for (5,-1,-2)
+[10:28:19.938] [[Cache]] Hit after lock for (5,-1,-2)
+[10:28:19.964] [[Cache]] Hit after lock for (5,-1,-2)
+[10:28:20.256] [[Generation]] (5,0,2): Render verts=17502, Collision verts=17502
+[10:28:20.510] [[Generation]] (-1,-1,5): Render verts=9246, Collision verts=9246
+[10:28:20.513] [[Cache]] Hit after lock for (-1,-1,5)
+[10:28:20.520] [[Cache]] Hit after lock for (-1,-1,5)
+[10:28:20.529] [[Cache]] Hit after lock for (-1,-1,5)
+[10:28:20.534] [[Cache]] Hit for (-1,1,-5)
+[10:28:20.534] [[Cache]] Hit for (1,1,5)
+[10:28:20.534] [[Cache]] Hit for (-5,1,1)
+[10:28:20.534] [[Cache]] Hit for (5,1,1)
+[10:28:20.534] [[Cache]] Hit for (-4,1,3)
+[10:28:20.534] [[Cache]] Hit for (0,1,5)
+[10:28:20.534] [[Cache]] Hit for (-3,1,-4)
+[10:28:20.534] [[Cache]] Hit for (-3,1,4)
+[10:28:20.534] [[Cache]] Hit for (-4,1,-3)
+[10:28:20.534] [[Cache]] Hit for (0,1,-5)
+[10:28:20.561] [[Generation]] (-2,-1,-5): Render verts=0, Collision verts=0
+[10:28:20.586] [[Generation]] (-1,-1,-5): Render verts=2655, Collision verts=2655
+[10:28:20.638] [[Generation]] (0,-1,3): Render verts=0, Collision verts=0
+[10:28:20.937] [[Generation]] (1,-1,-5): Render verts=0, Collision verts=0
+[10:28:20.994] [[Generation]] (-4,0,-4): Render verts=14253, Collision verts=14253
+[10:28:21.202] [[Generation]] (-2,-1,5): Render verts=39813, Collision verts=39813
+[10:28:21.335] [[Generation]] (5,-1,-1): Render verts=61404, Collision verts=61404
+[10:28:21.593] [[Generation]] (4,0,-4): Render verts=13023, Collision verts=13023
+[10:28:21.702] [[Generation]] (-3,-1,-2): Render verts=0, Collision verts=0
+[10:28:21.835] [[Generation]] (-5,-1,-1): Render verts=25005, Collision verts=25005
+[10:28:21.852] [[Cache]] Hit after lock for (-5,-1,-1)
+[10:28:21.870] [[Cache]] Hit after lock for (-5,-1,-1)
+[10:28:21.882] [[Cache]] Hit after lock for (-5,-1,-1)
+[10:28:21.895] [[Cache]] Hit for (2,0,-5)
+[10:28:21.931] [[Generation]] (1,-1,5): Render verts=22779, Collision verts=22779
+[10:28:21.942] [[Cache]] Hit after lock for (1,-1,5)
+[10:28:21.953] [[Cache]] Hit after lock for (1,-1,5)
+[10:28:21.965] [[Cache]] Hit after lock for (1,-1,5)
+[10:28:22.297] [[Generation]] (-4,-1,3): Render verts=0, Collision verts=0
+[10:28:22.297] [[Cache]] Hit after lock for (-4,-1,3)
+[10:28:22.298] [[Cache]] Hit after lock for (-4,-1,3)
+[10:28:22.328] [[Generation]] (-5,-1,1): Render verts=59049, Collision verts=59049
+[10:28:22.359] [[Cache]] Hit after lock for (-5,-1,1)
+[10:28:22.389] [[Cache]] Hit after lock for (-5,-1,1)
+[10:28:22.418] [[Cache]] Hit after lock for (-5,-1,1)
+[10:28:22.534] [[Generation]] (-3,-1,4): Render verts=756, Collision verts=756
+[10:28:22.535] [[Cache]] Hit after lock for (-3,-1,4)
+[10:28:22.539] [[Cache]] Hit after lock for (-3,-1,4)
+[10:28:22.539] [[Cache]] Hit for (-3,1,4)
+[10:28:22.540] [[Generation]] (4,1,-3): Render verts=0, Collision verts=0
+[10:28:22.546] [[Generation]] (5,-1,1): Render verts=10842, Collision verts=10842
+[10:28:22.552] [[Cache]] Hit after lock for (5,-1,1)
+[10:28:22.560] [[Cache]] Hit after lock for (5,-1,1)
+[10:28:22.579] [[Cache]] Hit after lock for (5,-1,1)
+[10:28:22.628] [[Generation]] (-4,0,4): Render verts=18630, Collision verts=18630
+[10:28:22.633] [[Cache]] Hit after lock for (-4,0,4)
+[10:28:22.642] [[Cache]] Hit after lock for (-4,0,4)
+[10:28:22.653] [[Cache]] Hit after lock for (-4,0,4)
+[10:28:22.709] [[Generation]] (-3,-1,-4): Render verts=0, Collision verts=0
+[10:28:22.709] [[Cache]] Hit after lock for (-3,-1,-4)
+[10:28:22.709] [[Cache]] Hit after lock for (-3,-1,-4)
+[10:28:23.008] [[Generation]] (4,1,3): Render verts=0, Collision verts=0
+[10:28:23.139] [[Generation]] (0,-1,5): Render verts=16308, Collision verts=16308
+[10:28:23.146] [[Cache]] Hit after lock for (0,-1,5)
+[10:28:23.156] [[Cache]] Hit after lock for (0,-1,5)
+[10:28:23.164] [[Cache]] Hit for (3,-1,-4)
+[10:28:23.164] [[Cache]] Hit for (5,0,2)
+[10:28:23.593] [[Generation]] (5,1,0): Render verts=0, Collision verts=0
+[10:28:23.747] [[Generation]] (3,1,4): Render verts=0, Collision verts=0
+[10:28:24.350] [[Generation]] (0,-1,-5): Render verts=0, Collision verts=0
+[10:28:24.350] [[Cache]] Hit after lock for (0,-1,-5)
+[10:28:24.350] [[Cache]] Hit after lock for (0,-1,-5)
+[10:28:24.350] [[Cache]] Hit for (-3,-1,4)
+[10:28:24.351] [[Cache]] Hit for (2,0,-5)
+[10:28:24.367] [[Cache]] Hit for (4,1,-3)
+[10:28:24.367] [[Cache]] Hit for (4,1,3)
+[10:28:24.367] [[Cache]] Hit for (5,1,0)
+[10:28:24.731] [[Generation]] (4,0,4): Render verts=17793, Collision verts=17793
+[10:28:24.741] [[Cache]] Hit after lock for (4,0,4)
+[10:28:24.748] [[Cache]] Hit after lock for (4,0,4)
+[10:28:24.759] [[Cache]] Hit after lock for (4,0,4)
+[10:28:24.786] [[Generation]] (-5,0,2): Render verts=19572, Collision verts=19572
+[10:28:24.800] [[Cache]] Hit after lock for (-5,0,2)
+[10:28:24.816] [[Cache]] Hit after lock for (-5,0,2)
+[10:28:25.852] [[Generation]] (4,1,-2): Render verts=0, Collision verts=0
+[10:28:26.016] [[Generation]] (-4,-1,-3): Render verts=876, Collision verts=876
+[10:28:26.016] [[Cache]] Hit after lock for (-4,-1,-3)
+[10:28:26.017] [[Cache]] Hit after lock for (-4,-1,-3)
+[10:28:26.017] [[Cache]] Hit for (2,0,-5)
+[10:28:26.031] [[Cache]] Hit for (4,1,-3)
+[10:28:26.031] [[Cache]] Hit for (4,1,3)
+[10:28:26.031] [[Cache]] Hit for (5,1,0)
+[10:28:26.031] [[Cache]] Hit for (3,-1,-4)
+[10:28:26.031] [[Cache]] Hit for (5,0,2)
+[10:28:26.037] [[Cache]] Hit for (3,1,4)
+[10:28:26.037] [[Cache]] Hit for (4,1,-2)
+[10:28:27.443] [[Generation]] (-2,1,-4): Render verts=0, Collision verts=0
+[10:28:28.289] [[Generation]] (5,-1,0): Render verts=78618, Collision verts=78618
+[10:28:28.335] [[Cache]] Hit after lock for (5,-1,0)
+[10:28:28.407] [[Cache]] Hit after lock for (5,-1,0)
+[10:28:28.451] [[Cache]] Hit for (-2,1,-4)
+[10:28:29.157] [[Generation]] (3,-1,4): Render verts=28365, Collision verts=28365
+[10:28:29.166] [[Cache]] Hit after lock for (3,-1,4)
+[10:28:29.209] [[Cache]] Hit after lock for (3,-1,4)
+[10:28:29.334] [[Generation]] (4,-1,3): Render verts=0, Collision verts=0
+[10:28:29.334] [[Cache]] Hit after lock for (4,-1,3)
+[10:28:29.334] [[Cache]] Hit after lock for (4,-1,3)
+[10:28:29.425] [[Generation]] (5,0,-2): Render verts=18093, Collision verts=18093
+[10:28:29.436] [[Cache]] Hit after lock for (5,0,-2)
+[10:28:29.448] [[Cache]] Hit after lock for (5,0,-2)
+[10:28:29.789] [[Generation]] (-5,0,-2): Render verts=14427, Collision verts=14427
+[10:28:29.793] [[Cache]] Hit after lock for (-5,0,-2)
+[10:28:29.805] [[Cache]] Hit after lock for (-5,0,-2)
+[10:28:29.872] [[Generation]] (4,-1,-3): Render verts=198, Collision verts=198
+[10:28:29.872] [[Cache]] Hit after lock for (4,-1,-3)
+[10:28:29.881] [[Cache]] Hit after lock for (4,-1,-3)
+[10:28:31.132] [[Generation]] (2,1,4): Render verts=0, Collision verts=0
+[10:28:31.173] [[Generation]] (-2,1,4): Render verts=0, Collision verts=0
+[10:28:31.205] [[Generation]] (4,1,2): Render verts=0, Collision verts=0
+[10:28:31.545] [[Generation]] (-4,1,2): Render verts=0, Collision verts=0
+[10:28:32.255] [[Generation]] (-5,0,-1): Render verts=19641, Collision verts=19641
+[10:28:32.261] [[Cache]] Hit after lock for (-5,0,-1)
+[10:28:32.643] [[Generation]] (-1,0,-5): Render verts=13686, Collision verts=13686
+[10:28:32.648] [[Cache]] Hit after lock for (-1,0,-5)
+[10:28:32.700] [[Generation]] (2,1,-4): Render verts=0, Collision verts=0
+[10:28:33.003] [[Generation]] (-4,1,-2): Render verts=0, Collision verts=0
+[10:28:34.150] [[Generation]] (1,0,-5): Render verts=14571, Collision verts=14571
+[10:28:34.158] [[Cache]] Hit after lock for (1,0,-5)
+[10:28:34.635] [[Generation]] (3,1,-3): Render verts=0, Collision verts=0
+[10:28:34.767] [[Generation]] (-3,0,-4): Render verts=14523, Collision verts=14523
+[10:28:34.789] [[Cache]] Hit after lock for (-3,0,-4)
+[10:28:34.800] [[Generation]] (-3,1,3): Render verts=0, Collision verts=0
+[10:28:34.800] [[Generation]] (0,0,-5): Render verts=12561, Collision verts=12561
+[10:28:34.813] [[Cache]] Hit after lock for (0,0,-5)
+[10:28:34.826] [[Generation]] (-3,1,-3): Render verts=0, Collision verts=0
+[10:28:34.893] [[Generation]] (-4,-1,2): Render verts=16986, Collision verts=16986
+[10:28:34.904] [[Cache]] Hit after lock for (-4,-1,2)
+[10:28:34.931] [[Generation]] (4,-1,-2): Render verts=360, Collision verts=360
+[10:28:34.931] [[Cache]] Hit after lock for (4,-1,-2)
+[10:28:35.135] [[Generation]] (5,0,-1): Render verts=17211, Collision verts=17211
+[10:28:35.141] [[Cache]] Hit after lock for (5,0,-1)
+[10:28:35.481] [[Generation]] (-2,-1,-4): Render verts=0, Collision verts=0
+[10:28:35.481] [[Cache]] Hit after lock for (-2,-1,-4)
+[10:28:35.677] [[Generation]] (3,1,3): Render verts=0, Collision verts=0
+[10:28:35.973] [[Generation]] (5,0,0): Render verts=12675, Collision verts=12675
+[10:28:35.982] [[Cache]] Hit after lock for (5,0,0)
+[10:28:36.196] [[Generation]] (-1,1,4): Render verts=0, Collision verts=0
+[10:28:36.243] [[Generation]] (5,0,1): Render verts=13710, Collision verts=13710
+[10:28:36.249] [[Cache]] Hit after lock for (5,0,1)
+[10:28:36.280] [[Generation]] (3,0,-4): Render verts=12858, Collision verts=12858
+[10:28:36.284] [[Cache]] Hit after lock for (3,0,-4)
+[10:28:36.309] [[Generation]] (1,1,4): Render verts=0, Collision verts=0
+[10:28:36.506] [[Generation]] (4,1,1): Render verts=0, Collision verts=0
+[10:28:36.528] [[Generation]] (4,0,-3): Render verts=16458, Collision verts=16458
+[10:28:36.533] [[Cache]] Hit after lock for (4,0,-3)
+[10:28:36.554] [[Generation]] (-5,0,0): Render verts=14307, Collision verts=14307
+[10:28:36.563] [[Cache]] Hit after lock for (-5,0,0)
+[10:28:36.701] [[Generation]] (-5,0,1): Render verts=13071, Collision verts=13071
+[10:28:36.713] [[Cache]] Hit after lock for (-5,0,1)
+[10:28:37.003] [[Generation]] (-4,0,-3): Render verts=13428, Collision verts=13428
+[10:28:37.013] [[Cache]] Hit after lock for (-4,0,-3)
+[10:28:37.022] [[Generation]] (2,0,5): Render verts=31077, Collision verts=31077
+[10:28:37.041] [[Cache]] Hit after lock for (2,0,5)
+[10:28:37.057] [[Cache]] Hit after lock for (2,0,5)
+[10:28:37.370] [[Generation]] (1,1,-4): Render verts=0, Collision verts=0
+[10:28:37.789] [[Generation]] (-4,1,-1): Render verts=0, Collision verts=0
+[10:28:38.002] [[Generation]] (-4,1,1): Render verts=0, Collision verts=0
+[10:28:38.004] [[Generation]] (4,1,-1): Render verts=0, Collision verts=0
+[10:28:38.126] [[Generation]] (-1,0,5): Render verts=33468, Collision verts=33468
+[10:28:38.149] [[Cache]] Hit after lock for (-1,0,5)
+[10:28:38.386] [[Generation]] (4,1,0): Render verts=0, Collision verts=0
+[10:28:38.557] [[Generation]] (-4,1,0): Render verts=0, Collision verts=0
+[10:28:38.570] [[Generation]] (4,-1,2): Render verts=10068, Collision verts=10068
+[10:28:38.589] [[Generation]] (-1,1,-4): Render verts=0, Collision verts=0
+[10:28:38.819] [[Generation]] (2,-1,4): Render verts=42237, Collision verts=42237
+[10:28:38.838] [[Cache]] Hit after lock for (2,-1,4)
+[10:28:38.858] [[Cache]] Hit for (4,-1,2)
+[10:28:38.866] [[Cache]] Hit for (2,1,4)
+[10:28:38.866] [[Cache]] Hit for (4,1,2)
+[10:28:38.866] [[Cache]] Hit for (-2,1,4)
+[10:28:38.866] [[Cache]] Hit for (-4,1,2)
+[10:28:38.866] [[Cache]] Hit for (2,1,-4)
+[10:28:38.866] [[Cache]] Hit for (-4,1,-2)
+[10:28:38.866] [[Cache]] Hit for (-3,1,3)
+[10:28:38.867] [[Cache]] Hit for (-3,1,-3)
+[10:28:38.867] [[Cache]] Hit for (3,1,-3)
+[10:28:38.867] [[Cache]] Hit for (3,1,3)
+[10:28:38.867] [[Cache]] Hit for (-1,1,4)
+[10:28:38.867] [[Cache]] Hit for (4,1,1)
+[10:28:38.867] [[Cache]] Hit for (1,1,4)
+[10:28:38.867] [[Cache]] Hit for (1,1,-4)
+[10:28:38.867] [[Cache]] Hit for (-4,1,-1)
+[10:28:38.867] [[Cache]] Hit for (-1,1,-4)
+[10:28:38.867] [[Cache]] Hit for (4,1,-1)
+[10:28:38.867] [[Cache]] Hit for (-4,1,1)
+[10:28:38.867] [[Cache]] Hit for (-4,1,0)
+[10:28:38.867] [[Cache]] Hit for (4,1,0)
+[10:28:39.139] [[Generation]] (-4,0,3): Render verts=15243, Collision verts=15243
+[10:28:39.621] [[Generation]] (-2,-1,4): Render verts=24042, Collision verts=24042
+[10:28:40.065] [[Generation]] (-3,0,4): Render verts=16521, Collision verts=16521
+[10:28:40.758] [[Generation]] (4,0,3): Render verts=16806, Collision verts=16806
+[10:28:40.859] [[Generation]] (2,-1,-4): Render verts=96, Collision verts=96
+[10:28:41.099] [[Generation]] (-3,-1,3): Render verts=252, Collision verts=252
+[10:28:41.276] [[Generation]] (3,-1,-3): Render verts=0, Collision verts=0
+[10:28:41.276] [[Cache]] Hit after lock for (3,-1,-3)
+[10:28:41.553] [[Generation]] (0,0,5): Render verts=25728, Collision verts=25728
+[10:28:41.563] [[Generation]] (-4,-1,-2): Render verts=0, Collision verts=0
+[10:28:41.563] [[Cache]] Hit after lock for (-4,-1,-2)
+[10:28:41.566] [[Cache]] Hit after lock for (0,0,5)
+[10:28:41.690] [[Generation]] (1,0,5): Render verts=18120, Collision verts=18120
+[10:28:41.701] [[Cache]] Hit after lock for (1,0,5)
+[10:28:41.785] [[Generation]] (-3,-1,-3): Render verts=0, Collision verts=0
+[10:28:41.785] [[Cache]] Hit after lock for (-3,-1,-3)
+[10:28:42.342] [[Generation]] (3,0,4): Render verts=15900, Collision verts=15900
+[10:28:42.351] [[Cache]] Hit after lock for (3,0,4)
+[10:28:42.379] [[Generation]] (3,-1,3): Render verts=6408, Collision verts=6408
+[10:28:42.386] [[Cache]] Hit after lock for (3,-1,3)
+[10:28:43.736] [[Generation]] (-4,-1,0): Render verts=8067, Collision verts=8067
+[10:28:43.742] [[Cache]] Hit after lock for (-4,-1,0)
+[10:28:44.122] [[Generation]] (4,-1,0): Render verts=35208, Collision verts=35208
+[10:28:44.138] [[Cache]] Hit after lock for (4,-1,0)
+[10:28:44.143] [[Generation]] (0,-1,-4): Render verts=0, Collision verts=0
+[10:28:44.143] [[Cache]] Hit after lock for (0,-1,-4)
+[10:28:44.143] [[Cache]] Hit for (1,0,4)
+[10:28:44.161] [[Cache]] Hit for (3,1,2)
+[10:28:44.607] [[Generation]] (0,-1,4): Render verts=8577, Collision verts=8577
+[10:28:44.611] [[Cache]] Hit after lock for (0,-1,4)
+[10:28:44.744] [[Generation]] (-4,0,2): Render verts=20625, Collision verts=20625
+[10:28:44.752] [[Cache]] Hit after lock for (-4,0,2)
+[10:28:44.840] [[Generation]] (4,0,2): Render verts=20715, Collision verts=20715
+[10:28:44.851] [[Cache]] Hit after lock for (4,0,2)
+[10:28:45.316] [[Generation]] (4,0,-2): Render verts=16065, Collision verts=16065
+[10:28:45.328] [[Cache]] Hit after lock for (4,0,-2)
+[10:28:45.340] [[Cache]] Hit for (1,0,4)
+[10:28:45.347] [[Cache]] Hit for (-3,-1,-2)
+[10:28:45.354] [[Generation]] (-2,1,3): Render verts=0, Collision verts=0
+[10:28:46.313] [[Generation]] (2,1,3): Render verts=0, Collision verts=0
+[10:28:46.358] [[Generation]] (2,1,-3): Render verts=0, Collision verts=0
+[10:28:46.462] [[Generation]] (-2,0,-4): Render verts=12819, Collision verts=12819
+[10:28:46.474] [[Cache]] Hit after lock for (-2,0,-4)
+[10:28:46.782] [[Generation]] (-3,0,-3): Render verts=19347, Collision verts=19347
+[10:28:46.790] [[Cache]] Hit after lock for (-3,0,-3)
+[10:28:47.019] [[Generation]] (3,0,-3): Render verts=18513, Collision verts=18513
+[10:28:47.029] [[Cache]] Hit after lock for (3,0,-3)
+[10:28:47.040] [[Generation]] (-3,1,2): Render verts=0, Collision verts=0
+[10:28:47.690] [[Generation]] (2,0,4): Render verts=20442, Collision verts=20442
+[10:28:47.702] [[Cache]] Hit after lock for (2,0,4)
+[10:28:47.779] [[Generation]] (-2,0,4): Render verts=16677, Collision verts=16677
+[10:28:47.796] [[Cache]] Hit after lock for (-2,0,4)
+[10:28:47.829] [[Cache]] Hit for (-3,1,-1)
+[10:28:47.832] [[Cache]] Hit for (3,1,1)
+[10:28:47.857] [[Cache]] Hit for (-2,0,3)
+[10:28:48.204] [[Generation]] (-4,0,-1): Render verts=13638, Collision verts=13638
+[10:28:48.209] [[Cache]] Hit after lock for (-4,0,-1)
+[10:28:49.487] [[Generation]] (-4,0,1): Render verts=11868, Collision verts=11868
+[10:28:49.497] [[Cache]] Hit after lock for (-4,0,1)
+[10:28:49.638] [[Generation]] (3,1,-1): Render verts=0, Collision verts=0
+[10:28:49.642] [[Generation]] (-3,1,-2): Render verts=0, Collision verts=0
+[10:28:49.817] [[Generation]] (3,0,3): Render verts=17415, Collision verts=17415
+[10:28:49.829] [[Cache]] Hit after lock for (3,0,3)
+[10:28:49.893] [[Generation]] (-1,1,3): Render verts=0, Collision verts=0
+[10:28:49.945] [[Generation]] (3,1,0): Render verts=0, Collision verts=0
+[10:28:49.946] [[Cache]] Hit for (0,-1,3)
+[10:28:50.036] [[Generation]] (-1,1,-3): Render verts=0, Collision verts=0
+[10:28:50.327] [[Generation]] (-2,1,-3): Render verts=0, Collision verts=0
+[10:28:50.445] [[Generation]] (1,1,-3): Render verts=0, Collision verts=0
+[10:28:50.725] [[Generation]] (-3,1,1): Render verts=0, Collision verts=0
+[10:28:50.863] [[Generation]] (-3,0,3): Render verts=16179, Collision verts=16179
+[10:28:50.870] [[Cache]] Hit after lock for (-3,0,3)
+[10:28:51.228] [[Generation]] (3,-1,-2): Render verts=0, Collision verts=0
+[10:28:51.583] [[Generation]] (3,-1,2): Render verts=26436, Collision verts=26436
+[10:28:51.594] [[Cache]] Hit after lock for (3,-1,2)
+[10:28:51.670] [[Generation]] (-1,0,-4): Render verts=13056, Collision verts=13056
+[10:28:51.680] [[Cache]] Hit after lock for (-1,0,-4)
+[10:28:51.772] [[Generation]] (0,1,-3): Render verts=0, Collision verts=0
+[10:28:51.791] [[Generation]] (-3,1,0): Render verts=0, Collision verts=0
+[10:28:51.839] [[Generation]] (0,1,3): Render verts=0, Collision verts=0
+[10:28:52.671] [[Generation]] (2,1,2): Render verts=0, Collision verts=0
+[10:28:53.005] [[Generation]] (2,-1,-3): Render verts=0, Collision verts=0
+[10:28:53.252] [[Generation]] (2,1,-2): Render verts=0, Collision verts=0
+[10:28:53.688] [[Generation]] (-2,1,-2): Render verts=0, Collision verts=0
+[10:28:53.757] [[Generation]] (-2,1,2): Render verts=0, Collision verts=0
+[10:28:54.948] [[Generation]] (4,0,-1): Render verts=15345, Collision verts=15345
+[10:28:55.975] [[Generation]] (-2,-1,-3): Render verts=0, Collision verts=0
+[10:28:56.216] [[Generation]] (1,0,-4): Render verts=12318, Collision verts=12318
+[10:28:56.839] [[Generation]] (2,-1,3): Render verts=38745, Collision verts=38745
+[10:28:56.854] [[Cache]] Hit for (0,0,-3)
+[10:28:57.234] [[Generation]] (-1,0,4): Render verts=16923, Collision verts=16923
+[10:28:57.248] [[Cache]] Hit after lock for (-1,0,4)
+[10:28:57.324] [[Generation]] (-3,-1,2): Render verts=23175, Collision verts=23175
+[10:28:57.388] [[Generation]] (-2,-1,3): Render verts=19170, Collision verts=19170
+[10:28:57.402] [[Cache]] Hit for (1,1,-2)
+[10:28:58.426] [[Generation]] (0,0,-4): Render verts=14361, Collision verts=14361
+[10:28:58.482] [[Generation]] (-1,-1,3): Render verts=0, Collision verts=0
+[10:28:58.659] [[Generation]] (3,-1,0): Render verts=5631, Collision verts=5631
+[10:28:58.675] [[Generation]] (-1,-1,-3): Render verts=0, Collision verts=0
+[10:28:58.844] [[Generation]] (3,-1,-1): Render verts=0, Collision verts=0
+[10:28:58.868] [[Generation]] (1,-1,3): Render verts=5871, Collision verts=5871
+[10:28:58.950] [[Generation]] (1,-1,-3): Render verts=0, Collision verts=0
+[10:28:59.019] [[Generation]] (0,-1,-3): Render verts=0, Collision verts=0
+[10:28:59.091] [[Generation]] (1,1,2): Render verts=0, Collision verts=0
+[10:28:59.345] [[Generation]] (-3,-1,1): Render verts=53787, Collision verts=53787
+[10:28:59.694] [[Generation]] (-3,-1,-1): Render verts=0, Collision verts=0
+[10:28:59.772] [[Generation]] (-3,0,-2): Render verts=12945, Collision verts=12945
+[10:29:00.417] [[Generation]] (-4,0,0): Render verts=13932, Collision verts=13932
+[10:29:00.475] [[Generation]] (4,0,1): Render verts=9627, Collision verts=9627
+[10:29:00.479] [[Cache]] Hit for (0,1,2)
+[10:29:00.479] [[Cache]] Hit for (2,0,-2)
+[10:29:00.483] [[Cache]] Hit for (-2,0,-2)
+[10:29:00.487] [[Cache]] Hit for (0,-1,2)
+[10:29:00.671] [[Generation]] (-3,-1,0): Render verts=1845, Collision verts=1845
+[10:29:00.671] [[Cache]] Hit for (-2,1,0)
+[10:29:00.672] [[Cache]] Hit for (0,0,0)
+[10:29:00.700] [[Generation]] (3,0,2): Render verts=11343, Collision verts=11343
+[10:29:00.704] [[Cache]] Hit for (3,-1,-2)
+[10:29:00.704] [[Cache]] Hit for (-2,1,3)
+[10:29:00.704] [[Cache]] Hit for (4,0,-1)
+[10:29:00.714] [[Cache]] Hit for (2,-1,-3)
+[10:29:00.714] [[Cache]] Hit for (-3,-1,-2)
+[10:29:00.714] [[Cache]] Hit for (2,1,3)
+[10:29:00.714] [[Cache]] Hit for (2,1,-3)
+[10:29:00.714] [[Cache]] Hit for (2,-1,3)
+[10:29:00.721] [[Generation]] (2,1,1): Render verts=0, Collision verts=0
+[10:29:00.721] [[Cache]] Hit for (-3,1,2)
+[10:29:00.721] [[Cache]] Hit for (-2,-1,-3)
+[10:29:00.721] [[Cache]] Hit for (-3,-1,2)
+[10:29:00.741] [[Cache]] Hit for (-2,-1,3)
+[10:29:00.744] [[Cache]] Hit for (1,0,-4)
+[10:29:00.755] [[Cache]] Hit for (-3,1,-2)
+[10:29:00.755] [[Cache]] Hit for (4,0,1)
+[10:29:00.756] [[Cache]] Hit for (-2,1,-3)
+[10:29:00.764] [[Cache]] Hit for (0,0,-4)
+[10:29:00.766] [[Cache]] Hit for (-4,0,0)
+[10:29:00.775] [[Cache]] Hit for (1,-1,3)
+[10:29:00.777] [[Cache]] Hit for (3,1,-1)
+[10:29:00.777] [[Cache]] Hit for (-3,-1,-1)
+[10:29:00.777] [[Cache]] Hit for (3,-1,-1)
+[10:29:00.777] [[Cache]] Hit for (-3,1,-1)
+[10:29:00.777] [[Cache]] Hit for (-1,1,3)
+[10:29:00.777] [[Cache]] Hit for (-1,-1,3)
+[10:29:00.777] [[Cache]] Hit for (3,1,1)
+[10:29:00.777] [[Cache]] Hit for (-1,1,-3)
+[10:29:00.777] [[Cache]] Hit for (1,-1,-3)
+[10:29:00.777] [[Cache]] Hit for (-3,1,1)
+[10:29:00.777] [[Cache]] Hit for (1,1,-3)
+[10:29:00.777] [[Cache]] Hit for (-3,-1,1)
+[10:29:00.780] [[Cache]] Hit for (-1,-1,-3)
+[10:29:00.780] [[Cache]] Hit for (0,-1,-3)
+[10:29:00.780] [[Cache]] Hit for (-3,0,-2)
+[10:29:00.792] [[Cache]] Hit for (-2,0,3)
+[10:29:00.801] [[Cache]] Hit for (3,0,2)
+[10:29:00.809] [[Cache]] Hit for (3,1,0)
+[10:29:00.809] [[Cache]] Hit for (3,-1,0)
+[10:29:00.811] [[Cache]] Hit for (0,1,-3)
+[10:29:00.811] [[Cache]] Hit for (0,1,3)
+[10:29:00.811] [[Cache]] Hit for (0,-1,3)
+[10:29:00.811] [[Cache]] Hit for (-3,-1,0)
+[10:29:00.811] [[Cache]] Hit for (-3,1,0)
+[10:29:00.811] [[Cache]] Hit for (2,1,2)
+[10:29:00.811] [[Cache]] Hit for (-2,1,2)
+[10:29:00.811] [[Cache]] Hit for (-2,1,-2)
+[10:29:00.811] [[Cache]] Hit for (2,1,-2)
+[10:29:00.811] [[Cache]] Hit for (0,0,-3)
+[10:29:00.811] [[Cache]] Hit for (1,1,2)
+[10:29:00.812] [[Cache]] Hit for (1,1,-2)
+[10:29:00.812] [[Cache]] Hit for (2,1,1)
+[10:29:00.812] [[Cache]] Hit for (0,1,2)
+[10:29:00.812] [[Cache]] Hit for (2,0,-2)
+[10:29:00.821] [[Cache]] Hit for (-2,0,-2)
+[10:29:00.823] [[Cache]] Hit for (0,-1,2)
+[10:29:00.823] [[Cache]] Hit for (-2,1,0)
+[10:29:00.823] [[Cache]] Hit for (0,0,0)
+[10:29:00.831] [[Cache]] Hit after lock for (2,1,5)
+[10:29:00.831] [[Cache]] Hit after lock for (2,1,5)
+[10:29:00.831] [[Cache]] Hit for (-5,1,-2)
+[10:29:00.831] [[Cache]] Hit for (2,-1,5)
+[10:29:00.833] [[Cache]] Hit for (2,-1,-5)
+[10:29:00.851] [[Cache]] Hit for (5,-1,2)
+[10:29:00.851] [[Cache]] Hit for (5,1,2)
+[10:29:00.851] [[Cache]] Hit for (-5,-1,2)
+[10:29:00.854] [[Cache]] Hit for (5,1,-2)
+[10:29:00.854] [[Cache]] Hit for (5,-1,-2)
+[10:29:00.881] [[Cache]] Hit for (-5,1,2)
+[10:29:00.881] [[Cache]] Hit for (-2,-1,-5)
+[10:29:00.881] [[Cache]] Hit for (-2,1,-5)
+[10:29:00.881] [[Cache]] Hit for (-2,-1,5)
+[10:29:00.889] [[Cache]] Hit for (-2,1,5)
+[10:29:00.889] [[Cache]] Hit for (4,0,4)
+[10:29:00.897] [[Cache]] Hit for (-4,0,4)
+[10:29:00.905] [[Cache]] Hit for (4,0,-4)
+[10:29:00.910] [[Cache]] Hit for (-4,0,-4)
+[10:29:00.913] [[Cache]] Hit for (5,-1,-1)
+[10:29:00.915] [[Cache]] Hit for (-1,1,5)
+[10:29:00.915] [[Cache]] Hit for (5,1,-1)
+[10:29:00.915] [[Cache]] Hit for (1,-1,-5)
+[10:29:00.915] [[Cache]] Hit for (-5,1,-1)
+[10:29:00.915] [[Cache]] Hit for (-1,-1,-5)
+[10:29:00.919] [[Cache]] Hit for (1,1,-5)
+[10:29:00.919] [[Cache]] Hit for (-1,-1,5)
+[10:29:00.926] [[Cache]] Hit for (-1,1,-5)
+[10:29:00.926] [[Cache]] Hit for (-5,-1,-1)
+[10:29:00.942] [[Cache]] Hit for (1,-1,5)
+[10:29:00.954] [[Cache]] Hit for (5,-1,1)
+[10:29:00.955] [[Cache]] Hit for (1,1,5)
+[10:29:00.955] [[Cache]] Hit for (-5,1,1)
+[10:29:00.955] [[Cache]] Hit for (-5,-1,1)
+[10:29:00.965] [[Cache]] Hit for (5,1,1)
+[10:29:00.966] [[Cache]] Hit for (-4,1,3)
+[10:29:00.966] [[Cache]] Hit for (-4,-1,3)
+[10:29:00.966] [[Cache]] Hit for (0,1,5)
+[10:29:00.966] [[Cache]] Hit for (-3,-1,-4)
+[10:29:00.966] [[Cache]] Hit for (-3,1,-4)
+[10:29:00.966] [[Cache]] Hit for (0,-1,5)
+[10:29:00.998] [[Generation]] (-1,1,2): Render verts=0, Collision verts=0
+[10:29:01.146] [[Generation]] (2,0,-3): Render verts=16923, Collision verts=16923
+[10:29:01.350] [[Generation]] (-1,1,-2): Render verts=0, Collision verts=0
+[10:29:01.401] [[Generation]] (-2,1,-1): Render verts=0, Collision verts=0
+[10:29:01.460] [[Generation]] (3,1,-2): Render verts=0, Collision verts=0
